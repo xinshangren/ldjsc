@@ -1,9 +1,9 @@
 <template>
   <div>
-  
-        <homeVue 
-          style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;"
-        ></homeVue>
+    <headlineVue v-if="tabid==0"  style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;">
+    </headlineVue>
+        <homeVue  v-if="tabid==4" style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;">
+        </homeVue>
     
 
     <div
@@ -37,6 +37,7 @@
 
 <script>
 import Vue from "vue";
+import headlineVue from "@/page/main/headline.vue";
 import homeVue from "@/page/main/home.vue";
 import { Search } from "vant";
 import $ from "jquery";
@@ -46,6 +47,7 @@ export default {
   name: "mainVue",
   data() {
     return {
+      tabid: 4,
       seach_value: "",
       tabImage: [
         require("@/assets/img/icon_news.png"),
@@ -65,11 +67,13 @@ export default {
   methods: {
     //改变tab的状态和图片
     changeTabStyle: function(tabid) {
+      this.tabid = tabid;
       mainJs.changeTabStyle(tabid);
     }
   },
   components: {
-    homeVue
+    homeVue,
+    headlineVue
   }
 };
 </script>

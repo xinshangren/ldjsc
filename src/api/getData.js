@@ -14,18 +14,13 @@ export const httpMethod = {
     findByTargetId: function (params) {
         return get("/api-qz/qz/zhibiao/findByTargetId", params);
     },
-    // 获取指标
-    findByTargetIds: function (params) {
-        return get("/api-qz/qz/zhibiao/findByTargetIds", params);
+    // 头条
+    // 图片列表新闻
+    getPictureclass: function (params) {
+        return get("cmsAppInsideController.action?getPictureclass", params);
     },
-     // 获取项目阶段汇报
-     getZdgcProProgressList: function (params) {
-        return get("/api-qz/qz/zdgc/getZdgcProProgressList", params);
-    },
-    // 获取项目列表
-    getProReportInfoByzdProType: function (params) {
-       return get("/api-qz/qz/zdgc/getProReportInfoByzdProType", params);
-   },
+
+
    //返回根目录
    returnBaseUrlFun: function () {
       return returnBaseUrl();

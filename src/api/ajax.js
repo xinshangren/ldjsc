@@ -4,7 +4,7 @@ import Qs from 'qs'
 let router = import("@/router");
 axios.defaults.timeout = 3000;
 //axios.defaults.baseURL = "/api";
-axios.defaults.baseURL = "http://1.71.190.139:8081/";//云时代地址
+axios.defaults.baseURL = "http://192.168.10.138:8080/jcsldjsc/";//段建斌地址
 //axios.defaults.baseURL = "http://10.7.2.23:9900/";//djb
 //axios.defaults.baseURL = "http://10.7.2.23:9900/";//zhangrui
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;application/json;charset=UTF-8";
