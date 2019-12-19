@@ -1,4 +1,4 @@
-import {returnBaseUrl,get, post } from "@/api/ajax";
+import { returnBaseUrl, get, post } from "@/api/ajax";
 
 
 export const httpMethod = {
@@ -25,11 +25,23 @@ export const httpMethod = {
     },
 
 
-   //返回根目录
-   returnBaseUrlFun: function () {
-      return returnBaseUrl();
-  }
+    //返回根目录
+    returnBaseUrlFun: function () {
+        return returnBaseUrl();
+    },
+    // 总体情况重点项目总计统计
+    getzdxmzj: function (params) {
+        return get("zdgcAppInsideController.action?getzdxmzj", params);
+    },
+    // 总体情况统计存在问题
+    statisticsExistiong: function (params) {
+        return get("zdgcAppInsideController.action?statisticsExistiong", params);
+    },
+    // 总体情况进度排名前三的项目
+    getProjectPlanTopThree: function (params) {
+        return get("zdgcAppInsideController.action?getProjectPlanTopThree", params);
+    }
 
-    
-   
+
+
 }
