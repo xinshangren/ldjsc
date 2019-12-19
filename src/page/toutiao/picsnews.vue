@@ -4,7 +4,7 @@
     <van-list id="newslist" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error" error-text="查询失败"
       style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
       <div style="position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 220px;" v-for="item of list" :key="item.id"
-        @click="goDetile(item.id)">
+        @click="goDetile(item)">
       <div v-if='item.ifRead=="1"' style="font-size: 12px;line-height: 25px;vertical-align: middle;text-align: center; color:#ffffff;border-radius:0 12px 0 12px;background-color: #e43b21;width: 60px;height: 25px;position: absolute;right: 0;top: 0;">
        已读
       </div>
@@ -87,7 +87,9 @@
         console.log("onLoad");
         this.getPictureclass();
       },
-      goDetile(id) {
+      goDetile(item) {
+        item.ifRead="1"
+        var id=item.id
         this.$router.push({
         path: "/toutiao/newsdetile",
         name: "newsdetile",
