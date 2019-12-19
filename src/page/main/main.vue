@@ -1,13 +1,13 @@
 <template>
   <div>
   
-        <homeVue
-          style="overflow-y:auto;overflow-x:hidden;margin-top:55px;margin-bottom:56px;"
+        <homeVue 
+          style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;"
         ></homeVue>
     
 
     <div
-      style="z-index: 2; display: flex;position: fixed;bottom: -1px;background: #ffffff;width: 100%;height: 55px;"
+      style="z-index: 2; display: flex;position: fixed;bottom: 0px;background: #ffffff;width: 100%;height: 55px;"
     >
       <div class="main_item" id="0">
         <img class="main_item_img" v-bind:src="tabImage[0]" />
@@ -20,7 +20,7 @@
       <div class="main_item" id="4" style="position: relative;width: 25%;">
         <img
           src="@/assets/img/tab_logo.png"
-          style="height: 54px;position: absolute;left: 8px;top: -3px;"
+          style="height: 54px;"
         />
       </div>
       <div class="main_item" id="2">

@@ -10,12 +10,12 @@
         shape="round"
         background="rgb(255, 255, 255,0)"
         v-model="seach_value"
-        style="width:73%;"
+        style="width:68%;"
       />
-
+       <img src="@/assets/img/icon_home.png" class="home_top_img" />
       <img src="@/assets/img/icon_message.png" class="home_top_img" />
       <img src="@/assets/img/icon_user.png" class="home_top_img" />
-       <img src="@/assets/img/icon_home.png" class="home_top_img" />
+      
     </div>
     <!--搜索框部分end-->
    <keep-alive>
