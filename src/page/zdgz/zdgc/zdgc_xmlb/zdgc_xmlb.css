@@ -75,3 +75,7 @@
     top: 22px;
 
 }
+
+.li_div_title{
+    margin-left: 17px;font-size: 14px;width: 169px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;
+}

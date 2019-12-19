@@ -40,8 +40,14 @@ export const httpMethod = {
     // 总体情况进度排名前三的项目
     getProjectPlanTopThree: function (params) {
         return get("zdgcAppInsideController.action?getProjectPlanTopThree", params);
+    },
+    // 项目列表
+    getProReportInfoByzdProType: function (params) {
+        return get("zdgcAppInsideController.action?getProReportInfoByzdProType", params);
     }
+    
 
+    
 
 
 }

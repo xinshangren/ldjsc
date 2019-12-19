@@ -83,12 +83,29 @@
               style="margin-left: 17px;font-size: 14px;width: 169px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
             >{{item.projectName}}</div>
             <img
+              v-if="item.zdProLevel=='2'"
               style="height:20px;margin-left:5px;margin-top:2px;"
               src="../../../../assets/img/project_city.png"
             />
             <img
+              v-if="item.zdProLevel=='1'"
+              style="height:20px;margin-left:5px;margin-top:2px;"
+              src="../../../../assets/img/project_province.png"
+            />
+            <img
+              v-if="item.zdProType=='1'"
               style="height:18px;margin-left:5px;margin-top:2px;"
-              src="../../../../assets/img/zdgc-ctcysj.png"
+              src="../../../../assets/img/zdgc_ctcysj.png"
+            />
+            <img
+              v-if="item.zdProType=='0'"
+              style="height:18px;margin-left:5px;margin-top:2px;"
+              src="../../../../assets/img/zdgc_jcss.png"
+            />
+            <img
+              v-if="item.zdProType=='2'"
+              style="height:18px;margin-left:5px;margin-top:2px;"
+              src="../../../../assets/img/zdgc_cyzx.png"
             />
           </div>
           <van-progress
