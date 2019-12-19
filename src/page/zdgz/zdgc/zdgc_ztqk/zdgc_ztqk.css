@@ -28,7 +28,7 @@
     margin-top: 16px;
 }
 .ztqk_tabmodel_left_title{
-    font-size: 20px;
+    font-size: 17px;
     color: #ffffff;
     width: 50%;
     text-align: right;
@@ -38,7 +38,7 @@
     color: #ffffff;
     width: 50%;
     text-align: left;
-    margin-top: 7px;
+    margin-top: 2px;
 }
 
 
@@ -48,17 +48,17 @@
     margin-top: 16px;
 }
 .ztqk_tabmodel_left_title1{
-    font-size: 20px;
+    font-size: 17px;
     color: #3ca1ec;
-    width: 50%;
+    width: 60%;
     text-align: right;
 }
 .ztqk_tabmodel_right_title1{
     font-size: 13px;
     color: #3ca1ec;
-    width: 50%;
+    width: 40%;
     text-align: left;
-    margin-top: 7px;
+    margin-top: 2px;
 }
 
 .echars_title{

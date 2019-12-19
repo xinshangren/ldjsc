@@ -1,6 +1,6 @@
 <template>
-<div style="margin-top:55px;">
-<van-tabs v-model="active" title-active-color="#2599e6" title-inactive-color="#333333" :sticky="true" line-width="75px">
+<div style="margin-top:54px;">
+<van-tabs v-model="active" title-active-color="#2599e6" :offset-top="54" title-inactive-color="#333333" :sticky="true" line-width="75px">
   <van-tab title="总体情况">
      <child1
           style="overflow-y:auto;overflow-x:hidden;"

@@ -26,7 +26,7 @@ module.exports = {
           '^/socket': ''
         },
         changeOrigin: true,
-        ws: true
+        ws: false
       },
     },
 

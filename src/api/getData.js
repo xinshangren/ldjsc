@@ -1,4 +1,4 @@
-import {returnBaseUrl,get, post } from "@/api/ajax";
+import { returnBaseUrl, get, post } from "@/api/ajax";
 
 
 export const httpMethod = {
@@ -14,23 +14,30 @@ export const httpMethod = {
     findByTargetId: function (params) {
         return get("/api-qz/qz/zhibiao/findByTargetId", params);
     },
-    // 获取指标
-    findByTargetIds: function (params) {
-        return get("/api-qz/qz/zhibiao/findByTargetIds", params);
+    // 头条
+    // 图片列表新闻
+    getPictureclass: function (params) {
+        return get("cmsAppInsideController.action?getPictureclass", params);
     },
-     // 获取项目阶段汇报
-     getZdgcProProgressList: function (params) {
-        return get("/api-qz/qz/zdgc/getZdgcProProgressList", params);
-    },
-    // 获取项目列表
-    getProReportInfoByzdProType: function (params) {
-       return get("/api-qz/qz/zdgc/getProReportInfoByzdProType", params);
-   },
-   //返回根目录
-   returnBaseUrlFun: function () {
-      return returnBaseUrl();
-  }
 
-    
-   
+
+    //返回根目录
+    returnBaseUrlFun: function () {
+        return returnBaseUrl();
+    },
+    // 总体情况重点项目总计统计
+    getzdxmzj: function (params) {
+        return get("zdgcAppInsideController.action?getzdxmzj", params);
+    },
+    // 总体情况统计存在问题
+    statisticsExistiong: function (params) {
+        return get("zdgcAppInsideController.action?statisticsExistiong", params);
+    },
+    // 总体情况进度排名前三的项目
+    getProjectPlanTopThree: function (params) {
+        return get("zdgcAppInsideController.action?getProjectPlanTopThree", params);
+    }
+
+
+
 }
