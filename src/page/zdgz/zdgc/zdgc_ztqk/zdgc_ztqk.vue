@@ -245,7 +245,6 @@ export default {
   }
 };
 </script>
-
 <style >
 @import "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.css";
 @import "../../../../assets/css/frozenui.css";
