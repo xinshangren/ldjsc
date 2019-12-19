@@ -1,5 +1,6 @@
 import {returnBaseUrl,get, post } from "@/api/ajax";
 
+
 export const httpMethod = {
     //获取程序配置
     getConfig: function () {
