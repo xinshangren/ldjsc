@@ -19,6 +19,10 @@ export const httpMethod = {
     getPictureclass: function (params) {
         return get("cmsAppInsideController.action?getPictureclass", params);
     },
+    // 新闻详情
+    getCmsArticleContent: function (params) {
+        return get("cmsAppInsideController.action?getCmsArticleContent", params);
+    },
 
 
     //返回根目录
