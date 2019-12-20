@@ -403,6 +403,12 @@ export default {
     this.getzdgcProReportInfoAtt(this.itemEnti.id);
     this.getZdgcProProgressList(this.itemEnti.id);
     this.getzdgcProReportInfoAttJJ(this.itemEnti.id);
+    // for (let i = 0; i < this.itemEnti.pathList.length; i++) {
+    //   this.images.push(
+    //     httpMethod.returnBaseUrlFun() + this.itemEnti.pathList[i]
+    //   );
+    // }
+    //this.getZdgcProProgressList(this.itemEnti.id);
     $("#pmJjdivid p").each(function() {
       $(this).attr("style", "font-size:17px;");
     });
