@@ -38,7 +38,6 @@
       };
     },
     mounted() {
-      this.getpermission();
     },
     methods: {
       changeactive: function (data) {
