@@ -1,0 +1,17 @@
+
+.tabimg{
+    height: 18px;
+    margin-top:13px;
+    margin-left:9px;
+}
+.van-tab--active {
+    color:#3097FB;
+    font-size: 18px;
+}
+.van-tabs__line{
+    background-color:#3097FB;
+    width: 61px;
+}
+.van-tab{
+    font-size: 18px;
+}

@@ -1,0 +1,118 @@
+.div_flex{
+    display: flex;
+}
+.div_next_style{
+    font-size:14px;color:#333333;
+}
+.backgroundDiv1{
+	background: url("../../../../assets/img/project_data_bg1.png") no-repeat;
+	text-align: center;
+	background-size: contain;
+}
+.backgroundDiv2{
+	background: url("../../../../assets/img/project_data_bg2.png") no-repeat;
+	text-align: center;
+	background-size: contain;
+	margin-left: 10px;
+}
+.backgroundDiv3{
+	background: url("../../../../assets/img/project_data_bg2.png") no-repeat;
+	text-align: center;
+	background-size: contain;
+	margin-left: 10px;
+}
+
+.ztqk_tabmodel_title{
+    font-size: 13px;
+    color: #ffffff;
+    margin-top: 16px;
+}
+.ztqk_tabmodel_left_title{
+    font-size: 17px;
+    color: #ffffff;
+    width: 50%;
+    text-align: right;
+}
+.ztqk_tabmodel_right_title{
+    font-size: 13px;
+    color: #ffffff;
+    width: 50%;
+    text-align: left;
+    margin-top: 2px;
+}
+
+
+.ztqk_tabmodel_title1{
+    font-size: 13px;
+    color: #3ca1ec;
+    margin-top: 16px;
+}
+.ztqk_tabmodel_left_title1{
+    font-size: 17px;
+    color: #3ca1ec;
+    width: 60%;
+    text-align: right;
+}
+.ztqk_tabmodel_right_title1{
+    font-size: 13px;
+    color: #3ca1ec;
+    width: 40%;
+    text-align: left;
+    margin-top: 2px;
+}
+
+.echars_title{
+    position: relative;height: 40px;background: #ffffff;border-bottom: 1px solid #cccccc;
+    line-height:40px;
+    
+}
+
+.list_right_jt{
+    
+    height: 15px;
+    position: absolute;
+    right: 12px;
+    top: 22px;
+
+}
+
+.li_div_title{
+    margin-left: 17px;font-size: 14px;width: 169px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;
+}
+.mescroll {
+    position: fixed;
+    top: 215px;
+    bottom: 0px;
+    height: auto;
+  }
+  .dialogNoSelect {
+	border: 1px solid #cccccc;
+	padding: 1px 15px 1px 15px;
+	border-radius: 33px;
+	font-size: 13px;
+	margin-left: 10px;
+	text-align: center;
+	margin-top: 4px;
+	background: #ffffff;
+}
+
+.dialogSelect {
+	border: 1px solid #1976D2;
+	padding: 1px 15px 1px 15px;
+	border-radius: 33px;
+	font-size: 13px;
+	margin-left: 10px;
+	text-align: center;
+	margin-top: 4px;
+	background: #f6fbff;
+	color: #1976D2;
+}
+
+.backgroundDivPhotohave{
+	background: url("../../../../assets/img/project_list_bg.jpg") no-repeat;
+	text-align: center;
+	background-size: cover;
+}
+.backgroundDivPhotonohave{
+	background:#ffffff;
+}

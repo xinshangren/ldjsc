@@ -9,28 +9,28 @@
         :formatter="formatter"
       />
     </van-popup>
-
-    <div style="display: flex;background: rgb(255, 255, 255);height: 40px;">
-      <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
-        <div class="ui-col ui-col">
-          <div class="div_next_style">前一年</div>
-        </div>
-        <div class="ui-col ui-col" @click="showDatePicker()">
-          <div class="div_flex" style="background: #f1f1f1;border-radius: 6px;">
-            <img
-              src="../../../../assets/img/project_calendar.png"
-              style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
-            />
-            <div class="div_next_style">2019年</div>
+   
+      <div style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 2;">
+        <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
+          <div class="ui-col ui-col">
+            <div class="div_next_style">前一年</div>
+          </div>
+          <div class="ui-col ui-col" @click="showDatePicker()">
+            <div class="div_flex" style="background: #f1f1f1;border-radius: 6px;">
+              <img
+                src="../../../../assets/img/project_calendar.png"
+                style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
+              />
+              <div class="div_next_style">2019年</div>
+            </div>
+          </div>
+          <div class="ui-col ui-col">
+            <div class="div_next_style" style="text-align:right;">后一年</div>
           </div>
         </div>
-        <div class="ui-col ui-col">
-          <div class="div_next_style" style="text-align:right;">后一年</div>
-        </div>
       </div>
-    </div>
-
-    <div class="ui-row-flex ui-whitespace" style="height: 88px;margin-top: 15px;">
+    
+    <div class="ui-row-flex ui-whitespace" style="height: 88px;margin-top: 55px;">
       <div class="ui-col ui-col backgroundDiv1">
         <div class="ztqk_tabmodel_title">重点工程数量</div>
         <div class="div_flex">
@@ -83,12 +83,29 @@
               style="margin-left: 17px;font-size: 14px;width: 169px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
             >{{item.projectName}}</div>
             <img
+              v-if="item.zdProLevel=='2'"
               style="height:20px;margin-left:5px;margin-top:2px;"
               src="../../../../assets/img/project_city.png"
             />
             <img
+              v-if="item.zdProLevel=='1'"
+              style="height:20px;margin-left:5px;margin-top:2px;"
+              src="../../../../assets/img/project_province.png"
+            />
+            <img
+              v-if="item.zdProType=='1'"
               style="height:18px;margin-left:5px;margin-top:2px;"
-              src="../../../../assets/img/zdgc-ctcysj.png"
+              src="../../../../assets/img/zdgc_ctcysj.png"
+            />
+            <img
+              v-if="item.zdProType=='0'"
+              style="height:18px;margin-left:5px;margin-top:2px;"
+              src="../../../../assets/img/zdgc_jcss.png"
+            />
+            <img
+              v-if="item.zdProType=='2'"
+              style="height:18px;margin-left:5px;margin-top:2px;"
+              src="../../../../assets/img/zdgc_cyzx.png"
             />
           </div>
           <van-progress
@@ -106,6 +123,7 @@
 </template>
 
 <script>
+
 import echarts from "echarts";
 import { echarsEnti } from "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.js";
 import { httpMethod } from "../../../../api/getData.js";
@@ -135,7 +153,7 @@ export default {
         { projectName: "", percentage: 0 },
         { projectName: "", percentage: 0 }
       ],
-      jingduList: [0, 0, 0],
+      jingduList: [0.0, 0.0, 0.0],
       color: ["#faad14", "#3ecbb2", "#3ca1ec"]
     };
   },
@@ -164,7 +182,7 @@ export default {
           }
         })
         .catch(err => {
-         // this.$toast(err);
+          // this.$toast(err);
         });
     },
     //第二个存在问题
@@ -197,12 +215,12 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == "1") {
-            this.jingduList=[];
+            this.jingduList = [];
             this.bottomList = res.dataList;
             for (var i = 0; i < res.dataList.length; i++) {
               this.jingduList.push(res.dataList[i].rate);
             }
-            console.log("============="+this.jingduList);
+            console.log("=============" + this.jingduList);
           }
         })
         .catch(err => {
@@ -245,7 +263,7 @@ export default {
   }
 };
 </script>
-<style >
+<style scoped>
 @import "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.css";
 @import "../../../../assets/css/frozenui.css";
 </style>
