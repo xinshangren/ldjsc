@@ -1,16 +1,16 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <div class="div_flex" style="background:#ffffff;">
+    <div class="div_flex" style="background:#ffffff;height:49px;">
       <van-search
         placeholder="请输入重点工程项目名称"
         @search="onSearch"
         v-model="seach_value"
-        style="width:77%;"
+        style="width:77%;margin-left:13px;"
       />
-      <img src="../../../../assets/img/project_voice.png" style="height: 33px;margin-top: 12px;" />
+      <img src="../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
       <img
         src="../../../../assets/img/project_filtrate.png"
-        style="height: 33px;margin-top: 12px;margin-left:10px;"
+        style="height: 27px;margin-top: 10px;margin-left:5px;"
         @click="queryList"
       />
     </div>
@@ -418,7 +418,7 @@ export default {
   }
 };
 </script>
-<style >
+<style scoped>
 @import "../../../../page/zdgz/zdgc/zdgc_xmlb/zdgc_xmlb.css";
 @import "../../../../assets/css/frozenui.css";
 </style>

@@ -15,7 +15,11 @@
           style="overflow-y:auto;overflow-x:hidden;"
         ></child3>
   </van-tab>
-  <van-tab title="统计分析"></van-tab>
+  <van-tab title="统计分析">
+      <child4
+          style="overflow-y:auto;overflow-x:hidden;"
+        ></child4>
+  </van-tab>
 </van-tabs>
 
 
@@ -29,6 +33,7 @@ Vue.use(Tab).use(Tabs);
 import child1 from "@/page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.vue";
 import child2 from "@/page/zdgz/zdgc/zdgc_xmlb/zdgc_xmlb.vue";
 import child3 from "@/page/zdgz/zdgc/zdgc_czwt/zdgc_czwt.vue";
+import child4 from "@/page/zdgz/zdgc/zdgc_tjfx/zdgc_tjfx.vue";
 export default {
   
   beforeCreate() {
@@ -49,7 +54,8 @@ export default {
    components: {
     child1,
     child2,
-    child3
+    child3,
+    child4
   }
 };
 </script>

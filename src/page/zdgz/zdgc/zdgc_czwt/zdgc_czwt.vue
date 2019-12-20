@@ -1,13 +1,13 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <div class="div_flex" style="background:#ffffff;">
+    <div class="div_flex" style="background:#ffffff;height:49px;">
       <van-search
         placeholder="请输入重点工程项目名称"
         @search="onSearch"
         v-model="seach_value"
-        style="width:85%;"
+        style="width:85%;margin-left:13px;"
       />
-      <img src="../../../../assets/img/project_voice.png" style="height: 33px;margin-top: 12px;" />
+      <img src="../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
     </div>
     <div style="display: flex;background: #ffffff;height: 36px;">
       <van-popup v-model="showPop" position="bottom" :style="{ height: '200px' }">
@@ -249,7 +249,7 @@ export default {
   }
 };
 </script>
-<style >
+<style scoped>
 @import "../../../../page/zdgz/zdgc/zdgc_czwt/zdgc_czwt.css";
 @import "../../../../assets/css/frozenui.css";
 </style>
