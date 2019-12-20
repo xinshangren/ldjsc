@@ -44,8 +44,11 @@ export const httpMethod = {
     // 项目列表
     getProReportInfoByzdProType: function (params) {
         return get("zdgcAppInsideController.action?getProReportInfoByzdProType", params);
+    },
+    // 项目重点工程类型
+    getTypeList: function (params) {
+        return get("zdgcAppInsideController.action?getTypeList", params);
     }
-    
 
     
 

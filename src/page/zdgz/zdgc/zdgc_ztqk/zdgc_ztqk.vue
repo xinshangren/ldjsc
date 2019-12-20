@@ -152,7 +152,7 @@ export default {
         { projectName: "", percentage: 0 },
         { projectName: "", percentage: 0 }
       ],
-      jingduList: [0, 0, 0],
+      jingduList: [0.0, 0.0, 0.0],
       color: ["#faad14", "#3ecbb2", "#3ca1ec"]
     };
   },
