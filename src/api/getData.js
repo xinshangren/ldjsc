@@ -23,8 +23,15 @@ export const httpMethod = {
     getCmsArticleContent: function (params) {
         return get("cmsAppInsideController.action?getCmsArticleContent", params);
     },
-
-
+    //钉办
+    //鉴权
+    getConfig: function (params) {
+        return get("dingTalkController.action?getConfig", params);
+    },
+    //获取部门
+    getUserOrDepart: function (params) {
+        return get("dingAppInsideController.action?getUserOrDepart", params);
+    },
     //返回根目录
     returnBaseUrlFun: function () {
         return returnBaseUrl();

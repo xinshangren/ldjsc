@@ -2,6 +2,8 @@
   <div>
     <headlineVue v-if="tabid==0"  style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;">
     </headlineVue>
+    <dingbanVue  v-if="tabid==2" style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;">
+    </dingbanVue>
         <homeVue  v-if="tabid==4" style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;">
         </homeVue>
     
@@ -39,6 +41,7 @@
 import Vue from "vue";
 import headlineVue from "@/page/main/headline.vue";
 import homeVue from "@/page/main/home.vue";
+import dingbanVue from "@/page/main/dingban.vue";
 import { Search } from "vant";
 import $ from "jquery";
 import { mainJs } from "../main/main.js";
@@ -73,7 +76,8 @@ export default {
   },
   components: {
     homeVue,
-    headlineVue
+    headlineVue,
+    dingbanVue
   }
 };
 </script>
