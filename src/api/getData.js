@@ -44,10 +44,32 @@ export const httpMethod = {
     // 项目列表
     getProReportInfoByzdProType: function (params) {
         return get("zdgcAppInsideController.action?getProReportInfoByzdProType", params);
+    },
+    // 项目重点工程类型
+    getTypeList: function (params) {
+        return get("zdgcAppInsideController.action?getTypeList", params);
+    },
+    // 项目规划图
+    getzdgcProReportInfoAtt: function (params) {
+        return get("zdgcAppInsideController.action?getzdgcProReportInfoAtt", params);
+    },
+    // 项目阶段汇报
+    getZdgcProProgressList: function (params) {
+        return get("zdgcAppInsideController.action?getZdgcProProgressList", params);
+    },
+    // 项目简介
+    getzdgcProReportInfoAttJJ: function (params) {
+        return get("zdgcAppInsideController.action?getzdgcProReportInfoAttJJ", params);
+    },
+    // 存在问题列表
+    getVoExistiongPro: function (params) {
+        return get("zdgcAppInsideController.action?getVoExistiongPro", params);
     }
-    
 
     
+    
+
+
 
 
 }
