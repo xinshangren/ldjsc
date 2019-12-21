@@ -16,13 +16,13 @@
         <div
           style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
           v-for="(item,index) of list" :key="index" @click="goDetile(item)">
-          <div style="color: #333333;font-size: 14px;">
+          <div style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
             {{item.title}}
           </div>
           <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
             {{item.summary}}
           </div>
-          <div style="color: #cccccc;font-size: 1px;display: flex;position: absolute;right: 0;">
+          <div style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
             <img src="../../assets/img/icon_time.png" style="height: 13px;"/>
             {{item.showTime}}
           </div>
@@ -36,13 +36,13 @@
         <div
           style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
           v-for="(item1,index1) of list1" :key="index1" @click="goDetile(item1)">
-          <div style="color: #333333;font-size: 14px;">
+          <div style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
             {{item1.title}}
           </div>
           <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
             {{item1.summary}}
           </div>
-          <div style="color: #cccccc;font-size: 1px;display: flex;position: absolute;right: 0;">
+          <div style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
             <img src="../../assets/img/icon_time.png" style="height: 13px;"/>
             {{item1.showTime}}
           </div>
@@ -63,7 +63,7 @@
     name: "newsdetile",
     mounted() {
       var orderHight1 = document.documentElement.clientHeight;
-      var heightlist = orderHight1 -375;
+      var heightlist = orderHight1 -245;
       $("#zwgkzxdt").css('height',heightlist + "px");
       $("#zwgkgsgg").css('height',heightlist + "px");
 
@@ -121,14 +121,14 @@
         finished: false, //是否已加载完所有数据
         isLoading: false, //是否处于下拉刷新状态
         page: 1,
-        pageSize: 4,
+        pageSize: 5,
         error1: false,
         list1: [],
         loading1: false, //是否处于加载状态
         finished1: false, //是否已加载完所有数据
         isLoading1: false, //是否处于下拉刷新状态
         page1: 1,
-        pageSize1: 4
+        pageSize1: 5
       };
     },
     methods: {

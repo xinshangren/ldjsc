@@ -1,5 +1,5 @@
 <template>
-  <div :style="backgroundDiv" style="background-size: 100% 100%;">
+  <div id="detileid" :style="backgroundDiv" style="background-size: 100% 100%; overflow: scroll;margin-top: 50px;">
     <div id="newsDealiTitleId" style="margin-top: 55px;text-align: center;font-size: 22px;font-weight: 600;">
       {{data.title}}</div>
     <div style="margin-top:10px;">
@@ -22,6 +22,9 @@
   export default {
     name: "newsdetile",
     mounted() {
+      var orderHight1 = document.documentElement.clientHeight;
+      var heightlist = orderHight1 -50;
+      $("#detileid").css('height',heightlist + "px");
       var articleId = this.$route.params.articleId;
       this.getCmsArticleContent(articleId);
     },

@@ -1,6 +1,6 @@
 <template>
 
-  <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :disabled='false'>
+  <div>
     <van-list id="newslist" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error" error-text="查询失败"
       style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
       <div style="position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 220px;" v-for="item of list" :key="item.id"
@@ -16,11 +16,9 @@
             <div style="margin-left: 15px; width: 70%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.title}}</div>
             <div style="position: absolute;right: 10px;margin-top:2px;">{{item.showTime}}</div>
           </div>
-          
-        
       </div>
     </van-list>
-  </van-pull-refresh>
+  </div>
 
 </template>
 <script>
@@ -44,7 +42,7 @@
     },
     mounted() {
       var orderHight1 =document.documentElement.clientHeight;
-        var heightlist=orderHight1-320;
+        var heightlist=orderHight1-190;
         document.getElementById("newslist").style.height=heightlist+"px"
     },
     methods: {

@@ -67,13 +67,13 @@
           <div
             style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
             v-for="(item,index) of list" :key="index" @click="goDetile(item)">
-            <div style="color: #333333;font-size: 14px;">
+            <div style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
               {{item.title}}
             </div>
             <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
               {{item.summary}}
             </div>
-            <div style="color: #cccccc;font-size: 1px;display: flex;position: absolute;right: 0;">
+            <div style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
               <img src="../../assets/img/icon_time.png" style="height: 13px;"/>
               {{item.showTime}}
             </div>
@@ -87,13 +87,13 @@
           <div
             style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
             v-for="(item1,index1) of list1" :key="index1" @click="goDetile(item1)">
-            <div style="color: #333333;font-size: 14px;">
+            <div style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
               {{item1.title}}
             </div>
             <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
               {{item1.summary}}
             </div>
-            <div style="color: #cccccc;font-size: 1px;display: flex;position: absolute;right: 0;">
+            <div style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
               <img src="../../assets/img/icon_time.png" style="height: 13px;"/>
               {{item1.showTime}}
             </div>
@@ -117,7 +117,7 @@
       var _this = this;
 
       var orderHight1 = document.documentElement.clientHeight;
-      var heightlist = orderHight1 -530;
+      var heightlist = orderHight1 -400;
       $("#newslist1").css('height',heightlist + "px");
       $("#newslist11").css('height',heightlist + "px");
 
