@@ -27,7 +27,7 @@
 <script>
 import child1 from "@/page/toutiao/picsnews.vue";
 import child2 from "@/page/toutiao/ldzc.vue";
-// import child3 from "@/page/jjyx/jjyx.vue";
+import child3 from "@/page/toutiao/zwgk.vue";
 // import child4 from "@/page/hbgj/hbgj.vue";
 
 export default {
@@ -46,7 +46,7 @@ methods: {
 components: {
   child1,
   child2,
-  // child3,
+  child3,
   // child4,
   
 }
