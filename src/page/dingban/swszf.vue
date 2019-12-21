@@ -1,23 +1,25 @@
 <template>
 
   <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-    <van-list id="newslist" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error" error-text="查询失败"
-      style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
-      <div style="display: flex; position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;" v-for="item of list" :key="item.id">
-     <img :src=item.img style="margin: 15px 10px 15px 10px; width: 60px;height:60px;"/>
-     <div style="color: #333333;font-size: 15px;margin-top: 20px;">
-      <div>
-       {{item.realname}}
-      </div>
-      <div style="margin-top: 13px;">
-        {{item.dutyName}}
-      </div>
-     </div>
-     <div style="display: flex; position: absolute; right: 10px;top: 18px;">
-      <img src="../../assets/img/phonecall.png" style="width: 50px;height:50px;"  @click="goDetile(item)"/>
-      <img src="../../assets/img/sms.png" style="width: 50px;height:50px;margin-left: 5px;"/>
-      <img src="../../assets/img/ding.png" style="width: 50px;height:50px;margin-left: 5px;"/>
-    </div>
+    <van-list id="newslist" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error"
+      error-text="查询失败" style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
+      <div
+        style="display: flex; position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+        v-for="item of list" :key="item.id">
+        <img :src=item.img style="margin: 15px 10px 15px 10px; width: 60px;height:60px;" />
+        <div style="color: #333333;font-size: 15px;margin-top: 20px;">
+          <div>
+            {{item.realname}}
+          </div>
+          <div style="margin-top: 13px;">
+            {{item.dutyName}}
+          </div>
+        </div>
+        <div style="display: flex; position: absolute; right: 10px;top: 18px;">
+          <img src="../../assets/img/phonecall.png" style="width: 50px;height:50px;" @click="goDetile(item)" />
+          <img src="../../assets/img/sms.png" style="width: 50px;height:50px;margin-left: 5px;" />
+          <img src="../../assets/img/ding.png" style="width: 50px;height:50px;margin-left: 5px;" />
+        </div>
       </div>
     </van-list>
   </van-pull-refresh>
@@ -40,13 +42,15 @@
         finished: false, //是否已加载完所有数据
         isLoading: false, //是否处于下拉刷新状态
         page: 1,
-        pageSize: 4
+        pageSize: 4,
+        corpId: ""
       };
     },
     mounted() {
       var orderHight1 = document.documentElement.clientHeight;
       var heightlist = orderHight1 - 175;
       document.getElementById("newslist").style.height = heightlist + "px"
+      this.gojq()
     },
     methods: {
       getUserOrDepart: function () {
@@ -83,10 +87,7 @@
         console.log("onLoad");
         this.getUserOrDepart();
       },
-
-      //鉴权
-      goDetile(item) {
-
+      gojq: function () {
         var currentUrl = window.location.href;//当前页面地址 
         if (window.location.hash == "#/") {
           currentUrl = currentUrl.substring(0, currentUrl.indexOf(window.location.hash));
@@ -100,6 +101,7 @@
           .then(res => {
             if (res.success == "1") {
               var data = JSON.parse(res.config);
+              this.corpId = data.corpId;
               dd.ready(function () {
                 dd.config({
                   agentId: data.agentId,
@@ -119,20 +121,6 @@
                 });
               });
 
-              dd.ready(function () {
-                dd.biz.telephone.call({
-                  users: [item.dingid], //用户列表，工号
-                  corpId: data.corpId, //企业id
-                  onSuccess: function () {
-                  },
-                  onFail: function (e) {
-                    alert("打电话错误" + JSON.stringify(e));
-                  }
-                });
-              });
-
-
-
             } else if (res.success == "0") {
               this.error = true;
             }
@@ -142,7 +130,21 @@
             this.$toast(err);
 
           });
-
+      },
+      //打电话
+      goDetile(item) {
+        var ddd = this.corpId;
+        dd.ready(function () {
+          dd.biz.telephone.call({
+            users: [item.dingid], //用户列表，工号
+            corpId: ddd, //企业id
+            onSuccess: function () {
+            },
+            onFail: function (e) {
+              alert("打电话错误" + JSON.stringify(e));
+            }
+          });
+        });
       }
     },
 

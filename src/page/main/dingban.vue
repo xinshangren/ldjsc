@@ -28,9 +28,6 @@
 
   export default {
     name: "headline",
-    beforeCreate() {
-
-    },
     data() {
       return {
         active: 0,

@@ -40,13 +40,15 @@
         finished: false, //是否已加载完所有数据
         isLoading: false, //是否处于下拉刷新状态
         page: 1,
-        pageSize: 4
+        pageSize: 4,
+        corpId: ""
       };
     },
     mounted() {
       var orderHight1 =document.documentElement.clientHeight;
         var heightlist=orderHight1-175;
         document.getElementById("newslist").style.height=heightlist+"px"
+        this.gojq()
     },
     methods: {
       getUserOrDepart: function () {
@@ -83,7 +85,7 @@
         console.log("onLoad");
         this.getUserOrDepart();
       },
-      goDetile(item) {
+      gojq: function () {
         var currentUrl = window.location.href;//当前页面地址 
         if (window.location.hash == "#/") {
           currentUrl = currentUrl.substring(0, currentUrl.indexOf(window.location.hash));
@@ -97,6 +99,7 @@
           .then(res => {
             if (res.success == "1") {
               var data = JSON.parse(res.config);
+              this.corpId = data.corpId;
               dd.ready(function () {
                 dd.config({
                   agentId: data.agentId,
@@ -116,20 +119,6 @@
                 });
               });
 
-              dd.ready(function () {
-                dd.biz.telephone.call({
-                  users: [item.dingid], //用户列表，工号
-                  corpId: data.corpId, //企业id
-                  onSuccess: function () {
-                  },
-                  onFail: function (e) {
-                    alert("打电话错误" + JSON.stringify(e));
-                  }
-                });
-              });
-
-
-
             } else if (res.success == "0") {
               this.error = true;
             }
@@ -139,6 +128,21 @@
             this.$toast(err);
 
           });
+      },
+      //打电话
+      goDetile(item) {
+        var ddd = this.corpId;
+        dd.ready(function () {
+          dd.biz.telephone.call({
+            users: [item.dingid], //用户列表，工号
+            corpId: ddd, //企业id
+            onSuccess: function () {
+            },
+            onFail: function (e) {
+              alert("打电话错误" + JSON.stringify(e));
+            }
+          });
+        });
       }
     },
 
