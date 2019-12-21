@@ -116,3 +116,15 @@
 .backgroundDivPhotonohave{
 	background:#ffffff;
 }
+
+.echars_titile_div{
+    border-left:2px solid #1976d2;font-size:14px;margin-left:12px;
+    padding-left: 10px;
+}
+.van-hairline--bottom::after{
+    background: #ccc;
+}
+
+.van-picker__columns:nth-child(1){
+  display: none;
+}

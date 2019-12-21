@@ -20,15 +20,15 @@ export const echarsEnti = {
     dataList.push(value1);
     dataList.push(value2);
     var total = parseInt(dataEntity.gcslqq) + parseInt(dataEntity.gcslxinj) + parseInt(dataEntity.gcslxj);
-    console.log(total);
+    // console.log(total);
     let option = {
       title: {
         text: '总数',
-        subtext: dataEntity.gcsl+"",
+        subtext: dataEntity.gcsl + "",
         x: '29%',
         y: '39%',
         textStyle: {
-          fontSize:16 ,
+          fontSize: 16,
           fontWeight: 'normal',
           color: ['#38a4dd']
         },
@@ -44,6 +44,8 @@ export const echarsEnti = {
       },
       color: ['#8fc31f', '#f35833', '#00ccff', '#ffcc00'],
       legend: {
+        itemHeight  :9,
+        itemWidth:9,
         orient: 'vertical',
         left: '60%',  //图例距离左的距离
         y: 'center',
@@ -55,8 +57,29 @@ export const echarsEnti = {
               target = dataList[i].value
             }
           }
+          var arr = [
+            '{b|' + name + '}',
+            '{a|' + ((target / total) * 100).toFixed(2) + '%}{a|'+target+'个}',
+          ]
           var bfb = parseInt((target / total) * 100).toFixed(0);
-          return name + " " + bfb + "% " + target;
+          // return name + " " + bfb + "% " + target;
+          return arr.join('\n');
+        },
+        textStyle: {
+          rich: {
+            a: {
+              fontSize: 14,
+              verticalAlign: 'center',
+              align: 'center',
+              padding: [0, 0, 0, 10]
+            },
+            b: {
+              fontSize: 14,
+              align: 'left',
+              padding: [0, 0, 0, 10],
+              lineHeight: 20
+            }
+          }
         }
       },
       series: [
@@ -93,10 +116,10 @@ export const echarsEnti = {
     };
     myCharts.setOption(option);
   },
-  createEcharsThree: function (echarts, value,dataentity) {
+  createEcharsThree: function (echarts, value, dataentity) {
     const myCharts = echarts.init(value);
     var dataXname = dataentity.axisX;
-    var axisY=dataentity.axisY;
+    var axisY = dataentity.axisY;
     var option = {
       backgroundColor: '#ffffff',
       tooltip: {
@@ -131,7 +154,7 @@ export const echarsEnti = {
       yAxis: [{
         name: '',
         type: 'value',
-        "show" : false,
+        "show": false,
         axisLine: {
           show: false,
           lineStyle: {
@@ -190,11 +213,11 @@ export const echarsEnti = {
           show: true,
           position: 'top',
           color: '#3ca1ec',
-          formatter: function (params){
+          formatter: function (params) {
             return params.value
           }
         },
-        data:axisY
+        data: axisY
       }]
     };
 

@@ -5,9 +5,9 @@ let router = import("@/router");
 axios.defaults.timeout = 6000;
 //axios.defaults.baseURL = "/api";
 //axios.defaults.baseURL = "http://192.168.10.138:8080/jcsldjsc/";//段建斌地址
-// axios.defaults.baseURL = "http://192.168.10.138:8080/jcsldjsc/";//djb
-axios.defaults.baseURL = "http://203.207.104.184:8080/jcsldjsc/";//正式环境
-// axios.defaults.baseURL = "http://203.207.104.184:8080/jcsldjsc/";//zhangrui
+//axios.defaults.baseURL = "http://192.168.10.138:8080/jcsldjsc/";//djb
+//axios.defaults.baseURL = "http://203.207.104.184:8080/jcsldjsc/";//正式环境
+axios.defaults.baseURL = "http://192.168.10.227:8062/jcsldjsc/";//zhangrui
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;application/json;charset=UTF-8";
 axios.defaults.headers["X-Requested-With"] = "XMLHttpRequest";
 axios.defaults.headers["Cache-Control"] = "no-cache";
@@ -38,7 +38,7 @@ router.then(lib => {
 //登录过期跳转
 axios.interceptors.response.use(response => {
     let data = response.data;
-   // store.commit('hideLoading');
+    // store.commit('hideLoading');
     // if (
     //     [10002].includes(data.ret)
     // ) {
@@ -50,7 +50,7 @@ axios.interceptors.response.use(response => {
 
 //返回值解构
 axios.interceptors.response.use(response => {
-    
+
     store.commit('hideLoading');
     let data = response.data;
     let isJson = (response.headers["content-type"] || "").includes("json");

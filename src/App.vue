@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loading v-show="LOADING"></loading>
+    <loading v-show="LOADING" style="z-index:3;"></loading>
       <!--搜索框部分start-->
     <div
       style="z-index: 2; height: 54px;background: #3098fb ;display: flex;position: fixed;top: 0px;width: 100%;"
