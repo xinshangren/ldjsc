@@ -376,8 +376,8 @@
                 style="height: 300px;padding: 28px;line-height: 26px;overflow: auto;"
               ></div>
               <div  v-show="!isFlag" style="height:346px;">
-                <div v-for="(item,index) in dataList" :key="index">
-                  <div style="display:flex;margin-top:14px;">
+                <div v-for="(item,index) in dataList" :key="index" style="padding-top:2px;margin-left: 10px;margin-right: 10px;box-shadow: 1px 1px 1px 1px #cccccc;border-radius: 3px;">
+                  <div style="display:flex;margin-top:7px;">
                     <div class="vantlist_block">
                       <div style="margin-top:9px;">{{index+1}}</div>
                     </div>
@@ -401,9 +401,9 @@
                     style="margin-left: 21px;color:#333333;font-size:12px;margin-top:5px;"
                   >{{item.solutionsAndDept}}</div>
                   <!-- <div class="van-hairline--bottom"></div> -->
-                  <div
+                  <!-- <div
                     style="margin-top: 4px;color: rgb(229, 229, 229);height: 1px;background: rgb(229, 229, 229);width: 94%;margin-left: 10px;margin-right: 10px;"
-                  ></div>
+                  ></div> -->
                 </div>
               </div>
               <div style="background: rgb(39, 150, 231);width: 60px;height: 60px;border-radius: 50%;text-align: center;margin: 0 auto;position: absolute;bottom: 10px;left: 42%;">
