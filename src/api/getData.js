@@ -86,8 +86,38 @@ export const httpMethod = {
     // 存在问题列表
     getVoExistiongPro: function (params) {
         return get("zdgcAppInsideController.action?getVoExistiongPro", params);
+    },
+    //重点工程进度统计
+    statisticsProgress: function (params) {
+        return get("zdgcAppInsideController.action?statisticsProgress", params);
+    },
+    //按区县统计各个阶段项目个数（柱状图）
+    statisticsRegionStage: function (params) {
+        return get("zdgcAppInsideController.action?statisticsRegionStage", params);
+    },
+    //按区县统计工程年度完成投资额占比（饼图）
+    statisticsNdProportion: function (params) {
+        return get("zdgcAppInsideController.action?statisticsNdProportion", params);
+    },
+    //区县统计工程年度投资额完成率（柱状图）
+    statisticsNdPercentage: function (params) {
+        return get("zdgcAppInsideController.action?statisticsNdPercentage", params);
+    },
+    //按重点工程类别统计年度完成投资额占比（饼图）
+    statisticsLbNdProportion: function (params) {
+        return get("zdgcAppInsideController.action?statisticsLbNdProportion", params);
+    },
+    //按重点工程类别统计年度投资额完成率（柱状图）
+    statisticsLbNdPercentage: function (params) {
+        return get("zdgcAppInsideController.action?statisticsLbNdPercentage", params);
+    },
+    //项目进度
+    getZdgcProProgress: function (params) {
+        return get("zdgcAppInsideController.action?getZdgcProProgress", params);
     }
 
+
+    
     
     
 

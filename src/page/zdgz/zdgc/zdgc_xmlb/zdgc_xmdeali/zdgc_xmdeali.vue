@@ -320,7 +320,7 @@
         </div>
 
         <div style="margin-top: 10px;">
-          <van-popup v-model="show" position="bottom" :style="{ height: '200px' }">
+          <van-popup position="bottom" :style="{ height: '200px' }">
             <van-datetime-picker
               v-model="currentDate"
               type="date"
@@ -346,26 +346,89 @@
             />
           </div>
           <van-divider style="margin-top: 10px;margin-bottom: 0px;"></van-divider>
-          <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-            <van-list v-model="loading" :finished="finished" @load="onLoad" :offset="10">
+          <van-popup
+            v-model="show"
+            position="bottom"
+            round
+            style="background:#ffffff;"
+            :style="{ height: '80%' }"
+          >
+            <div>
               <div
-                style="display: flex;height:100px;padding: 10px 10px;border-bottom: 2px solid #F1F4F6; background: #ffffff;"
-                v-for="item of list"
-                :key="item.id"
-                @click="goDetile"
+                style="display: flex;height: 40px;margin-top: 20px;margin-left: 10px;margin-right: 10px;"
               >
-                <img src="../../../../../assets/img/deimg.jpg" style="width: 35%;" />
-                <div style="margin-left:10px;text-align: left;width: 65%;font-size: 15px">
-                  <div style="color:#333333;">{{item.reportDate}}</div>
-                  <textarea
-                    style="color:#999999;height: 80px;width: 100%;border:none;resize: none;overflow:hidden"
-                    v-model="item.imageProgress"
-                    readonly
-                  ></textarea>
+                <div style="width:50%;position:relative;">
+                  <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_select_div1">
+                    <img class="pop_xxjd_img" :src="tabimg1" />
+                    <div style="margin-right:15px;">形象进度</div>
+                  </div>
+                </div>
+                <div style="width:50%;position:relative;">
+                  <div @click="selectTab(2)" id="tabdiv2" class="pop_tab_noselect_div2">
+                    <img class="pop_xxjd_img" :src="tabimg2" />
+                    <div style="margin-right:15px;">存在问题</div>
+                  </div>
                 </div>
               </div>
-            </van-list>
-          </van-pull-refresh>
+              <div
+                id="jiedContent"
+                v-show="isFlag"
+                style="height: 300px;padding: 28px;line-height: 26px;overflow: auto;"
+              ></div>
+              <div  v-show="!isFlag" style="height:346px;">
+                <div v-for="(item,index) in dataList" :key="index">
+                  <div style="display:flex;margin-top:14px;">
+                    <div class="vantlist_block">
+                      <div style="margin-top:9px;">{{index+1}}</div>
+                    </div>
+
+                    <div>
+                      <div style="margin-left:11px;color:#b6b6b6;font-size: 14px;">存在问题</div>
+                      <div
+                        class="van-multi-ellipsis--l2"
+                        style="font-size: 12px;margin-left: 11px;width: 243px;"
+                      >{{item.existingProblem}}</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;margin-top:10px;">
+                    <img
+                      style="height: 14px;margin-left: 21px;margin-top:3px;"
+                      src="../../../../../assets/img/zdgc-responsible.png"
+                    />
+                    <div style="color:#999999;font-size:14px;margin-left: 6px;">问题解决责任单位</div>
+                  </div>
+                  <div
+                    style="margin-left: 21px;color:#333333;font-size:12px;margin-top:5px;"
+                  >{{item.solutionsAndDept}}</div>
+                  <!-- <div class="van-hairline--bottom"></div> -->
+                  <div
+                    style="margin-top: 4px;color: rgb(229, 229, 229);height: 1px;background: rgb(229, 229, 229);width: 94%;margin-left: 10px;margin-right: 10px;"
+                  ></div>
+                </div>
+              </div>
+              <div style="background: rgb(39, 150, 231);width: 60px;height: 60px;border-radius: 50%;text-align: center;margin: 0 auto;position: absolute;bottom: 10px;left: 42%;">
+                   <img style="height:29px;margin-top: 15px;" src="../../../../../assets/img/icon_voice.png"/>
+              </div>
+            </div>
+          </van-popup>
+          <van-list v-model="loading" :finished="finished" @load="onLoad" :offset="10">
+            <div
+              style="display: flex;height:100px;padding: 10px 10px;border-bottom: 2px solid #F1F4F6; background: #ffffff;"
+              v-for="item of list"
+              :key="item.id"
+              @click="getZdgcProProgress(item.id)"
+            >
+              <img src="../../../../../assets/img/deimg.jpg" style="width: 35%;" />
+              <div style="margin-left:10px;text-align: left;width: 65%;font-size: 15px">
+                <div style="color:#333333;">{{item.reportDate}}</div>
+                <textarea
+                  style="color:#999999;height: 80px;width: 100%;border:none;resize: none;overflow:hidden"
+                  v-model="item.imageProgress"
+                  readonly
+                ></textarea>
+              </div>
+            </div>
+          </van-list>
         </div>
       </van-tab>
     </van-tabs>
@@ -415,8 +478,12 @@ export default {
   },
   data() {
     return {
+      dataList: [],
+      isFlag: true,
+      tabimg1: require("../../../../../assets/img/icon_report1_selected.png"),
+      tabimg2: require("../../../../../assets/img/icon_report2.png"),
       images: [],
-      jjEntity:[{content:""}],
+      jjEntity: [{ content: "" }],
       list: [],
       loading: false, //是否处于加载状态
       finished: false, //是否已加载完所有数据
@@ -439,6 +506,31 @@ export default {
   },
   updated() {},
   methods: {
+    selectTab: function(flag) {
+      console.log(flag);
+      switch (flag) {
+        case 1: //形象进度
+          this.isFlag = true;
+          $("#tabdiv1").removeClass("pop_tab_noselect_div1");
+          $("#tabdiv1").addClass("pop_tab_select_div1");
+          $("#tabdiv2").addClass("pop_tab_noselect_div2");
+          $("#tabdiv2").removeClass("pop_tab_select_div2");
+          this.tabimg1 = require("../../../../../assets/img/icon_report1_selected.png");
+          this.tabimg2 = require("../../../../../assets/img/icon_report2.png");
+          break;
+        case 2: //存在问题
+          this.isFlag = false;
+          $("#tabdiv1").removeClass("pop_tab_select_div1");
+          $("#tabdiv1").addClass("pop_tab_noselect_div1");
+          $("#tabdiv2").addClass("pop_tab_select_div2");
+          $("#tabdiv2").removeClass("pop_tab_noselect_div2");
+          this.tabimg1 = require("../../../../../assets/img/icon_report1.png");
+          this.tabimg2 = require("../../../../../assets/img/icon_report2_selected.png");
+          break;
+        default:
+          break;
+      }
+    },
     reshye: function() {
       //console.log("刷新");
       setTimeout(() => {
@@ -465,8 +557,8 @@ export default {
       httpMethod
         .getzdgcProReportInfoAtt(params)
         .then(res => {
-            console.log("获取图片");
-            
+          console.log("获取图片");
+
           if (res.success == "1") {
             var dataList = res.dataList;
             for (var i = 0; i < dataList.length; i++) {
@@ -476,6 +568,23 @@ export default {
             }
             console.log("获取图片");
             console.log(this.images);
+          }
+        })
+        .catch(err => {
+          this.$toast(err);
+        });
+    },
+     //存在问题列表
+    getVoExistiongPro: function(id) {
+      var params = {
+        proId: id
+      };
+
+      httpMethod
+        .getVoExistiongPro(params)
+        .then(res => {
+          if (res.success == "1") {
+            this.dataList = res.dataList;
           }
         })
         .catch(err => {
@@ -494,13 +603,37 @@ export default {
           //console.log("项目阶段汇报==="+JSON.stringify(res));
           if (res.success == "1") {
             var dataList = res.dataList;
-            this.list=dataList;
-            
+            this.list = dataList;
           }
         })
         .catch(err => {
           this.$toast(err);
         });
+    },
+
+    //项目详情
+    getZdgcProProgress: function(id) {
+      this.show = true;
+      var params = {
+        zdgcProProgressId: id
+      };
+
+      httpMethod
+        .getZdgcProProgress(params)
+        .then(res => {
+          console.log("项目详情===" + JSON.stringify(res));
+          if (res.success == "1") {
+            this.showPopData(res.data);
+          }
+        })
+        .catch(err => {
+          this.$toast(err);
+        });
+    },
+    showPopData: function(data) {
+      console.log(data.imageProgress);
+      this.getVoExistiongPro(data.id);
+      $("#jiedContent").html(data.imageProgress);
     },
     //项目简介
     getzdgcProReportInfoAttJJ: function(id) {
@@ -513,8 +646,8 @@ export default {
         .then(res => {
           //console.log("项目简介==="+JSON.stringify(res));
           if (res.success == "1") {
-            var data=res.data;
-           this.jjEntity= data;
+            var data = res.data;
+            this.jjEntity = data;
           }
         })
         .catch(err => {
@@ -580,40 +713,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import "../../../../../page/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali.css";
-
-.b2 {
-  margin: 1in 1.25in 1in 1.25in;
-}
-
-.s1 {
-  font-weight: bold;
-}
-
-.p1 {
-  text-align: center;
-  font-family: 宋体;
-  font-size: 22pt;
-}
-
-.p2 {
-  text-indent: 0.44652778in;
-  text-align: justify;
-  font-family: 仿宋;
-  font-size: 16pt;
-}
-
-.p3 {
-  text-indent: 0.44444445in;
-  text-align: justify;
-  font-family: 仿宋;
-  font-size: 16pt;
-}
-
-.p4 {
-  text-align: justify;
-  font-family: Calibri;
-  font-size: 10pt;
-}
 </style>

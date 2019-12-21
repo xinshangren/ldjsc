@@ -21,7 +21,7 @@
           <img class="home_ul_li_img" src="../../assets/img/icon2.png" />
           <div class="home_ul_li_div">重大改革</div>
         </li>
-        <li class="ui-col ui-col-25 home_ul_li_style">
+        <li @click="intentZdgc()"  class="ui-col ui-col-25 home_ul_li_style">
           <img class="home_ul_li_img" src="../../assets/img/icon3.png" />
           <div class="home_ul_li_div">重点工程</div>
         </li>
