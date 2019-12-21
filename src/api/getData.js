@@ -95,6 +95,10 @@ export const httpMethod = {
     //按重点工程类别统计年度投资额完成率（柱状图）
     statisticsLbNdPercentage: function (params) {
         return get("zdgcAppInsideController.action?statisticsLbNdPercentage", params);
+    },
+    //项目进度
+    getZdgcProProgress: function (params) {
+        return get("zdgcAppInsideController.action?getZdgcProProgress", params);
     }
 
 
