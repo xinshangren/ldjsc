@@ -7,7 +7,7 @@
       </div>
       <div id="menuid4" class="hjnoselect" style=" margin-left: -6%;">
         <img :src="img2" style="height:14px;margin-top: 9px;margin-left: 30%;" />
-        公式公告
+        公示公告
       </div>
     </div>
     <div id="zxdtlist" style="margin-top: 10px;">
@@ -63,7 +63,7 @@
     name: "newsdetile",
     mounted() {
       var orderHight1 = document.documentElement.clientHeight;
-      var heightlist = orderHight1 -245;
+      var heightlist = orderHight1 -215;
       $("#zwgkzxdt").css('height',heightlist + "px");
       $("#zwgkgsgg").css('height',heightlist + "px");
 

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <headlineVue v-if="tabid==0"  style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;">
+    <headlineVue v-if="tabid==0"  style="overflow-y:auto;overflow-x:hidden;margin-top:55px;">
     </headlineVue>
-    <dingbanVue  v-if="tabid==2" style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;">
+    <dingbanVue  v-if="tabid==2" style="overflow-y:auto;overflow-x:hidden;margin-top:55px;">
     </dingbanVue>
         <homeVue  v-if="tabid==4" style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:70px;">
         </homeVue>

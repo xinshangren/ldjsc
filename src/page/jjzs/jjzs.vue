@@ -4,7 +4,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(1)">
         <div class="li_div_title1">全市生产总值</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">完成情况</div>
@@ -43,7 +43,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(2)">
         <div class="li_div_title1">规模以上工业增加值</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">同比增长</div>
@@ -75,7 +75,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(3)">
         <div class="li_div_title1">一般公共预算收入</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">完成情况</div>
@@ -115,7 +115,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(4)">
         <div class="li_div_title1">固定资产投资</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">完成情况</div>
@@ -155,7 +155,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(5)">
         <div class="li_div_title1">社会消费品零售总额</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">完成情况</div>
@@ -195,7 +195,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(6)">
         <div class="li_div_title1">海关进出口总额</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">完成情况</div>
@@ -235,7 +235,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(7)">
         <div class="li_div_title1">居民人均可支配收入</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">居民人均可支配收入</div>

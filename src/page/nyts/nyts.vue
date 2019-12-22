@@ -4,7 +4,6 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(1)">
         <div class="li_div_title1">煤炭</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">企业数量总数</div>
@@ -57,7 +56,6 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(2)">
         <div class="li_div_title1">煤层气</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">企业数量总数</div>
@@ -96,7 +94,6 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(3)">
         <div class="li_div_title1">新能源</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">企业数量总数</div>

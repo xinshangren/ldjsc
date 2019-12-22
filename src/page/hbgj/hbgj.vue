@@ -3,7 +3,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(1)">
         <div class="li_div_title1">空气质量</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">本年优良天数总数</div>
@@ -42,7 +42,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(1)">
         <div class="li_div_title1">网格监管</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">监管污染源数量</div>

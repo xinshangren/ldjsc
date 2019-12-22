@@ -3,7 +3,6 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(1)">
         <div class="li_div_title1">旅游景区</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">景区数量总数</div>
@@ -66,7 +65,6 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(2)">
         <div class="li_div_title1">旅游示范村</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">示范村数量总数</div>

@@ -42,7 +42,7 @@
     },
     mounted() {
       var orderHight1 =document.documentElement.clientHeight;
-        var heightlist=orderHight1-190;
+        var heightlist=orderHight1-160;
         document.getElementById("newslist").style.height=heightlist+"px"
     },
     methods: {

@@ -6,16 +6,20 @@
         <div style="display: flex;margin-top: 13px;">
           <div id="news1positionId" style="font-size: 13px;">{{data.dutyName}}:</div>
           <div id="news1nameId" style="font-size: 13px;margin-left: 3px;">{{data.userName}}</div>
-          <img id="showLdsxId" style="height:15px;margin-left: 5px;" src="../../assets/img/icon_filtrate.png" @click="onClick()">
+          <img id="showLdsxId" style="height:15px;margin-left: 5px;" src="../../assets/img/icon_filtrate.png"
+            @click="onClick()">
         </div>
-        <div style="font-size: 11px;color: #666666;font-size: 13px;margin-top: 3px;line-height: 15px;overflow:hidden;height: 72px;"  v-html="data.summary">
+        <div
+          style="font-size: 11px;color: #666666;font-size: 13px;margin-top: 3px;line-height: 15px;overflow:hidden;height: 72px;"
+          v-html="data.summary">
         </div>
         <div id="ldjj_summary_xx_id" style="text-align: right; color: #1976D3;font-size: 13px;" @click="goxiangxi()">
           【详细】
         </div>
       </div>
     </div>
-    <div id="ldzc_ldcx_content_Id" style="display: none; position: absolute; top:45px;z-index: 3;background: #ffffff;margin: 15px;">
+    <div id="ldzc_ldcx_content_Id"
+      style="display: none; position: absolute; top:45px;z-index: 3;background: #ffffff;margin: 15px;">
       <div style="background: #ffffff;padding: 4px;display: flex;">
         <div style="font-size: 12px;line-height:29px;width: 56px;margin-left:6px;">书记</div>
         <ul class="ui-row" style="width: 100%;margin-right: 15px;">
@@ -46,7 +50,7 @@
         </ul>
       </div>
       <div style="background: #ffffff;padding: 4px;display: flex;height: 8px;">
-        
+
       </div>
     </div>
 
@@ -61,45 +65,51 @@
         领导讲话
       </div>
     </div>
-      <div id="zxhdlistid" style="margin-top: 10px;">
-        <van-list id="newslist1" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error" :immediate-check="false"
-        finished-text="暂无更多数据" error-text="查询失败" style="background: #ffffff;padding: 0 13px 13px 13px;overflow-y: auto;">
+    <div id="zxhdlistid" style="margin-top: 10px;">
+      <van-list id="newslist1" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error"
+        :immediate-check="false" finished-text="暂无更多数据" error-text="查询失败"
+        style="background: #ffffff;overflow-y: auto;">
+        <div
+          style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+          v-for="(item,index) of list" :key="index" @click="goDetile(item)">
           <div
-            style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
-            v-for="(item,index) of list" :key="index" @click="goDetile(item)">
-            <div style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
-              {{item.title}}
-            </div>
-            <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
-              {{item.summary}}
-            </div>
-            <div style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
-              <img src="../../assets/img/icon_time.png" style="height: 13px;"/>
-              {{item.showTime}}
-            </div>
+            style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
+            {{item.title}}
           </div>
-        </van-list>
-      </div>
+          <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
+            {{item.summary}}
+          </div>
+          <div
+            style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
+            <img src="../../assets/img/icon_time.png" style="height: 13px;" />
+            {{item.showTime}}
+          </div>
+        </div>
+      </van-list>
+    </div>
 
-      <div id="ldjhlistid" style="margin-top: 10px;display: none;">
-        <van-list id="newslist11" v-model="loading" :finished="finished" @load="onLoad1" :offset="60" :error.sync="error" :immediate-check="false"
-        finished-text="暂无更多数据" error-text="查询失败" style="background: #ffffff;padding: 0 13px 13px 13px;overflow-y: auto;">
+    <div id="ldjhlistid" style="margin-top: 10px;display: none;">
+      <van-list id="newslist11" v-model="loading" :finished="finished" @load="onLoad1" :offset="60" :error.sync="error"
+        :immediate-check="false" finished-text="暂无更多数据" error-text="查询失败"
+        style="background: #ffffff;overflow-y: auto;">
+        <div
+          style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+          v-for="(item1,index1) of list1" :key="index1" @click="goDetile(item1)">
           <div
-            style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
-            v-for="(item1,index1) of list1" :key="index1" @click="goDetile(item1)">
-            <div style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
-              {{item1.title}}
-            </div>
-            <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
-              {{item1.summary}}
-            </div>
-            <div style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
-              <img src="../../assets/img/icon_time.png" style="height: 13px;"/>
-              {{item1.showTime}}
-            </div>
+            style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
+            {{item1.title}}
           </div>
-        </van-list>
-      </div>
+          <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
+            {{item1.summary}}
+          </div>
+          <div
+            style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
+            <img src="../../assets/img/icon_time.png" style="height: 13px;" />
+            {{item1.showTime}}
+          </div>
+        </div>
+      </van-list>
+    </div>
 
   </div>
 
@@ -117,18 +127,18 @@
       var _this = this;
 
       var orderHight1 = document.documentElement.clientHeight;
-      var heightlist = orderHight1 -400;
-      $("#newslist1").css('height',heightlist + "px");
-      $("#newslist11").css('height',heightlist + "px");
+      var heightlist = orderHight1 - 370;
+      $("#newslist1").css('height', heightlist + "px");
+      $("#newslist11").css('height', heightlist + "px");
 
       _this.getUserCms("8a87821a6b1c0bb4016b1c113e2f0001");
-      $(".ui-row li").click(function(){
-        var userid=$(this).attr('id');
+      $(".ui-row li").click(function () {
+        var userid = $(this).attr('id');
         _this.getUserCms(userid);
         _this.hidepopu();
       });
 
-      
+
       $("#menu div").click(function () {
         $("#menu div").each(function () {
           if ($(this).hasClass("hjnoselect")) {
@@ -137,14 +147,14 @@
             if ($(this).attr('id') == 'menuid1') {
               _this.img1 = require("../../assets/img/head_icon1_selected.png");
               _this.img2 = require("../../assets/img/head_icon2.png");
-              $('#zxhdlistid').css('display','');
-              $('#ldjhlistid').css('display','none');
+              $('#zxhdlistid').css('display', '');
+              $('#ldjhlistid').css('display', 'none');
             } else {
               _this.img1 = require("../../assets/img/head_icon1.png");
               _this.img2 = require("../../assets/img/head_icon2_selected.png");
-              $('#zxhdlistid').css('display','none');
-              $('#ldjhlistid').css('display','');
-              if(_this.list1.length==0){
+              $('#zxhdlistid').css('display', 'none');
+              $('#ldjhlistid').css('display', '');
+              if (_this.list1.length == 0) {
                 _this.getCmsArticleContentList1();
               }
             }
@@ -154,16 +164,16 @@
             if ($(this).attr('id') == 'menuid1') {
               _this.img1 = require("../../assets/img/head_icon1.png");
               _this.img2 = require("../../assets/img/head_icon2_selected.png");
-              $('#zxhdlistid').css('display','none');
-              $('#ldjhlistid').css('display','');
-              if(_this.list1.length==0){
+              $('#zxhdlistid').css('display', 'none');
+              $('#ldjhlistid').css('display', '');
+              if (_this.list1.length == 0) {
                 _this.getCmsArticleContentList1();
               }
             } else {
               _this.img1 = require("../../assets/img/head_icon1_selected.png");
               _this.img2 = require("../../assets/img/head_icon2.png");
-              $('#zxhdlistid').css('display','');
-              $('#ldjhlistid').css('display','none');
+              $('#zxhdlistid').css('display', '');
+              $('#ldjhlistid').css('display', 'none');
             }
           }
         });
@@ -189,21 +199,21 @@
         isLoading1: false, //是否处于下拉刷新状态
         page1: 1,
         pageSize1: 4,
-        data:{}
+        data: {}
       };
     },
     methods: {
-      onClick:function(){
+      onClick: function () {
         $("#ldzc_ldcx_content_Id").show();
       },
-      hidepopu:function(){
+      hidepopu: function () {
         $("#ldzc_ldcx_content_Id").hide();
       },
-      getCmsArticleContentList:function(){
+      getCmsArticleContentList: function () {
         var params = {
           classId: this.data.dataList[0].id,
           page: this.page,
-          pageSize:this.pageSize
+          pageSize: this.pageSize
 
         };
         httpMethod
@@ -224,11 +234,11 @@
             this.$toast(err);
           });
       },
-      getCmsArticleContentList1:function(){
+      getCmsArticleContentList1: function () {
         var params = {
           classId: this.data.dataList[1].id,
           page: this.page1,
-          pageSize:this.pageSize1
+          pageSize: this.pageSize1
 
         };
         httpMethod
@@ -249,7 +259,7 @@
             this.$toast(err);
           });
       },
-      getUserCms:function(userId){
+      getUserCms: function (userId) {
         var params = {
           userId: userId,
         };
@@ -258,41 +268,37 @@
           .then(res => {
             if (res.success == "1") {
               this.data = res;
-              this.getCmsArticleContentList();
-             
-            } else if (res.success == "0") {
-              this.error = true;
-            }
-            
-          })
-          .catch(err => {
-            this.$toast(err);
-          });
-      },
-      getPictureclass: function () {
-        var params = {
-          page: this.page,
-          pageSize: this.pageSize,
-          userId: this.userId
-        };
-        this.page = this.page + 1;
-        httpMethod
-          .getPictureclass(params)
-          .then(res => {
-            if (res.success == "1") {
-              this.list = this.list.concat(res.dataList);
-              if (res.dataList < 4) {
-                this.finished = true;
+
+              this.page = 1;
+              this.list = [];
+
+              this.page1 = 1;
+              this.list1 = [];
+              var _this = this;
+              if ($('#menuid1').hasClass("hjnoselect")) {
+                $('#menuid1').removeClass("hjnoselect");
+                $('#menuid1').addClass("hjselect");
+                _this.img1 = require("../../assets/img/head_icon1_selected.png");
+                _this.img2 = require("../../assets/img/head_icon2.png");
+
+                $('#menuid2').removeClass("hjselect");
+                $('#menuid2').addClass("hjnoselect");
+
+
+                $('#zxhdlistid').css('display', '');
+                $('#ldjhlistid').css('display', 'none');
               }
+              this.getCmsArticleContentList();
+
+
+
             } else if (res.success == "0") {
               this.error = true;
             }
-            this.loading = false;
-            this.isLoading = false;
+
           })
           .catch(err => {
             this.$toast(err);
-            this.finished = true;
           });
       },
       onRefresh() {
@@ -321,7 +327,7 @@
         console.log("onLoad");
         this.getCmsArticleContentList1();
       },
-      goxiangxi(){
+      goxiangxi() {
         var id = this.data.articleid
         this.$router.push({
           path: "/toutiao/newsdetile",
@@ -378,25 +384,25 @@
   }
 
   .dialogNoSelect1 {
-	border: 1px solid #cccccc;
-	padding: 2px;
-	border-radius: 33px;
-	font-size: 12px;
-	margin-left: 10px;
-	text-align: center;
-	margin-top: 6px;
-	background: #cccccc;
-}
+    border: 1px solid #cccccc;
+    padding: 2px;
+    border-radius: 33px;
+    font-size: 12px;
+    margin-left: 10px;
+    text-align: center;
+    margin-top: 6px;
+    background: #cccccc;
+  }
 
-.dialogSelect1 {
-	border: 1px solid #1976D2;
-	padding: 2px;
-	border-radius: 33px;
-	font-size: 12px;
-	margin-left: 10px;
-	text-align: center;
-	margin-top: 6px;
-	background: #1976D3;
-	color: #ffffff;
-}
+  .dialogSelect1 {
+    border: 1px solid #1976D2;
+    padding: 2px;
+    border-radius: 33px;
+    font-size: 12px;
+    margin-left: 10px;
+    text-align: center;
+    margin-top: 6px;
+    background: #1976D3;
+    color: #ffffff;
+  }
 </style>
