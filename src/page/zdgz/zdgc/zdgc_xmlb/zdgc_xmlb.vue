@@ -88,7 +88,9 @@
               <div style="position: relative;margin-left:3px;">
                 <img style="height:15px;" src="../../../../assets/img/project_list_icon4.png" />
                 <div style="display: flex;position: absolute;top: 0px;left:23px;">
-                  <div style="font-size:13px;color:#00cc00;">{{item.rate}}%</div>
+                  <div v-if="item.rate!=undefined&&item.rate<51" style="font-size:13px;color:#FF4F26;">{{item.rate}}%</div>
+                    <div v-if="item.rate!=undefined&&item.rate>50&&item.rate< 76" style="font-size:13px;color:#FFB423;">{{item.rate}}%</div>
+                    <div v-if="item.rate!=undefined&&item.rate>75&&item.rate< 1000" style="font-size:13px;color:#01CC00;">{{item.rate}}%</div>
                 </div>
               </div>
             </div>
