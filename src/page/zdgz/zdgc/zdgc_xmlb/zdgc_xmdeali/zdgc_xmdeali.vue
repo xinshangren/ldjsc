@@ -27,6 +27,7 @@
             />
             <img
               v-if="itemEnti.hasCamera=='1'"
+              @click="openApp(itemEnti,$event)"
               style="height: 22px;position: absolute;right: 18px;top: 11px;"
               src="../../../../../assets/img/details_camera.png"
             />
@@ -467,7 +468,7 @@ import Vant, { Lazyload } from "vant";
 import { ImagePreview } from "vant";
 import { PullRefresh } from "vant";
 import { Field } from "vant";
-import { Popup } from "vant";
+import { Popup,Dialog} from "vant";
 
 Vue.use(Popup);
 Vue.use(PullRefresh);
@@ -476,7 +477,7 @@ Vue.use(ImagePreview);
 Vue.use(Lazyload);
 Vue.use(Swipe).use(SwipeItem);
 Vue.use(Divider);
-Vue.use(Tab).use(Tabs);
+Vue.use(Tab).use(Tabs).use(Dialog);
 export default {
   name: "zdgcdetile",
   beforeCreate() {
@@ -528,6 +529,31 @@ export default {
   },
   updated() {},
   methods: {
+    
+    openApp: function(item, e) {
+      var isTip = localStorage.getItem("isTip");
+      if (isTip != undefined) {
+        var regionName = item.regionName;
+        var hasCamera = item.hasCamera + "";
+        if (hasCamera == "1") {
+          window.location.href =
+            "m://com.hikvision.sdk.app/openwith?projname=" + regionName;
+        }
+      } else {
+        Dialog.alert({
+          message: "请先确定已经安装《项目视频监控》apk"
+        }).then(() => {
+          localStorage.setItem("isTip", "1");
+          var regionName = item.regionName;
+          var hasCamera = item.hasCamera + "";
+          if (hasCamera == "1") {
+            window.location.href =
+              "m://com.hikvision.sdk.app/openwith?projname=" + regionName;
+          }
+        });
+      }
+      e.stopPropagation(); //非IE浏览器
+    },
     selectTab: function(flag) {
       console.log(flag);
       switch (flag) {

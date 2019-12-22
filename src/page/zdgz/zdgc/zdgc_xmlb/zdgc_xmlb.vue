@@ -25,9 +25,15 @@
           v-for="(item,index) in list"
           :key="index"
           :class="item.hasCamera=='0'?'backgroundDivPhotonohave':'backgroundDivPhotohave' "
-          style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;"
+          style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;"
           @click="goDetile(item)"
         >
+          <img
+              v-if="item.hasCamera=='1'"
+              @click="openApp(item,$event)"
+              style="height: 22px;position: absolute;right: 18px;top:29px;"
+              src="../../../../assets/img/details_camera.png"
+            />
           <div  >
             <div style="display:flex;">
               <div class="li_div_title">{{item.projectName}}</div>
@@ -177,10 +183,10 @@ import echarts from "echarts";
 import { echarsEnti } from "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.js";
 import { httpMethod } from "../../../../api/getData.js";
 import Vue from "vue";
-import { Search, PullRefresh, Popup } from "vant";
+import { Search, PullRefresh, Popup,Dialog } from "vant";
 Vue.use(Search)
   .use(PullRefresh)
-  .use(Popup);
+  .use(Popup).use(Dialog);
 export default {
   components: {
     MescrollVue // 注册mescroll组件
@@ -225,6 +231,30 @@ export default {
     this.getDyTypeList();
   },
   methods: {
+    openApp: function(item, e) {
+      var isTip = localStorage.getItem("isTip");
+      if (isTip != undefined) {
+        var regionName = item.regionName;
+        var hasCamera = item.hasCamera + "";
+        if (hasCamera == "1") {
+          window.location.href =
+            "m://com.hikvision.sdk.app/openwith?projname=" + regionName;
+        }
+      } else {
+        Dialog.alert({
+          message: "请先确定已经安装《项目视频监控》apk"
+        }).then(() => {
+          localStorage.setItem("isTip", "1");
+          var regionName = item.regionName;
+          var hasCamera = item.hasCamera + "";
+          if (hasCamera == "1") {
+            window.location.href =
+              "m://com.hikvision.sdk.app/openwith?projname=" + regionName;
+          }
+        });
+      }
+      e.stopPropagation(); //非IE浏览器
+    },
     queryList: function() {
       this.show = true;
     },
