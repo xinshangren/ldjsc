@@ -60,6 +60,12 @@
           .then(res => {
             if (res.success == "1") {
               this.list = this.list.concat(res.dataList);
+              for(var i=0;i<this.list.length;i++){
+                var url1=httpMethod.returnBaseUrlFun();
+                if(this.list[i].imgUrl==null){
+                  this.list[i].imgUrl=url1+"upload/error/error.jpg"
+                }
+              }
               if(res.dataList<4){
                 this.finished = true;
               }

@@ -56,11 +56,11 @@
 
 
     <div id="menu" style="display: flex;">
-      <div id="menuid1" class="hjselect" style="margin-left: 17%;">
+      <div id="menuid1" class="hjselect" style="margin-left: 15%;border-radius:16px 0 0 16px;">
         <img id="imgid1" :src="img1" style="height:14px;margin-top: 9px;margin-left: 30%;" />
         最新活动
       </div>
-      <div id="menuid2" class="hjnoselect" style=" margin-left: -6%;">
+      <div id="menuid2" class="hjnoselect" style="border-radius:0 16px 16px 0 ;">
         <img id="imgid2" :src="img2" style="height:14px;margin-top: 9px;margin-left: 30%;" />
         领导讲话
       </div>
@@ -70,17 +70,17 @@
         :immediate-check="false" finished-text="暂无更多数据" error-text="查询失败"
         style="background: #ffffff;overflow-y: auto;">
         <div
-          style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+          style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 95px;"
           v-for="(item,index) of list" :key="index" @click="goDetile(item)">
           <div
-            style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
+            style="color: #333333;font-size: 16px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
             {{item.title}}
           </div>
-          <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
+          <div style="color: #999999;font-size: 14px;overflow: hidden;height: 60px;line-height: 20px;">
             {{item.summary}}
           </div>
           <div
-            style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
+            style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 5px;line-height: 13px;vertical-align: middle; margin-top: 5px;">
             <img src="../../assets/img/icon_time.png" style="height: 13px;" />
             {{item.showTime}}
           </div>
@@ -93,17 +93,17 @@
         :immediate-check="false" finished-text="暂无更多数据" error-text="查询失败"
         style="background: #ffffff;overflow-y: auto;">
         <div
-          style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+          style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 95px;"
           v-for="(item1,index1) of list1" :key="index1" @click="goDetile(item1)">
           <div
-            style="color: #333333;font-size: 14px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
+            style="color: #333333;font-size: 16px;width: 100%; overflow: hidden; text-overflow:ellipsis;white-space: nowrap;">
             {{item1.title}}
           </div>
-          <div style="color: #999999;font-size: 12px;overflow: hidden;height: 60px;line-height: 15px;">
+          <div style="color: #999999;font-size: 14px;overflow: hidden;height: 60px;line-height: 20px;">
             {{item1.summary}}
           </div>
           <div
-            style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 0;line-height: 13px;vertical-align: middle;">
+            style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 5px;line-height: 13px;vertical-align: middle;margin-top: 5px;">
             <img src="../../assets/img/icon_time.png" style="height: 13px;" />
             {{item1.showTime}}
           </div>
@@ -356,9 +356,7 @@
 
 <style socped>
   .hjselect {
-    z-index: 1;
     display: flex;
-    border-radius: 16px;
     width: 35%;
     height: 32px;
     background: #3ea2ed;
@@ -370,9 +368,7 @@
   }
 
   .hjnoselect {
-    z-index: 0;
     display: flex;
-    border-radius: 16px;
     width: 35%;
     height: 32px;
     color: #3ca1ec;
