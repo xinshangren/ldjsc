@@ -1,7 +1,6 @@
-
 <template>
  <div>
-  <van-tabs v-model="active" :sticky=true :ellipsis=false line-width="25%" style="font-size: 14px;" color="#2796e7" title-inactive-color="#999999"  title-active-color="#2796e7" >
+  <van-tabs @click="onClick" v-model="active" :sticky=true :ellipsis=false line-width="25%" style="font-size: 14px;" color="#2796e7" title-inactive-color="#999999"  title-active-color="#2796e7" >
     <van-tab title="图片新闻">
       <child1 
         v-bind:active="active"
@@ -23,7 +22,7 @@
 import child1 from "@/page/toutiao/picsnews.vue";
 import child2 from "@/page/toutiao/ldzc.vue";
 import child3 from "@/page/toutiao/zwgk.vue";
-// import child4 from "@/page/hbgj/hbgj.vue";
+import child4 from "@/page/toutiao/mljc.vue";
 
 export default {
 name: "headline",
@@ -36,13 +35,18 @@ methods: {
   changeactive: function(data) {
     console.log(data);
     this.active = data;
+  },
+  onClick(name, title){
+    if(title=='美丽晋城'){
+      this.$toast('功能开发中');
+    }
   }
 },
 components: {
   child1,
   child2,
   child3,
-  // child4,
+  child4,
   
 }
 };

@@ -3,7 +3,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(1)">
         <div class="li_div_title1">空气质量</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">本年优良天数总数</div>
@@ -27,12 +27,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style" style="margin-top:15px;">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;"  @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;"  @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -42,7 +42,7 @@
     <li class="li_class">
       <div style="position:relative;" @click="intentTwoLevel(1)">
         <div class="li_div_title1">网格监管</div>
-        <img class="rightImg" src="../../assets/img/li_jt.png" />
+        
       </div>
       <div class="block_div_style" style="margin-top:5px;">
         <div class="li_div_title2">监管污染源数量</div>
@@ -73,12 +73,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style" style="margin-top:15px;">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;"  @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;"  @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -108,6 +108,9 @@
       this.getListData();
     },
     methods: {
+      toast: function () {
+        this.$toast('功能开发中');
+      },
       getListData: function () {
         var params = {
           targetIds:

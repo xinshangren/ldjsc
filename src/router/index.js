@@ -4,6 +4,7 @@ import homeVue from '@/page/main/home.vue'
 import dingbanVue from '@/page/main/dingban.vue'
 import headlineVue from '@/page/main/headline.vue'
 import picsnewsVue from '@/page/toutiao/picsnews.vue'
+import mljcVue from '@/page/toutiao/mljc.vue'
 import swszfVue from '@/page/dingban/swszf.vue'
 import szxVue from '@/page/dingban/szx.vue'
 import dsjyyjVue from '@/page/dingban/dsjyyj.vue'
@@ -40,11 +41,16 @@ export default new Router({
       path: '/main/headline',
       name: 'headline',
       component: headlineVue
-    }, {
+    }, 
+    {
       path: '/toutiao/picsnews',
       name: 'picsnews',
       component: picsnewsVue
-    },  {
+    },{
+      path: '/toutiao/mljc',
+      name: 'mljc',
+      component: mljcVue
+    },{
       path: '/dingban/swszf',
       name: 'swszf',
       component: swszfVue

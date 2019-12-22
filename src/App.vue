@@ -12,9 +12,9 @@
         v-model="seach_value"
         style="width:68%;"
       />
-       <img src="@/assets/img/icon_home.png" class="home_top_img" />
-      <img src="@/assets/img/icon_message.png" class="home_top_img" />
-      <img src="@/assets/img/icon_user.png" class="home_top_img" />
+      <img src="@/assets/img/icon_home.png" class="home_top_img" @click="toast()"/>
+      <img src="@/assets/img/icon_message.png" class="home_top_img"  @click="toast()"/>
+      <img src="@/assets/img/icon_user.png" class="home_top_img"  @click="toast()"/>
       
     </div>
     <!--搜索框部分end-->
@@ -29,10 +29,16 @@
 import {mapState} from 'vuex'
 import Loading from '../src/store/loading.vue'
 export default {
-  name: "App", data() {
+  name: "App",
+   data() {
     return {
       seach_value: "",
     };
+  },
+  methods:{
+    toast: function () {
+        this.$toast('功能开发中');
+      }
   },
   beforeCreate() {
       document.querySelector("body").setAttribute("style", "background:#f7f7f7");
