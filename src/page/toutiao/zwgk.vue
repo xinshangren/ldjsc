@@ -2,11 +2,11 @@
   <div>
     <div id="menu1" style="display: flex; margin-top: 15px;">
       <div id="menuid3" class="hjselect" style="margin-left: 15%;border-radius:16px 0 0 16px;">
-        <img :src="img1" style="height:14px;margin-top: 9px;margin-left: 30%;" />
+        <img :src="img1" style="height:14px;margin-top: 8px;margin-left: 30%;" />
         最新动态
       </div>
       <div id="menuid4" class="hjnoselect" style="border-radius:0 16px 16px 0 ;">
-        <img :src="img2" style="height:14px;margin-top: 9px;margin-left: 30%;" />
+        <img :src="img2" style="height:14px;margin-top: 8px;margin-left: 30%;" />
         公示公告
       </div>
     </div>

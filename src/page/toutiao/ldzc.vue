@@ -57,11 +57,11 @@
 
     <div id="menu" style="display: flex;">
       <div id="menuid1" class="hjselect" style="margin-left: 15%;border-radius:16px 0 0 16px;">
-        <img id="imgid1" :src="img1" style="height:14px;margin-top: 9px;margin-left: 30%;" />
+        <img id="imgid1" :src="img1" style="height:14px;margin-top: 8px;margin-left: 30%;" />
         最新活动
       </div>
       <div id="menuid2" class="hjnoselect" style="border-radius:0 16px 16px 0 ;">
-        <img id="imgid2" :src="img2" style="height:14px;margin-top: 9px;margin-left: 30%;" />
+        <img id="imgid2" :src="img2" style="height:14px;margin-top: 8px;margin-left: 30%;" />
         领导讲话
       </div>
     </div>
