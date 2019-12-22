@@ -89,7 +89,7 @@
     </div>
 
     <div id="ldjhlistid" style="margin-top: 10px;display: none;">
-      <van-list id="newslist11" v-model="loading" :finished="finished" @load="onLoad1" :offset="60" :error.sync="error"
+      <van-list id="newslist11" v-model="loading1" :finished="finished1" @load="onLoad1" :offset="60" :error.sync="error"
         :immediate-check="false" finished-text="暂无更多数据" error-text="查询失败"
         style="background: #ffffff;overflow-y: auto;">
         <div
@@ -192,13 +192,13 @@
         finished: false, //是否已加载完所有数据
         isLoading: false, //是否处于下拉刷新状态
         page: 1,
-        pageSize: 4,
+        pageSize: 10,
         list1: [],
         loading1: false, //是否处于加载状态
         finished1: false, //是否已加载完所有数据
         isLoading1: false, //是否处于下拉刷新状态
         page1: 1,
-        pageSize1: 4,
+        pageSize1: 10,
         data: {}
       };
     },

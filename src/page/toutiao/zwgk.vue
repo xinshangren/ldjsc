@@ -11,7 +11,7 @@
       </div>
     </div>
     <div id="zxdtlist" style="margin-top: 10px;">
-      <van-list id="zwgkzxdt" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error" :immediate-check="false"
+      <van-list id="zwgkzxdt" v-model="loading" :finished="finished" @load="onLoad" :offset="100" :error.sync="error" :immediate-check="false"
       finished-text="暂无更多数据" error-text="查询失败" style="background: #ffffff;overflow-y: auto;">
         <div
           style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 95px;"
@@ -31,7 +31,7 @@
     </div>
 
     <div id="gsgglist" style="margin-top: 10px;display: none;">
-      <van-list id="zwgkgsgg" v-model="loading" :finished="finished" @load="onLoad1" :offset="60" :error.sync="error" :immediate-check="false"
+      <van-list id="zwgkgsgg" v-model="loading1" :finished="finished1" @load="onLoad1" :offset="100" :error.sync="error1" :immediate-check="false"
       finished-text="暂无更多数据" error-text="查询失败" style="background: #ffffff;overflow-y: auto;">
         <div
           style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 95px;"
@@ -121,14 +121,14 @@
         finished: false, //是否已加载完所有数据
         isLoading: false, //是否处于下拉刷新状态
         page: 1,
-        pageSize: 5,
+        pageSize: 10,
         error1: false,
         list1: [],
         loading1: false, //是否处于加载状态
         finished1: false, //是否已加载完所有数据
         isLoading1: false, //是否处于下拉刷新状态
         page1: 1,
-        pageSize1: 5
+        pageSize1: 10
       };
     },
     methods: {

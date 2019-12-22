@@ -1,9 +1,9 @@
 <template>
-  <div style="text-align: center;z-index: 3;position: fixed;left: 31%;top: 43%;background: rgba(0,0,0,0.5);border-radius: 10px;width: 150px;height: 100px;">
-    
-      <div class="wrapper" @click.stop>
+  <div style="text-align: center;z-index: 3;position: fixed;left: 31%;top: 85%;color:#ffffff;font-size:13px;text-align: center;line-height: 30px; vertical-align: middle; background: rgba(0,0,0,0.5);border-radius: 10px;width: 150px;height: 30px;">
+    加载中...
+      <!-- <div class="wrapper" @click.stop>
         <van-loading type="spinner" color="#ffffff" size="24px" vertical>加载中...</van-loading>
-      </div>
+      </div> -->
     
   </div>
 </template>

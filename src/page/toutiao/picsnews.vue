@@ -37,7 +37,7 @@
         finished: false, //是否已加载完所有数据
         isLoading: false, //是否处于下拉刷新状态
         page: 1,
-        pageSize: 4
+        pageSize: 10
       };
     },
     mounted() {
