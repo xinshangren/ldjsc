@@ -17,8 +17,8 @@
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 10px;">
           <img src="../../assets/img/phonecall.png" style="width: 50px;height:50px;" @click="goDetile(item)" />
-          <img src="../../assets/img/sms.png" style="width: 50px;height:50px;margin-left: 5px;" />
-          <img src="../../assets/img/ding.png" style="width: 50px;height:50px;margin-left: 5px;" />
+          <img src="../../assets/img/sms.png" style="width: 50px;height:50px;margin-left: 5px;" @click="toast()" />
+          <img src="../../assets/img/ding.png" style="width: 50px;height:50px;margin-left: 5px;"  @click="toast()"/>
         </div>
       </div>
     </van-list>
@@ -145,6 +145,9 @@
             }
           });
         });
+      },
+      toast: function () {
+        this.$toast('功能开发中');
       }
     },
 
