@@ -12,7 +12,7 @@
   </van-tab>
   <van-tab title="存在问题">
      <child3
-          style="overflow-y:auto;overflow-x:hidden;"
+          style=""
         ></child3>
   </van-tab>
   <van-tab title="统计分析">

@@ -374,7 +374,7 @@ export const echarsEnti = {
         },
         labelLine: {
           normal: {
-            show: true,
+            show: false,
             length: 1,
             length2: 2
           }
