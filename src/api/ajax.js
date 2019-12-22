@@ -2,7 +2,7 @@ import axios from 'axios'; // 引入axiosimport axios from "axios";
 import store from '../store/store'
 import Qs from 'qs'
 let router = import("@/router");
-axios.defaults.timeout = 6000;
+axios.defaults.timeout = 10000;
 //axios.defaults.baseURL = "/api";
 //axios.defaults.baseURL = "http://192.168.10.138:8080/jcsldjsc/";//段建斌地址
 // axios.defaults.baseURL = "http://192.168.10.138:8080/jcsldjsc/";//djb
