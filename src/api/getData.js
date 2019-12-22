@@ -23,6 +23,14 @@ export const httpMethod = {
     getCmsArticleContent: function (params) {
         return get("cmsAppInsideController.action?getCmsArticleContent", params);
     },
+    // 领导资料
+    getUserCms: function (params) {
+        return get("cmsAppInsideController.action?getUserCms", params);
+    },
+    // 栏目下文章列表
+    getCmsArticleContentList: function (params) {
+        return get("cmsAppInsideController.action?getCmsArticleContentList", params);
+    },
     //钉办
     //鉴权
     getConfig: function (params) {
@@ -32,6 +40,13 @@ export const httpMethod = {
     getUserOrDepart: function (params) {
         return get("dingAppInsideController.action?getUserOrDepart", params);
     },
+
+    //指标接口
+    findByTargetIds: function (params) {
+        return get("jscAppInsideController.action?findByTargetIds", params);
+    },
+
+
     //返回根目录
     returnBaseUrlFun: function () {
         return returnBaseUrl();

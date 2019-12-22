@@ -1,7 +1,7 @@
 <template>
 
-  <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-    <van-list id="newslist" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error"
+  <div>
+    <van-list id="newslist3" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error"
       error-text="查询失败" style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
       <div
         style="display: flex; position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
@@ -11,18 +11,18 @@
           <div>
             {{item.realname}}
           </div>
-          <div style="margin-top: 13px;">
+          <div style="margin-top: 20px;">
             {{item.dutyName}}
           </div>
         </div>
-        <div style="display: flex; position: absolute; right: 10px;top: 18px;">
+        <div style="display: flex; position: absolute; right: 10px;top: 10px;">
           <img src="../../assets/img/phonecall.png" style="width: 50px;height:50px;" @click="goDetile(item)" />
           <img src="../../assets/img/sms.png" style="width: 50px;height:50px;margin-left: 5px;" />
           <img src="../../assets/img/ding.png" style="width: 50px;height:50px;margin-left: 5px;" />
         </div>
       </div>
     </van-list>
-  </van-pull-refresh>
+  </div>
 
 </template>
 <script>
@@ -49,7 +49,7 @@
     mounted() {
       var orderHight1 = document.documentElement.clientHeight;
       var heightlist = orderHight1 - 175;
-      document.getElementById("newslist").style.height = heightlist + "px"
+      document.getElementById("newslist3").style.height = heightlist + "px"
       this.gojq()
     },
     methods: {

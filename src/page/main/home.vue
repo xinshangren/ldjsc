@@ -33,11 +33,11 @@
           <img class="home_ul_li_img" src="../../assets/img/icon15.png" />
           <div class="home_ul_li_div">12345</div>
         </li>
-        <li class="ui-col ui-col-25 home_ul_li_style1">
+        <li @click="intentJjzs()" class="ui-col ui-col-25 home_ul_li_style1">
           <img class="home_ul_li_img" src="../../assets/img/icon6.png" />
-          <div class="home_ul_li_div">整体态势</div>
+          <div class="home_ul_li_div">经济指数</div>
         </li>
-        <li class="ui-col ui-col-25 home_ul_li_style1">
+        <li @click="intentHbgj()" class="ui-col ui-col-25 home_ul_li_style1">
           <img class="home_ul_li_img" src="../../assets/img/icon5.png" />
           <div class="home_ul_li_div">环保攻坚</div>
         </li>
@@ -56,10 +56,7 @@
         <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">重点工作舱</div>
       </div>
 
-      <div
-        class="ui-row-flex ui-whitespace"
-        style="margin-top: 13px;padding-left: 7px;padding-right: 7px;"
-      >
+      <div class="ui-row-flex ui-whitespace" style="margin-top: 13px;padding-left: 7px;padding-right: 7px;">
         <div class="ui-col ui-col">
           <div style="position: relative;">
             <img style="width: 100%;" src="../../assets/img/work_pic1.png" />
@@ -84,7 +81,7 @@
             <img style="width: 100%;" src="../../assets/img/work_pic3.png" />
             <div class="home_zdgzc_div">文明共创</div>
           </div>
-          <div style="position: relative;margin-top: 10px;">
+          <div @click="intentHbgj()" style="position: relative;margin-top: 10px;">
             <img style="width: 100%;" src="../../assets/img/work_pic5.png" />
             <div class="home_zdgzc_div">环保攻坚</div>
           </div>
@@ -98,11 +95,11 @@
             <img class="home_jjyxc_line" src="../../assets/img/head_bg1.png" />
           </div>
           <div class="ui-row-flex ui-whitespace">
-            <div class="ui-col ui-col home_ul_li_style">
+            <div  @click="intentJjzs()" class="ui-col ui-col home_ul_li_style">
               <div class="home_jjyxc_line_rauds_div1">
                 <img class="home_jjyxc_line_rauds_img" src="../../assets/img/icon6.png" />
               </div>
-              <div class="home_jjyxc_line_text_div">整体趋势</div>
+              <div class="home_jjyxc_line_text_div">经济指数</div>
             </div>
             <div class="ui-col ui-col home_ul_li_style">
               <div class="home_jjyxc_line_rauds_div2">
@@ -124,13 +121,9 @@
               </div>
               <div class="home_jjyxc_line_text_div">招商引资</div>
             </div>
-            <div class="ui-col ui-col home_ul_li_style">
+            <div @click="intentNyts()" class="ui-col ui-col home_ul_li_style">
               <div class="home_jjyxc_line_rauds_div4">
-                <img
-                  class="home_jjyxc_line_rauds_img"
-                  style="margin-left:0px;"
-                  src="../../assets/img/icon12.png"
-                />
+                <img class="home_jjyxc_line_rauds_img" style="margin-left:0px;" src="../../assets/img/icon12.png" />
               </div>
               <div class="home_jjyxc_line_text_div">能源态势</div>
             </div>
@@ -167,10 +160,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="ui-col ui-col home_jjyxc_block"
-          style="margin-left: 12px;height: auto;padding-bottom:10px;"
-        >
+        <div class="ui-col ui-col home_jjyxc_block" style="margin-left: 12px;height: auto;padding-bottom:10px;">
           <div style="display: flex;margin-top: 9px;">
             <div class="home_jjyxc_line_left_div">社会民生舱</div>
             <img class="home_jjyxc_line" src="../../assets/img/head_bg1.png" />
@@ -202,29 +192,20 @@
       </div>
 
       <!--政府服务舱start-->
-      <div
-        class="home_jjyxc_block"
-        style="height: 112px;padding-bottom:10px;margin: 8px 11px;width: 94%;"
-      >
+      <div class="home_jjyxc_block" style="height: 112px;padding-bottom:10px;margin: 8px 11px;width: 94%;">
         <div style="text-align: center;position: relative;padding-top: 12px;">
           <img style="width: 234px;" src="../../assets/img/head_bg3.png" />
           <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">政府服务舱</div>
         </div>
 
         <div style="display: flex;margin-top: 20px;">
-          <div
-            class="home_jcglc_block_div"
-            style="margin: auto; width: 40%; border: 1px solid #ff6b09;"
-          >
+          <div class="home_jcglc_block_div" style="margin: auto; width: 40%; border: 1px solid #ff6b09;">
             <div style="background: #fff4e5;width: 40%;">
               <img class="home_jcglc_small_img" src="../../assets/img/icon19.png" />
             </div>
             <div class="home_jcglc_block_text_div">行政审批</div>
           </div>
-          <div
-            class="home_jcglc_block_div"
-            style="margin: auto;width: 40%;border: 1px solid #3eacf9;"
-          >
+          <div class="home_jcglc_block_div" style="margin: auto;width: 40%;border: 1px solid #3eacf9;">
             <div style="background: #daf3ff;width: 40%;">
               <img class="home_jcglc_small_img" src="../../assets/img/icon20.png" />
             </div>
@@ -241,35 +222,26 @@
         </div>
 
         <div class="ui-row-flex ui-whitespace" style="height: 88px;margin-top: 15px;">
-          <div
-            class="ui-col ui-col backgroundDiv1"
-          >
+          <div @click="intentQyly()" class="ui-col ui-col backgroundDiv1">
             <img style="height: 50px;" src="../../assets/img/icon_travel1.png" />
             <div style="color: #ffffff;font-size: 13px;">旅游景区</div>
           </div>
-          <div
-            class="ui-col ui-col backgroundDiv2"
-          >
+          <div class="ui-col ui-col backgroundDiv2">
             <img style="height: 50px;" src="../../assets/img/icon_travel2.png" />
             <div style="color: #ffffff;font-size: 13px;">游客画像</div>
           </div>
-          <div
-            class="ui-col ui-col backgroundDiv3"
-          >
+          <div class="ui-col ui-col backgroundDiv3">
             <img style="height: 50px;" src="../../assets/img/icon_travel3.png" />
             <div style="color: #ffffff;font-size: 13px;">非遗保护</div>
           </div>
         </div>
 
         <div style="position: relative;margin-top: 10px;">
-          <img
-            style="width: 94%;margin-left: 10px;margin-right: 10px;"
-            src="../../assets/img/control_pic.png"
-          />
+          <img style="width: 94%;margin-left: 10px;margin-right: 10px;" src="../../assets/img/control_pic.png" />
           <div style="position: absolute;color: #ffffff;top: 24px;left: 33px;">应急管理舱</div>
           <div
-            style="position: absolute;color: #ffffff;top: 24px;left: 131px;border-radius: 3px;border: 1px solid #ffffff;padding: 2px 4px;font-size: 13px;"
-          >远程调度</div>
+            style="position: absolute;color: #ffffff;top: 24px;left: 131px;border-radius: 3px;border: 1px solid #ffffff;padding: 2px 4px;font-size: 13px;">
+            远程调度</div>
         </div>
       </div>
       <!--全域旅游舱end-->
@@ -313,40 +285,60 @@
 </template>
 
 <script>
-import Vue from "vue";
-import { Search } from "vant";
-import $ from "jquery";
-import { mainJs } from "../main/main.js";
-Vue.use(Search);
-export default {
-  name: "homevue",
-  data() {
-    return {
-	  seach_value: "",
-    };
-  },
-  mounted() {
-    var context = this;
-    $(".main_item").click(function() {
-      var id = $(this).attr("id");
-      context.changeTabStyle(id);
-    });
-  },
-  methods: {
-    //改变tab的状态和图片
-    changeTabStyle: function(tabid) {
-      mainJs.changeTabStyle(tabid);
-	},
-	intentZdgc:function(){
-		this.$router.push({
+  import Vue from "vue";
+  import { Search } from "vant";
+  import $ from "jquery";
+  import { mainJs } from "../main/main.js";
+  Vue.use(Search);
+  export default {
+    name: "homevue",
+    data() {
+      return {
+        seach_value: "",
+      };
+    },
+    mounted() {
+      var context = this;
+      $(".main_item").click(function () {
+        var id = $(this).attr("id");
+        context.changeTabStyle(id);
+      });
+    },
+    methods: {
+      //改变tab的状态和图片
+      changeTabStyle: function (tabid) {
+        mainJs.changeTabStyle(tabid);
+      },
+      intentZdgc: function () {
+        this.$router.push({
           path: "/zdgz/zdgc/zdgc"
         });
-	}
-  }
-};
+      },
+      intentHbgj: function () {
+        this.$router.push({
+          path: "/hbgj/hbgj"
+        });
+      },
+      intentJjzs: function () {
+        this.$router.push({
+          path: "/jjzs/jjzs"
+        });
+      },
+      intentNyts: function () {
+        this.$router.push({
+          path: "/nyts/nyts"
+        });
+      },
+      intentQyly: function () {
+        this.$router.push({
+          path: "/qyly/qyly"
+        });
+      },
+    }
+  };
 </script>
 
 <style scoped>
-@import "../../assets/css/home.css";
-@import "../../assets/css/frozenui.css";
+  @import "../../assets/css/home.css";
+  @import "../../assets/css/frozenui.css";
 </style>

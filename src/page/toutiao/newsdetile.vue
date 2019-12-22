@@ -1,6 +1,7 @@
 <template>
-  <div :style="backgroundDiv" style="background-size: 100% 100%;">
-    <div id="newsDealiTitleId" style="margin-top: 55px;text-align: center;font-size: 22px;font-weight: 600;">{{data.title}}</div>
+  <div id="detileid" :style="backgroundDiv" style="background-size: 100% 100%; overflow: scroll;margin-top: 50px;">
+    <div id="newsDealiTitleId" style="margin-top: 55px;text-align: center;font-size: 22px;font-weight: 600;">
+      {{data.title}}</div>
     <div style="margin-top:10px;">
       <div id="newsDealiTimeId" style="color: #666666;font-size: 13px;float:left;margin-left: 4px;">{{data.showTime}}
       </div>
@@ -21,24 +22,27 @@
   export default {
     name: "newsdetile",
     mounted() {
+      var orderHight1 = document.documentElement.clientHeight;
+      var heightlist = orderHight1 -50;
+      $("#detileid").css('height',heightlist + "px");
       var articleId = this.$route.params.articleId;
       this.getCmsArticleContent(articleId);
     },
     data() {
       return {
-        data:{},
-        userId:"8a87821a6b1c0bb4016b1c113e2f0001",//暂时默认
+        data: {},
+        userId: "8a87821a6b1c0bb4016b1c113e2f0001",//暂时默认
         backgroundDiv: {
-        backgroundImage: "url(" + require("../../assets/img/head_bg.jpg") + ")"
-      },
+          backgroundImage: "url(" + require("../../assets/img/head_bg.jpg") + ")"
+        },
       };
     },
     methods: {
 
       getCmsArticleContent: function (articleId) {
         var params = {
-          articleId:articleId,
-          userId:this.userId
+          articleId: articleId,
+          userId: this.userId
         };
 
         httpMethod
@@ -50,6 +54,7 @@
               this.data = {};
               this.data = res.data;
               setTimeout(() => {
+                $("#pmJjdivid img").css('width', '100%');
                 $("#pmJjdivid p").each(function () {
                   $(this).attr("style", "font-size:17px;");
                 });
