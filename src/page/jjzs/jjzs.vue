@@ -28,12 +28,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -60,12 +60,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -100,12 +100,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -140,12 +140,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -180,12 +180,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -220,12 +220,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -280,12 +280,12 @@
 
       <div class="hor_line_div"></div>
       <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_duban.png" class="bottom_img_style" />
           <div class="bottom_div_font2">督办</div>
         </div>
@@ -315,6 +315,9 @@ export default {
     this.getListData();
   },
   methods: {
+    toast: function () {
+        this.$toast('功能开发中');
+      },
     //市生产总值：24完成情况，26同比增长//规模以上工业增加值：同比增长29//一般公共预算收入：完成情况33，同比35//固定资产投资：完成37，同比39
     //社会消费品零售总额：完成40，同比42//海关进出口：完成44同比46//居民人均可支配收入48，49，50，51，52，53
     getListData: function() {

@@ -47,12 +47,12 @@
 
       <div class="hor_line_div"></div>
     <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img
             src="../../assets/img/icon_duban.png"
             class="bottom_img_style"
@@ -80,12 +80,12 @@
 
       <div class="hor_line_div"></div>
      <div class="block_div_style">
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img src="../../assets/img/icon_attention.png" class="bottom_img_style" />
           <div class="bottom_div_font1">关注</div>
         </div>
         <div class="ver_line_div"></div>
-        <div style="width:50%;display:flex;">
+        <div style="width:50%;display:flex;" @click="toast()">
           <img
             src="../../assets/img/icon_duban.png"
             class="bottom_img_style"
@@ -117,6 +117,9 @@ export default {
     this.getListData();
   },
   methods: {
+    toast: function () {
+        this.$toast('功能开发中');
+      },
     getListData: function() {
       var params = {
         targetIds:

@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <van-list id="newslist" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error" error-text="查询失败"
+    <van-list id="newslist" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error" error-text="查询失败" :immediate-check="false"
       style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
       <div style="position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 220px;" v-for="item of list" :key="item.id"
         @click="goDetile(item)">
@@ -44,6 +44,8 @@
       var orderHight1 =document.documentElement.clientHeight;
         var heightlist=orderHight1-160;
         document.getElementById("newslist").style.height=heightlist+"px"
+
+        this.getPictureclass();
     },
     methods: {
       getPictureclass: function () {
