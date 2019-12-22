@@ -195,7 +195,7 @@
       <div class="home_jjyxc_block" style="height: 112px;padding-bottom:10px;margin: 8px 11px;width: 94%;">
         <div style="text-align: center;position: relative;padding-top: 12px;">
           <img style="width: 234px;" src="../../assets/img/head_bg3.png" />
-          <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">政府服务舱</div>
+          <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">政务服务舱</div>
         </div>
 
         <div style="display: flex;margin-top: 20px;">
