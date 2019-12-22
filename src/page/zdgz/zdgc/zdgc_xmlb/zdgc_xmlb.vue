@@ -118,11 +118,11 @@
       v-model="show"
       position="top"
       get-container="#count_id"
-      :style="{ height: '60%' }"
+      :style="{ height: '65%' }"
       @opened="openPop"
-      style="overflow:hidden;"
+      style="overflow:hidden;background:rgb(243, 243, 243);"
     >
-      <div>
+      <div style="background:#ffffff;">
         <div style="padding-top:9px;font-size: 14px;margin-left:17px;">进度分类</div>
         <ul id="jdflDialogId" class="ui-row" style="margin-top: 11px;margin-right: 15px;">
           <li id="0" class="ui-col ui-col-50 dialogNoSelect" style="width:27%;">前期</li>

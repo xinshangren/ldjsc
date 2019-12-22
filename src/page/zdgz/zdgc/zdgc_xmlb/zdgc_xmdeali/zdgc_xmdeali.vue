@@ -15,15 +15,21 @@
           <div id="tab1_div" style="margin-left:4px;">项目详情</div>
         </div>
 
-        <div style="height:60px;background:#F1F4F6;">
-          <div
-            :style="backgroundDiv"
-            style="height:60px;padding-left: 18px;background: no-repeat center right; background-size: contain;"
-          >
-            <div style="height: 17px;"></div>
+        <div style="height:46px;background:#F1F4F6;">
+          <div style="position:relative;height:46px;padding-left: 18px;">
+            <div style="height: 11px;"></div>
             <div
-              style="border-left:2px solid #3097FB;color: #3097FB;font-size:20px;text-align: left;padding-left: 20px;height: 20px;"
+              style="border-left:2px solid #3097FB;color: #3097FB;font-size:17px;text-align: left;padding-left: 13px;height: 20px;"
             >项目基本详情</div>
+            <img
+              style="height: 40px;position: absolute;left: 35%;top: 0px;"
+              src="../../../../../assets/img/bg-bt.png"
+            />
+            <img
+              v-if="itemEnti.hasCamera=='1'"
+              style="height: 22px;position: absolute;right: 18px;top: 11px;"
+              src="../../../../../assets/img/details_camera.png"
+            />
           </div>
         </div>
         <div style="margin: 20px;text-align: left;font-size:18px;">
@@ -191,15 +197,16 @@
           </div>
           <div style="color: #333333;margin-top: 10px;">{{itemEnti.mainContent}}</div>
         </div>
-        <div style="height:60px;background:#F1F4F6;">
-          <div
-            :style="backgroundDiv"
-            style="height:60px;padding-left: 18px;background: no-repeat center right; background-size: contain;"
-          >
-            <div style="height: 17px;"></div>
+        <div style="height:47px;background:#F1F4F6;">
+          <div style="position:relative;height:46px;padding-left: 18px;">
+            <div style="height: 11px;"></div>
             <div
-              style="border-left:2px solid #3097FB;color: #3097FB;font-size:20px;text-align: left;padding-left: 20px;height: 20px;"
+              style="border-left:2px solid #3097FB;color: #3097FB;font-size:17px;text-align: left;padding-left: 13px;height: 20px;"
             >项目单位信息</div>
+            <img
+              style="height: 40px;position: absolute;left: 35%;top: 0px;"
+              src="../../../../../assets/img/bg-bt.png"
+            />
           </div>
         </div>
         <div style="margin: 20px;text-align: left;font-size:18px;">
@@ -375,8 +382,12 @@
                 v-show="isFlag"
                 style="height: 300px;padding: 28px;line-height: 26px;overflow: auto;"
               ></div>
-              <div  v-show="!isFlag" style="height:346px;">
-                <div v-for="(item,index) in dataList" :key="index" style="padding-top:2px;margin-left: 10px;margin-right: 10px;box-shadow: 1px 1px 1px 1px #cccccc;border-radius: 3px;">
+              <div v-show="!isFlag" style="height:346px;">
+                <div
+                  v-for="(item,index) in dataList"
+                  :key="index"
+                  style="padding-bottom:6px;padding-top:2px;margin-left: 10px;margin-right: 10px;box-shadow: 1px 1px 1px 1px #cccccc;border-radius: 3px;"
+                >
                   <div style="display:flex;margin-top:7px;">
                     <div class="vantlist_block">
                       <div style="margin-top:9px;">{{index+1}}</div>
@@ -386,6 +397,12 @@
                       <div style="margin-left:11px;color:#b6b6b6;font-size: 14px;">存在问题</div>
                       <div
                         class="van-multi-ellipsis--l2"
+                        v-if="item.existingProblem==''"
+                        style="font-size: 12px;margin-left: 11px;width: 243px;"
+                      >暂无</div>
+                      <div
+                        class="van-multi-ellipsis--l2"
+                         v-if="item.existingProblem!=''"
                         style="font-size: 12px;margin-left: 11px;width: 243px;"
                       >{{item.existingProblem}}</div>
                     </div>
@@ -403,11 +420,16 @@
                   <!-- <div class="van-hairline--bottom"></div> -->
                   <!-- <div
                     style="margin-top: 4px;color: rgb(229, 229, 229);height: 1px;background: rgb(229, 229, 229);width: 94%;margin-left: 10px;margin-right: 10px;"
-                  ></div> -->
+                  ></div>-->
                 </div>
               </div>
-              <div style="background: rgb(39, 150, 231);width: 60px;height: 60px;border-radius: 50%;text-align: center;margin: 0 auto;position: absolute;bottom: 10px;left: 42%;">
-                   <img style="height:29px;margin-top: 15px;" src="../../../../../assets/img/icon_voice.png"/>
+              <div
+                style="background: rgb(39, 150, 231);width: 60px;height: 60px;border-radius: 50%;text-align: center;margin: 0 auto;position: absolute;bottom: 10px;left: 42%;"
+              >
+                <img
+                  style="height:29px;margin-top: 15px;"
+                  src="../../../../../assets/img/icon_voice.png"
+                />
               </div>
             </div>
           </van-popup>
@@ -574,7 +596,7 @@ export default {
           this.$toast(err);
         });
     },
-     //存在问题列表
+    //存在问题列表
     getVoExistiongPro: function(id) {
       var params = {
         proId: id

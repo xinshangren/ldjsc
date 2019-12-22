@@ -34,7 +34,7 @@ export const echarsEnti = {
         },
         subtextStyle: {
           color: '#2f3b4c',
-          fontSize: 30
+          fontSize: 24
         },
       },
       backgroundColor: '#ffffff',
@@ -42,7 +42,7 @@ export const echarsEnti = {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
       },
-      color: ['#8fc31f', '#f35833', '#00ccff', '#ffcc00'],
+      color: ['#3ca1ec', '#3ecbb2', '#faad14'],
       legend: {
         itemHeight  :9,
         itemWidth:9,

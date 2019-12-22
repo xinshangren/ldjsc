@@ -79,6 +79,7 @@
             v-for="(item,key) of bottomList "
             :key="key"
             style="height:60px;border-bottom:1px solid #cccccc;position:relative;"
+            @click="intentDeali(item)"
           >
             <div style="display:flex;padding-top:7px;">
               <div
@@ -117,7 +118,7 @@
               :color="color[key]"
               style="width: 74%;margin-left: 18px;margin-top: 11px;"
             />
-            <!-- <img class="list_right_jt" src="../../../../assets/img/icon_more.png" /> -->
+            <img class="list_right_jt" src="../../../../assets/img/icon_more.png" />
           </div>
         </van-list>
       </div>
@@ -140,7 +141,7 @@ export default {
   name: "zdgc_ztqk_vue",
   data() {
     return {
-      nowYear:new Date().getFullYear(),
+      nowYear: new Date().getFullYear(),
       seach_value: "",
       active: 0,
       list: [1, 2, 3],
@@ -162,7 +163,7 @@ export default {
   mounted() {
     this.getzdxmzj("");
     this.statisticsExistiong("");
-    this.getProjectPlanTopThree("2019");
+    this.getProjectPlanTopThree(new Date().getFullYear());
     //this.getThreeEchars(echarts, this.$refs.myCharts2);
   },
   methods: {
@@ -198,12 +199,12 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == "1") {
-            if( res.wts==undefined){
-             this.czwtCount = 0;
-            }else{
+            if (res.wts == undefined) {
+              this.czwtCount = 0;
+            } else {
               this.czwtCount = res.wts;
             }
-            
+
             this.getThreeEchars(echarts, this.$refs.myCharts2, res);
           }
         })
@@ -285,6 +286,15 @@ export default {
       this.nowYear = this.timeFormat(this.currentDate);
 
       this.show = false;
+    },
+    intentDeali: function(item) {
+      this.$router.push({
+        path: "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali",
+        name: "zdgc_xmdeali",
+        params: {
+          entity: item
+        }
+      });
     }
   }
 };
