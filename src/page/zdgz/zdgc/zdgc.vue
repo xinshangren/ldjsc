@@ -41,6 +41,7 @@
           <div style="width:50%;margin-left:25px;">
             <div>
               <div
+              @click="callPhone"
                 style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
               >
                 <img style="height: 15px;margin-left: 7px;margin-right: 4px;" src="../../../assets/img/icon_phone_orange.png" />
@@ -86,7 +87,11 @@ export default {
       });
     });
   },
-  methods: {},
+  methods: {
+    callPhone:function(){
+       window.location.href = 'tel://13935612128'
+    }
+  },
   components: {
     child1,
     child2,
