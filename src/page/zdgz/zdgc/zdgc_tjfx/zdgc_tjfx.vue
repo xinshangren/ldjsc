@@ -32,6 +32,38 @@
       </div>
     </van-sticky>
 
+    <div id="show_menu_Id" style="position: fixed;left: 20px;background: #ffffff;top: 127px;padding: 3px;z-index:99;">
+      <img style="height:23px;" src="../../../../assets/img/data_list_menu.png" />
+    </div>
+    <div id="menu_ul_id" style="display:none; position: fixed;left: 20px;background: #ffffff;top: 157px;padding: 3px;z-index:1;">
+      <ul id="menu_ul">
+        <li @click="returnCom(1)" class="menuliClass" style="display:flex;">
+          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+          <div class="menu_li_div">重点项目各阶段项目数量统计</div>
+        </li>
+        <li @click="returnCom(2)" class="menuliClass" style="display:flex;margin-top:4px;">
+          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+          <div class="menu_li_div">区县统计各阶段项目数量</div>
+        </li>
+        <li @click="returnCom(3)" class="menuliClass" style="display:flex;margin-top:4px;">
+          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+          <div class="menu_li_div">各区县实际投资额占比</div>
+        </li>
+        <li @click="returnCom(4)" class="menuliClass" style="display:flex;margin-top:4px;">
+          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+          <div class="menu_li_div">各区县实际投资额完成率</div>
+        </li>
+        <li @click="returnCom(5)" class="menuliClass" style="display:flex;margin-top:4px;">
+          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+          <div class="menu_li_div">各类型实际投资额占比</div>
+        </li>
+        <li @click="returnCom(6)" class="menuliClass" style="display:flex;margin-top:4px;">
+          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+          <div class="menu_li_div">各类型投资完成率</div>
+        </li>
+      </ul>
+    </div>
+
     <div>
       <div style="background:#ffffff;height:220px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div">重点项目各阶段项目数量统计</div>
@@ -39,7 +71,7 @@
           class="van-hairline--bottom"
           style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
         ></div>
-        <div ref="myCharts1" style="height:210px;width:100%;"></div>
+        <div id="myCharts1" ref="myCharts1" style="height:210px;width:100%;"></div>
       </div>
 
       <div style="background:#ffffff;height:220px;width:100%;margin-top:8px;padding-top:7px;">
@@ -48,7 +80,7 @@
           class="van-hairline--bottom"
           style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
         ></div>
-        <div ref="myCharts2" style="height:210px;width:100%;"></div>
+        <div id="myCharts2" ref="myCharts2" style="height:210px;width:100%;"></div>
       </div>
 
       <div style="background:#ffffff;height:240px;width:100%;margin-top:8px;padding-top:7px;">
@@ -57,16 +89,16 @@
           class="van-hairline--bottom"
           style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
         ></div>
-        <div ref="myCharts3" style="height:230px;width:100%;"></div>
+        <div id="myCharts3" ref="myCharts3" style="height:230px;width:100%;"></div>
       </div>
 
       <div style="background:#ffffff;height:240px;width:100%;margin-top:8px;padding-top:7px;">
-        <div class="echars_titile_div">各区县实际投资额占比</div>
+        <div class="echars_titile_div">各区县实际投资额完成率</div>
         <div
           class="van-hairline--bottom"
           style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
         ></div>
-        <div ref="myCharts4" style="height:230px;width:100%;"></div>
+        <div id="myCharts4" ref="myCharts4" style="height:230px;width:100%;"></div>
       </div>
 
       <div style="background:#ffffff;height:190px;width:100%;margin-top:8px;padding-top:7px;">
@@ -75,7 +107,7 @@
           class="van-hairline--bottom"
           style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
         ></div>
-        <div ref="myCharts5" style="height:180px;width:100%;"></div>
+        <div id="myCharts5" ref="myCharts5" style="height:180px;width:100%;"></div>
       </div>
 
       <div style="background:#ffffff;height:240px;width:100%;margin-top:8px;padding-top:7px;">
@@ -84,7 +116,7 @@
           class="van-hairline--bottom"
           style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
         ></div>
-        <div ref="myCharts6" style="height:230px;width:100%;"></div>
+        <div id="myCharts6" ref="myCharts6" style="height:230px;width:100%;"></div>
       </div>
     </div>
   </div>
@@ -121,8 +153,49 @@ export default {
     this.statisticsNdPercentage();
     this.statisticsLbNdProportion();
     this.statisticsLbNdPercentage();
+
+    $("#menu_ul li").click(function() {
+      $(this).css("background", "#e1f3ff");
+      $(this)
+        .siblings("li")
+        .css("background", "#ffffff");
+    });
+    $("#show_menu_Id").click(function(){
+         $("#menu_ul_id").show();
+    });
+
   },
   methods: {
+    returnCom(flag) {
+      var returnEle = null;
+       $("#menu_ul_id").hide();
+      switch (flag) {
+        case 1:
+          returnEle = document.getElementById("myCharts1");
+          break;
+        case 2:
+          returnEle = document.getElementById("myCharts2");
+          break;
+        case 3:
+          returnEle = document.getElementById("myCharts3");
+          break;
+        case 4:
+          returnEle = document.getElementById("myCharts4");
+          break;
+        case 5:
+          returnEle = document.getElementById("myCharts5");
+          break;
+        case 5:
+          returnEle = document.getElementById("myCharts6");
+          break;
+        default:
+          break;
+      }
+    //  $("#myCharts6").scrollIntoView(true);
+      if (returnEle) {
+        returnEle.scrollIntoView();
+      }
+    },
     upYearClick: function() {
       this.nowYear = parseInt(this.nowYear) - 1 + "";
       this.statisticsProgress();

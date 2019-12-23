@@ -128,3 +128,9 @@
 .van-picker__columns:nth-child(1){
   display: none;
 }
+.menu_li_img{
+    height: 12px;margin-top: 4px;margin-right: 5px;margin-left: 5px;
+}
+.menu_li_div{
+    color: #333333;font-size: 15px;
+}
