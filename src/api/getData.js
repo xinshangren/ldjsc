@@ -36,6 +36,10 @@ export const httpMethod = {
     getConfig: function (params) {
         return get("dingTalkController.action?getConfig", params);
     },
+    //获取当前用户
+    getUser: function (params) {
+        return get("dingTalkController.action?getUser", params);
+    },
     //获取部门
     getUserOrDepart: function (params) {
         return get("dingAppInsideController.action?getUserOrDepart", params);

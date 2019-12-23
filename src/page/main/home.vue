@@ -102,7 +102,7 @@
               <div class="home_jjyxc_line_text_div">经济指数</div>
             </div>
             <div @click="toast()" class="ui-col ui-col home_ul_li_style">
-              <div  class="home_jjyxc_line_rauds_div2">
+              <div class="home_jjyxc_line_rauds_div2">
                 <img class="home_jjyxc_line_rauds_img" src="../../assets/img/icon7.png" />
               </div>
               <div class="home_jjyxc_line_text_div">三大产业</div>
@@ -110,12 +110,12 @@
           </div>
         </div>
         <div class="ui-col ui-col home_jjyxc_block" style="margin-left: 12px;">
-          <div  @click="toast()" style="display: flex;margin-top: 9px;">
+          <div @click="toast()" style="display: flex;margin-top: 9px;">
             <div class="home_jjyxc_line_left_div">产业转型舱</div>
             <img class="home_jjyxc_line" src="../../assets/img/head_bg1.png" />
           </div>
           <div class="ui-row-flex ui-whitespace">
-            <div  @click="toast()" class="ui-col ui-col home_ul_li_style">
+            <div @click="toast()" class="ui-col ui-col home_ul_li_style">
               <div class="home_jjyxc_line_rauds_div3">
                 <img class="home_jjyxc_line_rauds_img" src="../../assets/img/icon11.png" />
               </div>
@@ -145,14 +145,14 @@
               <div class="home_jcglc_block_text_div">热点问题</div>
             </div>
 
-            <div  @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #ff790f;">
+            <div @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #ff790f;">
               <div style="background: #fff4e5;width: 40%;">
                 <img class="home_jcglc_small_img" src="../../assets/img/icon9.png" />
               </div>
               <div class="home_jcglc_block_text_div">热点事件</div>
             </div>
 
-            <div  @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #07b6d3;">
+            <div @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #07b6d3;">
               <div style="background: #d0fffe;width: 40%;">
                 <img class="home_jcglc_small_img" src="../../assets/img/icon10.png" />
               </div>
@@ -167,21 +167,21 @@
           </div>
 
           <div>
-            <div  @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #1ece6d;">
+            <div @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #1ece6d;">
               <div style="background: #ecffec;width: 40%;">
                 <img class="home_jcglc_small_img" src="../../assets/img/icon13.png" />
               </div>
               <div class="home_jcglc_block_text_div">教育服务</div>
             </div>
 
-            <div  @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #3ea7e9;">
+            <div @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #3ea7e9;">
               <div style="background: #daf3ff;width: 40%;">
                 <img class="home_jcglc_small_img" src="../../assets/img/icon15.png" />
               </div>
               <div class="home_jcglc_block_text_div">12345</div>
             </div>
 
-            <div  @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #f2ccaa;">
+            <div @click="toast()" class="home_jcglc_block_div" style="border: 1px solid #f2ccaa;">
               <div style="background: #ffecdb;width: 40%;">
                 <img class="home_jcglc_small_img" src="../../assets/img/icon14.png" />
               </div>
@@ -199,13 +199,14 @@
         </div>
 
         <div style="display: flex;margin-top: 20px;">
-          <div  @click="toast()" class="home_jcglc_block_div" style="margin: auto; width: 40%; border: 1px solid #ff6b09;">
+          <div @click="toast()" class="home_jcglc_block_div"
+            style="margin: auto; width: 40%; border: 1px solid #ff6b09;">
             <div style="background: #fff4e5;width: 40%;">
               <img class="home_jcglc_small_img" src="../../assets/img/icon19.png" />
             </div>
             <div class="home_jcglc_block_text_div">行政审批</div>
           </div>
-          <div  @click="toast()" class="home_jcglc_block_div" style="margin: auto;width: 40%;border: 1px solid #3eacf9;">
+          <div @click="toast()" class="home_jcglc_block_div" style="margin: auto;width: 40%;border: 1px solid #3eacf9;">
             <div style="background: #daf3ff;width: 40%;">
               <img class="home_jcglc_small_img" src="../../assets/img/icon20.png" />
             </div>
@@ -230,7 +231,7 @@
             <img style="height: 50px;" src="../../assets/img/icon_travel2.png" />
             <div style="color: #ffffff;font-size: 13px;">游客画像</div>
           </div>
-          <div  @click="toast()" class="ui-col ui-col backgroundDiv3">
+          <div @click="toast()" class="ui-col ui-col backgroundDiv3">
             <img style="height: 50px;" src="../../assets/img/icon_travel3.png" />
             <div style="color: #ffffff;font-size: 13px;">非遗保护</div>
           </div>
@@ -252,27 +253,27 @@
           <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">区县直通舱</div>
         </div>
         <ul class="ui-row" style="margin-top: 20px;">
-          <li  @click="toast()" class="ui-col ui-col-33 home_ul_li_style">
+          <li @click="toast()" class="ui-col ui-col-33 home_ul_li_style">
             <img class="home_ul_li_img" src="../../assets/img/map1.png" />
             <div class="home_ul_li_div">城区</div>
           </li>
-          <li  @click="toast()" class="ui-col ui-col-33 home_ul_li_style">
+          <li @click="toast()" class="ui-col ui-col-33 home_ul_li_style">
             <img class="home_ul_li_img" src="../../assets/img/map2.png" />
             <div class="home_ul_li_div">泽州县</div>
           </li>
-          <li  @click="toast()" class="ui-col ui-col-33 home_ul_li_style">
+          <li @click="toast()" class="ui-col ui-col-33 home_ul_li_style">
             <img class="home_ul_li_img" src="../../assets/img/map3.png" />
             <div class="home_ul_li_div">高平市</div>
           </li>
-          <li  @click="toast()" class="ui-col ui-col-33 home_ul_li_style1">
+          <li @click="toast()" class="ui-col ui-col-33 home_ul_li_style1">
             <img class="home_ul_li_img" src="../../assets/img/map4.png" />
             <div class="home_ul_li_div">阳城县</div>
           </li>
-          <li  @click="toast()" class="ui-col ui-col-33 home_ul_li_style1">
+          <li @click="toast()" class="ui-col ui-col-33 home_ul_li_style1">
             <img class="home_ul_li_img" src="../../assets/img/map5.png" />
             <div class="home_ul_li_div">沁水县</div>
           </li>
-          <li  @click="toast()" class="ui-col ui-col-33 home_ul_li_style1">
+          <li @click="toast()" class="ui-col ui-col-33 home_ul_li_style1">
             <img class="home_ul_li_img" src="../../assets/img/map6.png" />
             <div class="home_ul_li_div">陵川县</div>
           </li>
@@ -289,6 +290,9 @@
   import { Search } from "vant";
   import $ from "jquery";
   import { mainJs } from "../main/main.js";
+  import { httpMethod } from "../../api/getData.js";
+  import dd from 'dingtalk-jsapi';
+  import global_variable from '../../api/global_variable.js';
   Vue.use(Search);
   export default {
     name: "homevue",
@@ -303,8 +307,37 @@
         var id = $(this).attr("id");
         context.changeTabStyle(id);
       });
+      this.getCuruserid();
     },
     methods: {
+      getCuruserid: function () {
+        dd.ready(function () {
+          dd.runtime.permission.requestAuthCode({
+            corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+            onSuccess: function (info) {
+              var code = info.code // 通过该免登授权码可以获取用户身份
+              var params = {
+                code: code,
+              };
+              httpMethod
+                .getUser(params)
+                .then(res => {
+                  if (res.success == "1") {
+                    global_variable.userId = res.userId;    //将全局变量模块挂载到Vue.prototype中
+                  } else if (res.success == "0") {
+
+                  }
+                })
+                .catch(err => {
+                  this.$toast(err);
+                });
+            },
+            onFail: function (err) {
+              alert('dd error: ' + JSON.stringify(err));
+            }
+          });
+        });
+      },
       //改变tab的状态和图片
       changeTabStyle: function (tabid) {
         mainJs.changeTabStyle(tabid);

@@ -33,14 +33,13 @@
 </template>
 
 <script>
-  import Vue from "vue";
   import headlineVue from "@/page/main/headline.vue";
   import homeVue from "@/page/main/home.vue";
   import dingbanVue from "@/page/main/dingban.vue";
   import { Search } from "vant";
   import $ from "jquery";
   import { mainJs } from "../main/main.js";
-  Vue.use(Search);
+
   export default {
     name: "mainVue",
     data() {
@@ -61,18 +60,19 @@
         var id = $(this).attr("id");
         context.changeTabStyle(id);
       });
+     
     },
     methods: {
       //改变tab的状态和图片
       changeTabStyle: function (tabid) {
-        if (tabid==1||tabid==3) {
+        if (tabid == 1 || tabid == 3) {
           this.$toast('功能开发中');
         } else {
           this.tabid = tabid;
           mainJs.changeTabStyle(tabid);
         }
 
-      }
+      },
     },
     components: {
       homeVue,

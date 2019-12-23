@@ -19,23 +19,27 @@
   import $ from "jquery";
   import Vue from "vue";
   import { httpMethod } from "../../api/getData.js";
+  import global_variable from '../../api/global_variable.js';
   export default {
     name: "newsdetile",
+    data() {
+      return {
+        data: {},
+        userId: "",//暂时默认
+        backgroundDiv: {
+          backgroundImage: "url(" + require("../../assets/img/head_bg.jpg") + ")"
+        },
+      };
+    },
     mounted() {
       var orderHight1 = document.documentElement.clientHeight;
       var heightlist = orderHight1 -50;
       $("#detileid").css('height',heightlist + "px");
       var articleId = this.$route.params.articleId;
+      this.userId=global_variable.userId;
+      
       this.getCmsArticleContent(articleId);
-    },
-    data() {
-      return {
-        data: {},
-        userId: "8a87821a6b1c0bb4016b1c113e2f0001",//暂时默认
-        backgroundDiv: {
-          backgroundImage: "url(" + require("../../assets/img/head_bg.jpg") + ")"
-        },
-      };
+      
     },
     methods: {
 
