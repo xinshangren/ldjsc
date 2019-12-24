@@ -1,0 +1,19 @@
+.top_img{
+    height:56px;
+    position: absolute;;
+}
+.top_title_select1{
+    color: rgb(25, 118, 211);font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
+}
+.top_title_select2{
+    color:#47d3ba;font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
+}
+.top_title_select3{
+    color: #fbb01c;font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
+}
+.top_title_noselect{
+    color: rgb(255, 255, 255);font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
+}
+.block_div_style{
+    position: relative;height:56px;
+}
