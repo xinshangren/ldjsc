@@ -1,6 +1,7 @@
 .top_img{
     height:56px;
-    position: absolute;;
+    position: absolute;
+    z-index: -1;
 }
 .top_title_select1{
     color: rgb(25, 118, 211);font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
@@ -16,4 +17,8 @@
 }
 .block_div_style{
     position: relative;height:56px;
+}
+.van-tabs__line{
+    background-color:#3097FB;
+    margin-bottom:2px;
 }

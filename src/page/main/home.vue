@@ -349,7 +349,7 @@
       },
       intentHbgj: function () {
         this.$router.push({
-          path: "/hbgj/hbgj"
+          path: "/zdgz/hbgj/hbgj"
         });
       },
       intentJjzs: function () {

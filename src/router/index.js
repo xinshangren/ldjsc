@@ -13,7 +13,7 @@ import newsdetileVue from '@/page/toutiao/newsdetile.vue'
 import ldzcVue from '@/page/toutiao/ldzc.vue'
 import zwgkVue from '@/page/toutiao/zwgk.vue'
 import mainVue from '@/page/main/main.vue'
-import hbgjVue from '@/page/hbgj/hbgj.vue'
+import hbgjVue from '@/page/zdgz/hbgj/hbgj.vue'
 import zdgcVue from '@/page/zdgz/zdgc/zdgc.vue'
 import zdgc_xmdealiVue from '@/page/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali.vue'
 import zdgc_czwt_daliVue from '@/page/zdgz/zdgc/zdgc_czwt/zdgc_czwt_deali/zdgc_czwt_deali.vue'
@@ -86,7 +86,7 @@ export default new Router({
       name: 'zdgc',
       component: zdgcVue
     }, {
-      path: '/hbgj/hbgj',
+      path: '/zdgz/hbgj/hbgj',
       name: 'hbgj',
       component: hbgjVue
     }, {
