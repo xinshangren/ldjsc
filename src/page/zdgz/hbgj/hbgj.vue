@@ -21,52 +21,86 @@
       </div>
     </div>
 
-    <div style="display:flex;">
-      <div style="width: 25%;display: flex;height: 43px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;"> 
-            <img style="height: 30px; margin-top: 6px;margin-left: 10px;"  :src="TwoLevelTabImg1"/>
-            <div style="font-size: 14px;line-height: 37px;">空气</div>
-            <img style="height: 14px;margin-top: 14px;"  src="../../../assets/img/air_home_tab_arrow.png"/>
+    <div style="display:flex;border-bottom:1px solid #f3f3f3;">
+      <div class="twoLevel_left_div">
+        <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
+        <div style="font-size: 14px;line-height: 40px;">空气</div>
+        <img
+          style="height: 14px;margin-top: 14px;"
+          src="../../../assets/img/air_home_tab_arrow.png"
+        />
       </div>
-      <van-tabs line-width="75" v-model="active" style="width:75%;">
-        <van-tab title="实时状况">实时状况</van-tab>
-        <van-tab title="站点列表">站点列表</van-tab>
-        <van-tab title="数据统计">数据统计</van-tab>
+      <van-tabs
+        @click="smallTab_select"
+        id="tabId"
+        title-active-color="#2796e7"
+        title-inactive-color="#333333"
+        line-width="75"
+        v-model="active"
+        style="width:75%;"
+      >
+        <van-tab title="实时状况"></van-tab>
+        <van-tab title="站点列表"></van-tab>
+        <van-tab title="数据统计"></van-tab>
       </van-tabs>
+    </div>
+    <div>
+      <child1>
+        
+      </child1>
     </div>
   </div>
 </template>
 <script>
 import echarts from "echarts";
+import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air.vue";
 import $ from "jquery";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
 import { Tab, Tabs } from "vant";
 Vue.use(Tab).use(Tabs);
 export default {
-  name: "zdgz",
+  name: "hbgj",
+  components: {
+    child1
+  },
   beforeCreate() {
-    document.querySelector("body").setAttribute("style", "background:#F7F7F7");
+    document.querySelector("body").setAttribute("style", "background:#ffffff");
   },
   activated() {
     //返回保留页面记录
-    document.querySelector("body").setAttribute("style", "background:#F7F7F7");
+    document.querySelector("body").setAttribute("style", "background:#ffffff");
   },
   data() {
     return {
-      active:0,
+      active: 0,
       indexTabImg1: require("../../../assets/img/air_home_tab1selected.png"),
       indexTabImg2: require("../../../assets/img/air_home_tab2.png"),
       indexTabImg3: require("../../../assets/img/air_home_tab3.png"),
       TwoLevelTabImg1: require("../../../assets/img/air_list_icon1.png"),
       TwoLevelTabImg2: require("../../../assets/img/air_list_icon2.png"),
-      TwoLevelTabImg3: require("../../../assets/img/air_list_icon3.png"),
-
+      TwoLevelTabImg3: require("../../../assets/img/air_list_icon3.png")
     };
   },
   mounted() {
     //this.getListData();
   },
   methods: {
+    //空气子选项卡选择
+    smallTab_select: function(name, title) {
+      // console.log(name,title);
+      switch (name) {
+        case 0:
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+
+        default:
+          break;
+      }
+    },
     //选择顶部的选项卡
     selectIndexTab: function(index) {
       switch (index) {
@@ -132,7 +166,7 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "../../../assets/css/frozenui.css";
+<style>
 @import "../../../page/zdgz/hbgj/hbgj.css";
+@import "../../../assets/css/frozenui.css";
 </style>
