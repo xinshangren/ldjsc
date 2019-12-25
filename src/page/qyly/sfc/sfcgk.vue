@@ -17,7 +17,7 @@
         style="margin-top: 15px;color: #333333;font-size: 12px;border-left: 2px #3ca1ec solid;height:16px;padding-left: 20px;">
         接待游客数TOP10</div>
     </div>
-    <div ref="myCharts2" style=" height:200px;margin-bottom:10px;"></div>
+    <div ref="myCharts2" style=" height:300px;margin-bottom:10px;"></div>
    
   </div>
 </template>
@@ -26,7 +26,7 @@
   import { echarsEnti } from "./sfcgk.js";
   import { httpMethod } from "../../../api/getData.js";
   export default {
-    name: "jqgk",
+    name: "sfcgk",
     beforeCreate() {
     },
     activated() {//返回保留页面记录
@@ -74,6 +74,7 @@
   };
 </script>
 
-<style scoped>
-
+<style>
+@import "../../../page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.css";
+@import "../../../assets/css/frozenui.css";
 </style>

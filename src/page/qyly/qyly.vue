@@ -162,6 +162,5 @@
   };
 </script>
 
-<style scoped>
-  @import "../../assets/css/zhibiao.css";
+<style>
 </style>

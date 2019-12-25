@@ -11,7 +11,7 @@ export const echarsEnti = {
       names.push(dataEntity[i].counties);
       values.push(dataEntity[i].num);
       total = total + dataEntity[i].num;
-      var data= {
+      var data = {
         name: names[i],
         value: values[i]
       }
@@ -113,131 +113,166 @@ export const echarsEnti = {
     };
     myCharts.setOption(option);
   },
-  createEcharsTwo: function (echarts, value, dataEntity) {
-    const myCharts = echarts.init(value);
+  createEcharsTwo: function (echarts, value, result) {
+    const myCharts = echarts.init(value, "macarons");
 
-    // console.log(total);
+    var nameList = [];
+    var rankList = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
+    var valueList = [];
+    for (var i = 0; i < result.length; i++) {
+        var entity = result[i];
+        var name = entity.name; //城市名称
+        var cityRank = entity.cityRank; //城市名称
+        var visitor = entity.visitor; //值
+        nameList.push(name);
+        if (name === '晋城市') {
+            // showEcharsView1_ssgk1(result, rankList[i],value1,echarts);
+        }
+        valueList.push(parseFloat(visitor).toFixed(0));
+    }
+
+    var maxValue = Math.max.apply(null, valueList);
+    maxValue = maxValue + 100000;
+    var nyValueList = [];
+    var wYValueList = [];
+    var zeroValueList = [];
+    for (var i = 0; i < result.length; i++) {
+        var name = entity.name; //城市名称
+        var visitor = entity.visitor; //值
+        nyValueList.push(maxValue - 0.1);
+        wYValueList.push(maxValue);
+        zeroValueList.push(0);
+    }
+    var myColor = ['#57155d', '#b83b5d', '#b83b5d', '#e35e5f',
+        '#e35e5f', '#f0a15c', '#f0a15c', '#c5d686', '#c5d686', '#c5d686'
+    ];
     let option = {
-      grid: {
-        top: '10%',
-        left: '5%',
-        right: '5%',
-        bottom: '0%',
-        containLabel: true
-      },
-      xAxis: {
-        splitLine: { show: false },//去除网格线
-        type: 'category',
-        boundaryGap: false,
-        data: [dataEntity[0].year, dataEntity[1].year, dataEntity[2].year, dataEntity[3].year, dataEntity[4].year]
-      },
-      yAxis: {
-        splitLine: { show: false },//去除网格线
-        type: 'value'
-      },
-      series: [{
-        data: [dataEntity[0].visitor, dataEntity[1].visitor, dataEntity[2].visitor, dataEntity[3].visitor, dataEntity[4].visitor],
-        type: 'line',
-        areaStyle: {
-          normal: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-              offset: 0, color: '#3ca1ec' // 0% 处的颜色
-            }, {
-              offset: 0.5, color: '#74BCF1' // 100% 处的颜色
-            }, {
-              offset: 1, color: '#ffffff' // 100% 处的颜色
-            }]
-            ),
-          }
+        backgroundColor: '',
+        grid: {
+            left: '12%',
+            top: '0%',
+            right: '12%',
+            bottom: '-10%',
+            containLabel: true
         },
-        itemStyle: {
-          normal: {
-            lineStyle: {
-              color: '#3ca1ec' //改变折线颜色
-            }
-          }
+        xAxis: [{
+            show: false,
+        }],
+        color: myColor,
+        yAxis: [{
+            axisTick: 'none',
+            axisLine: 'none',
+            offset: '17',
+            axisLabel: {
+                textStyle: {
+                    color: '#000000',
+                    fontSize: '10',
+                }
+            },
+            data: nameList
+        }, {
+            axisTick: 'none',
+            axisLine: 'none',
+            axisLabel: {
+                textStyle: {
+                    color: '#000000',
+                    fontSize: '10',
+                }
+            },
+            data: rankList
+        }, {
+            name: '',
+            nameGap: '10',
+            nameTextStyle: {
+                color: '#000000',
+                fontSize: '10',
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(0,0,0,0)'
+                }
+            },
+            data: [],
+        }],
+        series: [{
+            name: '条',
+            type: 'bar',
+            yAxisIndex: 0,
+            data: valueList,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'right',
+                    textStyle: {
+                        color: '#000000',
+                        fontSize: '10',
+                    }
+                }
+            },
+            barWidth: 5,
+            itemStyle: {
+                normal: {
+                    color: function (params) {
+                        var num = myColor.length;
+                        return myColor[params.dataIndex]
+                    },
+                }
+            },
+            z: 2
+        }, {
+            name: '白框',
+            type: 'bar',
+            yAxisIndex: 1,
+            barGap: '-100%',
+            data: nyValueList,
+            barWidth: 7,
+            itemStyle: {
+                normal: {
+                    color: '#ffffff',
+                    barBorderRadius: 5,
+                }
+            },
+            z: 1
+        }, {
+            name: '外框',
+            type: 'bar',
+            yAxisIndex: 2,
+            barGap: '-100%',
+            data: wYValueList,
+            barWidth: 8,
+            itemStyle: {
+                normal: {
+                    color: function (params) {
+                        var num = myColor.length;
+                        return myColor[params.dataIndex]
+                    },
+                    barBorderRadius: 5,
+                }
+            },
+            z: 0
         },
-      }]
-    };;
+        {
+            name: '外圆',
+            type: 'scatter',
+            hoverAnimation: false,
+            data:zeroValueList,
+            yAxisIndex: 2,
+            symbolSize: 8,
+            itemStyle: {
+                normal: {
+                    color: function (params) {
+                        var num = myColor.length;
+                        return myColor[params.dataIndex]
+                    },
+                    opacity: 1,
+                }
+            },
+            z: 2
+        }
+        ]
+    };
     myCharts.setOption(option);
   },
-  createEcharsThree: function (echarts, value, dataentity) {
-    const myCharts = echarts.init(value);
-    var nameList = ['收入', '支出'];
-    var xlabel = [];
-    var yvalue1 = [];
-    var yvalue2 = [];
-
-    for (var i = 0; i < dataentity.length; i++) {
-      var enti = dataentity[i];
-      var income = (enti.income).toFixed(2); //产量
-      var expenditure = (enti.expenditure).toFixed(2); //利用量
-      var year = enti.year; //时间
-      xlabel.push(year);
-      yvalue1.push(income);
-      yvalue2.push(expenditure);
-
-    }
-    var option = {
-
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        }
-      },
-      legend: {
-        orient: 'horizontal', // 'vertical'
-        x: 'right', // 'center' | 'left' | {number},
-        y: 'top', // 'center' | 'bottom' | {number}
-        backgroundColor: '#fff',
-        itemGap: 20,
-        itemHeight: 5,
-        itemWidth: 10,
-        data: nameList
-      },
-      grid: {
-        left: '3%',
-        right: '10%',
-        bottom: '7%',
-        top: '15%',
-        containLabel: true
-      },
-      xAxis: {
-        type: 'category',
-        data: xlabel
-      },
-      yAxis: {
-        splitLine: { show: false },//去除网格线
-        type: 'value'
-      },
-      series: [{
-        name: nameList[0],
-        type: 'bar',
-        barMaxWidth: 10,
-        itemStyle: {
-          normal: {
-            color: "#3ca1ec"
-          }
-        },
-        data: yvalue1
-      },
-      {
-        name: nameList[1],
-        type: 'bar',
-        barMaxWidth: 10,
-        itemStyle: {
-          normal: {
-            color: "#faad14"
-          }
-        },
-        data: yvalue2
-      }
-      ]
-    };
-
-    myCharts.setOption(option);
-  }
 
 }
 
