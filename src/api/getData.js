@@ -120,7 +120,7 @@ export const httpMethod = {
         return get("zdgcAppInsideController.action?getZdgcProProgress", params);
     },
     //实时概况
-    getZdgcProProgress: function (params) {
+    getAirRealtimeData: function (params) {
         return get("sthjAppInsideController.action?getAirRealtimeData", params);
     },
     //实时概况污染物等级
@@ -138,7 +138,13 @@ export const httpMethod = {
     //空气质量变化趋势
     trendsInAirQuality: function (params) {
         return get("sthjAppInsideController.action?trendsInAirQuality", params);
+    },
+    //获取站点数据及信息list
+    getStationRealtimeData: function (params) {
+        return get("sthjAppInsideController.action?getStationRealtimeData", params);
     }
+
+    
 
     
 

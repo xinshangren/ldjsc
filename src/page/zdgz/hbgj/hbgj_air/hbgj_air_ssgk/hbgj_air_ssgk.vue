@@ -1,7 +1,9 @@
 <template>
-  <div style>
+  <div style="
+    overflow: auto;
+">
     <div style="position:relative;height:200px;">
-      <img class="ssgk_title_img" src="../../../../assets/img/air_home_bg.jpg" />
+      <img class="ssgk_title_img" src="../../../../../assets/img/air_home_bg.jpg" />
       <div id="indexaqi_value_id" class="ssgk_title1">0</div>
       <div style="display:flex;margin-top:0px;">
         <div class="ssgk_title1_div">AQ</div>
@@ -21,14 +23,14 @@
       <div style="display:flex;margin-top:5px;">
         <div class="ssgk_title1_div">
           <div style="display: flex;position: absolute;right: 0;">
-            <img style="height:28px;" src="../../../../assets/img/air_icon_temp.png" />
+            <img style="height:28px;" src="../../../../../assets/img/air_icon_temp.png" />
             <div id="nowwd_id" style="color:#333333;"></div>
           </div>
         </div>
         <div class="ssgk_title2_div">
           <div class="ssgk_title1_div">
             <div style="display: flex;position: absolute;left: 0;">
-              <img style="height:28px;" src="../../../../assets/img/air_icon_wind.png" />
+              <img style="height:28px;" src="../../../../../assets/img/air_icon_wind.png" />
               <div id="fldj_id" style="color:#333333;"></div>
             </div>
           </div>
@@ -99,13 +101,64 @@
         </div>
       </van-swipe-item>
     </van-swipe>
+    <div style="background:#ffffff;height:220px;width:100%;margin-top:8px;padding-top:7px;">
+      <div class="echars_titile_div">城市站点列表</div>
+      <div
+        class="van-hairline--bottom"
+        style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
+      ></div>
+      <div style="font-size: 14px;text-align: center;margin-left:10px;margin-right:10px;">
+        <div
+          class="ui-row-flex ui-whitespace"
+          style="color: rgb(255, 255, 255);background: rgb(60, 161, 236);padding-top: 6px;padding-bottom: 6px;"
+        >
+          <div class="ui-col ui-col">站点</div>
+          <div class="ui-col ui-col">站点类型</div>
+          <div class="ui-col ui-col">AQI</div>
+          <div class="ui-col ui-col">等级</div>
+        </div>
+      </div>
+      <div style="margin-left:10px;margin-right:10px;">
+        <div
+          style="font-size: 14px;text-align: center;"
+          v-for="(item,index) in bottomList"
+          :key="index"
+          :id="(index)"
+        >
+          <div
+            class="ui-row-flex ui-whitespace"
+            v-if="index%2==1"
+            style="color:#333333;background:#ffffff;padding-top: 6px;padding-bottom: 6px;"
+          >
+            <div class="ui-col ui-col">{{item.stationName}}</div>
+            <div class="ui-col ui-col">{{item.stationType}}</div>
+            <div class="ui-col ui-col">{{item.dataAqi}}</div>
+            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='6'">严重</div>
+            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='5'">重度</div>
+            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='4'">中度</div>
+          </div>
+          <div
+            class="ui-row-flex ui-whitespace"
+            v-if="index%2!=1"
+            style="color:#333333;background:#e2f3ff;padding-top: 6px;padding-bottom: 6px;"
+          >
+            <div class="ui-col ui-col">{{item.stationName}}</div>
+            <div class="ui-col ui-col">{{item.stationType}}</div>
+            <div class="ui-col ui-col">{{item.dataAqi}}</div>
+            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='6'">严重</div>
+            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='5'">重度</div>
+            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='4'">中度</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import echarts from "echarts";
 import $ from "jquery";
-import { httpMethod } from "../../../../api/getData.js";
-import { hbgjAirJs } from "../../../../page/zdgz/hbgj/hbgj_air/hbgj_air.js";
+import { httpMethod } from "../../../../../api/getData.js";
+import { hbgjAirJs } from "../../../../../page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.js";
 import Vue from "vue";
 import { Tab, Tabs, Swipe, SwipeItem } from "vant";
 Vue.use(Tab)
@@ -124,10 +177,10 @@ export default {
   data() {
     return {
       active: 0,
-      indexTabImg1: require("../../../../assets/img/air_home_tab1selected.png"),
       aqiList: [],
       listPmList: [],
-      alllevelist: []
+      alllevelist: [],
+      bottomList: []
     };
   },
   mounted() {
@@ -135,6 +188,7 @@ export default {
     this.provincialAirRanking();
     this.percentageOfGoodDays();
     this.trendsInAirQuality();
+    this.getStationRealtimeData();
   },
   methods: {
     swipeChange: function(index) {
@@ -179,10 +233,10 @@ export default {
       hbgjAirJs.showEcharsView1_ssgk1(echarts, value, data);
     },
     //实时概况
-    getZdgcProProgress: function() {
+    getAirRealtimeData: function() {
       //获取数据
       httpMethod
-        .getZdgcProProgress("")
+        .getAirRealtimeData("")
         .then(res => {
           console.log(res);
           var code = res.success;
@@ -253,9 +307,9 @@ export default {
           console.log(res);
           var code = res.success;
           if (code == "1") {
-            this.alllevelist = res; //总的图例
-            this.aqiList = res.AQI;
-            this.getZdgcProProgress(); //实时概况
+            this.alllevelist = res.data; //总的图例
+            this.aqiList = res.data.AQI;
+            this.getAirRealtimeData(); //实时概况
           }
         })
         .catch(err => {
@@ -301,7 +355,7 @@ export default {
           if (code == "1") {
             var axisY = res.axisY;
             var axisX = res.axisX;
-            this.showAirBhQs(echarts, this.$refs.myCharts3,axisY,axisX);
+            this.showAirBhQs(echarts, this.$refs.myCharts3, axisY, axisX);
           }
         })
         .catch(err => {
@@ -309,14 +363,36 @@ export default {
         });
     },
     //显示空气质量变化趋势
-    showAirBhQs: function(echarts, value, axisY,axisX) {
-      hbgjAirJs.showLbEcharsThree(echarts, value, axisY,axisX);
+    showAirBhQs: function(echarts, value, axisY, axisX) {
+      hbgjAirJs.showLbEcharsThree(echarts, value, axisY, axisX);
+    },
+    //获取站点数据及信息list
+    getStationRealtimeData: function() {
+      var params = {
+        dataType: 6,
+        wrdj: "4，5，6",
+        stationName: "",
+        stationTypeCode: "1，2，3，4，5，6，7"
+      };
+      //获取数据
+      httpMethod
+        .getStationRealtimeData(params)
+        .then(res => {
+          console.log(res);
+          var code = res.success;
+          if (code == "1") {
+            this.bottomList = res.dataList;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
 </script>
 
 <style>
-@import "../../../../page/zdgz/hbgj/hbgj_air/hbgj_air.css";
-@import "../../../../assets/css/frozenui.css";
+@import "../../../../../page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.css";
+@import "../../../../../assets/css/frozenui.css";
 </style>

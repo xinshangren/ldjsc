@@ -36,7 +36,7 @@
         title-active-color="#2796e7"
         title-inactive-color="#333333"
         line-width="75"
-        v-model="active"
+        v-model="airactive"
         style="width:75%;"
       >
         <van-tab title="实时状况"></van-tab>
@@ -45,15 +45,20 @@
       </van-tabs>
     </div>
     <div>
-      <child1>
+      <child1 v-if="airactive==0">
         
       </child1>
+       <child2 v-if="airactive==1">
+        
+      </child2>
+      
     </div>
   </div>
 </template>
 <script>
 import echarts from "echarts";
-import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air.vue";
+import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.vue";
+import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
 import $ from "jquery";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
@@ -62,7 +67,8 @@ Vue.use(Tab).use(Tabs);
 export default {
   name: "hbgj",
   components: {
-    child1
+    child1,
+    child2
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
@@ -73,7 +79,7 @@ export default {
   },
   data() {
     return {
-      active: 0,
+      airactive: 0,
       indexTabImg1: require("../../../assets/img/air_home_tab1selected.png"),
       indexTabImg2: require("../../../assets/img/air_home_tab2.png"),
       indexTabImg3: require("../../../assets/img/air_home_tab3.png"),
@@ -91,10 +97,13 @@ export default {
       // console.log(name,title);
       switch (name) {
         case 0:
+          this.airactive=0;
           break;
         case 1:
+          this.airactive=1;
           break;
         case 2:
+          this.airactive=2;
           break;
 
         default:
