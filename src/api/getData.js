@@ -139,7 +139,46 @@ export const httpMethod = {
     // 示范村概况
     getVillageBasicStatistics: function (params) {
         return get("qylyAppInsideController.action?getVillageBasicStatistics", params);
+    },
+    //实时概况
+    getAirRealtimeData: function (params) {
+        return get("sthjAppInsideController.action?getAirRealtimeData", params);
+    },
+    //实时概况污染物等级
+    getAirPollutantsLevel: function (params) {
+        return get("sthjAppInsideController.action?getAirPollutantsLevel", params);
+    },
+    //省内空气质量排名
+    provincialAirRanking: function (params) {
+        return get("sthjAppInsideController.action?provincialAirRanking", params);
+    },
+    
+    //市内城市空气质量排名
+    cityAirRanking: function (params) {
+        return get("sthjAppInsideController.action?cityAirRanking", params);
+    },
+    //优良天数占比
+    percentageOfGoodDays: function (params) {
+        return get("sthjAppInsideController.action?percentageOfGoodDays", params);
+    },
+    //空气质量变化趋势
+    trendsInAirQuality: function (params) {
+        return get("sthjAppInsideController.action?trendsInAirQuality", params);
+    },
+    //获取站点数据及信息list
+    getStationRealtimeData: function (params) {
+        return get("sthjAppInsideController.action?getStationRealtimeData", params);
     }
+
+    
+
+    
+
+    
+    
+
+    
+
 
 
     
