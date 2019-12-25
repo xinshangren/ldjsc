@@ -19,6 +19,11 @@ import zdgc_xmdealiVue from '@/page/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeal
 import zdgc_czwt_daliVue from '@/page/zdgz/zdgc/zdgc_czwt/zdgc_czwt_deali/zdgc_czwt_deali.vue'
 import jjzsVue from '@/page/jjzs/jjzs.vue'
 import qylyVue from '@/page/qyly/qyly.vue'
+import jqgkVue from '@/page/qyly/jq/jqgk.vue'
+import jqlistVue from '@/page/qyly/jq/jqlist.vue'
+import jqdetileVue from '@/page/qyly/jq/jqdetile.vue'
+import jqvideosVue from '@/page/qyly/jq/jqvideos.vue'
+import sfcgkVue from '@/page/qyly/sfc/sfcgk.vue'
 import nytsVue from '@/page/nyts/nyts.vue'
 Vue.use(Router)
 
@@ -97,6 +102,26 @@ export default new Router({
       path: '/qyly/qyly',
       name: 'qyly',
       component: qylyVue
+    },{
+      path: '/qyly/jq/jqgk',
+      name: 'jqgk',
+      component: jqgkVue
+    },{
+      path: '/qyly/jq/jqlist',
+      name: 'jqlist',
+      component: jqlistVue
+    },{
+      path: '/qyly/jq/jqdetile',
+      name: 'jqdetile',
+      component: jqdetileVue
+    },{
+      path: '/qyly/jq/jqvideos',
+      name: 'jqvideos',
+      component: jqvideosVue
+    },{
+      path: '/qyly/sfc/sfcgk',
+      name: 'sfcgk',
+      component: sfcgkVue
     },{
       path: '/nyts/nyts',
       name: 'nyts',
