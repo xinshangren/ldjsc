@@ -131,6 +131,11 @@ export const httpMethod = {
     provincialAirRanking: function (params) {
         return get("sthjAppInsideController.action?provincialAirRanking", params);
     },
+    
+    //市内城市空气质量排名
+    cityAirRanking: function (params) {
+        return get("sthjAppInsideController.action?cityAirRanking", params);
+    },
     //优良天数占比
     percentageOfGoodDays: function (params) {
         return get("sthjAppInsideController.action?percentageOfGoodDays", params);

@@ -20,38 +20,35 @@
         </div>
       </div>
     </div>
-
-    <div style="display:flex;border-bottom:1px solid #f3f3f3;">
-      <div class="twoLevel_left_div">
-        <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
-        <div style="font-size: 14px;line-height: 40px;">空气</div>
-        <img
-          style="height: 14px;margin-top: 14px;"
-          src="../../../assets/img/air_home_tab_arrow.png"
-        />
+    <van-sticky :offset-top="50">
+      <div style="display:flex;border-bottom:1px solid #f3f3f3;">
+        <div class="twoLevel_left_div">
+          <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
+          <div style="font-size: 14px;line-height: 40px;">空气</div>
+          <img
+            style="height: 14px;margin-top: 14px;"
+            src="../../../assets/img/air_home_tab_arrow.png"
+          />
+        </div>
+        <van-tabs
+          @click="smallTab_select"
+          id="tabId"
+          title-active-color="#2796e7"
+          title-inactive-color="#333333"
+          line-width="75"
+          v-model="airactive"
+          style="width:75%;"
+        >
+          <van-tab title="实时状况"></van-tab>
+          <van-tab title="站点列表"></van-tab>
+          <van-tab title="数据统计"></van-tab>
+        </van-tabs>
       </div>
-      <van-tabs
-        @click="smallTab_select"
-        id="tabId"
-        title-active-color="#2796e7"
-        title-inactive-color="#333333"
-        line-width="75"
-        v-model="airactive"
-        style="width:75%;"
-      >
-        <van-tab title="实时状况"></van-tab>
-        <van-tab title="站点列表"></van-tab>
-        <van-tab title="数据统计"></van-tab>
-      </van-tabs>
-    </div>
+    </van-sticky>
     <div>
-      <child1 v-if="airactive==0">
-        
-      </child1>
-       <child2 v-if="airactive==1">
-        
-      </child2>
-      
+      <child1 v-if="airactive==0"></child1>
+      <child2 v-if="airactive==1"></child2>
+      <child3 v-if="airactive==2"></child3>
     </div>
   </div>
 </template>
@@ -59,16 +56,18 @@
 import echarts from "echarts";
 import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.vue";
 import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
+import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
 import $ from "jquery";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
-import { Tab, Tabs } from "vant";
-Vue.use(Tab).use(Tabs);
+import { Tab, Tabs,Sticky } from "vant";
+Vue.use(Tab).use(Tabs).use(Sticky);
 export default {
   name: "hbgj",
   components: {
     child1,
-    child2
+    child2,
+    child3
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
@@ -97,13 +96,13 @@ export default {
       // console.log(name,title);
       switch (name) {
         case 0:
-          this.airactive=0;
+          this.airactive = 0;
           break;
         case 1:
-          this.airactive=1;
+          this.airactive = 1;
           break;
         case 2:
-          this.airactive=2;
+          this.airactive = 2;
           break;
 
         default:
