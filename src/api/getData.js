@@ -119,6 +119,27 @@ export const httpMethod = {
     getZdgcProProgress: function (params) {
         return get("zdgcAppInsideController.action?getZdgcProProgress", params);
     },
+    //全域旅游
+    // 景区概况
+    getScenicBasicStatistic: function (params) {
+        return get("qylyAppInsideController.action?getScenicBasicStatistics", params);
+    },
+    // 景区列表
+    getQylyScenicBasicList: function (params) {
+        return get("qylyAppInsideController.action?getQylyScenicBasicList", params);
+    },
+    // 景区详情
+    getQylyScenicBasic: function (params) {
+        return get("qylyAppInsideController.action?getQylyScenicBasic", params);
+    },
+    // 景区视频介绍列表
+    getScenicVideoList: function (params) {
+        return get("qylyAppInsideController.action?getScenicVideoList", params);
+    },
+    // 示范村概况
+    getVillageBasicStatistics: function (params) {
+        return get("qylyAppInsideController.action?getVillageBasicStatistics", params);
+    },
     //实时概况
     getAirRealtimeData: function (params) {
         return get("sthjAppInsideController.action?getAirRealtimeData", params);
