@@ -353,9 +353,9 @@
         });
       },
       intentJjzs: function () {
-        // this.$router.push({
-        //   path: "/jjyx/jjyx_ztts/jjyx_ztts"
-        // });
+        this.$router.push({
+          path: "/jjyx/jjyx_ztts/jjyx_ztts"
+        });
       },
       intentNyts: function () {
         this.$router.push({
