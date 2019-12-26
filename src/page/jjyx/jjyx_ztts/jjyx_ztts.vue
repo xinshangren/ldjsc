@@ -1,6 +1,5 @@
 <template>
   <div style="margin-top:54px;">
-  
     <van-tabs
       v-model="active"
       title-active-color="#2599e6"
@@ -26,7 +25,7 @@
         <div class="ui-col ui-col" @click="upYearClick">
           <div class="div_next_style">前一月</div>
         </div>
-        <div class="ui-col ui-col" @click="showDatePicker()" style="width:17%;">
+        <div class="ui-col ui-col" @click="showDatePicker()" style="width:12%;">
           <div
             class="div_flex"
             style="background: rgb(241, 241, 241);border-radius: 6px;display: flex;"
@@ -44,7 +43,7 @@
       </div>
     </div>
     <div style="margin-top:46px;z-index: -1;">
-      <child1 style=""></child1>
+      <child1 @changeTime="changeTime" ref="child1" :getChild="nowYear" :getChildMax="maxDate"></child1>
     </div>
 
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
@@ -83,13 +82,16 @@
         src="../../../assets/img/phone_button.png"
       />
     </div>
-      <van-popup v-model="show" position="bottom" :style="{ height: '200px' }">
+    <van-popup v-model="show" position="bottom" :style="{ height: '200px' }">
       <van-datetime-picker
         v-model="currentDate"
         type="year-month"
         style="height: 200px;"
+        :min-date="minDate"
+        :max-date="maxDate"
         @confirm="onconfirm"
         :formatter="formatter"
+        :filter="filter"
       />
     </van-popup>
   </div>
@@ -111,16 +113,23 @@ export default {
       seach_value: "",
       active: 0,
       show: false,
-      nowYear: new Date().getFullYear() + "-" + (new Date().getMonth() + 1),
-      currentDate: new Date()
+      nowYear: "",
+      currentDate: new Date(),
+      maxDate: new Date(),
+      minDate: new Date(2018, 0, 1)
     };
   },
   mounted() {},
   methods: {
+    changeTime: function(year,month) {
+      console.log(year+"=="+month);
+      this.maxDate = new Date(parseInt(year),parseInt(month)-1,1);
+      this.nowYear=year+"-"+month;
+    },
     upYearClick: function() {
       var year = this.nowYear.split("-")[0];
       var month = this.nowYear.split("-")[1];
-      if (parseInt(month) == 1) {
+      if (parseInt(month) == 2) {
         year = parseInt(year) - 1;
         month = 12;
       } else {
@@ -130,13 +139,14 @@ export default {
         month = "0" + month;
       }
       this.nowYear = year + "-" + month;
+      this.$refs.child1.changeTitme(this.nowYear);
     },
     downYearClick: function() {
       var year = this.nowYear.split("-")[0];
       var month = this.nowYear.split("-")[1];
       if (parseInt(month) == 12) {
         year = parseInt(year) + 1;
-        month = 1;
+        month = 2;
       } else {
         month = parseInt(month) + 1;
       }
@@ -144,6 +154,7 @@ export default {
         month = "0" + month;
       }
       this.nowYear = year + "-" + month;
+      this.$refs.child1.changeTitme(this.nowYear);
     },
     showDatePicker() {
       this.show = true;
@@ -165,12 +176,24 @@ export default {
       if (type === "month") {
         return `${value}月`;
       }
+
       return "";
+    },
+    filter(type, options) {
+      if (type === "month") {
+        options.shift();
+        // console.log(options);
+        return options.filter(option => option > 0);
+      }
+
+      return options;
     },
     onconfirm() {
       this.nowYear = this.timeFormat(this.currentDate);
-
+      // var year = this.nowYear.substr(0, 4);
+      // var month = this.nowYear.substr(5, this.nowYear.length - 1);
       this.show = false;
+      this.$refs.child1.changeTitme(this.nowYear);
     }
   },
   components: {

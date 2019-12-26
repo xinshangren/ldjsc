@@ -183,7 +183,7 @@ export const httpMethod = {
     },
     //获取宏观经济首页数据
     getHomeData: function (params) {
-        return get("sthjAppInsideController.action?getHomeData", params);
+        return get("hgjjAppInsideController.action?getHomeData", params);
     }
 
     
