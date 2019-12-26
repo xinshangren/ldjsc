@@ -41,7 +41,7 @@ export const echarsEnti = {
       },
       color: ['#3ca1ec', '#33d1f8', '#3ECBB2', '#FAAD14', '#D7FA14', 'F65454'],
       legend: {
-        itemHeight: 9,
+        itemHeight: 8,
         itemWidth: 8,
         orient: 'vertical',
         left: '50%',  //图例距离左的距离
@@ -85,9 +85,9 @@ export const echarsEnti = {
           type: 'pie',
           radius: '55%',
           // center: ['40%', '50%'],
-          center: ["35%", "50%"],
+          center: ["30%", "50%"],
           radius: ["40%", "70%"],
-
+          left:'100%',
           data: dataList,
           itemStyle: {
             emphasis: {

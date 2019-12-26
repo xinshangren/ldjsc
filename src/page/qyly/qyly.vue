@@ -1,8 +1,8 @@
 <template>
   <div>
     <div style="display: flex;margin-top: 60px;">
-      <img src="../../assets/img/teb-jq1.png" style="width:40% ;margin-left: 7%;" />
-      <img src="../../assets/img/teb-sfc2.png" style="width: 40%;margin-left: 6%;" />
+      <img :src="img1" style="width:150px;height:56px;margin:auto auto;" @click='changeState(1)'/>
+      <img :src="img2" style="width: 150px;height:56px;margin:auto auto;" @click='changeState(2)' />
     </div>
 
     <div v-if="state==1" style="position: relative;">
@@ -29,7 +29,7 @@
       <div @click="showState()"
         style="position: absolute;top:0;left: 0; width: 38%;display: flex;height: 44px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;">
         <img style="height: 25px; margin-top: 6px;margin-left: 15px;" src="../../assets/img/icon-jq2.png" />
-        <div style="font-size: 14px;line-height: 40px;">风景区</div>
+        <div style="font-size: 14px;line-height: 40px;">景 区</div>
         <img style="height: 14px;margin-top: 14px;margin-left: 20px" src="../../assets/img/air_home_tab_arrow.png" />
       </div>
     </div>
@@ -44,7 +44,7 @@
           <child4 v-bind:active="active"></child4>
         </van-tab>
         <van-tab title="示范村列表">
-          <child2 style=""></child2>
+          <child5 style=""></child5>
         </van-tab>
       </van-tabs>
       
@@ -59,7 +59,7 @@
     <div v-show='show' style="position: absolute;top:155px;left:10px;width: 30%;box-shadow: 2px 2px #f3f3f3;border: 1px #f3f3f3 solid;">
       <div @click='changeState(1)' style="display: flex;height: 44px;background: #ffffff;border-bottom: 1px #f3f3f3 solid;">
         <img style="height: 25px; margin-top: 6px;margin-left: 15px;" src="../../assets/img/icon-jq2.png" />
-        <div style="font-size: 14px;line-height: 40px;margin-left: 5px;">风景区</div>
+        <div style="font-size: 14px;line-height: 40px;margin-left: 5px;">景 区</div>
       </div>
       <div @click='changeState(2)' style="display: flex;height: 44px;background: #ffffff;">
         <img style="height: 25px; margin-top: 6px;margin-left: 15px;" src="../../assets/img/icon-sfc2.png" />
@@ -74,6 +74,7 @@
   import child2 from "@/page/qyly/jq/jqlist.vue";
   import child3 from "@/page/qyly/jq/jqvideos.vue";
   import child4 from "@/page/qyly/sfc/sfcgk.vue";
+  import child5 from "@/page/qyly/sfc/sfclist.vue";
   import { httpMethod } from "../../api/getData.js";
   export default {
     name: "zdgz",
@@ -85,6 +86,8 @@
     },
     data() {
       return {
+        img1: require("../../assets/img/teb-jq1.png"),
+        img2: require("../../assets/img/teb-sfc2.png"),
         show:false,
         state:1,
         active: 2,
@@ -93,10 +96,6 @@
       };
     },
     mounted() {
-      var cur = window.sessionStorage.getItem('jqactivated');
-      if (cur != null) {
-        this.active = parseInt(cur);;
-      }
 
     },
     methods: {
@@ -105,10 +104,20 @@
       },
       showState:function(){
         this.show=true;
+       
       },
       changeState:function(state){
         this.state=state;
         this.show=false;
+        if(state==2){
+          this.active=1;
+          this.img1=require("../../assets/img/teb-jq2.png");
+          this.img2=require("../../assets/img/teb-sfc1.png");
+        }else{
+          this.active=2;
+          this.img1=require("../../assets/img/teb-jq1.png");
+          this.img2=require("../../assets/img/teb-sfc2.png");
+        }
       },
       getListData: function () {
         var params = {
@@ -158,6 +167,7 @@
       child2,
       child3,
       child4,
+      child5,
     }
   };
 </script>

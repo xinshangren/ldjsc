@@ -23,6 +23,8 @@ import jqlistVue from '@/page/qyly/jq/jqlist.vue'
 import jqdetileVue from '@/page/qyly/jq/jqdetile.vue'
 import jqvideosVue from '@/page/qyly/jq/jqvideos.vue'
 import sfcgkVue from '@/page/qyly/sfc/sfcgk.vue'
+import sfclistVue from '@/page/qyly/sfc/sfclist.vue'
+import sfcdetileVue from '@/page/qyly/sfc/sfcdetile.vue'
 import nytsVue from '@/page/nyts/nyts.vue'
 import jjyx_zttsVue from '@/page/jjyx/jjyx_ztts/jjyx_ztts.vue'
 import hbgj_air_station_list_dealiVue from '@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali/hbgj_air_station_list_deali.vue'
@@ -98,7 +100,8 @@ export default new Router({
     }, {
       path: '/qyly/qyly',
       name: 'qyly',
-      component: qylyVue
+      component: qylyVue,
+      meta:{keepAlive:true}
     },{
       path: '/qyly/jq/jqgk',
       name: 'jqgk',
@@ -119,6 +122,14 @@ export default new Router({
       path: '/qyly/sfc/sfcgk',
       name: 'sfcgk',
       component: sfcgkVue
+    },{
+      path: '/qyly/sfc/sfclist',
+      name: 'sfclist',
+      component: sfclistVue
+    },{
+      path: '/qyly/sfc/sfcdetile',
+      name: 'sfcdetile',
+      component: sfcdetileVue
     },{
       path: '/nyts/nyts',
       name: 'nyts',
