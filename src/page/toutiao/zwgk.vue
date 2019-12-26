@@ -140,7 +140,7 @@
       },
       getCmsArticleContentList:function(){
         var params = {
-          classId: "2c9bfc706b0792a8016b0808a5940053",
+          classId: "17765",
           page: this.page,
           pageSize:this.pageSize
 
@@ -149,8 +149,13 @@
           .getCmsArticleContentList(params)
           .then(res => {
             if (res.success == "1") {
-              this.list = this.list.concat(res.dataList);
-              if (res.dataList < 4) {
+              if(res.dataList!=null){
+                this.list = this.list.concat(res.dataList);
+              }else{
+                this.list = [];
+              }
+             
+              if (res.dataList < 10) {
                 this.finished = true;
               }
             } else if (res.success == "0") {
@@ -175,7 +180,7 @@
           .then(res => {
             if (res.success == "1") {
               this.list1 = this.list1.concat(res.dataList);
-              if (res.dataList < 4) {
+              if (res.dataList < 10) {
                 this.finished1 = true;
               }
             } else if (res.success == "0") {

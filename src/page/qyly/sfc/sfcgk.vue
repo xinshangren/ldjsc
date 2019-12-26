@@ -1,5 +1,5 @@
 <template>
-  <div style="background: #ffffff;">
+  <div id="scfgkid" style="background: #ffffff;overflow-y: scroll;">
     <div
       style="display: flex;line-height: 16px;vertical-align: bottom;margin-left: 20px;height: 50px;border-bottom: 1px #c6c6c6 solid;margin-right: 10px;">
       <div
@@ -37,7 +37,9 @@
       };
     },
     mounted() {
-      window.sessionStorage.removeItem('jqactivated');
+      var orderHight1 = document.documentElement.clientHeight;
+      var heightlist = orderHight1 -160;
+      $("#scfgkid").css('height',heightlist + "px");
       this.getData();
     },
     methods: {

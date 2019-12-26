@@ -24,6 +24,8 @@ import jqlistVue from '@/page/qyly/jq/jqlist.vue'
 import jqdetileVue from '@/page/qyly/jq/jqdetile.vue'
 import jqvideosVue from '@/page/qyly/jq/jqvideos.vue'
 import sfcgkVue from '@/page/qyly/sfc/sfcgk.vue'
+import sfclistVue from '@/page/qyly/sfc/sfclist.vue'
+import sfcdetileVue from '@/page/qyly/sfc/sfcdetile.vue'
 import nytsVue from '@/page/nyts/nyts.vue'
 Vue.use(Router)
 
@@ -101,7 +103,8 @@ export default new Router({
     }, {
       path: '/qyly/qyly',
       name: 'qyly',
-      component: qylyVue
+      component: qylyVue,
+      meta:{keepAlive:true}
     },{
       path: '/qyly/jq/jqgk',
       name: 'jqgk',
@@ -122,6 +125,14 @@ export default new Router({
       path: '/qyly/sfc/sfcgk',
       name: 'sfcgk',
       component: sfcgkVue
+    },{
+      path: '/qyly/sfc/sfclist',
+      name: 'sfclist',
+      component: sfclistVue
+    },{
+      path: '/qyly/sfc/sfcdetile',
+      name: 'sfcdetile',
+      component: sfcdetileVue
     },{
       path: '/nyts/nyts',
       name: 'nyts',

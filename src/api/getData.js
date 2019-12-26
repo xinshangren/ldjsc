@@ -140,6 +140,14 @@ export const httpMethod = {
     getVillageBasicStatistics: function (params) {
         return get("qylyAppInsideController.action?getVillageBasicStatistics", params);
     },
+    // 示范村列表
+    getQylyVillageBasicList: function (params) {
+        return get("qylyAppInsideController.action?getQylyVillageBasicList", params);
+    },
+    // 示范村详情
+    getQylyVillageBasic: function (params) {
+        return get("qylyAppInsideController.action?getQylyVillageBasic", params);
+    },
     //实时概况
     getAirRealtimeData: function (params) {
         return get("sthjAppInsideController.action?getAirRealtimeData", params);

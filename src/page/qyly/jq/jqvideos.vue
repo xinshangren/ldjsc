@@ -81,7 +81,6 @@
       };
     },
     mounted() {
-      window.sessionStorage.removeItem('jqactivated');
     },
     methods: {
       openPop: function () {

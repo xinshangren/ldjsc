@@ -44,7 +44,7 @@
           <child4 v-bind:active="active"></child4>
         </van-tab>
         <van-tab title="示范村列表">
-          <child2 style=""></child2>
+          <child5 style=""></child5>
         </van-tab>
       </van-tabs>
       
@@ -74,6 +74,7 @@
   import child2 from "@/page/qyly/jq/jqlist.vue";
   import child3 from "@/page/qyly/jq/jqvideos.vue";
   import child4 from "@/page/qyly/sfc/sfcgk.vue";
+  import child5 from "@/page/qyly/sfc/sfclist.vue";
   import { httpMethod } from "../../api/getData.js";
   export default {
     name: "zdgz",
@@ -93,10 +94,6 @@
       };
     },
     mounted() {
-      var cur = window.sessionStorage.getItem('jqactivated');
-      if (cur != null) {
-        this.active = parseInt(cur);;
-      }
 
     },
     methods: {
@@ -105,10 +102,16 @@
       },
       showState:function(){
         this.show=true;
+       
       },
       changeState:function(state){
         this.state=state;
         this.show=false;
+        if(state==2){
+          this.active=1;
+        }else{
+          this.active=2;
+        }
       },
       getListData: function () {
         var params = {
@@ -158,6 +161,7 @@
       child2,
       child3,
       child4,
+      child5,
     }
   };
 </script>

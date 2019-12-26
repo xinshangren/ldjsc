@@ -86,7 +86,6 @@
       };
     },
     mounted() {
-      window.sessionStorage.setItem('jqactivated',3);
       var id = this.$route.params.entity;
       this.getQylyScenicBasic(id);
     },
