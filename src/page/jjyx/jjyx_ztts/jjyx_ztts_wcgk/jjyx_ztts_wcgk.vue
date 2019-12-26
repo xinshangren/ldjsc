@@ -187,7 +187,7 @@
       <div style="display:flex;">
         <div style="width:50%;text-align:center;">
           <div style="display:flex;font-size:14px;color:#333333;line-height:30px;">
-            <div style="margin-left:28px;">居民人均可支配收入</div>
+            <div style="margin-left:28px;">工业增加值</div>
             <img
               style="height: 14px;margin-left: 6px;margin-top:9px;"
               src="../../../../assets/img/eco_home_more.png"
@@ -243,9 +243,11 @@
           src="../../../../assets/img/eco_home_countyicon.png"
         />
         <div style="font-size:15px;color:#333333;line-height:47px;">各区县主要经济指标</div>
-    
       </div>
-          <img style="position: absolute;right: 57px;height: 46px;" src="../../../../assets/img/eco_home_countybg.png"/>
+      <img
+        style="top:0px;position: absolute;right: 57px;height: 46px;"
+        src="../../../../assets/img/eco_home_countybg.png"
+      />
     </div>
   </div>
 </template>
@@ -255,31 +257,75 @@ import echarts from "echarts";
 import { echarsEnti } from "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.js";
 import { httpMethod } from "../../../../api/getData.js";
 export default {
+  props: {
+    inputName: String,
+  },
   name: "zdgc_ztqk_vue",
   data() {
     return {
-      show: false
+      show: false,
+      qssczzEnti: {}, //全市生产总值
+      gdzctzEnti: {}, //固定资产投资
+      ybggyssrEnti: {}, //一般公共预算收入
+      shxfplszeEnti: {}, //社会消费品零售总额
+      jmrjkzpsrEnti: {}, //居民人均可支配收入
+      czjmrjkzpsrEnti: {}, //城镇居民人均可支配收入
+      ncjmrjkzpsrEnti: {}, //农村居民人均可支配收入
+      gyzjzEnti: {}, //工业增加值
+      hgjckzeEnti: {} //海关进出口总额
     };
   },
   mounted() {
-    //this.getThreeEchars(echarts, this.$refs.myCharts2);
+    this.getHomeData();
   },
   methods: {
     //第一个头和统计饼图
-    getzdxmzj: function(year) {
+    getHomeData: function(year, month) {
       var params = {
-        year: year
+        year: year,
+        month: month
       };
-
       httpMethod
-        .getzdxmzj(params)
+        .getHomeData(params)
         .then(res => {
           console.log(res);
           if (res.success == "1") {
-            this.zdgcsl = res.data.gcslmk.gcsl;
-            this.getOneEchars(echarts, this.$refs.myCharts1, res.data.gcslmk);
-            this.jhtze = res.data.jhtz;
-            this.wctze = res.data.wctz;
+            var data = res.date; //数据
+            for (var i = 0; i < data.length; i++) {
+              var enti = data[i];
+              var num = enti.val;
+              switch (parseInt(num)) {
+                case 1: //全市生产总值
+                  this.qssczzEnti = enti;
+                  break;
+                case 2: //城镇居民人均可支配收入（元）
+                  this.czjmrjkzpsrEnti = enti;
+                  break;
+                case 3: //农村居民人均可支配收入（元）
+                  this.ncjmrjkzpsrEnti = enti;
+                  break;
+                case 4: //工业增加值
+                  this.gyzjzEnti = enti;
+                  break;
+                case 5: //社会消费品零售总额
+                  this.shxfplszeEnti = enti;
+                  break;
+                case 6: //固定资产投资
+                  this.gdzctzEnti = enti;
+                  break;
+                case 7: //海关进出口总额（亿元）
+                  this.hgjckzeEnti = enti;
+                  break;
+                case 8: //一般公共预算收入
+                  this.ybggyssrEnti = enti;
+                  break;
+                case 9: //城镇居民人均可支配收入
+                  this.jmrjkzpsrEnti = enti;
+                  break;
+                default:
+                  break;
+              }
+            }
           }
         })
         .catch(err => {
