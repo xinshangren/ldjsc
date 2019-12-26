@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="display: flex;margin-top: 60px;">
+    <div style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;">
       <img :src="img1" style="width:150px;height:56px;margin:auto auto;" @click='changeState(1)'/>
       <img :src="img2" style="width: 150px;height:56px;margin:auto auto;" @click='changeState(2)' />
     </div>
