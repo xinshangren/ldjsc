@@ -394,7 +394,7 @@ export default {
     },
     //年月日的确定
     onconfirmAlltime: function() {
-      var date = this.timeFormatDay(this.currentYearMonth);
+      var date = this.timeFormatDay(this.currentYearMonthDay);
       this.showAllTime = false; //年月日显示
       switch (this.flagindex) {
         case 1: //第一个图表

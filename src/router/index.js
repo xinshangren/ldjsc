@@ -25,6 +25,7 @@ import jqvideosVue from '@/page/qyly/jq/jqvideos.vue'
 import sfcgkVue from '@/page/qyly/sfc/sfcgk.vue'
 import nytsVue from '@/page/nyts/nyts.vue'
 import jjyx_zttsVue from '@/page/jjyx/jjyx_ztts/jjyx_ztts.vue'
+import hbgj_air_station_list_dealiVue from '@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali/hbgj_air_station_list_deali.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -134,6 +135,12 @@ export default new Router({
       path: '/jjyx/jjyx_ztts/jjyx_ztts',
       name: 'jjyx_ztts',
       component: jjyx_zttsVue
+    }, {
+      path: '/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali',
+      name: 'hbgj_air_station_list_deali',
+      component: hbgj_air_station_list_dealiVue
     }
+
+    
   ]
 })

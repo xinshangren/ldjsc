@@ -549,7 +549,16 @@ export default {
         }
       });
     },
-    goDetile: function() {},
+    goDetile(item) {
+      //console.log(item);
+      this.$router.push({
+        path: "/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali",
+        name: "hbgj_air_station_list_deali",
+        params: {
+          entity: item
+        }
+      });
+    },
     clearType: function() {
       var context = this;
       var airList = this.alllevelist;

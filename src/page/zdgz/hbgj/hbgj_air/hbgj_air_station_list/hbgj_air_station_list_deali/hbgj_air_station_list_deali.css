@@ -1,0 +1,17 @@
+.index_bg{
+	
+    height: 362px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+
+}
+.yuanquan{
+	width: 49px;margin: 0 auto;height: 3px;
+}
+.echars_titile_div{
+    border-left:2px solid #1976d2;font-size:14px;margin-left:12px;
+    padding-left: 10px;
+}

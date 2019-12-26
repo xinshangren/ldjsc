@@ -5,7 +5,7 @@ export const hbgjAirJs = {
         var dataTemperature = res.data.dataTemperature;//度数
         $("#nowwd_id").html(dataTemperature);
         $("#fldj_id").html(res.data.dataWindDirection + "\t\t\t\t" + res.data.dataWindLevel);
-        $("#sywrw_id").html("首要污染物：" + dataPollutant);
+       
         var dataAqi = res.data.dataAqi;
         $("#indexaqi_value_id").html(dataAqi);
         var levelCodeIndex = "";
@@ -15,7 +15,7 @@ export const hbgjAirJs = {
             var levelValueEnd = entity.levelValueEnd; //范围结束
             var levelName = entity.levelName; //污染等级文字
             var levelCode = entity.levelCode; //污染等级code
-            if (dataAqi > levelValueStart && dataAqi < levelValueEnd) {
+            if (parseInt(dataAqi) > parseInt(levelValueStart) && parseInt(dataAqi) < parseInt(levelValueEnd)) {
                 levelCodeIndex = levelCode;
                 $("#indexaqi_id").html(levelName);
             }

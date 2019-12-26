@@ -6,7 +6,7 @@
       <img class="ssgk_title_img" src="../../../../../assets/img/air_home_bg.jpg" />
       <div id="indexaqi_value_id" class="ssgk_title1">0</div>
       <div style="display:flex;margin-top:0px;">
-        <div class="ssgk_title1_div">AQ</div>
+        <div class="ssgk_title1_div">AQI</div>
         <div style="width:50%;text-align:left;font-size:14px;">
           <div
             id="indexaqi_id"
@@ -16,8 +16,7 @@
       </div>
 
       <div style="display:flex;margin-top:5px;">
-        <div id="rankPm_id" class="ssgk_title1_div" style="color:#333333;">省内排名：</div>
-        <div id="sywrw_id" class="ssgk_title2_div" style="color:#333333;margin-right:0px;">首要污染物：</div>
+        <div id="rankPm_id" class="ssgk_title1_div" style="color:#333333;width:100%;text-align:center;">省内排名：  首要污染物：</div>
       </div>
 
       <div style="display:flex;margin-top:5px;">
@@ -185,7 +184,7 @@ export default {
   },
   mounted() {
     this.getAirPollutantsLevel();
-    this.provincialAirRanking();
+
     this.percentageOfGoodDays();
     this.trendsInAirQuality();
     this.getStationRealtimeData();
@@ -195,7 +194,7 @@ export default {
       console.log(index);
     },
     //省内空气质量排名
-    provincialAirRanking: function() {
+    provincialAirRanking: function(resData) {
       var params = {
         dateType: "年",
         dateStr: new Date().getFullYear()
@@ -218,7 +217,9 @@ export default {
               let cityName = enti.cityName;
               //console.log(cityName);
               if (cityName == "晋城市") {
-                $("#rankPm_id").html("省内排名：" + (i + 1));
+                var dataPollutant = resData.data.dataPollutant; //首要污染物
+                $("#rankPm_id").html("省内排名：" + (i + 1)+"\t\t\t\t\t\t\t\t首要污染物：" + dataPollutant);
+                // $("#rankPm_id").html("省内排名：" + (i + 1));
               }
             }
           }
@@ -296,6 +297,7 @@ export default {
     },
     //显示顶部数据
     showTopData: function(res) {
+      this.provincialAirRanking(res);
       hbgjAirJs.showTopTip(res, this.aqiList);
     },
     //实时概况污染物等级
