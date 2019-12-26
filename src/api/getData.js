@@ -176,6 +176,10 @@ export const httpMethod = {
     //获取站点数据及信息list
     getStationRealtimeData: function (params) {
         return get("sthjAppInsideController.action?getStationRealtimeData", params);
+    },
+    //获取宏观经济首页数据
+    getHomeData: function (params) {
+        return get("sthjAppInsideController.action?getHomeData", params);
     }
 
     

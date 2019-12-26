@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: auto;">
+  <div style="margin-top:0px;overflow:hidden;">
     <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
       <van-search
         placeholder="请输入站点名称"
@@ -652,7 +652,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import "../../../../../page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.css";
 @import "../../../../../assets/css/frozenui.css";
 </style>

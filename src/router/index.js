@@ -17,7 +17,6 @@ import hbgjVue from '@/page/zdgz/hbgj/hbgj.vue'
 import zdgcVue from '@/page/zdgz/zdgc/zdgc.vue'
 import zdgc_xmdealiVue from '@/page/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali.vue'
 import zdgc_czwt_daliVue from '@/page/zdgz/zdgc/zdgc_czwt/zdgc_czwt_deali/zdgc_czwt_deali.vue'
-import jjzsVue from '@/page/jjzs/jjzs.vue'
 import qylyVue from '@/page/qyly/qyly.vue'
 import jqgkVue from '@/page/qyly/jq/jqgk.vue'
 import jqlistVue from '@/page/qyly/jq/jqlist.vue'
@@ -27,6 +26,7 @@ import sfcgkVue from '@/page/qyly/sfc/sfcgk.vue'
 import sfclistVue from '@/page/qyly/sfc/sfclist.vue'
 import sfcdetileVue from '@/page/qyly/sfc/sfcdetile.vue'
 import nytsVue from '@/page/nyts/nyts.vue'
+import jjyx_zttsVue from '@/page/jjyx/jjyx_ztts/jjyx_ztts.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -97,10 +97,6 @@ export default new Router({
       name: 'hbgj',
       component: hbgjVue
     }, {
-      path: '/jjzs/jjzs',
-      name: 'jjzs',
-      component: jjzsVue
-    }, {
       path: '/qyly/qyly',
       name: 'qyly',
       component: qylyVue,
@@ -145,6 +141,10 @@ export default new Router({
       path: '/zdgz/zdgc/zdgc_czwt/zdgc_czwt_dali/zdgc_czwt_deali',
       name: 'zdgc_czwt_deali',
       component: zdgc_czwt_daliVue
+    }, {
+      path: '/jjyx/jjyx_ztts/jjyx_ztts',
+      name: 'jjyx_ztts',
+      component: jjyx_zttsVue
     }
   ]
 })
