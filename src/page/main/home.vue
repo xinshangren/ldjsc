@@ -354,7 +354,7 @@
       },
       intentJjzs: function () {
         this.$router.push({
-          path: "/jjzs/jjzs"
+          path: "/jjyx/jjyx_ztts/jjyx_ztts"
         });
       },
       intentNyts: function () {
