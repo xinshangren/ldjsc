@@ -32,10 +32,16 @@
       </div>
     </van-sticky>
 
-    <div id="show_menu_Id" style="position: fixed;left: 20px;background: #ffffff;top: 127px;padding: 3px;z-index:99;">
+    <div
+      id="show_menu_Id"
+      style="position: fixed;left: 20px;background: #ffffff;top: 127px;padding: 3px;z-index:99;"
+    >
       <img style="height:23px;" src="../../../../assets/img/data_list_menu.png" />
     </div>
-    <div id="menu_ul_id" style="display:none; position: fixed;left: 20px;background: #ffffff;top: 157px;padding: 3px;z-index:1;">
+    <div
+      id="menu_ul_id"
+      style="display:none; position: fixed;left: 20px;background: #ffffff;top: 157px;padding: 3px;z-index:1;"
+    >
       <ul id="menu_ul">
         <li @click="returnCom(1)" class="menuliClass" style="display:flex;">
           <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
@@ -160,15 +166,19 @@ export default {
         .siblings("li")
         .css("background", "#ffffff");
     });
-    $("#show_menu_Id").click(function(){
+    $("#show_menu_Id").click(function() {
+      if ($("#menu_ul_id").is(":hidden")) {
          $("#menu_ul_id").show();
+      } else {
+        $("#menu_ul_id").hide();
+      }
+     
     });
-
   },
   methods: {
     returnCom(flag) {
       var returnEle = null;
-       $("#menu_ul_id").hide();
+      $("#menu_ul_id").hide();
       switch (flag) {
         case 1:
           returnEle = document.getElementById("myCharts1");
@@ -191,7 +201,7 @@ export default {
         default:
           break;
       }
-    //  $("#myCharts6").scrollIntoView(true);
+      //  $("#myCharts6").scrollIntoView(true);
       if (returnEle) {
         returnEle.scrollIntoView();
       }
