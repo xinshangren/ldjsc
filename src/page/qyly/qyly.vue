@@ -1,8 +1,8 @@
 <template>
   <div>
     <div style="display: flex;margin-top: 60px;">
-      <img src="../../assets/img/teb-jq1.png" style="width:40% ;margin-left: 7%;" />
-      <img src="../../assets/img/teb-sfc2.png" style="width: 40%;margin-left: 6%;" />
+      <img src="../../assets/img/teb-jq1.png" style="width:150px;height:43px;margin:auto auto;" />
+      <img src="../../assets/img/teb-sfc2.png" style="width: 150px;height:43px;margin:auto auto;" />
     </div>
 
     <div v-if="state==1" style="position: relative;">

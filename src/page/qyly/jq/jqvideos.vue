@@ -1,10 +1,9 @@
 <template>
   <div style="overflow:hidden;background: #ffffff;">
 
-    <van-popup id="popup" v-model="show" position="top"  :style="{height: '100%' }" 
-    @opened="openPop"  :overlay='true'  :closeable='true' @click='closePop'
-      style="overflow:hidden;background:rgb(0, 0, 0);">
-      
+    <van-popup id="popup" v-model="show" position="top" :style="{height: '100%' }" @opened="openPop" :overlay='true'
+      :closeable='true' @click='closePop' style="overflow:hidden;background:rgb(0, 0, 0);">
+
     </van-popup>
 
     <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit"
@@ -18,7 +17,7 @@
 
           <div style="position: relative;">
             <img id="" style="border-radius:3px ;width:100%;height:95px;" :src=item.surface_picture>
-            <img src="../../../assets/img/bf.png" style="position: absolute;left:40%;top:25%;width:50px;height:50px">
+            <img src="../../../assets/img/bf.png" style="position: absolute;left:35%;top:17%;width:50px;height:50px">
             <div style="margin-left: 10px;display: flex;line-height: 13px;">
               <div style="font-size: 10px;color: #333333;">{{item.name}}</div>
               <div style="margin-left:10px;font-size: 9px;color: #fe1313;">
@@ -43,10 +42,11 @@
   import { httpMethod } from "../../../api/getData.js";
   import Vue from "vue";
   import { PullRefresh, Popup, Dialog } from "vant";
+  Vue.use(PullRefresh).use(Popup).use(Dialog);
   import Video from 'video.js'
   import 'video.js/dist/video-js.css'
   Vue.prototype.$video = Video
-  Vue.use(PullRefresh).use(Popup).use(Dialog);
+ 
 
   export default {
     components: {
@@ -55,8 +55,8 @@
     name: "zdgc_xmlb_vue",
     data() {
       return {
-        myPlayer:{},
-        curpath:'',
+        myPlayer: {},
+        curpath: '',
         show: false,
         list: [],
         mescroll: null, // mescroll实例对象
@@ -87,34 +87,33 @@
         this.intvideo();
       },
       closePop: function () {
-        this.show=false;
-        if(this.myPlayer!=null){
+        this.show = false;
+        if (this.myPlayer != null) {
           this.myPlayer.dispose();
-          this.myPlayer=null;
+          this.myPlayer = null;
         }
-        
+
       },
       intvideo: function () {
-        //初始化视频方法
-        $('#popup').html('<video id="myVideo" class="video-js" style="width: 100%;">'+
-        '<source src='+
-        this.curpath
-        +' type="video/mp4">'+
-      '</video>');
-        this.myPlayer = this.$video(myVideo, {
-          //确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
-          controls: true,
-          muted:"false",
-          //自动播放属性,muted:静音播放
-          autoplay: "muted",
+        
+          $('#popup').html('<video id="myVideo" class="video-js" style="width: 100%;">'+
+          '<source src='+
+          this.curpath
+          +' type="video/mp4">'+
+        '</video>');
+          this.myPlayer = this.$video(myVideo, {
+            //确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
+            controls: true,
+            //自动播放属性,muted:静音播放
+            autoplay: true,
+            //建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
+            preload: "auto",
+            //设置视频播放器的显示宽度（以像素为单位）
+            width: "800px",
+            //设置视频播放器的显示高度（以像素为单位）
+            height: "400px"
+          });
          
-          //建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
-          preload: "auto",
-          //设置视频播放器的显示宽度（以像素为单位）
-          width: "800px",
-          //设置视频播放器的显示高度（以像素为单位）
-          height: "400px"
-        });
       },
       mescrollInit(mescroll) {
         this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
@@ -153,15 +152,14 @@
           });
       },
       goDetile(item) {
-       this.curpath=item;
-       this.show=true;
+        this.curpath = item;
+        this.show = true;
       }
     }
   };
 </script>
 <style scoped>
   @import "../../../assets/css/frozenui.css";
-
   .mescroll {
     position: fixed;
     top: 160px;
