@@ -26,7 +26,7 @@
           />
           <div>
             <div style="margin-top: 6px;font-size: 14px;color: #666666;">温度</div>
-            <div id="wdDivId" style="color:#3ca1ec;font-size: 16px;">16°</div>
+            <div id="wdDivId" style="color:#3ca1ec;font-size: 16px;">0°</div>
           </div>
         </div>
         <div style="height:50px;width:1px;background:#cccccc;"></div>
@@ -37,7 +37,7 @@
           />
           <div style="margin-left:5px;">
             <div style="margin-top: 6px;font-size: 14px;color: #666666;">风速</div>
-            <div id="fsDivId"  style="color:#3ca1ec;font-size: 16px;">0级</div>
+            <div id="fsDivId" style="color:#3ca1ec;font-size: 16px;">0级</div>
           </div>
         </div>
       </div>
@@ -176,12 +176,12 @@ export default {
             var wdLabel = ["PM10", "SO2", "NO2", "PM2.5", "O3", "CO"];
             var wdLabel1 = ["PM10", "SO2", "NO2", "PM25", "O3", "CO"];
             var wdValue = [
-              dataEn.dataPm10,
-              dataEn.dataSo2,
-              dataEn.dataNo2,
-              dataEn.dataPm25,
-              dataEn.dataO3,
-              dataEn.dataCo
+              this.itemEnti.dataPm10,
+              this.itemEnti.dataSo2,
+              this.itemEnti.dataNo2,
+              this.itemEnti.dataPm25,
+              this.itemEnti.dataO3,
+              this.itemEnti.dataCo
             ];
 
             for (var j = 0; j < wdLabel.length; j++) {
@@ -197,26 +197,32 @@ export default {
                     var levelValueEnd = entity.levelValueEnd; //范围结束
                     var levelName = entity.levelName; //污染等级文字
                     var levelCode = entity.levelCode; //污染等级code
-                    if (
-                      parseInt(wdValues) > parseInt(levelValueStart) &&
-                      parseInt(wdValues) < parseInt(levelValueEnd)
-                    ) {
-                      colorLevel = levelCode;
-                      console.log(
-                        labelName + "===" + wdValues + "===" + levelCode
-                      );
+                    if (wdValues != "") {
+                      if (
+                        parseFloat(wdValues) > parseInt(levelValueStart) &&
+                        parseFloat(wdValues) < parseInt(levelValueEnd)
+                      ) {
+                        colorLevel = levelCode;
+                        console.log(
+                          labelName + "===" + wdValues + "===" + levelCode
+                        );
+                      }
+                    }else{
+                      colorLevel="1";
+                      wdValues="-";
                     }
                   }
+
+                  var map = {
+                    name: wdLabel[j],
+                    value: wdValues,
+                    colorvalue: colorLevel
+                  };
+                  this.listPmList.push(map);
                 }
               }
-
-              var map = {
-                name: wdLabel[j],
-                value: wdValue[j],
-                colorvalue: colorLevel
-              };
-              this.listPmList.push(map);
             }
+
             this.showYbpFun(
               echarts,
               this.$refs.myCharts,
