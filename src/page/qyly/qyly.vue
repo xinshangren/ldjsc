@@ -4,9 +4,9 @@
       <img :src="img1" style="width:150px;height:56px;margin:auto auto;" @click='changeState(1)'/>
       <img :src="img2" style="width: 150px;height:56px;margin:auto auto;" @click='changeState(2)' />
     </div>
-
     <div v-if="state==1" style="position: relative;">
-      <van-tabs v-model="active" :ellipsis=false line-width="25%" style="font-size: 14px;" color="#2796e7"
+      
+      <van-tabs v-model="active" :ellipsis=false  line-width="25%" style="font-size: 14px;" color="#2796e7"
         title-inactive-color="#999999" title-active-color="#2796e7">
 
         <van-tab title="站位标识">
@@ -25,7 +25,6 @@
           <child3 style=""></child3>
         </van-tab>
       </van-tabs>
-      
       <div @click="showState()"
         style="position: absolute;top:0;left: 0; width: 38%;display: flex;height: 44px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;">
         <img style="height: 25px; margin-top: 6px;margin-left: 15px;" src="../../assets/img/icon-jq2.png" />
