@@ -31,6 +31,10 @@ export const httpMethod = {
     getCmsArticleContentList: function (params) {
         return get("cmsAppInsideController.action?getCmsArticleContentList", params);
     },
+    // 美丽晋城文化晋城
+    getlmjcZL: function (params) {
+        return get("cmsAppInsideController.action?getlmjcZL", params);
+    },
     //钉办
     //鉴权
     getConfig: function (params) {
