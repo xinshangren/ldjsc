@@ -11,14 +11,22 @@
     </div>
     <div style="width: 100%;background: #ffffff;margin-top: 10px;">
       <img src="../../assets/img/whjc.png" style="margin-left: 35%;width: 30%; height: 25px;margin-top: 10px;">
-      <div :style="{backgroundImage: 'url(' + whys.imgUrl + ')', backgroundSize:'contain'}" style="display: flex;margin: 15px;height: 130px;">
+      <div :style="{backgroundImage: 'url(' + whys.imgUrl + ')', backgroundSize:'contain'}"
+        style="display: flex;margin: 15px;height: 130px;">
         <img src="" style="width: 135px;height: 130px;">
         <div style="background: rgba(255, 255, 255, 0.8);">
-          <img src="../../assets/img/whys.png" style="margin-left: 10%; width: 90%;height: 40px;">
-          <div style="font-size: 15px;color: #333333;margin-left: 10%;">
+          <img src="../../assets/img/whys.png" style="margin-left: 5%; width: 90%;height: 40px;">
+          <div style="font-size: 15px;color: #333333;margin-left: 5%;">
             {{whys.title}}
           </div>
-
+          <div style="font-size: 14px;color: #333333;margin-left: 5%;display: flex;overflow: scroll;">
+            <div style="width: 60px;height: 20px;line-height: 20px;vertical-align: middle; border: 1px #1976d2 solid; border-radius:3px;">
+              高平黑陶
+            </div>
+            <div style="width: 60px;height: 20px;line-height: 20px;vertical-align: middle; border: 1px #1976d2 solid; border-radius:3px;">
+              高平黑陶
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -64,10 +72,10 @@
           .then(res => {
             if (res.success == "1") {
               _this.yzjclist = res.dataList;
-              for(var i=0;i<res.dataList.length;i++){
+              for (var i = 0; i < res.dataList.length; i++) {
                 _this.images.push(res.dataList[i].imgUrl);
               }
-             
+
 
             } else if (res.success == "0") {
 
@@ -86,7 +94,7 @@
           .getlmjcZL(params)
           .then(res => {
             if (res.success == "1") {
-              _this.whys=res.whys[0];
+              _this.whys = res.whys[0];
 
             } else if (res.success == "0") {
 

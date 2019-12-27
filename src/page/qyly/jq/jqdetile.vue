@@ -12,7 +12,7 @@
         <div style="color: #ff3319;font-size: 15px;">
           {{data.star_level}}
         </div>
-        <div style="color: #565656;font-size: 16px;">
+        <div style="width: 50%; color: #565656;font-size: 16px;">
           {{data.address}}
         </div>
         <div style="color: #525252;font-size: 15px;">

@@ -13,7 +13,7 @@
        <child3 style=""></child3>
     </van-tab>
     <van-tab title="美丽晋城">
-       <child4 style=""></child4>
+       <!-- <child4 style=""></child4> -->
     </van-tab>
   </van-tabs>
 </div>

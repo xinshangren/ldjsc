@@ -22,7 +22,7 @@ export const echarsEnti = {
       title: {
         text: '总数',
         subtext: total + "",
-        x: '29%',
+        x: '23%',
         y: '39%',
         textStyle: {
           fontSize: 16,
@@ -44,7 +44,7 @@ export const echarsEnti = {
         itemHeight: 8,
         itemWidth: 8,
         orient: 'vertical',
-        left: '50%',  //图例距离左的距离
+        left: '45%',  //图例距离左的距离
         y: 'center',
         data: names,
         formatter: function (name) {
@@ -85,7 +85,7 @@ export const echarsEnti = {
           type: 'pie',
           radius: '55%',
           // center: ['40%', '50%'],
-          center: ["30%", "50%"],
+          center: ["28%", "50%"],
           radius: ["40%", "70%"],
           left:'100%',
           data: dataList,

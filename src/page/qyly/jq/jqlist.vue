@@ -1,14 +1,15 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;background: #ffffff;">
-    <div style="background:#ffffff;height:45px;display: flex;">
+    <div style="background:#ffffff;height:45px;display: flex; margin-top: 5px;">
+      <form action="/"  style="width:85%;margin-left:13px;">
       <van-search
         placeholder="请输入景点名称"
         @search="onSearch"
         v-model="seach_value"
-        style="width:85%;margin-left:13px;"
       />
+    </form>
       <img src="../../../assets/img/project_filtrate.png"
-        style="height: 27px;margin-top: 10px;margin-left:5px;"
+        style="height: 27px;margin-top: 5px;margin-left:5px;"
         @click="queryList"
       />
     </div>
@@ -51,7 +52,7 @@
       v-model="show"
       position="top"
       get-container="#count_id"
-      :style="{height: '20%' }"
+      :style="{height: '25%' }"
       @opened="openPop"
       style="overflow:hidden;background:rgb(243, 243, 243);"
     >

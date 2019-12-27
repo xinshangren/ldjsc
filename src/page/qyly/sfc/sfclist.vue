@@ -9,11 +9,11 @@
       style="background-color: #ffffff;margin-top: 5px;">
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div v-for="(item,index) in list" :key="index"
-          style="height:80px;padding-top:7px;padding-bottom:7px;border-bottom:1px #e4e4e4 solid ; position:relative;"
+        :style="backgroundDiv"
+          style="background-size: 100% 100%; height:80px;padding-top:7px;padding-bottom:7px;border-bottom:1px #e4e4e4 solid ; position:relative;"
           @click="goDetile(item)">
-
+          <div style="background: rgb(255, 255, 255,0.3);">
           <div style="color: #333333;font-size: 14px;margin-top: 8px;margin-left: 10px;">{{item.name}}</div>
-
           <div style="display:flex;margin-top: 10px;">
             <img src="../../../assets/img/mj.png" style="width: 14px;height: 14px;margin-left: 10px;">
             <div style="color: #666666;font-size: 12px;">{{item.area}}万平米</div>
@@ -24,6 +24,7 @@
             <img src="../../../assets/img/rs.png" style="width: 14px;height: 14px;margin-left: 10px;">
             <div style="color: #666666;font-size: 12px;">{{item.people}}</div>
           </div>
+        </div>
         </div>
       </div>
     </mescroll-vue>
@@ -45,6 +46,9 @@
     name: "sfclist",
     data() {
       return {
+        backgroundDiv:{
+        backgroundImage: 'url(' + require('../../../assets/img/sfcbg.png') + ')',
+      },
         active: 0,
         list: [],
         mescroll: null, // mescroll实例对象

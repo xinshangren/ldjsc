@@ -86,8 +86,8 @@
     },
     data() {
       return {
-        img1: require("../../assets/img/teb-jq1.png"),
-        img2: require("../../assets/img/teb-sfc2.png"),
+        img1: require("../../assets/img/teb-jq2.png"),
+        img2: require("../../assets/img/teb-sfc1.png"),
         show:false,
         state:1,
         active: 2,
@@ -111,12 +111,12 @@
         this.show=false;
         if(state==2){
           this.active=1;
-          this.img1=require("../../assets/img/teb-jq2.png");
-          this.img2=require("../../assets/img/teb-sfc1.png");
-        }else{
-          this.active=2;
           this.img1=require("../../assets/img/teb-jq1.png");
           this.img2=require("../../assets/img/teb-sfc2.png");
+        }else{
+          this.active=2;
+          this.img1=require("../../assets/img/teb-jq2.png");
+          this.img2=require("../../assets/img/teb-sfc1.png");
         }
       },
       getListData: function () {
