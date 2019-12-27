@@ -1,12 +1,14 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
     <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
-      <van-search
-        placeholder="请输入站点名称"
-        @search="onSearch"
-        v-model="seach_value"
-        style="width:77%;margin-left:13px;"
-      />
+      <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
+        <van-search
+          placeholder="请输入站点名称"
+          @search="onSearch"
+          v-model="seach_value"
+          
+        />
+      </form>
       <img src="../../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
       <img
         src="../../../../../assets/img/project_filtrate.png"
@@ -50,7 +52,7 @@
             <div style="position:relative;display:flex;margin-top:13px;">
               <div style="display:flex;">
                 <img style="height:20px;" src="../../../../../assets/img/icon_list_icon2.png" />
-                <div style="font-size:14px;margin-left:5px;">{{selectWrwName}}</div>
+                <div class="selectWrwName" style="font-size:14px;margin-left:5px;">{{selectWrwNameList[index]}}</div>
               </div>
               <div style="display:flex;position:absolute;right:0px;">
                 <img style="height:20px;" src="../../../../../assets/img/icon_list_icon3.png" />
@@ -72,7 +74,7 @@
       v-model="show"
       position="top"
       get-container="#count_id"
-      :style="{ height: '70%' }"
+      :style="{ height: '80%' }"
       @opened="openPop"
       style="overflow:hidden;background:rgb(243, 243, 243);"
     >
@@ -163,6 +165,7 @@ export default {
       alllevelist: [],
       stationList: [],
       selectWrwName: "AQI",
+      selectWrwNameList: [],
       curwuwlx: "6",
       curleve: "-1，1，2，3，4，5，6",
       curstation: "1，2，3，4，5，6，7",
@@ -174,6 +177,7 @@ export default {
       seach_value: "",
       show: false,
       mescroll: null, // mescroll实例对象
+      selectWrwNamePage: 0,
       mescrollDown: {
         callback: this.downCallback
       }, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
@@ -211,11 +215,12 @@ export default {
       //this.upCallback()
     },
     downCallback: function() {
-      this.mescroll.resetUpScroll();
       this.listValue = [];
+      this.mescroll.resetUpScroll();
     },
     //项目列表
     upCallback: function(page, mescroll) {
+      console.log(this.selectWrwName);
       var params = {
         dataType: this.curwuwlx,
         wrdj: this.curleve,
@@ -235,7 +240,11 @@ export default {
             }
             var data = res.dataList;
             if (data && data.length > 0) {
+              
               this.list = this.list.concat(data);
+              for (var jj = 0; jj < this.list.length; jj++) {
+                this.selectWrwNameList.push(this.selectWrwName);
+              }
               var valueList = [];
               for (var kk = 0; kk < data.length; kk++) {
                 var enti = data[kk];
@@ -346,7 +355,7 @@ export default {
 
             for (var Key in this.alllevelist) {
               var entityList = this.alllevelist[Key];
-              if (this.selectWrwName === Key) {
+              if (this.selectWrwName == Key) {
                 this.curleverlist = entityList;
               }
             }
@@ -421,6 +430,7 @@ export default {
           text = "PM25";
         }
         this.selectWrwName = text;
+        console.log(this.selectWrwName);
         context.listAirZlList = [];
         //初始化所有的空气质量
         $("#airZlDialogId li").each(function() {
@@ -440,7 +450,7 @@ export default {
 
         for (var Key in airList) {
           var entityList = airList[Key];
-          if (this.selectWrwName === Key) {
+          if (this.selectWrwName == Key) {
             this.curleverlist = entityList;
             var map = {
               name: "无",
@@ -462,7 +472,7 @@ export default {
             }
           }
         }
-        // console.log(context.listAirZlList);
+        console.log(this.selectWrwName);
       });
       //站点列表
       $("#zdlbDialogId li").click(function(e) {
@@ -474,7 +484,7 @@ export default {
           $(this).removeClass("dialogNoSelect");
         }
       });
-
+      
       if (this.openIndex == 0) {
         //站点列表
         $("#zdlbDialogId li").each(function(e) {
@@ -492,10 +502,11 @@ export default {
             $(this).addClass("dialogNoSelect");
           }
         });
+        
         for (var Key in airList) {
           var entityList = airList[Key];
 
-          if (this.selectWrwName === Key) {
+          if (this.selectWrwName == Key) {
             context.curleverlist = entityList;
             var map = {
               name: "无",
@@ -518,7 +529,7 @@ export default {
           }
         }
       }
-
+        
       this.openIndex++;
     },
     airIntent: function(item, event) {
@@ -552,7 +563,8 @@ export default {
     goDetile(item) {
       //console.log(item);
       this.$router.push({
-        path: "/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali",
+        path:
+          "/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali",
         name: "hbgj_air_station_list_deali",
         params: {
           entity: item
@@ -651,7 +663,7 @@ export default {
       console.log(context.curwuwlx);
       console.log(context.curleve);
       console.log(context.curstation);
-
+      console.log(this.selectWrwName);
       this.mescroll.resetUpScroll();
       this.listValue = [];
       this.list = [];

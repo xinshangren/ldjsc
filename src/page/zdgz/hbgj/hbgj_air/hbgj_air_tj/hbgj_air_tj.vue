@@ -70,7 +70,7 @@
     <div style="background:#ffffff;height:230px;width:100%;margin-top:8px;padding-top:7px;">
       <div style="display:flex;">
         <div class="echars_titile_div">市内空气质量排名</div>
-        <div id="echar2typeId" class="ui-row-flex ui-whitespace" style="width: 161px;">
+        <div id="echar2typeId" class="ui-row-flex ui-whitespace" style="width: 145px;">
           <div class="ui-col ui-col chars_div_time_select" style="text-align: center;width:43px;">年</div>
           <div
             class="ui-col ui-col chars_div_time_noselect"

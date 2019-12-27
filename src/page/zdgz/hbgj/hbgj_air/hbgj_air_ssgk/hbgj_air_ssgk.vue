@@ -22,14 +22,14 @@
       <div style="display:flex;margin-top:5px;">
         <div class="ssgk_title1_div">
           <div style="display: flex;position: absolute;right: 0;">
-            <img style="height:28px;" src="../../../../../assets/img/air_icon_temp.png" />
+            <img style="height:19px;" src="../../../../../assets/img/air_icon_temp.png" />
             <div id="nowwd_id" style="color:#333333;"></div>
           </div>
         </div>
         <div class="ssgk_title2_div">
           <div class="ssgk_title1_div">
             <div style="display: flex;position: absolute;left: 0;">
-              <img style="height:28px;" src="../../../../../assets/img/air_icon_wind.png" />
+              <img style="height:19px;" src="../../../../../assets/img/air_icon_wind.png" />
               <div id="fldj_id" style="color:#333333;"></div>
             </div>
           </div>

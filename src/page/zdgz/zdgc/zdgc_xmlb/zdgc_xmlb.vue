@@ -1,12 +1,13 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
     <div class="div_flex" style="background:#ffffff;height:49px;">
+      <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
       <van-search
         placeholder="请输入重点工程项目名称"
         @search="onSearch"
         v-model="seach_value"
-        style="width:77%;margin-left:13px;"
       />
+      </form>
       <img src="../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
       <img
         src="../../../../assets/img/project_filtrate.png"

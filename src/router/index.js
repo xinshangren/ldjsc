@@ -96,7 +96,8 @@ export default new Router({
     }, {
       path: '/zdgz/hbgj/hbgj',
       name: 'hbgj',
-      component: hbgjVue
+      component: hbgjVue,
+      meta:{keepAlive:true}
     }, {
       path: '/qyly/qyly',
       name: 'qyly',
