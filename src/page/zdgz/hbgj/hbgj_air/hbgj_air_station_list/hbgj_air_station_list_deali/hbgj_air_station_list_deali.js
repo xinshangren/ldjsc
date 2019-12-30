@@ -1,10 +1,10 @@
 export const hbgjAirJs = {
     //展示第一个轮播图
-    showLbEcharsOne: function (echarts, value, dataEn,alllevelist) {
+    showLbEcharsOne: function (echarts, value, dataEn,alllevelist,itemEnti) {
         console.log(dataEn);
         const myCharts = echarts.init(value, "macarons");
         var data = {
-            value: parseFloat(dataEn.dataAqi)
+            value: parseFloat(itemEnti.dataAqi)
         }
         $("#wdDivId").html(dataEn.dataTemperature);
         $("#fsDivId").html(dataEn.dataWindLevel);
@@ -17,7 +17,7 @@ export const hbgjAirJs = {
             var entTl = tuliList[j];
             var levelValueStart = parseFloat(entTl.levelValueStart); //范围开始
             var levelValueEnd = parseFloat(entTl.levelValueEnd); //范围结束
-            var valuefloat = parseInt(dataEn.dataAqi);
+            var valuefloat = parseInt(itemEnti.dataAqi);
             levelName = entTl.levelName; //等级名称
             if (valuefloat >= levelValueStart && valuefloat <= levelValueEnd) {
                 if (levelName == '优') {

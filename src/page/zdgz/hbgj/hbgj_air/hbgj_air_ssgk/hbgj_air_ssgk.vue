@@ -101,7 +101,7 @@
       </van-swipe-item>
     </van-swipe>
     <div style="background:#ffffff;height:220px;width:100%;margin-top:8px;padding-top:7px;">
-      <div class="echars_titile_div">城市站点列表</div>
+      <div class="echars_titile_div">污染严重站点</div>
       <div
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
@@ -119,26 +119,15 @@
       </div>
       <div style="margin-left:10px;margin-right:10px;">
         <div
-          style="font-size: 14px;text-align: center;"
+           @click="goDetile(item)"
+          style="font-size: 14px;text-align: center;border-bottom:1px solid #cccccc;"
           v-for="(item,index) in bottomList"
           :key="index"
           :id="(index)"
         >
+          
           <div
             class="ui-row-flex ui-whitespace"
-            v-if="index%2==1"
-            style="color:#333333;background:#ffffff;padding-top: 6px;padding-bottom: 6px;"
-          >
-            <div class="ui-col ui-col">{{item.stationName}}</div>
-            <div class="ui-col ui-col">{{item.stationType}}</div>
-            <div class="ui-col ui-col">{{item.dataAqi}}</div>
-            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='6'">严重</div>
-            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='5'">重度</div>
-            <div class="ui-col ui-col" v-if="item.dataAqiLevel=='4'">中度</div>
-          </div>
-          <div
-            class="ui-row-flex ui-whitespace"
-            v-if="index%2!=1"
             style="color:#333333;background:#e2f3ff;padding-top: 6px;padding-bottom: 6px;"
           >
             <div class="ui-col ui-col">{{item.stationName}}</div>
@@ -389,6 +378,17 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    goDetile(item) {
+      //console.log(item);
+      this.$router.push({
+        path:
+          "/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali",
+        name: "hbgj_air_station_list_deali",
+        params: {
+          entity: item
+        }
+      });
     }
   }
 };

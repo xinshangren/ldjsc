@@ -3,9 +3,9 @@
     <div style="position:relative;height:320px;">
       <img class="index_bg" src="../../../../../../assets/img/air_detail_bg.png" />
       <div
-        style="font-size: 14px;color: rgb(51, 51, 51);text-align: center;margin-top: 10px;"
+        style="font-size: 17px;color: rgb(51, 51, 51);text-align: center;margin-top: 10px;"
       >{{itemEnti.stationName}}</div>
-      <div style="font-size:12px;color:#999999;text-align: center;">更新时间:{{time}}</div>
+      <div style="font-size:14px;color:#999999;text-align: center;">更新时间:{{time}}</div>
       <div style="position: absolute;top: 169px;font-size: 11px;color: #666666;left: 42%;">空气质量指数</div>
       <div
         style="position: absolute;top: 190px;font-size: 11px;color: rgb(102, 102, 102);width: 100%;display: flex;"
@@ -17,7 +17,7 @@
         ></div>
       </div>
       <div
-        style="display: flex;height: 60px;position: absolute;width: 90%;top: 235px;background: #ffffff;margin-left: 17px;margin-right: 17px;border-radius: 8px;box-shadow: 0px 1px 6px 2px #cccccc;"
+        style="display: flex;height: 60px;position: absolute;width: 90%;top: 245px;background: #ffffff;margin-left: 17px;margin-right: 17px;border-radius: 8px;box-shadow: 0px 1px 6px 2px #cccccc;"
       >
         <div style="width:50%;display:flex;">
           <img
@@ -44,7 +44,7 @@
       <div ref="myCharts" style="width:100%;height:200px;"></div>
     </div>
 
-    <div style="background: rgba(255, 255, 255, 0.7);width: 100%;">
+    <div style="background: rgba(255, 255, 255, 0.7);width: 100%;margin-top:80px;">
       <ul class="ui-row">
         <li
           class="ui-col ui-col-33"
@@ -59,37 +59,37 @@
           <div class="yuanquan" v-if="item.colorvalue=='4'" style="background:#e35e5f;"></div>
           <div class="yuanquan" v-if="item.colorvalue=='5'" style="background:#b83b5d;"></div>
           <div class="yuanquan" v-if="item.colorvalue=='6'" style="background:#57155d;"></div>
-          <div style="color:#666666;font-size:13px;">{{item.name}}</div>
+          <div style="color:#666666;font-size:17px;">{{item.name}}</div>
 
           <div
             v-if="item.colorvalue=='1'"
-            style="width: 100%;text-align:center;color:#75d492;font-size:17px;"
+            style="width: 100%;text-align:center;color:#75d492;font-size:20px;"
           >{{item.value}}</div>
           <div
             v-if="item.colorvalue=='2'"
-            style="width: 100%;text-align:center;color:#c5d686;font-size:17px;"
+            style="width: 100%;text-align:center;color:#c5d686;font-size:20px;"
           >{{item.value}}</div>
           <div
             v-if="item.colorvalue=='3'"
-            style="width: 100%;text-align:center;color:#f0a15c;font-size:17px;"
+            style="width: 100%;text-align:center;color:#f0a15c;font-size:20px;"
           >{{item.value}}</div>
           <div
             v-if="item.colorvalue=='4'"
-            style="width: 100%;text-align:center;color:#e35e5f;font-size:17px;"
+            style="width: 100%;text-align:center;color:#e35e5f;font-size:20px;"
           >{{item.value}}</div>
           <div
             v-if="item.colorvalue=='5'"
-            style="width: 100%;text-align:center;color:#b83b5d;font-size:17px;"
+            style="width: 100%;text-align:center;color:#b83b5d;font-size:20px;"
           >{{item.value}}</div>
           <div
             v-if="item.colorvalue=='6'"
-            style="width: 100%;text-align:center;color:#57155d;font-size:17px;"
+            style="width: 100%;text-align:center;color:#57155d;font-size:20px;"
           >{{item.value}}</div>
         </li>
       </ul>
     </div>
 
-    <div style="background:#ffffff;height:240px;width:100%;margin-top:8px;padding-top:7px;">
+    <div style="background:#ffffff;height:240px;width:100%;margin-top:8px;padding-top:7px;display:none;">
       <div class="echars_titile_div">空气质量变化趋势</div>
       <div
         class="van-hairline--bottom"
@@ -227,7 +227,8 @@ export default {
               echarts,
               this.$refs.myCharts,
               res.data,
-              this.alllevelist
+              this.alllevelist,
+                this.itemEnti
             );
             console.log(JSON.stringify(this.listPmList));
             // this.showTopData(res);
@@ -238,8 +239,8 @@ export default {
         });
     },
     //显示空气质量
-    showYbpFun: function(echarts, value, data, list) {
-      hbgjAirJs.showLbEcharsOne(echarts, value, data, list);
+    showYbpFun: function(echarts, value, data, list, itemEnti) {
+      hbgjAirJs.showLbEcharsOne(echarts, value, data, list,itemEnti);
     },
     //空气质量变化趋势
     trendsInAirQuality: function() {

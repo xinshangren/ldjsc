@@ -185,6 +185,18 @@ export const httpMethod = {
     getHomeData: function (params) {
         return get("hgjjAppInsideController.action?getHomeData", params);
     },
+    //获取全市生产总值数据
+    getCityGDP: function (params) {
+        return get("hgjjAppInsideController.action?getCityGDP", params);
+    },
+    //获取固定资产投资
+    getFixedAssetsInvestment: function (params) {
+        return get("hgjjAppInsideController.action?getFixedAssetsInvestment", params);
+    },
+    //获取一般公共预算收入
+    getCommonalityIncome: function (params) {
+        return get("hgjjAppInsideController.action?getCommonalityIncome", params);
+    },
     
 
     

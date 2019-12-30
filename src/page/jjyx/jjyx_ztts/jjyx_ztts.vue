@@ -1,11 +1,13 @@
 <template>
   <div style="margin-top:54px;">
     <van-tabs
+      @touchmove.prevent
+      @click="smallTab_select"
       v-model="active"
       title-active-color="#2599e6"
       :offset-top="55"
       title-inactive-color="#333333"
-      sticky
+      :sticky="true"
       line-width="75px"
     >
       <van-tab title="完成概况"></van-tab>
@@ -42,8 +44,17 @@
         </div>
       </div>
     </div>
-    <div style="margin-top:46px;z-index: -1;">
-      <child1 @changeTime="changeTime" ref="child1" :getChild="nowYear" :getChildMax="maxDate"></child1>
+    <div style="margin-top:46px;z-index: -1;overflow: auto;">
+      <div
+        :is="currentView"
+        @changeTime="changeTime"
+        ref="child1"
+        :getChild="nowYear"
+        :getChildMax="maxDate"
+      ></div>
+      <!-- <child1 v-show="active=='0'" @changeTime="changeTime" ref="child1" :getChild="nowYear" :getChildMax="maxDate"></child1>
+
+      <child2 v-show="active=='1'" @changeTime="changeTime" ref="child2" :getChild="nowYear" :getChildMax="maxDate"></child2>-->
     </div>
 
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
@@ -103,6 +114,9 @@ import Vue from "vue";
 import { Tab, Tabs } from "vant";
 Vue.use(Tab).use(Tabs);
 import child1 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_wcgk/jjyx_ztts_wcgk.vue";
+import child2 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_qssczz/jjyx_ztts_qssczz.vue";
+import child3 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_gdzctz/jjyx_ztts_gdzctz.vue";
+import child4 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_ybggyssr/jjyx_ztts_ybggyssr.vue";
 export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
@@ -110,6 +124,7 @@ export default {
   name: "jjyx_ztts",
   data() {
     return {
+      currentView: "child1",
       seach_value: "",
       active: 0,
       show: false,
@@ -121,10 +136,34 @@ export default {
   },
   mounted() {},
   methods: {
-    changeTime: function(year,month) {
-      console.log(year+"=="+month);
-      this.maxDate = new Date(parseInt(year),parseInt(month)-1,1);
-      this.nowYear=year+"-"+month;
+    //空气子选项卡选择
+    smallTab_select: function(name, title) {
+      // console.log(name,title);
+      switch (name) {
+        case 0:
+          this.active = 0;
+          this.currentView = "child1";
+          break;
+        case 1:
+          this.active = 1;
+          this.currentView = "child2";
+          break;
+        case 2:
+          this.active = 2;
+          this.currentView = "child3";
+          break;
+        case 3:
+          this.active = 3;
+          this.currentView = "child4";
+          break;
+        default:
+          break;
+      }
+    },
+    changeTime: function(year, month) {
+      console.log(year + "==" + month);
+      this.maxDate = new Date(parseInt(year), parseInt(month) - 1, 1);
+      this.nowYear = year + "-" + month;
     },
     upYearClick: function() {
       var year = this.nowYear.split("-")[0];
@@ -197,7 +236,10 @@ export default {
     }
   },
   components: {
-    child1
+    child1,
+    child2,
+    child3,
+    child4
   }
 };
 </script>

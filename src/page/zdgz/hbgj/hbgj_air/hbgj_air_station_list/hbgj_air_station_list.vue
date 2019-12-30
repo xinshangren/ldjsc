@@ -199,7 +199,7 @@ export default {
       wrwNameList: [],
       alllevelist: [],
       stationList: [],
-      selectWrwNames: "",
+      selectWrwNames: "AQI",
       selectWrwNames1: "AQI",
       selectWrwNameList: [],
       curwuwlx: "6",
