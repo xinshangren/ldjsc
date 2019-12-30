@@ -2,12 +2,7 @@
   <div style="margin-top:0px;overflow:hidden;">
     <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
-        <van-search
-          placeholder="请输入站点名称"
-          @search="onSearch"
-          v-model="seach_value"
-          
-        />
+        <van-search placeholder="请输入站点名称" @search="onSearch" v-model="seach_value" />
       </form>
       <img src="../../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
       <img
@@ -52,7 +47,47 @@
             <div style="position:relative;display:flex;margin-top:13px;">
               <div style="display:flex;">
                 <img style="height:20px;" src="../../../../../assets/img/icon_list_icon2.png" />
-                <div class="selectWrwName" style="font-size:14px;margin-left:5px;">{{selectWrwNameList[index]}}</div>
+
+                <div
+                  v-if="curwuwlx==0"
+                  class="selectWrwName"
+                  style="font-size:14px;margin-left:5px;"
+                >PM10</div>
+                <div
+                  v-if="curwuwlx==1"
+                  class="selectWrwName"
+                  style="font-size:14px;margin-left:5px;"
+                >PM2.5</div>
+                <div
+                  v-if="curwuwlx==2"
+                  class="selectWrwName"
+                  style="font-size:14px;margin-left:5px;"
+                >SO2</div>
+                <div
+                  v-if="curwuwlx==3"
+                  class="selectWrwName"
+                  style="font-size:14px;margin-left:5px;"
+                >NO2</div>
+                <div
+                  v-if="curwuwlx==4"
+                  class="selectWrwName"
+                  style="font-size:14px;margin-left:5px;"
+                >CO</div>
+                <div
+                  v-if="curwuwlx==5"
+                  class="selectWrwName"
+                  style="font-size:14px;margin-left:5px;"
+                >O3</div>
+                <div
+                  v-if="curwuwlx==6"
+                  class="selectWrwName"
+                  style="font-size:14px;margin-left:5px;"
+                >AQI</div>
+                <div
+                  v-if="curwuwlx==7"
+                  class="selectWrwName"
+                  style="font-size:14px;margin-left:5px;"
+                >TVOC</div>
               </div>
               <div style="display:flex;position:absolute;right:0px;">
                 <img style="height:20px;" src="../../../../../assets/img/icon_list_icon3.png" />
@@ -164,7 +199,8 @@ export default {
       wrwNameList: [],
       alllevelist: [],
       stationList: [],
-      selectWrwName: "AQI",
+      selectWrwNames: "",
+      selectWrwNames1: "AQI",
       selectWrwNameList: [],
       curwuwlx: "6",
       curleve: "-1，1，2，3，4，5，6",
@@ -179,10 +215,12 @@ export default {
       mescroll: null, // mescroll实例对象
       selectWrwNamePage: 0,
       mescrollDown: {
-        callback: this.downCallback
+        callback: this.downCallback,
+        auto: false
       }, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       mescrollUp: {
         // 上拉加载的配置.
+        auto: false,
         callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }
         //以下是一些常用的配置,当然不写也可以的.
         page: {
@@ -220,7 +258,11 @@ export default {
     },
     //项目列表
     upCallback: function(page, mescroll) {
-      console.log(this.selectWrwName);
+      if (this.selectWrwNamePage == 0) {
+        this.selectWrwNames1 = "AQI";
+      }
+      this.selectWrwNamePage++;
+      console.log(this.selectWrwNames1);
       var params = {
         dataType: this.curwuwlx,
         wrdj: this.curleve,
@@ -240,11 +282,7 @@ export default {
             }
             var data = res.dataList;
             if (data && data.length > 0) {
-              
               this.list = this.list.concat(data);
-              for (var jj = 0; jj < this.list.length; jj++) {
-                this.selectWrwNameList.push(this.selectWrwName);
-              }
               var valueList = [];
               for (var kk = 0; kk < data.length; kk++) {
                 var enti = data[kk];
@@ -354,12 +392,41 @@ export default {
             this.alllevelist = res.data; //总的图例
 
             for (var Key in this.alllevelist) {
+              var name = "";
+              switch (parseInt(this.curwuwlx)) {
+                case 0:
+                  name="PM10"
+                  break;
+                case 1:
+                    name="PM25"
+                  break;
+                case 2:
+                    name="SO2"
+                  break;
+                case 3:
+                    name="NO2"
+                  break;
+                case 4:
+                    name="CO"
+                  break;
+                case 5:
+                    name="O3"
+                  break;
+                case 6:
+                    name="AQI"
+                  break;
+                case 7:
+                    name="TVOC"
+                  break;
+                default:
+                  break;
+              }
               var entityList = this.alllevelist[Key];
-              if (this.selectWrwName == Key) {
+              if (name == Key) {
                 this.curleverlist = entityList;
               }
             }
-
+            this.downCallback();
             var indexdata = res.data; //总数据
           }
         })
@@ -429,8 +496,9 @@ export default {
         if (text == "PM2.5") {
           text = "PM25";
         }
-        this.selectWrwName = text;
-        console.log(this.selectWrwName);
+        this.selectWrwNames = text;
+        this.selectWrwNames1 = text;
+        console.log(this.selectWrwNames1);
         context.listAirZlList = [];
         //初始化所有的空气质量
         $("#airZlDialogId li").each(function() {
@@ -450,7 +518,7 @@ export default {
 
         for (var Key in airList) {
           var entityList = airList[Key];
-          if (this.selectWrwName == Key) {
+          if (this.selectWrwNames == Key) {
             this.curleverlist = entityList;
             var map = {
               name: "无",
@@ -472,7 +540,7 @@ export default {
             }
           }
         }
-        console.log(this.selectWrwName);
+        console.log(this.selectWrwNames);
       });
       //站点列表
       $("#zdlbDialogId li").click(function(e) {
@@ -484,7 +552,7 @@ export default {
           $(this).removeClass("dialogNoSelect");
         }
       });
-      
+
       if (this.openIndex == 0) {
         //站点列表
         $("#zdlbDialogId li").each(function(e) {
@@ -502,11 +570,11 @@ export default {
             $(this).addClass("dialogNoSelect");
           }
         });
-        
+
         for (var Key in airList) {
           var entityList = airList[Key];
 
-          if (this.selectWrwName == Key) {
+          if (this.selectWrwNames == Key) {
             context.curleverlist = entityList;
             var map = {
               name: "无",
@@ -529,7 +597,7 @@ export default {
           }
         }
       }
-        
+
       this.openIndex++;
     },
     airIntent: function(item, event) {
@@ -663,7 +731,7 @@ export default {
       console.log(context.curwuwlx);
       console.log(context.curleve);
       console.log(context.curstation);
-      console.log(this.selectWrwName);
+      console.log(this.selectWrwNames1);
       this.mescroll.resetUpScroll();
       this.listValue = [];
       this.list = [];
