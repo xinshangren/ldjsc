@@ -1,49 +1,51 @@
 <template>
   <div style="margin-top:54px;">
-    <van-tabs
-      @touchmove.prevent
-      @click="smallTab_select"
-      v-model="active"
-      title-active-color="#2599e6"
-      :offset-top="55"
-      title-inactive-color="#333333"
-      :sticky="true"
-      line-width="75px"
-    >
-      <van-tab title="完成概况"></van-tab>
-      <van-tab title="GDP"></van-tab>
-      <van-tab title="固定资产"></van-tab>
-      <van-tab title="一般公共预算收入"></van-tab>
-      <van-tab title="社会消费品零售总额"></van-tab>
-      <van-tab title="人均可支配收入"></van-tab>
-      <van-tab title="工业增加值"></van-tab>
-      <van-tab title="海关进出口总额"></van-tab>
-      <van-tab title="区县情况"></van-tab>
-    </van-tabs>
-    <div
-      style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 1;"
-    >
-      <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
-        <div class="ui-col ui-col" @click="upYearClick">
-          <div class="div_next_style">前一月</div>
-        </div>
-        <div class="ui-col ui-col" @click="showDatePicker()" style="width:12%;">
-          <div
-            class="div_flex"
-            style="background: rgb(241, 241, 241);border-radius: 6px;display: flex;"
-          >
-            <img
-              src="../../../assets/img/project_calendar.png"
-              style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
-            />
-            <div class="div_next_style">{{nowYear}}</div>
+    <van-sticky :offset-top="55">
+      <van-tabs
+        @touchmove.prevent
+        @click="smallTab_select"
+        v-model="active"
+        title-active-color="#2599e6"
+        :offset-top="55"
+        title-inactive-color="#333333"
+        :sticky="true"
+        line-width="75px"
+      >
+        <van-tab title="完成概况"></van-tab>
+        <van-tab title="GDP"></van-tab>
+        <van-tab title="固定资产"></van-tab>
+        <van-tab title="一般公共预算收入"></van-tab>
+        <van-tab title="社会消费品零售总额"></van-tab>
+        <van-tab title="人均可支配收入"></van-tab>
+        <van-tab title="工业增加值"></van-tab>
+        <van-tab title="海关进出口总额"></van-tab>
+        <van-tab title="区县情况"></van-tab>
+      </van-tabs>
+      <div
+        style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 1;"
+      >
+        <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
+          <div class="ui-col ui-col" @click="upYearClick">
+            <div class="div_next_style">前一月</div>
+          </div>
+          <div class="ui-col ui-col" @click="showDatePicker()" style="width:12%;">
+            <div
+              class="div_flex"
+              style="background: rgb(241, 241, 241);border-radius: 6px;display: flex;"
+            >
+              <img
+                src="../../../assets/img/project_calendar.png"
+                style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
+              />
+              <div class="div_next_style">{{nowYear}}</div>
+            </div>
+          </div>
+          <div class="ui-col ui-col" @click="downYearClick">
+            <div class="div_next_style" style="text-align:right;">后一月</div>
           </div>
         </div>
-        <div class="ui-col ui-col" @click="downYearClick">
-          <div class="div_next_style" style="text-align:right;">后一月</div>
-        </div>
       </div>
-    </div>
+    </van-sticky>
     <div style="margin-top:46px;z-index: -1;overflow: auto;">
       <div
         :is="currentView"
@@ -117,6 +119,11 @@ import child1 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_wcgk/jjyx_ztts_wcgk.vue";
 import child2 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_qssczz/jjyx_ztts_qssczz.vue";
 import child3 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_gdzctz/jjyx_ztts_gdzctz.vue";
 import child4 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_ybggyssr/jjyx_ztts_ybggyssr.vue";
+import child5 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_shxfplszz/jjyx_ztts_shxfplszz.vue";
+import child6 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_jmrjkzpsr/jjyx_ztts_jmrjkzpsr.vue";
+import child7 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_gmysgyzjz/jjyx_ztts_gmysgyzjz.vue";
+import child8 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_hgjckze/jjyx_ztts_hgjckze.vue";
+import child9 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_qxqktj/jjyx_ztts_qxqktj.vue";
 export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
@@ -155,6 +162,26 @@ export default {
         case 3:
           this.active = 3;
           this.currentView = "child4";
+          break;
+        case 4:
+          this.active = 4;
+          this.currentView = "child5";
+          break;
+        case 5:
+          this.active = 5;
+          this.currentView = "child6";
+          break;
+        case 6:
+          this.active = 6;
+          this.currentView = "child7";
+          break;
+        case 7:
+          this.active = 7;
+          this.currentView = "child8";
+          break;
+            case 8:
+          this.active = 8;
+          this.currentView = "child9";
           break;
         default:
           break;
@@ -239,7 +266,12 @@ export default {
     child1,
     child2,
     child3,
-    child4
+    child4,
+    child5,
+    child6,
+    child7,
+    child8,
+    child9
   }
 };
 </script>
