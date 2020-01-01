@@ -1,26 +1,38 @@
 <template>
   <div style="margin-top:54px;">
+    <div style="zz-index: 99;position: absolute;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;">
+     <div style="background: rgb(247, 247, 247);height: 40px;width: 44px;margin-left: 4px;">
+      <img
+        style="height: 24px;margin-top: 9px;"
+        src="../../../assets/img/eco_tab_iconlist.png"
+      />
+      </div>
+    </div>
     <van-sticky :offset-top="55">
-      <van-tabs
-        @touchmove.prevent
-        @click="smallTab_select"
-        v-model="active"
-        title-active-color="#2599e6"
-        :offset-top="55"
-        title-inactive-color="#333333"
-        :sticky="true"
-        line-width="75px"
-      >
-        <van-tab title="完成概况"></van-tab>
-        <van-tab title="GDP"></van-tab>
-        <van-tab title="固定资产"></van-tab>
-        <van-tab title="一般公共预算收入"></van-tab>
-        <van-tab title="社会消费品零售总额"></van-tab>
-        <van-tab title="人均可支配收入"></van-tab>
-        <van-tab title="工业增加值"></van-tab>
-        <van-tab title="海关进出口总额"></van-tab>
-        <van-tab title="区县情况"></van-tab>
-      </van-tabs>
+      <div style="display:flex;">
+        <van-tabs
+          @touchmove.prevent
+          @click="smallTab_select"
+          v-model="active"
+          title-active-color="#2599e6"
+          :offset-top="55"
+          title-inactive-color="#333333"
+          :sticky="true"
+          line-width="75px"
+          style="width:86%;"
+        >
+          <van-tab title="完成概况"></van-tab>
+          <van-tab title="GDP"></van-tab>
+          <van-tab title="固定资产"></van-tab>
+          <van-tab title="一般公共预算收入"></van-tab>
+          <van-tab title="社会消费品零售总额"></van-tab>
+          <van-tab title="人均可支配收入"></van-tab>
+          <van-tab title="工业增加值"></van-tab>
+          <van-tab title="海关进出口总额"></van-tab>
+          <van-tab title="区县情况"></van-tab>
+        </van-tabs>
+      </div>
+
       <div
         style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 1;"
       >
@@ -179,7 +191,7 @@ export default {
           this.active = 7;
           this.currentView = "child8";
           break;
-            case 8:
+        case 8:
           this.active = 8;
           this.currentView = "child9";
           break;
