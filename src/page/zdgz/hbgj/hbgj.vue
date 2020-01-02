@@ -68,7 +68,7 @@
       <child1 v-if="Bigflag==1&&airactive==0"></child1>
       <child2 v-if="Bigflag==1&&airactive==1"></child2>
       <child3 v-if="Bigflag==1&&airactive==2"></child3>
-      <child4 v-if="Bigflag==2&&airactive==0"></child4>
+      <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
     </div>
   </div>
 </template>

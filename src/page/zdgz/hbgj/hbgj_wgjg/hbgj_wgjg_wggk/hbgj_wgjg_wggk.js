@@ -1,402 +1,20 @@
 export const hbgjAirJs = {
-    //显示顶部数据
-    showTopTip: function (res, list) {
-        var dataPollutant = res.data.dataPollutant;//首要污染物
-        var dataTemperature = res.data.dataTemperature;//度数
-        $("#nowwd_id").html(dataTemperature);
-        $("#fldj_id").html(res.data.dataWindDirection + "\t\t\t\t" + res.data.dataWindLevel);
-       
-        var dataAqi = res.data.dataAqi;
-        $("#indexaqi_value_id").html(dataAqi);
-        var levelCodeIndex = "";
-        for (var i = 0; i < list.length; i++) {
-            var entity = list[i];
-            var levelValueStart = entity.levelValueStart; //范围开始
-            var levelValueEnd = entity.levelValueEnd; //范围结束
-            var levelName = entity.levelName; //污染等级文字
-            var levelCode = entity.levelCode; //污染等级code
-            if (parseInt(dataAqi) > parseInt(levelValueStart) && parseInt(dataAqi) < parseInt(levelValueEnd)) {
-                levelCodeIndex = levelCode;
-                $("#indexaqi_id").html(levelName);
-            }
-        }
-        var colorClass = "";
-        switch (parseInt(levelCodeIndex)) {
-            case 1:
-                colorClass = "you";
-                break;
-            case 2:
-                colorClass = "liang";
-                break;
-            case 3:
-                colorClass = "qingdu";
-                break;
-            case 4:
-                colorClass = "zhongdu1";
-                break;
-            case 5:
-                colorClass = "zhongdu";
-                break;
-            case 6:
-                colorClass = "yanzhong";
-                break;
-            default:
-                break;
-        }
-        $("#indexaqi_id").addClass(colorClass);
-    },
     //展示第一个轮播图
-    showLbEcharsOne: function (echarts, value, result) {
+    showLbEcharsOne: function (echarts, value, lnum, pnum, dataList, counlist) {
         const myCharts = echarts.init(value, "macarons");
-
-        var nameList = [];
-        var rankList = ['11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
-        var valueList = [];
-        for (var i = 0; i < result.length; i++) {
-            var entity = result[i];
-            var name = entity.cityName; //城市名称
-            var cityRank = entity.cityRank; //城市名称
-            var dataCompositeIndex = entity.dataCompositeIndex; //值
-            nameList.push(name);
-            if (name === '晋城市') {
-                // showEcharsView1_ssgk1(result, rankList[i],value1,echarts);
-            }
-            valueList.push(parseFloat(dataCompositeIndex).toFixed(1));
-        }
-
-        var maxValue = Math.max.apply(null, valueList);
-        maxValue = maxValue + 10;
-        var nyValueList = [];
-        var wYValueList = [];
-        for (var i = 0; i < result.length; i++) {
-            var name = entity.cityName; //城市名称
-            var dataCompositeIndex = entity.dataCompositeIndex; //值
-            nyValueList.push(maxValue - 0.1);
-            wYValueList.push(maxValue);
-        }
-        var myColor = ['#57155d', '#57155d', '#b83b5d', '#b83b5d', '#e35e5f',
-            '#e35e5f', '#f0a15c', '#f0a15c', '#c5d686', '#c5d686', '#c5d686'
-        ];
-        let option = {
-            backgroundColor: '',
-            grid: {
-                left: '12%',
-                top: '0%',
-                right: '12%',
-                bottom: '-10%',
-                containLabel: true
-            },
-            xAxis: [{
-                show: false,
-            }],
-            color: myColor,
-            yAxis: [{
-                axisTick: 'none',
-                axisLine: 'none',
-                offset: '17',
-                axisLabel: {
-                    textStyle: {
-                        color: '#000000',
-                        fontSize: '10',
-                    }
-                },
-                data: nameList
-            }, {
-                axisTick: 'none',
-                axisLine: 'none',
-                axisLabel: {
-                    textStyle: {
-                        color: '#000000',
-                        fontSize: '10',
-                    }
-                },
-                data: rankList
-            }, {
-                name: '',
-                nameGap: '10',
-                nameTextStyle: {
-                    color: '#000000',
-                    fontSize: '10',
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: 'rgba(0,0,0,0)'
-                    }
-                },
-                data: [],
-            }],
-            series: [{
-                name: '条',
-                type: 'bar',
-                yAxisIndex: 0,
-                data: valueList,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'right',
-                        textStyle: {
-                            color: '#000000',
-                            fontSize: '10',
-                        }
-                    }
-                },
-                barWidth: 5,
-                itemStyle: {
-                    normal: {
-                        color: function (params) {
-                            var num = myColor.length;
-                            return myColor[params.dataIndex]
-                        },
-                    }
-                },
-                z: 2
-            }, {
-                name: '白框',
-                type: 'bar',
-                yAxisIndex: 1,
-                barGap: '-100%',
-                data: nyValueList,
-                barWidth: 7,
-                itemStyle: {
-                    normal: {
-                        color: '#ffffff',
-                        barBorderRadius: 5,
-                    }
-                },
-                z: 1
-            }, {
-                name: '外框',
-                type: 'bar',
-                yAxisIndex: 2,
-                barGap: '-100%',
-                data: wYValueList,
-                barWidth: 8,
-                itemStyle: {
-                    normal: {
-                        color: function (params) {
-                            var num = myColor.length;
-                            return myColor[params.dataIndex]
-                        },
-                        barBorderRadius: 5,
-                    }
-                },
-                z: 0
-            },
-            {
-                name: '外圆',
-                type: 'scatter',
-                hoverAnimation: false,
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                yAxisIndex: 2,
-                symbolSize: 8,
-                itemStyle: {
-                    normal: {
-                        color: function (params) {
-                            var num = myColor.length;
-                            return myColor[params.dataIndex]
-                        },
-                        opacity: 1,
-                    }
-                },
-                z: 2
-            }
-            ]
-        };
-        myCharts.setOption(option);
-    },
-    showEcharsView1_ssgk1: function (echarts, value, result) {
-        var rankStr = "";
-        var rankList1 = ['11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
-        for (var i = 0; i < result.length; i++) {
-            var entity = result[i];
-            var name = entity.cityName; //城市名称
-            var cityRank = entity.cityRank; //城市名称
-            var dataCompositeIndex = entity.dataCompositeIndex; //值
-            // nameList.push(name);
-            if (name === '晋城市') {
-                // showEcharsView1_ssgk1(result, rankList[i],value1,echarts);
-                rankStr = rankList1[i];
-            }
-        }
-        const myCharts = echarts.init(value, "macarons");
-        var nameList = [];
-        var rankList = [];
-        var valueList = [];
-        for (var i = 0; i < result.length; i++) {
-            var entity = result[i];
-            var name = entity.cityName; //城市名称
-            if (name == '晋城市') {
-                var cityRank = entity.cityRank; //城市名称
-                var dataCompositeIndex = entity.dataCompositeIndex; //值
-                nameList.push(name);
-                rankList.push(cityRank);
-                valueList.push(parseFloat(dataCompositeIndex).toFixed(1));
-            }
-
-        }
-
-        var maxValue = Math.max.apply(null, valueList);
-        maxValue = maxValue + 10;
-        var nyValueList = [];
-        var wYValueList = [];
-        for (var i = 0; i < result.length; i++) {
-            var name = result[i].cityName; //城市名称
-            if (name === '晋城市') {
-                nyValueList.push(maxValue - 0.1 + 14);
-                wYValueList.push(maxValue + 14);
-            }
-        }
-        var myColor = ['#1A76D3'];
-        console.log(valueList);
-        var option = {
-            backgroundColor: '',
-            grid: {
-                left: '12%',
-                top: '70%',
-                right: '8%',
-                bottom: '5%',
-                containLabel: true
-            },
-            xAxis: [{
-                show: false,
-            }],
-            color: myColor,
-            yAxis: [{
-                axisTick: 'none',
-                axisLine: 'none',
-                offset: '17',
-                axisLabel: {
-                    textStyle: {
-                        color: '#1A76D3',
-                        fontSize: '12',
-                    }
-                },
-                data: nameList
-            }, {
-                axisTick: 'none',
-                axisLine: 'none',
-                axisLabel: {
-                    textStyle: {
-                        color: '#1A76D3',
-                        fontSize: '12',
-                    }
-                },
-                data: [rankStr]
-            }, {
-                name: '',
-                nameGap: '50',
-                nameTextStyle: {
-                    color: '#000000',
-                    fontSize: '12',
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: 'rgba(0,0,0,0)'
-                    }
-                },
-                data: [rankStr],
-            }],
-            series: [{
-                name: '条',
-                type: 'bar',
-                yAxisIndex: 0,
-                data: valueList,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'right',
-                        textStyle: {
-                            color: '#1A76D3',
-                            fontSize: '12',
-                        }
-                    }
-                },
-                barWidth: 6,
-                itemStyle: {
-                    normal: {
-                        color: function (params) {
-                            var num = myColor.length;
-                            return myColor[params.dataIndex]
-                        },
-                    }
-                },
-                z: 2
-            }, {
-                name: '白框',
-                type: 'bar',
-                yAxisIndex: 1,
-                barGap: '-100%',
-                data: nyValueList,
-                barWidth: 8,
-                itemStyle: {
-                    normal: {
-                        color: '#ffffff',
-                        barBorderRadius: 5,
-                    }
-                },
-                z: 1
-            }, {
-                name: '外框',
-                type: 'bar',
-                yAxisIndex: 2,
-                barGap: '-100%',
-                data: wYValueList,
-                barWidth: 9,
-                itemStyle: {
-                    normal: {
-                        color: function (params) {
-                            var num = myColor.length;
-                            return myColor[params.dataIndex]
-                        },
-                        barBorderRadius: 5,
-                    }
-                },
-                z: 0
-            },
-            {
-                name: '外圆',
-                type: 'scatter',
-                hoverAnimation: false,
-                data: [0],
-                yAxisIndex: 2,
-                symbolSize: 9,
-                itemStyle: {
-                    normal: {
-                        color: function (params) {
-                            var num = myColor.length;
-                            return myColor[params.dataIndex]
-                        },
-                        opacity: 1,
-                    }
-                },
-                z: 2
-            }
-            ]
-        };
-
-        myCharts.setOption(option);
-    },
-    //第二个统计图表
-    showLbEcharsTwo: function (echarts, value, data) {
-
-        const myCharts = echarts.init(value, "macarons");
-        var total = 0;
-        var data1List = [data.levelOne, data.levelTwo, data.levelThree,
-        data.levelFour,
-        data.levelFive,
-        data.levelSix
-        ];
-        var nameList = ['优', '良', '轻度', '中度', '重度', '严重'];
         var data2List = [];
-        for (var i = 0; i < nameList.length; i++) {
+        var nameList = [];
+
+        for (var i = 0; i < counlist.length; i++) {
+            nameList.push(counlist[i].name);
             var map = {
-                name: nameList[i],
-                value: data1List[i]
+                name: counlist[i].name,
+                value: counlist[i].num
             }
             data2List.push(map);
         }
 
-        var totalstr = total + '亿';
+
         var option = {
             grid: {
                 top: '0%',
@@ -408,36 +26,30 @@ export const hbgjAirJs = {
             legend: {
                 orient: 'vertical',
                 x: 'right',
-                left: '81%',  //图例距离左的距离
-                y: 'top',
-                show: true,
-                itemHeight: 15,
-                itemWidth: 20,
+                y: 'center',
+                show: false,
+                itemHeight: 7,
                 data: nameList
             },
-            color: ['#75d492', '#c5d686', '#f0a15c', '#e35e5f', '#b83b5d', '#57155d'],
+            color: ['#FF9966', '#FF5CFD', '#B266FF', '#6699FF', '#32F7A6', '#99FF5C', '#FFCC66', '#ff5c8e'],
             series: [{
                 name: '',
                 type: 'pie',
                 minAngle: 15,
                 avoidLabelOverlap: true,
                 roseType: 'radius',
-                center: ['40%', '60%'],
-                radius: [0, 80],
+                center: ['50%', '50%'],
+                radius: [20, 50],
                 label: {
                     normal: {
                         show: true,
                         position: 'left', //标签的位置
                         textStyle: {
-                            fontSize: 11 //文字的字体大小
+                            fontSize: 12, //文字的字体大小
+                            color: '#000000'
                         },
                         formatter: function (a) {
-                            var value = a['percent'];
-                            if (value > 0) {
-                                return (a.name + ":" + a.value + "天\n" + "(" + a['percent'] + "%)");
-                            } else {
-                                return (a.name + "(0%)");
-                            }
+                            return (a.name + ":" + a.value);
                         }
                     },
                     emphasis: {
@@ -448,8 +60,11 @@ export const hbgjAirJs = {
                 labelLine: {
                     normal: {
                         show: true,
-                        length: 10,
-                        length2: 10
+                        length: 2,
+                        length2: 10,
+                        lineStyle: {
+                            color: '#000000'
+                        }
                     }
                 },
                 data: data2List
@@ -458,106 +73,255 @@ export const hbgjAirJs = {
 
         myCharts.setOption(option);
     },
-    //空气质量变化趋势
-    showLbEcharsThree: function (echarts, value, axisY, axisX) {
+    showLbEcharsTwo: function (echarts, value, lnum, pnum, dataList, counlist) {
         const myCharts = echarts.init(value, "macarons");
+        var data2List = [];
+        var nameList = [];
+        for (var i = 0; i < dataList.length; i++) {
+            var map = {
+                name: dataList[i].type,
+                value: dataList[i].num
+            }
+            nameList.push(dataList[i].type);
+            data2List.push(map);
+        }
 
-        var fontColor = '#000000';
         var option = {
             grid: {
-                left: '5%',
-                right: '5%',
-                top: '10%',
-                bottom: '5%',
+                top: '0%',
+                left: '0%',
+                right: '0%',
+                bottom: '0%',
                 containLabel: true
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                show: false,
+                itemHeight: 7,
+                data: nameList
+            },
+            color: ['#FF9966', '#FF5CFD', '#B266FF', '#6699FF', '#32F7A6', '#99FF5C', '#FFCC66', '#ff5c8e'],
+            series: [{
+                name: '',
+                type: 'pie',
+                minAngle: 15,
+                avoidLabelOverlap: true,
+                roseType: 'radius',
+                center: ['50%', '50%'],
+                radius: [20, 50],
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'left', //标签的位置
+                        textStyle: {
+                            fontSize: 12, //文字的字体大小
+                            color: '#000000'
+                        },
+                        formatter: function (a) {
+                            return (a.name + ":" + a.value);
+                        }
+                    },
+                    emphasis: {
+                        show: false,
+                        textStyle: {}
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: true,
+                        length: 2,
+                        length2: 10,
+                        lineStyle: {
+                            color: '#000000'
+                        }
+                    }
+                },
+                data: data2List
+            }]
+        };
+        myCharts.setOption(option);
+    },
+    showLbEcharsThree: function (echarts, value,list) {
+        const myCharts = echarts.init(value, "macarons");
+
+        var provideNumber; //x轴一行显示几个字；
+        var timeList = [];
+        var value1 = [];
+        var value2 = [];
+        var value3 = [];
+        var value4 = [];
+
+        provideNumber = 1;
+		for(var i = 0; i < list.length; i++) {
+			var problemnum = list[i].problemnum; //发现问题数量
+			var endnum = list[i].endnum; //完结数
+			var endrate = list[i].rate; //完结率
+			var recordnum = list[i].recordnum; //巡查量
+			var time = list[i].name;
+
+			timeList.push(time);
+			value1.push(parseFloat(problemnum));
+			value2.push(parseFloat(endnum));
+			value3.push(recordnum);
+			value4.push(endrate);
+		}
+
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            grid: {
+                left: '5%',
+                top: '15%',
+                right: '5%',
+                bottom: '4%',
+                containLabel: true
+            },
+            legend: {
+                orient: 'horizontal',
+                show: true,
+                itemHeight: 7,
+                itemWidth: 13,
+                x: '14%',
+                data: ['问题数', '办结数', '巡查数', '办结率'],
+                textStyle: {
+                    rich: {
+                        a: {
+                            width: 100,
+                        }
+                    },
+                    textFont: '11px verdana'
+                }
             },
             xAxis: [{
                 type: 'category',
-                boundaryGap: false,
-                axisLabel: {
-                    color: fontColor
-                },
+                data: timeList,
                 axisLine: {
-                    show: false,
                     lineStyle: {
-                        color: '#397cbc'
+                        color: '#000000',
                     }
                 },
-                axisTick: {
-                    show: false,
-                },
-                splitLine: {
-                    show: false,
-                    lineStyle: {
-                        color: '#195384'
-                    }
-                },
-                data: axisX
-            }],
-            yAxis: [{
-                type: 'value',
-                name: '',
-                min: 0,
                 axisLabel: {
-                    formatter: '{value}',
+                    showMaxLabel: true,
+                    showMinLabel: true,
+                    show: true,
+                    interval: 0, //横轴信息全部显示
                     textStyle: {
-                        color: fontColor
-                    }
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#27b4c2'
-                    }
-                },
-                axisTick: {
-                    show: false,
-                },
-                splitLine: {
-                    show: false,
-                    lineStyle: {
-                        color: '#11366e'
+                        color: '#000000', //文字颜色
+                        fontSize: 10
+                    },
+                    formatter: function (params) {
+                        var newParamsName = "";
+                        var paramsNameNumber = params.length;
+                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                        if (paramsNameNumber > provideNumber) {
+                            for (var p = 0; p < rowNumber; p++) {
+                                var tempStr = "";
+                                var start = p * provideNumber;
+                                var end = start + provideNumber;
+                                if (p == rowNumber - 1) {
+                                    tempStr = params.substring(start, paramsNameNumber);
+                                } else {
+                                    tempStr = params.substring(start, end) + "\n";
+                                }
+                                newParamsName += tempStr;
+                            }
+
+                        } else {
+                            newParamsName = params;
+                        }
+                        return newParamsName
                     }
                 }
             }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}',
+                    textStyle: {
+                        color: '#000'
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#000000',
+                    }
+                }
+            },
+            {
+                type: 'value',
+                interval: 25,
+                axisLabel: {
+                    formatter: '{value}%',
+                    textStyle: {
+                        color: '#000'
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#000000',
+                    }
+                }
+            }
+            ],
             series: [{
-                name: '已采纳',
-                type: 'line',
-                stack: '总量',
-                symbol: 'circle',
-                symbolSize: 4,
+                name: '问题数',
+                type: 'bar',
+                data: value1,
                 itemStyle: {
                     normal: {
-                        color: '#0092f6',
+                        color: '#70C600'
+                    }
+                }
+            },
+            {
+                name: '办结数',
+                type: 'bar',
+                data: value2,
+                itemStyle: {
+                    normal: {
+                        color: '#FFAB27'
+                    }
+                }
+            },
+            {
+                name: '巡查数',
+                type: 'bar',
+                data: value3,
+                itemStyle: {
+                    normal: {
+                        color: '#FF7430'
+                    }
+                }
+            },
+            {
+                name: '办结率',
+                type: 'line',
+                symbol: 'circle', //折线点设置为实心点
+                symbolSize: 8, //折线点的大小
+                yAxisIndex: 1,
+                data: value4,
+                itemStyle: {
+                    normal: {
+                        color: '#1976D2',
                         lineStyle: {
-                            color: "#0092f6",
-                            width: 1
-                        },
-                        areaStyle: {
-                            //color: '#94C9EC'
-                            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                                offset: 0,
-                                color: 'rgba(76,184,255,0.3)'
-                            }, {
-                                offset: 1,
-                                color: 'rgba(76,184,255,0.9)'
-                            }]),
+                            color: "#4691D9" //折线的颜色
                         }
                     }
-                },
-                markPoint: {
-                    itemStyle: {
-                        normal: {
-                            color: 'red'
-                        }
-                    }
-                },
-                data: axisY
-            }]
+                }
+            }
+            ]
         };
-
-
+        myCharts.clear();
         myCharts.setOption(option);
     }
-
 
 }

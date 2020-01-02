@@ -232,6 +232,10 @@ export const httpMethod = {
     },
     getMtTjQuantity: function (params){
         return get("nytsAppGbInsideController.action?getMtTjQuantity",params);
+    },
+    //获取监管概况巡查图表
+    getBasicRecordList: function (params) {
+        return get(" gridSupervisionController.action?basicRecordList", params);
     }
     
     

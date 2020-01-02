@@ -16,7 +16,7 @@
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
       ></div>
-      <div ref="myCharts2" style="height:210px;width:100%;"></div>
+      <div ref="myCharts1" style="height:210px;width:100%;"></div>
     </div>
 
     <div
@@ -33,11 +33,11 @@
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
       ></div>
-      <div ref="myCharts1" style="height:210px;width:100%;"></div>
+      <div ref="myCharts2" style="height:210px;width:100%;"></div>
     </div>
 
     <div
-      style="background:#ffffff;height:230px;width:100%;margin-top:8px;padding-top:7px;border-top:7px solid #F1F4F6;"
+      style="background:#ffffff;height:240px;width:100%;margin-top:8px;padding-top:7px;border-top:7px solid #F1F4F6;"
     >
       <div style="display:flex;">
         <div class="echars_titile_div">各区县网格监管情况展示</div>
@@ -101,7 +101,10 @@ export default {
       currentYear1: new Date().getFullYear(),
     };
   },
-  mounted() {},
+  mounted() {
+    this.getStationRealtimeData();
+    this.getBasicRecordList();
+  },
   methods: {
     
     //格式化事件
@@ -122,6 +125,8 @@ export default {
     onconfirmYear() {
       this.currentYear1 = this.timeFormatYear(this.currentYear);
       this.showYear = false;
+      this.getStationRealtimeData();
+    this.getBasicRecordList();
     },
     //开启年时间选择
     openPopYear: function() {
@@ -146,12 +151,44 @@ export default {
           console.log(res);
           var code = res.success;
           if (code == "1") {
-            this.bottomList = res.dataList;
+            var pay = res.sourceList;
+            this.showEcharsView1(echarts, this.$refs.myCharts1,res.leaderNum, res.personNum, pay, res.countyList);
+              this.showEcharsView2(echarts, this.$refs.myCharts2,res.leaderNum, res.personNum, pay, res.countyList);
           }
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    showEcharsView1: function(echarts, value,  data1,data2,data3,data4) {
+      hbgjAirJs.showLbEcharsOne(echarts, value, data1,data2,data3,data4);
+    },
+    showEcharsView2: function(echarts, value,  data1,data2,data3,data4) {
+      hbgjAirJs.showLbEcharsTwo(echarts, value, data1,data2,data3,data4);
+    },
+    //获取监管概况巡查图表
+    getBasicRecordList: function() {
+      var params = {
+        code: this.gkcode,
+        recordTime:this.currentYear1
+      };
+      //获取数据
+      httpMethod
+        .getBasicRecordList(params)
+        .then(res => {
+          console.log(res);
+          var code = res.success;
+          if (code == "1") {
+            var data = res.recordList;
+            this.showEcharsView3(echarts, this.$refs.myCharts3,data);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    showEcharsView3: function(echarts, value,  data1) {
+      hbgjAirJs.showLbEcharsThree(echarts, value, data1);
     }
   }
 };
