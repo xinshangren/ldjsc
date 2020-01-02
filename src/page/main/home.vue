@@ -359,7 +359,7 @@
       },
       intentNyts: function () {
         this.$router.push({
-          path: "/nyts/nyts"
+          path: "/cyzx/nyts/nyts"
         });
       },
       intentQyly: function () {

@@ -69,6 +69,7 @@
     },
     data() {
       return {
+        
         selectedItem: null,
         isShowPicker: false
       }

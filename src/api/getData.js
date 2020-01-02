@@ -197,6 +197,10 @@ export const httpMethod = {
     getCommonalityIncome: function (params) {
         return get("hgjjAppInsideController.action?getCommonalityIncome", params);
     },
+    //能源煤炭统计产值
+    getMtTjProduction: function (params){
+        return get("nytsAppGbInsideController.action?getMtTjProduction",params);
+    },
     
 
     
