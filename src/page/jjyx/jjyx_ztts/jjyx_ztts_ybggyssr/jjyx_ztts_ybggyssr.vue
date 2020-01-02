@@ -139,7 +139,7 @@ import { echarsEnti } from "../../../../page/jjyx/jjyx_ztts/jjyx_ztts_ybggyssr/j
 import { httpMethod } from "../../../../api/getData.js";
 export default {
   props: ["getChild"],
-  name: "jjyx_ztts_qssczz",
+  name: "jjyx_ztts_ybggyssr",
   data() {
     return {
       show: false,

@@ -202,6 +202,31 @@ export const httpMethod = {
         return get("nytsAppGbInsideController.action?getMtTjProduction",params);
     },
     
+    //获取社会消费品零售总额
+    getSocialConsumerGoods: function (params) {
+        return get("hgjjAppInsideController.action?getSocialConsumerGoods", params);
+    },
+    //获取居民人均可支配收入
+    getDisposableIncome: function (params) {
+        return get("hgjjAppInsideController.action?getDisposableIncome", params);
+    },
+    
+    //获取区县情况接口
+    getCounty: function (params) {
+        return get("hgjjAppInsideController.action?getCounty", params);
+    },
+    //获取工业增加值
+    getIndustrialValueAdded: function (params) {
+        return get("hgjjAppInsideController.action?getIndustrialValueAdded", params);
+    },
+    //获取海关进出口总额
+    getCustomsTrading: function (params) {
+        return get("hgjjAppInsideController.action?getCustomsTrading", params);
+    },
+    
+    
+    
+    
 
     
     
