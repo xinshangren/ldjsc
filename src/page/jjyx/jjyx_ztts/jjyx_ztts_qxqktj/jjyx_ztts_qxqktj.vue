@@ -41,7 +41,7 @@
     <!--生产总值表格-->
     <div style="background:#ffffff;height:337px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div" style="margin-top: 4px;">生产总值</div>
-        <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+        <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
         <div id="sczzTable" style="border: 1px solid #cccccc;width: 93%;margin: auto;margin-top: 20px;">
         <div
             class="ui-row-flex ui-whitespace"
@@ -80,7 +80,7 @@
     <!--社会消费品零售总额-->
     <div style="background:#ffffff;height:337px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div" style="margin-top: 4px;">社会消费品零售总额(万元)</div>
-        <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+        <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
         <div id="lszeTable" style="border: 1px solid #cccccc;width: 93%;margin: auto;margin-top: 20px;">
         <div
             class="ui-row-flex ui-whitespace"
@@ -119,7 +119,7 @@
       <!--工业增加值增加速度-->
      <div style="background:#ffffff;height:337px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div" style="margin-top: 4px;">工业增加值增加速度(%)</div>
-        <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+        <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
         <div id="zjsdTable" style="border: 1px solid #cccccc;width: 93%;margin: auto;margin-top: 20px;">
         <div
             class="ui-row-flex ui-whitespace"
@@ -157,7 +157,7 @@
      <!--固定资产投资1-7月-->
      <div style="background:#ffffff;height:600px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div" style="margin-top: 8px;">固定资产投资（1-{{indexMonth}}月）</div>
-        <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+        <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
         <!--各区县固定资产投资金额-->
         <div id="gdzcTable" style="margin-top: 20px;font-size: 13px;"> 
           <div style="text-align: center;">各区县固定资产投资金额（万元）</div>
@@ -323,7 +323,7 @@
      <!--人均可支配收入（元）-->
      <div style="background:#ffffff;height:976px;width:100%;margin-top:8px;padding-top:7px;">
       <div class="echars_titile_div" style="margin-top: 4px;">人均可支配收入（元）</div>
-      <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+      <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
       <!--居民人均可支配收入--> 
       <div id="rjzpTable" style="width: 93%;margin: auto;margin-top: 15px;">
         <span style="font-size: 13px;" >居民人均可支配收入</span>
@@ -440,8 +440,6 @@
         </div>  
        </div>
     </div>
-  
-  </div>
   </div>
 </template>
 
