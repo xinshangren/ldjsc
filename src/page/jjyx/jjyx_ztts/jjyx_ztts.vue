@@ -1,14 +1,19 @@
 <template>
   <div style="margin-top:54px;">
-    <div style="zz-index: 99;position: absolute;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;">
-     <div style="background: rgb(247, 247, 247);height: 40px;width: 44px;margin-left: 4px;">
-      <img
-        style="height: 24px;margin-top: 9px;"
-        src="../../../assets/img/eco_tab_iconlist.png"
-      />
+   
+    <div
+        id="showSelectDiv"
+        style="z-index: 99;position: fixed;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
+      >
+        <div
+          style="background: rgb(247, 247, 247);height: 35px;width: 40px;margin-top: 5px;margin-left: 7px;"
+        >
+          <img style="height: 18px;margin-top: 9px;" src="../../../assets/img/eco_tab_iconlist.png" />
+        </div>
       </div>
-    </div>
     <van-sticky :offset-top="55">
+       
+
       <div style="display:flex;">
         <van-tabs
           @touchmove.prevent
@@ -19,7 +24,8 @@
           title-inactive-color="#333333"
           :sticky="true"
           line-width="75px"
-          style="width:86%;"
+          style="width:100%;"
+          :ellipsis="false"
         >
           <van-tab title="完成概况"></van-tab>
           <van-tab title="GDP"></van-tab>
@@ -58,6 +64,27 @@
         </div>
       </div>
     </van-sticky>
+    <div
+      id="selectTabDiv"
+      style=" display:none;background: rgb(255, 255, 255);top: 140px;position: fixed;z-index: 1;box-shadow: 5px 1px 1px 2px #f3f3f3;"
+    >
+      <!-- <div style="padding-top:9px;font-size: 14px;margin-left:17px;">进度分类</div> -->
+      <ul
+        id="jdflDialogId"
+        class="ui-row"
+        style="margin-top: 11px;margin-right: 15px;margin-bottom:12px;"
+      >
+        <li id="0" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">完成概况</li>
+        <li id="1" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">GDP</li>
+        <li id="2" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">固定资产投资</li>
+        <li id="3" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">一般公共预算收入</li>
+        <li id="4" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">社会消费品零售总额</li>
+        <li id="5" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">人均可支配收入</li>
+        <li id="6" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">工业增加值</li>
+        <li id="7" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">海关进出口总额</li>
+        <li id="8" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">区县情况</li>
+      </ul>
+    </div>
     <div style="margin-top:46px;z-index: -1;overflow: auto;">
       <div
         :is="currentView"
@@ -150,14 +177,41 @@ export default {
       nowYear: "",
       currentDate: new Date(),
       maxDate: new Date(),
-      minDate: new Date(2018, 0, 1)
+      minDate: new Date(2018, 0, 1),
+      maxDataDate: ""
     };
   },
-  mounted() {},
+  mounted() {
+    var self = this;
+    $("#showSelectDiv").click(function(e) {
+      if ($("#selectTabDiv").is(":hidden")) {
+        $("#selectTabDiv").show();
+      } else {
+        $("#selectTabDiv").hide();
+      }
+    });
+    //选择进度类型
+    $("#jdflDialogId li").click(function(e) {
+      $(this)
+        .siblings("li")
+        .removeClass("dialogSelect");
+      $(this)
+        .siblings("li")
+        .removeClass("dialogNoSelect");
+      $(this)
+        .siblings("li")
+        .addClass("dialogNoSelect");
+      $(this).removeClass("dialogNoSelect");
+      $(this).addClass("dialogSelect");
+      console.log($(this).index());
+      $("#selectTabDiv").hide();
+      self.smallTab_select($(this).index(), "");
+    });
+  },
   methods: {
     //空气子选项卡选择
     smallTab_select: function(name, title) {
-      // console.log(name,title);
+      console.log(name,title);
       switch (name) {
         case 0:
           this.active = 0;
@@ -200,7 +254,8 @@ export default {
       }
     },
     changeTime: function(year, month) {
-      console.log(year + "==" + month);
+      this.maxDataDate = year + "-" + month;
+      console.log(year + "==============" + month);
       this.maxDate = new Date(parseInt(year), parseInt(month) - 1, 1);
       this.nowYear = year + "-" + month;
     },
@@ -222,6 +277,9 @@ export default {
     downYearClick: function() {
       var year = this.nowYear.split("-")[0];
       var month = this.nowYear.split("-")[1];
+
+      var maxYear = this.maxDataDate.split("-")[0];
+      var maxMonth = this.maxDataDate.split("-")[1];
       if (parseInt(month) == 12) {
         year = parseInt(year) + 1;
         month = 2;
@@ -231,6 +289,16 @@ export default {
       if (parseInt(month) < 10) {
         month = "0" + month;
       }
+      if (year > maxYear) {
+        this.$toast("下一年没有数据");
+        return;
+      } else if (year == maxYear) {
+        if (month > maxMonth) {
+          this.$toast("下一月没有数据");
+          return;
+        }
+      }
+
       this.nowYear = year + "-" + month;
       this.$refs.child1.changeTitme(this.nowYear);
     },

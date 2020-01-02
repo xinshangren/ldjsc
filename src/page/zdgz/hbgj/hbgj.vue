@@ -32,23 +32,43 @@
         </div>
         <van-tabs
           @click="smallTab_select"
-          id="tabId"
+          id="tabId1"
           title-active-color="#2796e7"
           title-inactive-color="#333333"
           line-width="75"
           v-model="airactive"
+           :ellipsis="false"
+           v-show="oneShow"
           style="width:75%;"
         >
           <van-tab title="实时状况"></van-tab>
           <van-tab title="站点列表"></van-tab>
           <van-tab title="数据统计"></van-tab>
         </van-tabs>
+        <van-tabs
+          @click="smallTab_select_wgjg"
+          ref="tabId2"
+          title-active-color="#2796e7"
+          title-inactive-color="#333333"
+          line-width="75"
+          v-model="wgjgactive"
+           v-show="twoShow"
+          style="width:75%;"
+          :ellipsis="false"
+          @rendered="rendered_wgjg"
+        >
+          <van-tab title="概况"></van-tab>
+          <van-tab title="污染源列表"></van-tab>
+          <van-tab title="人员列表"></van-tab>
+          <van-tab title="统计分析"></van-tab>
+        </van-tabs>
       </div>
     </van-sticky>
     <div>
-      <child1 v-if="airactive==0"></child1>
-      <child2 v-if="airactive==1"></child2>
-      <child3 v-if="airactive==2"></child3>
+      <child1 v-if="Bigflag==1&&airactive==0"></child1>
+      <child2 v-if="Bigflag==1&&airactive==1"></child2>
+      <child3 v-if="Bigflag==1&&airactive==2"></child3>
+      <child4 v-if="Bigflag==2&&airactive==0"></child4>
     </div>
   </div>
 </template>
@@ -57,17 +77,21 @@ import echarts from "echarts";
 import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.vue";
 import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
 import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
+import child4 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wggk/hbgj_wgjg_wggk.vue";
 import $ from "jquery";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
-import { Tab, Tabs,Sticky } from "vant";
-Vue.use(Tab).use(Tabs).use(Sticky);
+import { Tab, Tabs, Sticky } from "vant";
+Vue.use(Tab)
+  .use(Tabs)
+  .use(Sticky);
 export default {
   name: "hbgj",
   components: {
     child1,
     child2,
-    child3
+    child3,
+    child4
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
@@ -78,7 +102,11 @@ export default {
   },
   data() {
     return {
+      Bigflag: 1,
       airactive: 0,
+      wgjgactive: 0,
+      twoShow:false,
+      oneShow:true,
       indexTabImg1: require("../../../assets/img/air_home_tab1selected.png"),
       indexTabImg2: require("../../../assets/img/air_home_tab2.png"),
       indexTabImg3: require("../../../assets/img/air_home_tab3.png"),
@@ -94,25 +122,25 @@ export default {
     //空气子选项卡选择
     smallTab_select: function(name, title) {
       // console.log(name,title);
-      switch (name) {
-        case 0:
-          this.airactive = 0;
-          break;
-        case 1:
-          this.airactive = 1;
-          break;
-        case 2:
-          this.airactive = 2;
-          break;
-
-        default:
-          break;
-      }
+      this.airactive = name;
+    },
+    //网格子选项卡选择
+    smallTab_select_wgjg: function(name, title) {
+      // console.log(name,title);
+      this.wgjgactive = name;
+    },
+    rendered_wgjg:function (name, title) {
+       console.log(name,title);
     },
     //选择顶部的选项卡
     selectIndexTab: function(index) {
+      this.Bigflag = index;
       switch (index) {
         case 1:
+          // $("#tabId1").show();
+          // $("#tabId2").hide();
+          this.oneShow=true;
+          this.twoShow=false;
           $("#indexTabDiv1").addClass("top_title_select1");
           $("#indexTabDiv2").addClass("top_title_noselect");
           $("#indexTabDiv3").addClass("top_title_noselect");
@@ -126,6 +154,11 @@ export default {
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
           break;
         case 2:
+          this.oneShow=false;
+          this.twoShow=true;
+          this.$refs.tabId2.resize();
+          // $("#tabId1").hide();
+          // $("#tabId2").show();
           $("#indexTabDiv1").addClass("top_title_noselect");
           $("#indexTabDiv2").addClass("top_title_select2");
           $("#indexTabDiv3").addClass("top_title_noselect");
@@ -136,8 +169,11 @@ export default {
           this.indexTabImg1 = require("../../../assets/img/air_home_tab1.png");
           this.indexTabImg2 = require("../../../assets/img/air_home_tab2selected.png");
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
+          this.wgjgactive=0;
           break;
         case 3:
+          $("#tabId1").hide();
+          $("#tabId2").hide();
           $("#indexTabDiv1").addClass("top_title_noselect");
           $("#indexTabDiv2").addClass("top_title_noselect");
           $("#indexTabDiv3").addClass("top_title_select3");
@@ -152,23 +188,6 @@ export default {
         default:
           break;
       }
-    },
-    getListData: function() {
-      var params = {
-        targetIds: "58，59，61，62，63"
-      };
-      //获取数据
-      httpMethod
-        .findByTargetIds(params)
-        .then(res => {
-          console.log(res);
-          var code = res.success;
-          if (code == "1") {
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
     }
   }
 };

@@ -98,40 +98,40 @@
             <div style="margin-left: 0px;">同比±%</div>
           </div>
         </div>
-        <div
-          class="ui-row-flex ui-whitespace"
-          style="background:#ffffff;font-size:13px; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
-          v-for="(item,index) in dataList"
-          :key="index"
-        >
-          <div class="ui-col ui-col" style="text-align: center;">{{item.statisname}}</div>
-          <div class="ui-col ui-col" style="text-align: center;">{{item.ljindexdata}}</div>
-          <div class="ui-col ui-col" style="text-align: center;display: flex;">
-            <div style="color: red;margin-left: 23px;">{{item.ljyonydata}}%</div>
-            <img
-              v-if="item.ljyonydata>=0"
-              style="height: 15px;margin-top: 13px;margin:auto;"
-              src="../../../../assets/img/eco_rise.png"
-            />
-            <img
-              v-if="item.ljyonydata<0"
-              style="height: 15px;margin-top: 13px;margin:auto;"
-              src="../../../../assets/img/eco_down.png"
-            />
-          </div>
-          <div class="ui-col ui-col" style="text-align: center;">{{item.indexdata}}</div>
-          <div class="ui-col ui-col" style="text-align: center;display: flex;">
-            <div style="color: red;margin-left: 7px;">{{item.yonydata}}%</div>
-            <img
-              v-if="item.yonydata>=0"
-              style="height: 15px;margin-top: 13px;margin:auto;"
-              src="../../../../assets/img/eco_rise.png"
-            />
-            <img
-              v-if="item.yonydata<0"
-              style="height: 15px;margin-top: 13px;margin:auto;"
-              src="../../../../assets/img/eco_down.png"
-            />
+        <div   v-for="(item,index) in dataList" :key="index">
+          <div
+            class="ui-row-flex ui-whitespace"
+            :class="[index==0||index==1||index==2||index==5||index==8||index==11?'hightBackground':'nohightBackground']"
+          >
+            <div class="ui-col ui-col" style="text-align: center;">{{item.statisname}}</div>
+            <div class="ui-col ui-col" style="text-align: center;">{{item.ljindexdata}}</div>
+            <div class="ui-col ui-col" style="text-align: center;display: flex;">
+              <div style="color: red;margin-left: 23px;">{{item.ljyonydata}}%</div>
+              <img
+                v-if="item.ljyonydata>=0"
+                style="height: 15px;margin-top: 13px;margin:auto;"
+                src="../../../../assets/img/eco_rise.png"
+              />
+              <img
+                v-if="item.ljyonydata<0"
+                style="height: 15px;margin-top: 13px;margin:auto;"
+                src="../../../../assets/img/eco_down.png"
+              />
+            </div>
+            <div class="ui-col ui-col" style="text-align: center;">{{item.indexdata}}</div>
+            <div class="ui-col ui-col" style="text-align: center;display: flex;">
+              <div style="color: red;margin-left: 7px;">{{item.yonydata}}%</div>
+              <img
+                v-if="item.yonydata>=0"
+                style="height: 15px;margin-top: 13px;margin:auto;"
+                src="../../../../assets/img/eco_rise.png"
+              />
+              <img
+                v-if="item.yonydata<0"
+                style="height: 15px;margin-top: 13px;margin:auto;"
+                src="../../../../assets/img/eco_down.png"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -222,8 +222,8 @@ export default {
             // this.dataList = res.dateForm;
             var urbanOrTownData = res.urbanOrTownData; //城乡零售占比及增速
             var consumerGoodsRate = res.consumerGoodsRate;
-            this.indexMonth=res.quarter;
-            this.dataList=res.allConsumerData;//数据列表
+            this.indexMonth = res.quarter;
+            this.dataList = res.allConsumerData; //数据列表
             this.getOneEchars(
               echarts,
               this.$refs.myCharts1,

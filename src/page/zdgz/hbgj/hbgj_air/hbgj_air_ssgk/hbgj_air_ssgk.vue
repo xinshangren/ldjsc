@@ -333,9 +333,14 @@ export default {
     },
     //空气质量变化趋势
     trendsInAirQuality: function() {
+      var  month=new Date().getMonth()+1;
+      if(month<10){
+        month="0"+month;
+      }
+      var  dateStrs=new Date().getFullYear() + "-" + month;
       var params = {
         dateType: "天",
-        dateStr: new Date().getFullYear() + "-" + (new Date().getMonth() + 1)
+        dateStr: dateStrs
       };
       //获取数据
       httpMethod

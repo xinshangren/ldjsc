@@ -4,7 +4,7 @@
       <ul class="ui-row">
         <li class="ui-col ui-col-50" style="position:relative;">
           <div class="wcgk_one_right_driver"></div>
-          <div style="display:flex;margin-top:20px;">
+          <div @click="intentTab(1)" style="display:flex;margin-top:20px;">
             <img
               style="height:28px;margin-left:20px;"
               src="../../../../assets/img/eco_home_icon1.png"
@@ -42,7 +42,7 @@
 
         <li class="ui-col ui-col-50" style="position:relative;">
           <!-- <div class="wcgk_one_right_driver"></div> -->
-          <div style="display:flex;margin-top:20px;">
+          <div style="display:flex;margin-top:20px;" @click="intentTab(2)" >
             <img
               style="height:28px;margin-left:20px;"
               src="../../../../assets/img/eco_home_icon2.png"
@@ -80,7 +80,7 @@
 
         <li class="ui-col ui-col-50" style="position:relative;">
           <div class="wcgk_one_right_driver"></div>
-          <div style="display:flex;margin-top:20px;">
+          <div style="display:flex;margin-top:20px;" @click="intentTab(3)" >
             <img
               style="height:28px;margin-left:20px;"
               src="../../../../assets/img/eco_home_icon3.png"
@@ -118,7 +118,7 @@
 
         <li class="ui-col ui-col-50" style="position:relative;">
           <!-- <div class="wcgk_one_right_driver"></div> -->
-          <div style="display:flex;margin-top:20px;">
+          <div style="display:flex;margin-top:20px;" @click="intentTab(4)" >
             <img
               style="height:28px;margin-left:6px;"
               src="../../../../assets/img/eco_home_icon4.png"
@@ -158,7 +158,7 @@
     </div>
 
     <div style="background:#ffffff;margin-top:10px;padding-top:13px;">
-      <div style="display:flex;font-size:14px;color:#333333;line-height:30px;">
+      <div style="display:flex;font-size:14px;color:#333333;line-height:30px;" @click="intentTab(5)" >
         <div style="margin-left:17px;">居民人均可支配收入</div>
         <img
           style="height: 14px;margin-left: 6px;margin-top:9px;"
@@ -270,7 +270,7 @@
     <div style="background:#ffffff;margin-top:10px;">
       <div style="display:flex;">
         <div style="width:50%;text-align:center;">
-          <div style="display:flex;font-size:14px;color:#333333;line-height:30px;">
+          <div @click="intentTab(6)"  style="display:flex;font-size:14px;color:#333333;line-height:30px;">
             <div style="margin-left:28px;">工业增加值</div>
             <img
               style="height: 14px;margin-left: 6px;margin-top:9px;"
@@ -298,7 +298,7 @@
           <img style="height:50px;" src="../../../../assets/img/eco_home_icon5.png" />
         </div>
         <div style="width:60%;text-align:center;">
-          <div style="display:flex;font-size:14px;color:#333333;line-height:30px;">
+          <div @click="intentTab(7)"  style="display:flex;font-size:14px;color:#333333;line-height:30px;">
             <div style="margin-left:38px;">海关进出口总额</div>
             <img
               style="height: 14px;margin-left: 6px;margin-top:9px;"
@@ -340,7 +340,7 @@
       </div>
     </div>
 
-    <div style="margin-top:10px;background:#ffffff;height:50px;position:relative;">
+    <div style="margin-top:10px;background:#ffffff;height:50px;position:relative;" @click="intentTab(8)" >
       <div style="display:flex;">
         <img
           style="height: 27px;margin-top: 11px;margin-left: 16px;"
@@ -609,6 +609,10 @@ export default {
       //     entity: item
       //   }
       // });
+    },
+    intentTab:function (index) {
+      console.log(index);
+      this.$parent.smallTab_select(index,"");
     }
   }
 };

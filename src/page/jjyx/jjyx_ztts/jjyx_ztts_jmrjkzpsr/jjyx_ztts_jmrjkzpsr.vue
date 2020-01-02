@@ -13,7 +13,7 @@
             <div style="color:#0b91ed;font-size:20px;">{{totalData.indexdata}}</div>
             <div>元</div>
           </div>
-          <div style="font-size:12px;color:#666666;">社会消费品零售总额</div>
+          <div style="font-size:12px;color:#666666;">居民人均可支配收入</div>
         </div>
       </div>
       <div style="height:50px;width:1px;background:#cccccc;"></div>

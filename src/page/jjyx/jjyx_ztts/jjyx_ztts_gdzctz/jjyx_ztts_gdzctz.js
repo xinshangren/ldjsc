@@ -87,7 +87,7 @@ export const echarsEnti = {
 
     myCharts.setOption(option);
   },
-  showZfBarEchars: function (echarts, value, dataList) {
+  showZfBarEchars: function (echarts, value, dataList,downimg,upimg) {
     const myCharts = echarts.init(value);
     var dataShadow = [];
     var dataAxis = [];
@@ -189,7 +189,7 @@ export const echarsEnti = {
               height: 10,
               align: 'center',
               backgroundColor: {
-                image: '../img/hgjj_up_jt_bg.png' //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
+                image:upimg //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
               }
             },
             warnValue1: {
@@ -197,7 +197,7 @@ export const echarsEnti = {
               height: 10,
               align: 'center',
               backgroundColor: {
-                image: '../img/hgjj_down_jt_bg.png' //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
+                image: downimg //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
               }
             },
             a: {
@@ -376,6 +376,7 @@ export const echarsEnti = {
         }
       ]
     };
+    myCharts.clear();
     myCharts.setOption(option);
   },
   showGdzctzEchars4: function (echarts, value, list) {
@@ -547,6 +548,7 @@ export const echarsEnti = {
         },
       }]
     }
+    myCharts.clear();
     myCharts.setOption(option);
   },
   showGdzctzEchars5: function (echarts, value, list) {
@@ -712,7 +714,7 @@ export const echarsEnti = {
         },
       }]
     }
-  
+    myCharts.clear();
     myCharts.setOption(option);
   },
   showGdzctzEchars6: function (echarts, value, list) {
@@ -878,7 +880,7 @@ export const echarsEnti = {
         },
       }]
     }
-  
+    myCharts.clear();
     myCharts.setOption(option);
   }
 

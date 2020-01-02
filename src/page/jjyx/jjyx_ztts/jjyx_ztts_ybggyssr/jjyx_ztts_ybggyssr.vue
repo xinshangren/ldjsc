@@ -82,11 +82,11 @@
           style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
         >
           <div class="ui-col ui-col" style="text-align: center;"></div>
-          <div class="ui-col ui-col" style="text-align: center;">1-6月</div>
+          <div class="ui-col ui-col" style="text-align: center;">1-{{indexMonth}}月</div>
           <div class="ui-col ui-col" style="text-align: center;">
             <div style="margin-left: 23px;">同比±%</div>
           </div>
-          <div class="ui-col ui-col" style="text-align: center;">6月</div>
+          <div class="ui-col ui-col" style="text-align: center;">{{indexMonth}}月</div>
           <div class="ui-col ui-col" style="text-align: center;">
             <div style="margin-left: 0px;">同比±%</div>
           </div>
@@ -114,7 +114,7 @@
           </div>
           <div class="ui-col ui-col" style="text-align: center;">{{item.dy_index}}</div>
           <div class="ui-col ui-col" style="text-align: center;display: flex;">
-            <div style="color: red;margin-left: 7px;">{{item.dy_yony}}%</div>
+            <div style="color: red;margin-left: 2px;">{{item.dy_yony}}%</div>
             <img
               v-if="item.dy_yony>=0"
               style="height: 15px;margin-top: 13px;margin:auto;"

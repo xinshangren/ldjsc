@@ -80,7 +80,9 @@ export default {
       qssczzEnti: {},
       totalData: {},
       dataList: [],
-      indexMonth: ""
+      indexMonth: "",
+      downImg:require("../../../../assets/img/eco_down.png"),
+      upImg:require("../../../../assets/img/eco_rise.png"),
     };
   },
   mounted() {
@@ -117,7 +119,7 @@ export default {
           if (code == "1") {
              this.totalData=res.date;
             this.getOneEchars(echarts, this.$refs.myCharts1, res);
-            this.getTwoEchars(echarts, this.$refs.myCharts2, res);
+            this.getTwoEchars(echarts, this.$refs.myCharts2, res,this.downImg,this.upImg);
             this.getThreeEchars(echarts, this.$refs.myCharts3, res);
           }
         })
@@ -136,8 +138,8 @@ export default {
       echarsEnti.showHgckjkzeEchars1(echarts, value, data);
     },
     //初始化第二个图表
-    getTwoEchars: function(echarts, value, data) {
-      echarsEnti.showHgckjkzeEchars2(echarts, value, data);
+    getTwoEchars: function(echarts, value, data,downimg,upimg) {
+      echarsEnti.showHgckjkzeEchars2(echarts, value, data,downimg,upimg);
     },
     //初始化第三个图表
     getThreeEchars: function(echarts, value, data) {

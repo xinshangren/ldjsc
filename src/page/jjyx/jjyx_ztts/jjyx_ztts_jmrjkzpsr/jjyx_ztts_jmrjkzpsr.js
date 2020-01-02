@@ -148,6 +148,7 @@ export const echarsEnti = {
 			}
 		]
 	};
+	myCharts.clear();
     myCharts.setOption(option);
   },
   showjmrjsrEchars2: function (echarts, value, list) {
@@ -328,7 +329,7 @@ export const echarsEnti = {
 			},
 		}]
 	}
-
+	myCharts.clear();
     myCharts.setOption(option);
   },
   showjmrjsrEchars3: function (echarts, value, list) {
@@ -515,6 +516,7 @@ export const echarsEnti = {
 			},
 		}]
 	}
+	myCharts.clear();
     myCharts.setOption(option);
   },
   showjmrjsrEchars4: function (echarts, value, list) {
@@ -701,6 +703,7 @@ export const echarsEnti = {
 			},
 		}]
 	}
+	myCharts.clear();
     myCharts.setOption(option);
   },
   showjmrjsrEchars5: function (echarts, value, dataList1) {
@@ -1006,6 +1009,7 @@ export const echarsEnti = {
 		],
 		series: searList
 	};
+	myCharts.clear();
     myCharts.setOption(option);
   }
 
