@@ -230,14 +230,12 @@ export const httpMethod = {
     getbasicList: function (params) {
         return get(" gridSupervisionController.action?basicList", params);
     },
-
-
-
-
-
-
-
-
+    getMtTjQuantity: function (params){
+        return get("nytsAppGbInsideController.action?getMtTjQuantity",params);
+    }
+    
+    
+    
 
 
 
