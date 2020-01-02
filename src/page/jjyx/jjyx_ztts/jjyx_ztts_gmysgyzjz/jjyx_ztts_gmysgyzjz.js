@@ -14,740 +14,183 @@ export const echarsEnti = {
     }
     return temp;
   },
-  showjmrjsrEchars1: function (echarts, value,list) {
+  qyzjzEchars1: function (echarts, value,ret) {
     const myCharts = echarts.init(value);
-	var provideNumber = 5; //x轴一行显示几个字；
-	var xLabel = ['城镇居民可支配收入', '农村居民可支配收入'];
-	var maxValueList = [];
 	var valueList = [];
-	for(let i = 0; i < list.length; i++) {
-		if(i > 0) {
-			var statisname = list[i].statisname;
-			var indexdata = parseFloat((list[i].indexdata) / 10000).toFixed(2);
-			var yonydata = list[i].yonydata;
-			valueList.push(indexdata);
-			//			xLabel.push(statisname);
+	var xLabel = [];
+	var allYear = [];
+	var totalData1 = ret.totalRateData; //生产总值增长速度
+	var totalData = totalData1.reverse();
+	for(let i = 0; i < totalData.length; i++) {
+		var year = totalData[i].year;
+		allYear.push(year);
+		var monthRateData = totalData[i].monthRateData; //年份数组
+		for(let j = 0; j < monthRateData.length; j++) {
+			var month = monthRateData[j].month;
+			var rate = monthRateData[j].rate;
+			valueList.push(rate);
+			xLabel.push(month);
 		}
-
 	}
-	var yMax = Math.max.apply(null, valueList);
-	for(let j = 0; j < valueList.length; j++) {
-		maxValueList.push(yMax);
-	}
-	console.log(maxValueList);
-	console.log(valueList);
-	console.log(xLabel);
-
+	var areaname = ['数量'];
 	var option = {
+		tooltip: {
+			trigger: 'axis'
+		},
+		
+		dataZoom: [
+			{
+			  type: 'slider',
+			  throttle: '50',
+			  minValueSpan: 4,
+			  start: 0,
+			  end: 15,
+			  show:true,        
+			}
+		  ],
 		grid: {
-			top: '22%',
+			top: '10%',
 			left: '2%',
-			right: '5%',
-			bottom: '2%',
+			right: '4%',
+			bottom: '10%',
 			containLabel: true
 		},
-		xAxis: {
+		xAxis: [{
+			axisLine: {
+				lineStyle: {
+					color: '#000',
+				}
+			},
 			type: 'category',
+			boundaryGap: false,
 			data: xLabel,
 			splitLine: {
-				show: false
+				show: false,
+
+			},
+			"axisLabel": {
+				"interval": 0,
+				"show": true,
+				"splitNumber": 15,
+				"textStyle": {
+					"fontFamily": "微软雅黑",
+					"fontSize": 12,
+					"color": '#000'
+				}
 			},
 			splitArea: {
 				show: false
-			},
-			axisLabel: {
-				showMaxLabel: true,
-				showMinLabel: true,
-				show: true,
-				interval: 0, //横轴信息全部显示
-				textStyle: {
-					color: '#000000', //文字颜色
-					fontSize: 13
-				},
-				formatter: function(params) {
-					var newParamsName = "";
-					var paramsNameNumber = params.length;
-					var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
-					if(paramsNameNumber > provideNumber) {
-						for(var p = 0; p < rowNumber; p++) {
-							var tempStr = "";
-							var start = p * provideNumber;
-							var end = start + provideNumber;
-							if(p == rowNumber - 1) {
-								tempStr = params.substring(start, paramsNameNumber);
-							} else {
-								tempStr = params.substring(start, end) + "\n";
-							}
-							newParamsName += tempStr;
-						}
-
-					} else {
-						newParamsName = params;
-					}
-					return newParamsName
-				}
 			}
-		},
+		}, {
+			position: 'bottom',
+			offset: 50,
+			axisLine: {
+				onZero: false,
+				show: false
+			},
+			axisTick: {
+				length: 0,
+				inside: true,
+				interval: 5,
+				lineStyle: {
+					color: '#000',
+					fontSize: '14px'
+				}
+			},
+			"axisLabel": {
+				"interval": 0,
+				"inside": true,
+				"show": true,
+				"splitNumber": 15,
+				"textStyle": {
+					"fontFamily": "微软雅黑",
+					"fontSize": 12,
+					"color": '#000'
+				}
+			},
+			data: allYear
+		}],
 		yAxis: {
 			type: 'value',
-			max: yMax,
-			splitLine: {
+			axisLine: {
+				lineStyle: {
+					color: '#000',
+				}
+			},
+			axisLabel: {
+				formatter: '{value}%',
+				show: true,
+				textStyle: {
+					color: '#000'
+				}
+			},
+			splitLine: { //网格线
 				show: false
 			},
 			splitArea: {
 				show: false
-			}
+			},
+
 		},
-		series: [,
-			{ // 背景色
-				type: 'pictorialBar',
-				stack: '总量',
-				barWidth: 30, //柱子宽度
-				symbol: 'fixed',
-				symbolSize: [60, 10],
-				symbolMargin: 2,
-				symbolRepeat: 'repeat',
-				symbolBoundingData: 300,
-				z: -10,
-				data: maxValueList,
-				itemStyle: {
-					normal: {
-						color: '#E3F0FF',
-						label: {
-							show: true, //开启显示
-							position: 'top', //在上方显示
-							textStyle: { //数值样式
-								color: '#2AC3F6',
-								fontSize: 14
-							},
-							formatter: function(a) {
-								var index = a.dataIndex;
-								var value = valueList[index];
-								return value + '万元';
-							}
-						}
-					}
+		series: [{
+			name: areaname[0],
+			smooth: false,
+			type: 'line',
+			symbol: 'circle', //折线点设置为实心点
+			symbolSize: 8, //折线点的大小
+			smooth: true,
+			data: valueList,
+			areaStyle: {
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: '#C9FFFD'
+					}, {
+						offset: 1,
+						color: '#ffffff'
+					}], false)
+
 				}
 			},
-			{ // 背景色
-				type: 'pictorialBar',
-				stack: '总量',
-				barWidth: 30, //柱子宽度
-				symbol: 'fixed',
-				symbolSize: [60, 10],
-				symbolMargin: 2,
-				symbolRepeat: 'repeat',
-				symbolBoundingData: 300,
-				z: -10,
-				data: valueList,
-				itemStyle: {
-					normal: {
-						color: '#2AC3F6'
-					}
+			itemStyle: {
+				normal: {
+					color: '#ffffff',
+					borderColor: '#3f9bf5',
+					borderWidth: 1,
+					lineStyle: {
+						color: "#3f9bf5" //折线的颜色
+					},
 				}
 			}
-		]
+		}]
 	};
     myCharts.setOption(option);
   },
-  showjmrjsrEchars2: function (echarts, value, list) {
+  qyzjzEchars2: function (echarts, value,ret) {
     const myCharts = echarts.init(value);
-    var curVal = 0;
-	for(let i = 0; i < list.length; i++) {
-		var statisname = list[i].statisname;
-		if(statisname == '居民人均可支配收入（元）') {
-			curVal = list[i].yonydata;
-			console.log('curVal===' + curVal);
-		}
+	var electricityRateData1 = ret.electricityRateData; //全社会用电量增长速度
+	var electricityRateData = electricityRateData1.reverse();
 
-	}
+	var electricityData = ret.electricityData; //第二个标题
 
-	var angle = [220, -40];
-
-	var option = {
-		title: {
-			text: '居民人均增长率',
-			bottom: 'left',
-			left: 'center',
-			textStyle: {
-				//文字颜色
-				color: '#000',
-				//字体风格,'normal','italic','oblique'
-				fontStyle: 'normal',
-				//字体系列
-				fontFamily: 'sans-serif',
-				//字体大小
-				fontSize: 15
-			}
-		},
-		grid: {
-			top: '10%',
-			left: '2%',
-			right: '28%',
-			bottom: '2%',
-			containLabel: true
-		},
-		backgroundColor: '#fff',
-		tooltip: {
-			show: false,
-			formatter: "{a} <br/>{b} : {c}%"
-		},
-		series: [{
-			name: '最外层环仪表盘',
-			type: "gauge",
-			min: -50,
-			max: 50,
-			startAngle: angle[0],
-			endAngle: angle[1],
-			splitNumber: 10,
-			axisLine: {
-				lineStyle: {
-					color: [
-						[1, "#c1c3c5"]
-					],
-					width: 1
-				}
-			},
-			axisTick: {
-				lineStyle: {
-					color: "#fff",
-					width: 2
-				},
-				length: 0,
-				splitNumber: 1
-			},
-			axisLabel: {
-				distance: -40,
-				formatter: function(v) {
-					if(v == 60) {
-						return '{a|' + v + '}';
-					} else if(v == 85) {
-						return '{b|' + v + '}';
-					} else {
-						return v;
-					};
-				},
-				textStyle: {
-					color: "#bbb"
-				},
-				rich: {
-					a: {
-						color: '#fbe010'
-					},
-					b: {
-						color: '#3fa7dc'
-					}
-				}
-			},
-			splitLine: {
-				show: true,
-				length: 20,
-				lineStyle: {
-					color: '#fff',
-					width: 2
-				}
-			},
-			itemStyle: {
-				normal: {
-					color: "#818488",
-					shadowColor: 'rgba(0, 0, 0, 0.5)',
-					shadowBlur: 10
-				}
-			},
-			detail: {
-				formatter: function(v) {
-					console.log('v=====' + v);
-					if(isNaN(v)) {
-						return "-";
-					} else {
-						return v + "%";
-					}
-					return v;
-				},
-				offsetCenter: [0, "60%"],
-				textStyle: {
-					fontSize: 17,
-					color: "#333"
-				}
-			},
-			title: {
-				show: false
-			},
-			pointer: {
-				length: '85%'
-			},
-			data: [{
-				value: curVal
-			}]
-		}, {
-			name: "内环仪表盘四段颜色",
-			type: "gauge",
-			min: 0,
-			max: 100,
-			radius: '69%',
-			startAngle: angle[0],
-			endAngle: angle[1],
-			splitNumber: 10,
-			axisLine: {
-				lineStyle: {
-					color: [
-						[0, '#58e481'],
-						[0.1, '#88e792'],
-						[0.2, "#bee58a"],
-						[0.3, '#e5e58a'],
-						[0.4, '#fbe48a'],
-						[0.5, "#ffd27f"],
-						[0.6, '#ffb36b'],
-						[0.7, '#fb9255'],
-						[0.8, "#eb673a"],
-						[0.9, "#d9391c"],
-						[1, "#d9391c"]
-					],
-					width: 10
-				}
-			},
-			axisTick: {
-				show: false
-			},
-			axisLabel: {
-				show: false
-			},
-			splitLine: {
-				show: true,
-				length: 15,
-				lineStyle: {
-					color: '#fff',
-					width: 2
-				}
-			},
-			pointer: {
-				length: 0
-			},
-			detail: {
-				show: false
-			},
-		}]
-	}
-
-    myCharts.setOption(option);
-  },
-  showjmrjsrEchars3: function (echarts, value, list) {
-    const myCharts = echarts.init(value);
-	var curVal = 0;
-	for(let i = 0; i < list.length; i++) {
-		var statisname = list[i].statisname;
-		if(statisname == '城镇居民人均可支配收入（元）') {
-			curVal = list[i].yonydata;
-		}
-
-	}
-
-	var angle = [220, -40];
-
-	var option = {
-		backgroundColor: '#ECF7FD',
-		title: {
-			text: '城镇居民',
-			bottom: 'left',
-			left: 'center',
-			textStyle: {
-				//文字颜色
-				color: '#000',
-				//字体风格,'normal','italic','oblique'
-				fontStyle: 'normal',
-				//字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
-				//字体系列
-				fontFamily: 'sans-serif',
-				//字体大小
-				fontSize: 15
-			}
-		},
-		grid: {
-			top: '10%',
-			left: '2%',
-			right: '28%',
-			bottom: '2%',
-			containLabel: true
-		},
-		backgroundColor: '#fff',
-		tooltip: {
-			show: false,
-			formatter: "{a} <br/>{b} : {c}%"
-		},
-		series: [{
-			name: '最外层环仪表盘',
-			type: "gauge",
-			min: -50,
-			max: 50,
-			startAngle: angle[0],
-			endAngle: angle[1],
-			splitNumber: 10,
-			axisLine: {
-				lineStyle: {
-					color: [
-						[1, "#c1c3c5"]
-					],
-					width: 1
-				}
-			},
-			axisTick: {
-				lineStyle: {
-					color: "#fff",
-					width: 2
-				},
-				length: 0,
-				splitNumber: 1
-			},
-			axisLabel: {
-				distance: -40,
-				formatter: function(v) {
-					if(v == 60) {
-						return '{a|' + v + '}';
-					} else if(v == 85) {
-						return '{b|' + v + '}';
-					} else {
-						return v;
-					};
-				},
-				textStyle: {
-					color: "#bbb"
-				},
-				rich: {
-					a: {
-						color: '#fbe010'
-					},
-					b: {
-						color: '#3fa7dc'
-					}
-				}
-			},
-			splitLine: {
-				show: true,
-				length: 20,
-				lineStyle: {
-					color: '#fff',
-					width: 2
-				}
-			},
-			itemStyle: {
-				normal: {
-					color: "#818488",
-					shadowColor: 'rgba(0, 0, 0, 0.5)',
-					shadowBlur: 10
-				}
-			},
-			detail: {
-				formatter: function(v) {
-					console.log('v=====' + v);
-					if(isNaN(v)) {
-						return "-";
-					} else {
-						return v + "%";
-					}
-					return v;
-				},
-				offsetCenter: [0, "60%"],
-				textStyle: {
-					fontSize: 17,
-					color: "#333"
-				},
-				offsetCenter: [0, "60%"],
-				textStyle: {
-					fontSize: 17,
-					color: "#333"
-				}
-			},
-			title: {
-				show: false
-			},
-			pointer: {
-				length: '85%'
-			},
-			data: [{
-				value: curVal
-			}]
-		}, {
-			name: "内环仪表盘四段颜色",
-			type: "gauge",
-			min: 0,
-			max: 100,
-			radius: '69%',
-			startAngle: angle[0],
-			endAngle: angle[1],
-			splitNumber: 10,
-			axisLine: {
-				lineStyle: {
-					color: [
-						[0, '#58e481'],
-						[0.1, '#88e792'],
-						[0.2, "#bee58a"],
-						[0.3, '#e5e58a'],
-						[0.4, '#fbe48a'],
-						[0.5, "#ffd27f"],
-						[0.6, '#ffb36b'],
-						[0.7, '#fb9255'],
-						[0.8, "#eb673a"],
-						[0.9, "#d9391c"],
-						[1, "#d9391c"]
-					],
-					width: 10
-				}
-			},
-			axisTick: {
-				show: false
-			},
-			axisLabel: {
-				show: false
-			},
-			splitLine: {
-				show: true,
-				length: 15,
-				lineStyle: {
-					color: '#fff',
-					width: 2
-				}
-			},
-			pointer: {
-				length: 0
-			},
-			detail: {
-				show: false
-			},
-		}]
-	}
-    myCharts.setOption(option);
-  },
-  showjmrjsrEchars4: function (echarts, value, list) {
-	const myCharts = echarts.init(value);
-	var curVal = 0;
-	for(let i = 0; i < list.length; i++) {
-		var statisname = list[i].statisname;
-		if(statisname == '农村居民人均可支配收入（元）') {
-			curVal = list[i].yonydata;
-		}
-
-	}
-
-	var angle = [220, -40];
-
-	var option = {
-		backgroundColor: '#000',
-		title: {
-			text: '农村居民',
-			bottom: 'left',
-			left: 'center',
-			textStyle: {
-				//文字颜色
-				color: '#000',
-				//字体风格,'normal','italic','oblique'
-				fontStyle: 'normal',
-				//字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
-				//字体系列
-				fontFamily: 'sans-serif',
-				//字体大小
-				fontSize: 15
-			}
-		},
-		grid: {
-			top: '10%',
-			left: '2%',
-			right: '28%',
-			bottom: '2%',
-			containLabel: true
-		},
-		backgroundColor: '#fff',
-		tooltip: {
-			show: false,
-			formatter: "{a} <br/>{b} : {c}%"
-		},
-		series: [{
-			name: '最外层环仪表盘',
-			type: "gauge",
-			min: -50,
-			max: 50,
-			startAngle: angle[0],
-			endAngle: angle[1],
-			splitNumber: 10,
-			axisLine: {
-				lineStyle: {
-					color: [
-						[1, "#c1c3c5"]
-					],
-					width: 1
-				}
-			},
-			axisTick: {
-				lineStyle: {
-					color: "#fff",
-					width: 2
-				},
-				length: 0,
-				splitNumber: 1
-			},
-			axisLabel: {
-				distance: -40,
-				formatter: function(v) {
-					if(v == 60) {
-						return '{a|' + v + '}';
-					} else if(v == 85) {
-						return '{b|' + v + '}';
-					} else {
-						return v;
-					};
-				},
-				textStyle: {
-					color: "#bbb"
-				},
-				rich: {
-					a: {
-						color: '#fbe010'
-					},
-					b: {
-						color: '#3fa7dc'
-					}
-				}
-			},
-			splitLine: {
-				show: true,
-				length: 20,
-				lineStyle: {
-					color: '#fff',
-					width: 2
-				}
-			},
-			itemStyle: {
-				normal: {
-					color: "#818488",
-					shadowColor: 'rgba(0, 0, 0, 0.5)',
-					shadowBlur: 10
-				}
-			},
-			detail: {
-				formatter: function(v) {
-					console.log('v=====' + v);
-					if(isNaN(v)) {
-						return "-";
-					} else {
-						return v + "%";
-					}
-					return v;
-				},
-				offsetCenter: [0, "60%"],
-				textStyle: {
-					fontSize: 17,
-					color: "#333"
-				},
-				offsetCenter: [0, "60%"],
-				textStyle: {
-					fontSize: 17,
-					color: "#333"
-				}
-			},
-			title: {
-				show: false
-			},
-			pointer: {
-				length: '85%'
-			},
-			data: [{
-				value: curVal
-			}]
-		}, {
-			name: "内环仪表盘四段颜色",
-			type: "gauge",
-			min: 0,
-			max: 100,
-			radius: '69%',
-			startAngle: angle[0],
-			endAngle: angle[1],
-			splitNumber: 10,
-			axisLine: {
-				lineStyle: {
-					color: [
-						[0, '#58e481'],
-						[0.1, '#88e792'],
-						[0.2, "#bee58a"],
-						[0.3, '#e5e58a'],
-						[0.4, '#fbe48a'],
-						[0.5, "#ffd27f"],
-						[0.6, '#ffb36b'],
-						[0.7, '#fb9255'],
-						[0.8, "#eb673a"],
-						[0.9, "#d9391c"],
-						[1, "#d9391c"]
-					],
-					width: 10
-				}
-			},
-			axisTick: {
-				show: false
-			},
-			axisLabel: {
-				show: false
-			},
-			splitLine: {
-				show: true,
-				length: 15,
-				lineStyle: {
-					color: '#fff',
-					width: 2
-				}
-			},
-			pointer: {
-				length: 0
-			},
-			detail: {
-				show: false
-			},
-		}]
-	}
-    myCharts.setOption(option);
-  },
-  showjmrjsrEchars5: function (echarts, value, dataList1) {
-	const myCharts = echarts.init(value);
-	var dataList = dataList1.reverse();
 	var allYear = [];
 	var xLabel = [];
 	var searList = [];
 	var dataListValue1 = [];
-	var dataListValue2 = [];
-	var dataListValue3 = [];
-
-	var dataListValue5 = [];
-	var dataListValue6 = [];
-	var dataListValue7 = [];
-	var lengdList = [];
+	var dataListValue8 = [];
+	var lengdList = ['用电量', '增速'];
 	var flag = false;
-	for(let i = 0; i < dataList.length; i++) {
-		var year = dataList[i].year; //分段标题
-		var yearIncreaseRate = dataList[i].yearImcomeRate; //分段数据
+	for(let i = 0; i < electricityRateData.length; i++) {
+		var year = electricityRateData[i].year; //分段标题
+		var yearIncreaseRate = electricityRateData[i].monthRateData; //分段数据
 		for(let j = 0; j < yearIncreaseRate.length; j++) {
 			var enti = yearIncreaseRate[j];
-			var quarter = enti.quarter; //季度
-			var quarterdata = enti.quarterIncomeRate;
-			if(!flag) {
-				for(let k = 0; k < quarterdata.length; k++) {
-					var indexname = quarterdata[k].indexname; //name
-					lengdList.push(indexname);
-				}
-			}
-			flag = true;
-			var value1 = parseFloat(quarterdata[0].indexdata); //全市的值
-			var value2 = parseFloat(quarterdata[1].indexdata); //第一值
-			var value3 = parseFloat(quarterdata[2].indexdata); //第二值
-
-			var valuezs1 = parseFloat(quarterdata[0].yonydata); //全市的增速
-			var valuezs2 = parseFloat(quarterdata[1].yonydata); //第一值的增速
-			var valuezs3 = parseFloat(quarterdata[2].yonydata); //第二值的增速
-
-			dataListValue1.push(value1);
-			dataListValue2.push(value2);
-			dataListValue3.push(value3);
-
-			dataListValue5.push(valuezs1);
-			dataListValue6.push(valuezs2);
-			dataListValue7.push(valuezs3);
-			xLabel.push(quarter);
+			var month = enti.month;
+			var num = enti.num;
+			var rate = enti.rate;
+			dataListValue1.push(num);
+			dataListValue8.push(rate);
+			xLabel.push(month);
 		}
 		allYear.push('');
 		allYear.push('');
@@ -757,85 +200,66 @@ export const echarsEnti = {
 		allYear.push('');
 
 	}
+	var map0List = [];
+	var yMax = Math.max.apply(null, dataListValue1);
+	for(let i = 0; i < dataListValue1.length; i++) {
+		var index = 0;
+		var value1 = dataListValue1[i];
+		index = value1;
+		if(index > 0) {
+			map0List.push(yMax + 1);
+		} else {
+			map0List.push(0);
+		}
+	}
+	var map0 = { // For shadow
+		type: 'bar',
+		barWidth: 30, //柱子宽度
+		itemStyle: {
+			normal: {
+				color: function(params) {
+					var colorList = ['#E3F2FF'];
+					return colorList[params.dataIndex]
+				}
+			}
+		},
+		barGap: '-80%',
+		barCategoryGap: '40%',
+		data: map0List,
+		animation: false
+	}
 
 	var map1 = {
 		name: lengdList[0],
 		type: 'bar',
-		barWidth: 15, //柱子宽度
-		color: '#00DB7B',
-		stack: xLabel[0],
-		data: dataListValue1,
-		itemStyle: {
-			emphasis: {
-				barBorderRadius: 30
-			},
-			normal: {
-				barBorderRadius: [10, 10, 0, 0],
-			}
-		}
-
-	}
-	var map2 = {
-		name: lengdList[1],
-		type: 'bar',
-		color: '#FFBE62',
-		stack: xLabel[1],
-		barWidth: 15, //柱子宽度
-		data: dataListValue2,
-		itemStyle: {
-			emphasis: {
-				barBorderRadius: 30
-			},
-			normal: {
-				barBorderRadius: [10, 10, 0, 0],
-			}
-		}
-	}
-	var map3 = {
-		name: lengdList[2],
-		type: 'bar',
-		color: '#5DEFF8',
-		stack: xLabel[2],
-		barWidth: 15, //柱子宽度
-		data: dataListValue3,
-		itemStyle: {
-			emphasis: {
-				barBorderRadius: 30
-			},
-			normal: {
-				barBorderRadius: [10, 10, 0, 0],
-			}
-		}
-	}
-
-	var map5 = {
-		name: lengdList[0],
-		type: 'line',
-		symbol: 'circle', //折线点设置为实心点
-		symbolSize: 8, //折线点的大小
-		yAxisIndex: 1,
+		barWidth: 20, //柱子宽度
 		itemStyle: {
 			normal: {
-				color: '#ffffff',
-				borderColor: '#00DB7B',
-				borderWidth: 1,
-				lineStyle: {
-					color: "#00DB7B" //折线的颜色
-				},
+				//颜色渐变
+				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+					offset: 0,
+					color: '#3e9bf5'
+				}, {
+					offset: 0.8,
+					color: '#58b5f9'
+				}, {
+					offset: 1,
+					color: '#6dc9fd'
+				}])
 			}
 		},
-		data: dataListValue5,
+		stack: xLabel[0],
+		data: dataListValue1
 	}
-
-	var map6 = {
-			name: lengdList[1],
+	var map8 = {
+		name: lengdList[1],
 		type: 'line',
-		symbol: 'circle', //折线点设置为实心点
+		//		symbol: 'circle', //折线点设置为实心点
 		symbolSize: 8, //折线点的大小
 		yAxisIndex: 1,
 		itemStyle: {
 			normal: {
-				color: '#ffffff',
+				color: '#FFBE62',
 				borderColor: '#FFBE62',
 				borderWidth: 1,
 				lineStyle: {
@@ -843,34 +267,11 @@ export const echarsEnti = {
 				},
 			}
 		},
-		data: dataListValue6,
+		data: dataListValue8,
 	}
-
-	var map7 = {
-			name: lengdList[2],
-		type: 'line',
-		symbol: 'circle', //折线点设置为实心点
-		symbolSize: 8, //折线点的大小
-		yAxisIndex: 1,
-		itemStyle: {
-			normal: {
-				color: '#ffffff',
-				borderColor: '#5DEFF8',
-				borderWidth: 1,
-				lineStyle: {
-					color: "#21C1F5" //折线的颜色
-				},
-			}
-		},
-		data: dataListValue7,
-	}
-
+	searList.push(map0);
 	searList.push(map1);
-	searList.push(map2);
-	searList.push(map3);
-	searList.push(map5);
-	searList.push(map6);
-	searList.push(map7);
+	searList.push(map8);
 	console.log(searList);
 	console.log(xLabel);
 	console.log(allYear);
@@ -881,7 +282,8 @@ export const echarsEnti = {
 			show: true,
 			itemHeight: 7,
 			itemWidth: 13,
-			x: '14%',
+			x: '74%',
+			y: "0%",
 			data: lengdList,
 			textStyle: {
 				rich: {
@@ -905,7 +307,7 @@ export const echarsEnti = {
 		  ],
 		grid: {
 			right: '2%',
-			top: '15%',
+			top: '14%',
 			left: '2%',
 			bottom: '8%',
 			containLabel: true
@@ -918,30 +320,37 @@ export const echarsEnti = {
 		},
 		xAxis: [{
 			type: 'category',
+			splitLine: {
+				show: false
+			},
+			splitArea: {
+				show: false
+			},
 			axisTick: {
 				show: false,
+				alignWithLabel: false
 			},
 			"axisLabel": {
 				"interval": 0,
 				"show": true,
-				"splitNumber": 15,
 				"textStyle": {
 					"fontFamily": "微软雅黑",
 					"fontSize": 12,
 					"color": '#000'
 				}
 			},
-			data: xLabel,
+			data: xLabel
+		}, {
+			splitArea: {
+				show: false
+			},
 			splitLine: {
 				show: false
 			},
-			splitArea: {
-				show: false
-			}
-		}, {
 			position: 'bottom',
 			offset: 50,
 			axisLine: {
+				onZero: false,
 				show: false
 			},
 			axisTick: {
@@ -956,14 +365,12 @@ export const echarsEnti = {
 			axisLabel: {
 				inside: true
 			},
-			data: allYear,
-			splitArea: {
-				show: false
-			}
+			data: allYear
 		}],
 		yAxis: [{
-				name: "可支配收入(元)",
+				name: "用电量(千瓦时)",
 				type: 'value',
+				max: yMax,
 				axisLabel: {
 					textStyle: {
 						color: '#000'
@@ -974,7 +381,7 @@ export const echarsEnti = {
 						color: '#000000',
 					}
 				},
-				splitLine: {
+				splitLine: { //网格线
 					show: false
 				},
 				splitArea: {
@@ -996,7 +403,7 @@ export const echarsEnti = {
 						color: '#000000',
 					}
 				},
-				splitLine: {
+				splitLine: { //网格线
 					show: false
 				},
 				splitArea: {
@@ -1008,6 +415,393 @@ export const echarsEnti = {
 	};
     myCharts.setOption(option);
   }
+  ,
+  qyzjzEchars3: function (echarts, value,ret) {
+    const myCharts = echarts.init(value);
+	var electricityRateData = ret.electricityIndustryData; //全行业用电量与增速
+	//	var electricityRateData = electricityIndustryData1.reverse();
+	var allYear = [];
+	var xLabel = [];
+	var searList = [];
+	var dataListValue1 = [];
+	var dataListValue2 = [];
+	var dataListValue3 = [];
+
+	var dataListValue5 = [];
+	var dataListValue6 = [];
+	var dataListValue7 = [];
+	var lengdList = [];
+	var flag = false;
+	for(let i = 0; i < electricityRateData.length; i++) {
+		var industry = electricityRateData[i].industry; //名称
+		var monthRateData = electricityRateData[i].monthRateData; //数组值
+		lengdList.push(industry);
+		for(let k = 0; k < monthRateData.length; k++) {
+			var rate = monthRateData[k].rate;
+			var num = monthRateData[k].num;
+			var monthseason = monthRateData[k].monthseason;
+			if(i == 0) {
+				xLabel.push(monthseason);
+			}
+			if(i === 0) {
+				dataListValue1.push(num);
+				dataListValue5.push(rate);
+			} else if(i === 1) {
+				dataListValue2.push(num);
+				dataListValue6.push(rate);
+			} else if(i === 2) {
+				dataListValue3.push(num);
+				dataListValue7.push(rate);
+			}
+
+		}
+	}
+	var map1 = {
+		name: lengdList[0],
+		type: 'bar',
+		barWidth: 20, //柱子宽度
+		color: '#FFBE62',
+		stack: xLabel[0],
+		data: dataListValue1
+	}
+	var map2 = {
+		name: lengdList[1],
+		type: 'bar',
+		color: '#5DEFF8',
+		stack: xLabel[0],
+		barWidth: 20, //柱子宽度
+		data: dataListValue2
+	}
+	var map3 = {
+		name: lengdList[2],
+		type: 'bar',
+		color: '#21C1F5',
+		stack: xLabel[0],
+		barWidth: 20, //柱子宽度
+		data: dataListValue3
+	}
+	var map5 = {
+		type: 'line',
+		symbol: 'circle', //折线点设置为实心点
+		symbolSize: 8, //折线点的大小
+		yAxisIndex: 1,
+		itemStyle: {
+			normal: {
+				color: '#ffffff',
+				borderColor: '#FFBE62',
+				borderWidth: 1,
+				lineStyle: {
+					color: "#FFBE62" //折线的颜色
+				},
+			}
+		},
+		data: dataListValue5,
+	}
+
+	var map6 = {
+		type: 'line',
+		symbol: 'circle', //折线点设置为实心点
+		symbolSize: 8, //折线点的大小
+		yAxisIndex: 1,
+		itemStyle: {
+			normal: {
+				color: '#ffffff',
+				borderColor: '#5DEFF8',
+				borderWidth: 1,
+				lineStyle: {
+					color: "#5DEFF8" //折线的颜色
+				},
+			}
+		},
+		data: dataListValue6,
+	}
+
+	var map7 = {
+		type: 'line',
+		symbol: 'circle', //折线点设置为实心点
+		symbolSize: 8, //折线点的大小
+		yAxisIndex: 1,
+		itemStyle: {
+			normal: {
+				color: '#ffffff',
+				borderColor: '#21C1F5',
+				borderWidth: 1,
+				lineStyle: {
+					color: "#21C1F5" //折线的颜色
+				},
+			}
+		},
+		data: dataListValue7,
+	}
+	searList.push(map1);
+	searList.push(map2);
+	searList.push(map3);
+	searList.push(map5);
+	searList.push(map6);
+	searList.push(map7);
+	console.log(searList);
+	console.log(xLabel);
+
+	var option = {
+		legend: {
+			orient: 'horizontal',
+			show: true,
+			itemHeight: 7,
+			itemWidth: 13,
+			x: '14%',
+			data: lengdList,
+			textStyle: {
+				rich: {
+					a: {
+						width: 100,
+					}
+				},
+				textFont: '11px verdana'
+			}
+		},
+		grid: {
+			right: '2%',
+			top: '19%',
+			left: '5%',
+			bottom: '8%',
+			containLabel: true
+		},
+		tooltip: {
+			trigger: 'item',
+			axisPointer: { // 坐标轴指示器，坐标轴触发有效
+				type: 'line' // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		xAxis: [{
+			type: 'category',
+			axisTick: {
+				show: false,
+				alignWithLabel: false
+			},
+			"axisLabel": {
+				"interval": 0,
+				"show": true,
+				"splitNumber": 15,
+				"textStyle": {
+					"fontFamily": "微软雅黑",
+					"fontSize": 12,
+					"color": '#000'
+				}
+			},
+			data: xLabel
+		}],
+		yAxis: [{
+				name: '用电量(亿千瓦时)',
+				type: 'value',
+				axisLabel: {
+					textStyle: {
+						color: '#000'
+					}
+				},
+				axisLine: {
+					lineStyle: {
+						color: '#000000',
+					}
+				}
+			},
+			{
+				name: '增速(%)',
+				type: 'value',
+				axisLabel: {
+					formatter: '{value}%',
+					show: true,
+					textStyle: {
+						color: '#000'
+					}
+				},
+				axisLine: {
+					lineStyle: {
+						color: '#000000',
+					}
+				}
+			}
+		],
+		series: searList
+	};
+    myCharts.setOption(option);
+  }
+  ,
+  qyzjzEchars4: function (echarts, value,ret) {
+    const myCharts = echarts.init(value);
+	var electricityRateData = ret.electricityUrbanData; //城乡用电情况
+	var allYear = [];
+	var xLabel = [];
+	var searList = [];
+	var dataListValue1 = [];
+	var dataListValue2 = [];
+
+	var dataListValue5 = [];
+	var dataListValue6 = [];
+	var lengdList = [];
+	var flag = false;
+	for(let i = 0; i < electricityRateData.length; i++) {
+		var urben = electricityRateData[i].urben; //名称
+		var monthRateData = electricityRateData[i].monthRateData; //数组值
+		lengdList.push(urben);
+		for(let k = 0; k < monthRateData.length; k++) {
+			var rate = monthRateData[k].rate;
+			var num = monthRateData[k].num;
+			var monthseason = monthRateData[k].monthseason;
+			if(i == 0) {
+				xLabel.push(monthseason);
+			}
+			if(i === 0) {
+				dataListValue1.push(num);
+				dataListValue5.push(rate);
+			} else if(i === 1) {
+				dataListValue2.push(num);
+				dataListValue6.push(rate);
+			}
+
+		}
+	}
+	var map1 = {
+		name: lengdList[0],
+		type: 'bar',
+		barWidth: 20, //柱子宽度
+		color: '#FFBE62',
+		stack: xLabel[0],
+		data: dataListValue1
+	}
+	var map2 = {
+		name: lengdList[1],
+		type: 'bar',
+		color: '#21C1F5',
+		stack: xLabel[0],
+		barWidth: 20, //柱子宽度
+		data: dataListValue2
+	}
+	var map5 = {
+		type: 'line',
+		symbol: 'circle', //折线点设置为实心点
+		symbolSize: 8, //折线点的大小
+		yAxisIndex: 1,
+		itemStyle: {
+			normal: {
+				color: '#ffffff',
+				borderColor: '#FFBE62',
+				borderWidth: 1,
+				lineStyle: {
+					color: "#FFBE62" //折线的颜色
+				},
+			}
+		},
+		data: dataListValue5,
+	}
+
+	var map6 = {
+		type: 'line',
+		symbol: 'circle', //折线点设置为实心点
+		symbolSize: 8, //折线点的大小
+		yAxisIndex: 1,
+		itemStyle: {
+			normal: {
+				color: '#ffffff',
+				borderColor: '#21C1F5',
+				borderWidth: 1,
+				lineStyle: {
+					color: "#21C1F5" //折线的颜色
+				},
+			}
+		},
+		data: dataListValue6,
+	}
+	searList.push(map1);
+	searList.push(map2);
+	searList.push(map5);
+	searList.push(map6);
+	console.log(searList);
+	console.log(xLabel);
+
+	var option = {
+		legend: {
+			orient: 'horizontal',
+			show: true,
+			itemHeight: 7,
+			itemWidth: 13,
+			x: '14%',
+			data: lengdList,
+			textStyle: {
+				rich: {
+					a: {
+						width: 100,
+					}
+				},
+				textFont: '11px verdana'
+			}
+		},
+		grid: {
+			right: '2%',
+			top: '19%',
+			left: '5%',
+			bottom: '8%',
+			containLabel: true
+		},
+		tooltip: {
+			trigger: 'item',
+			axisPointer: { // 坐标轴指示器，坐标轴触发有效
+				type: 'line' // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		xAxis: [{
+			type: 'category',
+			axisTick: {
+				show: false,
+				alignWithLabel: false
+			},
+			"axisLabel": {
+				"interval": 0,
+				"show": true,
+				"splitNumber": 15,
+				"textStyle": {
+					"fontFamily": "微软雅黑",
+					"fontSize": 12,
+					"color": '#000'
+				}
+			},
+			data: xLabel
+		}],
+		yAxis: [{
+				name: '用电量(亿千瓦时)',
+				type: 'value',
+				axisLabel: {
+					textStyle: {
+						color: '#000'
+					}
+				},
+				axisLine: {
+					lineStyle: {
+						color: '#000000',
+					}
+				}
+			},
+			{
+				name: '增速(%)',
+				type: 'value',
+				axisLabel: {
+					formatter: '{value}%',
+					show: true,
+					textStyle: {
+						color: '#000'
+					}
+				},
+				axisLine: {
+					lineStyle: {
+						color: '#000000',
+					}
+				}
+			}
+		],
+		series: searList
+	};
+    myCharts.setOption(option);
+  }
+
 
 
 }

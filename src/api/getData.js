@@ -211,6 +211,16 @@ export const httpMethod = {
     getCounty: function (params) {
         return get("hgjjAppInsideController.action?getCounty", params);
     },
+    //获取工业增加值
+    getIndustrialValueAdded: function (params) {
+        return get("hgjjAppInsideController.action?getIndustrialValueAdded", params);
+    },
+    //获取海关进出口总额
+    getCustomsTrading: function (params) {
+        return get("hgjjAppInsideController.action?getCustomsTrading", params);
+    },
+    
+    
     
     
 
