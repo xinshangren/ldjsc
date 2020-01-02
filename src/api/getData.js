@@ -223,7 +223,9 @@ export const httpMethod = {
     getCustomsTrading: function (params) {
         return get("hgjjAppInsideController.action?getCustomsTrading", params);
     },
-    
+    getMtTjQuantity: function (params){
+        return get("nytsAppGbInsideController.action?getMtTjQuantity",params);
+    }
     
     
     

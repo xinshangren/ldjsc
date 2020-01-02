@@ -1,9 +1,12 @@
 
 //定义js全局变量 名称
 export const nytsMtGkJs = {
+	
 
     //煤炭概况第一个统计图
-    showMtgk_echar1: function (list){
+    showMtgk_echar1: function (echarts, ref,list){
+		console.log(echarts, ref,list);
+		const myCharts = echarts.init(ref);
         
     var nameList = ['工业总产值', '现价销售产值'];
 
@@ -15,8 +18,8 @@ export const nytsMtGkJs = {
 		var enti = list[i];
 		var date_month = enti.date_month;
 		var month = date_month.split('-')[1];
-		var gyzcz = checkStrOfZero(enti.gyzcz);
-		var xscz = checkStrOfZero(enti.xscz);
+		var gyzcz = enti.gyzcz;
+		var xscz = enti.xscz;
 		if(gyzcz > 0) {
 			yvalue1.push(parseFloat(gyzcz / 10000).toFixed(2));
 		} else {
@@ -156,10 +159,7 @@ export const nytsMtGkJs = {
 		]
 	};
 
-	var yuanChartdiv = document.getElementById('nyts_nymtgk_echars_id')
-	var yuanChart = echarts.init(yuanChartdiv, 'macarons');
-	yuanChart.clear();
-	yuanChart.setOption(option);
+	myCharts.setOption(option);
     }
 
 
