@@ -15,34 +15,198 @@ export const echarsEnti = {
     return temp;
   },
   showjmrjsrEchars1: function (echarts, value,list) {
+	const myCharts = echarts.init(value);
+	myCharts.clear();
+	var dataShadow = [];
+	var dataAxis = [];
+	var dataAP = [];
+	for(let i = 0; i < list.length; i++) {
+		var name = list[i].name;
+		var indexdata = list[i].indexdata;
+		var yonydata = list[i].yonydata;
+		dataAxis.push(name);
+		dataAP.push(yonydata);
+	}
+
+	var yMax = Math.max.apply(null, dataAP);
+	for(var i = 0; i < dataAP.length; i++) {
+		if(dataAP[i] < 0) {
+			dataShadow.push(dataAP[i] - 5);
+		} else {
+			dataShadow.push(dataAP[i] + 5);
+		}
+
+	}
+	var option = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: { // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		grid: {
+			top: 10,
+			bottom: 30,
+			right:30,
+			left: 10
+		},
+		xAxis: {
+			position: 'right',
+			type: 'category',
+			axisLine: {
+				show: false
+			},
+			axisLabel: {
+				show: true
+			},
+			axisTick: {
+				show: false
+			},
+			splitLine: {
+				show: false
+			},
+			data: dataAxis,
+			axisLabel: {
+				interval: 0
+			}
+
+		},
+		yAxis: {
+			type: 'value',
+			position: 'right',
+			splitLine: {
+				lineStyle: {
+					type: 'dashed'
+				}
+			},
+			splitArea: {
+				show: false
+			}
+		},
+		series: [{ // For shadow
+				type: 'bar',
+				barWidth: 25, //柱子宽度
+				itemStyle: {
+					normal: {
+						color: function(params) {
+							var colorList = ['#FDF4ED'];
+							return colorList[params.dataIndex]
+						}
+					}
+				},
+				barGap: '-80%',
+				barCategoryGap: '40%',
+				data: dataShadow,
+				animation: false
+			},
+			{
+				type: 'bar',
+				barWidth: 18, //柱子宽度
+				label: {
+					normal: {
+						show: true
+					}
+				},
+				itemStyle: {
+					normal: {
+						label: {
+							show: true, //开启显示
+							position: 'top', //在上方显示
+							textStyle: { //数值样式
+								color: '#000',
+								fontSize: 14
+							},
+							formatter: function(a) {
+								var index = a.dataIndex;
+								var value = dataAP[index];
+								return value + '%';
+							}
+						},
+						color: function(params) {
+							var colorList = [new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+								offset: 0,
+								color: '#ffffff'
+							}, {
+								offset: 1,
+								color: '#EE721B'
+							}]), new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+								offset: 0,
+								color: '#ffffff'
+							}, {
+								offset: 1,
+								color: '#EE721B'
+							}]), new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+								offset: 0,
+								color: '#ffffff'
+							}, {
+								offset: 1,
+								color: '#EE721B'
+							}]), new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+								offset: 0,
+								color: '#ffffff'
+							}, {
+								offset: 1,
+								color: '#EE721B'
+							}]), new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+								offset: 0,
+								color: '#ffffff'
+							}, {
+								offset: 1,
+								color: '#EE721B'
+							}]), new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+								offset: 0,
+								color: '#ffffff'
+							}, {
+								offset: 1,
+								color: '#EE721B'
+							}]), new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: '#ffffff'
+							}, {
+								offset: 1,
+								color: '#2DDA9D'
+							}])];
+							return colorList[params.dataIndex]
+						},
+						tooltip: {
+							trigger: 'axis',
+							axisPointer: { // 坐标轴指示器，坐标轴触发有效
+								type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+							}
+						}
+					},
+
+				},
+				data: dataAP
+			}
+		]
+	};
+		myCharts.setOption(option);
+	},
+  showjmrjsrEchars2: function (echarts, value, list) {
     const myCharts = echarts.init(value);
-	var provideNumber = 5; //x轴一行显示几个字；
-	var xLabel = ['城镇居民可支配收入', '农村居民可支配收入'];
+    var xLabel = [];
 	var maxValueList = [];
 	var valueList = [];
 	for(let i = 0; i < list.length; i++) {
-		if(i > 0) {
-			var statisname = list[i].statisname;
-			var indexdata = parseFloat((list[i].indexdata) / 10000).toFixed(2);
-			var yonydata = list[i].yonydata;
-			valueList.push(indexdata);
-			//			xLabel.push(statisname);
-		}
-
+		var statisname = list[i].name;
+		var indexdata = parseFloat((list[i].indexdata) / 10000).toFixed(2);
+		var yonydata = list[i].yonydata;
+		valueList.push(indexdata);
+		xLabel.push(statisname);
 	}
 	var yMax = Math.max.apply(null, valueList);
 	for(let j = 0; j < valueList.length; j++) {
 		maxValueList.push(yMax);
 	}
-	console.log(maxValueList);
 	console.log(valueList);
 	console.log(xLabel);
 
 	var option = {
 		grid: {
-			top: '22%',
-			left: '2%',
-			right: '5%',
+			top: '15%',
+			left: '1%',
+			right: '1%',
 			bottom: '2%',
 			containLabel: true
 		},
@@ -55,40 +219,15 @@ export const echarsEnti = {
 			splitArea: {
 				show: false
 			},
-			axisLabel: {
-				showMaxLabel: true,
-				showMinLabel: true,
+			axisLabel: {        
 				show: true,
-				interval: 0, //横轴信息全部显示
-				textStyle: {
-					color: '#000000', //文字颜色
-					fontSize: 13
-				},
-				formatter: function(params) {
-					var newParamsName = "";
-					var paramsNameNumber = params.length;
-					var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
-					if(paramsNameNumber > provideNumber) {
-						for(var p = 0; p < rowNumber; p++) {
-							var tempStr = "";
-							var start = p * provideNumber;
-							var end = start + provideNumber;
-							if(p == rowNumber - 1) {
-								tempStr = params.substring(start, paramsNameNumber);
-							} else {
-								tempStr = params.substring(start, end) + "\n";
-							}
-							newParamsName += tempStr;
-						}
-
-					} else {
-						newParamsName = params;
-					}
-					return newParamsName
+				textStyle: {	
+					fontSize:'11'
 				}
-			}
+			},
 		},
 		yAxis: {
+			name: '亿元',
 			type: 'value',
 			max: yMax,
 			splitLine: {
@@ -98,13 +237,11 @@ export const echarsEnti = {
 				show: false
 			}
 		},
-		series: [,
-			{ // 背景色
+		series: [{ // 背景色
 				type: 'pictorialBar',
 				stack: '总量',
-				barWidth: 30, //柱子宽度
 				symbol: 'fixed',
-				symbolSize: [60, 10],
+				symbolSize: [30, 5],
 				symbolMargin: 2,
 				symbolRepeat: 'repeat',
 				symbolBoundingData: 300,
@@ -118,12 +255,12 @@ export const echarsEnti = {
 							position: 'top', //在上方显示
 							textStyle: { //数值样式
 								color: '#2AC3F6',
-								fontSize: 14
+								fontSize: 12
 							},
 							formatter: function(a) {
 								var index = a.dataIndex;
 								var value = valueList[index];
-								return value + '万元';
+								return value + '';
 							}
 						}
 					}
@@ -132,9 +269,8 @@ export const echarsEnti = {
 			{ // 背景色
 				type: 'pictorialBar',
 				stack: '总量',
-				barWidth: 30, //柱子宽度
 				symbol: 'fixed',
-				symbolSize: [60, 10],
+				symbolSize: [30, 5],
 				symbolMargin: 2,
 				symbolRepeat: 'repeat',
 				symbolBoundingData: 300,
@@ -148,187 +284,6 @@ export const echarsEnti = {
 			}
 		]
 	};
-    myCharts.setOption(option);
-  },
-  showjmrjsrEchars2: function (echarts, value, list) {
-    const myCharts = echarts.init(value);
-    var curVal = 0;
-	for(let i = 0; i < list.length; i++) {
-		var statisname = list[i].statisname;
-		if(statisname == '居民人均可支配收入（元）') {
-			curVal = list[i].yonydata;
-			console.log('curVal===' + curVal);
-		}
-
-	}
-
-	var angle = [220, -40];
-
-	var option = {
-		title: {
-			text: '居民人均增长率',
-			bottom: 'left',
-			left: 'center',
-			textStyle: {
-				//文字颜色
-				color: '#000',
-				//字体风格,'normal','italic','oblique'
-				fontStyle: 'normal',
-				//字体系列
-				fontFamily: 'sans-serif',
-				//字体大小
-				fontSize: 15
-			}
-		},
-		grid: {
-			top: '10%',
-			left: '2%',
-			right: '28%',
-			bottom: '2%',
-			containLabel: true
-		},
-		backgroundColor: '#fff',
-		tooltip: {
-			show: false,
-			formatter: "{a} <br/>{b} : {c}%"
-		},
-		series: [{
-			name: '最外层环仪表盘',
-			type: "gauge",
-			min: -50,
-			max: 50,
-			startAngle: angle[0],
-			endAngle: angle[1],
-			splitNumber: 10,
-			axisLine: {
-				lineStyle: {
-					color: [
-						[1, "#c1c3c5"]
-					],
-					width: 1
-				}
-			},
-			axisTick: {
-				lineStyle: {
-					color: "#fff",
-					width: 2
-				},
-				length: 0,
-				splitNumber: 1
-			},
-			axisLabel: {
-				distance: -40,
-				formatter: function(v) {
-					if(v == 60) {
-						return '{a|' + v + '}';
-					} else if(v == 85) {
-						return '{b|' + v + '}';
-					} else {
-						return v;
-					};
-				},
-				textStyle: {
-					color: "#bbb"
-				},
-				rich: {
-					a: {
-						color: '#fbe010'
-					},
-					b: {
-						color: '#3fa7dc'
-					}
-				}
-			},
-			splitLine: {
-				show: true,
-				length: 20,
-				lineStyle: {
-					color: '#fff',
-					width: 2
-				}
-			},
-			itemStyle: {
-				normal: {
-					color: "#818488",
-					shadowColor: 'rgba(0, 0, 0, 0.5)',
-					shadowBlur: 10
-				}
-			},
-			detail: {
-				formatter: function(v) {
-					console.log('v=====' + v);
-					if(isNaN(v)) {
-						return "-";
-					} else {
-						return v + "%";
-					}
-					return v;
-				},
-				offsetCenter: [0, "60%"],
-				textStyle: {
-					fontSize: 17,
-					color: "#333"
-				}
-			},
-			title: {
-				show: false
-			},
-			pointer: {
-				length: '85%'
-			},
-			data: [{
-				value: curVal
-			}]
-		}, {
-			name: "内环仪表盘四段颜色",
-			type: "gauge",
-			min: 0,
-			max: 100,
-			radius: '69%',
-			startAngle: angle[0],
-			endAngle: angle[1],
-			splitNumber: 10,
-			axisLine: {
-				lineStyle: {
-					color: [
-						[0, '#58e481'],
-						[0.1, '#88e792'],
-						[0.2, "#bee58a"],
-						[0.3, '#e5e58a'],
-						[0.4, '#fbe48a'],
-						[0.5, "#ffd27f"],
-						[0.6, '#ffb36b'],
-						[0.7, '#fb9255'],
-						[0.8, "#eb673a"],
-						[0.9, "#d9391c"],
-						[1, "#d9391c"]
-					],
-					width: 10
-				}
-			},
-			axisTick: {
-				show: false
-			},
-			axisLabel: {
-				show: false
-			},
-			splitLine: {
-				show: true,
-				length: 15,
-				lineStyle: {
-					color: '#fff',
-					width: 2
-				}
-			},
-			pointer: {
-				length: 0
-			},
-			detail: {
-				show: false
-			},
-		}]
-	}
-
     myCharts.setOption(option);
   },
   showjmrjsrEchars3: function (echarts, value, list) {

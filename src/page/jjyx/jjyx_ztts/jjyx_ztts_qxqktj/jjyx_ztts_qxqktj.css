@@ -131,3 +131,9 @@
     background: #4ba9ef;display: flex;
     border-radius: 0px 35px 35px 0px;line-height: 22px;font-size: 15px;padding: 3px 10px;
 }
+.menu_li_img{
+    height: 12px;margin-top: 4px;margin-right: 5px;margin-left: 5px;
+}
+.menu_li_div{
+    color: #333333;font-size: 15px;
+}
