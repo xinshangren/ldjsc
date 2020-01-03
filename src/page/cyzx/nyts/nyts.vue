@@ -24,7 +24,7 @@
       </div>
     </div>
     <van-sticky :offset-top="50">
-      <div style="display:flex;border-bottom:1px solid #f3f3f3;">
+      <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
         <div class="twoLevel_left_div">
           <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
           <div style="font-size: 14px;line-height: 40px;margin-left: 3px;">煤炭</div>
@@ -47,11 +47,80 @@
           <van-tab title="项目列表"></van-tab>
         </van-tabs>
       </div>
+      <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
+        <div class="twoLevel_left_div">
+          <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
+          <div style="font-size: 14px;line-height: 40px;margin-left: 3px;">煤炭</div>
+          <img
+            style="height: 14px;margin-top: 14px;"
+            src="../../../assets/img/air_home_tab_arrow.png"
+          />
+        </div>
+        <van-tabs
+          @click="smallTab_select_xny"
+          id="tabId"
+          title-active-color="#2796e7"
+          title-inactive-color="#333333"
+          line-width="75"
+          v-model="airactive"
+          style="width:75%;"
+        >
+          <van-tab title="概况"></van-tab>
+          <van-tab title="企业列表"></van-tab>
+          <van-tab title="项目列表"></van-tab>
+        </van-tabs>
+      </div>
+      <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
+        <div style="width:30%;" class="twoLevel_left_div" >
+          <img style="height: 30px; margin-top: 6px;margin-left: 10px;" src="../../../assets/img/icon1-mcq.png" />
+          <div style="font-size: 14px;line-height: 40px;margin-left: 3px;">煤层气</div>
+          <img
+            style="height: 14px;margin-top: 14px;"
+            src="../../../assets/img/air_home_tab_arrow.png"
+          />
+        </div>
+        <van-tabs
+          id="tabId1"
+          title-active-color="#2796e7"
+          title-inactive-color="#333333"
+          line-width="70"
+          v-model="airactive2"
+          style="width:75%;"
+        >
+          <van-tab title="概况"></van-tab>
+          <van-tab title="企业列表"></van-tab>
+        </van-tabs>
+      </div>
+      <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
+        <div class="twoLevel_left_div">
+          <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
+          <div style="font-size: 14px;line-height: 40px;margin-left: 3px;">煤炭</div>
+          <img
+            style="height: 14px;margin-top: 14px;"
+            src="../../../assets/img/air_home_tab_arrow.png"
+          />
+        </div>
+        <van-tabs
+          @click="smallTab_select_nyxc"
+          id="tabId"
+          title-active-color="#2796e7"
+          title-inactive-color="#333333"
+          line-width="75"
+          v-model="airactive"
+          style="width:75%;"
+        >
+          <van-tab title="概况"></van-tab>
+          <van-tab title="企业列表"></van-tab>
+          <van-tab title="项目列表"></van-tab>
+        </van-tabs>
+      </div>
     </van-sticky>
     <div>
-      <child1 v-if="airactive==0"></child1>
-      <child2 v-if="airactive==1"></child2>
-      <child3 v-if="airactive==2"></child3>
+      <child1 v-if="flag==1&&airactive==0"></child1>
+      <child2 v-if="flag==1&&airactive==1"></child2>
+      <child3 v-if="flag==1&&airactive==2"></child3>
+      <child7 v-if="flag==3&&airactive2==0"></child7>
+      <child8 v-if="flag==3&&airactive2==1"></child8>
     </div>
 </div>
 
@@ -62,6 +131,8 @@ import echarts from "echarts";
 import child1 from "@/page/cyzx/nyts/nyts_mt/nyts_mt_gk/nyts_mt_gk.vue";
 import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
 import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
+import child7 from "@/page/cyzx/nyts/nyts_mcq/nyts_mcq_gk/nyts_mcq_gk.vue";
+import child8 from "@/page/cyzx/nyts/nyts_mcq/nyts_mcq_qylb/nyts_mcq_qylb.vue";
 import $ from "jquery";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
@@ -72,7 +143,9 @@ export default {
   components: {
     child1,
     child2,
-    child3
+    child3,
+    child7,
+    child8
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
@@ -84,6 +157,8 @@ export default {
   data() {
     return {
       airactive: 0,
+      airactive2: 0,
+      flag:1,
       indexTabImg1: require("../../../assets/img/mt2_tab.png"),
       indexTabImg2: require("../../../assets/img/xny1_tab.png"),
       indexTabImg3: require("../../../assets/img/mcq1_tab.png"),
@@ -95,6 +170,8 @@ export default {
   },
   mounted() {
     //this.getListData();
+    $('.child_tab').hide();
+    $('.child_tab ').eq(0).show();
   },
   methods: {
     //空气子选项卡选择
@@ -115,8 +192,20 @@ export default {
           break;
       }
     },
+    //新能源选项卡选择
+    smallTab_select_xny: function(name, title) {
+     
+    },
+    //能源相册子选项卡选择
+    smallTab_select_nyxc: function(name, title) {
+     
+    },
+    
     //选择顶部的选项卡
     selectIndexTab: function(index) {
+      $('.child_tab').hide();
+      $('.child_tab ').eq(index-1).show();
+      this.flag=index;
       switch (index) {
         case 1:
           this.indexTabImg1 = require("../../../assets/img/mt2_tab.png");

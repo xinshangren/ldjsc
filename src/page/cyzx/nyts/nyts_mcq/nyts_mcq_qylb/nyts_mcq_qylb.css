@@ -1,0 +1,85 @@
+.threeTab{
+    width: 100%;
+    height: 90px;
+    display: flex;
+    margin-top: 10px;
+}
+.oneTab{
+    width: 33%;
+    height: 70px;
+    background:url("../../../../../assets/img/mt_top_jt.png") no-repeat;
+    background-size: 100% 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.twoTab{
+    width: 33%;
+    height: 70px;
+    background:url("../../../../../assets/img/mt_top_qy.png") no-repeat;
+    background-size: 100% 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.thirdTab{
+    width: 33%;
+    height: 70px;
+    background:url("../../../../../assets/img/mt_top_xm.png") no-repeat;
+    background-size: 100% 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.fontStyle{
+	font-family: MicrosoftYaHei;
+	font-size: 20px;
+    color: #333333;
+    margin-left: 50%;
+}
+.dateSelect{
+  
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+
+}
+.sx{
+
+        width: 4px;
+        height: 20px;
+        background-color: #3ca1ec;
+        border-radius: 2px;
+        line-height: 60px;
+        margin-left: 15px;
+
+}
+.tj_z{
+
+	font-family: MicrosoftYaHei;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 48px;
+	letter-spacing: 0px;
+    color: #333333;
+    margin-left: 10px;
+}
+.timeYear{
+    font-family: MicrosoftYaHei-Bold;
+	font-size: 20px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 48px;
+	letter-spacing: 0px;
+    color: #3ca1ec;
+    margin-left: 10px;
+}
+.xl{
+    width: 13px;
+    height: 13px;
+    margin-top: 5px;
+}
+.van-tabs__line{
+    background-color:#3097FB;
+    width: 61px;
+    margin-bottom:2px;
+}
