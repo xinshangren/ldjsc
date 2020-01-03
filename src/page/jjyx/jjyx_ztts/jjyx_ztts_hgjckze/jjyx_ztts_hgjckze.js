@@ -86,7 +86,7 @@ export const echarsEnti = {
 	};
     myCharts.setOption(option);
   },
-  showHgckjkzeEchars2: function (echarts, value, ret) {
+  showHgckjkzeEchars2: function (echarts, value, ret,downimg,upimg) {
     const myCharts = echarts.init(value);
 	var dataShadow = [];
 	var dataAxis = [];
@@ -112,9 +112,9 @@ export const echarsEnti = {
 			}
 		},
 		grid: {
-			right: '2%',
+			right: '5%',
 			top: '0%',
-			left: '2%',
+			left: '5%',
 			bottom: '8%',
 			containLabel: true
 		},
@@ -162,33 +162,50 @@ export const echarsEnti = {
 					} else {
 						isFlag = false;
 					}
-					if(isFlag) {
-						return value + '\t' + tbValue + "%\t" + '{warnValue|}';
-					} else {
-						return value + '\t' + tbValue + "%\t" + '{warnValue1|}';
-					}
+					if (tbValue == '-') {
+						return "{a|" + value + "}" + "\t" + "{c|" + tbValue + "}";
+					  } else {
+						if (isFlag) {
+						  return "{a|" + value + "}" + "\t" + "{c|" + tbValue + "%}" + "\t" + "{warnValue|}";
+						} else {
+						  return "{a|" + value + "}" + "\t" + "{b|" + tbValue + "%}" + "\t" + "{warnValue1|}";
+						}
+					  }
 
 				},
 				// margin: 20,
-				rich: {
+				 // margin: 20,
+				 rich: {
 					//这里的rich，下面有解释
 					warnValue: {
-						//这里的warnValue对应上面的标签名
-						height: 10,
-						align: 'center',
-						backgroundColor: {
-							image: '../img/hgjj_up_jt_bg.png' //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
-						}
+					  //这里的warnValue对应上面的标签名
+					  height: 10,
+					  align: 'center',
+					  backgroundColor: {
+						image:upimg //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
+					  }
 					},
 					warnValue1: {
-						//这里的warnValue对应上面的标签名
-						height: 10,
-						align: 'center',
-						backgroundColor: {
-							image: '../img/hgjj_down_jt_bg.png' //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
-						}
+					  //这里的warnValue对应上面的标签名
+					  height: 10,
+					  align: 'center',
+					  backgroundColor: {
+						image: downimg //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
+					  }
+					},
+					a: {
+					  color: '#000',
+					  fontSize: 13
+					},
+					b: {
+					  color: '#14d692',
+					  fontSize: 13
+					},
+					c: {
+					  color: '#f30011',
+					  fontSize: 13
 					}
-				}
+				  }
 			}
 		},
 		series: [{ // For shadow

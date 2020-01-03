@@ -1,20 +1,20 @@
 //获取第1个图表
 export const echarsEnti = {
-  createEcharsOne: function (echarts, value, dataEntity) {
+  createEcharsOne: function (echarts, value, dataEntity, httpMethod) {
     const myCharts = echarts.init(value);
 
     var dataList = [];
     var value = {
       name: "前期",
-      value: dataEntity.gcslqq
+      value: httpMethod.checkStrOfZeroFun(dataEntity.gcslqq)
     }
     var value1 = {
       name: "新建",
-      value: dataEntity.gcslxinj
+      value: httpMethod.checkStrOfZeroFun(dataEntity.gcslxinj)
     }
     var value2 = {
       name: "续建",
-      value: dataEntity.gcslxj
+      value: httpMethod.checkStrOfZeroFun(dataEntity.gcslxj)
     }
     dataList.push(value);
     dataList.push(value1);
@@ -44,8 +44,8 @@ export const echarsEnti = {
       },
       color: ['#3ca1ec', '#3ecbb2', '#faad14'],
       legend: {
-        itemHeight  :9,
-        itemWidth:9,
+        itemHeight: 9,
+        itemWidth: 9,
         orient: 'vertical',
         left: '60%',  //图例距离左的距离
         y: 'center',
@@ -57,13 +57,22 @@ export const echarsEnti = {
               target = dataList[i].value
             }
           }
-          var arr = [
-            '{b|' + name + '}',
-            '{a|' + ((target / total) * 100).toFixed(2) + '%}{a|'+target+'个}',
-          ]
-          var bfb = parseInt((target / total) * 100).toFixed(0);
-          // return name + " " + bfb + "% " + target;
-          return arr.join('\n');
+          if (!(target == 0 && total == 0)) {
+            var arr = [
+              '{b|' + name + '}',
+              '{a|' + ((target / total) * 100).toFixed(2) + '%}{a|' + target + '个}',
+            ]
+            // return name + " " + bfb + "% " + target;
+            return arr.join('\n');
+          } else {
+            var arr = [
+              '{b|' + name + '}',
+              '{a|0%}{a|' + target + '个}',
+            ]
+            // return name + " " + bfb + "% " + target;
+            return arr.join('\n');
+          }
+
         },
         textStyle: {
           rich: {

@@ -186,9 +186,9 @@ export default {
       currentYear3:
         new Date().getFullYear() +
         "-" +
-        (new Date().getMonth() + 1) +
+        ((new Date().getMonth() + 1)<10?"0"+(new Date().getMonth() + 1):(new Date().getMonth() + 1)) +
         "-" +
-        new Date().getDate(),
+        ((new Date().getDate())<10?"0"+new Date().getDate():new Date().getDate()),
       currentYear4: new Date().getFullYear()
     };
   },
@@ -250,7 +250,7 @@ export default {
     this.provincialAirRanking("年", this.currentYear1);
     this.cityAirRanking("年", this.currentYear2);
     this.trendsInAirQuality("小时", this.currentYear3);
-    this.percentageOfGoodDays('年', this.currentYear4);
+    this.percentageOfGoodDays("年", this.currentYear4);
   },
   methods: {
     //判断是选的哪个图表时间
@@ -304,10 +304,10 @@ export default {
             number = $(this).index() + 1;
           }
         });
-        if(number==1){
-          number=3;
-        }else{
-          number=2;
+        if (number == 1) {
+          number = 3;
+        } else {
+          number = 2;
         }
       }
 
@@ -318,7 +318,13 @@ export default {
       // 时间格式化 2019-09-08
       let year = time.getFullYear();
       let month = time.getMonth() + 1;
+      if (month < 10) {
+        month = "0" + month;
+      }
       let day = time.getDate();
+      if (day < 10) {
+        day = "0" + day;
+      }
       return year;
     },
 
@@ -360,8 +366,8 @@ export default {
         case 3: //第三个图表
           break;
         case 4: //第四个图表
-         this.currentYear4 = date;
-         this.percentageOfGoodDays('年', this.currentYear4);
+          this.currentYear4 = date;
+          this.percentageOfGoodDays("年", this.currentYear4);
           break;
         default:
           break;
@@ -385,8 +391,8 @@ export default {
           this.trendsInAirQuality("天", this.currentYear3);
           break;
         case 4: //第四个图表
-         this.currentYear4 = date;
-         this.percentageOfGoodDays('月', this.currentYear4);
+          this.currentYear4 = date;
+          this.percentageOfGoodDays("月", this.currentYear4);
           break;
         default:
           break;
@@ -411,7 +417,7 @@ export default {
           break;
         case 4: //第四个图表
           this.currentYear4 = date;
-         this.percentageOfGoodDays('日', this.currentYear4);
+          this.percentageOfGoodDays("日", this.currentYear4);
           break;
         default:
           break;
@@ -533,15 +539,15 @@ export default {
           console.log("44444");
           var code = res.success;
           if (code == "1") {
-            var data=res.data;
-            this.showEcharsView4(echarts, this.$refs.myCharts4,data);
+            var data = res.data;
+            this.showEcharsView4(echarts, this.$refs.myCharts4, data);
           }
         })
         .catch(err => {});
     },
     //优良天数占比
-    showEcharsView4: function(echarts, value,data) {
-      hbgjAirJs.showLbEcharsFour(echarts, value,data);
+    showEcharsView4: function(echarts, value, data) {
+      hbgjAirJs.showLbEcharsFour(echarts, value, data);
     }
   }
 };

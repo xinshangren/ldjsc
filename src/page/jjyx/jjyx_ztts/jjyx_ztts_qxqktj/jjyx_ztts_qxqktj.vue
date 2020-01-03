@@ -2,7 +2,7 @@
   <div>
   <div
       id="show_menu_Id"
-      style="position: fixed;left: 20px;background: #ffffff;top: 127px;padding: 3px;z-index:99;"
+      style="position: fixed;left: 20px;background: #ffffff;top: 127px;padding: 3px;z-index:100;"
     >
       <img style="height:23px;" src="../../../../assets/img/data_list_menu.png" />
     </div>
@@ -25,7 +25,7 @@
         </li>
         <li @click="returnCom(4)" class="menuliClass" style="display:flex;margin-top:4px;">
           <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          <div class="menu_li_div">固定资产投资1-7月</div>
+          <div class="menu_li_div">固定资产投资</div>
         </li>
         <li @click="returnCom(5)" class="menuliClass" style="display:flex;margin-top:4px;">
           <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
@@ -41,14 +41,14 @@
     <!--生产总值表格-->
     <div style="background:#ffffff;height:337px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div" style="margin-top: 4px;">生产总值</div>
-        <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+        <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
         <div id="sczzTable" style="border: 1px solid #cccccc;width: 93%;margin: auto;margin-top: 20px;">
         <div
             class="ui-row-flex ui-whitespace"
             style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
           >
             <div class="ui-col ui-col" style="text-align: center;">地区</div>
-            <div class="ui-col ui-col" style="text-align: center;">1-3季度</div>
+            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度</div>
             <div class="ui-col ui-col" style="text-align: center;">
               <div style="margin-left: 5px;">同比±%</div>
             </div>
@@ -80,14 +80,14 @@
     <!--社会消费品零售总额-->
     <div style="background:#ffffff;height:337px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div" style="margin-top: 4px;">社会消费品零售总额(万元)</div>
-        <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+        <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
         <div id="lszeTable" style="border: 1px solid #cccccc;width: 93%;margin: auto;margin-top: 20px;">
         <div
             class="ui-row-flex ui-whitespace"
             style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
           >
             <div class="ui-col ui-col" style="text-align: center;">地区</div>
-            <div class="ui-col ui-col" style="text-align: center;">1-3季度</div>
+            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度</div>
             <div class="ui-col ui-col" style="text-align: center;">
               <div style="margin-left: 5px;">同比±%</div>
             </div>
@@ -119,7 +119,7 @@
       <!--工业增加值增加速度-->
      <div style="background:#ffffff;height:337px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div" style="margin-top: 4px;">工业增加值增加速度(%)</div>
-        <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+        <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
         <div id="zjsdTable" style="border: 1px solid #cccccc;width: 93%;margin: auto;margin-top: 20px;">
         <div
             class="ui-row-flex ui-whitespace"
@@ -157,7 +157,7 @@
      <!--固定资产投资1-7月-->
      <div style="background:#ffffff;height:600px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div" style="margin-top: 8px;">固定资产投资（1-{{indexMonth}}月）</div>
-        <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+        <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
         <!--各区县固定资产投资金额-->
         <div id="gdzcTable" style="margin-top: 20px;font-size: 13px;"> 
           <div style="text-align: center;">各区县固定资产投资金额（万元）</div>
@@ -212,8 +212,8 @@
    
     <!--一般公共预算收入-->
     <div style="background:#ffffff;height:650px;width:100%;margin-top:8px;padding-top:7px;">
-      <div class="echars_titile_div" style="margin-top: 4px;">一般公共预算收入(1-7月)</div>
-      <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+      <div class="echars_titile_div" style="margin-top: 4px;">一般公共预算收入(1-{{indexMonth}}月)</div>
+      <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
       <div id="ggysTable" style="margin-top: 20px;">
         <div style="text-align: center;font-size: 13px;">各区县公共预算收入金额（万元）</div>
         <div style="width: 93%;margin: auto;margin-top: 12px;">
@@ -323,7 +323,7 @@
      <!--人均可支配收入（元）-->
      <div style="background:#ffffff;height:976px;width:100%;margin-top:8px;padding-top:7px;">
       <div class="echars_titile_div" style="margin-top: 4px;">人均可支配收入（元）</div>
-      <div class="van-hairline--bottom"style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
+      <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
       <!--居民人均可支配收入--> 
       <div id="rjzpTable" style="width: 93%;margin: auto;margin-top: 15px;">
         <span style="font-size: 13px;" >居民人均可支配收入</span>
@@ -333,7 +333,7 @@
             style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
           >
             <div class="ui-col ui-col" style="text-align: center;">地区</div>
-            <div class="ui-col ui-col" style="text-align: center;">1-2季度</div>
+            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度</div>
             <div class="ui-col ui-col" style="text-align: center;">
               <div style="margin-left: 5px;">同比±%</div>
             </div>
@@ -371,7 +371,7 @@
             style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
           >
             <div class="ui-col ui-col" style="text-align: center;">地区</div>
-            <div class="ui-col ui-col" style="text-align: center;">1-2季度</div>
+            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度</div>
             <div class="ui-col ui-col" style="text-align: center;">
               <div style="margin-left: 5px;">同比±%</div>
             </div>
@@ -410,7 +410,7 @@
             style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
           >
             <div class="ui-col ui-col" style="text-align: center;">地区</div>
-            <div class="ui-col ui-col" style="text-align: center;">1-2季度</div>
+            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度</div>
             <div class="ui-col ui-col" style="text-align: center;">
               <div style="margin-left: 5px;">同比±%</div>
             </div>
@@ -440,8 +440,6 @@
         </div>  
        </div>
     </div>
-  
-  </div>
   </div>
 </template>
 
@@ -459,6 +457,7 @@ export default {
       qssczzEnti: {},
       totalData: {},
       indexMonth: "",
+      indexQuarter:"",
       sczj_dataList: [],
       lsze_dataList: [],
       zjsd_dataList: [],
@@ -583,6 +582,7 @@ export default {
             this.jmrj_dataList = res.jmrj;
             this.ncrj_dataList = res.ncrj;
             this.czrj_dataList = res.czrj;
+            this.indexQuarter=res.quarter;
             //各区县固定投资金额（万元） 数据
             $.each(res.gdzc,function(index,item){
               if(item.name == '城区'){

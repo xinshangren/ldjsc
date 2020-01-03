@@ -82,7 +82,9 @@ export default {
     return {
       show: false,
       qssczzEnti: {},
-      totalData: {}
+      totalData: {},
+      downImg:require("../../../../assets/img/eco_down.png"),
+      upImg:require("../../../../assets/img/eco_rise.png"),
     };
   },
   mounted() {
@@ -121,7 +123,7 @@ export default {
             var industryData = res.industryData; //饼图和右侧图表数据
             var investmentData = res.investmentData;
             this.getOneEchars(echarts, this.$refs.myCharts1, industryData);
-            this.getTwoEchars(echarts, this.$refs.myCharts2, industryData);
+            this.getTwoEchars(echarts, this.$refs.myCharts2, industryData,this.downImg,this.upImg);
             this.getThreeEchars(echarts, this.$refs.myCharts3, investmentData);
             this.getFourEchars(echarts, this.$refs.myCharts4, investmentData);
             this.getFiveEchars(echarts, this.$refs.myCharts5, investmentData);
@@ -143,8 +145,8 @@ export default {
       echarsEnti.showQssczzEcharsBar(echarts, value, data);
     },
     //初始化第二个图表
-    getTwoEchars: function(echarts, value, data) {
-      echarsEnti.showZfBarEchars(echarts, value, data);
+    getTwoEchars: function(echarts, value, data,downimg,upimg) {
+      echarsEnti.showZfBarEchars(echarts, value, data,downimg,upimg);
     },
     //初始化第三个图表
     getThreeEchars: function(echarts, value, data) {

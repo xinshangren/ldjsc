@@ -239,7 +239,7 @@ export default {
     getOneEchars: function(echarts, value, data) {
       // this.$store.commit('showLoading');//加载loading
       //this.$store.commit('hideLoading');//解除loading
-      echarsEnti.createEcharsOne(echarts, value, data);
+      echarsEnti.createEcharsOne(echarts, value, data,httpMethod);
     },
     //初始化第二个图表
     getThreeEchars: function(echarts, value, data) {
@@ -284,7 +284,9 @@ export default {
     },
     onconfirm() {
       this.nowYear = this.timeFormat(this.currentDate);
-
+      this.getzdxmzj(this.nowYear);
+      this.statisticsExistiong(this.nowYear);
+      this.getProjectPlanTopThree(this.nowYear);
       this.show = false;
     },
     intentDeali: function(item) {

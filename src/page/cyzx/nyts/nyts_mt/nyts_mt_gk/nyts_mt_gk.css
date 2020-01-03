@@ -30,9 +30,10 @@
 }
 .fontStyle{
 	font-family: MicrosoftYaHei;
-	font-size: 20px;
+	font-size: 13px;
     color: #333333;
     margin-left: 50%;
+    margin-top: 10px;
 }
 .dateSelect{
   
@@ -62,6 +63,7 @@
 	letter-spacing: 0px;
     color: #333333;
     margin-left: 10px;
+    font-size: 14px;
 }
 .timeYear{
     font-family: MicrosoftYaHei-Bold;

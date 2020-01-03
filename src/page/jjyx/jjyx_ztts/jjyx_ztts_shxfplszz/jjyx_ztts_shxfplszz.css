@@ -131,3 +131,9 @@
     background: #4ba9ef;display: flex;
     border-radius: 0px 35px 35px 0px;line-height: 22px;font-size: 15px;padding: 3px 10px;
 }
+.hightBackground{
+   color:#4ba7ec; background:#e1f3ff;font-size:13px; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;
+}
+.nohightBackground{
+    background:#ffffff;font-size:13px; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;
+}

@@ -42,7 +42,7 @@
       <div id="myCharts2" ref="myCharts2" style="height:260px;width:100%;"></div>
     </div>
 
-    <div style="background:#ffffff;height:300px;width:100%;margin-top:8px;padding-top:7px;">
+    <div style="background:#ffffff;height:340px;width:100%;margin-top:8px;padding-top:7px;">
       <div class="echars_titile_div">全市生产总值累计增长速度</div>
       <div
         class="van-hairline--bottom"
@@ -65,7 +65,9 @@ export default {
     return {
       show: false,
       qssczzEnti: {},
-      totalData:{}
+      totalData:{},
+      downImg:require("../../../../assets/img/eco_down.png"),
+      upImg:require("../../../../assets/img/eco_rise.png"),
     };
   },
   mounted() {
@@ -101,7 +103,7 @@ export default {
             var industryData = res.industryData; //饼图和右侧图表数据
             var gdpIncreaseRate = res.gdpIncreaseRate; //底部图表数据
             this.getOneEchars(echarts,this.$refs.myCharts1,industryData);
-            this.getTwoEchars(echarts,this.$refs.myCharts2,industryData);
+            this.getTwoEchars(echarts,this.$refs.myCharts2,industryData,this.downImg,this.upImg);
             this.getThreeEchars(echarts,this.$refs.myCharts3,gdpIncreaseRate);
           }
         })
@@ -120,8 +122,8 @@ export default {
       echarsEnti.showQssczzEcharsBar(echarts, value, data);
     },
     //初始化第二个图表
-    getTwoEchars: function(echarts, value, data) {
-      echarsEnti.showZfBarEchars(echarts, value, data);
+    getTwoEchars: function(echarts, value, data,downimg,upimg) {
+      echarsEnti.showZfBarEchars(echarts, value, data,downimg,upimg);
     },
     //初始化第三个图表
     getThreeEchars: function(echarts, value, data) {

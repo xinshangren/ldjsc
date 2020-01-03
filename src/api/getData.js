@@ -1,4 +1,4 @@
-import { returnBaseUrl, get, post } from "@/api/ajax";
+import { returnBaseUrl, get, post, checkStrOfZero } from "@/api/ajax";
 
 
 export const httpMethod = {
@@ -53,7 +53,10 @@ export const httpMethod = {
     findByTargetIds: function (params) {
         return get("jscAppInsideController.action?findByTargetIds", params);
     },
-
+    //过滤数据为0
+    checkStrOfZeroFun: function (str) {
+        return checkStrOfZero(str);
+    },
 
     //返回根目录
     returnBaseUrlFun: function () {
@@ -164,7 +167,7 @@ export const httpMethod = {
     provincialAirRanking: function (params) {
         return get("sthjAppInsideController.action?provincialAirRanking", params);
     },
-    
+
     //市内城市空气质量排名
     cityAirRanking: function (params) {
         return get("sthjAppInsideController.action?cityAirRanking", params);
@@ -198,10 +201,10 @@ export const httpMethod = {
         return get("hgjjAppInsideController.action?getCommonalityIncome", params);
     },
     //能源煤炭统计产值
-    getMtTjProduction: function (params){
-        return get("nytsAppGbInsideController.action?getMtTjProduction",params);
+    getMtTjProduction: function (params) {
+        return get("nytsAppGbInsideController.action?getMtTjProduction", params);
     },
-    
+
     //获取社会消费品零售总额
     getSocialConsumerGoods: function (params) {
         return get("hgjjAppInsideController.action?getSocialConsumerGoods", params);
@@ -210,7 +213,7 @@ export const httpMethod = {
     getDisposableIncome: function (params) {
         return get("hgjjAppInsideController.action?getDisposableIncome", params);
     },
-    
+
     //获取区县情况接口
     getCounty: function (params) {
         return get("hgjjAppInsideController.action?getCounty", params);
@@ -235,18 +238,25 @@ export const httpMethod = {
      getMcqStatistical: function (params) {
         return get("nytsAppGbInsideController.action?getMcqStatistical", params);
     },
+    //获取监管概况
+    getbasicList: function (params) {
+        return get("gridSupervisionController.action?basicList", params);
+    },
+    getMtTjQuantity: function (params){
+        return get("nytsAppGbInsideController.action?getMtTjQuantity",params);
+    },
+    //获取监管概况巡查图表
+    getBasicRecordList: function (params) {
+        return get("gridSupervisionController.action?basicRecordList", params);
+    }
+    
+    
     
 
-    
-    
-
-    
 
 
 
-    
-    
-    
+
 
 
 

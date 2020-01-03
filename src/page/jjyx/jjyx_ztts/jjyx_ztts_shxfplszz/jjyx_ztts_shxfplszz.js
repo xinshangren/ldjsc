@@ -36,7 +36,7 @@ export const echarsEnti = {
 		dataList.push(map);
 	}
 
-	const colorList = ['#EB6100', '#21C1F5'];
+	const colorList = ['#faad14', '#3ca1ec'];
 	var option = {
 		title: {
 			text: '\t\t\t零售总额\n\t\t\t' + allData + "\n\t\t\t\t\t万元",

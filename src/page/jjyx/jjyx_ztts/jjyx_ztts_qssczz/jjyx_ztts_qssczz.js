@@ -88,7 +88,7 @@ export const echarsEnti = {
 
     myCharts.setOption(option);
   },
-  showZfBarEchars: function (echarts, value, dataList) {
+  showZfBarEchars: function (echarts, value, dataList,downImg,upImg) {
     const myCharts = echarts.init(value);
     var dataShadow = [];
     var dataAxis = [];
@@ -190,7 +190,7 @@ export const echarsEnti = {
               height: 10,
               align: 'center',
               backgroundColor: {
-                image: '../img/hgjj_up_jt_bg.png' //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
+                image: upImg//这个warnImg是上面定义的图片var warnImg = "img/warn.png";
               }
             },
             warnValue1: {
@@ -198,7 +198,7 @@ export const echarsEnti = {
               height: 10,
               align: 'center',
               backgroundColor: {
-                image: '../img/hgjj_down_jt_bg.png' //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
+                image: downImg //这个warnImg是上面定义的图片var warnImg = "img/warn.png";
               }
             },
             a: {
