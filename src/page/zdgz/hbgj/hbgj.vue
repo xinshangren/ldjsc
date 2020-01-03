@@ -69,6 +69,44 @@
       <child2 v-if="Bigflag==1&&airactive==1"></child2>
       <child3 v-if="Bigflag==1&&airactive==2"></child3>
       <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
+      <child5 v-if="Bigflag==2&&wgjgactive==1"></child5>
+    </div>
+    
+    <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
+      <div id="rightAreaDivId" style="display:none;">
+        <div
+          style="display: flex;width: 268px;height: 44px;margin-right: -20px;margin-top: 3px;background: rgb(255, 255, 255);border-radius: 30px 0px 0px 30px;box-shadow:#f67b09 1px 1px 8px 1px"
+        >
+          <div style="width:40%;margin-left:25px;">
+            <div style="display:flex;margin-top:6px;">
+              <img
+                style="height: 13px;margin-top: 4px;margin-right: 4px;"
+                src="../../../assets/img/project_list_icon1.png"
+              />
+              <div style="font-size:13px; color:#666666;">责任单位</div>
+            </div>
+            <div style="color:#333333;font-size:13px;">市生态环境局</div>
+          </div>
+          <div style="width:50%;margin-left:25px;">
+            <div>
+              <div
+                style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
+              >
+                <img
+                  style="height: 15px;margin-left: 7px;margin-right: 4px;"
+                  src="../../../assets/img/icon_phone_orange.png"
+                />
+                <div style="color: rgb(246, 123, 9);font-size: 13px;">一键调度</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        id="leftAreaDivId"
+        style="height:53px;margin-right:15px;"
+        src="../../../assets/img/phone_button.png"
+      />
     </div>
   </div>
 </template>
@@ -78,6 +116,7 @@ import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.vue";
 import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
 import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
 import child4 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wggk/hbgj_wgjg_wggk.vue";
+import child5 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist.vue";
 import $ from "jquery";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
@@ -91,7 +130,8 @@ export default {
     child1,
     child2,
     child3,
-    child4
+    child4,
+    child5
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
@@ -116,9 +156,17 @@ export default {
     };
   },
   mounted() {
-    //this.getListData();
+    $("#leftAreaDivId").click(function() {
+      $("#rightAreaDivId").animate({
+        width: "toggle"
+      });
+    });
   },
   methods: {
+     
+    callPhone:function(){
+       window.location.href = 'tel://18635609998'
+    },
     //空气子选项卡选择
     smallTab_select: function(name, title) {
       // console.log(name,title);

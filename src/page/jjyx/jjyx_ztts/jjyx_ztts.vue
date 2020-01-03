@@ -111,7 +111,7 @@
               />
               <div style="font-size:13px; color:#666666;">责任单位</div>
             </div>
-            <div style="color:#333333;font-size:13px;">市发改委重点办</div>
+            <div style="color:#333333;font-size:13px;">市统计局</div>
           </div>
           <div style="width:50%;margin-left:25px;">
             <div>
@@ -183,6 +183,12 @@ export default {
   },
   mounted() {
     var self = this;
+    
+    $("#leftAreaDivId").click(function() {
+      $("#rightAreaDivId").animate({
+        width: "toggle"
+      });
+    });
     $("#showSelectDiv").click(function(e) {
       if ($("#selectTabDiv").is(":hidden")) {
         $("#selectTabDiv").show();
@@ -209,6 +215,10 @@ export default {
     });
   },
   methods: {
+    
+    callPhone:function(){
+       window.location.href = 'tel://0356-2566260'
+    },
     //空气子选项卡选择
     smallTab_select: function(name, title) {
       console.log(name,title);

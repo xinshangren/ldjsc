@@ -224,11 +224,23 @@ export const httpMethod = {
     },
     //获取海关进出口总额
     getCustomsTrading: function (params) {
-        return get("hgjjAppInsideController.action?getCustomsTrading", params);
+        return get("hgjjAppInsideController.action?getMcqGeneralSituation", params);
+    },
+    //获取煤层气概况数据
+    getMcqGeneralSituation: function (params) {
+        return get("nytsAppGbInsideController.action?getMcqGeneralSituation", params);
+    },
+    //获取煤层气企业列表数据
+    getMcqEnterpriseList: function (params) {
+        return get("nytsAppGbInsideController.action?getMcqEnterpriseList", params);
+    },
+     //获取煤层气企业抽采利用情况
+     getMcqStatistical: function (params) {
+        return get("nytsAppGbInsideController.action?getMcqStatistical", params);
     },
     //获取监管概况
     getbasicList: function (params) {
-        return get(" gridSupervisionController.action?basicList", params);
+        return get("gridSupervisionController.action?basicList", params);
     },
     getMtTjQuantity: function (params){
         return get("nytsAppGbInsideController.action?getMtTjQuantity",params);
@@ -236,7 +248,18 @@ export const httpMethod = {
     //获取监管概况巡查图表
     getBasicRecordList: function (params) {
         return get(" gridSupervisionController.action?basicRecordList", params);
+    },
+    //获取污染源列表
+    getGridSourceList: function (params) {
+        return get("gridSupervisionController.action?getGridSourceList", params);
+    },
+    //获取污染源类型
+    getCompanyType: function (params) {
+        return get("gridSupervisionController.action?getCompanyType", params);
     }
+
+    
+    
     
     
     
