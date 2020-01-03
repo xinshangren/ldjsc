@@ -373,8 +373,8 @@ export default {
     goDetile(item) {
       //console.log(item);
       this.$router.push({
-        path: "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali",
-        name: "zdgc_xmdeali",
+        path: "/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist_deali",
+        name: "hbgj_wgjg_wrylist_deali",
         params: {
           entity: item
         }

@@ -256,9 +256,22 @@ export const httpMethod = {
     //获取污染源类型
     getCompanyType: function (params) {
         return get("gridSupervisionController.action?getCompanyType", params);
+    },
+    //重点污染源覆盖物详情-污染物情况图表
+    lineGridRecord: function (params) {
+        return get("gridSupervisionController.action?lineGridRecord", params);
+    },
+    //获取网格列表
+    lineGridRecord: function (params) {
+        return get("gridSupervisionController.action?getGridInfoList", params);
+    },
+    //获取网格信息
+    getGridSpecificList: function (params) {
+        return get("gridSupervisionController.action?getGridSpecificList", params);
     }
 
     
+   
     
     
     

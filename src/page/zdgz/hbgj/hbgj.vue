@@ -70,6 +70,7 @@
       <child3 v-if="Bigflag==1&&airactive==2"></child3>
       <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
       <child5 v-if="Bigflag==2&&wgjgactive==1"></child5>
+      <child6 v-if="Bigflag==2&&wgjgactive==2"></child6>
     </div>
     
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
@@ -117,6 +118,7 @@ import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_sta
 import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
 import child4 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wggk/hbgj_wgjg_wggk.vue";
 import child5 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist.vue";
+import child6 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wgperson/hbgj_wgjg_wgperson.vue";
 import $ from "jquery";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
@@ -131,7 +133,8 @@ export default {
     child2,
     child3,
     child4,
-    child5
+    child5,
+    child6
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
