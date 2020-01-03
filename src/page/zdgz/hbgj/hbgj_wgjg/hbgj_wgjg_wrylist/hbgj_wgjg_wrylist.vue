@@ -30,82 +30,76 @@
           @click="goDetile(item)"
         >
           <div style="display:flex;margin-left:10px;">
-            <img style="height:15px;margin-top:3px" src="../../../../../assets/img/reseau_list_icon1.png" />
-            <div class="van-ellipsis" style="color: #333333;font-size: 15px;margin-left:14px;width:200px;">{{item.name}}</div>
+            <img
+              style="height:15px;margin-top:3px"
+              src="../../../../../assets/img/reseau_list_icon1.png"
+            />
             <div
-            v-if="item.type=='餐饮单位'"
-              class="listTypeStyle"
-            >
+              class="van-ellipsis"
+              style="color: #333333;font-size: 15px;margin-left:14px;width:200px;"
+            >{{item.name}}</div>
+            <div v-if="item.type=='餐饮单位'" class="listTypeStyle">
               <img style="height:15px;" src="../../../../../assets/img/pollution_type_icon2.png" />
               <div>餐饮单位</div>
             </div>
-            <div
-               v-if="item.type=='畜禽养殖'"
-              class="listTypeStyle"
-            >
+            <div v-if="item.type=='畜禽养殖'" class="listTypeStyle">
               <img style="height:15px;" src="../../../../../assets/img/pollution_type_icon3.png" />
               <div>畜禽养殖</div>
             </div>
-            <div
-             v-if="item.type=='建筑工地'"
-            class="listTypeStyle"
-            >
+            <div v-if="item.type=='建筑工地'" class="listTypeStyle">
               <img style="height:15px;" src="../../../../../assets/img/pollution_type_icon4.png" />
               <div>建筑工地</div>
             </div>
-            <div
-              v-if="item.type=='堆场'"
-            class="listTypeStyle"
-            >
+            <div v-if="item.type=='堆场'" class="listTypeStyle">
               <img style="height:15px;" src="../../../../../assets/img/pollution_type_icon5.png" />
               <div>堆场</div>
             </div>
-            <div
-              v-if="item.type=='加油站'"
-             class="listTypeStyle"
-            >
+            <div v-if="item.type=='加油站'" class="listTypeStyle">
               <img style="height:15px;" src="../../../../../assets/img/pollution_type_icon6.png" />
               <div>加油站</div>
             </div>
-            <div
-              v-if="item.type=='汽修'"
-              class="listTypeStyle"
-            >
+            <div v-if="item.type=='汽修'" class="listTypeStyle">
               <img style="height:15px;" src="../../../../../assets/img/pollution_type_icon7.png" />
               <div>汽修</div>
             </div>
-            <div
-            v-if="item.type=='其他单位'"
-             class="listTypeStyle"
-            >
+            <div v-if="item.type=='其他单位'" class="listTypeStyle">
               <img style="height:15px;" src="../../../../../assets/img/pollution_type_icon8.png" />
               <div>其他单位</div>
             </div>
-               <div
-                v-if="item.type=='工业企业'"
-              class="listTypeStyle"
-            >
+            <div v-if="item.type=='工业企业'" class="listTypeStyle">
               <img style="height:15px;" src="../../../../../assets/img/pollution_type_icon1.png" />
               <div>工业企业</div>
             </div>
           </div>
 
           <div style="display:flex;margin-left:10px;">
-              <img style="margin-top:3px;height:15px;" src="../../../../../assets/img/reseau_list_icon2.png" />
-              <div style="margin-left:15px;font-size:14px;color:#666666;">{{item.address}}</div>
+            <img
+              style="margin-top:3px;height:15px;"
+              src="../../../../../assets/img/reseau_list_icon2.png"
+            />
+            <div style="margin-left:15px;font-size:14px;color:#666666;">{{item.address}}</div>
           </div>
 
-           <div style="display:flex;margin-left:10px;">
-              <img style="margin-top:3px;height:15px;" src="../../../../../assets/img/reseau_list_icon3.png" />
-              <div style="margin-left:15px;font-size:14px;color:#666666;">{{item.contact_user}}</div>
+          <div style="display:flex;margin-left:10px;">
+            <img
+              style="margin-top:3px;height:15px;"
+              src="../../../../../assets/img/reseau_list_icon3.png"
+            />
+            <div style="margin-left:15px;font-size:14px;color:#666666;">{{item.contact_user}}</div>
 
-                <img style="margin-top:3px;height:15px;margin-left:10px;" src="../../../../../assets/img/reseau_list_icon4.png" />
-              <div style="margin-left:5px;font-size:14px;color:#666666;">{{item.contact_phone}}</div>
+            <img
+              style="margin-top:3px;height:15px;margin-left:10px;"
+              src="../../../../../assets/img/reseau_list_icon4.png"
+            />
+            <div style="margin-left:5px;font-size:14px;color:#666666;">{{item.contact_phone}}</div>
 
-                <img style="margin-top:3px;height:15px;margin-left:10px;" src="../../../../../assets/img/reseau_list_icon5.png" />
-              <div style="margin-left:5px;font-size:14px;color:#666666;">年度问题</div>
+            <img
+              style="margin-top:3px;height:15px;margin-left:10px;"
+              src="../../../../../assets/img/reseau_list_icon5.png"
+            />
+            <div style="margin-left:5px;font-size:14px;color:#666666;">年度问题</div>
 
-              <div style="color:#f30011;font-size:14px;margin-left:10px;">{{item.problemcount}}次</div>
+            <div style="color:#f30011;font-size:14px;margin-left:10px;">{{item.problemcount}}次</div>
           </div>
         </div>
       </div>
@@ -122,36 +116,29 @@
       style="overflow:hidden;background:rgb(243, 243, 243);"
     >
       <div style="background:#ffffff;">
-        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">进度分类</div>
+        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">污染源类型</div>
         <ul id="jdflDialogId" class="ui-row" style="margin-top: 11px;margin-right: 15px;">
-          <li id="0" class="ui-col ui-col-50 dialogNoSelect" style="width:27%;">前期</li>
-          <li id="1" class="ui-col ui-col-50 dialogNoSelect" style="width:27%;">新建</li>
-          <li id="2" class="ui-col ui-col-50 dialogNoSelect" style="width:27%;">续建</li>
+          <li
+            v-for="(item,index) in  companyTypeList"
+            :key="index"
+            :id="(index)"
+            class="ui-col ui-col-50 dialogSelect"
+            style="width:43%;"
+          >{{item.type}}</li>
         </ul>
 
         <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
-        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">项目类型</div>
+        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">所处区县</div>
 
         <ul class="ui-row" id="xmlxDialogId" style="margin-top: 11px;margin-right: 15px;">
           <li
-            v-for="(item,index) in listZdgcType"
+            v-for="(item,index) in  areaTypeList"
             :key="index"
-            :id="(index)"
+            :id="(item.typecode)"
             class="ui-col ui-col-50 dialogNoSelect"
             style="width:43%;"
           >{{item.typename}}</li>
         </ul>
-        <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
-        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">地域类型</div>
-        <ul class="ui-row" id="dylxDialogId" style="margin-top: 11px;margin-right: 15px;">
-          <li
-            v-for="(item,index) in listZdgcDyType"
-            :key="index"
-            :id="(index)"
-            class="ui-col ui-col-25 dialogNoSelect"
-          >{{item.typename}}</li>
-        </ul>
-
         <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
         <div style="display: flex;background: #f3f3f3;height:110px;">
           <div
@@ -196,11 +183,14 @@ export default {
       activeClassUldy: -1,
       listZdgcType: [],
       listZdgcDyType: [],
+      companyTypeList: [],
+      areaTypeList: [],
       show: false,
       seach_value: "",
       active: 0,
       list: [],
-      curwrwtype: "",
+      curwrwtype:
+        "餐饮单位，畜禽养殖，汽修，建筑工地，工业企业，堆场，加油站或油库，其他单位",
       projectName: "",
       wresarea: "",
       mescroll: null, // mescroll实例对象
@@ -224,7 +214,10 @@ export default {
       }
     };
   },
-  mounted() {},
+  mounted() {
+    this.getCompanyType();
+    this.getTypeList();
+  },
   methods: {
     queryList: function() {
       this.show = true;
@@ -271,37 +264,58 @@ export default {
           mescroll.endErr();
         });
     },
+    //获取列表筛选企业类型
+    getCompanyType: function() {
+      var params = {};
+
+      httpMethod
+        .getCompanyType(params)
+        .then(res => {
+          console.log(res);
+          if (res.success == "1") {
+            this.companyTypeList = res.typelist;
+          }
+        })
+        .catch(err => {});
+    },
+    //获取列表筛选企业类型
+    getTypeList: function() {
+      var params = {
+        type: "district"
+      };
+      httpMethod
+        .getTypeList(params)
+        .then(res => {
+          console.log(res);
+          if (res.success == "1") {
+            var map = {
+              typecode: "",
+              typename: "晋城市"
+            };
+
+            this.areaTypeList = res.dataList;
+            this.areaTypeList.unshift(map);
+          }
+        })
+        .catch(err => {});
+    },
     openPop: function() {
       //地域类型
-      $("#dylxDialogId li").click(function(e) {
-        $(this)
-          .siblings("li")
-          .removeClass("dialogSelect");
-        $(this)
-          .siblings("li")
-          .removeClass("dialogNoSelect");
-        $(this)
-          .siblings("li")
-          .addClass("dialogNoSelect");
-        $(this).removeClass("dialogNoSelect");
-        $(this).addClass("dialogSelect");
-      });
-      //选择进度类型
-      $("#jdflDialogId li").click(function(e) {
-        $(this)
-          .siblings("li")
-          .removeClass("dialogSelect");
-        $(this)
-          .siblings("li")
-          .removeClass("dialogNoSelect");
-        $(this)
-          .siblings("li")
-          .addClass("dialogNoSelect");
-        $(this).removeClass("dialogNoSelect");
-        $(this).addClass("dialogSelect");
-      });
-      //选择项目类型
       $("#xmlxDialogId li").click(function(e) {
+        $(this)
+          .siblings("li")
+          .removeClass("dialogSelect");
+        $(this)
+          .siblings("li")
+          .removeClass("dialogNoSelect");
+        $(this)
+          .siblings("li")
+          .addClass("dialogNoSelect");
+        $(this).removeClass("dialogNoSelect");
+        $(this).addClass("dialogSelect");
+      });
+      //选择污染源类型
+      $("#jdflDialogId li").click(function(e) {
         if ($(this).hasClass("dialogSelect")) {
           $(this).removeClass("dialogSelect");
           $(this).addClass("dialogNoSelect");
@@ -313,32 +327,25 @@ export default {
     },
     clickUlDy: function() {
       var context = this;
-      //循环获取选中的进度类型
-      $("#jdflDialogId li").each(function() {
-        var isSelect = $(this).hasClass("dialogSelect");
-        if (isSelect) {
-          console.log($(this).attr("id"));
-          context.projectNature = $(this).attr("id");
-        }
-      });
-
+      context.wresarea = "";
+      context.curwrwtype = "";
       //循环获取选中的地域类型
-      $("#dylxDialogId li").each(function() {
+      $("#xmlxDialogId li").each(function() {
         var isSelect = $(this).hasClass("dialogSelect");
         if (isSelect) {
-          context.buildAddr = $(this).attr("id");
+          context.wresarea = $(this).html();
         }
       });
 
       //循环获取选中的项目类型
-      $("#xmlxDialogId li").each(function() {
+      $("#jdflDialogId li").each(function() {
         var isSelect = $(this).hasClass("dialogSelect");
-        var id = $(this).attr("id");
+        var id = $(this).html();
         if (isSelect) {
-          if (context.zdProType != "") {
-            context.zdProType += "，" + id;
+          if (context.curwrwtype != "") {
+            context.curwrwtype += "，" + id;
           } else {
-            context.zdProType += id;
+            context.curwrwtype += id;
           }
         }
       });
@@ -349,23 +356,17 @@ export default {
       var context = this;
       //循环重置查询条件
       $("#jdflDialogId li").each(function() {
-        $(this).removeClass("dialogSelect");
-        $(this).addClass("dialogNoSelect");
+        $(this).removeClass("dialogNoSelect");
+        $(this).addClass("dialogSelect");
       });
       //循环重置查询条件
       $("#xmlxDialogId li").each(function() {
         $(this).removeClass("dialogSelect");
         $(this).addClass("dialogNoSelect");
       });
-      //循环重置查询条件
-      $("#dylxDialogId li").each(function() {
-        $(this).removeClass("dialogSelect");
-        $(this).addClass("dialogNoSelect");
-      });
-
-      context.zdProType = "";
-      context.buildAddr = "";
-      context.projectNature = "";
+      context.wresarea = "";
+      context.curwrwtype =
+        "餐饮单位，畜禽养殖，汽修，建筑工地，工业企业，堆场，加油站或油库，其他单位";
       this.mescroll.resetUpScroll();
       this.show = false;
     },

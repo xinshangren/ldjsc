@@ -25,7 +25,7 @@
           <img class="home_ul_li_img" src="../../assets/img/icon3.png" />
           <div class="home_ul_li_div">重点工程</div>
         </li>
-        <li @click="toast()" class="ui-col ui-col-25 home_ul_li_style">
+        <li @click="godetile('文明共创')" class="ui-col ui-col-25 home_ul_li_style">
           <img class="home_ul_li_img" src="../../assets/img/icon4.png" />
           <div class="home_ul_li_div">文明共创</div>
         </li>
@@ -341,6 +341,11 @@
       //改变tab的状态和图片
       changeTabStyle: function (tabid) {
         mainJs.changeTabStyle(tabid);
+      },
+      godetile: function () {
+        this.$router.push({
+          path: "/wmgc/wmgc"
+        });
       },
       intentZdgc: function () {
         this.$router.push({

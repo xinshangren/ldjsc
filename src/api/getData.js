@@ -252,8 +252,13 @@ export const httpMethod = {
     //获取污染源列表
     getGridSourceList: function (params) {
         return get("gridSupervisionController.action?getGridSourceList", params);
+    },
+    //获取污染源类型
+    getCompanyType: function (params) {
+        return get("gridSupervisionController.action?getCompanyType", params);
     }
 
+    
     
     
     

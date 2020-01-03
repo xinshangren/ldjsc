@@ -5,6 +5,7 @@ import dingbanVue from '@/page/main/dingban.vue'
 import headlineVue from '@/page/main/headline.vue'
 import picsnewsVue from '@/page/toutiao/picsnews.vue'
 import mljcVue from '@/page/toutiao/mljc.vue'
+import pzjcVue from '@/page/toutiao/pzjc.vue'
 import swszfVue from '@/page/dingban/swszf.vue'
 import szxVue from '@/page/dingban/szx.vue'
 import dsjyyjVue from '@/page/dingban/dsjyyj.vue'
@@ -18,6 +19,8 @@ import zdgcVue from '@/page/zdgz/zdgc/zdgc.vue'
 import zdgc_xmdealiVue from '@/page/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali.vue'
 import zdgc_czwt_daliVue from '@/page/zdgz/zdgc/zdgc_czwt/zdgc_czwt_deali/zdgc_czwt_deali.vue'
 import qylyVue from '@/page/qyly/qyly.vue'
+import wmgcVue from '@/page/wmgc/wmgc.vue'
+import wmgcxjzsVue from '@/page/wmgc/wmgcxjzs.vue'
 import jqgkVue from '@/page/qyly/jq/jqgk.vue'
 import jqlistVue from '@/page/qyly/jq/jqlist.vue'
 import jqdetileVue from '@/page/qyly/jq/jqdetile.vue'
@@ -58,6 +61,10 @@ export default new Router({
       path: '/toutiao/mljc',
       name: 'mljc',
       component: mljcVue
+    },{
+      path: '/toutiao/pzjc',
+      name: 'pzjc',
+      component: pzjcVue
     },{
       path: '/dingban/swszf',
       name: 'swszf',
@@ -102,6 +109,16 @@ export default new Router({
       path: '/qyly/qyly',
       name: 'qyly',
       component: qylyVue,
+      meta:{keepAlive:true}
+    }, {
+      path: '/wmgc/wmgc',
+      name: 'wmgc',
+      component: wmgcVue,
+      meta:{keepAlive:true}
+    }, {
+      path: '/wmgc/wmgcxjzs',
+      name: 'wmgcxjzs',
+      component:wmgcxjzsVue,
       meta:{keepAlive:true}
     },{
       path: '/qyly/jq/jqgk',
