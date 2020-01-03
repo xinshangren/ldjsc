@@ -5,7 +5,7 @@
     <div style="z-index: 2; height: 54px;background: #3098fb ;display: flex;position: fixed;top: 0px;width: 100%;">
       <van-search placeholder="搜索" shape="round" background="rgb(255, 255, 255,0)" v-model="seach_value"
         style="width:68%;" />
-      <img src="@/assets/img/icon_home.png" class="home_top_img" @click="toast()" />
+      <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
       <img src="@/assets/img/icon_message.png" class="home_top_img" @click="toast()" />
       <img src="@/assets/img/icon_user.png" class="home_top_img" @click="toast()" />
 
@@ -31,6 +31,9 @@
     methods: {
       toast: function () {
         this.$toast('功能开发中');
+      },
+      gotoHome:function () {
+        this.$router.push("/");
       }
     },
     beforeCreate() {

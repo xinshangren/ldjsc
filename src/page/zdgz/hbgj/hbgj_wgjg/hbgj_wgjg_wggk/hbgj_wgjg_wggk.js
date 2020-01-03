@@ -25,10 +25,12 @@ export const hbgjAirJs = {
             },
             legend: {
                 orient: 'vertical',
-                x: 'right',
+                icon: "circle",
+                right: '5%',
                 y: 'center',
-                show: false,
-                itemHeight: 7,
+                show: true,
+                itemHeight: 6,
+                itemWidth: 6,
                 data: nameList
             },
             color: ['#FF9966', '#FF5CFD', '#B266FF', '#6699FF', '#32F7A6', '#99FF5C', '#FFCC66', '#ff5c8e'],
@@ -38,7 +40,7 @@ export const hbgjAirJs = {
                 minAngle: 15,
                 avoidLabelOverlap: true,
                 roseType: 'radius',
-                center: ['50%', '50%'],
+                center: ['40%', '50%'],
                 radius: [20, 50],
                 label: {
                     normal: {
@@ -96,10 +98,12 @@ export const hbgjAirJs = {
             },
             legend: {
                 orient: 'vertical',
-                x: 'right',
+                icon: "circle",
+                right: '2%',
                 y: 'center',
-                show: false,
-                itemHeight: 7,
+                show: true,
+                itemHeight: 6,
+                itemWidth: 6,
                 data: nameList
             },
             color: ['#FF9966', '#FF5CFD', '#B266FF', '#6699FF', '#32F7A6', '#99FF5C', '#FFCC66', '#ff5c8e'],
@@ -109,7 +113,7 @@ export const hbgjAirJs = {
                 minAngle: 15,
                 avoidLabelOverlap: true,
                 roseType: 'radius',
-                center: ['50%', '50%'],
+                center: ['35%', '50%'],
                 radius: [20, 50],
                 label: {
                     normal: {

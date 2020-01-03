@@ -8,7 +8,7 @@
       <div style="display:flex;">
         <div class="echars_titile_div">污染源</div>
         <div style="display: flex;line-height: 20px;margin-left:20px;">
-          <div style="color:#3097fb;font-size:21px;">8833</div>
+          <div style="color:#3097fb;font-size:21px;">{{wryCount}}</div>
           <div style="color:#3097fb;font-size:13px;">个</div>
         </div>
       </div>
@@ -25,7 +25,7 @@
       <div style="display:flex;">
         <div class="echars_titile_div">监管人员</div>
         <div style="display: flex;line-height: 20px;margin-left:20px;">
-          <div style="color:#3097fb;font-size:21px;">18833</div>
+          <div style="color:#3097fb;font-size:21px;">{{jgPersonCount}}</div>
           <div style="color:#3097fb;font-size:13px;">个</div>
         </div>
       </div>
@@ -99,6 +99,8 @@ export default {
        showYear: false, //年显示
         currentYear: new Date(),
       currentYear1: new Date().getFullYear(),
+      wryCount:0,
+      jgPersonCount:0
     };
   },
   mounted() {
@@ -152,6 +154,8 @@ export default {
           var code = res.success;
           if (code == "1") {
             var pay = res.sourceList;
+            this.wryCount=res.sourceNum;//污染源
+            this.jgPersonCount=res.leaderNum + res.personNum
             this.showEcharsView1(echarts, this.$refs.myCharts1,res.leaderNum, res.personNum, pay, res.countyList);
               this.showEcharsView2(echarts, this.$refs.myCharts2,res.leaderNum, res.personNum, pay, res.countyList);
           }
