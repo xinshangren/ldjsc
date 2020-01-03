@@ -70,6 +70,43 @@
       <child3 v-if="Bigflag==1&&airactive==2"></child3>
       <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
     </div>
+    
+    <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
+      <div id="rightAreaDivId" style="display:none;">
+        <div
+          style="display: flex;width: 268px;height: 44px;margin-right: -20px;margin-top: 3px;background: rgb(255, 255, 255);border-radius: 30px 0px 0px 30px;box-shadow:#f67b09 1px 1px 8px 1px"
+        >
+          <div style="width:40%;margin-left:25px;">
+            <div style="display:flex;margin-top:6px;">
+              <img
+                style="height: 13px;margin-top: 4px;margin-right: 4px;"
+                src="../../../assets/img/project_list_icon1.png"
+              />
+              <div style="font-size:13px; color:#666666;">责任单位</div>
+            </div>
+            <div style="color:#333333;font-size:13px;">市生态环境局</div>
+          </div>
+          <div style="width:50%;margin-left:25px;">
+            <div>
+              <div
+                style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
+              >
+                <img
+                  style="height: 15px;margin-left: 7px;margin-right: 4px;"
+                  src="../../../assets/img/icon_phone_orange.png"
+                />
+                <div style="color: rgb(246, 123, 9);font-size: 13px;">一键调度</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        id="leftAreaDivId"
+        style="height:53px;margin-right:15px;"
+        src="../../../assets/img/phone_button.png"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -116,9 +153,17 @@ export default {
     };
   },
   mounted() {
-    //this.getListData();
+    $("#leftAreaDivId").click(function() {
+      $("#rightAreaDivId").animate({
+        width: "toggle"
+      });
+    });
   },
   methods: {
+     
+    callPhone:function(){
+       window.location.href = 'tel://18635609998'
+    },
     //空气子选项卡选择
     smallTab_select: function(name, title) {
       // console.log(name,title);
