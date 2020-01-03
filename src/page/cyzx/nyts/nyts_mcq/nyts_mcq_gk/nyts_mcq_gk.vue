@@ -165,10 +165,6 @@ export default {
             if (type === "year") {
                 return `${value}年`;
             }
-            if (type === "month") {
-                return `${value}月`;
-            }
-
             return "";
         },
         onconfirm() {
