@@ -89,3 +89,9 @@ export function get(url, data, otherConfig) {
 export function returnBaseUrl() {
     return axios.defaults.baseURL;
 }
+export function checkStrOfZero(str) {
+    if (str == '' || str == null || str == undefined) {
+        str = 0;
+    }
+    return str;
+}

@@ -6,10 +6,10 @@
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入污染源名称" @search="onSearch" v-model="seach_value" />
       </form>
-      <img src="../../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 21px;" />
+      <img src="../../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 11px;" />
       <img
         src="../../../../../assets/img/project_filtrate.png"
-        style="height: 27px;margin-top: 21px;margin-left:5px;"
+        style="height: 27px;margin-top: 11px;margin-left:5px;"
         @click="queryList"
       />
     </div>
@@ -30,8 +30,8 @@
           @click="goDetile(item)"
         >
           <div style="display:flex;margin-left:10px;">
-            <img style="height:19px;" src="../../../../../assets/img/reseau_list_icon1.png" />
-            <div class="van-ellipsis" style="color: #333333;font-size: 15px;margin-left:10px;width:200px;">{{item.name}}</div>
+            <img style="height:15px;margin-top:3px" src="../../../../../assets/img/reseau_list_icon1.png" />
+            <div class="van-ellipsis" style="color: #333333;font-size: 15px;margin-left:14px;width:200px;">{{item.name}}</div>
             <div
             v-if="item.type=='餐饮单位'"
               class="listTypeStyle"
