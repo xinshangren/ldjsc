@@ -151,6 +151,7 @@ export default {
       jhtze: 0,
       wctze: 0,
       czwtCount: 0,
+      indexyear:"",
       bottomList: [
         { projectName: "", percentage: 0 },
         { projectName: "", percentage: 0 },
@@ -163,7 +164,7 @@ export default {
   mounted() {
     this.getzdxmzj("");
     this.statisticsExistiong("");
-    this.getProjectPlanTopThree(new Date().getFullYear());
+    this.getProjectPlanTopThree("");
     //this.getThreeEchars(echarts, this.$refs.myCharts2);
   },
   methods: {
@@ -178,6 +179,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == "1") {
+            this.nowYear=res.data.year;
             this.zdgcsl = res.data.gcslmk.gcsl;
             this.getOneEchars(echarts, this.$refs.myCharts1, res.data.gcslmk);
             this.jhtze = res.data.jhtz;

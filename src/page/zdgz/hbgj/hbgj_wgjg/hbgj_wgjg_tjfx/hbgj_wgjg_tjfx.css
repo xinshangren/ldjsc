@@ -1,0 +1,109 @@
+#tabId .van-tabs__line{
+    background-color:#3097FB;
+    margin-bottom:2px;
+    height:2px;
+}
+.top_img{
+    height:56px;
+    position: absolute;
+    z-index: -1;
+}
+.top_title_select1{
+    color: rgb(25, 118, 211);font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
+}
+.top_title_select2{
+    color:#47d3ba;font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
+}
+.top_title_select3{
+    color: #fbb01c;font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
+}
+.top_title_noselect{
+    color: rgb(255, 255, 255);font-size: 14px;text-align: left;padding-top: 15px;padding-left: 15px;
+}
+.block_div_style{
+    position: relative;height:56px;
+}
+
+.twoLevel_left_div{
+    width: 25%;display: flex;height: 43px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;
+}
+.ssgk_title1{
+    font-size:37px;color:#333333;text-align:center;
+    padding-top: 18px;
+}
+.ssgk_title_img{
+    z-index:-1; height: 200px;width: 100%;position: absolute;top: 0px;left: 0px;
+}
+.ssgk_title1_div{
+    width:50%;text-align:right;margin-right:17px;font-size:14px;color:#666666;
+    position: relative;
+}
+.ssgk_title2_div{
+    width:50%;text-align:left;margin-right:17px;font-size:14px;color:#666666; position: relative;
+}
+.you{
+    background: #75D492;
+}
+.liang{
+    background:#C5D686 
+}
+.qingdu{
+    background: #F0A15C ;
+}
+.zhongdu1{
+    background:#E35E5F  
+}
+
+.zhongdu{
+    background: #B83B5D;
+}
+.yanzhong{
+    background:#57155D 
+}
+
+.yuanquan{
+    width: 7px;height: 7px;border-radius: 30px;background: rgb(204, 204, 204);margin-top: 6px;margin-left:8px;
+}
+
+.echars_title{
+    position: relative;height: 40px;background: #ffffff;border-bottom: 1px solid #cccccc;
+    line-height:40px;
+    
+}
+.echars_titile_div{
+    border-left:2px solid #1976d2;font-size:14px;margin-left:12px;
+    padding-left: 10px;
+}
+.chars_div_time_select {
+	background: #1976D3;
+	color: #ffffff;
+	font-size: 14px;
+	margin-left: 6px;
+	padding: 1px 0px;
+	border-radius: 3px;
+}
+
+.chars_div_time_noselect {
+	background: #ffffff;
+	margin-left: 6px;
+	color: #666666;
+	font-size: 14px;
+	border: 1px solid #cccccc;
+	padding: 1px 0px;
+	border-radius: 3px;
+}
+
+.chars_title_select{
+    width:40%;display:flex;
+}
+.top_menu_wgsx_div {
+	height: 73%;
+	display: flex;
+	position: fixed;
+	z-index: 0;
+	left: 26px;
+	bottom: 49px;
+	background: #ffffff;
+	border-radius: 0px;
+	box-shadow: 2px 2px 12px #cccccc;
+}

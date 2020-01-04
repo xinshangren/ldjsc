@@ -116,6 +116,7 @@
           <div style="width:50%;margin-left:25px;">
             <div>
               <div
+                 @click="callPhone()"
                 style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
               >
                 <img

@@ -71,6 +71,7 @@
       <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
       <child5 v-if="Bigflag==2&&wgjgactive==1"></child5>
       <child6 v-if="Bigflag==2&&wgjgactive==2"></child6>
+      <child7 v-if="Bigflag==2&&wgjgactive==3"></child7>
     </div>
     
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
@@ -91,6 +92,7 @@
           <div style="width:50%;margin-left:25px;">
             <div>
               <div
+              @click="callPhone()"
                 style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
               >
                 <img
@@ -119,7 +121,7 @@ import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
 import child4 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wggk/hbgj_wgjg_wggk.vue";
 import child5 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist.vue";
 import child6 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wgperson/hbgj_wgjg_wgperson.vue";
-import $ from "jquery";
+import child7 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_tjfx/hbgj_wgjg_tjfx.vue";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
 import { Tab, Tabs, Sticky } from "vant";
@@ -134,7 +136,8 @@ export default {
     child3,
     child4,
     child5,
-    child6
+    child6,
+    child7
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");

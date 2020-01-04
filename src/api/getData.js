@@ -247,7 +247,7 @@ export const httpMethod = {
     },
     //获取监管概况巡查图表
     getBasicRecordList: function (params) {
-        return get(" gridSupervisionController.action?basicRecordList", params);
+        return get("gridSupervisionController.action?basicRecordList", params);
     },
     //获取污染源列表
     getGridSourceList: function (params) {
@@ -262,13 +262,33 @@ export const httpMethod = {
         return get("gridSupervisionController.action?lineGridRecord", params);
     },
     //获取网格列表
-    lineGridRecord: function (params) {
+    getGridInfoList: function (params) {
         return get("gridSupervisionController.action?getGridInfoList", params);
     },
     //获取网格信息
     getGridSpecificList: function (params) {
         return get("gridSupervisionController.action?getGridSpecificList", params);
+    },
+    //获取监管概况排名图表
+    getGridRecordParam: function (params) {
+        return get("gridSupervisionController.action?getGridRecordParam", params);
+    },
+    //统计分析巡查情况饼状图
+    barGridRecord: function (params) {
+        return get("gridSupervisionController.action?barGridRecord", params);
+    },
+    //统计分析任务监管统计图
+    lineTask: function (params) {
+        return get("gridSupervisionController.action?lineTask", params);
+    },
+    //统计分析任务监管饼状图
+    barTask: function (params) {
+        return get("gridSupervisionController.action?barTask", params);
     }
+
+    
+
+    
 
     
    

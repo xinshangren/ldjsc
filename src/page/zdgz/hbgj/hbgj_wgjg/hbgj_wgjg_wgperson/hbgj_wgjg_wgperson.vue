@@ -215,14 +215,14 @@ export default {
     showSelectArea: function() {
       $("#wgsx_show_div_select_id1").show();
     },
-    //获取列表筛选企业类型
+    //获取网格列表
     getGridInfoListFuns: function(flag, gridCode) {
       var self = this;
       var params = {
         gridCode: gridCode
       };
       httpMethod
-        .lineGridRecord(params)
+        .getGridInfoList(params)
         .then(res => {
           console.log(res);
           if (res.success == "1") {

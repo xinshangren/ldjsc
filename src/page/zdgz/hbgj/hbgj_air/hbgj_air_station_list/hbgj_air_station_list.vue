@@ -25,7 +25,7 @@
         <div
           v-for="(item,index) in list"
           :key="index"
-          :class="item.hasCamera=='0'?'backgroundDivPhotonohave':'backgroundDivPhotohave' "
+         class="backgroundDivPhotonohave"
           style="position:relative;"
           @click="goDetile(item)"
         >
@@ -98,7 +98,7 @@
               </div>
             </div>
           </div>
-          <div class="van-hairline--bottom"></div>
+          <div class="van-hairline--bottom" style="height:7px;"></div>
         </div>
       </div>
     </mescroll-vue>
