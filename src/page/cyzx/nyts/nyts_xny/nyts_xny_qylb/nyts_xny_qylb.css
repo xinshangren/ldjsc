@@ -190,13 +190,18 @@
 	color: #1976D2;
 }
 
-.qygmImg{
-    width: 40px;
+.xny_qygmImg{
+    width: 44px;
 }
 
-.qyxzImg{
-    width: 47px;
+.xny_qylxImg{
+    height: 20px;
 }
+.xny_qyxzImg{
+    width: 67px;
+}
+
+
 .van-search{
     padding: 0%;
 }

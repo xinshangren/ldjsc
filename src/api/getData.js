@@ -234,16 +234,16 @@ export const httpMethod = {
     getMcqEnterpriseList: function (params) {
         return get("nytsAppGbInsideController.action?getMcqEnterpriseList", params);
     },
-     //获取煤层气企业抽采利用情况
-     getMcqStatistical: function (params) {
+    //获取煤层气企业抽采利用情况
+    getMcqStatistical: function (params) {
         return get("nytsAppGbInsideController.action?getMcqStatistical", params);
     },
     //获取监管概况
     getbasicList: function (params) {
         return get("gridSupervisionController.action?basicList", params);
     },
-    getMtTjQuantity: function (params){
-        return get("nytsAppGbInsideController.action?getMtTjQuantity",params);
+    getMtTjQuantity: function (params) {
+        return get("nytsAppGbInsideController.action?getMtTjQuantity", params);
     },
     //获取监管概况巡查图表
     getBasicRecordList: function (params) {
@@ -256,6 +256,14 @@ export const httpMethod = {
     //获取污染源类型
     getCompanyType: function (params) {
         return get("gridSupervisionController.action?getCompanyType", params);
+    },
+    //获取新能源企业列表
+    getXnyEnterpriseList: function (params) {
+        return get("nytsAppGbInsideController.action?getXnyEnterpriseList", params);
+    },
+    //获取新能源企业列表
+    getXnyProjectList: function (params) {
+        return get("nytsAppGbInsideController.action?getXnyProjectList", params);
     },
     //重点污染源覆盖物详情-污染物情况图表
     lineGridRecord: function (params) {
@@ -296,6 +304,10 @@ export const httpMethod = {
     
     
     
+
+
+
+
 
 
 

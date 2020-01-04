@@ -48,21 +48,20 @@
         </van-tabs>
       </div>
       <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
-        <div class="twoLevel_left_div">
-          <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
-          <div style="font-size: 14px;line-height: 40px;margin-left: 3px;">煤炭</div>
+        <div class="twoLevel_left_div" style="width: 30%;">
+          <img style="height: 30px; margin-top: 6px;margin-left: 10px;" src="../../../assets/img/icon1-xny.png" />
+          <div style="font-size: 14px;line-height: 40px;margin-left: 3px;">新能源</div>
           <img
             style="height: 14px;margin-top: 14px;"
             src="../../../assets/img/air_home_tab_arrow.png"
           />
         </div>
         <van-tabs
-          @click="smallTab_select_xny"
-          id="tabId"
+          id="tabId1"
           title-active-color="#2796e7"
           title-inactive-color="#333333"
           line-width="75"
-          v-model="airactive"
+          v-model="airactive1"
           style="width:75%;"
         >
           <van-tab title="概况"></van-tab>
@@ -80,7 +79,7 @@
           />
         </div>
         <van-tabs
-          id="tabId1"
+          id="tabId2"
           title-active-color="#2796e7"
           title-inactive-color="#333333"
           line-width="70"
@@ -102,7 +101,7 @@
         </div>
         <van-tabs
           @click="smallTab_select_nyxc"
-          id="tabId"
+          id="tabId3"
           title-active-color="#2796e7"
           title-inactive-color="#333333"
           line-width="75"
@@ -119,6 +118,11 @@
       <child1 v-if="flag==1&&airactive==0"></child1>
       <child2 v-if="flag==1&&airactive==1"></child2>
       <child3 v-if="flag==1&&airactive==2"></child3>
+      
+      <child4 v-if="flag==2&&airactive1==0"></child4>
+      <child5 v-if="flag==2&&airactive1==1"></child5>
+      <child6 v-if="flag==2&&airactive1==2"></child6>
+     
       <child7 v-if="flag==3&&airactive2==0"></child7>
       <child8 v-if="flag==3&&airactive2==1"></child8>
     </div>
@@ -131,6 +135,9 @@ import echarts from "echarts";
 import child1 from "@/page/cyzx/nyts/nyts_mt/nyts_mt_gk/nyts_mt_gk.vue";
 import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
 import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
+import child4 from "@/page/cyzx/nyts/nyts_xny/nyts_xny_gk/nyts_xny_gk.vue";
+import child5 from "@/page/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb.vue";
+import child6 from "@/page/cyzx/nyts/nyts_xny/nyts_xny_xmlb/nyts_xny_xmlb.vue";
 import child7 from "@/page/cyzx/nyts/nyts_mcq/nyts_mcq_gk/nyts_mcq_gk.vue";
 import child8 from "@/page/cyzx/nyts/nyts_mcq/nyts_mcq_qylb/nyts_mcq_qylb.vue";
 import $ from "jquery";
@@ -144,6 +151,9 @@ export default {
     child1,
     child2,
     child3,
+    child4,
+    child5,
+    child6,
     child7,
     child8
   },
@@ -157,6 +167,7 @@ export default {
   data() {
     return {
       airactive: 0,
+      airactive1: 0,
       airactive2: 0,
       flag:1,
       indexTabImg1: require("../../../assets/img/mt2_tab.png"),
@@ -191,10 +202,6 @@ export default {
         default:
           break;
       }
-    },
-    //新能源选项卡选择
-    smallTab_select_xny: function(name, title) {
-     
     },
     //能源相册子选项卡选择
     smallTab_select_nyxc: function(name, title) {

@@ -2,7 +2,7 @@
     <div style="margin-top:0px;overflow:hidden;">
         <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
             <form action="/" style="width: 84%;margin-left:13px;margin-top:8px;">
-                <van-search placeholder="请输入站点名称" @search="onSearch" v-model="seach_value" />
+                <van-search placeholder="请输入企业名称" @search="onSearch" v-model="seach_value" />
             </form>
             <img src="../../../../../assets/img/project_filtrate.png"
                 style="height: 27px;margin-top: 10px;margin-left:5px;" @click="queryList" />
@@ -25,22 +25,38 @@
                         </div>
                         <div style="display:flex;position:relative;">
                             <div style="float: left;margin-top: 6px;">
-                                <img class="qygmImg" v-if="item.ent_nature == 1"
-                                    src="../../../../../assets/img/mcq-gq.png" />
-                                <img class="qygmImg" v-if="item.ent_nature == 2"
-                                    src="../../../../../assets/img/mcq-yq.png" />
-                                <img class="qygmImg" v-if="item.ent_nature == 3"
-                                    src="../../../../../assets/img/mcq-wq.png" />
-                                <img class="qygmImg" v-if="item.ent_nature == 4"
-                                    src="../../../../../assets/img/mcq-mq.png" />
+                                <img class="xny_qyxzImg" v-if="item.ent_nature == 1"
+                                    src="../../../../../assets/img/xny-qy-gyqy.png" />
+                                <img class="xny_qyxzImg" v-if="item.ent_nature == 2"
+                                    src="../../../../../assets/img/xny-qy-jtsyzqy.png" />
+                                <img class="xny_qyxzImg" v-if="item.ent_nature == 3"
+                                    src="../../../../../assets/img/xny-qy-lyqy.png" />
+                                <img class="xny_qyxzImg" v-if="item.ent_nature == 4"
+                                    src="../../../../../assets/img/xny-qy-szqy.png" />
+                                <img class="xny_qyxzImg" v-if="item.ent_nature == 5"
+                                    src="../../../../../assets/img/xny-qy-syqy.png" />
+                                <img class="xny_qyxzImg" v-if="item.ent_nature == 6"
+                                    src="../../../../../assets/img/xny-qy-qtqy.png" />
                             </div>
-                            <div style="margin-left: 30px;margin-top: 6px;">
-                                <img class="qyxzImg" v-if="item.ent_scale == 1"
+                            <div style="margin-left: 10px;margin-top: 6px;">
+                                <img class="xny_qygmImg" v-if="item.ent_scale == 1"
                                     src="../../../../../assets/img/xny-qy-dx.png" />
-                                <img class="qyxzImg" v-if="item.ent_scale == 2"
+                                <img class="xny_qygmImg" v-if="item.ent_scale == 2"
                                     src="../../../../../assets/img/xny-qy-zx.png" />
-                                <img class="qyxzImg" v-if="item.ent_scale == 3"
+                                <img class="xny_qygmImg" v-if="item.ent_scale == 3"
                                     src="../../../../../assets/img/xny-qy-xx.png" />
+                            </div>
+                            <div style="margin-left: 10px;margin-top: 6px;">
+                                <img class="xny_qylxImg" v-if="item.ent_type == 1"
+                                    src="../../../../../assets/img/xny-qy-gd.png" />
+                                <img class="xny_qylxImg" v-if="item.ent_type == 2"
+                                    src="../../../../../assets/img/xny-qy-fd.png" />
+                                <img class="xny_qylxImg" v-if="item.ent_type == 3"
+                                    src="../../../../../assets/img/xny-qy-swzfd.png" />
+                                <img class="xny_qylxImg" v-if="item.ent_type == 4"
+                                    src="../../../../../assets/img/xny-qy-sd.png" />
+                                <img class="xny_qylxImg" v-if="item.ent_type == 5"
+                                    src="../../../../../assets/img/xny-qy-qt.png" />
                             </div>
                         </div>
                         <div style="display:flex;position:relative;">
@@ -57,12 +73,12 @@
             </div>
         </mescroll-vue>
 
-        <van-popup v-model="show" position="top" get-container="#count_id" :style="{ height: '80%' }" @opened="openPop"
+        <van-popup v-model="show" position="top" get-container="#count_id" :style="{ height: '76%' }" @opened="openPop"
             style="overflow:hidden;background:rgb(243, 243, 243);">
             <div style="background:#ffffff;">
-                <div style="padding-top:9px;font-size: 16px;margin-left:17px;">企业规模</div>
-                <ul id="qygmListDialogId" class="ui-row" style="margin-top: 11px;margin-right: 0px;">
-                    <li v-for="(item,index) in qygm_dataList" :key="index" :id="(item.typecode)"
+                <div style="padding-top:9px;font-size: 16px;margin-left:17px;">企业类型</div>
+                <ul class="ui-row" id="qylxListDialogId" style="margin-top: 11px;margin-right: 0px;">
+                    <li v-for="(item,index) in qylx_dataList" style="width: 26%;" :key="index" :id="(item.typecode)"
                         class="ui-col ui-col-25 dialogNoSelect">{{item.typename}}</li>
                 </ul>
 
@@ -70,6 +86,15 @@
                 <div style="padding-top:9px;font-size: 16px;margin-left:17px;">企业性质</div>
                 <ul class="ui-row" id="qyxzListDialogId" style="margin-top: 11px;margin-right: 0px;">
                     <li v-for="(item,index) in qyxz_dataList" :key="index" :id="(item.typecode)"
+                        v-if="item.typecode == 2" style="width:34%" class="ui-col ui-col-25 dialogNoSelect">
+                        {{item.typename}}</li>
+                    <li v-for="(item,index) in qyxz_dataList" :key="index" :id="(item.typecode)"
+                        v-if="item.typecode != 2" class="ui-col ui-col-25 dialogNoSelect">{{item.typename}}</li>
+                </ul>
+                <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+                <div style="padding-top:9px;font-size: 16px;margin-left:17px;">企业规模</div>
+                <ul id="qygmListDialogId" class="ui-row" style="margin-top: 11px;margin-right: 0px;">
+                    <li v-for="(item,index) in qygm_dataList" :key="index" :id="(item.typecode)"
                         class="ui-col ui-col-25 dialogNoSelect">{{item.typename}}</li>
                 </ul>
                 <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
@@ -113,13 +138,16 @@
             return {
                 qyxz_dataList: [],
                 qygm_dataList: [],
+                qylx_dataList: [],
                 comp_dataList: [],
                 compCount: 0,
                 query_params: {
                     ent_scale: "",
                     counties: "",
-                    ent_nature: ""
+                    ent_nature: "",
+                    ent_type: ""
                 },
+                ent_type: "",
                 ent_scale: "",
                 counties: "",
                 ent_nature: "",
@@ -166,16 +194,18 @@
                     ent_scale: this.query_params.ent_scale, //规模
                     counties: this.query_params.counties, //区县
                     ent_nature: this.query_params.ent_nature, //性质
+                    ent_type: this.query_params.ent_type, //类型
                     page: page.num,
                     pageSize: page.size
                 };
                 httpMethod
-                    .getMcqEnterpriseList(params)
+                    .getXnyEnterpriseList(params)
                     .then(res => {
                         console.log(res);
                         if (res.success == "1") {
-                            this.qygm_dataList = res.mcqQygm.dataList;
-                            this.qyxz_dataList = res.mcqQyxz.dataList;
+                            this.qygm_dataList = res.xnyscale.dataList;
+                            this.qyxz_dataList = res.xnynature.dataList;
+                            this.qylx_dataList = res.xnytype.dataList;
                             this.comp_dataList = res.dataList;
                             this.compCount = res.total;
                         }
@@ -208,6 +238,7 @@
                 var context = this;
                 $("#qygmListDialogId li").off('click');
                 $("#qyxzListDialogId li").off('click');
+                $("#qylxListDialogId li").off('click');
                 $("#ssqyListDialogId li").off('click');
                 //企业规模选择列表
                 $("#qygmListDialogId li").click(function () {
@@ -220,7 +251,17 @@
                     }
                 });
                 //企业性质选择列表
-                $('#qyxzListDialogId li').click(function () {
+                $("#qyxzListDialogId li").click(function () {
+                    if ($(this).hasClass("dialogSelect")) {
+                        $(this).removeClass("dialogSelect");
+                        $(this).addClass("dialogNoSelect");
+                    } else {
+                        $(this).addClass("dialogSelect");
+                        $(this).removeClass("dialogNoSelect");
+                    }
+                });
+                //企业性质选择列表
+                $("#qylxListDialogId li").click(function () {
                     if ($(this).hasClass("dialogSelect")) {
                         $(this).removeClass("dialogSelect");
                         $(this).addClass("dialogNoSelect");
@@ -237,8 +278,12 @@
                     } else {
                         $(this).addClass("dialogSelect");
                         $(this).removeClass("dialogNoSelect");
-                        $(this).siblings('li').addClass("dialogNoSelect");
-                        $(this).siblings('li').removeClass("dialogSelect");
+                        $(this)
+                            .siblings("li")
+                            .addClass("dialogNoSelect");
+                        $(this)
+                            .siblings("li")
+                            .removeClass("dialogSelect");
                     }
                 });
             },
@@ -257,12 +302,17 @@
                     $(this).removeClass("dialogSelect");
                     $(this).addClass("dialogNoSelect");
                 });
-                self.query_params={
+                $("#qylxListDialogId li").each(function () {
+                    $(this).removeClass("dialogSelect");
+                    $(this).addClass("dialogNoSelect");
+                });
+                (self.query_params = {
                     ent_scale: "",
                     counties: "",
-                    ent_nature: ""
-                },
-                self.mescroll.resetUpScroll();
+                    ent_nature: "",
+                    ent_type:""
+                }),
+                    self.mescroll.resetUpScroll();
                 self.show = false;
             },
             //确定
@@ -271,6 +321,7 @@
                 self.ent_scale = "";
                 self.counties = "";
                 self.ent_nature = "";
+                self.ent_type = "";
                 //企业规模选择
                 $("#qygmListDialogId li").each(function () {
                     if ($(this).hasClass("dialogSelect")) {
@@ -286,6 +337,13 @@
                     }
                 });
                 //企业规模选择
+                $("#qylxListDialogId li").each(function () {
+                    if ($(this).hasClass("dialogSelect")) {
+                        self.ent_type += $(this).attr("id");
+                        self.ent_type += "，";
+                    }
+                });
+                //企业规模选择
                 $("#ssqyListDialogId li").each(function () {
                     if ($(this).hasClass("dialogSelect")) {
                         self.counties = $(this).attr("id");
@@ -294,15 +352,15 @@
                 self.query_params.ent_scale = self.ent_scale;
                 self.query_params.counties = self.counties;
                 self.query_params.ent_nature = self.ent_nature;
+                self.query_params.ent_type = self.ent_type;
                 self.show = false;
                 console.log(self.query_params);
                 this.mescroll.resetUpScroll();
-
             }
         }
     };
 </script>
 <style>
-    @import "../../../../../page/cyzx/nyts/nyts_mcq/nyts_mcq_qylb/nyts_mcq_qylb.css";
+    @import "../../../../../page/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb.css";
     @import "../../../../../assets/css/frozenui.css";
 </style>
