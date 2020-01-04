@@ -264,7 +264,25 @@ export const httpMethod = {
     //获取新能源企业列表
     getXnyProjectList: function (params) {
         return get("nytsAppGbInsideController.action?getXnyProjectList", params);
+    },
+    //重点污染源覆盖物详情-污染物情况图表
+    lineGridRecord: function (params) {
+        return get("gridSupervisionController.action?lineGridRecord", params);
+    },
+    //获取网格列表
+    lineGridRecord: function (params) {
+        return get("gridSupervisionController.action?getGridInfoList", params);
+    },
+    //获取网格信息
+    getGridSpecificList: function (params) {
+        return get("gridSupervisionController.action?getGridSpecificList", params);
     }
+
+    
+   
+    
+    
+    
     
 
 
