@@ -224,7 +224,7 @@ export const httpMethod = {
     },
     //获取海关进出口总额
     getCustomsTrading: function (params) {
-        return get("hgjjAppInsideController.action?getMcqGeneralSituation", params);
+        return get("hgjjAppInsideController.action?getCustomsTrading", params);
     },
     //获取煤层气概况数据
     getMcqGeneralSituation: function (params) {

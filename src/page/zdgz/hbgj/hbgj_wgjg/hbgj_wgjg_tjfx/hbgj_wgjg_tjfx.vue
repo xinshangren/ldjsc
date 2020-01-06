@@ -89,7 +89,7 @@
       <div style="display:flex;">
         <div class="echars_titile_div">任务监管情况</div>
         <div @click="showSelectArea(2)" style="display:flex;margin-left:17px;">
-          <div id="oneTimeDivId" style="color:#3097fb;font-size:14px;line-height:22px;">选择网格</div>
+          <div id="twoTimeDivId" style="color:#3097fb;font-size:14px;line-height:22px;">选择网格</div>
           <img
             style="height: 11px;margin-top: 6px;margin-left: 5px;"
             src="../../../../../assets/img/air_data_arrow.png"
@@ -253,7 +253,7 @@ export default {
         .addClass("chars_div_time_noselect");
     });
 
-     $("#echar2typeId div").click(function(e) {
+    $("#echar2typeId div").click(function(e) {
       $(this).removeClass("chars_div_time_noselect");
       $(this).addClass("chars_div_time_select");
       $(this)
@@ -661,6 +661,19 @@ export default {
                 self.getGridInfoListFuns("2", code);
                 // self.getGridSpecificList(code, name);
                 self.wgName = name;
+
+                switch (self.wgType) {
+                  case 1:
+                    $("#oneTimeDivId").html(name);
+                    self.echars_gridCode2 = code;
+                    break;
+                  case 2:
+                    $("#twoimeDivId").html(name);
+                    self.echars_gridCode3 = code;
+                    break;
+                  default:
+                    break;
+                }
               });
             } else if (flag == "2") {
               $("#top_wgsx_ul2_list").html("");
@@ -713,6 +726,18 @@ export default {
                 self.getGridInfoListFuns("3", code);
                 // self.getGridSpecificList(code, name);
                 self.wgName = name;
+                switch (self.wgType) {
+                  case 1:
+                    $("#oneTimeDivId").html(name);
+                    self.echars_gridCode2 = code;
+                    break;
+                  case 2:
+                    $("#twoimeDivId").html(name);
+                    self.echars_gridCode3 = code;
+                    break;
+                  default:
+                    break;
+                }
               });
             } else if (flag == "3") {
               $("#top_wgsx_ul3_list").html("");
@@ -752,6 +777,18 @@ export default {
                 var name = $(this).html();
                 // self.getGridSpecificList(code, name);
                 self.wgName = name;
+                switch (self.wgType) {
+                  case 1:
+                    $("#oneTimeDivId").html(name);
+                    self.echars_gridCode2 = code;
+                    break;
+                  case 2:
+                    $("#twoimeDivId").html(name);
+                    self.echars_gridCode3 = code;
+                    break;
+                  default:
+                    break;
+                }
               });
             }
           }
