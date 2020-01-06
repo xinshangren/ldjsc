@@ -32,6 +32,9 @@ import nytsVue from '@/page/cyzx/nyts/nyts.vue'
 import jjyx_zttsVue from '@/page/jjyx/jjyx_ztts/jjyx_ztts.vue'
 import hbgj_air_station_list_dealiVue from '@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali/hbgj_air_station_list_deali.vue'
 import hbgj_wgjg_wrylist_dealiVue from '@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist_deali/hbgj_wgjg_wrylist_deali.vue'
+import nyts_mcq_qylb_detailVue from '@/page/cyzx/nyts/nyts_mcq/nyts_mcq_qylb/nyts_mcq_qylb_detail/nyts_mcq_qylb_detail.vue'
+import nyts_xny_qylb_detailVue from '@/page/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb_detail/nyts_xny_qylb_detail.vue'
+import nyts_xny_xmlb_detailVue from '@/page/cyzx/nyts/nyts_xny/nyts_xny_xmlb/nyts_xny_xmlb_detail/nyts_xny_xmlb_detail.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -173,6 +176,18 @@ export default new Router({
       path: '/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist_deali',
       name: 'hbgj_wgjg_wrylist_deali',
       component: hbgj_wgjg_wrylist_dealiVue
+    },{
+      path: '/cyzx/nyts/nyts_mcq/nyts_mcq_qylb/nyts_mcq_qylb_detail/',
+      name: 'nyts_mcq_qylb_detail',
+      component: nyts_mcq_qylb_detailVue
+    },{
+      path: '/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb_detail/',
+      name: 'nyts_xny_qylb_detail',
+      component: nyts_xny_qylb_detailVue
+    },{
+      path: '/cyzx/nyts/nyts_xny/nyts_xny_xmlb/nyts_xny_xmlb_detail/',
+      name: 'nyts_xny_xmlb_detail',
+      component: nyts_xny_xmlb_detailVue
     }
 
     

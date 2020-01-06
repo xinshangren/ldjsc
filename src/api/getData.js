@@ -292,7 +292,11 @@ export const httpMethod = {
     //统计分析任务监管饼状图
     barTask: function (params) {
         return get("gridSupervisionController.action?barTask", params);
-    }
+    },
+    //新能源项目发电量
+    getXnyReport: function (params) {
+        return get("nytsAppGbInsideController.action?getXnyReport", params);
+    },
 
     
 

@@ -16,7 +16,8 @@
         <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
             <div id="newsList"
                 style="margin-top:3px;margin-left:10px;margin-right:10px;box-shadow:1px 1px 2px 3px  #f3f3f3;">
-                <div v-for="(item,index) in comp_dataList" :key="index" style="position:relative;">
+                <div v-for="(item,index) in comp_dataList" :key="index" @click="goDetail(item)"
+                    style="position:relative;">
                     <div style="padding:7px;">
                         <div style="display:flex;position:relative;">
                             <p
@@ -36,18 +37,16 @@
                                 <img class="xny_xmlxImg" v-if="item.pro_type == 5"
                                     src="../../../../../assets/img/xny-qy-qt.png" />
                             </div>
-                            <!-- <div style="margin-left: 10px;margin-top: 6px;">
-                                <img class="xny_qylxImg" v-if="item.pro_type == 1"
-                                    src="../../../../../assets/img/xny-qy-gd.png" />
-                                <img class="xny_qylxImg" v-if="item.pro_type == 2"
-                                    src="../../../../../assets/img/xny-qy-fd.png" />
-                                <img class="xny_qylxImg" v-if="item.pro_type == 3"
-                                    src="../../../../../assets/img/xny-qy-swzfd.png" />
-                                <img class="xny_qylxImg" v-if="item.pro_type == 4"
-                                    src="../../../../../assets/img/xny-qy-sd.png" />
-                                <img class="xny_qylxImg" v-if="item.pro_type == 5"
-                                    src="../../../../../assets/img/xny-qy-qt.png" />
-                            </div> -->
+                          <div style="margin-left: 10px;margin-top: 6px;">
+                                <img class="xny_xmjdImg" v-if="item.project_phase == 1"
+                                    src="../../../../../assets/img/xny-xm-zj.png" />
+                                <img class="xny_xmjdImg" v-if="item.project_phase == 2"
+                                    src="../../../../../assets/img/xny-xm-yyx.png" />
+                                <img class="xny_xmjdImg" v-if="item.project_phase == 3"
+                                    src="../../../../../assets/img/xny-xm-tjqq.png" />
+                                <img class="xny_xmjdImg" v-if="item.project_phase == 4"
+                                    src="../../../../../assets/img/xny-xm-xz.png" />
+                            </div>
                         </div>
                         <div style="display:flex;position:relative;">
                             <div>
@@ -329,7 +328,17 @@
                 self.show = false;
                 console.log(self.query_params);
                 this.mescroll.resetUpScroll();
-            }
+            },
+            goDetail(item) {
+                this.$router.push({
+                    path:
+                        "/cyzx/nyts/nyts_xny/nyts_xny_xmlb/nyts_xny_xmlb_detail/",
+                    name: "nyts_xny_xmlb_detail",
+                    params: {
+                        entity: item
+                    }
+                });
+            },
         }
     };
 </script>
