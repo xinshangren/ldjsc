@@ -22,11 +22,11 @@
     </div>
     <van-sticky :offset-top="50">
       <div style="display:flex;border-bottom:1px solid #f3f3f3;">
-        <div class="twoLevel_left_div">
-          <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
-          <div style="font-size: 14px;line-height: 40px;">空气</div>
+        <div @click="showHideLeftSelect()" class="twoLevel_left_div">
+          <img style="height: 24px; margin-top: 8px;margin-left: 10px;" :src="TwoLevelTabImg1" />
+          <div id="selectDivName" style="font-size: 14px;line-height: 40px;">空气</div>
           <img
-            style="height: 14px;margin-top: 14px;"
+            style="height: 14px;margin-top: 14px;margin-left:3px;"
             src="../../../assets/img/air_home_tab_arrow.png"
           />
         </div>
@@ -78,6 +78,25 @@
         </van-tabs>
       </div>
     </van-sticky>
+    <div
+      id="leftSelectDivId"
+      style="display:none; position: absolute;top: 164px;height: 97px;background: rgb(255, 255, 255);z-index: 1;padding: 5px 10px;border-radius: 5px;left: 8px;"
+    >
+      <ul id="leftUlId">
+        <li style="display: flex;border-bottom: 1px solid #cccccc;">
+          <img style="height:23px;" :src="lefttabimg1" />
+          <div style="color: rgb(39, 150, 231);font-size: 15px;margin-left: 5px;">空气</div>
+        </li>
+        <li style="margin-top:10px;display: flex;border-bottom: 1px solid #cccccc;">
+          <img style="height:20px;" :src="lefttabimg2" />
+          <div style="color: #333333;font-size: 15px;margin-left: 5px;">网格</div>
+        </li>
+        <li style="margin-top:10px;display: flex;border-bottom: 1px solid #cccccc;">
+          <img style="height:20px;" :src="lefttabimg3" />
+          <div style="color: #333333;font-size: 15px;margin-left: 5px;">企业</div>
+        </li>
+      </ul>
+    </div>
     <div>
       <div :is="currentView"></div>
       <!-- <child1 v-if="Bigflag==1&&airactive==0"></child1>
@@ -182,17 +201,110 @@ export default {
       indexTabImg3: require("../../../assets/img/air_home_tab3.png"),
       TwoLevelTabImg1: require("../../../assets/img/air_list_icon1.png"),
       TwoLevelTabImg2: require("../../../assets/img/air_list_icon2.png"),
-      TwoLevelTabImg3: require("../../../assets/img/air_list_icon3.png")
+      TwoLevelTabImg3: require("../../../assets/img/air_list_icon3.png"),
+      lefttabimg1: require("../../../assets/img/air_list_icon1_selected.png"),
+      lefttabimg2: require("../../../assets/img/air_list_icon2.png"),
+      lefttabimg3: require("../../../assets/img/air_list_icon3.png")
     };
   },
   mounted() {
+    var self = this;
     $("#leftAreaDivId").click(function() {
       $("#rightAreaDivId").animate({
         width: "toggle"
       });
     });
+
+    $("#leftUlId li").click(function() {
+      console.log($(this).index());
+      self.selectLeftTab($(this).index());
+      switch ($(this).index()) {
+        case 0:
+          self.selectIndexTab(1);
+          break;
+        case 1:
+          self.selectIndexTab(2);
+          break;
+        case 2:
+          self.selectIndexTab(3);
+          break;
+        default:
+          break;
+      }
+    });
   },
   methods: {
+    selectLeftTab: function(index) {
+      switch (index) {
+        case 0:
+          $("#selectDivName").html("空气");
+          $("#leftUlId li")
+            .eq(0)
+            .find("div")
+            .css("color", "rgb(39, 150, 231)");
+          $("#leftUlId li")
+            .eq(1)
+            .find("div")
+            .css("color", "#333333");
+          $("#leftUlId li")
+            .eq(2)
+            .find("div")
+            .css("color", "#333333");
+          this.TwoLevelTabImg1 = require("../../../assets/img/air_list_icon1.png");
+          this.lefttabimg1 = require("../../../assets/img/air_list_icon1_selected.png");
+          this.lefttabimg2 = require("../../../assets/img/air_list_icon2.png");
+          this.lefttabimg3 = require("../../../assets/img/air_list_icon3.png");
+          break;
+        case 1:
+          $("#selectDivName").html("网格");
+          $("#leftUlId li")
+            .eq(1)
+            .find("div")
+            .css("color", "rgb(39, 150, 231)");
+          $("#leftUlId li")
+            .eq(0)
+            .find("div")
+            .css("color", "#333333");
+          $("#leftUlId li")
+            .eq(2)
+            .find("div")
+            .css("color", "#333333");
+          this.TwoLevelTabImg1 = require("../../../assets/img/air_list_icon2.png");
+          this.lefttabimg1 = require("../../../assets/img/air_list_icon1.png");
+          this.lefttabimg2 = require("../../../assets/img/air_list_icon2_selected.png");
+          this.lefttabimg3 = require("../../../assets/img/air_list_icon3.png");
+          break;
+        case 2:
+          $("#selectDivName").html("企业");
+          $("#leftUlId li")
+            .eq(2)
+            .find("div")
+            .css("color", "rgb(39, 150, 231)");
+          $("#leftUlId li")
+            .eq(0)
+            .find("div")
+            .css("color", "#333333");
+          $("#leftUlId li")
+            .eq(1)
+            .find("div")
+            .css("color", "#333333");
+          this.TwoLevelTabImg1 = require("../../../assets/img/air_list_icon3.png");
+          this.lefttabimg1 = require("../../../assets/img/air_list_icon1.png");
+          this.lefttabimg2 = require("../../../assets/img/air_list_icon2.png");
+          this.lefttabimg3 = require("../../../assets/img/air_list_icon3_selected.png");
+          break;
+        default:
+          break;
+      }
+      $("#leftSelectDivId").hide();
+    },
+    showHideLeftSelect: function() {
+      if ($("#leftSelectDivId").is(":hidden")) {
+        $("#leftSelectDivId").show();
+      } else {
+        $("#leftSelectDivId").hide();
+      }
+    },
     callPhone: function() {
       window.location.href = "tel://18635609998";
     },
@@ -257,6 +369,7 @@ export default {
       this.Bigflag = index;
       switch (index) {
         case 1:
+          this.selectLeftTab(0);
           this.oneShow = true;
           this.twoShow = false;
           this.threeShow = false;
@@ -288,6 +401,7 @@ export default {
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
           break;
         case 2:
+           this.selectLeftTab(1);
           this.oneShow = false;
           this.twoShow = true;
           this.threeShow = false;
@@ -306,6 +420,7 @@ export default {
           this.wgjgactive = 0;
           break;
         case 3:
+           this.selectLeftTab(2);
           this.oneShow = false;
           this.twoShow = false;
           this.threeShow = true;
