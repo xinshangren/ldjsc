@@ -32,13 +32,13 @@
         </div>
         <van-tabs
           @click="smallTab_select"
-          id="tabId1"
+          ref="tabId1"
           title-active-color="#2796e7"
           title-inactive-color="#333333"
           line-width="75"
           v-model="airactive"
-           :ellipsis="false"
-           v-show="oneShow"
+          :ellipsis="false"
+          v-show="oneShow"
           style="width:75%;"
         >
           <van-tab title="实时状况"></van-tab>
@@ -52,7 +52,7 @@
           title-inactive-color="#333333"
           line-width="75"
           v-model="wgjgactive"
-           v-show="twoShow"
+          v-show="twoShow"
           style="width:75%;"
           :ellipsis="false"
           @rendered="rendered_wgjg"
@@ -62,18 +62,35 @@
           <van-tab title="人员列表"></van-tab>
           <van-tab title="统计分析"></van-tab>
         </van-tabs>
+        <van-tabs
+          @click="smallTab_select_zdqy"
+          ref="tabId3"
+          title-active-color="#2796e7"
+          title-inactive-color="#333333"
+          line-width="75"
+          v-model="zdqyactive"
+          v-show="threeShow"
+          style="width:75%;"
+          :ellipsis="false"
+        >
+          <van-tab title="企业概况"></van-tab>
+          <van-tab title="重点企业列表"></van-tab>
+        </van-tabs>
       </div>
     </van-sticky>
     <div>
-      <child1 v-if="Bigflag==1&&airactive==0"></child1>
+      <div :is="currentView"></div>
+      <!-- <child1 v-if="Bigflag==1&&airactive==0"></child1>
       <child2 v-if="Bigflag==1&&airactive==1"></child2>
       <child3 v-if="Bigflag==1&&airactive==2"></child3>
       <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
       <child5 v-if="Bigflag==2&&wgjgactive==1"></child5>
       <child6 v-if="Bigflag==2&&wgjgactive==2"></child6>
       <child7 v-if="Bigflag==2&&wgjgactive==3"></child7>
+      <child8 v-if="Bigflag==3&&wgjgactive==0"></child8>
+      <child9 v-if="Bigflag==3&&wgjgactive==1"></child9>-->
     </div>
-    
+
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
       <div id="rightAreaDivId" style="display:none;">
         <div
@@ -92,7 +109,7 @@
           <div style="width:50%;margin-left:25px;">
             <div>
               <div
-              @click="callPhone()"
+                @click="callPhone()"
                 style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
               >
                 <img
@@ -122,6 +139,8 @@ import child4 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wggk/hbgj_wgjg_wggk.vue
 import child5 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist.vue";
 import child6 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wgperson/hbgj_wgjg_wgperson.vue";
 import child7 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_tjfx/hbgj_wgjg_tjfx.vue";
+import child8 from "@/page/zdgz/hbgj/hbgj_wrqy/hbgj_wrqy_qygk/hbgj_wrqy_qygk.vue";
+import child9 from "@/page/zdgz/hbgj/hbgj_wrqy/hbgj_zdqylb/hbgj_zdqylb.vue";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
 import { Tab, Tabs, Sticky } from "vant";
@@ -137,7 +156,9 @@ export default {
     child4,
     child5,
     child6,
-    child7
+    child7,
+    child8,
+    child9
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
@@ -148,11 +169,14 @@ export default {
   },
   data() {
     return {
+      currentView: "child1",
       Bigflag: 1,
       airactive: 0,
       wgjgactive: 0,
-      twoShow:false,
-      oneShow:true,
+      zdqyactive: 0,
+      threeShow: false,
+      twoShow: false,
+      oneShow: true,
       indexTabImg1: require("../../../assets/img/air_home_tab1selected.png"),
       indexTabImg2: require("../../../assets/img/air_home_tab2.png"),
       indexTabImg3: require("../../../assets/img/air_home_tab3.png"),
@@ -169,32 +193,88 @@ export default {
     });
   },
   methods: {
-     
-    callPhone:function(){
-       window.location.href = 'tel://18635609998'
+    callPhone: function() {
+      window.location.href = "tel://18635609998";
     },
     //空气子选项卡选择
     smallTab_select: function(name, title) {
       // console.log(name,title);
       this.airactive = name;
+      switch (name) {
+        case 0:
+          this.currentView = "child1";
+          break;
+        case 1:
+          this.currentView = "child2";
+          break;
+        case 2:
+          this.currentView = "child3";
+          break;
+        default:
+          break;
+      }
     },
     //网格子选项卡选择
     smallTab_select_wgjg: function(name, title) {
       // console.log(name,title);
       this.wgjgactive = name;
+      switch (name) {
+        case 0:
+          this.currentView = "child4";
+          break;
+        case 1:
+          this.currentView = "child5";
+          break;
+        case 2:
+          this.currentView = "child6";
+          break;
+        case 3:
+          this.currentView = "child7";
+          break;
+        default:
+          break;
+      }
     },
-    rendered_wgjg:function (name, title) {
-       console.log(name,title);
+    smallTab_select_zdqy: function(name, title) {
+      this.zdqyactive = name;
+      switch (name) {
+        case 0:
+          this.currentView = "child8";
+          break;
+        case 1:
+          this.currentView = "child9";
+          break;
+
+        default:
+          break;
+      }
+    },
+    rendered_wgjg: function(name, title) {
+      console.log(name, title);
     },
     //选择顶部的选项卡
     selectIndexTab: function(index) {
       this.Bigflag = index;
       switch (index) {
         case 1:
-          // $("#tabId1").show();
-          // $("#tabId2").hide();
-          this.oneShow=true;
-          this.twoShow=false;
+          this.oneShow = true;
+          this.twoShow = false;
+          this.threeShow = false;
+          this.$refs.tabId1.resize();
+          switch (this.airactive) {
+            case 0:
+              this.currentView = "child1";
+              break;
+            case 1:
+              this.currentView = "child2";
+              break;
+            case 2:
+              this.currentView = "child3";
+              break;
+            default:
+              break;
+          }
+
           $("#indexTabDiv1").addClass("top_title_select1");
           $("#indexTabDiv2").addClass("top_title_noselect");
           $("#indexTabDiv3").addClass("top_title_noselect");
@@ -208,11 +288,11 @@ export default {
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
           break;
         case 2:
-          this.oneShow=false;
-          this.twoShow=true;
+          this.oneShow = false;
+          this.twoShow = true;
+          this.threeShow = false;
           this.$refs.tabId2.resize();
-          // $("#tabId1").hide();
-          // $("#tabId2").show();
+          this.currentView = "child4";
           $("#indexTabDiv1").addClass("top_title_noselect");
           $("#indexTabDiv2").addClass("top_title_select2");
           $("#indexTabDiv3").addClass("top_title_noselect");
@@ -223,11 +303,14 @@ export default {
           this.indexTabImg1 = require("../../../assets/img/air_home_tab1.png");
           this.indexTabImg2 = require("../../../assets/img/air_home_tab2selected.png");
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
-          this.wgjgactive=0;
+          this.wgjgactive = 0;
           break;
         case 3:
-          $("#tabId1").hide();
-          $("#tabId2").hide();
+          this.oneShow = false;
+          this.twoShow = false;
+          this.threeShow = true;
+          this.$refs.tabId3.resize();
+          this.currentView = "child8";
           $("#indexTabDiv1").addClass("top_title_noselect");
           $("#indexTabDiv2").addClass("top_title_noselect");
           $("#indexTabDiv3").addClass("top_title_select3");

@@ -8,10 +8,7 @@
       <div style="display:flex;">
         <div class="echars_titile_div">晋城市发现问题数排行</div>
         <div @click="showSelectTime(1)" style="display:flex;margin-left:17px;">
-          <div
-            id="oneTimeDivId"
-            style="color:#3097fb;font-size:14px;line-height:22px;"
-          >{{currentYear1}}</div>
+          <div style="color:#3097fb;font-size:14px;line-height:22px;">{{currentYear1}}</div>
           <img
             style="height: 11px;margin-top: 6px;margin-left: 5px;"
             src="../../../../../assets/img/air_data_arrow.png"
@@ -666,10 +663,14 @@ export default {
                   case 1:
                     $("#oneTimeDivId").html(name);
                     self.echars_gridCode2 = code;
+                    self.lineGridRecord();
+                    self.barGridRecord();
                     break;
                   case 2:
-                    $("#twoimeDivId").html(name);
+                    $("#twoTimeDivId").html(name);
                     self.echars_gridCode3 = code;
+                    self.lineTask();
+                    self.barTask();
                     break;
                   default:
                     break;
@@ -730,10 +731,14 @@ export default {
                   case 1:
                     $("#oneTimeDivId").html(name);
                     self.echars_gridCode2 = code;
+                    self.lineGridRecord();
+                    self.barGridRecord();
                     break;
                   case 2:
-                    $("#twoimeDivId").html(name);
+                    $("#twoTimeDivId").html(name);
                     self.echars_gridCode3 = code;
+                    self.lineTask();
+                    self.barTask();
                     break;
                   default:
                     break;
@@ -781,10 +786,14 @@ export default {
                   case 1:
                     $("#oneTimeDivId").html(name);
                     self.echars_gridCode2 = code;
+                    self.lineGridRecord();
+                    self.barGridRecord();
                     break;
                   case 2:
-                    $("#twoimeDivId").html(name);
+                    $("#twoTimeDivId").html(name);
                     self.echars_gridCode3 = code;
+                    self.lineTask();
+                    self.barTask();
                     break;
                   default:
                     break;

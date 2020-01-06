@@ -1,0 +1,81 @@
+
+.tabimg{
+    height: 17px;
+    margin-top: 14px;
+    margin-left:16px;
+}
+.van-tab--active {
+    color:#3097FB;
+    font-size: 18px;
+}
+.van-tabs__line{
+    background-color:#3097FB;
+    width: 61px;
+}
+.van-tab{
+    font-size: 18px;
+}
+.pop_xxjd_img{
+    
+    height: 19px;
+    margin-top: 7px;
+    margin-right: 12px;
+    margin-left: 12px;
+
+}
+.pop_tab_select_div1{
+    box-shadow: 2px 5px 3px #f3f3f3;
+    margin: 0 auto;
+    width: 130px;
+    position: absolute;;
+    right: 0px;
+    color: rgb(255, 255, 255);
+    background: #4ba9ef;display: flex;
+    border-radius:35px 0px 0px 35px;line-height: 32px;font-size: 15px;
+    padding: 3px 10px;
+}
+.pop_tab_noselect_div1{
+    box-shadow: 2px 5px 3px #f3f3f3;
+    margin: 0 auto;
+    width: 130px;
+    position: absolute;;
+    right: 0px;
+    color: #4ba9ef;
+    background: #ffffff;display: flex;
+    border-radius:35px 0px 0px 35px;line-height: 32px;font-size: 15px;
+    padding: 3px 10px;
+}
+.pop_tab_noselect_div2{
+    margin: 0 auto;
+    width: 130px;
+    position: absolute;;
+    left: 0px;
+    box-shadow: 2px 5px 3px #f3f3f3;
+    color: #3ea2ec;background: #ffffff;display: flex;
+    border-radius: 0px 35px 35px 0px;line-height: 32px;font-size: 15px;padding: 3px 10px;
+}
+.pop_tab_select_div2{
+    margin: 0 auto;
+    width: 130px;
+    position: absolute;;
+    left: 0px;
+    box-shadow: 2px 5px 3px #f3f3f3;
+    color: #ffffff;
+    background: #4ba9ef;display: flex;
+    border-radius: 0px 35px 35px 0px;line-height: 32px;font-size: 15px;padding: 3px 10px;
+}
+.vantlist_block{
+    color: rgb(255, 255, 255);background: rgb(60, 161, 236);width: 40px;height: 40px;border-radius: 9px;margin-left: 21px;text-align: center;
+}
+
+.oneLiSelectClass{
+    text-align: center;
+}
+.oneLiNoSelectClass{
+    text-align: center;
+    background: #eeeeee;
+    width: 73px;
+    height: 71px;
+    padding: 5px;
+
+}

@@ -32,6 +32,7 @@ import nytsVue from '@/page/cyzx/nyts/nyts.vue'
 import jjyx_zttsVue from '@/page/jjyx/jjyx_ztts/jjyx_ztts.vue'
 import hbgj_air_station_list_dealiVue from '@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali/hbgj_air_station_list_deali.vue'
 import hbgj_wgjg_wrylist_dealiVue from '@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist_deali/hbgj_wgjg_wrylist_deali.vue'
+import hbgj_zdqylb_dealiVue from '@/page/zdgz/hbgj/hbgj_wrqy/hbgj_zdqylb/hbgj_zdqylb_deali/hbgj_zdqylb_deali.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -173,7 +174,12 @@ export default new Router({
       path: '/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist_deali',
       name: 'hbgj_wgjg_wrylist_deali',
       component: hbgj_wgjg_wrylist_dealiVue
+    }, {
+      path: '/page/zdgz/hbgj/hbgj_wrqy/hbgj_zdqylb/hbgj_zdqylb_deali/hbgj_zdqylb_deali',
+      name: 'hbgj_zdqylb_deali',
+      component: hbgj_zdqylb_dealiVue
     }
+
 
     
   ]
