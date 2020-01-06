@@ -16,7 +16,8 @@
         <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
             <div id="newsList"
                 style="margin-top:3px;margin-left:10px;margin-right:10px;box-shadow:1px 1px 2px 3px  #f3f3f3;">
-                <div v-for="(item,index) in comp_dataList" :key="index" style="position:relative;">
+                <div v-for="(item,index) in comp_dataList" :key="index" style="position:relative;"
+                    @click="goDetail(item)">
                     <div style="padding:7px;">
                         <div style="display:flex;position:relative;">
                             <p
@@ -257,12 +258,12 @@
                     $(this).removeClass("dialogSelect");
                     $(this).addClass("dialogNoSelect");
                 });
-                self.query_params={
+                self.query_params = {
                     ent_scale: "",
                     counties: "",
                     ent_nature: ""
                 },
-                self.mescroll.resetUpScroll();
+                    self.mescroll.resetUpScroll();
                 self.show = false;
             },
             //确定
@@ -298,7 +299,17 @@
                 console.log(self.query_params);
                 this.mescroll.resetUpScroll();
 
-            }
+            },
+            goDetail(item) {
+                this.$router.push({
+                    path:
+                        "/cyzx/nyts/nyts_mcq/nyts_mcq_qylb/nyts_mcq_qylb_detail",
+                    name: "nyts_mcq_qylb_detail",
+                    params: {
+                        entity: item
+                    }
+                });
+            },
         }
     };
 </script>

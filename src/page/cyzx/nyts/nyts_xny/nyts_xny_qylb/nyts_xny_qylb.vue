@@ -16,7 +16,7 @@
         <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
             <div id="newsList"
                 style="margin-top:3px;margin-left:10px;margin-right:10px;box-shadow:1px 1px 2px 3px  #f3f3f3;">
-                <div v-for="(item,index) in comp_dataList" :key="index" style="position:relative;">
+                <div v-for="(item,index) in comp_dataList" :key="index" @click="goDetail(item)" style="position:relative;">
                     <div style="padding:7px;">
                         <div style="display:flex;position:relative;">
                             <p
@@ -356,7 +356,17 @@
                 self.show = false;
                 console.log(self.query_params);
                 this.mescroll.resetUpScroll();
-            }
+            },
+            goDetail(item) {
+                this.$router.push({
+                    path:
+                        "/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb_detail/",
+                    name: "nyts_xny_qylb_detail",
+                    params: {
+                        entity: item
+                    }
+                });
+            },
         }
     };
 </script>

@@ -325,6 +325,10 @@ export const httpMethod = {
     getPollutantalarm: function (params) {
        return get("pollutionSourcesController.action?getPollutantalarm", params);
    },
+    //新能源项目发电量
+    getXnyReport: function (params) {
+        return get("nytsAppGbInsideController.action?getXnyReport", params);
+    },
 
     
 
