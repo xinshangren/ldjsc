@@ -293,6 +293,38 @@ export const httpMethod = {
     barTask: function (params) {
         return get("gridSupervisionController.action?barTask", params);
     },
+    //根据地域统计污染物
+    getRegionCount: function (params) {
+        return get("pollutionSourcesController.action?getRegionCount", params);
+    },
+    //首页关注程度
+    getFollowCount: function (params) {
+        return get("pollutionSourcesController.action?getFollowCount", params);
+    },
+    //首页所属流域
+    getLvCount: function (params) {
+        return get("pollutionSourcesController.action?getLvCount", params);
+    },
+    //首页污染源数量等
+    getPollutionCount: function (params) {
+        return get("pollutionSourcesController.action?getPollutionCount", params);
+    },
+    //污染源企业列表
+    getBaseinfoCompany: function (params) {
+        return get("pollutionSourcesController.action?getBaseinfoCompany", params);
+    },
+    //污染源企业列表筛选字典
+    getQueryForFound: function (params) {
+        return get("pollutionSourcesController.action?getQueryForFound", params);
+    },
+     //污染源企业列表详情
+     getBaseinfo: function (params) {
+        return get("pollutionSourcesController.action?getBaseinfo", params);
+    },
+    //重点污染源覆盖物详情-污染物报警
+    getPollutantalarm: function (params) {
+       return get("pollutionSourcesController.action?getPollutantalarm", params);
+   },
     //新能源项目发电量
     getXnyReport: function (params) {
         return get("nytsAppGbInsideController.action?getXnyReport", params);
@@ -305,6 +337,17 @@ export const httpMethod = {
     entStatistics: function (params) {
         return get("nytsAppGbInsideController.action?entStatistics", params);
     },
+
+    
+
+
+    
+    
+    
+
+    
+    
+
     
 
     

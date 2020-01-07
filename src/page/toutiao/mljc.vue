@@ -100,7 +100,7 @@
 
       <div :style="{backgroundImage: 'url(' + mstc.imgUrl + ')', backgroundSize:'contain'}"
         style="display: flex;margin: 15px; margin-top: 10px;margin-bottom: 0px; height: 130px; overflow-y: scroll;">
-        <div style="background: rgba(255, 255, 255, 0.8);width: 68%;">
+        <div style="background: rgba(255, 255, 255, 0.8);width: 68%;overflow: scroll;">
           <img src="../../assets/img/mstc.png" style="margin-left: 5%; width: 90%;height: 40px;">
           <div style="font-size: 15px;color: #333333;margin-left: 5%;">
             {{mstc.title}}

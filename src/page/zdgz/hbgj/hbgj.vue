@@ -22,23 +22,23 @@
     </div>
     <van-sticky :offset-top="50">
       <div style="display:flex;border-bottom:1px solid #f3f3f3;">
-        <div class="twoLevel_left_div">
-          <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
-          <div style="font-size: 14px;line-height: 40px;">空气</div>
+        <div @click="showHideLeftSelect()" class="twoLevel_left_div">
+          <img style="height: 24px; margin-top: 8px;margin-left: 10px;" :src="TwoLevelTabImg1" />
+          <div id="selectDivName" style="font-size: 14px;line-height: 40px;">空气</div>
           <img
-            style="height: 14px;margin-top: 14px;"
+            style="height: 14px;margin-top: 14px;margin-left:3px;"
             src="../../../assets/img/air_home_tab_arrow.png"
           />
         </div>
         <van-tabs
           @click="smallTab_select"
-          id="tabId1"
+          ref="tabId1"
           title-active-color="#2796e7"
           title-inactive-color="#333333"
           line-width="75"
           v-model="airactive"
-           :ellipsis="false"
-           v-show="oneShow"
+          :ellipsis="false"
+          v-show="oneShow"
           style="width:75%;"
         >
           <van-tab title="实时状况"></van-tab>
@@ -52,7 +52,7 @@
           title-inactive-color="#333333"
           line-width="75"
           v-model="wgjgactive"
-           v-show="twoShow"
+          v-show="twoShow"
           style="width:75%;"
           :ellipsis="false"
           @rendered="rendered_wgjg"
@@ -62,18 +62,54 @@
           <van-tab title="人员列表"></van-tab>
           <van-tab title="统计分析"></van-tab>
         </van-tabs>
+        <van-tabs
+          @click="smallTab_select_zdqy"
+          ref="tabId3"
+          title-active-color="#2796e7"
+          title-inactive-color="#333333"
+          line-width="75"
+          v-model="zdqyactive"
+          v-show="threeShow"
+          style="width:75%;"
+          :ellipsis="false"
+        >
+          <van-tab title="企业概况"></van-tab>
+          <van-tab title="重点企业列表"></van-tab>
+        </van-tabs>
       </div>
     </van-sticky>
+    <div
+      id="leftSelectDivId"
+      style="display:none; position: absolute;top: 164px;height: 97px;background: rgb(255, 255, 255);z-index: 1;padding: 5px 10px;border-radius: 5px;left: 8px;"
+    >
+      <ul id="leftUlId">
+        <li style="display: flex;border-bottom: 1px solid #cccccc;">
+          <img style="height:23px;" :src="lefttabimg1" />
+          <div style="color: rgb(39, 150, 231);font-size: 15px;margin-left: 5px;">空气</div>
+        </li>
+        <li style="margin-top:10px;display: flex;border-bottom: 1px solid #cccccc;">
+          <img style="height:20px;" :src="lefttabimg2" />
+          <div style="color: #333333;font-size: 15px;margin-left: 5px;">网格</div>
+        </li>
+        <li style="margin-top:10px;display: flex;border-bottom: 1px solid #cccccc;">
+          <img style="height:20px;" :src="lefttabimg3" />
+          <div style="color: #333333;font-size: 15px;margin-left: 5px;">企业</div>
+        </li>
+      </ul>
+    </div>
     <div>
-      <child1 v-if="Bigflag==1&&airactive==0"></child1>
+      <div :is="currentView"></div>
+      <!-- <child1 v-if="Bigflag==1&&airactive==0"></child1>
       <child2 v-if="Bigflag==1&&airactive==1"></child2>
       <child3 v-if="Bigflag==1&&airactive==2"></child3>
       <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
       <child5 v-if="Bigflag==2&&wgjgactive==1"></child5>
       <child6 v-if="Bigflag==2&&wgjgactive==2"></child6>
       <child7 v-if="Bigflag==2&&wgjgactive==3"></child7>
+      <child8 v-if="Bigflag==3&&wgjgactive==0"></child8>
+      <child9 v-if="Bigflag==3&&wgjgactive==1"></child9>-->
     </div>
-    
+
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
       <div id="rightAreaDivId" style="display:none;">
         <div
@@ -92,7 +128,7 @@
           <div style="width:50%;margin-left:25px;">
             <div>
               <div
-              @click="callPhone()"
+                @click="callPhone()"
                 style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
               >
                 <img
@@ -122,6 +158,8 @@ import child4 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wggk/hbgj_wgjg_wggk.vue
 import child5 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wrylist/hbgj_wgjg_wrylist.vue";
 import child6 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wgperson/hbgj_wgjg_wgperson.vue";
 import child7 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_tjfx/hbgj_wgjg_tjfx.vue";
+import child8 from "@/page/zdgz/hbgj/hbgj_wrqy/hbgj_wrqy_qygk/hbgj_wrqy_qygk.vue";
+import child9 from "@/page/zdgz/hbgj/hbgj_wrqy/hbgj_zdqylb/hbgj_zdqylb.vue";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
 import { Tab, Tabs, Sticky } from "vant";
@@ -137,7 +175,9 @@ export default {
     child4,
     child5,
     child6,
-    child7
+    child7,
+    child8,
+    child9
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
@@ -148,53 +188,206 @@ export default {
   },
   data() {
     return {
+      currentView: "child1",
       Bigflag: 1,
       airactive: 0,
       wgjgactive: 0,
-      twoShow:false,
-      oneShow:true,
+      zdqyactive: 0,
+      threeShow: false,
+      twoShow: false,
+      oneShow: true,
       indexTabImg1: require("../../../assets/img/air_home_tab1selected.png"),
       indexTabImg2: require("../../../assets/img/air_home_tab2.png"),
       indexTabImg3: require("../../../assets/img/air_home_tab3.png"),
       TwoLevelTabImg1: require("../../../assets/img/air_list_icon1.png"),
       TwoLevelTabImg2: require("../../../assets/img/air_list_icon2.png"),
-      TwoLevelTabImg3: require("../../../assets/img/air_list_icon3.png")
+      TwoLevelTabImg3: require("../../../assets/img/air_list_icon3.png"),
+      lefttabimg1: require("../../../assets/img/air_list_icon1_selected.png"),
+      lefttabimg2: require("../../../assets/img/air_list_icon2.png"),
+      lefttabimg3: require("../../../assets/img/air_list_icon3.png")
     };
   },
   mounted() {
+    var self = this;
     $("#leftAreaDivId").click(function() {
       $("#rightAreaDivId").animate({
         width: "toggle"
       });
     });
+
+    $("#leftUlId li").click(function() {
+      console.log($(this).index());
+      self.selectLeftTab($(this).index());
+      switch ($(this).index()) {
+        case 0:
+          self.selectIndexTab(1);
+          break;
+        case 1:
+          self.selectIndexTab(2);
+          break;
+        case 2:
+          self.selectIndexTab(3);
+          break;
+        default:
+          break;
+      }
+    });
   },
   methods: {
-     
-    callPhone:function(){
-       window.location.href = 'tel://18635609998'
+    selectLeftTab: function(index) {
+      switch (index) {
+        case 0:
+          $("#selectDivName").html("空气");
+          $("#leftUlId li")
+            .eq(0)
+            .find("div")
+            .css("color", "rgb(39, 150, 231)");
+          $("#leftUlId li")
+            .eq(1)
+            .find("div")
+            .css("color", "#333333");
+          $("#leftUlId li")
+            .eq(2)
+            .find("div")
+            .css("color", "#333333");
+          this.TwoLevelTabImg1 = require("../../../assets/img/air_list_icon1.png");
+          this.lefttabimg1 = require("../../../assets/img/air_list_icon1_selected.png");
+          this.lefttabimg2 = require("../../../assets/img/air_list_icon2.png");
+          this.lefttabimg3 = require("../../../assets/img/air_list_icon3.png");
+          break;
+        case 1:
+          $("#selectDivName").html("网格");
+          $("#leftUlId li")
+            .eq(1)
+            .find("div")
+            .css("color", "rgb(39, 150, 231)");
+          $("#leftUlId li")
+            .eq(0)
+            .find("div")
+            .css("color", "#333333");
+          $("#leftUlId li")
+            .eq(2)
+            .find("div")
+            .css("color", "#333333");
+          this.TwoLevelTabImg1 = require("../../../assets/img/air_list_icon2.png");
+          this.lefttabimg1 = require("../../../assets/img/air_list_icon1.png");
+          this.lefttabimg2 = require("../../../assets/img/air_list_icon2_selected.png");
+          this.lefttabimg3 = require("../../../assets/img/air_list_icon3.png");
+          break;
+        case 2:
+          $("#selectDivName").html("企业");
+          $("#leftUlId li")
+            .eq(2)
+            .find("div")
+            .css("color", "rgb(39, 150, 231)");
+          $("#leftUlId li")
+            .eq(0)
+            .find("div")
+            .css("color", "#333333");
+          $("#leftUlId li")
+            .eq(1)
+            .find("div")
+            .css("color", "#333333");
+          this.TwoLevelTabImg1 = require("../../../assets/img/air_list_icon3.png");
+          this.lefttabimg1 = require("../../../assets/img/air_list_icon1.png");
+          this.lefttabimg2 = require("../../../assets/img/air_list_icon2.png");
+          this.lefttabimg3 = require("../../../assets/img/air_list_icon3_selected.png");
+          break;
+        default:
+          break;
+      }
+      $("#leftSelectDivId").hide();
+    },
+    showHideLeftSelect: function() {
+      if ($("#leftSelectDivId").is(":hidden")) {
+        $("#leftSelectDivId").show();
+      } else {
+        $("#leftSelectDivId").hide();
+      }
+    },
+    callPhone: function() {
+      window.location.href = "tel://18635609998";
     },
     //空气子选项卡选择
     smallTab_select: function(name, title) {
       // console.log(name,title);
       this.airactive = name;
+      switch (name) {
+        case 0:
+          this.currentView = "child1";
+          break;
+        case 1:
+          this.currentView = "child2";
+          break;
+        case 2:
+          this.currentView = "child3";
+          break;
+        default:
+          break;
+      }
     },
     //网格子选项卡选择
     smallTab_select_wgjg: function(name, title) {
       // console.log(name,title);
       this.wgjgactive = name;
+      switch (name) {
+        case 0:
+          this.currentView = "child4";
+          break;
+        case 1:
+          this.currentView = "child5";
+          break;
+        case 2:
+          this.currentView = "child6";
+          break;
+        case 3:
+          this.currentView = "child7";
+          break;
+        default:
+          break;
+      }
     },
-    rendered_wgjg:function (name, title) {
-       console.log(name,title);
+    smallTab_select_zdqy: function(name, title) {
+      this.zdqyactive = name;
+      switch (name) {
+        case 0:
+          this.currentView = "child8";
+          break;
+        case 1:
+          this.currentView = "child9";
+          break;
+
+        default:
+          break;
+      }
+    },
+    rendered_wgjg: function(name, title) {
+      console.log(name, title);
     },
     //选择顶部的选项卡
     selectIndexTab: function(index) {
       this.Bigflag = index;
       switch (index) {
         case 1:
-          // $("#tabId1").show();
-          // $("#tabId2").hide();
-          this.oneShow=true;
-          this.twoShow=false;
+          this.selectLeftTab(0);
+          this.oneShow = true;
+          this.twoShow = false;
+          this.threeShow = false;
+          this.$refs.tabId1.resize();
+          switch (this.airactive) {
+            case 0:
+              this.currentView = "child1";
+              break;
+            case 1:
+              this.currentView = "child2";
+              break;
+            case 2:
+              this.currentView = "child3";
+              break;
+            default:
+              break;
+          }
+
           $("#indexTabDiv1").addClass("top_title_select1");
           $("#indexTabDiv2").addClass("top_title_noselect");
           $("#indexTabDiv3").addClass("top_title_noselect");
@@ -208,11 +401,12 @@ export default {
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
           break;
         case 2:
-          this.oneShow=false;
-          this.twoShow=true;
+           this.selectLeftTab(1);
+          this.oneShow = false;
+          this.twoShow = true;
+          this.threeShow = false;
           this.$refs.tabId2.resize();
-          // $("#tabId1").hide();
-          // $("#tabId2").show();
+          this.currentView = "child4";
           $("#indexTabDiv1").addClass("top_title_noselect");
           $("#indexTabDiv2").addClass("top_title_select2");
           $("#indexTabDiv3").addClass("top_title_noselect");
@@ -223,11 +417,15 @@ export default {
           this.indexTabImg1 = require("../../../assets/img/air_home_tab1.png");
           this.indexTabImg2 = require("../../../assets/img/air_home_tab2selected.png");
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
-          this.wgjgactive=0;
+          this.wgjgactive = 0;
           break;
         case 3:
-          $("#tabId1").hide();
-          $("#tabId2").hide();
+           this.selectLeftTab(2);
+          this.oneShow = false;
+          this.twoShow = false;
+          this.threeShow = true;
+          this.$refs.tabId3.resize();
+          this.currentView = "child8";
           $("#indexTabDiv1").addClass("top_title_noselect");
           $("#indexTabDiv2").addClass("top_title_noselect");
           $("#indexTabDiv3").addClass("top_title_select3");

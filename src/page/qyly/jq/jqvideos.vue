@@ -11,7 +11,6 @@
 
       <ul id="newsList" style="display: block;padding-left: 3%">
         <li v-for="(item,index) in list" :key="index"
-          :class="item.hasCamera=='0'?'backgroundDivPhotonohave':'backgroundDivPhotohave' "
           style="float:left; width:48%; height:130px;padding-top:7px;padding-bottom:7px;position:relative;margin-right: 2%;"
           @click="goDetile(item.realpath)">
 
