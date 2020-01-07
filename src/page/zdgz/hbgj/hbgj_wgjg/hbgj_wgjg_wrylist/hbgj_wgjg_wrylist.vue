@@ -1,7 +1,5 @@
 <template>
-  <div style="
-    overflow: auto;
-">
+  <div style="margin-top:0px;overflow:hidden;">
     <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入污染源名称" @search="onSearch" v-model="seach_value" />

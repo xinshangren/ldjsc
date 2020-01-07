@@ -808,7 +808,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import "../../../../../page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_tjfx/hbgj_wgjg_tjfx.css";
 @import "../../../../../assets/css/frozenui.css";
 </style>
