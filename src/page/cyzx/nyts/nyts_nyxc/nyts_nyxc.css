@@ -1,0 +1,22 @@
+.mt_right_img{
+    width: 29px;
+	height: 24px;
+}
+
+.van-swipe__indicator{
+    background-color:#cccccc;
+}
+
+.selectBottom{
+    border:1px solid #1976d2;
+}
+.noselectBottom{
+    border:1px solid #cccccc;
+}
+
+.selectBottomDiv{
+    margin-top:5px;font-size: 14px;color: #1976d2;text-align:center;
+}
+.noselectBottomDiv{
+    margin-top:5px;font-size: 14px;color: #333333;text-align:center;
+}

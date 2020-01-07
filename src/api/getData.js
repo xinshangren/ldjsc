@@ -337,6 +337,11 @@ export const httpMethod = {
     entStatistics: function (params) {
         return get("nytsAppGbInsideController.action?entStatistics", params);
     },
+    //能源相册
+    getNyxcImgList: function (params) {
+        return get("nytsAppGbInsideController.action?getImgList", params);
+    },
+
 
     
 
