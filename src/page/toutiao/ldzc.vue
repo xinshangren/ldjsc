@@ -29,7 +29,8 @@
       <div style="background: #ffffff;padding: 4px;display: flex;">
         <div style="font-size: 12px;line-height:29px;width: 56px;margin-left:6px;">副书记</div>
         <ul class="ui-row" style="width: 100%;margin-right: 15px;">
-          <li id="8a87821a6b1c6361016b1c8128070001" class="ui-col ui-col-30 dialogNoSelect1" style="width:27%;">李根田</li>
+          <li id="8a87821a6b1c0bb4016b1c12c2550004" class="ui-col ui-col-30 dialogNoSelect1" style="width:27%;float: left;">刘峰</li>
+          <li id="8a87821a6b1c6361016b1c8128070001" class="ui-col ui-col-30 dialogNoSelect1" style="width:27%;float: left;">李根田</li>
         </ul>
       </div>
       <div style="background: #ffffff;padding: 4px;display: flex;">
