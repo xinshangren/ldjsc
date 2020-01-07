@@ -329,6 +329,14 @@ export const httpMethod = {
     getXnyReport: function (params) {
         return get("nytsAppGbInsideController.action?getXnyReport", params);
     },
+    //新能源概况图
+    getXnyTjPhase: function (params) {
+        return get("nytsAppGbInsideController.action?getXnyTjPhase", params);
+    },
+    //新能源概况
+    entStatistics: function (params) {
+        return get("nytsAppGbInsideController.action?entStatistics", params);
+    },
 
     
 
