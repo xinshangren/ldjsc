@@ -116,7 +116,7 @@
                 <div class="dateSelect" style="height: 50px;">
                     <div class="sx"></div>
                     <div class="tj_z">煤层气企业抽采利用情况统计图</div>
-                    <div style="font-size: 17px;" class="timeYear" @click="showDatePicker()">{{nowYear}}年</div>
+                    <div style="font-size: 15px;" class="timeYear" @click="showDatePicker()">{{nowYear}}年</div>
                     <img class="xl" src="../../../../../../assets/img/air_data_arrow.png" />
                 </div>
                 <div class="van-hairline--bottom" style="margin-left: 10px;margin-right: 5px;"></div>
@@ -133,7 +133,7 @@
                 <div class="dateSelect" style="height: 50px;">
                     <div class="sx"></div>
                     <div class="tj_z">煤层气企业抽采利用情况统计表格</div>
-                    <div style="font-size: 17px;" class="timeYear" @click="showDatePicker1()">{{nowYear1}}年{{nowMonth}}月
+                    <div style="font-size: 15px;" class="timeYear" @click="showDatePicker1()">{{nowYear1}}年{{nowMonth}}月
                     </div>
                     <img class="xl" src="../../../../../../assets/img/air_data_arrow.png" />
                 </div>
