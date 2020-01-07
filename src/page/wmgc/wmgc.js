@@ -148,7 +148,7 @@ export const echarsEnti = {
     Line.map((item, index) => {
       datas.push(
         {
-          symbolSize: 15,
+          symbolSize: 13,
           symbol: img[index],
           name: item,
           type: "line",

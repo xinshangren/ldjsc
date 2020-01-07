@@ -9,21 +9,28 @@
     </div>
 
     <div style="display: flex;">
-      <div style="width: 50%; background: #333333">
-      
+      <div style="width: 50%;border-right: 2px #FFD59F solid;">
+        <div v-for="(value,index) in names" :key="index" class="gridtitleName" style="border-bottom: 1px #E5E6E7 solid;">{{value}}</div>
       </div>
       <div style="width: 100%;overflow: scroll;">
-        <div style="width: 210%;">
-          <van-grid :border="false" :column-num="10">
-            <van-grid-item v-for="value in 35" :key="value">
-              
-              <div :class="value==2?'gridtitle':'gridtitle1'">{{value}}</div>
-            </van-grid-item>
-          </van-grid>
+        <div style="width: 210%;display:flex;border-bottom: 1px #E5E6E7 solid;">
+          <div style="width: 25%;margin-left: -25%;" class="gridtitleName">点位类型</div>
+          <div style="width: 20%;margin: auto 0;" class="griddate">2019-08</div>
+        </div>
+        <div style="width: 210%;display:flex;border-bottom: 1px #E5E6E7 solid;">
+          <div style="width: 25%;margin-left: -25%;" class="gridtitleName">得分/星级</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">得分</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">星级</div>
+        </div>
+        <div style="width: 210%;display:flex;border-bottom: 1px #E5E6E7 solid;" v-for="(value1,index1) in names1"
+          :key="index1">
+          <div style="width: 25%;margin-left: -25%;" class="gridtitleName">{{value1}}</div>
+          <div style="width: 10%;margin: auto 0;" class="value1">{{index1}}</div>
+          <div style="width: 10%;margin: auto 0;" class="value2">{{index1}}</div>
         </div>
       </div>
     </div>
-    
+
 
 
 
@@ -44,6 +51,8 @@
     name: "wmgclxdf",
     data() {
       return {
+        names: ['点位类型','得分/星级','问题药品举报电话', '劳动者维权举报电话', '青少年课外活动中心', '城市规划馆、文化馆、博物馆、纪念馆、科技馆、少年宫'],
+        names1: ['问题药品举报电话', '劳动者维权举报电话', '青少年课外活动中心', '城市规划馆、文化馆、博物馆、纪念馆、科技馆、少年宫'],
       };
     },
     mounted() {
@@ -57,25 +66,43 @@
 </script>
 
 <style socped>
-.van-grid-item__content {
-    padding: 0;
-    height: 30px;
+  .gridtitleName {
+    background: #F3F4F7;
     text-align: center;
-  }
-  .gridtitle {
-    display: flex;
-    background: #FFEE92;
+    padding: 7px;
+    font-size: 15px;
+    color: #333333;
     width: 100%;
-    height: 30px;
-    padding: 6px;
+    line-height: 15px;
+    box-sizing: border-box;
   }
 
-  .gridtitle1 {
-    display: flex;
-    background: #3ca1ec;
+  .griddate {
+    background: #FFFDCF;
+    text-align: center;
+    padding: 7px;
+    font-size: 15px;
+    color: #333333;
     width: 100%;
-    height: 30px;
-    padding: 6px;
+    line-height: 15px;
+    box-sizing: border-box;
   }
-
+  .value1 {
+    text-align: center;
+    font-size: 15px;
+    color: #333333;
+    width: 100%;
+    line-height: 15px;
+    padding: 7px;
+    box-sizing: border-box;
+  }
+  .value2 {
+    text-align: center;
+    font-size: 15px;
+    color: #333333;
+    width: 100%;
+    line-height: 15px;
+    padding: 7px;
+    box-sizing: border-box;
+  }
 </style>

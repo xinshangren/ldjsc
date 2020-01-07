@@ -1,9 +1,9 @@
 <template style="background: #ffffff;">
   <div>
-    <div class="maintitle">
-      <div style="margin-left: 10%; line-height: 70px;vertical-align: middle; color: #ffff66;font-size: 12px;">2019-6
+    <div class="gkmaintitle">
+      <div style="margin-left: 7%;width: 18%; line-height: 70px;vertical-align: middle; color: #ffff66;font-size: 12px;">2019-6
       </div>
-      <div style="margin-left: 25%;line-height: 70px;vertical-align: middle;font-size: 14px;color:#ff3d2e;">评级点位：</div>
+      <div style="margin-left: 15%;line-height: 70px;vertical-align: middle;font-size: 14px;color:#ff3d2e;">评级点位：</div>
       <div style="line-height: 70px;vertical-align: middle;font-size: 26px;color:#ff3d2e;">420</div>
       <div style="line-height: 70px;vertical-align: middle;font-size: 14px;color:#ff3d2e;">个</div>
       <div style="margin-left: 5%;line-height: 70px;vertical-align: middle;font-size: 14px;color:#ff3d2e;">+6</div>
@@ -18,7 +18,7 @@
         每月各星级数量展示
       </div>
     </div>
-    <div ref="myCharts2" style=" height:170px;"></div>
+    <div ref="myCharts2" style=" height:200px;"></div>
     <div style="margin-left: 20px;margin-right: 20px;border: 1px #F1F1F1 solid;">
       <van-grid :border="false" :column-num="7">
         <van-grid-item>
@@ -33,31 +33,31 @@
         </van-grid-item>
         <van-grid-item>
           <div class="gridtitle">
-            <img src="../../assets/img/xx-r.png" style="height: 15px;">
+            <img src="../../assets/img/xx-r.png" style="height: 50%;margin-top: 10%;">
             <div>红星</div>
           </div>
         </van-grid-item>
         <van-grid-item>
           <div class="gridtitle">
-            <img src="../../assets/img/xx-p.png" style="height: 15px;">
+            <img src="../../assets/img/xx-p.png" style="height: 50%;margin-top: 10%;">
             <div>粉星</div>
           </div>
         </van-grid-item>
         <van-grid-item>
           <div class="gridtitle">
-            <img src="../../assets/img/xx-y.png" style="height: 15px;">
+            <img src="../../assets/img/xx-y.png" style="height: 50%;margin-top: 10%;">
             <div>黄星</div>
           </div>
         </van-grid-item>
         <van-grid-item>
           <div class="gridtitle">
-            <img src="../../assets/img/xx-g.png" style="height: 15px;">
+            <img src="../../assets/img/xx-g.png" style="height: 50%;margin-top: 10%;">
             <div>绿星</div>
           </div>
         </van-grid-item>
         <van-grid-item style="padding: 0;">
           <div class="gridtitle">
-            <img src="../../assets/img/xx-b.png" style="height: 15px;">
+            <img src="../../assets/img/xx-b.png" style="height: 50%;margin-top: 10%;">
             <div>蓝星</div>
           </div>
         </van-grid-item>
@@ -68,8 +68,8 @@
           {{value}}
         </van-grid-item>
       </van-grid>
-     
     </div>
+    <div style="height: 30px;"></div>
   </div>
 </template>
 <script>
@@ -109,7 +109,7 @@
 </script>
 
 <style socped>
-  .maintitle {
+  .gkmaintitle {
     width: 90%;
     margin-top: 10px;
     margin-left: 5%;

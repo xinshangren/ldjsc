@@ -7,7 +7,7 @@
       ></child1>
     </van-tab>
     <van-tab title="创城动态">
-      <child2 style=""></child2>
+      <!-- <child2 style=""></child2> -->
     </van-tab>
     <van-tab title="星级展示">
        <child3 style=""></child3>
