@@ -19,10 +19,10 @@
 </div>
 </template>
 <script>
-import child1 from "@/page/wmgc/wmgcxjzs.vue";
+import child1 from "@/page/wmgc/wmgcgk.vue";
 import child2 from "@/page/toutiao/ldzc.vue";
-import child3 from "@/page/toutiao/zwgk.vue";
-import child4 from "@/page/toutiao/mljc.vue";
+import child3 from "@/page/wmgc/wmgcxjzs.vue";
+import child4 from "@/page/wmgc/wmgclxdf.vue";
 
 export default {
 name: "headline",
