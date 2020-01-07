@@ -23,7 +23,6 @@
         <div
           v-for="(item,index) in list"
           :key="index"
-          :class="item.hasCamera=='0'?'backgroundDivPhotonohave':'backgroundDivPhotohave' "
           style="height:80px;padding-top:7px;padding-bottom:7px;border-bottom:1px #e4e4e4 solid ; position:relative;display: flex;"
           @click="goDetile(item)"
         >

@@ -15,18 +15,25 @@
       <div style="width: 100%;overflow: scroll;">
         <div style="width: 210%;display:flex;border-bottom: 1px #E5E6E7 solid;">
           <div style="width: 25%;margin-left: -25%;" class="gridtitleName">点位类型</div>
-          <div style="width: 20%;margin: auto 0;" class="griddate">2019-08</div>
+          <div style="width: 20%;margin: auto 0;" class="griddate" v-for="(valued,indexd) in 5" :key="indexd">2019-08</div>
         </div>
         <div style="width: 210%;display:flex;border-bottom: 1px #E5E6E7 solid;">
           <div style="width: 25%;margin-left: -25%;" class="gridtitleName">得分/星级</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">得分</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">星级</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">得分</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">星级</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">得分</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">星级</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">得分</div>
+          <div style="width: 10%;margin: auto 0;" class="griddate">星级</div>
           <div style="width: 10%;margin: auto 0;" class="griddate">得分</div>
           <div style="width: 10%;margin: auto 0;" class="griddate">星级</div>
         </div>
         <div style="width: 210%;display:flex;border-bottom: 1px #E5E6E7 solid;" v-for="(value1,index1) in names1"
           :key="index1">
           <div style="width: 25%;margin-left: -25%;" class="gridtitleName">{{value1}}</div>
-          <div style="width: 10%;margin: auto 0;" class="value1">{{index1}}</div>
-          <div style="width: 10%;margin: auto 0;" class="value2">{{index1}}</div>
+          <div style="width: 10%;margin: auto 0;" class="value1" v-for="(value1,index1) in names1":key="index1">{{index1}}</div>
         </div>
       </div>
     </div>
