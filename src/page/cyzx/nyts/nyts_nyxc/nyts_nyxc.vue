@@ -7,7 +7,7 @@
       <div>{{indexList.length}}</div>
     </div>
     <van-swipe @change="changeSwipe" ref="swipe" :widht="200" :height="290">
-      <van-swipe-item style="text-align:center;" v-for="(image, index) in images" :key="index">
+      <van-swipe-item style="text-align:center;" v-for="(image, index) in indexRelaList" :key="index">
         <img style="height:270px;" v-lazy="image" @click="imgPreview(index)" />
       </van-swipe-item>
     </van-swipe>
@@ -72,6 +72,7 @@ export default {
       images: [],
       airactive: 0,
       indexList: [],
+      indexRelaList:[],
       indexFlag: 0,
       indexTabImg1: require("../../../../assets/img/mt2_tab.png")
     };
@@ -154,7 +155,7 @@ export default {
     },
     imgPreview: function(index) {
       ImagePreview({
-        images: this.images,
+        images: this.indexRelaList,
         startPosition: index,
         onClose() {
           // do something
@@ -173,13 +174,17 @@ export default {
           if (code == "1") {
             var dataList = res.dataList;
             this.images = [];
+            this.indexRelaList=[];
             this.indexList = dataList;
             for (var i = 0; i < dataList.length; i++) {
               var basePath = dataList[i].basePath;
+              var realPath=dataList[i].realPath;
               var basePathUrl = httpMethod.returnBaseUrlFun() + basePath;
+              var relaPathUrl = httpMethod.returnBaseUrlFun() + realPath;
               this.images.push(basePathUrl);
+              this.indexRelaList.push(relaPathUrl);
             }
-            console.log(this.images);
+            console.log(this.indexRelaList);
           }
         })
         .catch(err => {
