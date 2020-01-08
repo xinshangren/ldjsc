@@ -1,5 +1,5 @@
 <template>
-  <div id="jqgkid" style="background: #ffffff;overflow-y: scroll;">
+  <div id="jqgkid" ref="jqgkid" style="background: #ffffff;overflow-y: scroll;">
     <div
       style="display: flex;line-height: 16px;vertical-align: bottom;margin-left: 20px;height: 50px;border-bottom: 1px #c6c6c6 solid;margin-right: 10px;">
       <div
@@ -56,10 +56,26 @@
       };
     },
     mounted() {
-      var orderHight1 = document.documentElement.clientHeight;
-      var heightlist = orderHight1 -160;
-      $("#jqgkid").css('height',heightlist + "px");
+      // var orderHight1 = document.documentElement.clientHeight;
+      // var heightlist = orderHight1 -160;
+      // $("#jqgkid").css('height',heightlist + "px");
       this.getData();
+      var _this=this;
+      // var display='flex'
+      // this.$refs.jqgkid.addEventListener('scroll', () => {
+      //       var current_offset_top = _this.$refs.jqgkid.scrollTop;
+      //       if(current_offset_top>60&&display=='flex'){
+      //         _this.$emit('fatherMethod');
+      //         display='none'
+      //       }
+      //       if(current_offset_top==0&&display=='none'){
+      //         _this.$emit('fatherMethod');
+      //         display='flex'
+      //       }
+ 
+      //   }, false);
+
+
     },
     methods: {
       toast: function () {

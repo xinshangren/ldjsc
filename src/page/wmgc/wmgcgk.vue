@@ -1,14 +1,42 @@
 <template style="background: #ffffff;">
   <div>
     <div class="gkmaintitle">
-      <div style="margin-left: 7%;width: 18%; line-height: 70px;vertical-align: middle; color: #ffff66;font-size: 12px;">2019-6
+      <div id="gkdatepick"
+        style="margin-left: 7%;display: flex; width: 18%; line-height: 70px;vertical-align: middle; color: #ffff66;font-size: 12px;">
+        {{date}}
+        <img src="../../assets/img/xl.png" style="height: 12px;margin-top: 29px;">
       </div>
       <div style="margin-left: 15%;line-height: 70px;vertical-align: middle;font-size: 14px;color:#ff3d2e;">评级点位：</div>
-      <div style="line-height: 70px;vertical-align: middle;font-size: 26px;color:#ff3d2e;">420</div>
+      <div style="line-height: 70px;vertical-align: middle;font-size: 26px;color:#ff3d2e;">{{datatj.dw_zs}}</div>
       <div style="line-height: 70px;vertical-align: middle;font-size: 14px;color:#ff3d2e;">个</div>
-      <div style="margin-left: 5%;line-height: 70px;vertical-align: middle;font-size: 14px;color:#ff3d2e;">+6</div>
-      <img src="../../assets/img/eco_rise.png" style="margin-top: 28px; height: 14px;">
+      <div v-if="date!='2019-06'"
+        style="margin-left: 5%;line-height: 70px;vertical-align: middle;font-size: 14px;color:#ff3d2e;">
+        {{datatj.dw_zj}}</div>
+
+      <img v-if="date!='2019-06'" :src="iconpath" style="margin-top: 28px; height: 14px;">
     </div>
+
+    <div id="gkdateselect"
+      style="display: none; background:#ffffff;position: absolute;width:70px;z-index: 998;left:12%;top:98px;border:0.5px #e03e3c solid;">
+      <ul id="gkdateul">
+        <li show="6月份" code='2019-06'
+          style="border-top:0.5px #e03e3c solid;font-size:15px;color: #e03e3c;height: 25px;text-align: center;" >2019-06
+        </li>
+        <li show="7月份" code='2019-07'
+          style="border-top:0.5px #e03e3c solid;font-size:15px;color: #e03e3c;height: 25px;text-align: center;">2019-07
+        </li>
+        <li show="8月份" code='2019-08'
+          style="border-top:0.5px #e03e3c solid;font-size:15px;color: #e03e3c;height: 25px;text-align: center;">2019-08
+        </li>
+        <li show="9月份" code='2019-09'
+          style="border-top:0.5px #e03e3c solid;font-size:15px;color: #e03e3c;height: 25px;text-align: center;">2019-09
+        </li>
+        <li show="10月份" code='2019-10'
+          style="border-top:0.5px #e03e3c solid;font-size:15px;color: #e03e3c;height: 25px;text-align: center;">2019-10
+        </li>
+      </ul>
+    </div>
+
     <div ref="myCharts1" style=" height:170px;"></div>
     <div style=" height:5px;background:#F3F4F7;"></div>
     <div
@@ -64,7 +92,7 @@
       </van-grid>
 
       <van-grid :border="true" :column-num="7">
-        <van-grid-item v-for="value in 35" :key="value">
+        <van-grid-item v-for="(value,index) in MonthLevelist" :key="index">
           {{value}}
         </van-grid-item>
       </van-grid>
@@ -86,13 +114,97 @@
     name: "wmgcgk",
     data() {
       return {
+        iconpath:require('../../assets/img/eco_rise.png'),
+        dwRateList: [],
+        datatj: {},
+        date: "2019-10",
+        MonthLevelist: []
       };
     },
     mounted() {
-      this.getOneEchars();
-      this.getTwoEchars();
+      var  _this=this;
+      this.getDwSummary();
+      this.getMonthLevelNum();
+
+      //月份选择
+      $("#gkdatepick").off("click");
+      $("#gkdatepick").on("click", function () {
+        $("#gkdateselect").css('display', '');
+      });
+      $("#gkdateul li").click(function () {
+        var code = $(this).attr("code");
+        _this.date=code;
+        $("#gkdateselect").css('display', 'none');
+        _this.getDwSummary();
+        // isfirst = 1;
+        // initxjzs();
+        // $("#xjDialogId li").each(function() {
+        // 	if($(this).hasClass("dialogNoSelect")) {
+        // 		$(this).removeClass("dialogNoSelect");
+        // 		$(this).addClass("dialogSelect");
+        // 	}
+        // });
+        // entrySend();
+      });
     },
     methods: {
+      // 
+      getDwSummary: function () {
+        var _this = this;
+        var params = {
+          date: _this.date
+        };
+        httpMethod
+          .getDwSummary(params)
+          .then(res => {
+            console.log(res);
+            if (res.success == "1") {
+              _this.getOneEchars(res.dwRateList);
+              _this.datatj = res.dataList[0]
+              if((_this.datatj.dw_zj+'').indexOf('-')==0){
+                _this.iconpath=require('../../assets/img/eco_down.png')
+              }else{
+                _this.datatj.dw_zj='+'+_this.datatj.dw_zj
+                _this.iconpath=require('../../assets/img/eco_rise.png')
+              }
+            }
+          })
+          .catch(err => {
+
+          });
+      },
+      // 
+      getMonthLevelNum: function () {
+        var _this = this;
+        var params = {
+        };
+        httpMethod
+          .getMonthLevelNum(params)
+          .then(res => {
+            console.log(res);
+            if (res.success == "1") {
+              _this.getTwoEchars(res.dataList);
+              _this.MonthLevelist = [];
+              for (var i = 0; i < res.dataList.length; i++) {
+                var datav = res.dataList[i].monthList;
+                var date = res.dataList[i].date.substring(5, 7)
+                if (date.indexOf('0') == 0) {
+                  date = date.replace('0', '');
+                }
+
+                _this.MonthLevelist.push(date + '月')
+                _this.MonthLevelist.push(res.dataList[i].total)
+                for (var j = 0; j < datav.length; j++) {
+                  _this.MonthLevelist.push(datav[j].dw_count);
+                }
+
+              }
+            }
+          })
+          .catch(err => {
+
+          });
+      },
       //初始化第一个图表
       getOneEchars: function (data) {
         echarsEnti.createEcharsOne(echarts, this.$refs.myCharts1, data);

@@ -77,7 +77,7 @@
           </div>
         </div>
         <div class="ui-col ui-col" style="margin-left: 8px;">
-          <div @click="toast()" style="position: relative;">
+          <div @click="godetile('文明共创')" style="position: relative;">
             <img style="width: 100%;" src="../../assets/img/work_pic3.png" />
             <div class="home_zdgzc_div">文明共创</div>
           </div>
