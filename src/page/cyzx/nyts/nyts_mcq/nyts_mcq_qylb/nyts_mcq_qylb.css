@@ -78,17 +78,7 @@
     height: 13px;
     margin-top: 5px;
 }
-.van-tabs__line{
-    background-color:#3097FB;
-    width: 61px;
-    margin-bottom:2px;
-}
 
-#tabId .van-tabs__line{
-    background-color:#3097FB;
-    margin-bottom:2px;
-    height:2px;
-}
 .top_img{
     height:56px;
     position: absolute;
@@ -199,4 +189,9 @@
 }
 .van-search{
     padding: 0%;
+}
+.van-tabs__line {
+    background-color: #3097FB;
+    margin-bottom: 2px;
+    height: 2px;
 }

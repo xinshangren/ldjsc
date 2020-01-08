@@ -2,3 +2,20 @@
     width: 29px;
 	height: 24px;
 }
+
+#tabId1 .van-tabs__line {
+    background-color: #3097FB;
+    margin-bottom: 2px;
+    height: 2px;
+    width: 75px;
+    transform: translateX(47px) translateX(-50%);
+    transition-duration: 0.3s;
+}
+#tabId2 .van-tabs__line {
+    background-color: #3097FB;
+    margin-bottom: 2px;
+    height: 2px;
+    width: 70px;
+    transform: translateX(67px) translateX(-50%);
+    transition-duration: 0.3s;
+}

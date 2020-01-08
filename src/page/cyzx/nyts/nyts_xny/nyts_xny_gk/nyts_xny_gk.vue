@@ -68,7 +68,7 @@
             <div class="dateSelect" style="height: 50px;">
                 <div class="sx"></div>
                 <div class="tj_z">新能源项目</div>
-                <div class="timeYear">2</div>
+                <div class="timeYear">{{pro_count}}</div>
                 <div class="timeYear">个</div>
             </div>
             <div class="van-hairline--bottom" style="margin-left: 10px;margin-right: 10px;"></div>
@@ -116,17 +116,18 @@
                 qylxCount_DataList: { gq: 0, yq: 0, wq: 0, mq: 0, zs: 0 },
                 indexMonth: "",
                 show: false,
-                nowYear: new Date().getFullYear(),
+                nowYear: "",
                 currentDate: new Date(),
                 maxDate: new Date(),
                 minDate: new Date(2018, 0, 1),
-                xnyGkData: {gd:0,fd:0,swzfd:0,qt:0,sd:0},
-                xnyGkSum:0,
+                xnyGkData: { gd: 0, fd: 0, swzfd: 0, qt: 0, sd: 0 },
+                xnyGkSum: 0,
+                pro_count: 0
             };
         },
         mounted() {
             this.getHomeData();
-            this.getHomeData1("2019");
+            this.getHomeData1(this.nowYear);
             this.getHomeData2();
         },
         methods: {
@@ -140,7 +141,13 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
-                            this.getOneEchars(echarts, myCharts1, res.dataList);
+                            self.pro_count = 0;
+                            $.each(res.dataList, function (i, v) {
+                                if (v.xms != null) {
+                                    self.pro_count += v.xms;
+                                }
+                            });
+                            self.getOneEchars(echarts, myCharts1, res.dataList);
                         }
                     })
                     .catch(err => { });
@@ -149,7 +156,7 @@
                 var self = this;
                 var params = {
                     type: "1",
-                    dateYear: date,
+                    dateYear: date
                 };
                 //获取数据
                 httpMethod
@@ -157,7 +164,21 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
-                            this.getTwoEchars(echarts, myCharts2, res.dataList);
+                            this.nowYear = res.dateYear.substr(0, 4);
+                            var arr = res.dataList;
+                            for (var j = 0; j < arr.length - 1; j++) {
+                                //两两比较，如果前一个比后一个大，则交换位置。
+                                for (var i = 0; i < arr.length - 1 - j; i++) {
+                                    var a = arr[i].nfdl!=null?arr[i].nfdl:0;
+                                    var b = arr[i + 1].nfdl!=null?arr[i + 1].nfdl:0;
+                                    if (a > b) {
+                                        var temp = arr[i];
+                                        arr[i] = arr[i + 1];
+                                        arr[i + 1] = temp;
+                                    }
+                                }
+                            }
+                            this.getTwoEchars(echarts, myCharts2,arr);
                         }
                     })
                     .catch(err => { });
@@ -190,13 +211,13 @@
                                     case "5":
                                         self.xnyGkData.qt = v.js;
                                         break;
-                                    default: break;
+                                    default:
+                                        break;
                                 }
-                                if(v.js != null){
-                                    self.xnyGkSum+=v.js
+                                if (v.js != null) {
+                                    self.xnyGkSum += v.js;
                                 }
-                            })
-                            console.log(self.xnyGkData)
+                            });
                         }
                     })
                     .catch(err => { });
@@ -224,7 +245,6 @@
                 this.nowYear = this.timeFormat(this.currentDate);
                 this.show = false;
                 //this.$refs.child1.changeTitme(this.nowYear);
-                console.log(this.nowYear);
                 this.getHomeData1(this.nowYear);
             },
             showDatePicker() {

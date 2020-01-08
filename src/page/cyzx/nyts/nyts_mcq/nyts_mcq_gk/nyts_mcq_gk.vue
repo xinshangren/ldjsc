@@ -89,7 +89,7 @@ export default {
             qylxCount_DataList:{gq:0,yq:0,wq:0,mq:0,zs:0},
             indexMonth:"",
             show: false,
-            nowYear: new Date().getFullYear(),
+            nowYear: '',
             currentDate: new Date(),
             maxDate: new Date(),
             minDate: new Date(2018, 0, 1),
@@ -116,6 +116,7 @@ export default {
                 var code = res.success;
                     if (code == "1") {
                         var self = this;
+                        self.nowYear = res.dateMonth.substr(0,4);
                         self.qylxCount_DataList={gq:0,yq:0,wq:0,mq:0,zs:0},
                         $.each(res.entNature,function(index,value){
                            if(value.ent_number == null ){
@@ -171,7 +172,6 @@ export default {
             this.nowYear = this.timeFormat(this.currentDate);
             this.show = false;
             //this.$refs.child1.changeTitme(this.nowYear);
-            console.log(this.nowYear)
             this.getHomeData1(this.nowYear);
         },
         showDatePicker(){

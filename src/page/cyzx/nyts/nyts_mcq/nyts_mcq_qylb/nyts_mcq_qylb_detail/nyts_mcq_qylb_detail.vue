@@ -248,9 +248,9 @@
                 compDetail: {},
                 show: false,
                 show1: false,
-                nowYear: new Date().getFullYear(),
-                nowYear1: new Date().getFullYear(),
-                nowMonth: new Date().getMonth() + 1,
+                nowYear: '',
+                nowYear1: '',
+                nowMonth: '',
                 currentDate: new Date(),
                 currentDate1: new Date(),
                 maxDate: new Date(),
@@ -286,9 +286,14 @@
                     break;
             };
             this.compDetail = data;
-            var dateMonth = this.nowYear + "-" + this.nowMonth;
-            this.getHomeData(this.compDetail.id, dateMonth);
-            this.getHomeData1(this.compDetail.id, dateMonth);
+            var dateMonth = this.nowYear1 + "-" + this.nowMonth;
+
+            this.getHomeData(this.compDetail.id, this.nowYear);
+            if(this.nowYear1 == "" || this.nowMonth == ""){
+                this.getHomeData1(this.compDetail.id, "");
+            }else{
+                this.getHomeData1(this.compDetail.id, dateMonth);
+            }
         },
         methods: {
             getHomeData: function (id, date) {
@@ -303,6 +308,8 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
+                            console.log(res)
+                            this.nowYear = res.dateMonth.substr(0,4)
                             this.getOneEchars(echarts, myCharts1, res.dataTj);
                         }
                     })
@@ -320,6 +327,8 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
+                             this.nowYear1 = res.dateMonth.substr(0,4)
+                             this.nowMonth = res.dateMonth.substr(5,6)
                             if(res.dateFrom!= null&&res.dateFrom.length>0){
                                 this.tableData = res.dateFrom[0];
                             }

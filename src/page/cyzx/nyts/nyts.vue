@@ -1,4 +1,3 @@
-
 <template>
 <div style="margin-top:61px;">
     <div class="ui-row-flex ui-whitespace">
@@ -133,8 +132,8 @@
 <script>
 import echarts from "echarts";
 import child1 from "@/page/cyzx/nyts/nyts_mt/nyts_mt_gk/nyts_mt_gk.vue";
-import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
-import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
+import child2 from "@/page/cyzx/nyts/nyts_mt/nyts_mt_qylb/nyts_mt_qylb.vue";
+import child3 from "@/page/cyzx/nyts/nyts_mt/nyts_mt_xmlb/nyts_mt_xmlb.vue";
 import child4 from "@/page/cyzx/nyts/nyts_xny/nyts_xny_gk/nyts_xny_gk.vue";
 import child5 from "@/page/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb.vue";
 import child6 from "@/page/cyzx/nyts/nyts_xny/nyts_xny_xmlb/nyts_xny_xmlb.vue";
