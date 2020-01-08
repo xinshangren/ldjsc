@@ -19,7 +19,8 @@
         margin: 0 auto;
         writing-mode: tb-rl;
     }
-    .trigger{
+
+    .trigger {
         text-align: center;
     }
 </style>
@@ -27,9 +28,7 @@
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
         <div style="background:#ffffff;height:345px;width:100%;margin-top:5px;">
             <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
-                <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">
-                    {{compDetail.ent_name}}
-                </div>
+                <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.ent_name}}</div>
                 <div style="margin-top: 10px;">
                     <img class="mcq_qyxq_qyxzImg" v-if="compDetail.ent_nature == 1"
                         src="../../../../../../assets/img/mcq-gq.png" />
@@ -139,89 +138,59 @@
                 </div>
                 <div class="van-hairline--bottom" style="margin-left: 10px;margin-right: 5px;"></div>
                 <div id="nymt_mcq_company_deali_content1_div_id">
-                    <div id="" style="margin-top: 10px;">
-                        <table  border="1" cellspacing="0" cellpadding="0"
-                            style='margin-top: 5px;width:100%;border: #d3edff;'>
-                                <tr id="table_title1" >
-                                    <td style="background: #3ca1ec; width: 40%;"colspan="2" rowspan="2" >
-                                        <p class="wry_tj_table_title_p">煤层气产量(万立方米)</p>
-                                    </td>
-                                    <td class='trigger ' style="background-color: #e9f6ff;width: 20%;">
-                                        本月
-                                    </td>
-                                    <td class='trigger '>
-                                      {{tableData.production_month}}
-                                    </td>
-                                </tr>
-                                <tr id="table_title1" >
-                                    <td class='trigger 'style="background-color: #e9f6ff;">
-                                        1-本月
-                                    </td>
-                                    <td class='trigger '>
-                                        {{tableData.production_month_total}}
-                                    </td>
-                                </tr>
-                                <tr id="table_title1" >
-                                    <td style="background: #3ca1ec;" rowspan="4">
-                                        <p class="wry_tj_table_title_p">煤层气利用量(万立方米)</p>
-                                    </td>
-                                    <td style="background: #3ca1ec;" rowspan="2">
-                                        <p class="wry_tj_table_title_p">自用量</p>
-                                    </td>
-                                    <td class='trigger 'style="background-color: #e9f6ff;">
-                                        本月
-                                    </td>
-                                    <td class='trigger '>
-                                        {{tableData.plant_demand_month}}
-                                    </td>
-                                </tr>
-                                <tr id="table_title1" >
-                                    <td class='trigger 'style="background-color: #e9f6ff;">
-                                        1-本月
-                                    </td>
-                                    <td class='trigger '>
-                                        {{tableData.plant_demand_month_total}}
-                                    </td>
-                                </tr>
-                                <tr id="table_title1" >
-                                    <td style="background: #3ca1ec;"  rowspan="2">
-                                        <p class="wry_tj_table_title_p">管道外输量</p>
-                                    </td>
-                                    <td class='trigger 'style="background-color: #e9f6ff;">
-                                        本月
-                                    </td>
-                                    <td class='trigger '>
-                                        {{tableData.the_throughput_month}}
-                                    </td>
-                                </tr>
-                                <tr id="table_title1" >
-                                    <td class='trigger 'style="background-color: #e9f6ff;">
-                                        1-本月
-                                    </td>
-                                    <td class='trigger '>
-                                        {{tableData.the_throughput_month_total}}
-                                    </td>
-                                </tr>
-                                <tr id="table_title1" >
-                                    <td style="background: #3ca1ec;" colspan="2"  rowspan="2">
-                                        <p class="wry_tj_table_title_p">煤层气利用率（%）</p>
-                                    </td>
-                                    <td class='trigger 'style="background-color: #e9f6ff;">
-                                        本月
-                                    </td>
-                                    <td class='trigger '>
-                                        {{tableData.use_ratio_month}}
-                                    </td>
-                                </tr>
-                                <tr id="table_title1" >
-                                    <td class='trigger 'style="background-color: #e9f6ff;">
-                                        1-本月
-                                    </td>
-                                    <td class='trigger '>
-                                        {{tableData.use_ratio_month_total}}
-                                    </td>
-                                </tr>
-
+                    <div id style="margin-top: 10px;">
+                        <table border="1" cellspacing="0" cellpadding="0"
+                            style="margin-top: 5px;width:100%;border: #d3edff;">
+                            <tr id="table_title1">
+                                <td style="background: #3ca1ec; width: 40%;" colspan="2" rowspan="2">
+                                    <p class="wry_tj_table_title_p">煤层气产量(万立方米)</p>
+                                </td>
+                                <td class="trigger" style="background-color: #e9f6ff;width: 20%;">本月</td>
+                                <td class="trigger">{{tableData!=null?tableData.production_month:0}}</td>
+                            </tr>
+                            <tr id="table_title1">
+                                <td class="trigger" style="background-color: #e9f6ff;">1-本月</td>
+                                <td class="trigger">{{tableData!=null?tableData.production_month_total:0}}</td>
+                            </tr>
+                            <tr id="table_title1">
+                                <td style="background: #3ca1ec;" rowspan="4">
+                                    <p class="wry_tj_table_title_p">煤层气利用量(万立方米)</p>
+                                </td>
+                                <td style="background: #3ca1ec;" rowspan="2">
+                                    <p class="wry_tj_table_title_p">自用量</p>
+                                </td>
+                                <td class="trigger" style="background-color: #e9f6ff;">本月</td>
+                                <td class="trigger">{{tableData!=null?tableData.plant_demand_month:0}}</td>
+                            </tr>
+                            <tr id="table_title1">
+                                <td class="trigger" style="background-color: #e9f6ff;">1-本月</td>
+                                <td class="trigger">{{tableData!=null?tableData.plant_demand_month_total:0}}</td>
+                            </tr>
+                            <tr id="table_title1">
+                                <td style="background: #3ca1ec;" rowspan="2">
+                                    <p class="wry_tj_table_title_p">管道外输量</p>
+                                </td>
+                                <td class="trigger" style="background-color: #e9f6ff;">本月</td>
+                                <td class="trigger">{{tableData!=null?tableData.the_throughput_month:0}}</td>
+                            </tr>
+                            <tr id="table_title1">
+                                <td class="trigger" style="background-color: #e9f6ff;">1-本月</td>
+                                <td class="trigger">{{tableData!=null?tableData.the_throughput_month_total:0}}</td>
+                            </tr>
+                            <tr id="table_title1">
+                                <td style="background: #3ca1ec;" colspan="2" rowspan="2">
+                                    <p class="wry_tj_table_title_p">煤层气利用率（%）</p>
+                                </td>
+                                <td class="trigger" style="background-color: #e9f6ff;">本月</td>
+                                <td class="trigger">
+                                    {{tableData!=null?tableData.use_ratio_month:0}}</td>
+                            </tr>
+                            <tr id="table_title1">
+                                <td class="trigger" style="background-color: #e9f6ff;">1-本月</td>
+                                <td class="trigger">
+                                    {{tableData!=null?tableData.use_ratio_month_total:0}}
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -241,25 +210,25 @@
     import $ from "jquery";
     import echarts from "echarts";
     import { httpMethod } from "../../../../../../api/getData.js";
-    import { nytsMcqQylbDetailJs } from "./nyts_mcq_qylb_detail.js"
+    import { nytsMcqQylbDetailJs } from "./nyts_mcq_qylb_detail.js";
     export default {
         data() {
             return {
                 compDetail: {},
                 show: false,
                 show1: false,
-                nowYear: '',
-                nowYear1: '',
-                nowMonth: '',
+                nowYear: "",
+                nowYear1: "",
+                nowMonth: "",
                 currentDate: new Date(),
                 currentDate1: new Date(),
                 maxDate: new Date(),
                 minDate: new Date(2018, 0, 1),
-                tableData:{ }
+                tableData: {}
             };
         },
         mounted() {
-            let data = this.$route.params.entity
+            let data = this.$route.params.entity;
             switch (data.counties) {
                 case "1":
                     data.counties = "市直";
@@ -284,16 +253,10 @@
                     break;
                 default:
                     break;
-            };
-            this.compDetail = data;
-            var dateMonth = this.nowYear1 + "-" + this.nowMonth;
-
-            this.getHomeData(this.compDetail.id, this.nowYear);
-            if(this.nowYear1 == "" || this.nowMonth == ""){
-                this.getHomeData1(this.compDetail.id, "");
-            }else{
-                this.getHomeData1(this.compDetail.id, dateMonth);
             }
+            this.compDetail = data;
+            this.getHomeData(this.compDetail.id,"");
+            this.getHomeData1(this.compDetail.id, "");
         },
         methods: {
             getHomeData: function (id, date) {
@@ -308,8 +271,7 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
-                            console.log(res)
-                            this.nowYear = res.dateMonth.substr(0,4)
+                            this.nowYear = res.dateMonth.substr(0, 4);
                             this.getOneEchars(echarts, myCharts1, res.dataTj);
                         }
                     })
@@ -327,10 +289,16 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
-                             this.nowYear1 = res.dateMonth.substr(0,4)
-                             this.nowMonth = res.dateMonth.substr(5,6)
-                            if(res.dateFrom!= null&&res.dateFrom.length>0){
+                            if(this.nowYear1 == ""){
+                                this.nowYear1 = res.dateMonth.substr(0, 4);
+                            }
+                            if(this.nowMonth == ""){
+                                this.nowMonth = res.dateMonth.substr(5, 6);
+                            }
+                            if (res.dateFrom != null && res.dateFrom.length > 0) {
                                 this.tableData = res.dateFrom[0];
+                            }else{
+                                this.tableData = null;
                             }
                         }
                     })
@@ -339,7 +307,7 @@
             formatter(type, value) {
                 if (type === "year") {
                     return `${value}年`;
-                };
+                }
                 return "";
             },
             timeFormat(time) {
@@ -364,9 +332,9 @@
                 this.show1 = true;
             },
             formatter1(type, value) {
-                if (type === 'year') {
+                if (type === "year") {
                     return `${value}年`;
-                } else if (type === 'month') {
+                } else if (type === "month") {
                     return `${value}月`;
                 }
                 return value;
@@ -377,14 +345,14 @@
             onconfirm1() {
                 this.nowYear1 = this.currentDate1.getFullYear();
                 this.nowMonth = this.currentDate1.getMonth() + 1;
-                let dateMonth = this.nowYear1+"-"+this.nowMonth;
-                this.getHomeData1(this.compDetail.id,dateMonth);
+                let dateMonth = this.nowYear1 + "-" + this.nowMonth;
+                this.getHomeData1(this.compDetail.id, dateMonth);
                 this.show1 = false;
             },
             //初始化第一个图表
             getOneEchars: function (echarts, value, data) {
                 nytsMcqQylbDetailJs.showjmrjsrEchars1(echarts, value, data);
-            },
-        },
+            }
+        }
     };
 </script>

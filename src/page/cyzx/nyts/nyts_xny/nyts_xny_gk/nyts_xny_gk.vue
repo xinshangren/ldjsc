@@ -82,7 +82,7 @@
             <div class="dateSelect" style="height: 50px;">
                 <div class="sx"></div>
                 <div class="tj_z">新能源项目年度发电量</div>
-                <div class="timeYear" style="font-size: 15px;" @click="showDatePicker()">2019</div>
+                <div class="timeYear" style="font-size: 15px;" @click="showDatePicker()">{{nowYear}}</div>
                 <div class="timeYear" style="font-size: 15px;">年</div>
                 <img class="xl" src="../../../../../assets/img/air_data_arrow.png" />
             </div>
@@ -164,7 +164,9 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
-                            this.nowYear = res.dateYear.substr(0, 4);
+                            if(this.nowYear == ''){
+                                this.nowYear = res.dateYear.substr(0, 4);
+                            }
                             var arr = res.dataList;
                             for (var j = 0; j < arr.length - 1; j++) {
                                 //两两比较，如果前一个比后一个大，则交换位置。
@@ -244,7 +246,6 @@
             onconfirm() {
                 this.nowYear = this.timeFormat(this.currentDate);
                 this.show = false;
-                //this.$refs.child1.changeTitme(this.nowYear);
                 this.getHomeData1(this.nowYear);
             },
             showDatePicker() {

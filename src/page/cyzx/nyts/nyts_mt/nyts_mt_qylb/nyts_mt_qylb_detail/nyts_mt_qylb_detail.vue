@@ -182,7 +182,8 @@
                 <div class="dateSelect" style="height: 50px;">
                     <div class="sx"></div>
                     <div class="tj_z">产量产值基本信息</div>
-                    <div style="font-size: 15px;" class="timeYear" @click="showDatePicker1()">{{nowYear1}}年{{nowMonth}}月</div>
+                    <div style="font-size: 15px;" class="timeYear" @click="showDatePicker1()">{{nowYear1}}年{{nowMonth}}月
+                    </div>
                     <img class="xl" src="../../../../../../assets/img/air_data_arrow.png" />
                 </div>
                 <div class="van-hairline--bottom" style="margin-left: 10px;margin-right: 5px;"></div>
@@ -192,13 +193,14 @@
                             style='margin-top: 5px;width:100%;border: #d3edff;'>
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec; width: 12%;" rowspan="4">
-                                    <p class="wry_tj_table_title_p">原&nbsp&nbsp&nbsp煤&nbsp&nbsp&nbsp产&nbsp&nbsp&nbsp量</p>
+                                    <p class="wry_tj_table_title_p">原&nbsp&nbsp&nbsp煤&nbsp&nbsp&nbsp产&nbsp&nbsp&nbsp量
+                                    </p>
                                 </td>
                                 <td class='trigger ' style="background-color: #e9f6ff;width: 58%;">
                                     本月实际
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.lmcl_this_month}}
+                                    {{mapcl!=null?mapcl.lmcl_this_month:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -206,7 +208,7 @@
                                     本年本月止累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.lmcl_lj_year}}
+                                    {{mapcl!=null?mapcl.lmcl_lj_year:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -214,7 +216,7 @@
                                     去年同期累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.lmcl_synchronous}}
+                                    {{mapcl!=null?mapcl.lmcl_synchronous:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -222,11 +224,11 @@
                                     比去年同期增减（±%）
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.lmcl_yonydata}}
-                                    <img v-if="mapcl.lmcl_flag == 1"
-                                        style="height: 15px;" src="../../../../../../assets/img/eco_rise.png" />
-                                    <img v-if="mapcl.lmcl_flag == 2"
-                                        style="height: 15px;" src="../../../../../../assets/img/eco_down.png" />
+                                    {{mapcl!=null?mapcl.lmcl_yonydata:0}}
+                                    <img v-if="mapcl!=null &&mapcl.lmcl_flag == 1" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_rise.png" />
+                                    <img v-if="mapcl!=null && mapcl.lmcl_flag == 2" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_down.png" />
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -237,7 +239,7 @@
                                     本月实际
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.spmcl_this_month}}
+                                    {{mapcl!=null?mapcl.spmcl_this_month:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -245,7 +247,7 @@
                                     本年本月止累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.spmcl_lj_year}}
+                                    {{mapcl!=null?mapcl.spmcl_lj_year:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -253,7 +255,7 @@
                                     去年同期累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.spmcl_synchronous}}
+                                    {{mapcl!=null?mapcl.spmcl_synchronous:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -261,11 +263,11 @@
                                     比去年同期增减（±%）
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.spmcl_yonydata}}
-                                     <img v-if="mapcl.spmcl_flag == 1"
-                                        style="height: 15px;" src="../../../../../../assets/img/eco_rise.png" />
-                                    <img v-if="mapcl.spmcl_flag == 2"
-                                        style="height: 15px;" src="../../../../../../assets/img/eco_down.png" />
+                                    {{mapcl!=null?mapcl.spmcl_yonydata:0}}
+                                    <img v-if="mapcl!=null && mapcl.spmcl_flag == 1" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_rise.png" />
+                                    <img v-if="mapcl!=null && mapcl.spmcl_flag == 2" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_down.png" />
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -276,7 +278,7 @@
                                     本月实际
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.jmcl_this_month}}
+                                    {{mapcl!=null?mapcl.jmcl_this_month:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -284,7 +286,7 @@
                                     本年本月止累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.jmcl_lj_year}}
+                                    {{mapcl!=null?mapcl.jmcl_lj_year:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -292,7 +294,7 @@
                                     去年同期累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.jmcl_synchronous}}
+                                    {{mapcl!=null?mapcl.jmcl_synchronous:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -300,11 +302,11 @@
                                     比去年同期增减（±%）
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl.jmcl_yonydata}}
-                                    <img v-if="mapcl.jmcl_flag == 1"
-                                       style="height: 15px;" src="../../../../../../assets/img/eco_rise.png" />
-                                   <img v-if="mapcl.jmcl_flag == 2"
-                                       style="height: 15px;" src="../../../../../../assets/img/eco_down.png" />
+                                    {{mapcl!=null?mapcl.jmcl_yonydata:0}}
+                                    <img v-if="mapcl!=null && mapcl.jmcl_flag == 1" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_rise.png" />
+                                    <img v-if="mapcl!=null && mapcl.jmcl_flag == 2" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_down.png" />
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -315,7 +317,7 @@
                                     本月实际
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcz.value_this_month}}
+                                    {{mapcl!=null?mapcl.value_this_month:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -323,7 +325,7 @@
                                     本年本月止累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcz.value_lj_year}}
+                                    {{mapcl!=null?mapcl.value_lj_year:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -331,7 +333,7 @@
                                     去年同期累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcz.value_synchronous}}
+                                    {{mapcl!=null?mapcl.value_synchronous:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -339,11 +341,11 @@
                                     比去年同期增减（±%）
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcz.value_yonydata}}
-                                    <img v-if="mapcz.value_flag == 1"
-                                       style="height: 15px;" src="../../../../../../assets/img/eco_rise.png" />
-                                   <img v-if="mapcz.value_flag == 2"
-                                       style="height: 15px;" src="../../../../../../assets/img/eco_down.png" />
+                                    {{mapcl!=null?mapcl.value_yonydata:0}}
+                                    <img v-if="mapcl!=null && mapcz.value_flag == 1" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_rise.png" />
+                                    <img v-if="mapcl!=null && mapcz.value_flag == 2" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_down.png" />
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -354,7 +356,7 @@
                                     本月实际
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcz.sales_value_this_month}}
+                                    {{mapcl!=null?mapcl.sales_value_this_month:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -362,7 +364,7 @@
                                     本年本月止累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcz.sales_value_lj_year}}
+                                    {{mapcl!=null?mapcl.sales_value_lj_year:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -370,7 +372,7 @@
                                     去年同期累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcz.sales_value_synchronous}}
+                                    {{mapcl!=null?mapcl.sales_value_synchronous:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -378,11 +380,11 @@
                                     比去年同期增减（±%）
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcz.sales_value_yonydata}}
-                                    <img v-if="mapcz.sales_value_flag == 1"
-                                       style="height: 15px;" src="../../../../../../assets/img/eco_rise.png" />
-                                   <img v-if="mapcz.sales_value_flag == 2"
-                                       style="height: 15px;" src="../../../../../../assets/img/eco_down.png" />
+                                    {{mapcl!=null?mapcl.sales_value_yonydata:0}}
+                                    <img v-if="mapcl!=null && mapcz.sales_value_flag == 1" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_rise.png" />
+                                    <img v-if="mapcl!=null && mapcz.sales_value_flag == 2" style="height: 15px;"
+                                        src="../../../../../../assets/img/eco_down.png" />
                                 </td>
                             </tr>
 
@@ -412,9 +414,9 @@
                 compDetail: {},
                 show: false,
                 show1: false,
-                nowYear:"",
+                nowYear: "",
                 nowYear1: "",
-                nowMonth:"",
+                nowMonth: "",
                 currentDate: new Date(),
                 currentDate1: new Date(),
                 maxDate: new Date(),
@@ -452,10 +454,10 @@
                 data.ent_scale += "万吨"
             }
             this.compDetail = data;
-            if(this.nowYear1 != '' && this.monthDate == ''){
+            if (this.nowYear1 != '' && this.monthDate == '') {
                 this.getHomeData(this.compDetail.id, this.nowYear, this.nowYear1 + "-" + this.nowMonth);
-            }else{
-                 this.getHomeData(this.compDetail.id, this.nowYear, '');
+            } else {
+                this.getHomeData(this.compDetail.id, this.nowYear, '');
             }
         },
         methods: {
@@ -472,105 +474,117 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
-                            this.nowYear = res.tjListDate;
-                            this.nowYear1 = res.mapclDate.substr(0,4);
-                            this.nowMonth = res.mapclDate.substr(5,6);
+                            console.log(params)
+                            if (this.nowYear == '') {
+                                this.nowYear = res.tjListDate;
+                            }
+                            if (this.nowYear1 == '') {
+                                this.nowYear1 = res.mapclDate.substr(0, 4);
+                            }
+                            if (this.nowMonth == '') {
+                                this.nowMonth = res.mapclDate.substr(5, 6);
+                            }
                             this.getOneEchars(echarts, myCharts1, res.tjList);
                             var data1 = res.mapcl;
                             var data2 = res.mapcz;
-                            if(data1.lmcl_this_month == null || data1.lmcl_this_month == ""){
-                                data1.lmcl_this_month = 0;
-                            }
-                            if(data1.lmcl_lj_year == null || data1.lmcl_lj_year == ""){
-                                data1.lmcl_lj_year = 0;
-                            }
-                            if(data1.lmcl_synchronous == null || data1.lmcl_synchronous == ""){
-                                data1.lmcl_synchronous = 0;
-                            }
-                            if(data1.lmcl_yonydata == null || data1.lmcl_yonydata == ""){
-                                data1.lmcl_yonydata = 0;
-                                data1.lmcl_flag = 0;
-                            }else if(data1.lmcl_yonydata > 0){
-                                data1.lmcl_flag = 1;
-                            }else if(data1.lmcl_yonydata < 0){
-                                data1.lmcl_yonydata = Math.abs(data1.lmcl_yonydata) ;
-                                data1.lmcl_flag = 2;
-                            }
-                            if(data1.spmcl_this_month == null || data1.spmcl_this_month == ""){
-                                data1.spmcl_this_month = 0;
-                            }
-                            if(data1.spmcl_lj_year == null || data1.spmcl_lj_year == ""){
-                                data1.spmcl_lj_year = 0;
-                            }
-                            if(data1.spmcl_synchronous == null || data1.spmcl_synchronous == ""){
-                                data1.spmcl_synchronous = 0;
-                            }
-                            if(data1.spmcl_yonydata == null || data1.spmcl_yonydata == ""){
-                                data1.spmcl_yonydata = 0;
-                                data1.spmcl_flag = 0;
-                            }else if(data1.spmcl_yonydata > 0){
-                                data1.spmcl_flag = 1;
-                            }else if(data1.spmcl_yonydata < 0){
-                                data1.spmcl_yonydata = Math.abs(data1.spmcl_yonydata) ;
-                                data1.spmcl_flag = 2;
-                            }
-                            if(data1.jmcl_this_month == null || data1.jmcl_this_month == ""){
-                                data1.jmcl_this_month = 0;
-                            }
-                            if(data1.jmcl_lj_year == null || data1.jmcl_lj_year == ""){
-                                data1.jmcl_lj_year = 0;
-                            }
-                            if(data1.jmcl_synchronous == null || data1.jmcl_synchronous == ""){
-                                data1.jmcl_synchronous = 0;
-                            }
-                            if(data1.jmcl_yonydata == null || data1.jmcl_yonydata == ""){
-                                data1.jmcl_yonydata = 0;
-                                data1.jmcl_flag = 0;
-                            }else if(data1.jmcl_yonydata > 0){
-                                data1.jmcl_flag = 1;
-                            }else if(data1.jmcl_yonydata < 0){
-                                data1.jmcl_yonydata = Math.abs(data1.jmcl_yonydata) ;
-                                data1.jmcl_flag = 2;
+                            if(data1 != null){
+
+                                if (data1.lmcl_this_month == null || data1.lmcl_this_month == "") {
+                                    data1.lmcl_this_month = 0;
+                                }
+                                if (data1.lmcl_lj_year == null || data1.lmcl_lj_year == "") {
+                                    data1.lmcl_lj_year = 0;
+                                }
+                                if (data1.lmcl_synchronous == null || data1.lmcl_synchronous == "") {
+                                    data1.lmcl_synchronous = 0;
+                                }
+                                if (data1.lmcl_yonydata == null || data1.lmcl_yonydata == "") {
+                                    data1.lmcl_yonydata = 0;
+                                    data1.lmcl_flag = 0;
+                                } else if (data1.lmcl_yonydata > 0) {
+                                    data1.lmcl_flag = 1;
+                                } else if (data1.lmcl_yonydata < 0) {
+                                    data1.lmcl_yonydata = Math.abs(data1.lmcl_yonydata);
+                                    data1.lmcl_flag = 2;
+                                }
+                                if (data1.spmcl_this_month == null || data1.spmcl_this_month == "") {
+                                    data1.spmcl_this_month = 0;
+                                }
+                                if (data1.spmcl_lj_year == null || data1.spmcl_lj_year == "") {
+                                    data1.spmcl_lj_year = 0;
+                                }
+                                if (data1.spmcl_synchronous == null || data1.spmcl_synchronous == "") {
+                                    data1.spmcl_synchronous = 0;
+                                }
+                                if (data1.spmcl_yonydata == null || data1.spmcl_yonydata == "") {
+                                    data1.spmcl_yonydata = 0;
+                                    data1.spmcl_flag = 0;
+                                } else if (data1.spmcl_yonydata > 0) {
+                                    data1.spmcl_flag = 1;
+                                } else if (data1.spmcl_yonydata < 0) {
+                                    data1.spmcl_yonydata = Math.abs(data1.spmcl_yonydata);
+                                    data1.spmcl_flag = 2;
+                                }
+                                if (data1.jmcl_this_month == null || data1.jmcl_this_month == "") {
+                                    data1.jmcl_this_month = 0;
+                                }
+                                if (data1.jmcl_lj_year == null || data1.jmcl_lj_year == "") {
+                                    data1.jmcl_lj_year = 0;
+                                }
+                                if (data1.jmcl_synchronous == null || data1.jmcl_synchronous == "") {
+                                    data1.jmcl_synchronous = 0;
+                                }
+                                if (data1.jmcl_yonydata == null || data1.jmcl_yonydata == "") {
+                                    data1.jmcl_yonydata = 0;
+                                    data1.jmcl_flag = 0;
+                                } else if (data1.jmcl_yonydata > 0) {
+                                    data1.jmcl_flag = 1;
+                                } else if (data1.jmcl_yonydata < 0) {
+                                    data1.jmcl_yonydata = Math.abs(data1.jmcl_yonydata);
+                                    data1.jmcl_flag = 2;
+                                }
                             }
                             this.mapcl = data1;
-                            if(data2.value_this_month == null || data2.value_this_month == ""){
-                                data2.value_this_month = 0;
-                            }
-                            if(data2.value_lj_year == null || data2.value_lj_year == ""){
-                                data2.value_lj_year = 0;
-                            }
-                            if(data2.value_synchronous == null || data2.value_synchronous == ""){
-                                data2.value_synchronous = 0;
-                            }
-                            if(data2.value_yonydata == null || data2.value_yonydata == ""){
-                                data2.value_yonydata = 0;
-                                data2.value_flag = 0;
-                            }else if(data2.value_yonydata > 0){
-                                data2.value_flag = 1;
-                            }else if(data2.value_yonydata < 0){
-                                data2.value_yonydata = Math.abs(data2.value_yonydata) ;
-                                data2.value_flag = 2;
-                            }
-                            if(data2.sales_value_this_month == null || data2.sales_value_this_month == ""){
-                                data2.sales_value_this_month = 0;
-                            }
-                            if(data2.sales_value_lj_year == null || data2.sales_value_lj_year == ""){
-                                data2.sales_value_lj_year = 0;
-                            }
-                            if(data2.sales_value_synchronous == null || data2.sales_value_synchronous == ""){
-                                data2.sales_value_synchronous = 0;
-                            }
-                            if(data2.sales_value_yonydata == null || data2.sales_value_yonydata == ""){
-                                data2.sales_value_yonydata = 0;
-                                data2.sales_value_flag = 0;
-                            }else if(data2.sales_value_yonydata > 0){
-                                data2.sales_value_flag = 1;
-                            }else if(data2.sales_value_yonydata < 0){
-                                data2.sales_value_yonydata = Math.abs(data2.sales_value_yonydata) ;
-                                data2.sales_value_flag = 2;
+                            if(data2 != null){
+                                if (data2.value_this_month == null || data2.value_this_month == "") {
+                                    data2.value_this_month = 0;
+                                }
+                                if (data2.value_lj_year == null || data2.value_lj_year == "") {
+                                    data2.value_lj_year = 0;
+                                }
+                                if (data2.value_synchronous == null || data2.value_synchronous == "") {
+                                    data2.value_synchronous = 0;
+                                }
+                                if (data2.value_yonydata == null || data2.value_yonydata == "") {
+                                    data2.value_yonydata = 0;
+                                    data2.value_flag = 0;
+                                } else if (data2.value_yonydata > 0) {
+                                    data2.value_flag = 1;
+                                } else if (data2.value_yonydata < 0) {
+                                    data2.value_yonydata = Math.abs(data2.value_yonydata);
+                                    data2.value_flag = 2;
+                                }
+                                if (data2.sales_value_this_month == null || data2.sales_value_this_month == "") {
+                                    data2.sales_value_this_month = 0;
+                                }
+                                if (data2.sales_value_lj_year == null || data2.sales_value_lj_year == "") {
+                                    data2.sales_value_lj_year = 0;
+                                }
+                                if (data2.sales_value_synchronous == null || data2.sales_value_synchronous == "") {
+                                    data2.sales_value_synchronous = 0;
+                                }
+                                if (data2.sales_value_yonydata == null || data2.sales_value_yonydata == "") {
+                                    data2.sales_value_yonydata = 0;
+                                    data2.sales_value_flag = 0;
+                                } else if (data2.sales_value_yonydata > 0) {
+                                    data2.sales_value_flag = 1;
+                                } else if (data2.sales_value_yonydata < 0) {
+                                    data2.sales_value_yonydata = Math.abs(data2.sales_value_yonydata);
+                                    data2.sales_value_flag = 2;
+                                }
                             }
                             this.mapcz = data2;
-                            
+                      
                         }
                     })
                     .catch(err => { });
@@ -593,7 +607,7 @@
                 this.nowMonth = this.currentDate1.getMonth() + 1;
                 let dateMonth = this.nowYear1 + "-" + this.nowMonth;
                 //this.$refs.child1.changeTitme(this.nowYear);
-                this.getHomeData(this.compDetail.id, this.nowYear,dateMonth);
+                this.getHomeData(this.compDetail.id, this.nowYear, dateMonth);
             },
 
             showDatePicker() {

@@ -232,7 +232,9 @@
                             var total = ret.total;
                             if (isSuccess != null && isSuccess == "1") {
                                 let dataList = ret.tjs
-                                this.nowYear = ret.year;
+                                if(this.nowYear == ''){
+                                    this.nowYear = ret.year;
+                                }
                                 this.ktcl = dataList[0].ktcl!=null?dataList[0].ktcl:0;
                                 this.ymcl = dataList[0].ymcl!=null?dataList[0].ymcl:0;
                                 this.getTwoEcharts(echarts, mycharts1, ret.tjt);

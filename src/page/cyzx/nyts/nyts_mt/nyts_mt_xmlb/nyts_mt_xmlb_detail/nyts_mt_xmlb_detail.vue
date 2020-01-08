@@ -219,9 +219,12 @@
         },
         mounted() {
             let data = this.$route.params.entity;
-            data.general_estimate = Math.round(data.general_estimate*100)/100;
-            data.invest = Math.round(data.invest*100)/100;
-            data.tze_year_plan = Math.round(data.tze_year_plan*100)/100;
+            var a = data.general_estimate/10000;
+            var b = data.invest/10000;
+            var c = data.tze_year_plan/10000;
+            data.general_estimate = Math.round(a*100)/100;
+            data.invest = Math.round(b*100)/100;
+            data.tze_year_plan = Math.round(c*100)/100;
             this.proDetail = data;
             this.getHomeData(this.proDetail.id,this.nowYear);
         },

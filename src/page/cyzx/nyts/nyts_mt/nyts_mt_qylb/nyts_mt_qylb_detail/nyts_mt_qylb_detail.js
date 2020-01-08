@@ -107,8 +107,6 @@ export const nytsMtQylbDetailJs = {
         searList.push(map5);
         searList.push(map6);
         searList.push(map7);
-        console.log(searList);
-        console.log(xLabel);
 
         var option = {
             legend: {
