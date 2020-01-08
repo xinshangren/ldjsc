@@ -2,10 +2,10 @@
   <div class="amap-page-container">
     <div id="maintitleId" class="maintitle">
       <div style="display: flex;">
-        <div id="xjzstimete" style="display: none;"></div>
-        <div id="xjzstime" style="width: 57px;height:23px;display: flex;margin-left: 73px;margin-top: 10px;background: #eeeeee;border-radius: 3px;">
+        <div id="xjzstime"
+          style="width: 57px;height:23px;display: flex;margin-left: 73px;margin-top: 10px;background: #eeeeee;border-radius: 3px;">
           <div id="timeshow" style="height:23px;font-size: 15px;">
-            7月份
+            10月份
           </div>
           <img src="../../assets/img/jb.png" style="margin-top:10px;width: 10px;" height="10px" />
         </div>
@@ -105,7 +105,7 @@
 
 <script>
   import Vue from "vue";
-  import $ from "jquery";
+  import { httpMethod } from "../../api/getData.js";
   import VueAMap from 'vue-amap';
   Vue.use(VueAMap);
   VueAMap.initAMapApiLoader({
@@ -118,11 +118,12 @@
     name: "homevue",
     data() {
       return {
+        date: '2019-10',
         amapManager,
         iswxshow: false,
         features: ['point'],
         center: [112.851581, 35.49111],
-        zoom: 9,
+        zoom: 12,
         resizeEnable: true,
         events: {
           'moveend': () => {
@@ -202,20 +203,55 @@
         var show = $(this).attr("show");
         var code = $(this).attr("code");
         $("#timeshow").html(show);
-        $("#xjzstimete").html(code);
         $("#dateselect").css('display', 'none');
-        // isfirst = 1;
-        // initxjzs();
-        // $("#xjDialogId li").each(function() {
-        // 	if($(this).hasClass("dialogNoSelect")) {
-        // 		$(this).removeClass("dialogNoSelect");
-        // 		$(this).addClass("dialogSelect");
-        // 	}
-        // });
-        // entrySend();
+        _this.date=code;
+        _this.getLevelBasicList();
       });
+
+      _this.getLevelBasicList();
     },
     methods: {
+      // 
+      getLevelBasicList: function () {
+        var _this = this;
+        var params = {
+          date: _this.date
+        };
+        httpMethod
+          .getLevelBasicList(params)
+          .then(res => {
+            console.log(res);
+            if (res.success == "1") {
+              let markers = [];
+              var path = require('../../assets/img/xx-r.png');
+              for (let i = 0; i < res.dataList.length; i++) {
+                if(res.dataList[i].dw_level=='10'){
+                  path = require('../../assets/img/xx-r.png');
+                }else if(res.dataList[i].dw_level=='9'){
+                  path = require('../../assets/img/xx-p.png');
+                }else if(res.dataList[i].dw_level=='8'){
+                  path = require('../../assets/img/xx-y.png');
+                }else if(res.dataList[i].dw_level=='7'){
+                  path = require('../../assets/img/xx-g.png');
+                }else{
+                  path = require('../../assets/img/xx-b.png');
+                }
+                if(res.dataList[i].longitude!=null&&res.dataList[i].latitude!=null&&res.dataList[i].longitude!=''&&res.dataList[i].latitude!=''){
+                  markers.push({
+                  position: [res.dataList[i].longitude, res.dataList[i].latitude],
+                  template: "<div  style='height:20px'><img src='" + path + "' style='height:15px'></div>",
+                });
+                }
+               
+              }
+              _this.markers = markers;
+
+            }
+          })
+          .catch(err => {
+
+          });
+      },
       setMapFeatures() {
         if (this.map == null) {
           this.map = amapManager.getMap();
@@ -230,23 +266,6 @@
         console.log(features);
         this.map.setFeatures(features);
       },
-
-      getMap() {
-        let self = this;
-        let markers = [];
-        let index = 0;
-
-        let basePosition = [112.851581, 35.49111];
-        let num = 10;
-        var path = require('../../assets/img/xx-r.png');
-        for (let i = 0; i < num; i++) {
-          markers.push({
-            position: [basePosition[0], basePosition[1] + i * 0.03],
-            template: "<div  style='height:20px'><img src='" + path + "' style='height:20px'></div>",
-          });
-        }
-        this.markers = markers;
-      }
     }
   };
 </script>

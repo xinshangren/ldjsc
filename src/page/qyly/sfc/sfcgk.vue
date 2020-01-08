@@ -37,9 +37,9 @@
       };
     },
     mounted() {
-      var orderHight1 = document.documentElement.clientHeight;
-      var heightlist = orderHight1 -160;
-      $("#scfgkid").css('height',heightlist + "px");
+      // var orderHight1 = document.documentElement.clientHeight;
+      // var heightlist = orderHight1 -160;
+      // $("#scfgkid").css('height',heightlist + "px");
       this.getData();
     },
     methods: {

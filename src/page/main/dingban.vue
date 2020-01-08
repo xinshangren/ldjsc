@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-tabs v-model="active" :sticky=true :ellipsis=false line-width="25%" style="font-size: 14px;" color="#2796e7"
+    <van-tabs v-model="active" :sticky=false :ellipsis=false line-width="25%" style="font-size: 14px;" color="#2796e7"
       title-inactive-color="#999999" title-active-color="#2796e7">
       <van-tab title="市委市政府" id="2c9bfcdd6c3d7c42016c3d84d4a6000e">
         <child1 v-bind:active="active"></child1>

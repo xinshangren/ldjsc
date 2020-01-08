@@ -329,7 +329,31 @@ export const httpMethod = {
     getXnyReport: function (params) {
         return get("nytsAppGbInsideController.action?getXnyReport", params);
     },
-
+    //文明共创
+    // 总数及比例统计
+    getDwSummary: function (params) {
+        return get("wmgcAppInsideController.action?getDwSummary", params);
+    },
+    // 各月各数据星级数量
+    getMonthLevelNum: function (params) {
+        return get("wmgcAppInsideController.action?getMonthLevelNum", params);
+    },
+    // 各星级地图点位
+    getLevelBasicList: function (params) {
+        return get("wmgcAppInsideController.action?getLevelBasicList", params);
+    },
+    // 获取点位类型列表
+    getDwlxList: function (params) {
+        return get("wmgcAppInsideController.action?getDwlxList", params);
+    },
+    // 类型得分统计 ： 
+    typeScoreStatistics: function (params) {
+        return get("wmgcAppInsideController.action?typeScoreStatistics", params);
+    },
+    // 创城动态 ： 
+    getCmsCcdtList: function (params) {
+        return get("wmgcAppInsideController.action?getCmsCcdtList", params);
+    },
     
 
 
