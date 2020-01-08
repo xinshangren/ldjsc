@@ -31,6 +31,7 @@
           />
         </div>
         <van-tabs
+          @touchmove.prevent
           @click="smallTab_select"
           ref="tabId1"
           title-active-color="#2796e7"
@@ -46,6 +47,7 @@
           <van-tab title="数据统计"></van-tab>
         </van-tabs>
         <van-tabs
+          @touchmove.prevent
           @click="smallTab_select_wgjg"
           ref="tabId2"
           title-active-color="#2796e7"
@@ -63,6 +65,7 @@
           <van-tab title="统计分析"></van-tab>
         </van-tabs>
         <van-tabs
+          @touchmove.prevent
           @click="smallTab_select_zdqy"
           ref="tabId3"
           title-active-color="#2796e7"
@@ -97,18 +100,18 @@
         </li>
       </ul>
     </div>
-    <div>
-      <div :is="currentView"></div>
-      <!-- <child1 v-if="Bigflag==1&&airactive==0"></child1>
+    
+      <!-- <div :is="currentView"></div> -->
+      <child1 v-if="Bigflag==1&&airactive==0"></child1>
       <child2 v-if="Bigflag==1&&airactive==1"></child2>
       <child3 v-if="Bigflag==1&&airactive==2"></child3>
       <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
       <child5 v-if="Bigflag==2&&wgjgactive==1"></child5>
       <child6 v-if="Bigflag==2&&wgjgactive==2"></child6>
       <child7 v-if="Bigflag==2&&wgjgactive==3"></child7>
-      <child8 v-if="Bigflag==3&&wgjgactive==0"></child8>
-      <child9 v-if="Bigflag==3&&wgjgactive==1"></child9>-->
-    </div>
+      <child8 v-if="Bigflag==3&&zdqyactive==0"></child8>
+      <child9 v-if="Bigflag==3&&zdqyactive==1"></child9>
+    
 
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
       <div id="rightAreaDivId" style="display:none;">
@@ -151,7 +154,13 @@
 </template>
 <script>
 import echarts from "echarts";
-import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.vue";
+import { httpMethod } from "../../../api/getData.js";
+import Vue from "vue";
+import { Tab, Tabs, Sticky } from "vant";
+Vue.use(Tab)
+  .use(Tabs)
+  .use(Sticky);
+  import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.vue";
 import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
 import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
 import child4 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wggk/hbgj_wgjg_wggk.vue";
@@ -160,12 +169,6 @@ import child6 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wgperson/hbgj_wgjg_wgpe
 import child7 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_tjfx/hbgj_wgjg_tjfx.vue";
 import child8 from "@/page/zdgz/hbgj/hbgj_wrqy/hbgj_wrqy_qygk/hbgj_wrqy_qygk.vue";
 import child9 from "@/page/zdgz/hbgj/hbgj_wrqy/hbgj_zdqylb/hbgj_zdqylb.vue";
-import { httpMethod } from "../../../api/getData.js";
-import Vue from "vue";
-import { Tab, Tabs, Sticky } from "vant";
-Vue.use(Tab)
-  .use(Tabs)
-  .use(Sticky);
 export default {
   name: "hbgj",
   components: {
@@ -445,7 +448,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 @import "../../../page/zdgz/hbgj/hbgj.css";
 @import "../../../assets/css/frozenui.css";
 </style>

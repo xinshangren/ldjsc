@@ -371,6 +371,10 @@ export const httpMethod = {
 
 
 
+    //能源相册
+    getNyxcImgList: function (params) {
+        return get("nytsAppGbInsideController.action?getImgList", params);
+    },
 
 
 

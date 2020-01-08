@@ -35,7 +35,7 @@
         </li>
         <li @click="intentJjzs()" class="ui-col ui-col-25 home_ul_li_style1">
           <img class="home_ul_li_img" src="../../assets/img/icon6.png" />
-          <div class="home_ul_li_div">经济指数</div>
+          <div class="home_ul_li_div">经济运行</div>
         </li>
         <li @click="intentHbgj()" class="ui-col ui-col-25 home_ul_li_style1">
           <img class="home_ul_li_img" src="../../assets/img/icon5.png" />
@@ -99,7 +99,7 @@
               <div class="home_jjyxc_line_rauds_div1">
                 <img class="home_jjyxc_line_rauds_img" src="../../assets/img/icon6.png" />
               </div>
-              <div class="home_jjyxc_line_text_div">经济指数</div>
+              <div class="home_jjyxc_line_text_div">经济运行</div>
             </div>
             <div @click="toast()" class="ui-col ui-col home_ul_li_style">
               <div class="home_jjyxc_line_rauds_div2">
@@ -125,7 +125,7 @@
               <div class="home_jjyxc_line_rauds_div4">
                 <img class="home_jjyxc_line_rauds_img" style="margin-left:0px;" src="../../assets/img/icon12.png" />
               </div>
-              <div class="home_jjyxc_line_text_div">能源态势</div>
+              <div class="home_jjyxc_line_text_div">能源革命</div>
             </div>
           </div>
         </div>
@@ -225,7 +225,7 @@
         <div class="ui-row-flex ui-whitespace" style="height: 88px;margin-top: 15px;">
           <div @click="intentQyly()" class="ui-col ui-col backgroundDiv1">
             <img style="height: 50px;" src="../../assets/img/icon_travel1.png" />
-            <div style="color: #ffffff;font-size: 13px;">旅游景区</div>
+            <div style="color: #ffffff;font-size: 13px;">全域旅游</div>
           </div>
           <div @click="toast()" class="ui-col ui-col backgroundDiv2">
             <img style="height: 50px;" src="../../assets/img/icon_travel2.png" />

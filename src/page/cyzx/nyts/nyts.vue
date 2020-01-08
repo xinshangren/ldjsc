@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <van-sticky :offset-top="50">
+    <van-sticky id="twoLeveltab" :offset-top="50">
       <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
         <div class="twoLevel_left_div">
           <img style="height: 30px; margin-top: 6px;margin-left: 10px;" :src="TwoLevelTabImg1" />
@@ -124,6 +124,7 @@
      
       <child7 v-if="flag==3&&airactive2==0"></child7>
       <child8 v-if="flag==3&&airactive2==1"></child8>
+      <child9 v-if="flag==4"></child9>
     </div>
 </div>
 
@@ -139,6 +140,7 @@ import child5 from "@/page/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb.vue";
 import child6 from "@/page/cyzx/nyts/nyts_xny/nyts_xny_xmlb/nyts_xny_xmlb.vue";
 import child7 from "@/page/cyzx/nyts/nyts_mcq/nyts_mcq_gk/nyts_mcq_gk.vue";
 import child8 from "@/page/cyzx/nyts/nyts_mcq/nyts_mcq_qylb/nyts_mcq_qylb.vue";
+import child9 from "@/page/cyzx/nyts/nyts_nyxc/nyts_nyxc.vue";
 import $ from "jquery";
 import { httpMethod } from "../../../api/getData.js";
 import Vue from "vue";
@@ -154,7 +156,8 @@ export default {
     child5,
     child6,
     child7,
-    child8
+    child8,
+    child9
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
@@ -214,24 +217,28 @@ export default {
       this.flag=index;
       switch (index) {
         case 1:
+          $("#twoLeveltab").show();
           this.indexTabImg1 = require("../../../assets/img/mt2_tab.png");
           this.indexTabImg2 = require("../../../assets/img/xny1_tab.png");
           this.indexTabImg3 = require("../../../assets/img/mcq1_tab.png");
           this.indexTabImg4 = require("../../../assets/img/energy_pic_tab.png");
           break;
         case 2:
+          $("#twoLeveltab").show();
           this.indexTabImg1 = require("../../../assets/img/mt1_tab.png");
           this.indexTabImg2 = require("../../../assets/img/xny2_tab.png");
           this.indexTabImg3 = require("../../../assets/img/mcq1_tab.png");
           this.indexTabImg4 = require("../../../assets/img/energy_pic_tab.png");
           break;
         case 3:
+           $("#twoLeveltab").show();
           this.indexTabImg1 = require("../../../assets/img/mt1_tab.png");
           this.indexTabImg2 = require("../../../assets/img/xny1_tab.png");
           this.indexTabImg3 = require("../../../assets/img/mcq2_tab.png");
           this.indexTabImg4 = require("../../../assets/img/energy_pic_tab.png");
           break;
         case 4:
+          $("#twoLeveltab").hide();
           this.indexTabImg1 = require("../../../assets/img/mt1_tab.png");
           this.indexTabImg2 = require("../../../assets/img/xny1_tab.png");
           this.indexTabImg3 = require("../../../assets/img/mcq1_tab.png");
