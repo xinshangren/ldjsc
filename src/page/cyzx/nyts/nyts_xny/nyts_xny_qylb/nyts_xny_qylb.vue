@@ -86,10 +86,10 @@
                 <div style="padding-top:9px;font-size: 16px;margin-left:17px;">企业性质</div>
                 <ul class="ui-row" id="qyxzListDialogId" style="margin-top: 11px;margin-right: 0px;">
                     <li v-for="(item,index) in qyxz_dataList" :key="index" :id="(item.typecode)"
-                        v-if="item.typecode == 2" style="width:34%" class="ui-col ui-col-25 dialogNoSelect">
+                        v-if= "item.typecode == 2" style="width:34%" class="ui-col ui-col-25 dialogNoSelect">
                         {{item.typename}}</li>
                     <li v-for="(item,index) in qyxz_dataList" :key="index" :id="(item.typecode)"
-                        v-if="item.typecode != 2" class="ui-col ui-col-25 dialogNoSelect">{{item.typename}}</li>
+                        v-if= "item.typecode != 2" class="ui-col ui-col-25 dialogNoSelect">{{item.typename}}</li>
                 </ul>
                 <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
                 <div style="padding-top:9px;font-size: 16px;margin-left:17px;">企业规模</div>

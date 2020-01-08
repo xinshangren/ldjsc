@@ -135,7 +135,11 @@
         </div>
       </div>
 
-      <div ref="myCharts5" style="height:210px;width:100%;"></div>
+      <div  ref="myCharts5" style="height:210px;width:100%;"></div>
+
+      <div ref="myCharts5_nodata" style="text-align: center;margin-right:12px;margin-top:20px;">
+        <img style="height:118px;" src="../../../../../assets/img/no_data.png" />
+      </div>
     </div>
 
     <div
@@ -223,7 +227,8 @@ export default {
       wgName: "",
       echars_gridCode2: "555555",
       echars_gridCode3: "555555",
-      wgType: 1
+      wgType: 1,
+      barTaskList:[]
     };
   },
   mounted() {
@@ -507,8 +512,15 @@ export default {
           console.log(res);
           var code = res.success;
           if (code == "1") {
-            var list = res.barTaskList;
-            this.showEcharsView5(echarts, this.$refs.myCharts5, list);
+            this.barTaskList = res.barTaskList;
+            if( this.barTaskList.length>0){
+              this.$refs.myCharts5.style.display="";
+              this.$refs.myCharts5_nodata.style.display="none";
+            }else{
+               this.$refs.myCharts5.style.display="none";
+              this.$refs.myCharts5_nodata.style.display="";
+            }
+            this.showEcharsView5(echarts, this.$refs.myCharts5, this.barTaskList);
           }
         })
         .catch(err => {
@@ -808,7 +820,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import "../../../../../page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_tjfx/hbgj_wgjg_tjfx.css";
 @import "../../../../../assets/css/frozenui.css";
 </style>

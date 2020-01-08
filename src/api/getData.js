@@ -242,6 +242,7 @@ export const httpMethod = {
     getbasicList: function (params) {
         return get("gridSupervisionController.action?basicList", params);
     },
+
     getMtTjQuantity: function (params) {
         return get("nytsAppGbInsideController.action?getMtTjQuantity", params);
     },
@@ -317,14 +318,14 @@ export const httpMethod = {
     getQueryForFound: function (params) {
         return get("pollutionSourcesController.action?getQueryForFound", params);
     },
-     //污染源企业列表详情
-     getBaseinfo: function (params) {
+    //污染源企业列表详情
+    getBaseinfo: function (params) {
         return get("pollutionSourcesController.action?getBaseinfo", params);
     },
     //重点污染源覆盖物详情-污染物报警
     getPollutantalarm: function (params) {
-       return get("pollutionSourcesController.action?getPollutantalarm", params);
-   },
+        return get("pollutionSourcesController.action?getPollutantalarm", params);
+    },
     //新能源项目发电量
     getXnyReport: function (params) {
         return get("nytsAppGbInsideController.action?getXnyReport", params);
@@ -355,23 +356,50 @@ export const httpMethod = {
         return get("wmgcAppInsideController.action?getCmsCcdtList", params);
     },
     
+    //新能源概况图
+    getXnyTjPhase: function (params) {
+        return get("nytsAppGbInsideController.action?getXnyTjPhase", params);
+    },
+    //新能源概况
+    entStatistics: function (params) {
+        return get("nytsAppGbInsideController.action?entStatistics", params);
+    },
+    //煤炭统计产值
+    getMtTjOutput: function (params) {
+        return get("nytsAppGbInsideController.action?getMtTjOutput", params);
+    },
+    //煤炭销售统计图
+    getMtTjMarket: function (params) {
+        return get("nytsAppGbInsideController.action?getMtTjMarket", params);
+    },
+    //能源煤炭企业列表
+    getMtEnterpriseList: function (params) {
+        return get("nytsAppGbInsideController.action?getMtEnterpriseList", params);
+    },
+    //煤炭产值产量
+    getMtEntIdOutputTj: function (params) {
+        return get("nytsAppGbInsideController.action?getMtEntIdOutputTj", params);
+    },
+    //煤炭项目详情
+    getMtProjectList: function (params) {
+        return get("nytsAppGbInsideController.action?getMtProjectList", params);
+    },
+    //煤炭项目详情
+    getMtReportList: function (params) {
+        return get("nytsAppGbInsideController.action?getMtReportList", params);
+    },
+
+    //能源相册
+    getNyxcImgList: function (params) {
+        return get("nytsAppGbInsideController.action?getImgList", params);
+    },
 
 
-    
-    
-    
 
-    
-    
 
-    
 
-    
-   
-    
-    
-    
-    
+
+
 
 
 

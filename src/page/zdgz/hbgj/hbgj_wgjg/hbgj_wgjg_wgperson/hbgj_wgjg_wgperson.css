@@ -79,12 +79,6 @@
 .li_div_title{
     margin-left: 17px;font-size: 14px;width: 169px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;
 }
-.mescroll {
-    position: fixed;
-    top: 250px;
-    bottom: 0px;
-    height: auto;
-  }
   .dialogNoSelect {
 	border: 1px solid #cccccc;
 	padding: 1px 15px 1px 15px;
