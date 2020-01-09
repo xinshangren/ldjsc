@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     .xny_qyxq_qyxzImg{
         height: 20px;
     }
@@ -11,11 +11,14 @@
     .mcq_qyxq_icon {
         height: 20px;
     }
+    #compDetail span{
+        margin-left: -18px;
+    }
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
         <div style="background:#ffffff;height:345px;width:100%;margin-top:5px;">
-            <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
+            <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="compDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.ent_name}}</div>
                 <div style="margin-top: 10px;">
                     <img class="xny_qyxq_qyxzImg" v-if="compDetail.ent_nature == 1"

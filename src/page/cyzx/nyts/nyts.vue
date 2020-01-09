@@ -1,3 +1,26 @@
+<style>
+#tabId .van-tabs__line{
+    background-color:#3097FB;
+    margin-bottom:2px;
+    height:2px;
+}
+#tabId1 .van-tabs__line {
+    background-color: #3097FB;
+    margin-bottom: 2px;
+    height: 2px;
+    width: 75px;
+    transform: translateX(47px) translateX(-50%);
+    transition-duration: 0.3s;
+}
+#tabId2 .van-tabs__line {
+    background-color: #3097FB;
+    margin-bottom: 2px;
+    height: 2px;
+    width: 70px;
+    transform: translateX(67px) translateX(-50%);
+    transition-duration: 0.3s;
+}
+</style>
 <template>
 <div style="margin-top:61px;">
     <div class="ui-row-flex ui-whitespace">
@@ -130,6 +153,7 @@
 
   
 </template>
+
 <script>
 import echarts from "echarts";
 import child1 from "@/page/cyzx/nyts/nyts_mt/nyts_mt_gk/nyts_mt_gk.vue";
@@ -269,8 +293,8 @@ export default {
 };
 
 </script>
-
-<style >
-@import "../../cyzx/nyts/nyts.css";
-
+<style scoped>
+ @import "../../../assets/css/frozenui.css";
+  @import "../../../page/cyzx/nyts/nyts.css";
 </style>
+

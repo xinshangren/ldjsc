@@ -370,7 +370,7 @@
         }
     };
 </script>
-<style>
+<style scoped>
     @import "../../../../../page/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb.css";
     @import "../../../../../assets/css/frozenui.css";
 </style>

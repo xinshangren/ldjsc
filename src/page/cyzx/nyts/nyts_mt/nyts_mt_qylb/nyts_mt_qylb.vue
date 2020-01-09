@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     .mt_qyxzImg {
         height: 20px;
     }
@@ -411,7 +411,7 @@
         }
     };
 </script>
-<style>
-    @import "../../../../../page/cyzx/nyts/nyts_xny/nyts_xny_qylb/nyts_xny_qylb.css";
+<style scoped>
     @import "../../../../../assets/css/frozenui.css";
+     @import "../../../../../page/cyzx/nyts/nyts_mt/nyts_mt_qylb/nyts_mt_qylb.css";
 </style>

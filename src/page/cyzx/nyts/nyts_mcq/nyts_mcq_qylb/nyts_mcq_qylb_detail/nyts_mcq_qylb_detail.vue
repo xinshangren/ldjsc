@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     .mcq_qyxq_qyxzImg {
         width: 45px;
     }
@@ -9,6 +9,7 @@
 
     .mcq_qyxq_icon {
         height: 20px;
+        width: 20px;
     }
 
     .wry_tj_table_title_p {
@@ -23,11 +24,14 @@
     .trigger {
         text-align: center;
     }
+    #compDetail span{
+            margin-left: -18px;
+    }
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
         <div style="background:#ffffff;height:345px;width:100%;margin-top:5px;">
-            <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
+            <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="compDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.ent_name}}</div>
                 <div style="margin-top: 10px;">
                     <img class="mcq_qyxq_qyxzImg" v-if="compDetail.ent_nature == 1"
@@ -140,7 +144,7 @@
                 <div id="nymt_mcq_company_deali_content1_div_id">
                     <div id style="margin-top: 10px;">
                         <table border="1" cellspacing="0" cellpadding="0"
-                            style="margin-top: 5px;width:100%;border: #d3edff;">
+                            style="margin-top: 5px;width:100%;border: #d3edff;border-collapse: collapse;">
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec; width: 40%;" colspan="2" rowspan="2">
                                     <p class="wry_tj_table_title_p">煤层气产量(万立方米)</p>
@@ -224,7 +228,8 @@
                 currentDate1: new Date(),
                 maxDate: new Date(),
                 minDate: new Date(2018, 0, 1),
-                tableData: {}
+                tableData: {
+                }
             };
         },
         mounted() {
@@ -255,7 +260,7 @@
                     break;
             }
             this.compDetail = data;
-            this.getHomeData(this.compDetail.id,"");
+            this.getHomeData(this.compDetail.id, "");
             this.getHomeData1(this.compDetail.id, "");
         },
         methods: {
@@ -289,17 +294,18 @@
                     .then(res => {
                         var code = res.success;
                         if (code == "1") {
-                            if(this.nowYear1 == ""){
+                            if (this.nowYear1 == "") {
                                 this.nowYear1 = res.dateMonth.substr(0, 4);
                             }
-                            if(this.nowMonth == ""){
+                            if (this.nowMonth == "") {
                                 this.nowMonth = res.dateMonth.substr(5, 6);
                             }
                             if (res.dateFrom != null && res.dateFrom.length > 0) {
                                 this.tableData = res.dateFrom[0];
-                            }else{
+                            } else {
                                 this.tableData = null;
                             }
+                            console.log(this.tableData)
                         }
                     })
                     .catch(err => { });
@@ -345,7 +351,12 @@
             onconfirm1() {
                 this.nowYear1 = this.currentDate1.getFullYear();
                 this.nowMonth = this.currentDate1.getMonth() + 1;
-                let dateMonth = this.nowYear1 + "-" + this.nowMonth;
+                let dateMonth = "";
+                if(this.nowMonth < 10){
+                    dateMonth = this.nowYear1 + "-0" + this.nowMonth;
+                }else{
+                    dateMonth = this.nowYear1 + "-" + this.nowMonth;
+                }
                 this.getHomeData1(this.compDetail.id, dateMonth);
                 this.show1 = false;
             },
@@ -356,3 +367,6 @@
         }
     };
 </script>
+<style scoped>
+ @import "../../../../../../page/cyzx/nyts/nyts_mcq/nyts_mcq_qylb/nyts_mcq_qylb_detail/nyts_mcq_qylb_detail.css";
+</style>
