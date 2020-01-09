@@ -1,16 +1,4 @@
-<style>
-    .xny_qyxq_qyxzImg {
-        height: 20px;
-    }
-
-    .xny_qyxq_qygmImg {
-        height: 20px;
-    }
-
-    .xny_qyxq_qylxImg {
-        height: 20px;
-    }
-
+<style scoped>
     .mcq_qyxq_icon {
         height: 20px;
     }
@@ -31,11 +19,14 @@
     tr {
         height: 40px;
     }
+    #proDetail span{
+        margin-left: -18px;
+    }
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
         <div style="background:#ffffff;height:440px;width:100%;margin-top:5px;">
-            <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
+            <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="proDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{proDetail.pro_name}}</div>
                 <div style="margin-top: 15px;">
                     <div style="min-height: 60px;margin-top: 15px;">
@@ -260,3 +251,6 @@
         }
     };
 </script>
+<style scoped>
+    @import "../../../../../../page/cyzx/nyts/nyts_mt/nyts_mt_xmlb/nyts_mt_xmlb_detail/nyts_mt_xmlb_detail.css";
+</style>

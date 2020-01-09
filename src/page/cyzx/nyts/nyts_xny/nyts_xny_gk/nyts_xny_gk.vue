@@ -100,7 +100,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     @import "../../../../../page/cyzx/nyts/nyts_mt/nyts_mt_gk/nyts_mt_gk.css";
     @import "../../../../../assets/css/frozenui.css";
 </style>

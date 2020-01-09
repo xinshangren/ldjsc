@@ -72,7 +72,7 @@
 </div>
 </template>
 
-<style>
+<style scoped>
 @import "../../../../../page/cyzx/nyts/nyts_mt/nyts_mt_gk/nyts_mt_gk.css";
 @import "../../../../../page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.css";
 @import "../../../../../assets/css/frozenui.css";

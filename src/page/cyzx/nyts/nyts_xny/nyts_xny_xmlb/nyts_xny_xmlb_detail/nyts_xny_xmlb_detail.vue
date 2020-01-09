@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     .xny_xmlb_xmjdImg {
         height: 20px;
     }
@@ -10,11 +10,14 @@
     .mcq_qyxq_icon {
         height: 20px;
     }
+    #proDetail span{
+        margin-left: -18px;
+    }
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
         <div style="background:#ffffff;height:380px;width:100%;margin-top:5px;">
-            <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
+            <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="proDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.pro_name}}</div>
                 <div style="margin-top: 10px;">
                     <div style="margin-top: 6px;">
@@ -196,4 +199,5 @@
 </script>
 <style scoped>
     @import "../../../../../../assets/css/frozenui.css";
+    @import "../../../../../../page/cyzx/nyts/nyts_xny/nyts_xny_xmlb/nyts_xny_xmlb_detail/nyts_xny_xmlb_detail.css";
 </style>

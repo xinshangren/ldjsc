@@ -1,20 +1,7 @@
-<style>
-    .xny_qyxq_qyxzImg {
+<style scoped>
+    .mt_qyxq_icon {
         height: 20px;
     }
-
-    .xny_qyxq_qygmImg {
-        height: 20px;
-    }
-
-    .xny_qyxq_qylxImg {
-        height: 20px;
-    }
-
-    .mcq_qyxq_icon {
-        height: 20px;
-    }
-
     .wry_tj_table_title_p {
         font-size: 16px;
         text-align: center;
@@ -23,58 +10,25 @@
         margin: 0 auto;
         writing-mode: tb-rl;
     }
-
     .trigger {
         text-align: center;
     }
-
     tr {
         height: 40px;
+    }
+    #compDetail span{
+        margin-left: -18px;
     }
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
         <div style="background:#ffffff;height:400px;width:100%;margin-top:5px;">
-            <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
+            <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="compDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.ent_name}}</div>
-                <div style="margin-top: 10px;">
-                    <img class="xny_qyxq_qyxzImg" v-if="compDetail.ent_nature == 1"
-                        src="../../../../../../assets/img/xny-qy-gyqy.png" />
-                    <img class="xny_qyxq_qyxzImg" v-if="compDetail.ent_nature == 2"
-                        src="../../../../../../assets/img/xny-qy-jtsyzqy.png" />
-                    <img class="xny_qyxq_qyxzImg" v-if="compDetail.ent_nature == 3"
-                        src="../../../../../../assets/img/xny-qy-lyqy.png" />
-                    <img class="xny_qyxq_qyxzImg" v-if="compDetail.ent_nature == 4"
-                        src="../../../../../../assets/img/xny-qy-szqy.png" />
-                    <img class="xny_qyxq_qyxzImg" v-if="compDetail.ent_nature == 5"
-                        src="../../../../../../assets/img/xny-qy-syqy.png" />
-                    <img class="xny_qyxq_qyxzImg" v-if="compDetail.ent_nature == 6"
-                        src="../../../../../../assets/img/xny-qy-qtqy.png" />
-
-                    <img class="xny_qyxq_qygmImg" v-if="compDetail.ent_scale == 1"
-                        src="../../../../../../assets/img/xny-qy-dx.png" />
-                    <img class="xny_qyxq_qygmImg" v-if="compDetail.ent_scale == 2"
-                        src="../../../../../../assets/img/xny-qy-zx.png" />
-                    <img class="xny_qyxq_qygmImg" v-if="compDetail.ent_scale == 3"
-                        src="../../../../../../assets/img/xny-qy-xx.png" />
-
-
-                    <img class="xny_qyxq_qylxImg" v-if="compDetail.ent_type == 1"
-                        src="../../../../../../assets/img/xny-qy-gd.png" />
-                    <img class="xny_qyxq_qylxImg" v-if="compDetail.ent_type == 2"
-                        src="../../../../../../assets/img/xny-qy-fd.png" />
-                    <img class="xny_qyxq_qylxImg" v-if="compDetail.ent_type == 3"
-                        src="../../../../../../assets/img/xny-qy-swzfd.png" />
-                    <img class="xny_qyxq_qylxImg" v-if="compDetail.ent_type == 4"
-                        src="../../../../../../assets/img/xny-qy-sd.png" />
-                    <img class="xny_qyxq_qylxImg" v-if="compDetail.ent_type == 5"
-                        src="../../../../../../assets/img/xny-qy-qt.png" />
-
-                </div>
                 <div style="margin-top: 15px;">
                     <div>
                         <div>
-                            <img style="float: left;" class="mcq_qyxq_icon"
+                            <img style="float: left;" class="mt_qyxq_icon"
                                 src="../../../../../../assets/img/details_icon17.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">地址</div>
                         </div>
@@ -85,7 +39,7 @@
                     <div style="min-height: 60px;margin-top: 15px;">
                         <div style="width: 50%;float: left;">
                             <div>
-                                <img style="float: left;" class="mcq_qyxq_icon"
+                                <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon3.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">法人代表</div>
                             </div>
@@ -95,7 +49,7 @@
                         </div>
                         <div style="width: 50%;float: right;">
                             <div>
-                                <img style="float: left;" class="mcq_qyxq_icon"
+                                <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon19.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">联系方式</div>
                             </div>
@@ -107,7 +61,7 @@
                     <div style="min-height: 60px;margin-top: 15px;">
                         <div style="width: 50%;float: left;">
                             <div>
-                                <img style="float: left;" class="mcq_qyxq_icon"
+                                <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon26.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">隶属主体</div>
                             </div>
@@ -117,7 +71,7 @@
                         </div>
                         <div style="width: 50%;float: right;">
                             <div>
-                                <img style="float: left;" class="mcq_qyxq_icon"
+                                <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon5.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">瓦斯等级</div>
                             </div>
@@ -129,7 +83,7 @@
                     <div style="min-height: 60px;margin-top: 30px;">
                         <div style="width: 50%;float: left;">
                             <div>
-                                <img style="float: left;" class="mcq_qyxq_icon"
+                                <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon27.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">规模</div>
                             </div>
@@ -139,7 +93,7 @@
                         </div>
                         <div style="width: 50%;float: right;">
                             <div>
-                                <img style="float: left;" class="mcq_qyxq_icon"
+                                <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon9.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">煤矿性质</div>
                             </div>
@@ -150,7 +104,7 @@
                     </div>
                     <div style="margin-top: 10px;clear: both;">
                         <div>
-                            <img style="float: left;" class="mcq_qyxq_icon"
+                            <img style="float: left;" class="mt_qyxq_icon"
                                 src="../../../../../../assets/img/details_icon18.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">统一社会信用代码</div>
                         </div>
@@ -190,7 +144,7 @@
                 <div id="nymt_mcq_company_deali_content1_div_id">
                     <div id="" style="margin-top: 10px;">
                         <table border="1" cellspacing="0" cellpadding="0"
-                            style='margin-top: 5px;width:100%;border: #d3edff;'>
+                            style='margin-top: 5px;width:100%;border: #d3edff;border-collapse: collapse;'>
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec; width: 12%;" rowspan="4">
                                     <p class="wry_tj_table_title_p">原&nbsp&nbsp&nbsp煤&nbsp&nbsp&nbsp产&nbsp&nbsp&nbsp量
@@ -317,7 +271,7 @@
                                     本月实际
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl!=null?mapcl.value_this_month:0}}
+                                    {{mapcz!=null?mapcz.value_this_month:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -325,7 +279,7 @@
                                     本年本月止累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl!=null?mapcl.value_lj_year:0}}
+                                    {{mapcz!=null?mapcz.value_lj_year:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -333,7 +287,7 @@
                                     去年同期累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl!=null?mapcl.value_synchronous:0}}
+                                    {{mapcz!=null?mapcz.value_synchronous:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -341,10 +295,10 @@
                                     比去年同期增减（±%）
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl!=null?mapcl.value_yonydata:0}}
-                                    <img v-if="mapcl!=null && mapcz.value_flag == 1" style="height: 15px;"
+                                    {{mapcz!=null?mapcz.value_yonydata:0}}
+                                    <img v-if="mapcz!=null && mapcz.value_flag == 1" style="height: 15px;"
                                         src="../../../../../../assets/img/eco_rise.png" />
-                                    <img v-if="mapcl!=null && mapcz.value_flag == 2" style="height: 15px;"
+                                    <img v-if="mapcz!=null && mapcz.value_flag == 2" style="height: 15px;"
                                         src="../../../../../../assets/img/eco_down.png" />
                                 </td>
                             </tr>
@@ -356,7 +310,7 @@
                                     本月实际
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl!=null?mapcl.sales_value_this_month:0}}
+                                    {{mapcz!=null?mapcz.sales_value_this_month:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -364,7 +318,7 @@
                                     本年本月止累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl!=null?mapcl.sales_value_lj_year:0}}
+                                    {{mapcz!=null?mapcz.sales_value_lj_year:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -372,7 +326,7 @@
                                     去年同期累计
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl!=null?mapcl.sales_value_synchronous:0}}
+                                    {{mapcz!=null?mapcz.sales_value_synchronous:0}}
                                 </td>
                             </tr>
                             <tr id="table_title1">
@@ -380,10 +334,10 @@
                                     比去年同期增减（±%）
                                 </td>
                                 <td class='trigger '>
-                                    {{mapcl!=null?mapcl.sales_value_yonydata:0}}
-                                    <img v-if="mapcl!=null && mapcz.sales_value_flag == 1" style="height: 15px;"
+                                    {{mapcz!=null?mapcz.sales_value_yonydata:0}}
+                                    <img v-if="mapcz!=null && mapcz.sales_value_flag == 1" style="height: 15px;"
                                         src="../../../../../../assets/img/eco_rise.png" />
-                                    <img v-if="mapcl!=null && mapcz.sales_value_flag == 2" style="height: 15px;"
+                                    <img v-if="mapcz!=null && mapcz.sales_value_flag == 2" style="height: 15px;"
                                         src="../../../../../../assets/img/eco_down.png" />
                                 </td>
                             </tr>
@@ -645,3 +599,6 @@
     }
 
 </script>
+<style scoped>
+    @import "../../../../../../page/cyzx/nyts/nyts_mt/nyts_mt_qylb/nyts_mt_qylb_detail/nyts_mt_qylb_detail.css";
+</style>
