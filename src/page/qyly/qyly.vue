@@ -53,8 +53,9 @@
       </div>
     </van-sticky>
 
+    <div :is="currentView"></div>
     <div v-show='show'
-      style="z-index: 100; position: absolute;top:155px;left:10px;width: 30%;box-shadow: 2px 2px #f3f3f3;border: 1px #f3f3f3 solid;">
+      style=" position: absolute;top:155px;left:10px;width: 30%;box-shadow: 2px 2px #f3f3f3;border: 1px #f3f3f3 solid;">
       <div @click='changeState(1)'
         style="display: flex;height: 44px;background: #ffffff;border-bottom: 1px #f3f3f3 solid;">
         <img style="height: 25px; margin-top: 6px;margin-left: 15px;" src="../../assets/img/icon-jq2.png" />
@@ -65,8 +66,6 @@
         <div style="font-size: 14px;line-height: 40px;margin-left: 5px;">示范村</div>
       </div>
     </div>
-
-    <div :is="currentView"></div>
   </div>
 </template>
 <script>
