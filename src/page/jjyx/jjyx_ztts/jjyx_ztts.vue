@@ -1,19 +1,16 @@
 <template>
   <div style="margin-top:54px;">
-   
     <div
-        id="showSelectDiv"
-        style="z-index: 99;position: fixed;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
+      id="showSelectDiv"
+      style="z-index: 99;position: fixed;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
+    >
+      <div
+        style="background: rgb(247, 247, 247);height: 35px;width: 40px;margin-top: 5px;margin-left: 7px;"
       >
-        <div
-          style="background: rgb(247, 247, 247);height: 35px;width: 40px;margin-top: 5px;margin-left: 7px;"
-        >
-          <img style="height: 18px;margin-top: 9px;" src="../../../assets/img/eco_tab_iconlist.png" />
-        </div>
+        <img style="height: 18px;margin-top: 9px;" src="../../../assets/img/eco_tab_iconlist.png" />
       </div>
+    </div>
     <van-sticky id="jjyx_tabs" :offset-top="55">
-       
-
       <div style="display:flex;">
         <van-tabs
           @touchmove.prevent
@@ -116,7 +113,7 @@
           <div style="width:50%;margin-left:25px;">
             <div>
               <div
-                 @click="callPhone()"
+                @click="callPhone()"
                 style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
               >
                 <img
@@ -164,6 +161,8 @@ import child6 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_jmrjkzpsr/jjyx_ztts_jmrjkzps
 import child7 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_gmysgyzjz/jjyx_ztts_gmysgyzjz.vue";
 import child8 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_hgjckze/jjyx_ztts_hgjckze.vue";
 import child9 from "@/page/jjyx/jjyx_ztts/jjyx_ztts_qxqktj/jjyx_ztts_qxqktj.vue";
+import { httpMethod } from "../../../api/getData.js";
+import global_variable from "../../../api/global_variable.js";
 export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
@@ -184,7 +183,7 @@ export default {
   },
   mounted() {
     var self = this;
-    
+
     $("#leftAreaDivId").click(function() {
       $("#rightAreaDivId").animate({
         width: "toggle"
@@ -214,49 +213,127 @@ export default {
       $("#selectTabDiv").hide();
       self.smallTab_select($(this).index(), "");
     });
+    self.doAddAppLogList(
+      global_variable.logId,
+      global_variable.ddPhone,
+      "30",
+      "完成概况"
+    );
   },
   methods: {
-    
-    callPhone:function(){
-       window.location.href = 'tel://0356-2566260'
+    //获取记录日志的logid
+    doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
+      var params = {
+        logId: logId,
+        ddPhone: ddPhone,
+        grouping_id: grouping_id,
+        grouping_name: grouping_name
+      };
+      httpMethod
+        .doAddAppLogList(params)
+        .then(res => {
+          console.log(res);
+          if (res.success == "1") {
+          }
+        })
+        .catch(err => {
+          // this.$toast(err);
+        });
+    },
+    callPhone: function() {
+      window.location.href = "tel://0356-2566260";
     },
     //空气子选项卡选择
     smallTab_select: function(name, title) {
-      console.log(name,title);
+      console.log(name, title);
       switch (name) {
         case 0:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "30",
+            "完成概况"
+          );
           this.active = 0;
           this.currentView = "child1";
           break;
         case 1:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "31",
+            "GDP"
+          );
           this.active = 1;
           this.currentView = "child2";
           break;
         case 2:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "32",
+            "固定资产"
+          );
           this.active = 2;
           this.currentView = "child3";
           break;
         case 3:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "33",
+            "一般公共预算收入"
+          );
           this.active = 3;
           this.currentView = "child4";
           break;
         case 4:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "34",
+            "社会消费品零售总额"
+          );
           this.active = 4;
           this.currentView = "child5";
           break;
         case 5:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "35",
+            "人均可支配收入"
+          );
           this.active = 5;
           this.currentView = "child6";
           break;
         case 6:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "36",
+            "工业增加值"
+          );
           this.active = 6;
           this.currentView = "child7";
           break;
         case 7:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "37",
+            "海关进出口总额"
+          );
           this.active = 7;
           this.currentView = "child8";
           break;
         case 8:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "38",
+            "区县情况"
+          );
           this.active = 8;
           this.currentView = "child9";
           break;

@@ -8,6 +8,7 @@
       title-inactive-color="#333333"
       :sticky="true"
       line-width="75px"
+      @change="tabsclick"
     >
       <van-tab title="总体情况">
         <child1 style="overflow-y:auto;overflow-x:hidden;"></child1>
@@ -41,10 +42,13 @@
           <div style="width:50%;margin-left:25px;">
             <div>
               <div
-              @click="callPhone"
+                @click="callPhone"
                 style="display: flex;width: 72%;border: 1px solid rgb(246, 123, 9);border-radius: 5px;padding: 3px;margin-top: 10px;"
               >
-                <img style="height: 15px;margin-left: 7px;margin-right: 4px;" src="../../../assets/img/icon_phone_orange.png" />
+                <img
+                  style="height: 15px;margin-left: 7px;margin-right: 4px;"
+                  src="../../../assets/img/icon_phone_orange.png"
+                />
                 <div style="color: rgb(246, 123, 9);font-size: 13px;">一键调度</div>
               </div>
             </div>
@@ -69,6 +73,8 @@ import child1 from "@/page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.vue";
 import child2 from "@/page/zdgz/zdgc/zdgc_xmlb/zdgc_xmlb.vue";
 import child3 from "@/page/zdgz/zdgc/zdgc_czwt/zdgc_czwt.vue";
 import child4 from "@/page/zdgz/zdgc/zdgc_tjfx/zdgc_tjfx.vue";
+import { httpMethod } from "../../../api/getData.js";
+import global_variable from "../../../api/global_variable.js";
 export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
@@ -86,10 +92,73 @@ export default {
         width: "toggle"
       });
     });
+    this.doAddAppLogList(
+      global_variable.logId,
+      global_variable.ddPhone,
+      "9",
+      "总体情况"
+    );
   },
   methods: {
-    callPhone:function(){
-       window.location.href = 'tel://13935612128'
+    callPhone: function() {
+      window.location.href = "tel://13935612128";
+    },
+    tabsclick: function(name, title) {
+      console.log(name);
+      switch (parseInt(name)) {
+        case 0:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "9",
+            "总体情况"
+          );
+          break;
+        case 1:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "10",
+            "项目列表"
+          );
+          break;
+        case 2:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "11",
+            "存在问题"
+          );
+          break;
+        case 3:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "12",
+            "统计分析"
+          );
+          break;
+        default:
+          break;
+      }
+    }, //获取记录日志的logid
+    doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
+      var params = {
+        logId: logId,
+        ddPhone: ddPhone,
+        grouping_id: grouping_id,
+        grouping_name: grouping_name
+      };
+      httpMethod
+        .doAddAppLogList(params)
+        .then(res => {
+          console.log(res);
+          if (res.success == "1") {
+          }
+        })
+        .catch(err => {
+          // this.$toast(err);
+        });
     }
   },
   components: {

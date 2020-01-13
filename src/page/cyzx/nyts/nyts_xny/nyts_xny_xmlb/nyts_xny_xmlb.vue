@@ -21,7 +21,7 @@
                     <div style="padding:7px;">
                         <div style="display:flex;position:relative;">
                             <p
-                                style="font-size: 17px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                                style="font-size: 15px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                 {{item.ent_name}}</p>
                         </div>
                         <div style="display:flex;position:relative;">
@@ -50,10 +50,10 @@
                         </div>
                         <div style="display:flex;position:relative;">
                             <div>
-                                <img style="float: left;height: 20px;"
+                                <img style="float: left;height: 13px;margin-top:6px;"
                                     src="../../../../../assets/img/details_icon17.png" />
                                 <span
-                                    style="margin-left: 5px;font-size: 14px;color: gray;width: 330px;">所属区县：{{item.counties}}</span>
+                                    style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">所属区县：{{item.counties}}</span>
                             </div>
                         </div>
                     </div>
@@ -205,7 +205,7 @@
                                 }
                             })
                         }
-                        this.comp_dataList = res.dataList;
+                        this.comp_dataList =    this.comp_dataList.concat(res.dataList);
                         this.$nextTick(() => {
                             this.mescroll.endBySize(res.dataList.length, res.total);
                         });

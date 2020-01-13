@@ -19,7 +19,7 @@
 
         <div slot="title" style="display: flex;">
             <div style="width:48%;text-align:right; margin-top: 8px;font-size:16px;">项目总数</div>
-            <div id="font_color1" ref="totalCountId" style="font-size:24px;">{{proCount}}</div>
+            <div id="font_color1" ref="totalCountId" style="font-size:24px;color:#1976d2;">{{proCount}}</div>
             <div style="margin-top:8px;font-size:16px;">家</div>
         </div>
         <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
@@ -30,28 +30,28 @@
                     <div style="padding:7px;">
                         <div style="display:flex;position:relative;">
                             <p
-                                style="font-size: 17px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                                style="font-size: 15px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                 {{item.pro_name}}</p>
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
                             <div>
-                                <img style="float: left;height: 20px;"
+                                <img style="float: left;height: 12px;margin-top:5px;"
                                     src="../../../../../assets/img/iconmt-jsxz.png" />
-                                <span style="margin-left: 5px;font-size: 14px;color: gray;width: 330px;">建设性质：{{item.pro_nature}}</span>
+                                <span style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">建设性质：{{item.pro_nature}}</span>
                             </div>
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
                             <div>
-                                <img style="float: left;height: 20px;" src="../../../../../assets/img/iconmt-sj.png" />
+                                <img style="float: left;height: 12px;margin-top:5px;" src="../../../../../assets/img/iconmt-sj.png" />
                                 <span
-                                    style="margin-left: 5px;font-size: 14px;color: gray;width: 330px;">开工年月：{{item.start_work_date}}</span>
+                                    style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">开工年月：{{item.start_work_date}}</span>
                             </div>
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
                             <div style="float: left;width: 50%;">
-                                <img style="float: left;height: 20px;" src="../../../../../assets/img/iconmt-sj.png" />
+                                <img style="float: left;height: 12px;margin-top:5px;" src="../../../../../assets/img/iconmt-sj.png" />
                                 <span
-                                    style="margin-left: 5px;font-size: 14px;color: gray;width: 330px;">投资年月：{{item.production_date}}</span>
+                                    style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">投资年月：{{item.production_date}}</span>
                             </div>
                             <div style="float: right;width: 50%;">
                                 <img style="height: 7px; width: 25px;" src="../../../../../assets/img/jd.png" /><i

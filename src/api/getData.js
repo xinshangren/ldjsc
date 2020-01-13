@@ -393,6 +393,19 @@ export const httpMethod = {
     getNyxcImgList: function (params) {
         return get("nytsAppGbInsideController.action?getImgList", params);
     },
+    //记录日志所需参数获取
+    doAddAppLog: function (params) {
+        return get("homeController.action?doAddAppLog", params);
+    },
+    //记录日志
+    doAddAppLogList: function (params) {
+        return get("homeController.action?doAddAppLogList", params);
+    },
+    //获取当前用户常用应用
+    getFrequentlyApp: function (params) {
+        return get("homeController.action?getFrequentlyApp", params);
+    },
+
 
 
 

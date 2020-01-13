@@ -100,18 +100,17 @@
         </li>
       </ul>
     </div>
-    
-      <!-- <div :is="currentView"></div> -->
-      <child1 v-if="Bigflag==1&&airactive==0"></child1>
-      <child2 v-if="Bigflag==1&&airactive==1"></child2>
-      <child3 v-if="Bigflag==1&&airactive==2"></child3>
-      <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
-      <child5 v-if="Bigflag==2&&wgjgactive==1"></child5>
-      <child6 v-if="Bigflag==2&&wgjgactive==2"></child6>
-      <child7 v-if="Bigflag==2&&wgjgactive==3"></child7>
-      <child8 v-if="Bigflag==3&&zdqyactive==0"></child8>
-      <child9 v-if="Bigflag==3&&zdqyactive==1"></child9>
-    
+
+    <!-- <div :is="currentView"></div> -->
+    <child1 v-if="Bigflag==1&&airactive==0"></child1>
+    <child2 v-if="Bigflag==1&&airactive==1"></child2>
+    <child3 v-if="Bigflag==1&&airactive==2"></child3>
+    <child4 v-if="Bigflag==2&&wgjgactive==0"></child4>
+    <child5 v-if="Bigflag==2&&wgjgactive==1"></child5>
+    <child6 v-if="Bigflag==2&&wgjgactive==2"></child6>
+    <child7 v-if="Bigflag==2&&wgjgactive==3"></child7>
+    <child8 v-if="Bigflag==3&&zdqyactive==0"></child8>
+    <child9 v-if="Bigflag==3&&zdqyactive==1"></child9>
 
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
       <div id="rightAreaDivId" style="display:none;">
@@ -155,12 +154,13 @@
 <script>
 import echarts from "echarts";
 import { httpMethod } from "../../../api/getData.js";
+import global_variable from "../../../api/global_variable.js";
 import Vue from "vue";
 import { Tab, Tabs, Sticky } from "vant";
 Vue.use(Tab)
   .use(Tabs)
   .use(Sticky);
-  import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.vue";
+import child1 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_ssgk/hbgj_air_ssgk.vue";
 import child2 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list.vue";
 import child3 from "@/page/zdgz/hbgj/hbgj_air/hbgj_air_tj/hbgj_air_tj.vue";
 import child4 from "@/page/zdgz/hbgj/hbgj_wgjg/hbgj_wgjg_wggk/hbgj_wgjg_wggk.vue";
@@ -237,6 +237,25 @@ export default {
     });
   },
   methods: {
+    //获取记录日志的logid
+    doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
+      var params = {
+        logId: logId,
+        ddPhone: ddPhone,
+        grouping_id: grouping_id,
+        grouping_name: grouping_name
+      };
+      httpMethod
+        .doAddAppLogList(params)
+        .then(res => {
+          console.log(res);
+          if (res.success == "1") {
+          }
+        })
+        .catch(err => {
+          // this.$toast(err);
+        });
+    },
     selectLeftTab: function(index) {
       switch (index) {
         case 0:
@@ -317,12 +336,30 @@ export default {
       this.airactive = name;
       switch (name) {
         case 0:
+           this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "16",
+            "实时情况"
+          );
           this.currentView = "child1";
           break;
         case 1:
+             this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "17",
+            "站点列表"
+          );
           this.currentView = "child2";
           break;
         case 2:
+               this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "18",
+            "数据分析"
+          );
           this.currentView = "child3";
           break;
         default:
@@ -335,15 +372,39 @@ export default {
       this.wgjgactive = name;
       switch (name) {
         case 0:
+                this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "19",
+            "概况"
+          );
           this.currentView = "child4";
           break;
         case 1:
+                this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "20",
+            "污染源列表"
+          );
           this.currentView = "child5";
           break;
         case 2:
+                this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "21",
+            "人员列表"
+          );
           this.currentView = "child6";
           break;
         case 3:
+                this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "22",
+            "统计分析"
+          );
           this.currentView = "child7";
           break;
         default:
@@ -354,9 +415,21 @@ export default {
       this.zdqyactive = name;
       switch (name) {
         case 0:
+               this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "59",
+            "企业概况"
+          );
           this.currentView = "child8";
           break;
         case 1:
+               this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "60",
+            "重点企业列表"
+          );
           this.currentView = "child9";
           break;
 
@@ -372,6 +445,12 @@ export default {
       this.Bigflag = index;
       switch (index) {
         case 1:
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "13",
+            "空气检测"
+          );
           this.selectLeftTab(0);
           this.oneShow = true;
           this.twoShow = false;
@@ -404,7 +483,13 @@ export default {
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
           break;
         case 2:
-           this.selectLeftTab(1);
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "14",
+            "网格监管"
+          );
+          this.selectLeftTab(1);
           this.oneShow = false;
           this.twoShow = true;
           this.threeShow = false;
@@ -423,7 +508,13 @@ export default {
           this.wgjgactive = 0;
           break;
         case 3:
-           this.selectLeftTab(2);
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            "14",
+            "重点企业"
+          );
+          this.selectLeftTab(2);
           this.oneShow = false;
           this.twoShow = false;
           this.threeShow = true;
