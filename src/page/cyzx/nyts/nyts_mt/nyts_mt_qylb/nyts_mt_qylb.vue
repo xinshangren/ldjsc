@@ -33,7 +33,7 @@
       <van-tab>
         <div slot="title" style="display: flex;">
           <div style="width:48%;text-align:right;">企业总数</div>
-          <div id="font_color1" ref="totalCountId" style="font-size:24px;">{{compCount}}</div>
+          <div id="font_color1" ref="totalCountId" style="font-size:21px;">{{compCount}}</div>
           <div>家</div>
         </div>
         <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
@@ -50,7 +50,8 @@
               <div style="padding:7px;">
                 <div style="display:flex;position:relative;">
                   <p
-                    style="font-size: 15px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                  class="mt_qylb_title_style"
+                    style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                   >{{item.ent_name}}</p>
                 </div>
                 <div style="display:flex;position:relative;">
@@ -90,7 +91,8 @@
                     src="../../../../../assets/img/details_icon17.png"
                   />
                   <span
-                    style="margin-left: 5px;font-size: 14px;color: gray;width: 330px;"
+                 class="mt_qylb_title_style"
+                    style="margin-left: 5px;color: gray;width: 330px;"
                   >地址：{{item.ent_address}}</span>
                 </div>
                 <div style="display:flex;position:relative;margin-top: 3px;">
@@ -99,7 +101,8 @@
                     src="../../../../../assets/img/iconmt-lszt.png"
                   />
                   <span
-                    style="margin-left: 5px;font-size: 14px;color: gray;width: 330px;"
+                  class="mt_qylb_title_style"
+                    style="margin-left: 5px;color: gray;width: 330px;"
                   >隶属集团：{{item.ent_nature}}</span>
                 </div>
                 <div style="display:flex;position:relative;margin-top: 3px;">
@@ -108,7 +111,8 @@
                     src="../../../../../assets/img/iconmt-qygm.png"
                   />
                   <span
-                    style="margin-left: 5px;font-size: 14px;color: gray;width: 330px;"
+                  class="mt_qylb_title_style"
+                    style="margin-left: 5px;color: gray;width: 330px;"
                   >企业规模：{{item.ent_scale}}万吨/年</span>
                 </div>
               </div>
@@ -123,7 +127,7 @@
           <div
             id="font_color2"
             ref="totalCountId"
-            style="font-size:24px;color:#2796e7;"
+            style="font-size:21px;color:#2796e7;"
           >{{bloc_count}}</div>
           <div>家</div>
         </div>
@@ -141,7 +145,8 @@
             <div style="padding:7px;">
               <div style="display:flex;position:relative;">
                 <p
-                  style="font-size: 15px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                 class="mt_qylb_title_style"
+                  style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                 >{{item.ent_nature}}</p>
               </div>
 
@@ -152,7 +157,8 @@
                     src="../../../../../assets/img/iconmt-lszt.png"
                   />
                   <span
-                    style="margin-left: 5px;font-size: 14px;color: gray;width: 330px;"
+                   class="mt_qylb_title_style"
+                    style="margin-left: 5px;color: gray;width: 330px;"
                   >下属企业{{item.num}}家</span>
               </div>
             </div>

@@ -21,11 +21,12 @@
                     <div style="padding:7px;">
                         <div style="display:flex;position:relative;">
                             <p
-                                style="font-size: 15px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                            class="mcq_qylb_font_style"
+                                style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                 {{item.ent_name}}</p>
                         </div>
-                        <div style="display:flex;position:relative;">
-                            <div style="float: left;margin-top: -11px;">
+                        <div style="display:flex;position:relative;font-size:14px;">
+                            <div style="float: left;margin-top: 3px;">
                                 <img class="qygmImg" v-if="item.ent_nature == 1"
                                     src="../../../../../assets/img/mcq-gq.png" />
                                 <img class="qygmImg" v-if="item.ent_nature == 2"
@@ -35,7 +36,7 @@
                                 <img class="qygmImg" v-if="item.ent_nature == 4"
                                     src="../../../../../assets/img/mcq-mq.png" />
                             </div>
-                            <div style="margin-left: 30px;margin-top: -11px;">
+                            <div style="margin-left: 30px;margin-top: 3px;">
                                 <img class="qyxzImg" v-if="item.ent_scale == 1"
                                     src="../../../../../assets/img/xny-qy-dx.png" />
                                 <img class="qyxzImg" v-if="item.ent_scale == 2"
@@ -49,7 +50,8 @@
                                 <img style="height: 13px;margin-top:3px;"
                                     src="../../../../../assets/img/details_icon17.png" />
                                 <span
-                                    style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">地址：{{item.ent_address}}</span>
+                              class="mcq_qylb_font_style"
+                                    style="margin-left: 5px;color: gray;width: 330px;">地址：{{item.ent_address}}</span>
                             
                         </div>
                     </div>

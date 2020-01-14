@@ -67,3 +67,27 @@
 .vantlist_block{
     color: rgb(255, 255, 255);background: rgb(60, 161, 236);width: 40px;height: 40px;border-radius: 9px;margin-left: 21px;text-align: center;
 }
+
+.deali_font_style{
+    font-size:15px;
+    margin-left: 2px;
+}
+.deali_small_img_style{
+    height:22px;
+}
+.deali_jdimg_style{
+    height: 207px;
+}
+
+.deali_title_style{
+    font-size: 16px;
+}
+.deali_jdhb_font_style{
+    font-size: 15px;
+}
+.volice_out_img_style{
+    width: 50px;height: 50px;
+}
+.volice_img_style{
+    height:20px;
+}

@@ -19,9 +19,9 @@
     tr {
         height: 40px;
     }
-    #proDetail span{
+    /* #proDetail span{
         margin-left: -18px;
-    }
+    } */
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
@@ -36,10 +36,10 @@
                                     src="../../../../../../assets/img/details_icon28.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">设计工程量</div>
                             </div>
-                            <div>
-                                <span v-if="proDetail.design_quantity != null && proDetail.design_quantity !== '' "
-                                    style="font-size: 16px;">{{proDetail.design_quantity}}M</span>
-                                <span v-else style="font-size: 16px;">0M</span>
+                            <div class="mt_xmlb_deali_content_font_style">
+                                <span  v-if="proDetail.design_quantity != null && proDetail.design_quantity !== '' "
+                                    >{{proDetail.design_quantity}}M</span>
+                                <span v-else >0M</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -48,10 +48,10 @@
                                     src="../../../../../../assets/img/details_icon29.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">本年计划工程量</div>
                             </div>
-                            <div>
+                            <div class="mt_xmlb_deali_content_font_style">
                                 <span v-if="proDetail.gcl_year_plan != null && proDetail.gcl_year_plan !== '' "
-                                    style="font-size: 16px;">{{proDetail.gcl_year_plan}}M</span>
-                                <span v-else style="font-size: 16px;">0M</span>
+                                    >{{proDetail.gcl_year_plan}}M</span>
+                                <span v-else >0M</span>
                             </div>
                         </div>
                     </div>
@@ -62,10 +62,10 @@
                                     src="../../../../../../assets/img/details_icon30.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">设计能力</div>
                             </div>
-                            <div>
+                            <div class="mt_xmlb_deali_content_font_style">
                                 <span v-if="proDetail.design_capability != null && proDetail.design_capability !== '' "
-                                    style="font-size: 16px;">{{proDetail.design_capability}}万吨</span>
-                                <span v-else style="font-size: 16px;">0万吨</span>
+                                   >{{proDetail.design_capability}}万吨</span>
+                                <span v-else >0万吨</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -74,8 +74,8 @@
                                     src="../../../../../../assets/img/details_icon31.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">建设性质</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{proDetail.pro_nature}}</span>
+                            <div class="mt_xmlb_deali_content_font_style">
+                                <span >{{proDetail.pro_nature}}</span>
                             </div>
                         </div>
                     </div>
@@ -86,8 +86,8 @@
                                     src="../../../../../../assets/img/details_icon32.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">开拓方式</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{proDetail.pioneering_way}}</span>
+                            <div class="mt_xmlb_deali_content_font_style">
+                                <span>{{proDetail.pioneering_way}}</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -96,8 +96,8 @@
                                     src="../../../../../../assets/img/details_icon33.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">煤种牌号</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{proDetail.kind}}</span>
+                            <div class="mt_xmlb_deali_content_font_style">
+                                <span >{{proDetail.kind}}</span>
                             </div>
                         </div>
                     </div>
@@ -108,8 +108,8 @@
                                     src="../../../../../../assets/img/details_icon34.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">开工年月</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{proDetail.start_work_date}}</span>
+                            <div class="mt_xmlb_deali_content_font_style">
+                                <span >{{proDetail.start_work_date}}</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -118,8 +118,8 @@
                                     src="../../../../../../assets/img/details_icon34.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">投产年月</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{proDetail.production_date}}</span>
+                            <div class="mt_xmlb_deali_content_font_style">
+                                <span>{{proDetail.production_date}}</span>
                             </div>
                         </div>
                     </div>
@@ -130,10 +130,10 @@
                                     src="../../../../../../assets/img/details_icon35.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">总投资额</div>
                             </div>
-                            <div>
+                            <div class="mt_xmlb_deali_content_font_style">
                                 <span v-if="proDetail.general_estimate != null && proDetail.general_estimate !== '' "
-                                    style="font-size: 16px;">{{proDetail.general_estimate}}亿</span>
-                                <span v-else style="font-size: 16px;">0亿</span>
+                                   >{{proDetail.general_estimate}}亿</span>
+                                <span v-else >0亿</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -142,10 +142,10 @@
                                     src="../../../../../../assets/img/details_icon36.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">至上年未完成投资额</div>
                             </div>
-                            <div>
+                            <div class="mt_xmlb_deali_content_font_style">
                                 <span v-if="proDetail.invest != null && proDetail.invest !== '' "
-                                    style="font-size: 16px;">{{proDetail.invest}}亿</span>
-                                <span v-else style="font-size: 16px;">0亿</span>
+                                   >{{proDetail.invest}}亿</span>
+                                <span v-else >0亿</span>
                             </div>
                         </div>
                     </div>
@@ -156,17 +156,17 @@
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">本年计划投资额</div>
                             
                         </div>
-                        <div>
+                        <div class="mt_xmlb_deali_content_font_style">
                             <span v-if="proDetail.tze_year_plan != null && proDetail.tze_year_plan !== '' "
-                                style="font-size: 16px;">{{proDetail.tze_year_plan}}亿</span>
-                            <span v-else style="font-size: 16px;">0亿</span>
+                                >{{proDetail.tze_year_plan}}亿</span>
+                            <span v-else >0亿</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div style="background:#ffffff;height:310px;width:100%;margin-top:5px;">
-            <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
+            <div style="margin: 10px 10px 10px 10px; padding-top:10px;">
                 <div class="dateSelect" style="height: 50px;">
                     <div class="sx"></div>
                     <div class="tj_z">全年项目投资额变化趋势图</div>
@@ -180,7 +180,7 @@
             </div>
         </div>
         <div style="background:#ffffff;height:313px;width:100%;margin-top:5px;">
-            <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
+            <div style="margin: 10px 10px 10px 10px; padding-top:10px;">
                 <div class="dateSelect" style="height: 50px;">
                     <div class="sx"></div>
                     <div class="tj_z">主工程量与房屋面积变化趋势图</div>

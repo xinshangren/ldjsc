@@ -28,12 +28,12 @@
                 <div style="margin-top: 15px;">
                     <div>
                         <div>
-                            <img style="float: left;" class="mt_qyxq_icon"
+                            <img style="float: left;" class="mt_qyxq_icon "
                                 src="../../../../../../assets/img/details_icon17.png" />
-                            <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">地址</div>
+                            <div class="mt_qylb_deali_font_style" style=" margin-left: 25px;color: gray;width: 50%;">地址</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;width: 50%;">{{compDetail.ent_address}}</span>
+                        <div class="mt_qylb_deali_content_font_style">
+                            <span style="width: 50%;">{{compDetail.ent_address}}</span>
                         </div>
                     </div>
                     <div style="min-height: 60px;margin-top: 15px;">
@@ -41,10 +41,10 @@
                             <div>
                                 <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon3.png" />
-                                <div style=" margin-left: 25px;font-size: 14px;color: gray;">法人代表</div>
+                                <div class="mt_qylb_deali_font_style" style=" margin-left: 25px;font-size: 14px;color: gray;">法人代表</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{compDetail.legal_behalf}}</span>
+                            <div class="mt_qylb_deali_content_font_style">
+                                <span>{{compDetail.legal_behalf}}</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -53,20 +53,20 @@
                                     src="../../../../../../assets/img/details_icon19.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">联系方式</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{compDetail.phone_contacts}}</span>
+                            <div class="mt_qylb_deali_content_font_style">
+                                <span >{{compDetail.phone_contacts}}</span>
                             </div>
                         </div>
                     </div>
-                    <div style="min-height: 60px;margin-top: 15px;">
+                    <div style="min-height: 60px;margin-top: 1px;">
                         <div style="width: 50%;float: left;">
                             <div>
                                 <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon26.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">隶属主体</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{compDetail.ent_nature}}</span>
+                            <div class="mt_qylb_deali_content_font_style">
+                                <span >{{compDetail.ent_nature}}</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -75,20 +75,20 @@
                                     src="../../../../../../assets/img/details_icon5.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">瓦斯等级</div>
                             </div>
-                            <div>
+                            <div class="mt_qylb_deali_content_font_style">
                                 <span style="font-size: 16px;">{{compDetail.gas_level}}</span>
                             </div>
                         </div>
                     </div>
-                    <div style="min-height: 60px;margin-top: 30px;">
+                    <div style="min-height: 60px;margin-top: 15px;">
                         <div style="width: 50%;float: left;">
                             <div>
                                 <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon27.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">规模</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{compDetail.ent_scale}}</span>
+                            <div class="mt_qylb_deali_content_font_style">
+                                <span>{{compDetail.ent_scale}}</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -97,8 +97,8 @@
                                     src="../../../../../../assets/img/details_icon9.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">煤矿性质</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{compDetail.ent_type}}</span>
+                            <div class="mt_qylb_deali_content_font_style">
+                                <span >{{compDetail.ent_type}}</span>
                             </div>
                         </div>
                     </div>
@@ -108,15 +108,15 @@
                                 src="../../../../../../assets/img/details_icon18.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">统一社会信用代码</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;width: 50%;">{{compDetail.credit_code}}</span>
+                        <div class="mt_qylb_deali_content_font_style">
+                            <span style="width: 50%;">{{compDetail.credit_code}}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div style="background:#ffffff;height:310px;width:100%;margin-top:5px;">
-            <div style="margin: 10px 20px 10px 20px; padding-top:10px;">
+            <div style="margin: 10px 10px 10px 10px; padding-top:10px;">
                 <div class="dateSelect" style="height: 50px;">
                     <div class="sx"></div>
                     <div class="tj_z">产量产值变化趋势图</div>
@@ -347,11 +347,11 @@
                 </div>
             </div>
         </div>
-        <van-popup v-model="show" position="bottom" :style="{ height: '200px' }">
+        <van-popup @opened="openPopYear"  v-model="show" position="bottom" :style="{ height: '200px' }">
             <van-datetime-picker v-model="currentDate" type="year-month" style="height: 200px;" :min-date="minDate"
                 :max-date="maxDate" @confirm="onconfirm" :formatter="formatter" @cancel="hideDataPicker" />
         </van-popup>
-        <van-popup v-model="show1" position="bottom" :style="{ height: '200px' }">
+        <van-popup  v-model="show1" position="bottom" :style="{ height: '200px' }">
             <van-datetime-picker v-model="currentDate1" type="year-month" style="height: 200px;" :min-date="minDate"
                 :max-date="maxDate" @confirm="onconfirm1" :formatter="formatter1" @cancel="hideDataPicker1" />
         </van-popup>
@@ -415,6 +415,14 @@
             }
         },
         methods: {
+            //开启年时间选择
+    openPopYear: function() {
+      console.log("111");
+      $(".van-picker__columns")
+        .find(".van-picker-column")
+        .eq(1)
+        .hide();
+    },
             getHomeData: function (id, yearDate, monthDate) {
                 var self = this;
                 var params = {

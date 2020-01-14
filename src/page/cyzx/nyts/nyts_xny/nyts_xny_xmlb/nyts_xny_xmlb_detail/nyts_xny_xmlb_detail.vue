@@ -19,7 +19,7 @@
         <div style="background:#ffffff;height:auto;width:100%;margin-top:5px;">
             <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="proDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.pro_name}}</div>
-                <div style="margin-top: 10px;">
+                <div style="margin-top: 10px;font-size:15px;">
                     <div style="margin-top: 6px;">
                         <img class="xny_xmlb_xmlxImg" v-if="compDetail.pro_type == 1"
                             src="../../../../../../assets/img/xny-qy-gd.png" />
@@ -48,8 +48,8 @@
                                 src="../../../../../../assets/img/details_icon21.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">企业名称</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;width: 50%;">{{compDetail.ent_name}}</span>
+                        <div class="xny_xmlb_deali_content_font_style">
+                            <span style="width: 50%;">{{compDetail.ent_name}}</span>
                         </div>
                     </div>
                     <div style="min-height: 60px;">
@@ -59,8 +59,8 @@
                                     src="../../../../../../assets/img/details_icon25.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">所属区县</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{compDetail.counties}}</span>
+                            <div class="xny_xmlb_deali_content_font_style">
+                                <span style="">{{compDetail.counties}}</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;margin-top: 15px;">
@@ -69,8 +69,8 @@
                                     src="../../../../../../assets/img/details_icon21.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">装机容量</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{compDetail.installed_capacity}}万kw</span>
+                            <div class="xny_xmlb_deali_content_font_style">
+                                <span style="">{{compDetail.installed_capacity}}万kw</span>
                             </div>
                         </div>
                     </div>
@@ -81,8 +81,8 @@
                                     src="../../../../../../assets/img/details_icon12.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">核准（备案）时间</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;">{{compDetail.records_time}}</span>
+                            <div class="xny_xmlb_deali_content_font_style">
+                                <span style="">{{compDetail.records_time}}</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;margin-top: 15px;">
@@ -91,8 +91,8 @@
                                     src="../../../../../../assets/img/details_icon23.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">项目年份</div>
                             </div>
-                            <div>
-                                <span style="font-size: 16px;width: 50%;">{{compDetail.pro_year}}</span>
+                            <div class="xny_xmlb_deali_content_font_style">
+                                <span style="width: 50%;">{{compDetail.pro_year}}</span>
                             </div>
                         </div>
                     </div>
@@ -102,8 +102,8 @@
                                 src="../../../../../../assets/img/details_icon22.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;">核准文件名称及文号</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;">{{compDetail.records_code }}</span>
+                        <div class="xny_xmlb_deali_content_font_style">
+                            <span style="">{{compDetail.records_code }}</span>
                         </div>
 
                     </div>

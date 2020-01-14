@@ -30,10 +30,11 @@
           <div style="padding:7px;">
             <div style="display:flex;position:relative;">
               <p
-                style="font-size: 15px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+              class="xnylb_list_font"
+                style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
               >{{item.ent_name}}</p>
             </div>
-            <div style="display:flex;position:relative;">
+            <div style="display:flex;position:relative;font-size:15px;">
               <div style="margin-top: 3px;">
                 <img
                   class="xny_qyxzImg"
@@ -118,7 +119,8 @@
                   src="../../../../../assets/img/details_icon17.png"
                 />
                 <span
-                  style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;"
+                class="xnylb_list_font"
+                  style="margin-left: 5px;color: gray;width: 330px;"
                 >地址：{{item.ent_address}}</span>
             </div>
           </div>

@@ -21,11 +21,12 @@
                     <div style="padding:7px;">
                         <div style="display:flex;position:relative;">
                             <p
-                                style="font-size: 15px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                            class="xnyxmlb_font_style"
+                                style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                 {{item.ent_name}}</p>
                         </div>
-                        <div style="display:flex;position:relative;">
-                            <div style="margin-left: 10px;margin-top: -11px;">
+                        <div style="display:flex;position:relative;font-size:15px;">
+                            <div style="margin-left: 10px;margin-top: 3px;">
                                 <img class="xny_xmlxImg" v-if="item.pro_type == 1"
                                     src="../../../../../assets/img/xny-qy-gd.png" />
                                 <img class="xny_xmlxImg" v-if="item.pro_type == 2"
@@ -37,7 +38,7 @@
                                 <img class="xny_xmlxImg" v-if="item.pro_type == 5"
                                     src="../../../../../assets/img/xny-qy-qt.png" />
                             </div>
-                          <div style="margin-left: 10px;margin-top: -11px;">
+                          <div style="margin-left: 10px;margin-top: 3px;">
                                 <img class="xny_xmjdImg" v-if="item.project_phase == 1"
                                     src="../../../../../assets/img/xny-xm-zj.png" />
                                 <img class="xny_xmjdImg" v-if="item.project_phase == 2"
@@ -53,7 +54,8 @@
                                 <img style="height: 13px;margin-top:3px;"
                                     src="../../../../../assets/img/details_icon17.png" />
                                 <span
-                                    style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">所属区县：{{item.counties}}</span>
+                                class="xnyxmlb_font_style"
+                                    style="margin-left: 5px;color: gray;width: 330px;">所属区县：{{item.counties}}</span>
                             
                         </div>
                     </div>

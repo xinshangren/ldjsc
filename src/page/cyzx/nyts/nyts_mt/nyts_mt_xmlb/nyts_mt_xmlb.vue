@@ -30,28 +30,31 @@
                     <div style="padding:7px;">
                         <div style="display:flex;position:relative;">
                             <p
-                                style="font-size: 15px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                            class="mt_xmlb_font_style"
+                                style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                 {{item.pro_name}}</p>
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
                             
                                 <img style="height: 12px;margin-top:5px;"
                                     src="../../../../../assets/img/iconmt-jsxz.png" />
-                                <span style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">建设性质：{{item.pro_nature}}</span>
+                                <span class="mt_xmlb_font_style" style="margin-left: 5px;color: gray;width: 330px;">建设性质：{{item.pro_nature}}</span>
                             
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
                            
                                 <img style="height: 12px;margin-top:5px;" src="../../../../../assets/img/iconmt-sj.png" />
                                 <span
-                                    style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">开工年月：{{item.start_work_date}}</span>
+                                class="mt_xmlb_font_style"
+                                    style="margin-left: 5px;color: gray;width: 330px;">开工年月：{{item.start_work_date}}</span>
                             
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
                             <div style="display:flex;width: 50%;">
                                 <img style="height: 12px;margin-top:5px;" src="../../../../../assets/img/iconmt-sj.png" />
                                 <span
-                                    style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">投资年月：{{item.production_date}}</span>
+                                class="mt_xmlb_font_style"
+                                    style="margin-left: 5px;color: gray;width: 330px;">投资年月：{{item.production_date}}</span>
                             </div>
                             <div style="display:flex;width: 50%;">
                                 <img style="height: 7px; width: 25px;margin-top:5px;" src="../../../../../assets/img/jd.png" /><i

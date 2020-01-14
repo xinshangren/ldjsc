@@ -1,4 +1,13 @@
 <style scoped>
+.mcq_xmlb_deali_font_style{
+    font-size:15px;
+    margin-left: 2px;
+}
+.mcq_xmlb_deali_content_font_style{
+    font-size:15px;
+    margin-top: 8px;
+    margin-left: 15px;
+}
     .mcq_qyxq_qyxzImg {
         width: 45px;
     }
@@ -18,7 +27,7 @@
         color: #ffffff;
         padding: 11px 0px 11px 0px;
         margin: 0 auto;
-        writing-mode: tb-rl;
+        width:24px;
     }
 
     .trigger {
@@ -27,13 +36,16 @@
     #compDetail span{
             margin-left: -18px;
     }
+    td{
+        font-size:14px;
+    }
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
         <div style="background:#ffffff;height:auto;width:100%;margin-top:5px;">
             <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="compDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.ent_name}}</div>
-                <div style="margin-top: 10px;">
+                <div style="margin-top: 10px;font-size:14px;">
                     <img class="mcq_qyxq_qyxzImg" v-if="compDetail.ent_nature == 1"
                         src="../../../../../../assets/img/mcq-gq.png" />
                     <img class="mcq_qyxq_qyxzImg" v-if="compDetail.ent_nature == 2"
@@ -57,8 +69,8 @@
                                 src="../../../../../../assets/img/details_icon17.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">地址</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;width: 50%;">{{compDetail.ent_address}}</span>
+                        <div class="mcq_xmlb_deali_content_font_style">
+                            <span style="width: 50%;">{{compDetail.ent_address}}</span>
                         </div>
                     </div>
                     <div style="width: 50%;float: left;margin-top: 15px;">
@@ -67,8 +79,8 @@
                                 src="../../../../../../assets/img/details_icon25.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;">所属区县</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;">{{compDetail.counties}}</span>
+                        <div class="mcq_xmlb_deali_content_font_style">
+                            <span>{{compDetail.counties}}</span>
                         </div>
                     </div>
                     <div style="width: 50%;float: right;margin-top: 15px;">
@@ -77,8 +89,8 @@
                                 src="../../../../../../assets/img/details_icon3.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;">法人代表</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;">{{compDetail.legal_behalf}}</span>
+                        <div class="mcq_xmlb_deali_content_font_style">
+                            <span >{{compDetail.legal_behalf}}</span>
                         </div>
                     </div>
                     <div style="width: 50%;float: left;margin-top: 15px;">
@@ -87,8 +99,8 @@
                                 src="../../../../../../assets/img/details_icon19.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;">联系方式</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;">{{compDetail.phone_contacts}}</span>
+                        <div class="mcq_xmlb_deali_content_font_style">
+                            <span >{{compDetail.phone_contacts}}</span>
                         </div>
                     </div>
                     <div style="width: 50%;float: right;margin-top: 15px;">
@@ -97,8 +109,8 @@
                                 src="../../../../../../assets/img/details_icon20.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;">组织机构代码</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;">{{compDetail.institution_code}}</span>
+                        <div class="mcq_xmlb_deali_content_font_style">
+                            <span >{{compDetail.institution_code}}</span>
                         </div>
                     </div>
                     <div style="margin-top: 135px;clear: both;">
@@ -107,8 +119,8 @@
                                 src="../../../../../../assets/img/details_icon18.png" />
                             <div style=" margin-left: 25px;font-size: 14px;color: gray;width: 50%;">统一社会信用代码</div>
                         </div>
-                        <div>
-                            <span style="font-size: 16px;width: 50%;">{{compDetail.credit_code}}</span>
+                        <div class="mcq_xmlb_deali_content_font_style">
+                            <span style="width: 50%;">{{compDetail.credit_code}}</span>
                         </div>
                     </div>
                 </div>
@@ -131,7 +143,7 @@
             </div>
         </div>
 
-        <div style="background:#ffffff;height:620px;width:100%;margin-top:5px;">
+        <div style="background:#ffffff;height:auto;width:100%;margin-top:5px;">
             <div style="margin: 10px 8px 10px 8px;">
                 <div class="dateSelect" style="height: 50px;">
                     <div class="sx"></div>
@@ -142,7 +154,7 @@
                 </div>
                 <div class="van-hairline--bottom" style="margin-left: 10px;margin-right: 5px;"></div>
                 <div id="nymt_mcq_company_deali_content1_div_id">
-                    <div id style="margin-top: 10px;font-size:14px;">
+                    <div id style="margin-top: 10px;">
                         <table border="1" cellspacing="0" cellpadding="0"
                             style="margin-top: 5px;width:100%;border: #d3edff;border-collapse: collapse;">
                             <tr id="table_title1">
@@ -183,7 +195,7 @@
                             </tr>
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec;" colspan="2" rowspan="2">
-                                    <p class="wry_tj_table_title_p">煤层气利用率（%）</p>
+                                    <p class="wry_tj_table_title_p">煤层气利用率(%)</p>
                                 </td>
                                 <td class="trigger" style="background-color: #e9f6ff;">本月</td>
                                 <td class="trigger">
@@ -200,11 +212,11 @@
                 </div>
             </div>
         </div>
-        <van-popup v-model="show" position="bottom" :style="{ height: '200px' }">
+        <van-popup v-model="show" @opened="openPopYear" position="bottom" :style="{ height: '200px',overflow:'hidden' }">
             <van-datetime-picker v-model="currentDate" type="year-month" style="height: 200px;" :min-date="minDate"
                 :max-date="maxDate" @confirm="onconfirm" :formatter="formatter" @cancel="hideDataPicker" />
         </van-popup>
-        <van-popup v-model="show1" position="bottom" :style="{ height: '200px' }">
+        <van-popup v-model="show1" position="bottom" :style="{ height: '200px',overflow:'hidden' }">
             <van-datetime-picker v-model="currentDate1" type="year-month" style="height: 200px;" :min-date="minDate"
                 :max-date="maxDate" @confirm="onconfirm1" :formatter="formatter1" @cancel="hideDataPicker1" />
         </van-popup>
@@ -215,6 +227,8 @@
     import echarts from "echarts";
     import { httpMethod } from "../../../../../../api/getData.js";
     import { nytsMcqQylbDetailJs } from "./nyts_mcq_qylb_detail.js";
+    // import eruda from 'eruda';
+    // eruda.init();
     export default {
         data() {
             return {
@@ -261,9 +275,17 @@
             }
             this.compDetail = data;
             this.getHomeData(this.compDetail.id, "");
-            this.getHomeData1(this.compDetail.id, "");
+            this.getHomeData1("", "");
         },
         methods: {
+            //开启年时间选择
+    openPopYear: function() {
+      console.log("111");
+      $(".van-picker__columns")
+        .find(".van-picker-column")
+        .eq(1)
+        .hide();
+    },
             getHomeData: function (id, date) {
                 var self = this;
                 var params = {
@@ -357,7 +379,7 @@
                 }else{
                     dateMonth = this.nowYear1 + "-" + this.nowMonth;
                 }
-                this.getHomeData1(this.compDetail.id, dateMonth);
+                this.getHomeData1("", dateMonth);
                 this.show1 = false;
             },
             //初始化第一个图表
