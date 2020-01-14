@@ -8,7 +8,7 @@
     </homeVue>
 
 
-    <div style="z-index: 2; display: flex;position: fixed;bottom: 0px;background: #ffffff;width: 100%;height: 55px;">
+    <div style="z-index: 2; display: flex;position: fixed;bottom: 0px;background: #ffffff;width: 100%;height: 55px;font-size:15px;">
       <div class="main_item" id="0">
         <img class="main_item_img" v-bind:src="tabImage[0]" />
         <div class="main_item_noSelect">头条</div>
@@ -83,5 +83,5 @@
 </script>
 
 <style scoped>
-
+ 
 </style>

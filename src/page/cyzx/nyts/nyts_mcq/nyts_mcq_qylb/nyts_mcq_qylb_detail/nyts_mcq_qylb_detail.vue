@@ -30,7 +30,7 @@
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
-        <div style="background:#ffffff;height:345px;width:100%;margin-top:5px;">
+        <div style="background:#ffffff;height:auto;width:100%;margin-top:5px;">
             <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="compDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.ent_name}}</div>
                 <div style="margin-top: 10px;">
@@ -142,7 +142,7 @@
                 </div>
                 <div class="van-hairline--bottom" style="margin-left: 10px;margin-right: 5px;"></div>
                 <div id="nymt_mcq_company_deali_content1_div_id">
-                    <div id style="margin-top: 10px;">
+                    <div id style="margin-top: 10px;font-size:14px;">
                         <table border="1" cellspacing="0" cellpadding="0"
                             style="margin-top: 5px;width:100%;border: #d3edff;border-collapse: collapse;">
                             <tr id="table_title1">

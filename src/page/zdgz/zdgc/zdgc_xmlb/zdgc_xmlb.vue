@@ -16,9 +16,9 @@
       />
     </div>
     <div id="count_id" style="display:flex;">
-      <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;">共</div>
+      <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:16px;">共</div>
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">0</div>
-      <div style="width:48%;color:#1976d2;margin-top:6px;">个</div>
+      <div style="width:48%;color:#1976d2;margin-top:6px;font-size:16px;">个</div>
     </div>
     <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
@@ -26,7 +26,7 @@
           v-for="(item,index) in list"
           :key="index"
           :class="item.hasCamera=='0'?'backgroundDivPhotonohave':'backgroundDivPhotohave' "
-          style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;"
+          style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;font-size:15px;"
           @click="goDetile(item)"
         >
           <img
@@ -166,11 +166,11 @@
         <div style="display: flex;background: #f3f3f3;height:110px;">
           <div
             @click="clearType"
-            style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;"
+            style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;font-size:14px;"
           >重置</div>
           <div
             @click="clickUlDy"
-            style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;text-align: center;"
+            style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;text-align: center;font-size:14px;"
           >确定</div>
         </div>
       </div>

@@ -87,7 +87,7 @@ button {
 }
 
 body {
-	font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+	/* font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
 	line-height: 1.5;
 	font-size: 16px;
 	color: #000;
@@ -95,7 +95,7 @@ body {
 	-webkit-user-select: none;
 	-webkit-text-size-adjust: 100%;
 	-webkit-tap-highlight-color: transparent;
-	outline: 0
+	outline: 0 */
 }
 
 h1,

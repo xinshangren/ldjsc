@@ -13,29 +13,29 @@
                 <div style="float: left; ">
                     <div style='font-size: 17px;float: left; color: rgb(248, 57, 12); border: 1px solid rgb(248, 57, 12);  border-radius: 50px;  width: 21px; height: 26px;  padding: 10px; padding-left: 15px;'>国</div>
                     <div style="float: right;margin-left: 10px;">
-                        <p style="line-height: 22px;">国企</p>
-                        <p style="line-height: 22px;"><span style="font-size: 20px;color: #F8390C;">{{qylxCount_DataList.gq}}</span>家</p>
+                        <p style="line-height: 22px;font-size:14px;">国企</p>
+                        <p style="line-height: 22px;font-size:14px;"><span style="font-size: 20px;color: #F8390C;">{{qylxCount_DataList.gq}}</span>家</p>
                     </div>
                 </div>
                 <div style="float: right;margin-right: 33px;">
                     <div style='font-size: 17px;float: left; color: #F5A504;; border: 1px solid #F5A504;;  border-radius: 50px;  width: 21px; height: 26px;  padding: 10px; padding-left: 15px;'>央</div>
                     <div style="float: right;margin-left: 10px;">
-                        <p style="line-height: 22px;">央企</p>
-                        <p style="line-height: 22px;"><span style="font-size: 20px;color: #F5A504;">{{qylxCount_DataList.yq}}</span>家</p>
+                        <p style="line-height: 22px;font-size:14px;">央企</p>
+                        <p style="line-height: 22px;font-size:14px;"><span style="font-size: 20px;color: #F5A504;">{{qylxCount_DataList.yq}}</span>家</p>
                     </div>
                 </div>
                 <div style="clear: both; float:left;margin-top: 17px; ">
                     <div style='font-size: 17px;float: left; color: #972CD4; border: 1px solid #972CD4;  border-radius: 50px;  width: 21px; height: 26px;  padding: 10px; padding-left: 15px;'>外</div>
                     <div style="float: right;margin-left: 10px;">
-                        <p style="line-height: 22px;">外企</p>
-                        <p style="line-height: 22px;"><span style="font-size: 20px;color: #972CD4;">{{qylxCount_DataList.wq}}</span>家</p>
+                        <p style="line-height: 22px;font-size:14px;">外企</p>
+                        <p style="line-height: 22px;font-size:14px;"><span style="font-size: 20px;color: #972CD4;">{{qylxCount_DataList.wq}}</span>家</p>
                     </div>
                 </div>
                 <div style="float: right;margin-top:17px;margin-right: 33px;  ">
                     <div style='font-size: 17px;float: left; color: #88EAED; border: 1px solid #88EAED;  border-radius: 50px;  width: 21px; height: 26px;  padding: 10px; padding-left: 15px;'>民</div>
                     <div style="float: right;margin-left: 10px;">
-                        <p style="line-height: 22px;">民企</p>
-                        <p style="line-height: 22px;"><span style="font-size: 20px;color: #88EAED;">{{qylxCount_DataList.mq}}</span>家</p>
+                        <p style="line-height: 22px;font-size:14px;">民企</p>
+                        <p style="line-height: 22px;font-size:14px;"><span style="font-size: 20px;color: #88EAED;">{{qylxCount_DataList.mq}}</span>家</p>
                     </div>
                 </div>
             </div>

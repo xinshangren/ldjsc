@@ -46,9 +46,9 @@
     </div>
 
     <div id="count_id" style="display:flex;">
-      <div style="width:30%;text-align:right;color:#1976d2;margin-top:6px;">共</div>
+      <div style="width:35%;text-align:right;color:#1976d2;margin-top:6px;font-size:14px;">共</div>
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">0</div>
-      <div style="width:48%;color:#1976d2;margin-top:6px;">个项目存在问题</div>
+      <div style="width:48%;color:#1976d2;margin-top:6px;font-size:14px;">个项目存在问题</div>
     </div>
     <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
       <div id="newsList" style="padding-left:10px;padding-right:10px;">

@@ -16,7 +16,7 @@
 </style>
 <template>
     <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
-        <div style="background:#ffffff;height:380px;width:100%;margin-top:5px;">
+        <div style="background:#ffffff;height:auto;width:100%;margin-top:5px;">
             <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="proDetail">
                 <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.pro_name}}</div>
                 <div style="margin-top: 10px;">
@@ -120,8 +120,8 @@
                 <div id="sczzTable" style="border: 1px solid #cccccc;width: 100%;margin-top: 10px;">
                     <div class="ui-row-flex ui-whitespace"
                         style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;">
-                        <div class="ui-col ui-col" style="text-align: center;">时间</div>
-                        <div class="ui-col ui-col" style="text-align: center;">本年度发电量(万千万时)</div>
+                        <div class="ui-col ui-col" style="text-align: center;font-size:14px;">时间</div>
+                        <div class="ui-col ui-col" style="text-align: center;font-size:14px;">本年度发电量(万千万时)</div>
                     </div>
                     <div class="ui-row-flex ui-whitespace"
                         style="background:#ffffff;font-size:13px; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"

@@ -67,7 +67,7 @@
                 @click="showSelectTime(1)"
                 style="display: flex;background: #eeeeee;border-radius: 4px;padding: 2px 9px;"
               >
-                <div>{{starttime}}</div>
+                <div style="font-size:14px;">{{starttime}}</div>
                 <img
                   style="height: 11px;margin-left: 3px;margin-top: 6px;"
                   src="../../../../../../assets/img/air_home_tab_arrow.png"
@@ -80,7 +80,7 @@
                 @click="showSelectTime(2)"
                 style="display: flex;background: #eeeeee;border-radius: 4px;padding: 2px 9px;"
               >
-                <div>{{endtime}}</div>
+                <div  style="font-size:14px;">{{endtime}}</div>
                 <img
                   style="height: 11px;margin-left: 3px;margin-top: 6px;"
                   src="../../../../../../assets/img/air_home_tab_arrow.png"

@@ -28,7 +28,7 @@
       </div>
       <div style="position: absolute;right: 15px;">
         <img :src=images[0] style="width: 146px;height: 95px;">
-        <div v-if="curpath!=null" style="display: flex;color: #3097fb;position: absolute;right: 35px;" @click="goVideo()">
+        <div v-if="curpath!=null" style="display: flex;color: #3097fb;position: absolute;right: 35px;font-size:14px;" @click="goVideo()">
           <img src="../../../assets/img/spjs.png" style="height: 14px;margin-top: 4px;">
           视频介绍
         </div>

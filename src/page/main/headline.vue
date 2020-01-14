@@ -44,8 +44,8 @@ export default {
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
-      "51",
-      "图片新闻"
+      "7",
+      "头条"
     );
   },
   methods: {

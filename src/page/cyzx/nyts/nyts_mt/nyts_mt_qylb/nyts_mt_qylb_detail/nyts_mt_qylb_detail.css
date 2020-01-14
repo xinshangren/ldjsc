@@ -7,6 +7,12 @@
     align-items: center;
 
 }
+.xl{
+    height:14px;
+}
+.trigger{
+    font-size:15px;
+}
 .sx{
 
         width: 4px;

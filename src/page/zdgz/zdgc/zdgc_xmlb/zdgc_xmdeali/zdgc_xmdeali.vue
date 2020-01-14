@@ -10,7 +10,7 @@
       title-inactive-color="#333333"
     >
       <van-tab name="1">
-        <div slot="title" style="font-size:17px;display:flex;">
+        <div slot="title" style="font-size:15px;display:flex;">
           <img id="tab1" :src="img1" class="tabimg" />
           <div id="tab1_div" style="margin-left:4px;">项目详情</div>
         </div>
@@ -102,18 +102,18 @@
           <div style="width: 48%;">
             <div style="display:flex;">
               <img src="../../../../../assets/img/1icon-cylxdl.png" style="height: 22px;" />
-              <div style="color: #999999;">产业类型大类</div>
+              <div style="color: #999999;font-size:18px;">产业类型大类</div>
             </div>
-            <div style="color: #333333;margin-top: 8px;">{{itemEnti.industryFirstType}}</div>
+            <div style="color: #333333;margin-top: 8px;font-size:18px;">{{itemEnti.industryFirstType}}</div>
           </div>
         </div>
 
         <div style="margin: 20px;text-align: left;">
           <div style="display:flex;">
             <img src="../../../../../assets/img/1icon-cylx.png" style="height: 22px;" />
-            <div style="color: #999999;">产业类型</div>
+            <div style="color: #999999;font-size:18px;">产业类型</div>
           </div>
-          <div style="color: #333333;margin-top: 10px;">{{itemEnti.industryType}}</div>
+          <div style="color: #333333;margin-top: 10px;font-size:18px;">{{itemEnti.industryType}}</div>
         </div>
         <van-divider :style="{ padding: '0 20px' }"></van-divider>
         <div style="margin: 20px;text-align: left;font-size:18px;">
@@ -161,14 +161,14 @@
         <div style="margin: 20px;text-align: left;">
           <div style="display:flex;">
             <img src="../../../../../assets/img/1icon-tzwce.png" style="height: 22px;" />
-            <div style="color: #999999;">投资完成额</div>
+            <div style="color: #999999;font-size:18px;">投资完成额</div>
           </div>
-          <div style="color: #333333;margin-top: 10px;">{{itemEnti.investment}}亿</div>
+          <div style="color: #333333;margin-top: 10px;font-size:18px;">{{itemEnti.investment}}亿</div>
         </div>
         <van-divider :style="{ padding: '0 20px' }"></van-divider>
         <div style="margin:20px;display:flex;">
           <img src="../../../../../assets/img/1icon-xpxx.png" style="height: 22px;" />
-          <div style="color: #3ca1ec;">审批信息</div>
+          <div style="color: #3ca1ec;font-size:18px;">审批信息</div>
         </div>
         <div style="display: flex;margin-left: 20px;text-align: left;font-size: 18px;">
           <img src="../../../../../assets/img/sp.png" style="width: 7px;height:277px" />
@@ -187,16 +187,16 @@
         <div style="margin: 20px;text-align: left;">
           <div style="display:flex;">
             <img src="../../../../../assets/img/1icon-jsgmjnr.png" style="height: 22px;" />
-            <div style="color: #999999;">建设规模及内容</div>
+            <div style="color: #999999;font-size:18px;">建设规模及内容</div>
           </div>
-          <div style="color: #333333;margin-top: 10px;">{{itemEnti.scaleAndContent}}</div>
+          <div style="color: #333333;margin-top: 10px;font-size:18px;">{{itemEnti.scaleAndContent}}</div>
         </div>
         <div style="margin: 20px;text-align: left;">
           <div style="display:flex;">
             <img src="../../../../../assets/img/1icon-bnjsnr.png" style="height: 22px;" />
-            <div style="color: #999999;">本年建设内容</div>
+            <div style="color: #999999;font-size:18px;">本年建设内容</div>
           </div>
-          <div style="color: #333333;margin-top: 10px;">{{itemEnti.mainContent}}</div>
+          <div style="color: #333333;margin-top: 10px;font-size:18px;">{{itemEnti.mainContent}}</div>
         </div>
         <div style="height:47px;background:#F1F4F6;">
           <div style="position:relative;height:46px;padding-left: 18px;">
@@ -313,7 +313,7 @@
         </div>
       </van-tab>
       <van-tab name="2" :click="reshye()">
-        <div slot="title" style="font-size:17px;display:flex;">
+        <div slot="title" style="font-size:15px;display:flex;">
           <img id="tab2" :src="img2" class="tabimg" />
           <div id="tab2_div" style="margin-left:4px;color:#666666;">项目简介</div>
         </div>
@@ -322,7 +322,7 @@
         </div>
       </van-tab>
       <van-tab name="3">
-        <div slot="title" style="font-size:17px;display:flex;">
+        <div slot="title" style="font-size:15px;display:flex;">
           <img id="tab3" :src="img3" class="tabimg" />
           <div id="tab3_div" style="margin-left:4px;color:#666666;">阶段汇报</div>
         </div>
@@ -381,7 +381,7 @@
               <div
                 id="jiedContent"
                 v-show="isFlag"
-                style="height: 300px;padding: 28px;line-height: 26px;overflow: auto;"
+                style="height: 300px;padding: 28px;line-height: 26px;overflow: auto;font-size:18px;"
               ></div>
               <div v-show="!isFlag" style="height:346px;">
                 <div
@@ -391,7 +391,7 @@
                 >
                   <div style="display:flex;margin-top:7px;">
                     <div class="vantlist_block">
-                      <div style="margin-top:9px;">{{index+1}}</div>
+                      <div style="margin-top:9px;font-size:15px;">{{index+1}}</div>
                     </div>
 
                     <div>

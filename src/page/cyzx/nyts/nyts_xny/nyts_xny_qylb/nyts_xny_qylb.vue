@@ -11,9 +11,9 @@
       />
     </div>
     <div id="count_id" style="display:flex;">
-      <div style="width:48%;text-align:right;margin-top:8px;">企业总数</div>
+      <div style="width:48%;text-align:right;margin-top:8px;font-size:15px;">企业总数</div>
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">{{compCount}}</div>
-      <div style="width:48%;color:#1976d2;margin-top:8px;">家</div>
+      <div style="width:48%;color:#1976d2;margin-top:8px;font-size:15px;">家</div>
     </div>
 
     <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
@@ -34,7 +34,7 @@
               >{{item.ent_name}}</p>
             </div>
             <div style="display:flex;position:relative;">
-              <div style="float: left;margin-top: 6px;">
+              <div style="margin-top: 3px;">
                 <img
                   class="xny_qyxzImg"
                   v-if="item.ent_nature == 1"
@@ -66,7 +66,7 @@
                   src="../../../../../assets/img/xny-qy-qtqy.png"
                 />
               </div>
-              <div style="margin-left: 10px;margin-top: 6px;">
+              <div style="margin-left: 10px;margin-top:3px;">
                 <img
                   class="xny_qygmImg"
                   v-if="item.ent_scale == 1"
@@ -83,7 +83,7 @@
                   src="../../../../../assets/img/xny-qy-xx.png"
                 />
               </div>
-              <div style="margin-left: 10px;margin-top: 6px;">
+              <div style="margin-left: 10px;margin-top:3px;">
                 <img
                   class="xny_qylxImg"
                   v-if="item.ent_type == 1"
@@ -112,15 +112,14 @@
               </div>
             </div>
             <div style="display:flex;position:relative;">
-              <div>
+              
                 <img
-                  style="float: left;height: 13px;margin-top:6px;"
+                  style="height: 13px;margin-top:3px;"
                   src="../../../../../assets/img/details_icon17.png"
                 />
                 <span
                   style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;"
                 >地址：{{item.ent_address}}</span>
-              </div>
             </div>
           </div>
           <div class="van-hairline--bottom"></div>

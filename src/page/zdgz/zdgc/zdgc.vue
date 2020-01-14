@@ -86,6 +86,19 @@ export default {
       active: 0
     };
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(from);
+    if (from.path != "/") {
+      if (to.path == "/zdgz/zdgc/zdgc") {
+        to.meta.keepAlive = true;
+      } else {
+        to.meta.keepAlive = false;
+      }
+    } else {
+      to.meta.keepAlive = false;
+    }
+    next();
+  },
   mounted() {
     $("#leftAreaDivId").click(function() {
       $("#rightAreaDivId").animate({

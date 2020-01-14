@@ -34,32 +34,31 @@
                                 {{item.pro_name}}</p>
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
-                            <div>
-                                <img style="float: left;height: 12px;margin-top:5px;"
+                            
+                                <img style="height: 12px;margin-top:5px;"
                                     src="../../../../../assets/img/iconmt-jsxz.png" />
                                 <span style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">建设性质：{{item.pro_nature}}</span>
-                            </div>
+                            
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
-                            <div>
-                                <img style="float: left;height: 12px;margin-top:5px;" src="../../../../../assets/img/iconmt-sj.png" />
+                           
+                                <img style="height: 12px;margin-top:5px;" src="../../../../../assets/img/iconmt-sj.png" />
                                 <span
                                     style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">开工年月：{{item.start_work_date}}</span>
-                            </div>
+                            
                         </div>
                         <div style="display:flex;position:relative;margin-top: 3px;">
-                            <div style="float: left;width: 50%;">
-                                <img style="float: left;height: 12px;margin-top:5px;" src="../../../../../assets/img/iconmt-sj.png" />
+                            <div style="display:flex;width: 50%;">
+                                <img style="height: 12px;margin-top:5px;" src="../../../../../assets/img/iconmt-sj.png" />
                                 <span
                                     style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">投资年月：{{item.production_date}}</span>
                             </div>
-                            <div style="float: right;width: 50%;">
-                                <img style="height: 7px; width: 25px;" src="../../../../../assets/img/jd.png" /><i
-                                    style="padding-left: 35px;color: #33cc33;font-size: 12px;">已完成进度{{item.percentage}}%</i>
+                            <div style="display:flex;width: 50%;">
+                                <img style="height: 7px; width: 25px;margin-top:5px;" src="../../../../../assets/img/jd.png" /><i
+                                    style="padding-left: 10px;color: #33cc33;font-size: 12px;">已完成进度{{item.percentage}}%</i>
                                 <div>
                                     <van-progress v-if="item.percentage<=100" :show-pivot=false color="#33cc33" :percentage="item.percentage" />
                                     <van-progress v-if="item.percentage>100" :show-pivot=false color="#33cc33" :percentage="100" />
-                              
                                 </div>
 
                             </div>
@@ -185,7 +184,7 @@
                                     }
                                })
                             })
-                            this.pro_dataList = res.dataList;
+                            this.pro_dataList = this.pro_dataList.concat(res.dataList); 
                             this.jsxz_dataList = res.mtJsxz.dataList;
                             this.ktfs_dataList = res.mtKtfs.dataList;
                             this.proCount = res.total;

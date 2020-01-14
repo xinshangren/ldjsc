@@ -8,9 +8,9 @@
                 style="height: 27px;margin-top: 10px;margin-left:5px;" @click="queryList" />
         </div>
         <div id="count_id" style="display:flex;">
-            <div style="width:48%;text-align:right;margin-top:8px;">企业总数</div>
+            <div style="width:48%;text-align:right;margin-top:8px;font-size:14px;">企业总数</div>
             <div ref="totalCountId" style="color:#1976d2;font-size:24px;">{{compCount}}</div>
-            <div style="width:48%;color:#1976d2;margin-top:8px;">家</div>
+            <div style="width:48%;color:#1976d2;margin-top:8px;font-size:14px;">家</div>
         </div>
 
         <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
@@ -25,7 +25,7 @@
                                 {{item.ent_name}}</p>
                         </div>
                         <div style="display:flex;position:relative;">
-                            <div style="float: left;margin-top: 6px;">
+                            <div style="float: left;margin-top: -11px;">
                                 <img class="qygmImg" v-if="item.ent_nature == 1"
                                     src="../../../../../assets/img/mcq-gq.png" />
                                 <img class="qygmImg" v-if="item.ent_nature == 2"
@@ -35,7 +35,7 @@
                                 <img class="qygmImg" v-if="item.ent_nature == 4"
                                     src="../../../../../assets/img/mcq-mq.png" />
                             </div>
-                            <div style="margin-left: 30px;margin-top: 6px;">
+                            <div style="margin-left: 30px;margin-top: -11px;">
                                 <img class="qyxzImg" v-if="item.ent_scale == 1"
                                     src="../../../../../assets/img/xny-qy-dx.png" />
                                 <img class="qyxzImg" v-if="item.ent_scale == 2"
@@ -45,12 +45,12 @@
                             </div>
                         </div>
                         <div style="display:flex;position:relative;">
-                            <div>
-                                <img style="float: left;height: 13px;margin-top:6px;"
+                            
+                                <img style="height: 13px;margin-top:3px;"
                                     src="../../../../../assets/img/details_icon17.png" />
                                 <span
                                     style="margin-left: 5px;font-size: 13px;color: gray;width: 330px;">地址：{{item.ent_address}}</span>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="van-hairline--bottom"></div>
@@ -88,10 +88,10 @@
                 <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
                 <div style="display: flex;background: #f3f3f3;height:110px;">
                     <div @click="clearType"
-                        style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;">重置
+                        style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;font-size:14px;">重置
                     </div>
                     <div @click="clickUlDy"
-                        style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;text-align: center;">
+                        style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;text-align: center;font-size:14px;">
                         确定</div>
                 </div>
             </div>

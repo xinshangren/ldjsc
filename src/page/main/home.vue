@@ -3,14 +3,17 @@
     <!--每日要闻start-->
     <div @click="godetile(100)" style="text-align: center;position: relative;">
       <img class="home_head_img" src="../../assets/img/headtop.png" />
-      <div class="home_head_time_style">2019-12-18</div>
+      <div class="home_head_time_style" style="font-size:14px;">2019-12-18</div>
     </div>
     <!--每日要闻end-->
     <!--常用应用start-->
     <div style="height: auto;width: 100%;background: #ffffff;margin-top: 5px;">
-      <div style="text-align: center;position: relative;padding-top: 12px;">
+      <div style="text-align: center;position: relative;padding-top: 0px;">
         <img style="width: 228px;" src="../../assets/img/line.png" />
-        <div class="home_title_style" style="position: absolute;left: 42%;top: 17px;">常用应用</div>
+        <div
+          class="home_title_style"
+          style="position: absolute;left: 42%;top: 27px;font-size:15px;"
+        >常用应用</div>
       </div>
       <ul class="ui-row" style="margin-top: 23px;">
         <li
@@ -20,11 +23,11 @@
           class="ui-col ui-col-25 home_ul_li_style"
         >
           <div v-if="index>3" style="margin-top:14px;">
-            <img class="home_ul_li_img" :src="item.imgUrl" />
+            <img class="home_ul_li_img" :src="appLogList[index]" />
             <div class="home_ul_li_div">{{item.name}}</div>
           </div>
           <div v-if="index<4">
-            <img class="home_ul_li_img" :src="item.imgUrl" />
+            <img class="home_ul_li_img" :src="appLogList[index]" />
             <div class="home_ul_li_div">{{item.name}}</div>
           </div>
         </li>
@@ -35,9 +38,12 @@
 
     <!--重点工作仓start-->
     <div style="width: 100%;background: #ffffff;margin-top: 5px;padding-bottom: 20px;">
-      <div style="text-align: center;position: relative;padding-top: 12px;">
+      <div style="text-align: center;position: relative;padding-top:0px;">
         <img style="width: 134px;" src="../../assets/img/head_bg2.png" />
-        <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">重点工作舱</div>
+        <div
+          class="home_title_style"
+          style="position: absolute;left: 40%;top: 27px;font-size:15px;"
+        >重点工作舱</div>
       </div>
 
       <div
@@ -214,9 +220,12 @@
         class="home_jjyxc_block"
         style="height: 112px;padding-bottom:10px;margin: 8px 11px;width: 94%;"
       >
-        <div style="text-align: center;position: relative;padding-top: 12px;">
+        <div style="text-align: center;position: relative;padding-top:0px;">
           <img style="width: 234px;" src="../../assets/img/head_bg3.png" />
-          <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">政务服务舱</div>
+          <div
+            class="home_title_style"
+            style="position: absolute;left: 40%;top: 27px;font-size:15px;"
+          >政务服务舱</div>
         </div>
 
         <div style="display: flex;margin-top: 20px;">
@@ -245,9 +254,12 @@
       <!--政府服务舱end-->
       <!--全域旅游舱start-->
       <div>
-        <div style="text-align: center;position: relative;padding-top: 12px;">
+        <div style="text-align: center;position: relative;padding-top: 0px;">
           <img style="width: 134px;" src="../../assets/img/head_bg2.png" />
-          <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">全域旅游舱</div>
+          <div
+            class="home_title_style"
+            style="position: absolute;left: 40%;top: 27px;font-size:15px;"
+          >全域旅游舱</div>
         </div>
 
         <div class="ui-row-flex ui-whitespace" style="height: 88px;margin-top: 15px;">
@@ -270,7 +282,7 @@
             style="width: 94%;margin-left: 10px;margin-right: 10px;"
             src="../../assets/img/control_pic.png"
           />
-          <div style="position: absolute;color: #ffffff;top: 24px;left: 33px;">应急管理舱</div>
+          <div style="position: absolute;color: #ffffff;top: 24px;left: 33px;font-size:14px;">应急管理舱</div>
           <div
             @click="godetile(111)"
             style="position: absolute;color: #ffffff;top: 24px;left: 131px;border-radius: 3px;border: 1px solid #ffffff;padding: 2px 4px;font-size: 13px;"
@@ -280,9 +292,12 @@
       <!--全域旅游舱end-->
       <!--区县直通舱start-->
       <div>
-        <div style="text-align: center;position: relative;padding-top: 12px;">
+        <div style="text-align: center;position: relative;padding-top: 0px;">
           <img style="width: 134px;" src="../../assets/img/head_bg2.png" />
-          <div class="home_title_style" style="position: absolute;left: 40%;top: 14px;">区县直通舱</div>
+          <div
+            class="home_title_style"
+            style="position: absolute;left: 40%;top: 27px;font-size:15px;"
+          >区县直通舱</div>
         </div>
         <ul class="ui-row" style="margin-top: 20px;">
           <li @click="godetile(111)" class="ui-col ui-col-33 home_ul_li_style">
@@ -335,10 +350,20 @@ export default {
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#f3f3f3");
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(from);
+    if (to.path != "/main/home") {
+      to.meta.keepAlive = true;
+    } else {
+      to.meta.keepAlive = false;
+    }
+    next();
+  },
   data() {
     return {
       seach_value: "",
       appList: [],
+      appLogList: [],
       img1: require("../../assets/img/icon3.png"),
       img2: require("../../assets/img/icon5.png"),
       img3: require("../../assets/img/icon16.png"),
@@ -417,29 +442,14 @@ export default {
             for (var i = 0; i < res.data.length; i++) {
               var entity = res.data[i];
               var id = entity.id;
-              if (id == "1") {
-                //重点工程
-                entity.imgUrl = this.img1;
-              } else if (id == "2") {
-                //环保攻坚
-                entity.imgUrl = this.img2;
-              } else if (id == "3") {
-                //全域旅游
-                entity.imgUrl = this.img3;
-              } else if (id == "4") {
-                //文明共创
-                entity.imgUrl = this.img4;
-              } else if (id == "5") {
-                //经济指数
-                entity.imgUrl = this.img5;
-              } else if (id == "6") {
-                //能源态势
-                entity.imgUrl = this.img6;
-              }
+              this.appLogList.push(
+                httpMethod.returnBaseUrlFun() + entity.log_url
+              );
+              // entity.imgUrl = ;
               this.appList.push(entity);
             }
             // this.appList = res.data;
-            // console.log(this.appList);
+            // console.log(JSON.stringify(this.appList));
           }
         })
         .catch(err => {
@@ -468,7 +478,7 @@ export default {
           // this.$toast(err);
         });
     },
-    //1=重点工程2=环保攻坚3=全域旅游4=文明共创5=经济指数6=能源态势
+    //1=重点工程2=环保攻坚3=全域旅游4=文明共创5=经济指数6=能源态势 8=钉办
     godetile: function(index) {
       var id = "";
       var name = "";
@@ -477,50 +487,51 @@ export default {
           this.$router.push({
             path: "/zdgz/zdgc/zdgc"
           });
-          id="1";
-          name="重点工程";
+          name = "重点工程";
           break;
         case 2:
           this.$router.push({
             path: "/zdgz/hbgj/hbgj"
           });
-            id="2";
-          name="环保攻坚";
+          name = "环保攻坚";
           break;
         case 3:
           this.$router.push({
             path: "/qyly/qyly"
           });
-             id="3";
-          name="全域旅游";
+          name = "全域旅游";
           break;
         case 4:
           this.$router.push({
             path: "/wmgc/wmgc"
           });
-              id="4";
-          name="文明共创";
+          name = "文明共创";
           break;
         case 5:
           this.$router.push({
             path: "/jjyx/jjyx_ztts/jjyx_ztts"
           });
-              id="5";
-          name="经济指数";
+          name = "经济指数";
           break;
         case 6:
           this.$router.push({
             path: "/cyzx/nyts/nyts"
           });
-             id="6";
-          name="能源态势";
+          name = "能源态势";
+          break;
+        case 7:
+          name = "头条";
+          this.$parent.changeTabStyle("0");
+          break;
+        case 8:
+          name = "钉办";
+           this.$parent.changeTabStyle("2");
           break;
         default:
-          id="999";
           this.$toast("功能开发中");
           break;
       }
-      if (id != "999") {
+      if (index != 999) {
         this.doAddAppLogList(
           global_variable.logId,
           global_variable.ddPhone,

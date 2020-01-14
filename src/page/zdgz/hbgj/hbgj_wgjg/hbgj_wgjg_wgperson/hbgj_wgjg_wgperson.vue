@@ -6,18 +6,18 @@
       style="background: rgb(255, 255, 255);height: 100px;margin-left: 10px;margin-right: 10px;border-radius: 6px;box-shadow: 0px 1px 8px 3px #f3f3f3;margin-top: 7px;"
     >
       <div style="display:flex;padding-top:5px;">
-        <div style="width:58%;text-align:right;">{{wgName}}</div>
-        <div style="width:50%;" @click="showSelectArea">
-          <img
-            style="height: 18px;margin-top: 2px;"
-            src="../../../../../assets/img/icon_filtrate.png"
-          />
-        </div>
+        <div style="width:51%;text-align:right;font-size:14px;">{{wgName}}</div>
+
+        <img
+          @click="showSelectArea"
+          style="height: 18px;margin-top: 2px;"
+          src="../../../../../assets/img/icon_filtrate.png"
+        />
       </div>
       <div class="ui-row-flex ui-whitespace" style="margin-top:13px;">
         <div class="ui-col ui-col" @click="changeList(1)">
           <div style="height:2px;width:76%;background:#2796e7;margin:0 auto;"></div>
-          <div style="display:flex;margin-top:8px;">
+          <div style="display:flex;margin-top:8px;font-size:14px;">
             <div style="width:35%;text-align:right;">
               <img
                 style="height: 17px;margin-top: 3px;"
@@ -33,7 +33,7 @@
         </div>
         <div class="ui-col ui-col" @click="changeList(2)">
           <div style="height:2px;width:76%;background:#13dbe8;margin:0 auto;"></div>
-          <div style="display:flex;margin-top:8px;">
+          <div style="display:flex;margin-top:8px;font-size:14px;">
             <div style="width:35%;text-align:right;">
               <img
                 style="height: 17px;margin-top: 3px;"
@@ -49,7 +49,7 @@
         </div>
         <div class="ui-col ui-col">
           <div style="height:2px;width:76%;background:#fab01b;margin:0 auto;"></div>
-          <div style="display:flex;margin-top:8px;">
+          <div style="display:flex;margin-top:8px;font-size:14px;">
             <div style="width:35%;text-align:right;">
               <img
                 style="height: 17px;margin-top: 3px;"
@@ -65,7 +65,7 @@
         </div>
         <div class="ui-col ui-col">
           <div style="height:2px;width:76%;background:#fc621f;margin:0 auto;"></div>
-          <div style="display:flex;margin-top:8px;">
+          <div style="display:flex;margin-top:8px;font-size:14px;">
             <div style="width:35%;text-align:right;">
               <img
                 style="height: 17px;margin-top: 3px;"
@@ -153,15 +153,15 @@
         style="height: 32px;position: absolute;right: 2px;top: -10px;"
       />
       <div style="width: 30%;text-align: center;">
-        <ul id="top_wgsx_ul1_list" style="height: 100%;overflow: auto;"></ul>
+        <ul id="top_wgsx_ul1_list" style="height: 100%;overflow: auto;font-size:14px;"></ul>
       </div>
       <div id="top_wgsx_ul2_list1_div" style="width:30%;text-align: center;">
-        <ul id="top_wgsx_ul2_list" style="height: 100%;background:#F9F9F9;overflow: auto;"></ul>
+        <ul id="top_wgsx_ul2_list" style="height: 100%;background:#F9F9F9;overflow: auto;font-size:14px;"></ul>
       </div>
       <div id="top_wgsx_ul3_list1_div" style="width:60%;text-align: center;">
         <ul
           id="top_wgsx_ul3_list"
-          style="padding-top:1px;height: 100%;background:#F0F0F0;overflow: auto;"
+          style="padding-top:1px;height: 100%;background:#F0F0F0;overflow: auto;font-size:14px;"
         ></ul>
       </div>
     </div>
@@ -354,7 +354,7 @@ export default {
                 var name = $(this).html();
                 self.getGridInfoListFuns("2", code);
                 self.getGridSpecificList(code, name);
-                self.wgName=name;
+                self.wgName = name;
               });
             } else if (flag == "2") {
               $("#top_wgsx_ul2_list").html("");
@@ -406,7 +406,7 @@ export default {
                 var name = $(this).html();
                 self.getGridInfoListFuns("3", code);
                 self.getGridSpecificList(code, name);
-                self.wgName=name;
+                self.wgName = name;
               });
             } else if (flag == "3") {
               $("#top_wgsx_ul3_list").html("");
@@ -445,7 +445,7 @@ export default {
                 var code = $(this).attr("id");
                 var name = $(this).html();
                 self.getGridSpecificList(code, name);
-                self.wgName=name;
+                self.wgName = name;
               });
             }
           }

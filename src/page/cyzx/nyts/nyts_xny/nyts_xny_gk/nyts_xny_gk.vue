@@ -14,8 +14,8 @@
                         <img style="float: left;  width: 50px; height: 50px;"
                             src="../../../../../assets/img/xny_top_gf.png" />
                         <div style="float: right;margin-left: 10px;">
-                            <p style="line-height: 22px;">光伏</p>
-                            <p style="line-height: 22px;">
+                            <p style="line-height: 22px;font-size:18px;">光伏</p>
+                            <p style="line-height: 22px;font-size:18px;">
                                 <span style="font-size: 20px;color: #F8390C;">{{xnyGkData.gd}}</span>家
                             </p>
                         </div>
@@ -24,8 +24,8 @@
                         <img style="float: left;  width: 50px; height: 50px;"
                             src="../../../../../assets/img/xny_top_sd.png" />
                         <div style="float: right;margin-left: 10px;">
-                            <p style="line-height: 22px;">水电</p>
-                            <p style="line-height: 22px;">
+                            <p style="line-height: 22px;font-size:18px;">水电</p>
+                            <p style="line-height: 22px;font-size:18px;">
                                 <span style="font-size: 20px;color: #F5A504;">{{xnyGkData.sd}}</span>家
                             </p>
                         </div>
@@ -34,8 +34,8 @@
                         <img style="float: left;  width: 50px; height: 50px;"
                             src="../../../../../assets/img/xny_top_fd.png" />
                         <div style="float: right;margin-left: 10px;">
-                            <p style="line-height: 22px;">风电</p>
-                            <p style="line-height: 22px;">
+                            <p style="line-height: 22px;font-size:18px;">风电</p>
+                            <p style="line-height: 22px;font-size:18px;">
                                 <span style="font-size: 20px;color: #972CD4;">{{xnyGkData.fd}}</span>家
                             </p>
                         </div>
@@ -44,8 +44,8 @@
                         <img style="float: left;  width: 50px; height: 50px;"
                             src="../../../../../assets/img/xny_top_swzfd.png" />
                         <div style="float: right;margin-left: 10px;">
-                            <p style="line-height: 22px;">生物质发电</p>
-                            <p style="line-height: 22px;">
+                            <p style="line-height: 22px;font-size:18px;">生物质发电</p>
+                            <p style="line-height: 22px;font-size:18px;">
                                 <span style="font-size: 20px;color: #88EAED;">{{xnyGkData.swzfd}}</span>家
                             </p>
                         </div>
@@ -54,8 +54,8 @@
                         <img style="float: left;  width: 50px; height: 50px;"
                             src="../../../../../assets/img/xny_top_qt.png" />
                         <div style="float: right;margin-left: 10px;">
-                            <p style="line-height: 22px;">其他</p>
-                            <p style="line-height: 22px;">
+                            <p style="line-height: 22px;font-size:18px;">其他</p>
+                            <p style="line-height: 22px;font-size:18px;">
                                 <span style="font-size: 20px;color: #88EAED;">{{xnyGkData.qt}}</span>家
                             </p>
                         </div>

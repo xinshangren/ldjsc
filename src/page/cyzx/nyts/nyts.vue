@@ -172,6 +172,19 @@ export default {
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#ffffff");
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(from);
+    if (from.path != "/") {
+      if (to.path == "/cyzx/nyts/nyts") {
+        to.meta.keepAlive = true;
+      } else {
+        to.meta.keepAlive = false;
+      }
+    }else{
+       to.meta.keepAlive = false;
+    }
+    next();
+  },
   data() {
     return {
       oneShow: true,

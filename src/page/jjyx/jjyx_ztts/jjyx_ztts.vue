@@ -5,7 +5,7 @@
       style="z-index: 99;position: fixed;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
     >
       <div
-        style="background: rgb(247, 247, 247);height: 35px;width: 40px;margin-top: 5px;margin-left: 7px;"
+        style="background: rgb(247, 247, 247);height: 35px;width: 40px;margin-top: 5px;margin-left: 7px;font-size:15px;"
       >
         <img style="height: 18px;margin-top: 9px;" src="../../../assets/img/eco_tab_iconlist.png" />
       </div>
@@ -41,7 +41,7 @@
       >
         <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
           <div class="ui-col ui-col" @click="upYearClick">
-            <div class="div_next_style">前一月</div>
+            <div class="div_next_style" style="font-size:15px;">前一月</div>
           </div>
           <div class="ui-col ui-col" @click="showDatePicker()" style="width:12%;">
             <div
@@ -52,11 +52,11 @@
                 src="../../../assets/img/project_calendar.png"
                 style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
               />
-              <div class="div_next_style">{{nowYear}}</div>
+              <div class="div_next_style" style="font-size:15px;">{{nowYear}}</div>
             </div>
           </div>
           <div class="ui-col ui-col" @click="downYearClick">
-            <div class="div_next_style" style="text-align:right;">后一月</div>
+            <div class="div_next_style" style="text-align:right;font-size:15px;">后一月</div>
           </div>
         </div>
       </div>
@@ -89,6 +89,7 @@
         ref="child1"
         :getChild="nowYear"
         :getChildMax="maxDate"
+       style="font-size:15px;"
       ></div>
       <!-- <child1 v-show="active=='0'" @changeTime="changeTime" ref="child1" :getChild="nowYear" :getChildMax="maxDate"></child1>
 

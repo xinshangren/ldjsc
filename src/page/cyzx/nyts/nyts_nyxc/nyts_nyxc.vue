@@ -2,9 +2,9 @@
 <template>
   <div style="margin-top: 0px;border-top: 10px solid #F7F7F7;">
     <div style="display: flex;position: absolute;right: 16px;z-index: 1;margin-top: 7px;background: rgba(0,0,0,0.5);padding: 2px 14px;border-radius: 18px;color: #ffffff;">
-      <div>{{indexFlag+1}}</div>
-      <div style="margin-left: 3px;margin-right: 3px;">/</div>
-      <div>{{indexList.length}}</div>
+      <div style="font-size:14px;">{{indexFlag+1}}</div>
+      <div style="margin-left: 3px;margin-right: 3px;font-size:14px;">/</div>
+      <div style="font-size:14px;">{{indexList.length}}</div>
     </div>
     <van-swipe @change="changeSwipe" ref="swipe" :widht="200" :height="290">
       <van-swipe-item style="text-align:center;" v-for="(image, index) in indexRelaList" :key="index">

@@ -189,6 +189,19 @@ export default {
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#ffffff");
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(from);
+    if (from.path != "/") {
+      if (to.path == "/zdgz/hbgj/hbgj") {
+        to.meta.keepAlive = true;
+      } else {
+        to.meta.keepAlive = false;
+      }
+    } else {
+      to.meta.keepAlive = false;
+    }
+    next();
+  },
   data() {
     return {
       currentView: "child1",
@@ -336,7 +349,7 @@ export default {
       this.airactive = name;
       switch (name) {
         case 0:
-           this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "16",
@@ -345,7 +358,7 @@ export default {
           this.currentView = "child1";
           break;
         case 1:
-             this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "17",
@@ -354,7 +367,7 @@ export default {
           this.currentView = "child2";
           break;
         case 2:
-               this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "18",
@@ -372,7 +385,7 @@ export default {
       this.wgjgactive = name;
       switch (name) {
         case 0:
-                this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "19",
@@ -381,7 +394,7 @@ export default {
           this.currentView = "child4";
           break;
         case 1:
-                this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "20",
@@ -390,7 +403,7 @@ export default {
           this.currentView = "child5";
           break;
         case 2:
-                this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "21",
@@ -399,7 +412,7 @@ export default {
           this.currentView = "child6";
           break;
         case 3:
-                this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "22",
@@ -415,7 +428,7 @@ export default {
       this.zdqyactive = name;
       switch (name) {
         case 0:
-               this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "59",
@@ -424,7 +437,7 @@ export default {
           this.currentView = "child8";
           break;
         case 1:
-               this.doAddAppLogList(
+          this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
             "60",
