@@ -59,12 +59,11 @@
                             <div style="display:flex;width: 50%;">
                                 <img style="height: 7px; width: 25px;margin-top:5px;" src="../../../../../assets/img/jd.png" /><i
                                     style="padding-left: 10px;color: #33cc33;font-size: 12px;">已完成进度{{item.percentage}}%</i>
-                                <div>
-                                    <van-progress v-if="item.percentage<=100" :show-pivot=false color="#33cc33" :percentage="item.percentage" />
-                                    <van-progress v-if="item.percentage>100" :show-pivot=false color="#33cc33" :percentage="100" />
-                                </div>
-
                             </div>
+                        </div>
+                        <div style="width:50%;position:relative;float:right;">
+                            <van-progress v-if="item.percentage<=100" :show-pivot=false color="#33cc33" :percentage="item.percentage" />
+                            <van-progress v-if="item.percentage>100" :show-pivot=false color="#33cc33" :percentage="100" />
                         </div>
                     </div>
                     <div class="van-hairline--bottom"></div>
