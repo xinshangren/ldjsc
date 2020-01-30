@@ -1,9 +1,9 @@
 <template>
   <div style="z-index: 1; position: absolute;top: 0px;">
     <!--每日要闻start-->
-    <div @click="godetile(100)" style="text-align: center;position: relative;">
+    <div @click="godetile(65)" style="text-align: center;position: relative;">
       <img class="home_head_img" src="../../assets/img/headtop.png" />
-      <div class="home_head_time_style" style="font-size:14px;">2019-12-18</div>
+      <div class="home_head_time_style" style="font-size:14px;"></div>
     </div>
     <!--每日要闻end-->
     <!--常用应用start-->
@@ -525,7 +525,15 @@ export default {
           break;
         case 8:
           name = "钉办";
-           this.$parent.changeTabStyle("2");
+          this.$parent.changeTabStyle("2");
+          break;
+        case 65:
+          id="65";
+          name = "每日要情";
+            this.$router.push({
+            path: "/zdgz/mryq/mryq"
+          });
+
           break;
         default:
           this.$toast("功能开发中");

@@ -8,7 +8,7 @@ axios.defaults.timeout = 10000;
 //axios.defaults.baseURL = "http://192.168.10.138:8080/jcsldjsc/";//djb
 // axios.defaults.baseURL = "http://10.1.0.73:8080/jcsldjsc/";//正式环境内网ip
 axios.defaults.baseURL = "http://203.207.103.48:8080/jcsldjsc/";//正式环境互联网ip
-// axios.defaults.baseURL = "http://10.7.1.69:8062/jcsldjsc/";//zhangrui
+// axios.defaults.baseURL = "http://10.7.1.69:8090/jeecg-boot/";//zhangrui
 // axios.defaults.baseURL = "http://203.207.104.209:7081/jcsldjsc/";//另一个生产服务器
 //  axios.defaults.baseURL = "http://127.0.0.1:8080/jcsldjsc/";//张峰宽
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;application/json;charset=UTF-8";
@@ -57,6 +57,7 @@ axios.interceptors.response.use(response => {
     store.commit('hideLoading');
     let data = response.data;
     let isJson = (response.headers["content-type"] || "").includes("json");
+    return data;
     if (isJson) {
         return Promise.resolve({
             data: data.data,

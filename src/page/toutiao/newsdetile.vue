@@ -9,7 +9,7 @@
         style="color: #666666;font-size: 13px;float:right;margin-right: 4px;">{{data.source}}</span>
     </div>
     <div style="width: 92%;padding: 2% 4% 2% 4%;">
-      <div id="pmJjdivid" style="width:100%;" v-html="data.content"></div>
+      <div id="pmJjdivid" style="width:100%;font-size: 20px;" v-html="data.content"></div>
     </div>
   </div>
 

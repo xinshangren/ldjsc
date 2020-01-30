@@ -405,6 +405,12 @@ export const httpMethod = {
     getFrequentlyApp: function (params) {
         return get("homeController.action?getFrequentlyApp", params);
     },
+    //今日要闻
+    getCmsMyrq: function (params) {
+        return get("cmsAppInsideController.action?getCmsMyrq", params);
+    },
+
+    
 
 
 
