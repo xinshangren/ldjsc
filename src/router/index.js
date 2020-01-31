@@ -42,7 +42,12 @@ import zdgz_mryqVue from '@/page/zdgz/mryq/mryq.vue'
 import zdgz_mryqDealiVue from '@/page/zdgz/mryq/mryqDeali/mryqDeali.vue'
 
 Vue.use(Router)
-
+import VueRouter from "vue-router";
+// 解决两次访问相同路由地址报错
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 export default new Router({
   routes: [
     {

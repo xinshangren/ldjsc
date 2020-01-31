@@ -7,6 +7,7 @@ const downjtJtImg="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAB
 const pageSize = 10
 const logId=''
 const ddPhone=''
+const indexTabId=4;
 
 export default {
   baseURL,
@@ -17,5 +18,6 @@ export default {
   upjtJtImg,
   downjtJtImg,
   logId,
-  ddPhone
+  ddPhone,
+  indexTabId
 }

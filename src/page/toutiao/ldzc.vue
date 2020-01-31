@@ -30,13 +30,14 @@
         <div style="font-size: 12px;line-height:29px;width: 56px;margin-left:6px;">副书记</div>
         <ul class="ui-row" style="width: 100%;margin-right: 15px;">
           <li id="8a87821a6b1c0bb4016b1c12c2550004" class="ui-col ui-col-30 dialogNoSelect1" style="width:27%;float: left;">刘峰</li>
-          <li id="8a87821a6b1c6361016b1c8128070001" class="ui-col ui-col-30 dialogNoSelect1" style="width:27%;float: left;">李根田</li>
+             <li id="8a8180c96ff6bcb6016ff9e86ced0022" class="ui-col ui-col-30 dialogNoSelect1" style="width:27%;float: left;">姚逊</li>
+          <!-- <li id="8a87821a6b1c6361016b1c8128070001" class="ui-col ui-col-30 dialogNoSelect1" style="width:27%;float: left;">李根田</li> -->
         </ul>
       </div>
       <div style="background: #ffffff;padding: 4px;display: flex;">
         <div style="font-size: 12px;line-height:29px;width: 56px;margin-left:6px;">常委</div>
         <ul class="ui-row" style="width: 100%;margin-right: 15px;display: block;overflow: hidden;">
-          <li id="8a87821a6b1c6361016b1c837d220004" class="dialogNoSelect1" style="width:27%;float: left;">赵沂旸</li>
+          <!-- <li id="8a87821a6b1c6361016b1c837d220004" class="dialogNoSelect1" style="width:27%;float: left;">赵沂旸</li> -->
           <li id="8a87821a6b1c6361016b1c84ed36000a" class="dialogNoSelect1" style="width:27%;float: left;">那志茂</li>
           <li id="8a87821a6b1c6361016b1c85c04b000d" class="dialogNoSelect1" style="width:27%;float: left;">卫明喜</li>
           <li id="8a87821a6b1c6361016b1c88da620010" class="dialogNoSelect1" style="width:27%;float: left;">石云峰</li>
