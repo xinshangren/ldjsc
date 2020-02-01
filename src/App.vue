@@ -17,27 +17,30 @@
       <img src="@/assets/img/icon_user.png" class="home_top_img" @click="toast()" />
     </div>
     <!--搜索框部分end-->
+    <!-- <router-view></router-view> -->
     <keep-alive>
-      <router-view :getChild="nowYear" v-if="$route.meta.keepAlive"></router-view>
+      <router-view  v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
-    <router-view :getChild="nowYear" v-if="!$route.meta.keepAlive"></router-view>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import Loading from "../src/store/loading.vue";
-import global_variable from "../src/api/global_variable.js";
-import { mainJs } from "../src/page/main/main.js";
-import mainvue from "../src/page/main/main.vue";
 export default {
   name: "App",
-  props: ["tabid"],
+  activated: function() {
+    console.log("+++++++++++++++++");
+    this.$setgoindex();
+  },
   data() {
     return {
       seach_value: "",
-      nowYear:"4"
     };
+  },
+   mounted() {
+    //this.gotoHome();
   },
   methods: {
     toast: function() {
@@ -49,11 +52,7 @@ export default {
       var name = this.$route.name;
       if (name == "main") {
        this.$root.$emit('test11', 'hi')
-      //this.$router.remove("/")
-      // this.$router.push("/")
-       this.nowYear = "4"
-      //location.reload();
-         mainJs.changeTabStyle("4");
+         //mainJs.changeTabStyle("4");
       } else {
         this.$router.push("/");
       }

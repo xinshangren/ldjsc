@@ -7,7 +7,7 @@
     </div>
     <!--每日要闻end-->
     <!--常用应用start-->
-    <div style="height: auto;width: 100%;background: #ffffff;margin-top: 5px;">
+    <div style="height: auto;width: 100%;background: #ffffff;margin-top: -6px;">
       <div style="text-align: center;position: relative;padding-top: 0px;">
         <img style="width: 228px;" src="../../assets/img/line.png" />
         <div
@@ -539,6 +539,7 @@ export default {
           this.$toast("功能开发中");
           break;
       }
+      this.$parent.removeEvent();
       if (index != 999) {
         this.doAddAppLogList(
           global_variable.logId,

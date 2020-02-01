@@ -41,12 +41,21 @@ export default {
     };
   },
   mounted() {
+    this.$parent.isDeali=false;
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
       "7",
       "头条"
     );
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log("headline");
+     next(vm => {
+          vm.$parent.isDeali=false;
+        });
+    
+    next();
   },
   methods: {
     changeactive: function(data) {
@@ -56,6 +65,7 @@ export default {
     onClick(name, title) {},
     tabsclick: function(name, title) {
       console.log(name);
+      this.$parent.removeEvent();
       switch (parseInt(name)) {
         case 0:
           this.doAddAppLogList(

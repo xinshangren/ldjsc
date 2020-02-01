@@ -1,8 +1,4 @@
 export const mainJs = {
-
-  changeTabOutFun: function (id) {
-    this.tabid = id;
-  },
   changeTabStyle: function (id) {
     switch (parseInt(id)) {
       case 0: //头条

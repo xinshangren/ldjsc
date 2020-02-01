@@ -7,7 +7,7 @@ const downjtJtImg="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAB
 const pageSize = 10
 const logId=''
 const ddPhone=''
-const indexTabId=4;
+const indexTabId=0;
 
 export default {
   baseURL,
