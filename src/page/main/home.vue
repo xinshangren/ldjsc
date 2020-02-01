@@ -423,7 +423,7 @@
               name = "重点工程";
               this.$parent.removeEvent();
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
           case 2:
@@ -434,7 +434,7 @@
               name = "环保攻坚";
               this.$parent.removeEvent();
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
           case 3:
@@ -445,7 +445,7 @@
               name = "全域旅游";
               this.$parent.removeEvent();
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
           case 4:
@@ -456,7 +456,7 @@
               name = "文明共创";
               this.$parent.removeEvent();
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
           case 5:
@@ -468,7 +468,7 @@
               name = "经济指数";
               this.$parent.removeEvent();
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
           case 6:
@@ -480,7 +480,7 @@
               name = "能源态势";
               this.$parent.removeEvent();
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
           case 7:
@@ -498,7 +498,7 @@
               name = "重大改革";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
           case 10:
@@ -506,7 +506,7 @@
               name = "三大产业";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -515,7 +515,7 @@
               name = "招商引资";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -524,7 +524,7 @@
               name = "热点问题";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -533,7 +533,7 @@
               name = "热点事件";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -542,7 +542,7 @@
               name = "工作效能";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -551,7 +551,7 @@
               name = "教育服务";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -560,7 +560,7 @@
               name = "12345";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -569,7 +569,7 @@
               name = "就业服务";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -578,7 +578,7 @@
               name = "行政审批";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -587,7 +587,7 @@
               name = "行政监督";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -596,7 +596,7 @@
               name = "游客画像";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -605,7 +605,7 @@
               name = "非遗保护";
               this.$toast("功能开发中");
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
 
@@ -619,7 +619,7 @@
               });
               this.$parent.removeEvent();
             } else {
-              this.$toast("权限不足，请联系管理员！");
+              this.$toast("权限不足，");
             }
             break;
           case 112:
