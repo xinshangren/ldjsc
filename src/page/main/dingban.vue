@@ -11,9 +11,9 @@
       title-active-color="#2796e7"
       @change="tabsclick"
     >
-      <van-tab title="工作群" id="0">
+      <!-- <van-tab title="工作群" id="0">
         <div style="height:100%;overflow:auto;">
-          <!-- <vhtmlpanel :url.sync="url1"></vhtmlpanel> -->
+          <vhtmlpanel :url.sync="url1"></vhtmlpanel>
           <iframe
             ref="iframe"
             id="bdIframe"
@@ -23,7 +23,7 @@
             style="width:100%;height:100%;border-width:0px;"
           ></iframe>
         </div>
-      </van-tab>
+      </van-tab> -->
       <van-tab title="市委市政府" id="2c9bfcdd6c3d7c42016c3d84d4a6000e">
         <child1 v-bind:active="active"></child1>
       </van-tab>
