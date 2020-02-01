@@ -12,8 +12,16 @@
       @change="tabsclick"
     >
       <van-tab title="工作群" id="0">
-        <div style="height:500px;">
-          <iframe style="width:100%;height:100%;"  :src="url1"></iframe>
+        <div style="height:100%;overflow:auto;">
+          <!-- <vhtmlpanel :url.sync="url1"></vhtmlpanel> -->
+          <iframe
+            ref="iframe"
+            id="bdIframe"
+            :src="url1"
+            frameborder="0"
+            scrolling="no"
+            style="width:100%;height:100%;border-width:0px;"
+          ></iframe>
         </div>
       </van-tab>
       <van-tab title="市委市政府" id="2c9bfcdd6c3d7c42016c3d84d4a6000e">
@@ -41,17 +49,17 @@ import child3 from "@/page/dingban/szx.vue";
 import child4 from "@/page/dingban/dsjyyj.vue";
 import { httpMethod } from "../../api/getData.js";
 import global_variable from "../../api/global_variable.js";
-
+import vhtmlpanel from "@/components/HtmlPanel.vue";
 export default {
   name: "headline",
   data() {
     return {
       active: 0,
       data: {},
-      //  url1:
-      //   "http://www.baidu.com"
       url1:
-        "http://203.207.104.105:22001/gov-inter/pages/index.jsp?type=12%25269UFckSUDKYbqp5WXsFeANg%253D%253D&corpId=12%2526zm5I%252B28cxAMS%252B8HHXdo5eHVKvsWXYvgTY07BZfJRnlTqhywqrsMf84vlraBG5RiW"
+        "http://203.207.104.105:22001/gov-inter/pages/groupManage/myGroupList.html"
+      // url1:
+      //   "http://203.207.104.105:22001/gov-inter/pages/index.jsp?type=12%25269UFckSUDKYbqp5WXsFeANg%253D%253D&corpId=12%2526zm5I%252B28cxAMS%252B8HHXdo5eHVKvsWXYvgTY07BZfJRnlTqhywqrsMf84vlraBG5RiW"
     };
   },
   mounted() {
@@ -61,6 +69,13 @@ export default {
       "8",
       "钉办"
     );
+    setTimeout(function() {
+      var oIframe = document.getElementById("bdIframe");
+      var deviceWidth = document.documentElement.clientWidth;
+      var deviceHeight = document.documentElement.clientHeight;
+      oIframe.style.width = Number(deviceWidth) + "px"; //数字是页面布局宽度差值
+      oIframe.style.height = Number(deviceHeight) - 110+ "px"; //数字是页面布局高度差
+    }, 600);
 
     // $("#gzqId").html("");
   },
@@ -131,7 +146,8 @@ export default {
     child1,
     child2,
     child3,
-    child4
+    child4,
+    vhtmlpanel
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app"  >
+  <div id="app">
     <loading v-show="LOADING" style="z-index:3;"></loading>
     <!--搜索框部分start-->
     <div
@@ -12,14 +12,28 @@
         v-model="seach_value"
         style="width:68%;"
       />
-      <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
-      <img src="@/assets/img/icon_message.png" class="home_top_img" @click="toast()" />
-      <img src="@/assets/img/icon_user.png" class="home_top_img" @click="toast()" />
+      <div style="display:flex;color:#ffffff;width:32%;">
+        <div class="index_top_img_jg1">
+          <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
+          <div>首页</div>
+        </div>
+        <div class="index_top_img_jg">
+           <img src="@/assets/img/icon_message.png" class="home_top_img" @click="toast()" />
+          <div>消息</div>
+        </div>
+        <div s class="index_top_img_jg">
+          <img src="@/assets/img/icon_user.png" class="home_top_img" @click="toast()" />
+          <div>我的</div>
+        </div>
+      </div>
+
+     
+      
     </div>
     <!--搜索框部分end-->
     <!-- <router-view></router-view> -->
     <keep-alive>
-      <router-view  v-if="$route.meta.keepAlive"></router-view>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
     <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
@@ -36,10 +50,10 @@ export default {
   },
   data() {
     return {
-      seach_value: "",
+      seach_value: ""
     };
   },
-   mounted() {
+  mounted() {
     //this.gotoHome();
   },
   methods: {
@@ -51,8 +65,8 @@ export default {
       // console.log(this.$route.name);
       var name = this.$route.name;
       if (name == "main") {
-       this.$root.$emit('test11', 'hi')
-         //mainJs.changeTabStyle("4");
+        this.$root.$emit("test11", "hi");
+        //mainJs.changeTabStyle("4");
       } else {
         this.$router.push("/");
       }

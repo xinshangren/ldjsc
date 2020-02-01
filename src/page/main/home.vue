@@ -50,7 +50,7 @@
         class="ui-row-flex ui-whitespace"
         style="margin-top: 13px;padding-left: 7px;padding-right: 7px;"
       >
-        <div class="ui-col ui-col">
+        <!-- <div class="ui-col ui-col">
           <div @click="godetile(65)" style="position: relative;">
             <img style="width: 100%;" src="../../assets/img/work_pic1.png" />
             <div style="display: flex;position: absolute;top: 12px;margin-left: 12px;">
@@ -58,8 +58,8 @@
               <div style="font-size: 14px;color: #ffffff;margin-left: 9px;">每日要情</div>
             </div>
           </div>
-        </div>
-        <div class="ui-col ui-col" style="margin-left: 8px;">
+        </div> -->
+        <div class="ui-col ui-col" style="margin-left: 4px;">
           <div @click="godetile(111)" style="position: relative;">
             <img style="width: 100%;" src="../../assets/img/work_pic2.png" />
             <div class="home_zdgzc_div">重大改革</div>

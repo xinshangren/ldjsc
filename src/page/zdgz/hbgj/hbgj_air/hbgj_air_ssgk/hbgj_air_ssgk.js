@@ -213,12 +213,12 @@ export const hbgjAirJs = {
         for (var i = 0; i < result.length; i++) {
             var entity = result[i];
             var name = entity.cityName; //城市名称
-            var cityRank = entity.cityRank; //城市名称
+            var cityRank = entity.rownum; //城市名称
             var dataCompositeIndex = entity.dataAqi; //值
             // nameList.push(name);
             if (name === '晋城市') {
                 // showEcharsView1_ssgk1(result, rankList[i],value1,echarts);
-                rankStr = rankList1[i];
+                rankStr = cityRank;
             }
         }
         const myCharts = echarts.init(value, "macarons");

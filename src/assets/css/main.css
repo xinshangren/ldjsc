@@ -21,10 +21,17 @@
 .mui-input-row.mui-search .mui-icon-clear {
 	top: 10px;
 }
-
+.index_top_img_jg{
+	margin-left:10px;text-align:center;
+	font-size:13px;
+}
+.index_top_img_jg1{
+    text-align:center;
+	font-size:13px;
+}
 .home_top_img {
-	height: 45%;
-	margin-top: 17px;
+	height: 35%;
+	margin-top: 7px;
 	margin-left: 3%;
 }
 
