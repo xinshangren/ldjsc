@@ -40,7 +40,7 @@ import nyts_mt_qylb_detailVue from '@/page/cyzx/nyts/nyts_mt/nyts_mt_qylb/nyts_m
 import nyts_mt_xmlb_detailVue from '@/page/cyzx/nyts/nyts_mt/nyts_mt_xmlb/nyts_mt_xmlb_detail/nyts_mt_xmlb_detail.vue'
 import zdgz_mryqVue from '@/page/zdgz/mryq/mryq.vue'
 import zdgz_mryqDealiVue from '@/page/zdgz/mryq/mryqDeali/mryqDeali.vue'
-
+import jqvideos_dealVue from '@/page/qyly/jq/jqvideos_deali.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -214,9 +214,14 @@ export default new Router({
       path: '/zdgz/mryq/mryq/mryqDeali',
       name: 'mryqDealiVue',
       component: zdgz_mryqDealiVue
+    },{
+      path: '/qyly/jq/mryq/jqvideos_deali',
+      name: 'jqvideos_dealVue',
+      component: jqvideos_dealVue
     }
 
 
+    
     
   ]
 })

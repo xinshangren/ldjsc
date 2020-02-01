@@ -185,12 +185,12 @@ export default {
     //省内空气质量排名
     provincialAirRanking: function(resData) {
       var params = {
-        dateType: "年",
-        dateStr: new Date().getFullYear()
+        // dateType: "年",
+        // dateStr: new Date().getFullYear()
       };
       //获取数据
       httpMethod
-        .provincialAirRanking(params)
+        .provincialAir(params)
         .then(res => {
           //console.log(res);
           var code = res.success;
@@ -204,10 +204,11 @@ export default {
             for (var i = 0; i < dataListnew.length; i++) {
               var enti = dataListnew[i];
               let cityName = enti.cityName;
+                let cityRank = enti.rownum; //城市名称
               //console.log(cityName);
               if (cityName == "晋城市") {
                 var dataPollutant = resData.data.dataPollutant; //首要污染物
-                $("#rankPm_id").html("省内排名：" + (i + 1)+"\t\t\t\t\t\t\t\t首要污染物：" + dataPollutant);
+                $("#rankPm_id").html("省内排名：" + cityRank+"\t\t\t\t\t\t\t\t首要污染物：" + dataPollutant);
                 // $("#rankPm_id").html("省内排名：" + (i + 1));
               }
             }

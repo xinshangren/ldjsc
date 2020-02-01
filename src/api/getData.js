@@ -168,6 +168,11 @@ export const httpMethod = {
         return get("sthjAppInsideController.action?provincialAirRanking", params);
     },
 
+    //省内空气质量排名新方法
+    provincialAir: function (params) {
+        return get("sthjAppInsideController.action?provincialAir", params);
+    },
+
     //市内城市空气质量排名
     cityAirRanking: function (params) {
         return get("sthjAppInsideController.action?cityAirRanking", params);

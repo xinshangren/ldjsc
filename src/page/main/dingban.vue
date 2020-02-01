@@ -4,13 +4,18 @@
       v-model="active"
       :sticky="false"
       :ellipsis="false"
-      line-width="25%"
+      line-width="20%"
       style="font-size: 14px;"
       color="#2796e7"
       title-inactive-color="#999999"
       title-active-color="#2796e7"
       @change="tabsclick"
     >
+      <van-tab title="工作群" id="0">
+        <div style="height:500px;">
+          <iframe style="width:100%;height:100%;"  :src="url1"></iframe>
+        </div>
+      </van-tab>
       <van-tab title="市委市政府" id="2c9bfcdd6c3d7c42016c3d84d4a6000e">
         <child1 v-bind:active="active"></child1>
       </van-tab>
@@ -29,6 +34,7 @@
   </div>
 </template>
 <script>
+import $ from "jquery";
 import child1 from "@/page/dingban/swszf.vue";
 import child2 from "@/page/dingban/srd.vue";
 import child3 from "@/page/dingban/szx.vue";
@@ -41,7 +47,11 @@ export default {
   data() {
     return {
       active: 0,
-      data: {}
+      data: {},
+      //  url1:
+      //   "http://www.baidu.com"
+      url1:
+        "http://203.207.104.105:22001/gov-inter/pages/index.jsp?type=12%25269UFckSUDKYbqp5WXsFeANg%253D%253D&corpId=12%2526zm5I%252B28cxAMS%252B8HHXdo5eHVKvsWXYvgTY07BZfJRnlTqhywqrsMf84vlraBG5RiW"
     };
   },
   mounted() {
@@ -51,6 +61,8 @@ export default {
       "8",
       "钉办"
     );
+
+    // $("#gzqId").html("");
   },
   methods: {
     changeactive: function(data) {
@@ -60,7 +72,7 @@ export default {
     tabsclick: function(name, title) {
       console.log(name);
       switch (parseInt(name)) {
-        case 0:
+        case 1:
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -68,7 +80,7 @@ export default {
             "市委市政府"
           );
           break;
-        case 1:
+        case 2:
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -76,7 +88,7 @@ export default {
             "市人大"
           );
           break;
-        case 2:
+        case 3:
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -84,7 +96,7 @@ export default {
             "市政协"
           );
           break;
-        case 3:
+        case 4:
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,

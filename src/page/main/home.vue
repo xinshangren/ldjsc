@@ -374,10 +374,10 @@ export default {
   },
   mounted() {
     var context = this;
-    $(".main_item").click(function() {
-      var id = $(this).attr("id");
-      context.changeTabStyle(id);
-    });
+    // $(".main_item").click(function() {
+    //   var id = $(this).attr("id");
+    //   context.changeTabStyle(id);
+    // });
     this.getCuruserid();
     this.doAddAppLog("1264283316793072");
   },
@@ -455,10 +455,6 @@ export default {
         .catch(err => {
           // this.$toast(err);
         });
-    },
-    //改变tab的状态和图片
-    changeTabStyle: function(tabid) {
-      mainJs.changeTabStyle(tabid);
     }, //获取记录日志的logid
     doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
       var params = {
@@ -488,58 +484,66 @@ export default {
             path: "/zdgz/zdgc/zdgc"
           });
           name = "重点工程";
+          this.$parent.removeEvent();
           break;
         case 2:
           this.$router.push({
             path: "/zdgz/hbgj/hbgj"
           });
           name = "环保攻坚";
+          this.$parent.removeEvent();
           break;
         case 3:
           this.$router.push({
             path: "/qyly/qyly"
           });
           name = "全域旅游";
+          this.$parent.removeEvent();
           break;
         case 4:
           this.$router.push({
             path: "/wmgc/wmgc"
           });
           name = "文明共创";
+          this.$parent.removeEvent();
           break;
         case 5:
           this.$router.push({
             path: "/jjyx/jjyx_ztts/jjyx_ztts"
           });
           name = "经济指数";
+          this.$parent.removeEvent();
           break;
         case 6:
           this.$router.push({
             path: "/cyzx/nyts/nyts"
           });
           name = "能源态势";
+          this.$parent.removeEvent();
           break;
         case 7:
           name = "头条";
           this.$parent.changeTabStyle("0");
+          this.$parent.addEvent();
           break;
         case 8:
           name = "钉办";
           this.$parent.changeTabStyle("2");
+          this.$parent.addEvent();
           break;
         case 65:
-          id="65";
+          id = "65";
           name = "每日要情";
-            this.$router.push({
+          this.$router.push({
             path: "/zdgz/mryq/mryq"
           });
-
+          this.$parent.removeEvent();
           break;
         default:
           this.$toast("功能开发中");
           break;
       }
-      this.$parent.removeEvent();
+
       if (index != 999) {
         this.doAddAppLogList(
           global_variable.logId,

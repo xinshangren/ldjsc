@@ -50,20 +50,23 @@ export const hbgjAirJs = {
         const myCharts = echarts.init(value, "macarons");
 
         var nameList = [];
-        var rankList = ['11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
+        var rankList = [];
         var valueList = [];
         for (var i = 0; i < result.length; i++) {
             var entity = result[i];
             var name = entity.cityName; //城市名称
-            var cityRank = entity.cityRank; //城市名称
-            var dataCompositeIndex = entity.dataCompositeIndex; //值
+            var cityRank = entity.rownum; //城市名称
+            var dataCompositeIndex = entity.dataAqi; //值
             nameList.push(name);
+            rankList.push(cityRank);
             if (name === '晋城市') {
                 // showEcharsView1_ssgk1(result, rankList[i],value1,echarts);
             }
             valueList.push(parseFloat(dataCompositeIndex).toFixed(1));
         }
-
+        valueList=valueList.reverse();
+        nameList=nameList.reverse();
+        rankList=rankList.reverse();
         var maxValue = Math.max.apply(null, valueList);
         maxValue = maxValue + 10;
         var nyValueList = [];
@@ -211,7 +214,7 @@ export const hbgjAirJs = {
             var entity = result[i];
             var name = entity.cityName; //城市名称
             var cityRank = entity.cityRank; //城市名称
-            var dataCompositeIndex = entity.dataCompositeIndex; //值
+            var dataCompositeIndex = entity.dataAqi; //值
             // nameList.push(name);
             if (name === '晋城市') {
                 // showEcharsView1_ssgk1(result, rankList[i],value1,echarts);
@@ -226,8 +229,8 @@ export const hbgjAirJs = {
             var entity = result[i];
             var name = entity.cityName; //城市名称
             if (name == '晋城市') {
-                var cityRank = entity.cityRank; //城市名称
-                var dataCompositeIndex = entity.dataCompositeIndex; //值
+                var cityRank = entity.rownum; //城市名称
+                var dataCompositeIndex = entity.dataAqi; //值
                 nameList.push(name);
                 rankList.push(cityRank);
                 valueList.push(parseFloat(dataCompositeIndex).toFixed(1));

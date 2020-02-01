@@ -116,10 +116,13 @@ export default {
     removeEvent: function() {
       window.removeEventListener("popstate", this.funback, false); //false阻止默认事件
     },
+    addEvent: function() {
+      window.addEventListener("popstate", this.funback, false); //false阻止默认事件
+    },
     funback: function() {
       console.log("this.isCreate===" + this.isCreate);
       console.log("this.isDeali===" + this.isDeali);
-      console.log(this.$route.name);
+      console.log(this.tabid);
       // console.log(this.$route.query);
       var name = this.$route.name;
       if (name == "main") {
@@ -145,8 +148,8 @@ export default {
               setTimeout(() => {
                 this.$router.push({ path: "/" });
               }, 500);
-              console.log(this.$router);
-              this.$router.back(-100);
+              // console.log(this.$router);
+              // this.$router.back(-100);
             }
           }
           this.isDeali=false;
@@ -157,11 +160,14 @@ export default {
     backGoHome: function() {},
     //改变tab的状态和图片
     changeTabStyle: function(tabid) {
+      console.log("改变tab=="+tabid);
       if (tabid == 1 || tabid == 3) {
         this.$toast("功能开发中");
       } else {
+        
         this.tabid = tabid;
         mainJs.changeTabStyle(tabid);
+         
       }
     }
   },
