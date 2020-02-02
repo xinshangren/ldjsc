@@ -315,6 +315,7 @@
       // });
       this.getCuruserid();
      
+     
     },
     methods: {
       getCuruserid: function () {
