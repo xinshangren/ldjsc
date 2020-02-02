@@ -67,16 +67,12 @@ export default {
     },
     //获取群列表
     getGroupInfo: function(flag) {
-      var typeM = "";
-      if (flag == 1) {
-        typeM = "myGroupList";
-      } else {
-        typeM = "groupDetail";
-      }
+     
       var params = {
-        method: typeM,
-        dingUserId: "086404192126244705",
-        groupId: "3",
+        method: "myGroupList",
+        dingUserId:global_variable.userId,
+        // dingUserId:"086404192126244705",
+        groupId: "",
         groupName: this.seach_value
       };
       httpMethod
@@ -95,6 +91,9 @@ export default {
               this.isshow=true;
             }
           
+          }else if(res.code == "fail"){
+               this.$toast(res.message);
+               this.isshow=true;
           }
         })
         .catch(err => {
