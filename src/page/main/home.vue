@@ -395,7 +395,7 @@ export default {
             httpMethod
               .getUser(params)
               .then(res => {
-                if (res.success == "1") {
+                if (res.code == "1") {
                   if (res.functions != null) {
                     this.permissionList = res.functions;
                     console.log(this.permissionList);
@@ -410,7 +410,7 @@ export default {
                       });
                     });
                   }
-                } else if (res.success == "0") {
+                } else if (res.code == "0") {
                 }
               })
               .catch(err => {
