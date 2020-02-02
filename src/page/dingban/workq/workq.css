@@ -1,0 +1,11 @@
+.stateClass{
+    height: 41px;
+    position: absolute;
+    right: 20px;
+}
+.groupList{
+    padding-top:7px;padding-bottom:7px;position:relative;font-size:15px;border-bottom:1px solid #f1f1f1;
+}
+.groupLeftImg{
+    height: 40px;margin-left: 15px;
+}

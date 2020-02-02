@@ -414,6 +414,10 @@ export const httpMethod = {
     getCmsMyrq: function (params) {
         return get("cmsAppInsideController.action?getCmsMyrq", params);
     },
+    //工作群列表和详情
+    getGroupInfo: function (params) {
+        return get("dingTalkController.action?getGroupInfo", params);
+    },
 
     
 
