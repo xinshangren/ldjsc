@@ -48,21 +48,21 @@
         </div>-->
         <div class="ui-col ui-col" style="margin-left: 4px;">
           <div @click="godetile(9)" style="position: relative;">
-            <img style="width: 100%;" src="../../assets/img/work_pic2.png" />
+            <img style="width: 100%;height:88px" src="../../assets/img/work_pic2.png" />
             <div class="home_zdgzc_div">重大改革</div>
           </div>
           <div @click="godetile(1)" style="position: relative;margin-top: 10px;" id="clickZdgcId">
-            <img style="width: 100%;" src="../../assets/img/work_pic4.png" />
+            <img style="width: 100%;height:88px" src="../../assets/img/work_pic4.png" />
             <div class="home_zdgzc_div">重点工程</div>
           </div>
         </div>
         <div class="ui-col ui-col" style="margin-left: 8px;">
           <div @click="godetile(4)" style="position: relative;">
-            <img style="width: 100%;" src="../../assets/img/work_pic3.png" />
+            <img style="width: 100%;height:88px" src="../../assets/img/work_pic3.png" />
             <div class="home_zdgzc_div">文明共创</div>
           </div>
           <div @click="godetile(2)" style="position: relative;margin-top: 10px;">
-            <img style="width: 100%;" src="../../assets/img/work_pic5.png" />
+            <img style="width: 100%;height:88px" src="../../assets/img/work_pic5.png" />
             <div class="home_zdgzc_div">环保攻坚</div>
           </div>
         </div>
@@ -330,8 +330,17 @@
                 .getUser(params)
                 .then(res => {
                   if (res.success == "1") {
-                    self.permissionList = res.functions;
-                    global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
+                    console.log(res)
+                    if(res.functions != null){
+                      console.log('权限列表')
+                      self.permissionList = res.functions;
+                      global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
+                    }else{
+                      //code为2 是无此用户  
+                      self.$toast('权限不足，请联系管理员！');
+                      //退出应用
+                      self.$parent.exit();
+                    }
                   } else if (res.success == "0") {
                   }
                 })
@@ -481,14 +490,40 @@
             }
             break;
           case 7:
-            name = "头条";
-            this.$parent.changeTabStyle("0");
-            this.$parent.addEvent();
+            if (this.permissionList.indexOf("综合信息") > -1) {
+              name = "头条";
+              this.$parent.changeTabStyle("0");
+              this.$parent.addEvent();
+            } else {
+              this.$toast("权限不足");
+            }
             break;
           case 8:
-            name = "钉办";
-            this.$parent.changeTabStyle("2");
-            this.$parent.addEvent();
+            if (this.permissionList.indexOf("一键直连") > -1) {
+              name = "钉办";
+              this.$parent.changeTabStyle("2");
+              this.$parent.addEvent();
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
+          case 29:
+            if (this.permissionList.indexOf("13710督办") > -1) {
+              name = "13710督办";
+              this.$parent.changeTabStyle("1");
+              this.$parent.addEvent();
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
+          case 30:
+            if (this.permissionList.indexOf("市长热线") > -1) {
+              name = "市长热线";
+              this.$parent.changeTabStyle("3");
+              this.$parent.addEvent();
+            } else {
+              this.$toast("权限不足");
+            }
             break;
           case 9:
             if (this.permissionList.indexOf("重大改革") > -1) {

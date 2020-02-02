@@ -30,7 +30,7 @@ Vue.prototype.$setgoindex = function () {
 }
 Vue.use(Vant);
 // eruda.init();
-// const vConsole = new Vconsole();
+ const vConsole = new Vconsole();
 // Vue.use(vConsole)
 /* eslint-disable no-new */
 new Vue({
