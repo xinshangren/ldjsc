@@ -221,7 +221,7 @@
         <div style="position: relative;margin-top: 10px;">
           <img style="width: 94%;margin-left: 10px;margin-right: 10px;" src="../../assets/img/control_pic.png" />
           <div style="position: absolute;color: #ffffff;top: 24px;left: 33px;font-size:14px;">应急管理舱</div>
-          <div @click="godetile(111)"
+          <div @click="godetile(22)"
             style="position: absolute;color: #ffffff;top: 24px;left: 131px;border-radius: 3px;border: 1px solid #ffffff;padding: 2px 4px;font-size: 13px;">
             远程调度</div>
         </div>
@@ -234,27 +234,27 @@
           <div class="home_title_style" style="position: absolute;left: 40%;top: 27px;font-size:15px;">区县直通舱</div>
         </div>
         <ul class="ui-row" style="margin-top: 20px;">
-          <li @click="godetile(112)" class="ui-col ui-col-33 home_ul_li_style">
+          <li @click="godetile(23)" class="ui-col ui-col-33 home_ul_li_style">
             <img class="home_ul_li_img" src="../../assets/img/map1.png" />
             <div class="home_ul_li_div">城区</div>
           </li>
-          <li @click="godetile(112)" class="ui-col ui-col-33 home_ul_li_style">
+          <li @click="godetile(24)" class="ui-col ui-col-33 home_ul_li_style">
             <img class="home_ul_li_img" src="../../assets/img/map2.png" />
             <div class="home_ul_li_div">泽州县</div>
           </li>
-          <li @click="godetile(112)" class="ui-col ui-col-33 home_ul_li_style">
+          <li @click="godetile(25)" class="ui-col ui-col-33 home_ul_li_style">
             <img class="home_ul_li_img" src="../../assets/img/map3.png" />
             <div class="home_ul_li_div">高平市</div>
           </li>
-          <li @click="godetile(112)" class="ui-col ui-col-33 home_ul_li_style1">
+          <li @click="godetile(26)" class="ui-col ui-col-33 home_ul_li_style1">
             <img class="home_ul_li_img" src="../../assets/img/map4.png" />
             <div class="home_ul_li_div">阳城县</div>
           </li>
-          <li @click="godetile(112)" class="ui-col ui-col-33 home_ul_li_style1">
+          <li @click="godetile(27)" class="ui-col ui-col-33 home_ul_li_style1">
             <img class="home_ul_li_img" src="../../assets/img/map5.png" />
             <div class="home_ul_li_div">沁水县</div>
           </li>
-          <li @click="godetile(112)" class="ui-col ui-col-33 home_ul_li_style1">
+          <li @click="godetile(28)" class="ui-col ui-col-33 home_ul_li_style1">
             <img class="home_ul_li_img" src="../../assets/img/map6.png" />
             <div class="home_ul_li_div">陵川县</div>
           </li>
@@ -324,13 +324,14 @@
             onSuccess: function (info) {
               var code = info.code; // 通过该免登授权码可以获取用户身份
               var params = {
-                code: code
+                code:code,
               };
               httpMethod
                 .getUser(params)
                 .then(res => {
                   if (res.success == "1") {
                     this.permissionList = res.functions;
+                    alert(this.permissionList)
                     global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
                   } else if (res.success == "0") {
                   }
@@ -472,12 +473,12 @@
             }
             break;
           case 6:
-            if (this.permissionList.indexOf("能源态势") > -1) {
+            if (this.permissionList.indexOf("能源革命") > -1) {
 
               this.$router.push({
                 path: "/cyzx/nyts/nyts"
               });
-              name = "能源态势";
+              name = "能源革命";
               this.$parent.removeEvent();
             } else {
               this.$toast("权限不足");
@@ -608,8 +609,63 @@
               this.$toast("权限不足");
             }
             break;
+          case 22:
+            if (this.permissionList.indexOf("远程调度") > -1) {
+              name = "远程调度";
+              this.$toast("功能开发中");
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
+          case 23:
+            if (this.permissionList.indexOf("城区") > -1) {
+              name = "城区";
+              this.$toast("部署中");
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
+          case 24:
+            if (this.permissionList.indexOf("泽州县") > -1) {
+              name = "泽州县";
+              this.$toast("部署中");
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
+          case 25:
+            if (this.permissionList.indexOf("高平市") > -1) {
+              name = "高平市";
+              this.$toast("部署中");
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
+          case 26:
+            if (this.permissionList.indexOf("阳城县") > -1) {
+              name = "阳城县";
+              this.$toast("部署中");
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
+          case 27:
+            if (this.permissionList.indexOf("沁水县") > -1) {
+              name = "沁水县";
+              this.$toast("部署中");
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
+          case 28:
+            if (this.permissionList.indexOf("陵川县") > -1) {
+              name = "陵川县";
+              this.$toast("部署中");
+            } else {
+              this.$toast("权限不足");
+            }
+            break;
 
-         
           case 65:
             if (this.permissionList.indexOf("每日要情") > -1) {
               id = "65";
@@ -621,9 +677,6 @@
             } else {
               this.$toast("权限不足");
             }
-            break;
-          case 112:
-            this.$toast("部署中");
             break;
           default:
             this.$toast("功能开发中");
