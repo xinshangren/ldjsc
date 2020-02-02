@@ -285,7 +285,6 @@
       document.querySelector("body").setAttribute("style", "background:#f3f3f3");
     },
     beforeRouteEnter(to, from, next) {
-      console.log(from);
       if (to.path != "/main/home") {
         to.meta.keepAlive = true;
       } else {
@@ -318,20 +317,20 @@
     },
     methods: {
       getCuruserid: function () {
+        var self = this;
         dd.ready(function () {
           dd.runtime.permission.requestAuthCode({
             corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
             onSuccess: function (info) {
               var code = info.code; // 通过该免登授权码可以获取用户身份
               var params = {
-                code:code,
+                code: code,
               };
               httpMethod
                 .getUser(params)
                 .then(res => {
                   if (res.success == "1") {
-                    this.permissionList = res.functions;
-                    alert(this.permissionList)
+                    self.permissionList = res.functions;
                     global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
                   } else if (res.success == "0") {
                   }
@@ -354,7 +353,6 @@
         httpMethod
           .doAddAppLog(params)
           .then(res => {
-            console.log(res);
             if (res.success == "1") {
               global_variable.logId = res.logId;
               global_variable.ddPhone = res.ddPhone;
@@ -374,7 +372,6 @@
         httpMethod
           .getFrequentlyApp(params)
           .then(res => {
-            console.log(res);
             if (res.success == "1") {
               for (var i = 0; i < res.data.length; i++) {
                 var entity = res.data[i];
@@ -403,7 +400,6 @@
         httpMethod
           .doAddAppLogList(params)
           .then(res => {
-            console.log(res);
             if (res.success == "1") {
             }
           })
