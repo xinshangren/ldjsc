@@ -167,7 +167,7 @@ export default {
     changeTabStyle: function(tabid) {
       console.log("改变tab==" + tabid);
       if (tabid == 0) {
-        if ((this.permissionList, indexOf("综合信息") > -1)) {
+        if ((this.permissionList.indexOf("综合信息") > -1)) {
           this.tabid = tabid;
           mainJs.changeTabStyle(tabid);
         } else {
@@ -175,14 +175,14 @@ export default {
         }
       }
       if (tabid == 1) {
-        if ((this.permissionList, indexOf("13710督办") > -1)) {
+        if ((this.permissionList.indexOf("13710督办") > -1)) {
          this.$toast("功能开发中");
         } else {
           this.$toast("权限不足");
         }
       }
       if (tabid == 2) {
-        if ((this.permissionList, indexOf("一键直连") > -1)) {
+        if ((this.permissionList.indexOf("一键直连") > -1)) {
           this.tabid = tabid;
           mainJs.changeTabStyle(tabid);
         } else {
@@ -190,7 +190,7 @@ export default {
         }
       }
       if (tabid == 3) {
-        if ((this.permissionList, indexOf("市长热线") > -1)) {
+        if ((this.permissionList.indexOf("市长热线") > -1)) {
          this.$toast("功能开发中");
         } else {
           this.$toast("权限不足");
