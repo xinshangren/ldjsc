@@ -92,6 +92,8 @@ export default {
   mounted() {
     var context = this;
     context.permissionList = context.$refs.home.permissionList
+    console.log('main页面')
+    console.log(context.permissionList)
     $(".main_item").click(function() {
       var id = $(this).attr("id");
       context.changeTabStyle(id);
