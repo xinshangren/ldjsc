@@ -331,6 +331,7 @@
                 .getUser(params)
                 .then(res => {
                   if (res.success == "1") {
+                    console.log('---')
                     this.permissionList = res.functions;
                     console.log( this.permissionList );
                     global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
