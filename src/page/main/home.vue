@@ -314,7 +314,7 @@
       //   context.changeTabStyle(id);
       // });
       this.getCuruserid();
-      this.doAddAppLog("1264283316793072");
+     
     },
     methods: {
       getCuruserid: function () {
@@ -331,7 +331,9 @@
                 .then(res => {
                   if (res.success == "1") {
                     this.permissionList = res.functions;
+                    console.log( this.permissionList );
                     global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
+                     this.doAddAppLog(global_variable.userId);
                   } else if (res.success == "0") {
                   }
                 })
