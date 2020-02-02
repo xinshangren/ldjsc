@@ -395,15 +395,17 @@ export default {
               .getUser(params)
               .then(res => {
                 if (res.success == "1") {
-                 if(res.functions != null){
-                   this.permissionList = res.functions;
-                   console.log(this.permissionList);
-                   global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
-                   this.doAddAppLog(global_variable.userId);
-                 }else{
-                   self.$toast('权限不足，请联系管理员！');
-                   self.$parent.exit();
-                 }
+                  if (res.functions != null) {
+                    this.permissionList = res.functions;
+                    console.log(this.permissionList);
+                    global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
+                    this.doAddAppLog(global_variable.userId);
+                  } else {
+                    self.$toast("权限不足，请联系管理员！");
+                    dd.ready(function() {
+                      dd.biz.navigation.close();
+                    });
+                  }
                 } else if (res.success == "0") {
                 }
               })

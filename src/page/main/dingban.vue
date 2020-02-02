@@ -12,20 +12,10 @@
       @change="tabsclick"
     >
       <van-tab title="工作群" id="0">
-        <div style="height:100%;overflow:auto;">
-         
-          <iframe
-            ref="iframe"
-            id="bdIframe"
-            :src="url1"
-            frameborder="0"
-            scrolling="no"
-            style="width:100%;height:100%;border-width:0px;"
-          ></iframe>
-        </div>
+          <child5 v-bind:active="active"></child5>
       </van-tab>
       <van-tab title="市委市政府" id="2c9bfcdd6c3d7c42016c3d84d4a6000e">
-        <child1 v-bind:active="active"></child1>
+        <child1></child1>
       </van-tab>
 
       <van-tab title="市人大" id="8ae4804f6d39da6a016d4c924f5d0117">
@@ -47,6 +37,7 @@ import child1 from "@/page/dingban/swszf.vue";
 import child2 from "@/page/dingban/srd.vue";
 import child3 from "@/page/dingban/szx.vue";
 import child4 from "@/page/dingban/dsjyyj.vue";
+import child5 from "@/page/dingban/workq/workq.vue";
 import { httpMethod } from "../../api/getData.js";
 import global_variable from "../../api/global_variable.js";
 import vhtmlpanel from "@/components/HtmlPanel.vue";
@@ -69,13 +60,13 @@ export default {
       "8",
       "钉办"
     );
-    setTimeout(function() {
-      var oIframe = document.getElementById("bdIframe");
-      var deviceWidth = document.documentElement.clientWidth;
-      var deviceHeight = document.documentElement.clientHeight;
-      oIframe.style.width = Number(deviceWidth) + "px"; //数字是页面布局宽度差值
-      oIframe.style.height = Number(deviceHeight) - 110+ "px"; //数字是页面布局高度差
-    }, 600);
+    // setTimeout(function() {
+    //   var oIframe = document.getElementById("bdIframe");
+    //   var deviceWidth = document.documentElement.clientWidth;
+    //   var deviceHeight = document.documentElement.clientHeight;
+    //   oIframe.style.width = Number(deviceWidth) + "px"; //数字是页面布局宽度差值
+    //   oIframe.style.height = Number(deviceHeight) - 110+ "px"; //数字是页面布局高度差
+    // }, 600);
 
     // $("#gzqId").html("");
   },
@@ -147,7 +138,7 @@ export default {
     child2,
     child3,
     child4,
-    vhtmlpanel
+    child5
   }
 };
 </script>

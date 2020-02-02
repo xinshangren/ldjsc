@@ -41,6 +41,8 @@ import nyts_mt_xmlb_detailVue from '@/page/cyzx/nyts/nyts_mt/nyts_mt_xmlb/nyts_m
 import zdgz_mryqVue from '@/page/zdgz/mryq/mryq.vue'
 import zdgz_mryqDealiVue from '@/page/zdgz/mryq/mryqDeali/mryqDeali.vue'
 import jqvideos_dealVue from '@/page/qyly/jq/jqvideos_deali.vue'
+import workqDealiVue from '@/page/dingban/workq/workqDeali/workqDeali.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -218,6 +220,10 @@ export default new Router({
       path: '/qyly/jq/mryq/jqvideos_deali',
       name: 'jqvideos_dealVue',
       component: jqvideos_dealVue
+    },{
+      path: '/dingban/workq/workqDeali/workqDeali',
+      name: 'workqDeali',
+      component: workqDealiVue
     }
 
 
