@@ -334,13 +334,13 @@
 
 <script>
 import Vue from "vue";
-import { Search } from "vant";
+import { Search, Dialog } from "vant";
 import $ from "jquery";
 import { mainJs } from "../main/main.js";
 import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
 import global_variable from "../../api/global_variable.js";
-Vue.use(Search);
+Vue.use(Search).use(Dialog);
 export default {
   name: "homevue",
   beforeCreate() {
@@ -383,6 +383,7 @@ export default {
   },
   methods: {
     getCuruserid: function() {
+      var self = this;
       dd.ready(function() {
         dd.runtime.permission.requestAuthCode({
           corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
@@ -401,16 +402,19 @@ export default {
                     global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
                     this.doAddAppLog(global_variable.userId);
                   } else {
-                    self.$toast("权限不足，请联系管理员！");
-                    dd.ready(function() {
-                      dd.biz.navigation.close();
+                    Dialog.alert({
+                      message: "权限不足，请联系管理员！"
+                    }).then(() => {
+                      dd.ready(function() {
+                        dd.biz.navigation.close();
+                      });
                     });
                   }
                 } else if (res.success == "0") {
                 }
               })
               .catch(err => {
-                this.$toast(err);
+                self.$toast(err);
               });
           },
           onFail: function(err) {
