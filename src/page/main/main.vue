@@ -4,7 +4,7 @@
     <dingbanVue v-if="tabid==2" style="overflow-y:auto;overflow-x:hidden;margin-top:55px;"></dingbanVue>
     <homeVue
       v-if="tabid==4"
-      style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:55px;"
+      style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:55px;" ref ='home'
     ></homeVue>
 
     <div
@@ -54,7 +54,8 @@ export default {
         require("@/assets/img/icon_supervise.png"),
         require("@/assets/img/icon_ding.png"),
         require("@/assets/img/icon_hotline.png")
-      ]
+      ],
+      permissionList: []
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -90,6 +91,7 @@ export default {
   },
   mounted() {
     var context = this;
+    context.permissionList = context.$refs.home.permissionList
     $(".main_item").click(function() {
       var id = $(this).attr("id");
       context.changeTabStyle(id);
@@ -113,6 +115,9 @@ export default {
     window.removeEventListener("popstate", context.funback, false); //false阻止默认事件
   },
   methods: {
+    exit:function(){
+      this.$router.go(-3);
+    },
     removeEvent: function() {
       window.removeEventListener("popstate", this.funback, false); //false阻止默认事件
     },
@@ -132,7 +137,7 @@ export default {
               this.changeTabStyle("4");
               history.pushState(null, null, document.URL);
               this.isCreate = false;
-              this.isDeali=false;
+              this.isDeali = false;
             }
           } else {
             if (this.isCreate) {
@@ -152,22 +157,44 @@ export default {
               // this.$router.back(-100);
             }
           }
-          this.isDeali=false;
+          this.isDeali = false;
         }
-        this.isDeali=false;
+        this.isDeali = false;
       }
     },
     backGoHome: function() {},
     //改变tab的状态和图片
     changeTabStyle: function(tabid) {
-      console.log("改变tab=="+tabid);
-      if (tabid == 1 || tabid == 3) {
-        this.$toast("功能开发中");
-      } else {
-        
-        this.tabid = tabid;
-        mainJs.changeTabStyle(tabid);
-         
+      console.log("改变tab==" + tabid);
+      if (tabid == 0) {
+        if ((this.permissionList, indexOf("综合信息") > -1)) {
+          this.tabid = tabid;
+          mainJs.changeTabStyle(tabid);
+        } else {
+          this.$toast("权限不足");
+        }
+      }
+      if (tabid == 1) {
+        if ((this.permissionList, indexOf("13710督办") > -1)) {
+         this.$toast("功能开发中");
+        } else {
+          this.$toast("权限不足");
+        }
+      }
+      if (tabid == 2) {
+        if ((this.permissionList, indexOf("一键直连") > -1)) {
+          this.tabid = tabid;
+          mainJs.changeTabStyle(tabid);
+        } else {
+          this.$toast("权限不足");
+        }
+      }
+      if (tabid == 3) {
+        if ((this.permissionList, indexOf("市长热线") > -1)) {
+         this.$toast("功能开发中");
+        } else {
+          this.$toast("权限不足");
+        }
       }
     }
   },
