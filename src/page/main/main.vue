@@ -188,8 +188,8 @@ export default {
         } else {
           this.$toast("权限不足");
         }
-         this.tabid = tabid;
-          mainJs.changeTabStyle(tabid);
+        //  this.tabid = tabid;
+        //   mainJs.changeTabStyle(tabid);
       }
       if (tabid == 3) {
         if ((this.permissionList.indexOf("市长热线") > -1)) {
