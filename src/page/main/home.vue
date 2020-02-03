@@ -361,7 +361,7 @@ export default {
   },
   data() {
     return {
-      
+
       seach_value: "",
       appList: [],
       appLogList: [],

@@ -6,7 +6,6 @@
       v-if="tabid==4"
       style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:55px;"
       ref="home"
-      @returnParentList="returnParentList"
     ></homeVue>
 
     <div
@@ -43,6 +42,7 @@ import { Search } from "vant";
 import $ from "jquery";
 import { mainJs } from "../main/main.js";
 import global_variable from "../../api/global_variable.js";
+import dd from "dingtalk-jsapi";
 export default {
   name: "mainVue",
   data() {
@@ -93,6 +93,7 @@ export default {
   },
   mounted() {
     var context = this;
+    context.getCuruserid();
     $(".main_item").click(function() {
       var id = $(this).attr("id");
       context.changeTabStyle(id);
@@ -166,13 +167,9 @@ export default {
     backGoHome: function() {},
     //改变tab的状态和图片
     changeTabStyle: function(tabid) {
-       console.log("改变tab==" + tabid);
-      if (this.tabid == "4") {
-        
-        this.permissionList = this.$refs.home.returnParentList();
-        console.log("main页面");
-        console.log(this.permissionList);
-      }
+      console.log("改变tab==" + tabid);
+      console.log("main页面");
+      console.log(this.permissionList);
       if (tabid == 0) {
         if (this.permissionList.indexOf("综合信息") > -1) {
           this.tabid = tabid;
@@ -205,6 +202,40 @@ export default {
           this.$toast("权限不足");
         }
       }
+    },
+    getCuruserid: function() {
+      var self = this;
+      dd.ready(function() {
+        dd.runtime.permission.requestAuthCode({
+          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          onSuccess: function(info) {
+            var code = info.code; // 通过该免登授权码可以获取用户身份
+            var params = {
+              code: code
+            };
+            httpMethod
+              .getUser(params)
+              .then(res => {
+                console.log(res);
+                if (res.success == "1") {
+                  if (res.functions != null) {
+                    self.permissionList = res.functions;
+                    console.log("main权限" + res.functions);
+                  } else {
+                    console.log("关闭应用");
+                  }
+                } else if (res.success == "0") {
+                }
+              })
+              .catch(err => {
+                //self.$toast(err);
+              });
+          },
+          onFail: function(err) {
+            alert("dd error: " + JSON.stringify(err));
+          }
+        });
+      });
     }
   },
   components: {
