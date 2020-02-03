@@ -821,7 +821,6 @@ export default {
                 menu: "泽州县"
               }
             });
-            this.$toast("部署中");
           } else {
             this.$toast("权限不足");
           }
@@ -837,7 +836,6 @@ export default {
                 menu: "高平市"
               }
             });
-            this.$toast("部署中");
           } else {
             this.$toast("权限不足");
           }
@@ -853,7 +851,6 @@ export default {
                 menu: "阳城县"
               }
             });
-            this.$toast("部署中");
           } else {
             this.$toast("权限不足");
           }
@@ -869,7 +866,6 @@ export default {
                 menu: "沁水县"
               }
             });
-            this.$toast("部署中");
           } else {
             this.$toast("权限不足");
           }
@@ -885,7 +881,6 @@ export default {
                 menu: "陵川县"
               }
             });
-            this.$toast("部署中");
           } else {
             this.$toast("权限不足");
           }

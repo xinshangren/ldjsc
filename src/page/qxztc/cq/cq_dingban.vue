@@ -11,8 +11,16 @@
       title-active-color="#2796e7"
       @change="tabsclick"
     >
-      <van-tab v-for="(item,index) in departList" :key="index" :title="item.departname" :id="item.id">
-        <cq_dingbanDetailVue v-bind:active="active"></cq_dingbanDetailVue>
+      <van-tab
+        v-for="(item,index) in departList"
+        :key="index"
+        :title="item.departname"
+        :id="item.id"
+      >
+        <cq_dingbanDetailVue v-bind:departId="item.id"></cq_dingbanDetailVue>
+      </van-tab>
+      <van-tab v-if="isShow"  :title="areaName">
+        <img style="width:100%;" src="../../../assets/img/no-data.jpg" />
       </van-tab>
     </van-tabs>
   </div>
@@ -29,8 +37,10 @@ export default {
   name: "headline",
   data() {
     return {
+      isShow: false,
       departId: "",
       departList: [],
+      areaName: "",
       active: 0,
       data: {},
       url1:
@@ -40,13 +50,15 @@ export default {
     };
   },
   mounted() {
+    var params = this.$route.query;
+    this.areaName = params.menu;
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
-      this.$route.query.num,
-      this.$route.query.menu
+      params.num,
+      params.menu
     );
-    this.departId = this.$route.query.departId;
+    this.departId = params.departId;
     this.getDepartList(this.departId);
   },
   methods: {
@@ -59,8 +71,11 @@ export default {
         .goUserLogin(params)
         .then(res => {
           if (res.success == "1") {
-            self.departList = res.tSDepartList;
-            console.log(self.departList)
+            if (res.tSDepartList != null && res.tSDepartList.length>0) {
+              self.departList = res.tSDepartList;
+            } else {
+              self.isShow = true;
+            }
           } else if (res.success == "0") {
             self.$toast(res.msg);
           }
@@ -71,12 +86,9 @@ export default {
         });
     },
     changeactive: function(data) {
-      console.log(data);
       this.active = data;
     },
-    tabsclick: function(name, title) {
-      console.log(name);
-    }, //获取记录日志的logid
+    tabsclick: function(name, title) {}, //获取记录日志的logid
     doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
       var params = {
         logId: logId,
@@ -87,7 +99,6 @@ export default {
       httpMethod
         .doAddAppLogList(params)
         .then(res => {
-          console.log(res);
           if (res.success == "1") {
           }
         })
