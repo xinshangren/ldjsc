@@ -205,10 +205,6 @@ export default {
           this.$toast("权限不足");
         }
       }
-      if(tabid == 4){
-         this.tabid = tabid;
-          mainJs.changeTabStyle(tabid);
-      }
     }
   },
   components: {
