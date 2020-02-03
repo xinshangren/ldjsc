@@ -42,6 +42,7 @@ import { Search } from "vant";
 import $ from "jquery";
 import { mainJs } from "../main/main.js";
 import global_variable from "../../api/global_variable.js";
+import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
 export default {
   name: "mainVue",
