@@ -4,7 +4,9 @@
     <dingbanVue v-if="tabid==2" style="overflow-y:auto;overflow-x:hidden;margin-top:55px;"></dingbanVue>
     <homeVue
       v-if="tabid==4"
-      style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:55px;" ref ='home'
+      style="overflow-y:auto;overflow-x:hidden;margin-top:55px;padding-bottom:55px;"
+      ref="home"
+      @returnParentList="returnParentList"
     ></homeVue>
 
     <div
@@ -91,9 +93,6 @@ export default {
   },
   mounted() {
     var context = this;
-    context.permissionList = context.$refs.home.permissionList
-    console.log('main页面')
-    console.log(context.permissionList)
     $(".main_item").click(function() {
       var id = $(this).attr("id");
       context.changeTabStyle(id);
@@ -117,7 +116,7 @@ export default {
     window.removeEventListener("popstate", context.funback, false); //false阻止默认事件
   },
   methods: {
-    exit:function(){
+    exit: function() {
       this.$router.go(-3);
     },
     removeEvent: function() {
@@ -167,9 +166,14 @@ export default {
     backGoHome: function() {},
     //改变tab的状态和图片
     changeTabStyle: function(tabid) {
-      console.log("改变tab==" + tabid);
+       console.log("改变tab==" + tabid);
+      if (this.tabid == "4") {
+        this.permissionList = this.$refs.home.returnParentList();
+        console.log("main页面");
+        console.log(this.permissionList);
+      }
       if (tabid == 0) {
-        if ((this.permissionList.indexOf("综合信息") > -1)) {
+        if (this.permissionList.indexOf("综合信息") > -1) {
           this.tabid = tabid;
           mainJs.changeTabStyle(tabid);
         } else {
@@ -177,14 +181,14 @@ export default {
         }
       }
       if (tabid == 1) {
-        if ((this.permissionList.indexOf("13710督办") > -1)) {
-         this.$toast("功能开发中");
+        if (this.permissionList.indexOf("13710督办") > -1) {
+          this.$toast("功能开发中");
         } else {
           this.$toast("权限不足");
         }
       }
       if (tabid == 2) {
-        if ((this.permissionList.indexOf("一键直连") > -1)) {
+        if (this.permissionList.indexOf("一键直连") > -1) {
           this.tabid = tabid;
           mainJs.changeTabStyle(tabid);
         } else {
@@ -194,8 +198,8 @@ export default {
         //   mainJs.changeTabStyle(tabid);
       }
       if (tabid == 3) {
-        if ((this.permissionList.indexOf("市长热线") > -1)) {
-         this.$toast("功能开发中");
+        if (this.permissionList.indexOf("市长热线") > -1) {
+          this.$toast("功能开发中");
         } else {
           this.$toast("权限不足");
         }

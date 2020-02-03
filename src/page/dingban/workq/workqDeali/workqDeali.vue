@@ -39,6 +39,7 @@ import { Search } from "vant";
 import $ from "jquery";
 import { httpMethod } from "../../../../api/getData.js";
 import global_variable from "../../../../api/global_variable.js";
+import dd from "dingtalk-jsapi";
 export default {
   name: "workqDeali",
   data() {
@@ -49,7 +50,7 @@ export default {
       itemEnti: {},
       headUrl: require("../../../../assets/img/defaultImg.png"),
       entity: {},
-      corpId:""
+      corpId: ""
     };
   },
   beforeCreate() {
@@ -67,26 +68,28 @@ export default {
   },
   methods: {
     sjjq: function() {
+      var self = this;
       dd.ready(function() {
-        dd.runtime.info({
-          onSuccess: function(info) {
-            console.log("runtime info: " + JSON.stringify(info));
-          },
-          onFail: function(err) {
-            console.log("fail: " + JSON.stringify(err));
-          }
-        });
+        // dd.runtime.info({
+        //   onSuccess: function(info) {
+        //     console.log("runtime info: " + JSON.stringify(info));
+        //   },
+        //   onFail: function(err) {
+        //     console.log("fail: " + JSON.stringify(err));
+        //   }
+        // });
+        console.log(self.corpId);
         dd.biz.chat.toConversation({
-          corpId: this.corpId, ////企业id,必须是用户所属的企业的corpid
-          chatId: this.entity.groupNumber, //会话Id
+          corpId: self.corpId, ////企业id,必须是用户所属的企业的corpid
+          chatId: self.entity.groupNumber, //会话Id
           onSuccess: function(info) {
-            console.log(this.corpId);
-            console.log( this.entity.groupNumber);
+            console.log(self.corpId);
+            console.log(self.entity.groupNumber);
             console.log("toConversation info: " + JSON.stringify(info));
           },
           onFail: function(e) {
             console.log("toConversation fail: " + JSON.stringify(e));
-             this.$toast("系统出现问题，请稍后再试!");
+            //  this.$toast("系统出现问题，请稍后再试!");
           }
         });
       });
@@ -95,8 +98,8 @@ export default {
     getGroupInfo: function(dingUserId, groupId) {
       var params = {
         method: "groupDetail",
-        dingUserId:dingUserId,
-          // dingUserId: "1264283316793072",
+        dingUserId: dingUserId,
+        // dingUserId: "1264283316793072",
         groupId: groupId,
         groupName: ""
       };
@@ -131,6 +134,7 @@ export default {
         .then(res => {
           if (res.success == "1") {
             var data = JSON.parse(res.config);
+            console.log(res.config);
             this.corpId = data.corpId;
             dd.ready(function() {
               dd.config({
