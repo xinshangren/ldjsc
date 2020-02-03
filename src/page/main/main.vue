@@ -58,6 +58,39 @@ export default {
         require("@/assets/img/icon_ding.png"),
         require("@/assets/img/icon_hotline.png")
       ],
+      //   permissionList: [
+      //   "每日要情",
+      //   "重大改革",
+      //   "文明共创",
+      //   "重点工程",
+      //   "环保攻坚",
+      //   "经济运行",
+      //   "三大产业",
+      //   "招商引资",
+      //   "能源革命",
+      //   "热点问题",
+      //   "热点事件",
+      //   "工作效能",
+      //   "教育服务",
+      //   "12345",
+      //   "就业服务",
+      //   "行政审批",
+      //   "行政监督",
+      //   "全域旅游",
+      //   "游客画像",
+      //   "非遗保护",
+      //   "远程调度",
+      //   "城区",
+      //   "泽州县",
+      //   "高平市",
+      //   "阳城县",
+      //   "沁水县",
+      //   "陵川县",
+      //   "综合信息",
+      //   "13710督办",
+      //   "一键直连",
+      //   "市长热线"
+      // ],
       permissionList: []
     };
   },
@@ -72,6 +105,7 @@ export default {
     var context = this;
     if (to.path == "/") {
       if (
+        from.path != "/dingban/workq/workqDeali/workqDeali" &&
         from.path != "/toutiao/newsdetile" &&
         from.path != "/" &&
         from.name != null
@@ -144,18 +178,21 @@ export default {
             }
           } else {
             if (this.isCreate) {
+              dd.ready(function() {
+                dd.biz.navigation.close();
+              });
               console.log(window.history.length);
-              if (window.history.length <= 1) {
-                this.$router.push({ path: "/" });
-                return;
-              } else {
-                this.$router.go(-1);
-              }
+              // if (window.history.length <= 1) {
+              //   this.$router.push({ path: "/" });
+              //   return;
+              // } else {
+              //   this.$router.go(-1);
+              // }
               //上面都没执行就说明卡在当前页不是最后一条， histroy记录数量大于1，又没有回退记录，只能返回首页，
               //如果上面都执行了 页面都跳走了，这个也就不用管了
-              setTimeout(() => {
-                this.$router.push({ path: "/" });
-              }, 500);
+              // setTimeout(() => {
+              //   this.$router.push({ path: "/" });
+              // }, 500);
               // console.log(this.$router);
               // this.$router.back(-100);
             }
@@ -173,6 +210,7 @@ export default {
       console.log(this.permissionList);
       if (tabid == 0) {
         if (this.permissionList.indexOf("综合信息") > -1) {
+          this.isDeali=false;
           this.tabid = tabid;
           mainJs.changeTabStyle(tabid);
         } else {
@@ -181,6 +219,7 @@ export default {
       }
       if (tabid == 1) {
         if (this.permissionList.indexOf("13710督办") > -1) {
+           this.isDeali=false;
           this.$toast("功能开发中");
         } else {
           this.$toast("权限不足");
@@ -188,6 +227,7 @@ export default {
       }
       if (tabid == 2) {
         if (this.permissionList.indexOf("一键直连") > -1) {
+           this.isDeali=false;
           this.tabid = tabid;
           mainJs.changeTabStyle(tabid);
         } else {
@@ -198,10 +238,15 @@ export default {
       }
       if (tabid == 3) {
         if (this.permissionList.indexOf("市长热线") > -1) {
+           this.isDeali=false;
           this.$toast("功能开发中");
         } else {
           this.$toast("权限不足");
         }
+      }
+      if (tabid == 4) {
+        this.tabid = tabid;
+        mainJs.changeTabStyle(tabid);
       }
     },
     getCuruserid: function() {
