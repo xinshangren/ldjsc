@@ -370,7 +370,8 @@ export default {
       img4: require("../../assets/img/icon4.png"),
       img5: require("../../assets/img/icon6.png"),
       img6: require("../../assets/img/icon12.png"),
-      permissionList: []
+      permissionList: ["每日要情","重大改革","文明共创","重点工程","环保攻坚","经济运行","三大产业","招商引资","能源革命","热点问题","热点事件","工作效能","教育服务","12345","就业服务","行政审批","行政监督","全域旅游","游客画像","非遗保护","远程调度","城区","泽州县","高平市","阳城县","沁水县","陵川县","综合信息","13710督办","一键直连","市长热线"],
+      departId:"",
     };
   },
   mounted() {
@@ -540,22 +541,22 @@ export default {
           }
           break;
         case 5:
-          if (this.permissionList.indexOf("经济指数") > -1) {
+          if (this.permissionList.indexOf("经济运行") > -1) {
             this.$router.push({
               path: "/jjyx/jjyx_ztts/jjyx_ztts"
             });
-            name = "经济指数";
+            name = "经济运行";
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
           }
           break;
         case 6:
-          if (this.permissionList.indexOf("能源态势") > -1) {
+          if (this.permissionList.indexOf("能源革命") > -1) {
             this.$router.push({
               path: "/cyzx/nyts/nyts"
             });
-            name = "能源态势";
+            name = "能源革命";
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
@@ -719,7 +720,10 @@ export default {
         case 23:
           if (this.permissionList.indexOf("城区") > -1) {
             name = "城区";
-            this.$toast("部署中");
+              this.$router.push({
+              path: "/qxztc/cq/cq_dingban",
+              query:{departId:'402809816c1cc114016c1cc3cfc80005'}
+            });
           } else {
             this.$toast("权限不足");
           }
@@ -727,6 +731,7 @@ export default {
         case 24:
           if (this.permissionList.indexOf("泽州县") > -1) {
             name = "泽州县";
+            this.departId = "402809816c1cc114016c1cc43cff0007";
             this.$toast("部署中");
           } else {
             this.$toast("权限不足");
@@ -735,6 +740,7 @@ export default {
         case 25:
           if (this.permissionList.indexOf("高平市") > -1) {
             name = "高平市";
+             this.departId = "402809816c1cc114016c1cc49bb80009";
             this.$toast("部署中");
           } else {
             this.$toast("权限不足");
@@ -743,6 +749,7 @@ export default {
         case 26:
           if (this.permissionList.indexOf("阳城县") > -1) {
             name = "阳城县";
+            this.departId = "8a8180c970012108017003b8a6fb0045";
             this.$toast("部署中");
           } else {
             this.$toast("权限不足");
@@ -751,6 +758,7 @@ export default {
         case 27:
           if (this.permissionList.indexOf("沁水县") > -1) {
             name = "沁水县";
+            this.departId = "8a8180c970012108017003b8e60a0047";
             this.$toast("部署中");
           } else {
             this.$toast("权限不足");
@@ -759,6 +767,7 @@ export default {
         case 28:
           if (this.permissionList.indexOf("陵川县") > -1) {
             name = "陵川县";
+            this.departId = "8a8180c970012108017003b92b5a0049";
             this.$toast("部署中");
           } else {
             this.$toast("权限不足");
