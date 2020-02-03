@@ -415,6 +415,9 @@ export default {
     this.getCuruserid();
   },
   methods: {
+    returnParentList:function(){
+       return this.permissionList;
+    },
     getCuruserid: function() {
       var self = this;
       dd.ready(function() {
