@@ -43,7 +43,8 @@
         isLoading: false, //是否处于下拉刷新状态
         page: 1,
         pageSize: 4,
-        corpId: ""
+        corpId: "",
+        departId:"",
       };
     },
     mounted() {
