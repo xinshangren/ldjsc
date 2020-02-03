@@ -168,6 +168,7 @@ export default {
     changeTabStyle: function(tabid) {
        console.log("改变tab==" + tabid);
       if (this.tabid == "4") {
+        
         this.permissionList = this.$refs.home.returnParentList();
         console.log("main页面");
         console.log(this.permissionList);
