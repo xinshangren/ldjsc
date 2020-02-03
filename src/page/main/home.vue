@@ -340,6 +340,7 @@ import { mainJs } from "../main/main.js";
 import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
 import global_variable from "../../api/global_variable.js";
+import store from "../../store/store";
 Vue.use(Search).use(Dialog);
 export default {
   name: "homevue",
@@ -361,7 +362,6 @@ export default {
   },
   data() {
     return {
-
       seach_value: "",
       appList: [],
       appLogList: [],
@@ -371,39 +371,40 @@ export default {
       img4: require("../../assets/img/icon4.png"),
       img5: require("../../assets/img/icon6.png"),
       img6: require("../../assets/img/icon12.png"),
-      permissionList: [
-        "每日要情",
-        "重大改革",
-        "文明共创",
-        "重点工程",
-        "环保攻坚",
-        "经济运行",
-        "三大产业",
-        "招商引资",
-        "能源革命",
-        "热点问题",
-        "热点事件",
-        "工作效能",
-        "教育服务",
-        "12345",
-        "就业服务",
-        "行政审批",
-        "行政监督",
-        "全域旅游",
-        "游客画像",
-        "非遗保护",
-        "远程调度",
-        "城区",
-        "泽州县",
-        "高平市",
-        "阳城县",
-        "沁水县",
-        "陵川县",
-        "综合信息",
-        "13710督办",
-        "一键直连",
-        "市长热线"
-      ],
+      // permissionList: [
+      //   "每日要情",
+      //   "重大改革",
+      //   "文明共创",
+      //   "重点工程",
+      //   "环保攻坚",
+      //   "经济运行",
+      //   "三大产业",
+      //   "招商引资",
+      //   "能源革命",
+      //   "热点问题",
+      //   "热点事件",
+      //   "工作效能",
+      //   "教育服务",
+      //   "12345",
+      //   "就业服务",
+      //   "行政审批",
+      //   "行政监督",
+      //   "全域旅游",
+      //   "游客画像",
+      //   "非遗保护",
+      //   "远程调度",
+      //   "城区",
+      //   "泽州县",
+      //   "高平市",
+      //   "阳城县",
+      //   "沁水县",
+      //   "陵川县",
+      //   "综合信息",
+      //   "13710督办",
+      //   "一键直连",
+      //   "市长热线"
+      // ],
+      permissionList:[],
       departId: ""
     };
   },
@@ -416,8 +417,8 @@ export default {
     this.getCuruserid();
   },
   methods: {
-    returnParentList:function(){
-       return this.permissionList;
+    returnParentList: function() {
+      return this.permissionList;
     },
     getCuruserid: function() {
       var self = this;
@@ -531,6 +532,7 @@ export default {
     godetile: function(index) {
       var id = "";
       var name = "";
+      var isUploadLog = true;
       switch (parseInt(index)) {
         case 1:
           if (this.permissionList.indexOf("重点工程") > -1) {
@@ -541,6 +543,7 @@ export default {
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 2:
@@ -552,6 +555,7 @@ export default {
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 3:
@@ -563,6 +567,7 @@ export default {
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 4:
@@ -574,6 +579,7 @@ export default {
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 5:
@@ -585,6 +591,7 @@ export default {
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 6:
@@ -596,6 +603,7 @@ export default {
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 7:
@@ -605,6 +613,7 @@ export default {
             this.$parent.addEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 8:
@@ -614,36 +623,45 @@ export default {
             this.$parent.addEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 29:
           if (this.permissionList.indexOf("13710督办") > -1) {
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 30:
           if (this.permissionList.indexOf("市长热线") > -1) {
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 9:
           if (this.permissionList.indexOf("重大改革") > -1) {
             name = "重大改革";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 10:
           if (this.permissionList.indexOf("三大产业") > -1) {
             name = "三大产业";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -651,8 +669,10 @@ export default {
           if (this.permissionList.indexOf("招商引资") > -1) {
             name = "招商引资";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -660,8 +680,10 @@ export default {
           if (this.permissionList.indexOf("热点问题") > -1) {
             name = "热点问题";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -669,7 +691,9 @@ export default {
           if (this.permissionList.indexOf("热点事件") > -1) {
             name = "热点事件";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
+            isUploadLog = false;
             this.$toast("权限不足");
           }
           break;
@@ -678,8 +702,10 @@ export default {
           if (this.permissionList.indexOf("工作效能") > -1) {
             name = "工作效能";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -687,8 +713,10 @@ export default {
           if (this.permissionList.indexOf("教育服务") > -1) {
             name = "教育服务";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -696,8 +724,10 @@ export default {
           if (this.permissionList.indexOf("12345") > -1) {
             name = "12345";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -705,8 +735,10 @@ export default {
           if (this.permissionList.indexOf("就业服务") > -1) {
             name = "就业服务";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -714,8 +746,10 @@ export default {
           if (this.permissionList.indexOf("行政审批") > -1) {
             name = "行政审批";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -723,8 +757,10 @@ export default {
           if (this.permissionList.indexOf("行政监督") > -1) {
             name = "行政监督";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -732,8 +768,10 @@ export default {
           if (this.permissionList.indexOf("游客画像") > -1) {
             name = "游客画像";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
 
@@ -741,16 +779,20 @@ export default {
           if (this.permissionList.indexOf("非遗保护") > -1) {
             name = "非遗保护";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 22:
           if (this.permissionList.indexOf("远程调度") > -1) {
             name = "远程调度";
             this.$toast("功能开发中");
+            isUploadLog = false;
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 23:
@@ -758,7 +800,11 @@ export default {
             name = "城区";
             this.$router.push({
               path: "/qxztc/cq/cq_dingban",
-              query: { departId: "402809816c1cc114016c1cc3cfc80005", num: "23",menu:"城区" }
+              query: {
+                departId: "402809816c1cc114016c1cc3cfc80005",
+                num: "23",
+                menu: "城区"
+              }
             });
           } else {
             this.$toast("权限不足");
@@ -769,7 +815,11 @@ export default {
             name = "泽州县";
             this.$router.push({
               path: "/qxztc/cq/cq_dingban",
-              query: { departId: "402809816c1cc114016c1cc43cff0007", num: "24",menu:"泽州县"  }
+              query: {
+                departId: "402809816c1cc114016c1cc43cff0007",
+                num: "24",
+                menu: "泽州县"
+              }
             });
             this.$toast("部署中");
           } else {
@@ -781,7 +831,11 @@ export default {
             name = "高平市";
             this.$router.push({
               path: "/qxztc/cq/cq_dingban",
-              query: { departId: "402809816c1cc114016c1cc49bb80009", num: "25",menu:"高平市"  }
+              query: {
+                departId: "402809816c1cc114016c1cc49bb80009",
+                num: "25",
+                menu: "高平市"
+              }
             });
             this.$toast("部署中");
           } else {
@@ -793,7 +847,11 @@ export default {
             name = "阳城县";
             this.$router.push({
               path: "/qxztc/cq/cq_dingban",
-              query: { departId: "8a8180c970012108017003b8a6fb0045", num: "26",menu:"阳城县"  }
+              query: {
+                departId: "8a8180c970012108017003b8a6fb0045",
+                num: "26",
+                menu: "阳城县"
+              }
             });
             this.$toast("部署中");
           } else {
@@ -805,7 +863,11 @@ export default {
             name = "沁水县";
             this.$router.push({
               path: "/qxztc/cq/cq_dingban",
-              query: { departId: "8a8180c970012108017003b8e60a0047", num: "27",menu:"沁水县"  }
+              query: {
+                departId: "8a8180c970012108017003b8e60a0047",
+                num: "27",
+                menu: "沁水县"
+              }
             });
             this.$toast("部署中");
           } else {
@@ -817,7 +879,11 @@ export default {
             name = "陵川县";
             this.$router.push({
               path: "/qxztc/cq/cq_dingban",
-              query: { departId: "8a8180c970012108017003b92b5a0049", num: "28",menu:"陵川县"  }
+              query: {
+                departId: "8a8180c970012108017003b92b5a0049",
+                num: "28",
+                menu: "陵川县"
+              }
             });
             this.$toast("部署中");
           } else {
@@ -834,23 +900,28 @@ export default {
             this.$parent.removeEvent();
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         case 112:
           this.$toast("部署中");
+          isUploadLog = false;
           break;
         default:
           this.$toast("功能开发中");
+          isUploadLog = false;
           break;
       }
 
       if (index != 999) {
-        this.doAddAppLogList(
-          global_variable.logId,
-          global_variable.ddPhone,
-          id,
-          name
-        );
+        if (isUploadLog) {
+          this.doAddAppLogList(
+            global_variable.logId,
+            global_variable.ddPhone,
+            id,
+            name
+          );
+        }
       }
     }
   }
