@@ -42,7 +42,8 @@ import zdgz_mryqVue from '@/page/zdgz/mryq/mryq.vue'
 import zdgz_mryqDealiVue from '@/page/zdgz/mryq/mryqDeali/mryqDeali.vue'
 import jqvideos_dealVue from '@/page/qyly/jq/jqvideos_deali.vue'
 import workqDealiVue from '@/page/dingban/workq/workqDeali/workqDeali.vue'
-
+import cq_dingbanVue from '@/page/qxztc/cq/cq_dingban.vue'
+import cq_dingbanDetailVue from '@/page/qxztc/cq/cq_dingbanDetail.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -224,8 +225,16 @@ export default new Router({
       path: '/dingban/workq/workqDeali/workqDeali',
       name: 'workqDeali',
       component: workqDealiVue
+    },{
+      path: '/qxztc/cq/cq_dingban',
+      name: 'cq_dingban',
+      component: cq_dingbanVue
+    },{
+      path: '/qxztc/cq/cq_dingbanDetail',
+      name: 'cq_dingbanDetail',
+      component: cq_dingbanDetailVue
     }
-
+    
 
     
     

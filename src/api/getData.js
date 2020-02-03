@@ -44,10 +44,15 @@ export const httpMethod = {
     getUser: function (params) {
         return get("dingTalkController.action?getUser", params);
     },
-    //获取部门
+    //获取某部门下的用户
     getUserOrDepart: function (params) {
         return get("dingAppInsideController.action?getUserOrDepart", params);
     },
+    //获取通讯录部门信息
+    goUserLogin: function (params) {
+        return get("dingAppInsideController.action?goUserLogin", params);
+    },
+
 
     //指标接口
     findByTargetIds: function (params) {
