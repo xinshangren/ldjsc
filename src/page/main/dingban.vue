@@ -1,6 +1,8 @@
 <template>
   <div>
     <van-tabs
+      ref="tabId1"
+      id="tabId1"
       v-model="active"
       :sticky="false"
       :ellipsis="false"
@@ -11,8 +13,8 @@
       title-active-color="#2796e7"
       @change="tabsclick"
     >
-      <van-tab title="工作群" id="0">
-          <child5 v-bind:active="active"></child5>
+      <van-tab id="tabone" v-show="isShowTabOne" title="工作群">
+        <child5 @getWorkGroupList="getWorkGroupList"></child5>
       </van-tab>
       <van-tab title="市委市政府" id="2c9bfcdd6c3d7c42016c3d84d4a6000e">
         <child1></child1>
@@ -47,6 +49,8 @@ export default {
     return {
       active: 0,
       data: {},
+      workGroupList: [],
+      isShowTabOne: false,
       url1:
         "http://203.207.104.105:22001/gov-inter/pages/groupManage/myGroupList.html"
       // url1:
@@ -60,17 +64,33 @@ export default {
       "8",
       "钉办"
     );
-    // setTimeout(function() {
-    //   var oIframe = document.getElementById("bdIframe");
-    //   var deviceWidth = document.documentElement.clientWidth;
-    //   var deviceHeight = document.documentElement.clientHeight;
-    //   oIframe.style.width = Number(deviceWidth) + "px"; //数字是页面布局宽度差值
-    //   oIframe.style.height = Number(deviceHeight) - 110+ "px"; //数字是页面布局高度差
-    // }, 600);
-
-    // $("#gzqId").html("");
   },
   methods: {
+    //获取工作群
+    getWorkGroupList: function(list) {
+      console.log(list);
+      this.workGroupList = list;
+      if (list.length > 0) {
+        this.isShowTabOne = true;
+        //  var tablist = $(".van-tabs__nav.van-tabs__nav--line")
+        //   .children(":first")
+        //   .css("display", "");
+        //    $("#tabone").show();
+        // this.active=1;
+      } else {
+        this.isShowTabOne = false;
+        $("#tabone").hide();
+        $("#tabId1").children();
+        var tablist = $(".van-tabs__nav.van-tabs__nav--line")
+          .children(":first")
+          .css("display", "none");
+        console.log();
+
+        this.active = 1;
+        // [0].hide();
+      }
+      this.$refs.tabId1.resize();
+    },
     changeactive: function(data) {
       console.log(data);
       this.active = data;

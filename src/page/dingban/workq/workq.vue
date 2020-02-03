@@ -13,26 +13,21 @@
     line-height: 30px;
     margin-top: 9px;
     border-radius: 5px;
-"   
- @click="onSearch"
+"
+        @click="onSearch"
       >查询</div>
     </div>
     <div style="background:#ffffff;">
-      <div
-        v-for="(item,index) in list"
-        :key="index"
-        class="groupList"
-        @click="goDetile(item)"
-      >
+      <div v-for="(item,index) in list" :key="index" class="groupList" @click="goDetile(item)">
         <div style="display: flex;position: relative;">
-          <img src="../../../assets/img/group.png" class="groupLeftImg"/>
+          <img src="../../../assets/img/group.png" class="groupLeftImg" />
           <div style="line-height:33px;margin-left:12px;">{{item.name}}</div>
-          <img v-if="item.state==0" class="stateClass" src="../../../assets/img/zt1.png"  />
-          <img v-if="item.state==1" class="stateClass" src="../../../assets/img/zt2.png"  />
+          <img v-if="item.state==0" class="stateClass" src="../../../assets/img/zt1.png" />
+          <img v-if="item.state==1" class="stateClass" src="../../../assets/img/zt2.png" />
           <img v-if="item.state==2" class="stateClass" src="../../../assets/img/zt3.png" />
         </div>
       </div>
-       <img v-show="isshow" style="width:100%;" src="../../../assets/img/no-data.jpg" />
+      <img v-show="isshow" style="width:100%;" src="../../../assets/img/no-data.jpg" />
     </div>
   </div>
 </template>
@@ -48,7 +43,8 @@ export default {
     return {
       seach_value: "",
       list: [],
-      isshow:false
+      isshow: false,
+      indexFlag: 0
     };
   },
   beforeCreate() {
@@ -60,17 +56,20 @@ export default {
   },
   mounted() {
     this.getGroupInfo(1);
+     var list=[];
+    //  console.log(this.$parent.active);
+     
+    //  this.$parent.getWorkGroupList(list);
   },
   methods: {
     onSearch: function() {
-       this.getGroupInfo(1);
+      this.getGroupInfo(1);
     },
     //获取群列表
     getGroupInfo: function(flag) {
-     
       var params = {
         method: "myGroupList",
-        dingUserId:global_variable.userId,
+        dingUserId: global_variable.userId,
         // dingUserId:"086404192126244705",
         groupId: "",
         groupName: this.seach_value
@@ -80,20 +79,31 @@ export default {
         .then(res => {
           console.log(res);
           if (res.code == "success") {
-             this.list=[];
-            var datalist=res.data;
-            if(datalist!=null&&datalist.length>0){
-                 this.list =this.list.concat(res.data);
-                  // this.list =this.list.concat(res.data);
-                 this.isshow=false;
-            }else{
-              this.list=[];
-              this.isshow=true;
+            this.list = [];
+            var datalist = res.data;
+            if (datalist != null && datalist.length > 0) {
+              this.list = this.list.concat(res.data);
+              if (indexFlag == 0) {
+                 this.$emit("getWorkGroupList",this.list);
+                // this.$parent.getWorkGroupList(this.list);
+              }
+              indexFlag++;
+              // this.list =this.list.concat(res.data);
+              this.isshow = false;
+            } else {
+              this.list = [];
+              this.isshow = true;
+               if (indexFlag == 0) {
+                 this.$emit("getWorkGroupList",this.list);
+                // this.$parent.getWorkGroupList(this.list);
+              }
             }
-          
-          }else if(res.code == "fail"){
-               this.$toast(res.message);
-               this.isshow=true;
+          } else if (res.code == "fail") {
+            var list=[];
+              this.$emit("getWorkGroupList",list);
+            // this.$toast(res.message);
+            this.isshow = true;
+            
           }
         })
         .catch(err => {
