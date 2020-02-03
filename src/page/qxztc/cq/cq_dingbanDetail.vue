@@ -20,6 +20,7 @@
           <img src="../../../assets/img/sms.png" style="width: 50px;height:50px;margin-left: 5px;" @click="goSms(item)" />
           <img src="../../../assets/img/ding.png" style="width: 50px;height:50px;margin-left: 5px;" @click="goDing(item)" />
         </div>
+        <img v-show="isshow" style="width:100%;" src="../../../assets/img/no-data.jpg" />
       </div>
     </van-list>
   </div>
@@ -44,34 +45,41 @@
         page: 1,
         pageSize: 4,
         corpId: "",
-        departId:"",
+        isshow:false,
       };
     },
+    props:['departId'],
     mounted() {
       var orderHight1 = document.documentElement.clientHeight;
-      var heightlist = orderHight1 - 175;
+      var heightlist = orderHight1 - 122;
       document.getElementById("newslist1").style.height = heightlist + "px"
       this.gojq()
     },
     methods: {
-      getUserOrDepart: function () {
+      getUserOrDepart: function (departId) {
         var params = {
-          departId: "8a8781c56bcf2141016bcf25ff670005"
+          departId: departId
         };
         httpMethod
           .getUserOrDepart(params)
           .then(res => {
             if (res.success == "1") {
-              this.list = this.list.concat(res.userList);
-              for (var i = 0; i < this.list.length; i++) {
-                this.list[i].img = httpMethod.returnBaseUrlFun() + this.list[i].img
+              if(res.userList != null){
+                this.list = this.list.concat(res.userList);
+                for (var i = 0; i < this.list.length; i++) {
+                  this.list[i].img = httpMethod.returnBaseUrlFun() + this.list[i].img
+                }
+                this.finished = true;
+                this.isshow = false;
+              }else{
+                 this.isshow = true;
               }
-              this.finished = true;
             } else if (res.success == "0") {
               this.error = true;
             }
             this.loading = false;
             this.isLoading = false;
+            
           })
           .catch(err => {
             this.$toast(err);
@@ -86,7 +94,7 @@
         //上拉加载
         this.error = false;
         console.log("onLoad");
-        this.getUserOrDepart();
+        this.getUserOrDepart(this.departId);
       },
       gojq: function () {
         var currentUrl = window.location.href;//当前页面地址 
