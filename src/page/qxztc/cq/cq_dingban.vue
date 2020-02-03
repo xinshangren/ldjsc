@@ -43,8 +43,8 @@ export default {
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
-      "23",
-      "城区"
+      this.$route.query.num,
+      this.$route.query.menu
     );
     this.departId = this.$route.query.departId;
     this.getDepartList(this.departId);
