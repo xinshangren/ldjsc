@@ -155,7 +155,30 @@ export default {
                 timeStamp: data.timeStamp,
                 nonceStr: data.nonceStr,
                 signature: data.signature,
-                jsApiList: ["biz.chat.toConversation", "runtime.info"]
+               jsApiList: [
+                  "runtime.info",
+                  "biz.contact.choose",
+                  "device.notification.confirm",
+                  "device.notification.alert",
+                  "device.notification.prompt",
+                  "biz.ding.post",
+                  "biz.util.openLink",
+                  "device.audio",
+                  "device.audio.startRecord",
+                  "device.audio.stopRecord",
+                  "device.audio.translateVoice",
+                  "biz.ding.create",
+                  "biz.telephone.call",
+                  "biz.contact.complexPicker",
+                  "biz.util.open",
+                  "biz.chat.open",
+                  "biz.chat.pickConversation",
+                  "biz.user.get",
+                  "biz.util.uploadImage",
+                  "biz.chat.openSingleChat",
+                  "biz.ding.create",
+                  "biz.chat.toConversation"
+                ]
               });
               dd.error(function(error) {
                 console.log("dd error: " + JSON.stringify(error));

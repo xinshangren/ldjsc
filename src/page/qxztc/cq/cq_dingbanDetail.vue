@@ -120,6 +120,7 @@ export default {
           currentUrl.indexOf(window.location.hash)
         );
       }
+      console.log(currentUrl);
       var params = {
         currentUrl: currentUrl
       };
@@ -158,7 +159,8 @@ export default {
                   "biz.user.get",
                   "biz.util.uploadImage",
                   "biz.chat.openSingleChat",
-                  "biz.ding.create"
+                  "biz.ding.create",
+                  "biz.chat.toConversation"
                 ]
               });
               dd.error(function(error) {

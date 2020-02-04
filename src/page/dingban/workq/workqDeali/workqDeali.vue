@@ -30,7 +30,7 @@
 
     <!-- <div v-if="entity.state==2" class="workdealiBottomButton">申请</div> -->
 
-    <!-- <div v-if="entity.state==1" @click="sjjq()" class="workdealiBottomButton">点击进群</div> -->
+    <div v-if="entity.state==1" @click="sjjq()" class="workdealiBottomButton">点击进群</div>
   </div>
 </template>
 
@@ -63,7 +63,7 @@ export default {
   mounted() {
     this.itemEnti = this.$route.params.entity;
     console.log(JSON.stringify(this.$route.params.entity));
-    // this.gojq();
+    this.gojq();
     this.getGroupInfo(global_variable.userId, this.itemEnti.groupId);
   },
   methods: {
@@ -117,9 +117,29 @@ export default {
                 timeStamp: data.timeStamp,
                 nonceStr: data.nonceStr,
                 signature: data.signature,
-                jsApiList: [
-                  "biz.chat.toConversation",
+                  jsApiList: [
                   "runtime.info",
+                  "biz.contact.choose",
+                  "device.notification.confirm",
+                  "device.notification.alert",
+                  "device.notification.prompt",
+                  "biz.ding.post",
+                  "biz.util.openLink",
+                  "device.audio",
+                  "device.audio.startRecord",
+                  "device.audio.stopRecord",
+                  "device.audio.translateVoice",
+                  "biz.ding.create",
+                  "biz.telephone.call",
+                  "biz.contact.complexPicker",
+                  "biz.util.open",
+                  "biz.chat.open",
+                  "biz.chat.pickConversation",
+                  "biz.user.get",
+                  "biz.util.uploadImage",
+                  "biz.chat.openSingleChat",
+                  "biz.ding.create",
+                  "biz.chat.toConversation"
                 ]
               });
               dd.error(function(error) {
