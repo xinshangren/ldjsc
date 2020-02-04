@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-list
-      id="newslist1"
+      id="newslist5"
       v-model="loading"
       :finished="finished"
       @load="onLoad"
@@ -16,18 +16,18 @@
         :key="item.id"
       >
         <input
-          :id="'dsjyyjid'+index"
+          :id="'qxqkfqid'+index"
           hidden
           type="checkbox"
           :value="item.dingid"
           v-model="callPhoneList"
           @change="addPhone"
         />
-        <label :for="'dsjyyjid'+index" class="active"></label>
+        <label :for="'qxqkfqid'+index" class="active"></label>
         <img :src="item.img" style="margin: 15px 10px 15px 22px; width: 60px;height:60px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
-          <div style="margin-top: 20px;max-width: 60px;">{{item.dutyName}}</div>
+          <div style="margin-top: 20px;">{{item.dutyName}}</div>
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 10px;">
           <img
@@ -60,7 +60,7 @@ export default {
   name: "picsnews",
   data() {
     return {
-      userId: "", //暂时默认
+      userId: "8ae4804f6d39da6a016d4c928ede0119", //暂时默认
       error: false,
       list: [],
       loading: false, //是否处于加载状态
@@ -71,30 +71,31 @@ export default {
       corpId: "",
       callPhoneList: [],
       callButton: false,
-      map:{},
+      map: {}
     };
   },
   mounted() {
     var orderHight1 = document.documentElement.clientHeight;
     var heightlist = orderHight1 - 175;
-    document.getElementById("newslist1").style.height = heightlist + "px";
+    document.getElementById("newslist5").style.height = heightlist + "px";
     this.gojq();
   },
   methods: {
-    addPhone:function(){
-      console.log("dsjyyj页面")
+    addPhone: function() {
+      console.log("qxqkfq页面");
       this.map.callPhoneList = this.callPhoneList;
-      this.map.flag = 'dsjyyj';
-      console.log(this.map)
-      this.$emit('addPhone', this.map);
+      this.map.flag = "qxqkfq";
+      console.log(this.map);
+      this.$emit("addPhone", this.map);
     },
     getUserOrDepart: function() {
       var params = {
-        departId: "8a8180c9700ff44e017010166e88000d"
+        departId: "402809816c1cc114016c1cc330320003"
       };
       httpMethod
         .getUserOrDepart(params)
         .then(res => {
+          console.log(res)
           if (res.success == "1") {
             this.list = this.list.concat(res.userList);
             for (var i = 0; i < this.list.length; i++) {
@@ -138,6 +139,7 @@ export default {
       httpMethod
         .getConfig(params)
         .then(res => {
+          console.log(res)
           if (res.success == "1") {
             var data = JSON.parse(res.config);
             this.corpId = data.corpId;

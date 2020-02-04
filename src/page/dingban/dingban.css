@@ -1,9 +1,10 @@
 
 .active{
+    margin-left: -32px;
     margin-top: 32px;
-    height: 25px;
-    width:25px;
-    background-size:14px;
+    height: 20px;
+    width:20px;
+    background-size:20px;
     background-image: url("../../assets/img/choice1.png");
     background-repeat: no-repeat;
     background-position: center;

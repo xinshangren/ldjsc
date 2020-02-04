@@ -16,21 +16,34 @@
       <van-tab id="tabone" v-show="isShowTabOne" title="工作群">
         <child5 @getWorkGroupList="getWorkGroupList"></child5>
       </van-tab>
-      <van-tab title="市委市政府" id="2c9bfcdd6c3d7c42016c3d84d4a6000e">
-        <child1></child1>
+      <van-tab title="市委常委" id="8a8180c9700ff44e01701014c9940006">
+        <child1 v-on:addPhone="addPhone"></child1>
       </van-tab>
 
-      <van-tab title="市人大" id="8ae4804f6d39da6a016d4c924f5d0117">
-        <child2 style></child2>
+      <van-tab title="市政府" id="8a8180c9700ff44e01701015295f0008">
+        <child2 style v-on:addPhone="addPhone"></child2>
       </van-tab>
-      <van-tab title="市政协" id="8ae4804f6d39da6a016d4c928ede0119">
-        <child3 style></child3>
+      <van-tab title="市委工作部门" id="8a8180c9700ff44e01701016140f000b">
+        <child3 style v-on:addPhone="addPhone"></child3>
       </van-tab>
 
-      <van-tab title="大数据应用局" id="8a8781c56bcf2141016bcf25ff670005">
-        <child4 style></child4>
+      <van-tab title="市政府工作部门" id="8a8180c9700ff44e017010166e88000d">
+        <child4 style v-on:addPhone="addPhone"></child4>
+      </van-tab>
+      <van-tab title="县市区开发区" id="402809816c1cc114016c1cc330320003">
+        <child6 style v-on:addPhone="addPhone"></child6>
       </van-tab>
     </van-tabs>
+    <img
+      id="leftAreaDivId"
+      v-show="callButton"
+      style="height: 53px; 
+    position: absolute;
+    right: 3px;
+        bottom: 56px;"
+      src="../../assets/img/dial.png"
+      @click="goDingPhone"
+    />
   </div>
 </template>
 <script>
@@ -39,14 +52,24 @@ import child1 from "@/page/dingban/swszf.vue";
 import child2 from "@/page/dingban/srd.vue";
 import child3 from "@/page/dingban/szx.vue";
 import child4 from "@/page/dingban/dsjyyj.vue";
+import child6 from "@/page/dingban/qxqkfq.vue";
 import child5 from "@/page/dingban/workq/workq.vue";
 import { httpMethod } from "../../api/getData.js";
 import global_variable from "../../api/global_variable.js";
 import vhtmlpanel from "@/components/HtmlPanel.vue";
+import dd from "dingtalk-jsapi";
 export default {
   name: "headline",
   data() {
     return {
+      corpId:"",
+      swszf: [],
+      srd: [],
+      szx: [],
+      dsjyyj: [],
+      qxqkfq:[],
+      callPhoneList: [],
+      callButton: false,
       active: 0,
       data: {},
       workGroupList: [],
@@ -64,8 +87,116 @@ export default {
       "8",
       "钉办"
     );
+    this.gojq();
   },
   methods: {
+     gojq: function() {
+      var currentUrl = window.location.href; //当前页面地址
+      if (window.location.hash == "#/") {
+        currentUrl = currentUrl.substring(
+          0,
+          currentUrl.indexOf(window.location.hash)
+        );
+      }
+      var params = {
+        currentUrl: currentUrl
+      };
+
+      httpMethod
+        .getConfig(params)
+        .then(res => {
+          if (res.success == "1") {
+            var data = JSON.parse(res.config);
+            this.corpId = data.corpId;
+            dd.ready(function() {
+              dd.config({
+                agentId: data.agentId,
+                corpId: data.corpId,
+                timeStamp: data.timeStamp,
+                nonceStr: data.nonceStr,
+                signature: data.signature,
+                jsApiList: [
+                  "runtime.info",
+                  "biz.contact.choose",
+                  "device.notification.confirm",
+                  "device.notification.alert",
+                  "device.notification.prompt",
+                  "biz.ding.post",
+                  "biz.util.openLink",
+                  "device.audio",
+                  "device.audio.startRecord",
+                  "device.audio.stopRecord",
+                  "device.audio.translateVoice",
+                  "biz.ding.create",
+                  "biz.telephone.call",
+                  "biz.contact.complexPicker",
+                  "biz.util.open",
+                  "biz.chat.open",
+                  "biz.chat.pickConversation",
+                  "biz.user.get",
+                  "biz.util.uploadImage",
+                  "biz.chat.openSingleChat",
+                  "biz.ding.create"
+                ]
+              });
+              dd.error(function(error) {
+                alert("dd error: " + JSON.stringify(error));
+              });
+            });
+          } else if (res.success == "0") {
+            this.error = true;
+          }
+        })
+        .catch(err => {
+          this.$toast(err);
+        });
+    },
+    addPhone: function(map) {
+      if (map != null) {
+        if (map.flag == "swszf") {
+          this.swszf = map.callPhoneList;
+        } else if (map.flag == "srd") {
+          this.srd = map.callPhoneList;
+        } else if (map.flag == "szx") {
+          this.szx = map.callPhoneList;
+        } else if (map.flag == "dsjyyj") {
+          this.dsjyyj = map.callPhoneList;
+        }else if (map.flag == "qxqkfq") {
+          this.qxqkfq = map.callPhoneList;
+        }
+      }
+      var a = [];
+      var b = a.concat(this.swszf)
+      var c = b.concat(this.szx)
+      var d = c.concat(this.srd)
+      var e = d.concat(this.dsjyyj)
+      var f = e.concat(this.qxqkfq)
+      this.callPhoneList = f;
+      console.log("父页面");
+      console.log(this.callPhoneList);
+      if (this.callPhoneList != null && this.callPhoneList.length > 0) {
+        this.callButton = true;
+      } else {
+        this.callButton = false;
+      }
+      console.log(this.callButton);
+    },
+    //群视频会议
+    goDingPhone() {
+      var ddd = this.corpId;
+      var users = this.callPhoneList;
+      console.log(users);
+      dd.ready(function() {
+        dd.biz.telephone.call({
+          users: users, //用户列表，工号
+          corpId: ddd, //企业id
+          onSuccess: function() {},
+          onFail: function(e) {
+            alert("打电话错误" + JSON.stringify(e));
+          }
+        });
+      });
+    },
     //获取工作群
     getWorkGroupList: function(list) {
       console.log(list);
@@ -158,7 +289,8 @@ export default {
     child2,
     child3,
     child4,
-    child5
+    child5,
+    child6
   }
 };
 </script>

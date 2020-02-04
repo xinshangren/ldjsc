@@ -9,6 +9,7 @@ import pzjcVue from '@/page/toutiao/pzjc.vue'
 import swszfVue from '@/page/dingban/swszf.vue'
 import szxVue from '@/page/dingban/szx.vue'
 import dsjyyjVue from '@/page/dingban/dsjyyj.vue'
+import qxqkfqVue from '@/page/dingban/qxqkfq.vue'
 import srdVue from '@/page/dingban/srd.vue'
 import newsdetileVue from '@/page/toutiao/newsdetile.vue'
 import ldzcVue from '@/page/toutiao/ldzc.vue'
@@ -96,6 +97,10 @@ export default new Router({
       path: '/dingban/dsjyyj',
       name: 'dsjyyj',
       component: dsjyyjVue
+    }, {
+      path: '/dingban/qxqkfq',
+      name: 'qxqkfq',
+      component: qxqkfqVue
     }, {
       path: '/toutiao/newsdetile',
       name: 'newsdetile',

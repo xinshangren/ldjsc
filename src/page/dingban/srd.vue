@@ -11,7 +11,7 @@
       style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;"
     >
       <div
-        style="display: flex; position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+        style="margin-left: 32px;width: 90%;display: flex; position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
         v-for="(item,index) of list"
         :key="item.id"
       >
@@ -24,10 +24,10 @@
           @change="addPhone"
         />
         <label :for="'srdid'+index" class = "active"></label>
-        <img :src="item.img" style="margin: 15px 10px 15px 2px; width: 60px;height:60px;" />
+        <img :src="item.img" style="margin: 15px 10px 15px 22px; width: 60px;height:60px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
-          <div>{{item.realname}}</div>
-          <div style="margin-top: 20px;">{{item.dutyName}}</div>
+          <div style="max-width:60px;">{{item.realname}}</div>
+          <div style="margin-top: 20px;max-width: 60px;">{{item.dutyName}}</div>
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 10px;">
           <img
@@ -48,16 +48,6 @@
         </div>
       </div>
     </van-list>
-    <img
-      id="leftAreaDivId"
-      v-show="callButton"
-      style="height: 53px; 
-    position: absolute;
-    right: 3px;
-        bottom: 3px;"
-      src="../../assets/img/dial.png"
-      @click="goDingPhone"
-    />
   </div>
 </template>
 <script>
@@ -80,7 +70,8 @@ export default {
       pageSize: 4,
       corpId: "",
       callPhoneList: [],
-      callButton: false
+      callButton: false,
+      map:{},
     };
   },
   mounted() {
@@ -90,34 +81,16 @@ export default {
     this.gojq();
   },
   methods: {
-    addPhone: function() {
-      console.log(this.callPhoneList);
-      if (this.callPhoneList != null && this.callPhoneList.length > 0) {
-        this.callButton = true;
-      } else {
-        this.callButton = false;
-      }
-      console.log(this.callButton);
-    },
-    //群视频会议
-    goDingPhone() {
-      var ddd = this.corpId;
-      var users = this.callPhoneList;
-      console.log(users);
-      dd.ready(function() {
-        dd.biz.telephone.call({
-          users: users, //用户列表，工号
-          corpId: ddd, //企业id
-          onSuccess: function() {},
-          onFail: function(e) {
-            alert("打电话错误" + JSON.stringify(e));
-          }
-        });
-      });
+     addPhone:function(){
+      console.log("srd页面")
+      this.map.callPhoneList = this.callPhoneList;
+      this.map.flag = 'srd';
+      console.log(this.map)
+      this.$emit('addPhone', this.map);
     },
     getUserOrDepart: function() {
       var params = {
-        departId: "8ae4804f6d39da6a016d4c924f5d0117"
+        departId: "8a8180c9700ff44e01701015295f0008"
       };
       httpMethod
         .getUserOrDepart(params)
