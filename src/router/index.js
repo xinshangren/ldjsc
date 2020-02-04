@@ -44,6 +44,8 @@ import jqvideos_dealVue from '@/page/qyly/jq/jqvideos_deali.vue'
 import workqDealiVue from '@/page/dingban/workq/workqDeali/workqDeali.vue'
 import cq_dingbanVue from '@/page/qxztc/cq/cq_dingban.vue'
 import cq_dingbanDetailVue from '@/page/qxztc/cq/cq_dingbanDetail.vue'
+import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDealiFj.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -216,7 +218,12 @@ export default new Router({
     },{
       path: '/zdgz/mryq/mryq/mryqDeali',
       name: 'mryqDealiVue',
-      component: zdgz_mryqDealiVue
+      component: zdgz_mryqDealiVue,
+      meta:{keepAlive:true}
+    },{
+      path: '/zdgz/mryq/mryq/mryqDeali/mryqDealiFj',
+      name: 'mryqDealiFjVue',
+      component: zdgz_mryqDealiFjVue
     },{
       path: '/qyly/jq/mryq/jqvideos_deali',
       name: 'jqvideos_dealVue',

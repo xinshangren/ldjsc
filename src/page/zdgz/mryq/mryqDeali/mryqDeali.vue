@@ -67,6 +67,13 @@ export default {
   methods: {
     openFj: function(item) {
       console.log(item);
+       this.$router.push({
+        path: "/zdgz/mryq/mryq/mryqDeali/mryqDealiFj",
+        name: "mryqDealiFjVue",
+        params: {
+          entity: item
+        }
+      });
     },
     //获取记录日志的logid
     doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
@@ -89,10 +96,10 @@ export default {
     },
     goDetile(item) {
       this.$router.push({
-        path: "/toutiao/newsdetile",
-        name: "newsdetile",
+        path: "/zdgz/mryq/mryq/mryqDeali/mryqDealiFj",
+        name: "mryqDealiFjVue",
         params: {
-          articleId: id
+          entity: item
         }
       });
     }

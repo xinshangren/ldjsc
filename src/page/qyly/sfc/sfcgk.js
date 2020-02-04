@@ -87,7 +87,7 @@ export const echarsEnti = {
           // center: ['40%', '50%'],
           center: ["28%", "50%"],
           radius: ["40%", "70%"],
-          left:'100%',
+          left: '100%',
           data: dataList,
           itemStyle: {
             emphasis: {
@@ -120,15 +120,15 @@ export const echarsEnti = {
     var rankList = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
     var valueList = [];
     for (var i = 0; i < result.length; i++) {
-        var entity = result[i];
-        var name = entity.name; //城市名称
-        var cityRank = entity.cityRank; //城市名称
-        var visitor = entity.visitor; //值
-        nameList.push(name);
-        if (name === '晋城市') {
-            // showEcharsView1_ssgk1(result, rankList[i],value1,echarts);
-        }
-        valueList.push(parseFloat(visitor).toFixed(0));
+      var entity = result[i];
+      var name = entity.name; //城市名称
+      var cityRank = entity.cityRank; //城市名称
+      var visitor = entity.visitor; //值
+      nameList.push(name);
+      if (name === '晋城市') {
+        // showEcharsView1_ssgk1(result, rankList[i],value1,echarts);
+      }
+      valueList.push(parseFloat(visitor).toFixed(0));
     }
 
     var maxValue = Math.max.apply(null, valueList);
@@ -137,139 +137,155 @@ export const echarsEnti = {
     var wYValueList = [];
     var zeroValueList = [];
     for (var i = 0; i < result.length; i++) {
-        var name = entity.name; //城市名称
-        var visitor = entity.visitor; //值
-        nyValueList.push(maxValue - 0.1);
-        wYValueList.push(maxValue);
-        zeroValueList.push(0);
+      var name = entity.name; //城市名称
+      var visitor = entity.visitor; //值
+      nyValueList.push(maxValue - 0.1);
+      wYValueList.push(maxValue);
+      zeroValueList.push(0);
     }
     var myColor = ['#57155d', '#b83b5d', '#b83b5d', '#e35e5f',
-        '#e35e5f', '#f0a15c', '#f0a15c', '#c5d686', '#c5d686', '#c5d686'
+      '#e35e5f', '#f0a15c', '#f0a15c', '#c5d686', '#c5d686', '#c5d686'
     ];
     let option = {
-        backgroundColor: '',
-        grid: {
-            left: '12%',
-            top: '0%',
-            right: '12%',
-            bottom: '-10%',
-            containLabel: true
+      backgroundColor: '',
+      grid: {
+        left: '12%',
+        top: '0%',
+        right: '12%',
+        bottom: '-10%',
+        containLabel: true
+      },
+      xAxis: [{
+        show: false,
+      }],
+      color: myColor,
+      yAxis: [{
+        axisTick: 'none',
+        axisLine: 'none',
+        offset: '17',
+        axisLabel: {
+          textStyle: {
+            color: '#000000',
+            fontSize: '10',
+          }
         },
-        xAxis: [{
-            show: false,
-        }],
-        color: myColor,
-        yAxis: [{
-            axisTick: 'none',
-            axisLine: 'none',
-            offset: '17',
-            axisLabel: {
-                textStyle: {
-                    color: '#000000',
-                    fontSize: '10',
-                }
-            },
-            data: nameList
-        }, {
-            axisTick: 'none',
-            axisLine: 'none',
-            axisLabel: {
-                textStyle: {
-                    color: '#000000',
-                    fontSize: '10',
-                }
-            },
-            data: rankList
-        }, {
-            name: '',
-            nameGap: '10',
-            nameTextStyle: {
-                color: '#000000',
-                fontSize: '10',
-            },
-            axisLine: {
-                lineStyle: {
-                    color: 'rgba(0,0,0,0)'
-                }
-            },
-            data: [],
-        }],
-        series: [{
-            name: '条',
-            type: 'bar',
-            yAxisIndex: 0,
-            data: valueList,
-            label: {
-                normal: {
-                    show: true,
-                    position: 'right',
-                    textStyle: {
-                        color: '#000000',
-                        fontSize: '10',
-                    }
-                }
-            },
-            barWidth: 5,
-            itemStyle: {
-                normal: {
-                    color: function (params) {
-                        var num = myColor.length;
-                        return myColor[params.dataIndex]
-                    },
-                }
-            },
-            z: 2
-        }, {
-            name: '白框',
-            type: 'bar',
-            yAxisIndex: 1,
-            barGap: '-100%',
-            data: nyValueList,
-            barWidth: 7,
-            itemStyle: {
-                normal: {
-                    color: '#ffffff',
-                    barBorderRadius: 5,
-                }
-            },
-            z: 1
-        }, {
-            name: '外框',
-            type: 'bar',
-            yAxisIndex: 2,
-            barGap: '-100%',
-            data: wYValueList,
-            barWidth: 8,
-            itemStyle: {
-                normal: {
-                    color: function (params) {
-                        var num = myColor.length;
-                        return myColor[params.dataIndex]
-                    },
-                    barBorderRadius: 5,
-                }
-            },
-            z: 0
+        data: nameList
+      }, {
+        axisTick: 'none',
+        axisLine: 'none',
+        axisLabel: {
+          textStyle: {
+            color: '#000000',
+            fontSize: '10',
+          }
         },
-        {
-            name: '外圆',
-            type: 'scatter',
-            hoverAnimation: false,
-            data:zeroValueList,
-            yAxisIndex: 2,
-            symbolSize: 8,
-            itemStyle: {
-                normal: {
-                    color: function (params) {
-                        var num = myColor.length;
-                        return myColor[params.dataIndex]
-                    },
-                    opacity: 1,
-                }
+        data: rankList
+      }, {
+        name: '',
+        nameGap: '10',
+        nameTextStyle: {
+          color: '#000000',
+          fontSize: '10',
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(0,0,0,0)'
+          }
+        },
+        data: [],
+      }],
+      series: [{
+        name: '条',
+        type: 'bar',
+        yAxisIndex: 0,
+        data: valueList,
+        label: {
+          normal: {
+            show: true,
+            position: 'right',
+            textStyle: {
+              color: '#000000',
+              fontSize: '10',
             },
-            z: 2
-        }
-        ]
+            formatter: function (a) {
+              var result = [],
+                counter = 0,
+                num = a.data;
+              num = (num || 0).toString().split('');
+              for (var i = num.length - 1; i >= 0; i--) {
+                counter++;
+                result.unshift(num[i]);
+                if (!(counter % 3) && i != 0) {
+                  result.unshift(',');
+                }
+              }
+              result.unshift("");
+              result = result.join('');
+              return result;
+            }
+          }
+        },
+        barWidth: 5,
+        itemStyle: {
+          normal: {
+            color: function (params) {
+              var num = myColor.length;
+              return myColor[params.dataIndex]
+            },
+          }
+        },
+        z: 2
+      }, {
+        name: '白框',
+        type: 'bar',
+        yAxisIndex: 1,
+        barGap: '-100%',
+        data: nyValueList,
+        barWidth: 7,
+        itemStyle: {
+          normal: {
+            color: '#ffffff',
+            barBorderRadius: 5,
+          }
+        },
+        z: 1
+      }, {
+        name: '外框',
+        type: 'bar',
+        yAxisIndex: 2,
+        barGap: '-100%',
+        data: wYValueList,
+        barWidth: 8,
+        itemStyle: {
+          normal: {
+            color: function (params) {
+              var num = myColor.length;
+              return myColor[params.dataIndex]
+            },
+            barBorderRadius: 5,
+          }
+        },
+        z: 0
+      },
+      {
+        name: '外圆',
+        type: 'scatter',
+        hoverAnimation: false,
+        data: zeroValueList,
+        yAxisIndex: 2,
+        symbolSize: 8,
+        itemStyle: {
+          normal: {
+            color: function (params) {
+              var num = myColor.length;
+              return myColor[params.dataIndex]
+            },
+            opacity: 1,
+          }
+        },
+        z: 2
+      }
+      ]
     };
     myCharts.setOption(option);
   },

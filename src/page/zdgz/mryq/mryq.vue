@@ -16,7 +16,7 @@
               style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 5px;line-height: 13px;vertical-align: middle; margin-top: 5px;"
             >
               <img src="../../../assets/img/icon_time.png" style="height: 13px;" />
-              {{item.updDate}}
+              {{item.createDate}}
             </div>
           </div>
         </div>
@@ -103,8 +103,8 @@ export default {
               var dataNew = [];
               dataNew = data;
               for (var i = 0; i < data.length; i++) {
-                var updDate = this.dateFormat(data[i].updDate);
-                data[i].updDate = updDate;
+                var createDate = this.dateFormat(data[i].createDate);
+                data[i].createDate = createDate;
               }
               this.list = this.list.concat(data);
             }
