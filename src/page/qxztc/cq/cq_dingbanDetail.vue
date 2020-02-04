@@ -114,7 +114,7 @@ export default {
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
-      if (window.location.hash == "#/") {
+      if (window.location.hash == "#/" || window.location.hash == "#/qxztc/cq/cq_dingban") {
         currentUrl = currentUrl.substring(
           0,
           currentUrl.indexOf(window.location.hash)
