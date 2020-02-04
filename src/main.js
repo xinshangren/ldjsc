@@ -18,18 +18,8 @@ import router from './router'
 //Vue.prototype.$moment = moment
 Vue.prototype.GLOBAL=global_
 Vue.config.productionTip = false
-Vue.prototype.$setgoindex = function () {
-  console.log("===========");
-  if (window.history.length <= 1) {
-    if (location.href.indexOf('?') === -1) {
-      window.location.href = location.href + '?goindex=true'
-    } else if (location.href.indexOf('?') !== -1 && location.href.indexOf('goindex') === -1) {
-      window.location.href = location.href + '&goindex=true'
-    }
-  }
-}
 Vue.use(Vant);
-// eruda.init();
+eruda.init();
 // const vConsole = new Vconsole();
 // Vue.use(vConsole)
 /* eslint-disable no-new */

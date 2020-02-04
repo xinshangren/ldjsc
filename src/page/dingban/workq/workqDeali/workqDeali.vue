@@ -63,7 +63,7 @@ export default {
   mounted() {
     this.itemEnti = this.$route.params.entity;
     console.log(JSON.stringify(this.$route.params.entity));
-    this.gojq();
+    this.gojqConfig();
     this.getGroupInfo(global_variable.userId, this.itemEnti.groupId);
   },
   methods: {
@@ -118,14 +118,16 @@ export default {
           // this.$toast(err);
         });
     },
-    gojq: function() {
+    gojqConfig: function() {
       var currentUrl = window.location.href; //当前页面地址
+      console.log(currentUrl);
       if (window.location.hash == "#/") {
         currentUrl = currentUrl.substring(
           0,
           currentUrl.indexOf(window.location.hash)
         );
       }
+       console.log(currentUrl);
       var params = {
         currentUrl: currentUrl
       };
@@ -143,8 +145,32 @@ export default {
                 timeStamp: data.timeStamp,
                 nonceStr: data.nonceStr,
                 signature: data.signature,
-                jsApiList: ["runtime.info", "biz.chat.toConversation"]
+                jsApiList: [
+                  "runtime.info",
+                  "biz.contact.choose",
+                  "device.notification.confirm",
+                  "device.notification.alert",
+                  "device.notification.prompt",
+                  "biz.ding.post",
+                  "biz.util.openLink",
+                  "device.audio",
+                  "device.audio.startRecord",
+                  "device.audio.stopRecord",
+                  "device.audio.translateVoice",
+                  "biz.ding.create",
+                  "biz.telephone.call",
+                  "biz.contact.complexPicker",
+                  "biz.util.open",
+                  "biz.chat.open",
+                  "biz.chat.pickConversation",
+                  "biz.user.get",
+                  "biz.util.uploadImage",
+                  "biz.chat.openSingleChat",
+                  "biz.ding.create",
+                  "biz.chat.toConversation"
+                ]
               });
+              console.log("鉴权成功");
               dd.error(function(error) {
                 alert("dd error: " + JSON.stringify(error));
               });

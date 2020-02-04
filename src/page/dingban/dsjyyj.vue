@@ -170,7 +170,8 @@ export default {
                   "biz.user.get",
                   "biz.util.uploadImage",
                   "biz.chat.openSingleChat",
-                  "biz.ding.create"
+                  "biz.ding.create",
+                  "biz.chat.toConversation"
                 ]
               });
               dd.error(function(error) {

@@ -127,12 +127,14 @@ export default {
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
+      console.log(currentUrl);
       if (window.location.hash == "#/") {
         currentUrl = currentUrl.substring(
           0,
           currentUrl.indexOf(window.location.hash)
         );
       }
+      console.log(currentUrl);
       var params = {
         currentUrl: currentUrl
       };
@@ -172,7 +174,8 @@ export default {
                   "biz.user.get",
                   "biz.util.uploadImage",
                   "biz.chat.openSingleChat",
-                  "biz.ding.create"
+                  "biz.ding.create",
+                  "biz.chat.toConversation"
                 ]
               });
               dd.error(function(error) {
