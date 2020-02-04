@@ -11,7 +11,7 @@
         <div>群管理员：</div>
         <img class="workdealiImgHeadDiv" :src="headUrl" />
         <div style="position: absolute;right: 10px;">{{entity.groupOwner}}</div>
-      </div> -->
+      </div>-->
       <div class="workdealiDiv">
         <div>群成员数：</div>
         <div style="position: absolute;right: 10px;">{{entity.groupUserNub}}人</div>
@@ -120,23 +120,15 @@ export default {
     },
     gojqConfig: function() {
       var currentUrl = window.location.href; //当前页面地址
-      // console.log(currentUrl);
-      // if (window.location.hash == "#/dingban/workq/workqDeali/workqDeali") {
-      //   currentUrl = currentUrl.substring(
-      //     0,
-      //     currentUrl.indexOf(window.location.hash)
-      //   );
-      // }
-       var value="http://203.207.103.48:8080/jcsldjsc/webpage/jcsldjscApp/index.html?dd_nav_bgcolor=FF3097FB&ddportalUserID=u%252BaDKilMdYRcpz0bPgOBd7q4re%252FVaJ7goMltQ1W9jno%253D&userId=0yHzzXwyPxrQ6iCf4sS%252FKA%253D%253D#/dingban/workq/workqDeali/workqDeali";
-    var number=currentUrl.indexOf("#");
-    console.log(number);
-    // currentUrl = currentUrl.substring(0,number) + currentUrl.substring(number+1,currentUrl.length);
-     currentUrl = currentUrl.substring(0,number);
-       console.log(currentUrl);
-      //  currentUrl=currentUrl.replace('#/','');
-        // console.log(currentUrl);
+      var value =
+        "http://203.207.103.48:8080/jcsldjsc/webpage/jcsldjscApp/index.html?dd_nav_bgcolor=FF3097FB&ddportalUserID=u%252BaDKilMdYRcpz0bPgOBd7q4re%252FVaJ7goMltQ1W9jno%253D&userId=0yHzzXwyPxrQ6iCf4sS%252FKA%253D%253D#/dingban/workq/workqDeali/workqDeali";
+      var number = currentUrl.indexOf("#");
+      console.log(number);
+      currentUrl = currentUrl.substring(0,number) + currentUrl.substring(number+1,currentUrl.length);
+      // currentUrl = currentUrl.substring(0, number);
+      console.log(currentUrl);
       var params = {
-        currentUrl:currentUrl
+        currentUrl: currentUrl
       };
       httpMethod
         .getConfig(params)
@@ -152,30 +144,7 @@ export default {
                 timeStamp: data.timeStamp,
                 nonceStr: data.nonceStr,
                 signature: data.signature,
-                jsApiList: [
-                  "runtime.info",
-                  "biz.contact.choose",
-                  "device.notification.confirm",
-                  "device.notification.alert",
-                  "device.notification.prompt",
-                  "biz.ding.post",
-                  "biz.util.openLink",
-                  "device.audio",
-                  "device.audio.startRecord",
-                  "device.audio.stopRecord",
-                  "device.audio.translateVoice",
-                  "biz.ding.create",
-                  "biz.telephone.call",
-                  "biz.contact.complexPicker",
-                  "biz.util.open",
-                  "biz.chat.open",
-                  "biz.chat.pickConversation",
-                  "biz.user.get",
-                  "biz.util.uploadImage",
-                  "biz.chat.openSingleChat",
-                  "biz.ding.create",
-                  "biz.chat.toConversation"
-                ]
+                jsApiList: ["runtime.info", "biz.chat.toConversation"]
               });
               console.log("鉴权成功");
               dd.error(function(error) {
