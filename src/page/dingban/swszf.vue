@@ -25,10 +25,10 @@
           @change="addPhone"
         />
         <label :for="'id'+index" class = "active"></label>
-        <img :src="item.img" style="margin: 15px 10px 15px 22px; width: 60px;height:60px;" />
+        <img :src="item.img" style="margin: 14px 14px 15px 22px;  width: 45px; height: 45px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
-          <div style="margin-top: 20px;">{{item.dutyName}}</div>
+          <div style="margin-top: 23px;margin-left: -53px;font-size: 13px;">{{item.dutyName}}</div>
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 10px;">
           <img
