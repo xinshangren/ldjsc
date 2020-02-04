@@ -16,6 +16,7 @@
         :key="item.id"
       >
         <input
+        v-if="item.dingid != null"
           :id="'szxid'+index"
           hidden
           type="checkbox"

@@ -16,6 +16,7 @@
         :key="item.id"
       >
         <input
+          v-if="item.dingid != null"
           :id="'qxqkfqid'+index"
           hidden
           type="checkbox"
@@ -23,7 +24,7 @@
           v-model="callPhoneList"
           @change="addPhone"
         />
-        <label :for="'qxqkfqid'+index" class="active"></label>
+        <label  :for="'qxqkfqid'+index" class="active"></label>
         <img :src="item.img" style="margin: 15px 10px 15px 22px; width: 60px;height:60px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
@@ -95,7 +96,7 @@ export default {
       httpMethod
         .getUserOrDepart(params)
         .then(res => {
-          console.log(res)
+          console.log(res);
           if (res.success == "1") {
             this.list = this.list.concat(res.userList);
             for (var i = 0; i < this.list.length; i++) {
@@ -139,7 +140,7 @@ export default {
       httpMethod
         .getConfig(params)
         .then(res => {
-          console.log(res)
+          console.log(res);
           if (res.success == "1") {
             var data = JSON.parse(res.config);
             this.corpId = data.corpId;
