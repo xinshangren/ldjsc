@@ -91,7 +91,7 @@ export default {
       //   "一键直连",
       //   "市长热线"
       // ],
-      permissionList: []
+     permissionList: []
     };
   },
   beforeRouteEnter(to, from, next) {
