@@ -107,6 +107,7 @@ export default {
       if (
         from.path != "/dingban/workq/workqDeali/workqDeali" &&
         from.path != "/toutiao/newsdetile" &&
+        from.path != "/qxztc/cq/cq_dingban" &&
         from.path != "/" &&
         from.name != null
       ) {
