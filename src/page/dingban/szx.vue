@@ -24,7 +24,7 @@
           v-model="callPhoneList"
           @change="addPhone"
         />
-        <label :for="'szxid'+index" class = "active"></label>
+        <label @click="errorMsg(item)" :for="'szxid'+index" class="active"></label>
         <img :src="item.img" style="margin: 14px 14px 15px 22px; width: 45px; height: 45px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
@@ -72,7 +72,7 @@ export default {
       corpId: "",
       callPhoneList: [],
       callButton: false,
-      map:{},
+      map: {}
     };
   },
   mounted() {
@@ -82,12 +82,12 @@ export default {
     this.gojq();
   },
   methods: {
-     addPhone:function(){
-      console.log("sxz页面")
+    addPhone: function() {
+      console.log("sxz页面");
       this.map.callPhoneList = this.callPhoneList;
-      this.map.flag = 'szx';
-      console.log(this.map)
-      this.$emit('addPhone', this.map);
+      this.map.flag = "szx";
+      console.log(this.map);
+      this.$emit("addPhone", this.map);
     },
     getUserOrDepart: function() {
       var params = {
@@ -96,7 +96,7 @@ export default {
       httpMethod
         .getUserOrDepart(params)
         .then(res => {
-          console.log(res)
+          console.log(res);
           if (res.success == "1") {
             this.list = this.list.concat(res.userList);
             for (var i = 0; i < this.list.length; i++) {
@@ -187,9 +187,15 @@ export default {
           this.$toast(err);
         });
     },
+    errorMsg: function(item) {
+      if (item.dingid != null) {
+      } else {
+        this.$toast("该用户未在'晋城智能办公平台'");
+      }
+    },
     //打电话
     goDetile(item) {
-      if(item.dingid != null){
+      if (item.dingid != null) {
         var ddd = this.corpId;
         dd.ready(function() {
           dd.biz.telephone.call({
@@ -201,13 +207,13 @@ export default {
             }
           });
         });
-      }else{
+      } else {
         this.$toast("该用户未在'晋城智能办公平台'");
       }
     },
     //发消息
     goSms(item) {
-      if(item.dingid != null){
+      if (item.dingid != null) {
         var ddd = this.corpId;
         dd.biz.chat.openSingleChat({
           corpId: ddd, // 企业id,必须是用户所属的企业的corpid
@@ -217,12 +223,12 @@ export default {
             alert("发消息" + JSON.stringify(e));
           }
         });
-      }else{
+      } else {
         this.$toast("该用户未在'晋城智能办公平台'");
       }
     },
     goDing(item) {
-      if(item.dingid != null){
+      if (item.dingid != null) {
         var ddd = this.corpId;
         dd.biz.ding.create({
           users: [item.dingid], // 用户列表，工号
@@ -238,7 +244,10 @@ export default {
           confInfo: {
             bizSubType: 0, // 子业务类型如会议：0：预约会议；1：预约电话会议；2：预约视频会议；（注：目前只有会议才有子业务类型）
             location: "某某会议室", //会议地点；（非必填）
-            startTime: { format: "yyyy-MM-dd HH:mm", value: "2019-12-23 08:00" }, // 会议开始时间
+            startTime: {
+              format: "yyyy-MM-dd HH:mm",
+              value: "2019-12-23 08:00"
+            }, // 会议开始时间
             endTime: { format: "yyyy-MM-dd HH:mm", value: "2019-12-23 08:00" }, // 会议结束时间
             remindMinutes: 30, // 会前提醒。单位分钟-1：不提醒；0：事件发生时提醒；5：提前5分钟；15：提前15分钟；30：提前30分钟；60：提前1个小时；1440：提前一天；
             remindType: 2 // 会议提前提醒方式。0:电话, 1:短信, 2:应用内
@@ -258,7 +267,7 @@ export default {
           },
           onFail: function() {}
         });
-      }else{
+      } else {
         this.$toast("该用户未在'晋城智能办公平台'");
       }
     },

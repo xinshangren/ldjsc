@@ -24,7 +24,7 @@
           v-model="callPhoneList"
           @change="addPhone"
         />
-        <label :for="'id'+index" class = "active"></label>
+        <label  @click="errorMsg(item)" :for="'id'+index" class = "active"></label>
         <img :src="item.img" style="margin: 14px 14px 15px 22px;  width: 45px; height: 45px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
@@ -88,6 +88,13 @@ export default {
       this.map.flag = 'swszf';
       console.log(this.map)
       this.$emit('addPhone', this.map);
+    },
+    errorMsg:function(item){
+      if(item.dingid != null){
+
+      }else{
+        this.$toast("该用户未在'晋城智能办公平台'");
+      }
     },
     getUserOrDepart: function() {
       var params = {
@@ -207,6 +214,7 @@ export default {
     },
     //发消息
     goSms(item) {
+      console.log(item)
       if(item.dingid != null){
         var ddd = this.corpId;
         dd.biz.chat.openSingleChat({
