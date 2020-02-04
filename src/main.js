@@ -29,11 +29,7 @@ Vue.prototype.$setgoindex = function () {
   }
 }
 Vue.use(Vant);
-<<<<<<< HEAD
-eruda.init();
-=======
 // eruda.init();
->>>>>>> d4169dc68a5c258302c92235df322bca57df3adf
 // const vConsole = new Vconsole();
 // Vue.use(vConsole)
 /* eslint-disable no-new */
