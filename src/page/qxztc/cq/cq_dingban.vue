@@ -49,6 +49,19 @@ export default {
       //   "http://203.207.104.105:22001/gov-inter/pages/index.jsp?type=12%25269UFckSUDKYbqp5WXsFeANg%253D%253D&corpId=12%2526zm5I%252B28cxAMS%252B8HHXdo5eHVKvsWXYvgTY07BZfJRnlTqhywqrsMf84vlraBG5RiW"
     };
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(from);
+    if (from.path != "/") {
+      if (to.path == "/cyzx/nyts/nyts") {
+        to.meta.keepAlive = true;
+      } else {
+        to.meta.keepAlive = false;
+      }
+    }else{
+       to.meta.keepAlive = false;
+    }
+    next();
+  },
   mounted() {
     var params = this.$route.query;
     this.areaName = params.menu;
