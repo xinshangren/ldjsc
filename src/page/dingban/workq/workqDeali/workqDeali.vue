@@ -125,6 +125,7 @@ export default {
       // var number = currentUrl.indexOf("#");
       // console.log(number);
       // currentUrl = currentUrl.substring(0,number) + currentUrl.substring(number+2,currentUrl.length);
+       currentUrl = currentUrl.substring(0,number);
       // currentUrl = currentUrl.substring(0, number);
       console.log(currentUrl);
       var params = {
