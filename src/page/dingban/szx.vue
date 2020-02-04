@@ -16,7 +16,7 @@
         :key="item.id"
       >
         <input
-        v-if="item.dingid != null"
+          v-if="item.dingid != null"
           :id="'szxid'+index"
           hidden
           type="checkbox"
@@ -28,7 +28,7 @@
         <img :src="item.img" style="margin: 15px 10px 15px 22px; width: 60px;height:60px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
-          <div style="margin-top: 20px;max-width: 60px;">{{item.dutyName}}</div>
+          <div style="margin-top: 20px;">{{item.dutyName}}</div>
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 10px;">
           <img
