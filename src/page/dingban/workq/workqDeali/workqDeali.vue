@@ -63,7 +63,7 @@ export default {
   mounted() {
     this.itemEnti = this.$route.params.entity;
     console.log(JSON.stringify(this.$route.params.entity));
-    this.gojqConfig();
+    this.gojq();
     this.getGroupInfo(global_variable.userId, this.itemEnti.groupId);
   },
   methods: {
@@ -118,48 +118,69 @@ export default {
           // this.$toast(err);
         });
     },
-    gojqConfig: function() {
-      var currentUrl = window.location.href; //当前页面地址
-      // var value =
-      //   "http://203.207.103.48:8080/jcsldjsc/webpage/jcsldjscApp/index.html?dd_nav_bgcolor=FF3097FB&ddportalUserID=u%252BaDKilMdYRcpz0bPgOBd7q4re%252FVaJ7goMltQ1W9jno%253D&userId=0yHzzXwyPxrQ6iCf4sS%252FKA%253D%253D#/dingban/workq/workqDeali/workqDeali";
-      // var number = currentUrl.indexOf("#");
-      // console.log(number);
-      // currentUrl = currentUrl.substring(0,number) + currentUrl.substring(number+2,currentUrl.length);
-       currentUrl = currentUrl.substring(0,number);
-      // currentUrl = currentUrl.substring(0, number);
-      console.log(currentUrl);
-      var params = {
-        currentUrl: currentUrl
-      };
-      httpMethod
-        .getConfig(params)
-        .then(res => {
-          if (res.success == "1") {
-            var data = JSON.parse(res.config);
-            console.log(res.config);
-            this.corpId = data.corpId;
-            dd.ready(function() {
-              dd.config({
-                agentId: data.agentId,
-                corpId: data.corpId,
-                timeStamp: data.timeStamp,
-                nonceStr: data.nonceStr,
-                signature: data.signature,
-                jsApiList: ["runtime.info", "biz.chat.toConversation"]
+    
+      gojq: function () {
+        var currentUrl = window.location.href;//当前页面地址 
+        if (window.location.hash == "#/") {
+          currentUrl = currentUrl.substring(0, currentUrl.indexOf(window.location.hash));
+        }
+        var params = {
+          currentUrl: currentUrl
+        };
+
+        httpMethod
+          .getConfig(params)
+          .then(res => {
+            if (res.success == "1") {
+              var data = JSON.parse(res.config);
+              this.corpId = data.corpId;
+              dd.ready(function () {
+                dd.config({
+                  agentId: data.agentId,
+                  corpId: data.corpId,
+                  timeStamp: data.timeStamp,
+                  nonceStr: data.nonceStr,
+                  signature: data.signature,
+                  jsApiList: [
+                    'runtime.info',
+                    'biz.contact.choose',
+                    'device.notification.confirm',
+                    'device.notification.alert',
+                    'device.notification.prompt',
+                    'biz.ding.post',
+                    'biz.util.openLink',
+                    'device.audio',
+                    'device.audio.startRecord',
+                    'device.audio.stopRecord',
+                    'device.audio.translateVoice',
+                    'biz.ding.create',
+                    'biz.telephone.call',
+                    'biz.contact.complexPicker',
+                    'biz.util.open',
+                    'biz.chat.open',
+                    'biz.chat.pickConversation',
+                    'biz.user.get',
+                    'biz.util.uploadImage',
+                    'biz.chat.openSingleChat',
+                    'biz.ding.create',
+                    'biz.chat.toConversation'
+                  ]
+                });
+                dd.error(function (error) {
+                  alert('dd error: ' + JSON.stringify(error));
+                });
               });
-              console.log("鉴权成功");
-              dd.error(function(error) {
-                alert("dd error: " + JSON.stringify(error));
-              });
-            });
-          } else if (res.success == "0") {
-            this.error = true;
-          }
-        })
-        .catch(err => {
-          // this.$toast(err);
-        });
-    }
+
+            } else if (res.success == "0") {
+              this.error = true;
+            }
+
+          })
+          .catch(err => {
+            this.$toast(err);
+
+          });
+      }
   }
 };
 </script>
