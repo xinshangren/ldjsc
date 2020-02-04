@@ -127,9 +127,11 @@ export default {
           currentUrl.indexOf(window.location.hash)
         );
       }
+     
        console.log(currentUrl);
+        console.log(window.location.hash);
       var params = {
-        currentUrl: currentUrl
+        currentUrl: "http://203.207.103.48:8080/jcsldjsc/webpage/jcsldjscApp/index.html?dd_nav_bgcolor=FF3097FB&ddportalUserID=u%252BaDKilMdYRcpz0bPgOBd7q4re%252FVaJ7goMltQ1W9jno%253D&userId=0yHzzXwyPxrQ6iCf4sS%252FKA%253D%253D/dingban/workq/workqDeali/workqDeali"
       };
       httpMethod
         .getConfig(params)
