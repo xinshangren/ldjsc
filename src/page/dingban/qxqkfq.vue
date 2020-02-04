@@ -205,7 +205,7 @@ export default {
           });
         });
       }else{
-        alert("该用户未在'晋城智能办公平台'");
+         this.$toast("该用户未在'晋城智能办公平台'");
       }
     },
     //发消息
@@ -221,7 +221,7 @@ export default {
           }
         });
       }else{
-        alert("该用户未在'晋城智能办公平台'");
+         this.$toast("该用户未在'晋城智能办公平台'");
       }
     },
     goDing(item) {
@@ -262,7 +262,7 @@ export default {
           onFail: function() {}
         });
       }else{
-        alert("该用户未在'晋城智能办公平台'");
+        this.$toast("该用户未在'晋城智能办公平台'");
       }
     },
     toast: function() {
