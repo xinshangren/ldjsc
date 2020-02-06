@@ -483,6 +483,7 @@ export default {
             "42",
             "能源相册"
           );
+          this.selectLeftTab(3);
           $("#twoLeveltab").hide();
           this.indexTabImg1 = require("../../../assets/img/mt1_tab.png");
           this.indexTabImg2 = require("../../../assets/img/xny1_tab.png");

@@ -62,9 +62,9 @@
       <div class="dateSelect" style="height: 50px;">
         <div class="sx"></div>
         <div class="tj_z">煤层气抽采利用情况</div>
-        <div class="timeYear" style="font-size:15px" @click="showDatePicker()">{{nowYear}}</div>
+        <div class="timeYear" style="font-size:15px" >{{nowYear}}</div>
         <div class="timeYear" style="font-size:15px">年</div>
-        <img class="xl" src="../../../../../assets/img/air_data_arrow.png" />
+        <img class="xl" src="../../../../../assets/img/air_data_arrow.png"@click="showDatePicker()" />
       </div>
       <div class="van-hairline--bottom" style="margin-left: 10px;margin-right: 10px;"></div>
       <div style="width: 93%;margin: auto;margin-top: 12px;">

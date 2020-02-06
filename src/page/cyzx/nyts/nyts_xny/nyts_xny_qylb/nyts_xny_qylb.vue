@@ -194,11 +194,11 @@
         <div style="display: flex;background: #f3f3f3;height:110px;">
           <div
             @click="clearType"
-            style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;"
+            style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;font-size: 14px;"
           >重置</div>
           <div
             @click="clickUlDy"
-            style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;text-align: center;"
+            style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;text-align: center;font-size: 14px;"
           >确定</div>
         </div>
       </div>
@@ -310,6 +310,7 @@ export default {
       this.show = true;
     },
     onSearch() {
+       this.comp_dataList = [];
       this.mescroll.resetUpScroll();
     },
     downCallback: function() {
@@ -395,6 +396,7 @@ export default {
         ent_nature: "",
         ent_type: ""
       }),
+      self.comp_dataList = [];
         self.mescroll.resetUpScroll();
       self.show = false;
     },
@@ -437,6 +439,7 @@ export default {
       self.query_params.ent_nature = self.ent_nature;
       self.query_params.ent_type = self.ent_type;
       self.show = false;
+       self.comp_dataList = [];
       console.log(self.query_params);
       this.mescroll.resetUpScroll();
     },

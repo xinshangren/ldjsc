@@ -200,6 +200,7 @@
                 this.show = true;
             },
             onSearch() {
+                this.comp_dataList = [];
                 this.mescroll.resetUpScroll();
             },
             downCallback: function () {
@@ -265,6 +266,7 @@
                     counties: "",
                     ent_nature: ""
                 },
+                self.comp_dataList = [];
                     self.mescroll.resetUpScroll();
                 self.show = false;
             },
@@ -298,6 +300,7 @@
                 self.query_params.counties = self.counties;
                 self.query_params.ent_nature = self.ent_nature;
                 self.show = false;
+                  self.comp_dataList = [];
                 console.log(self.query_params);
                 this.mescroll.resetUpScroll();
 

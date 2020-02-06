@@ -90,10 +90,10 @@
                 <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
                 <div style="display: flex;background: #f3f3f3;height:110px;font-size:14px;">
                     <div @click="clearType"
-                        style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;">重置
+                        style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;font-size:14px;text-align: center;">重置
                     </div>
                     <div @click="clickUlDy"
-                        style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;text-align: center;">
+                        style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;font-size:14px;text-align: center;">
                         确定</div>
                 </div>
             </div>
@@ -186,6 +186,13 @@
                                     }
                                })
                             })
+                            $.each(res.mtKtfs.dataList,function(i,v){
+                                $.each(res.dataList,function(i1,v1){
+                                    if(v.typecode == v1.pioneering_way){
+                                        v1.pioneering_way = v.typename
+                                    }
+                               })
+                            })
                             this.pro_dataList = this.pro_dataList.concat(res.dataList); 
                             this.jsxz_dataList = res.mtJsxz.dataList;
                             this.ktfs_dataList = res.mtKtfs.dataList;
@@ -257,6 +264,7 @@
                     pro_nature: "",
                     pioneering_way: "",
                 }),
+                    self.pro_dataList = [];
                     self.mescroll.resetUpScroll();
                 self.show = false;
             },
@@ -283,6 +291,7 @@
                 self.query_params.pioneering_way = self.pioneering_way;
                 self.show = false;
                 console.log(self.query_params);
+                 self.pro_dataList = [];
                 this.mescroll.resetUpScroll();
             },
             goDetail(item) {
