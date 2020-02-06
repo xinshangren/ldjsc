@@ -134,12 +134,9 @@ export default {
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
-      if (window.location.hash == "#/") {
-        currentUrl = currentUrl.substring(
-          0,
-          currentUrl.indexOf(window.location.hash)
-        );
-      }
+      var number=currentUrl.indexOf("#");
+      currentUrl = currentUrl.substring(0,number);
+      console.log(currentUrl);
       var params = {
         currentUrl: currentUrl
       };
