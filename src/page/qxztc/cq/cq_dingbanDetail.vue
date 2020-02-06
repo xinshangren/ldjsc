@@ -67,7 +67,7 @@ export default {
   props: ["departId"],
   mounted() {
     var orderHight1 = document.documentElement.clientHeight;
-    var heightlist = orderHight1 - 122;
+    var heightlist = orderHight1 - 172;
     document.getElementById("newslist1").style.height = heightlist + "px";
     this.gojq();
   },
