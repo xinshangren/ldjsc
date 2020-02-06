@@ -54,7 +54,7 @@
     </div>
     
     <div style="background:#ffffff;height:300px;width:100%;margin-top:8px;padding-top:7px;">
-      <div class="echars_titile_div">近5年海关进出口总额及增长速度</div>
+      <div class="echars_titile_div">近5年海关进出口总额及增速</div>
       <div
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"

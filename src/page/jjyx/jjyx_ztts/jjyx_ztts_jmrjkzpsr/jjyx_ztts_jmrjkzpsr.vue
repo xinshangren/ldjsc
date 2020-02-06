@@ -57,7 +57,7 @@
     </div>
     
     <div style="background:#ffffff;height:290px;width:100%;margin-top:8px;padding-top:7px;">
-      <div class="echars_titile_div">居民人均可支配收入及增长速度</div>
+      <div class="echars_titile_div">居民人均可支配收入及增速</div>
       <div
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"

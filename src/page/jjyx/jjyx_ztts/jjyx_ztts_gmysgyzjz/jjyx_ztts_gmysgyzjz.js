@@ -282,7 +282,7 @@ export const echarsEnti = {
 			show: true,
 			itemHeight: 7,
 			itemWidth: 13,
-			x: '74%',
+			x: 'center',
 			y: "0%",
 			data: lengdList,
 			textStyle: {
@@ -307,7 +307,7 @@ export const echarsEnti = {
 		  ],
 		grid: {
 			right: '2%',
-			top: '14%',
+			top: '22%',
 			left: '2%',
 			bottom: '8%',
 			containLabel: true
