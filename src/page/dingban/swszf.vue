@@ -36,11 +36,11 @@
             style="width: 50px;height:50px;"
             @click="goDetile(item)"
           />
-          <img
+          <!-- <img
             src="../../assets/img/sms.png"
             style="width: 50px;height:50px;margin-left: 5px;"
             @click="goSms(item)"
-          />
+          /> -->
           <!-- <img
             src="../../assets/img/ding.png"
             style="width: 50px;height:50px;margin-left: 5px;"

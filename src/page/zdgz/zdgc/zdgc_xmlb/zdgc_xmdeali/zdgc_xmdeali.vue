@@ -1,12 +1,12 @@
 <template>
-  <div style="margin-top:55px">
+  <div style="margin-top:101px">
     <van-tabs
       title-active-color="#2599e6"
       line-width="90px"
       :sticky="true"
       :ellipsis="false"
       @click="onClick"
-      :offset-top="54"
+      :offset-top="101"
       title-inactive-color="#333333"
     >
       <van-tab name="1">
@@ -56,7 +56,8 @@
                 <img class="deali_small_img_style" src="../../../../../assets/img/1icon-ry.png"  />
                 <div class="deali_font_style" style="color: #999999;">包联领导</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.contractPerson}}</div>
+              <div class="deali_font_style" v-if="itemEnti.contractPerson!=''" style="color: #333333;margin-top: 8px;">{{itemEnti.contractPerson}}</div>
+              <div class="deali_font_style" v-if="itemEnti.contractPerson==''"  style="color: #333333;margin-top: 8px;">暂无</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
@@ -105,7 +106,8 @@
               <img class="deali_small_img_style"  src="../../../../../assets/img/1icon-cylxdl.png" />
               <div class="deali_font_style"  style="color: #999999;">产业类型大类</div>
             </div>
-            <div class="deali_font_style"  style="color: #333333;margin-top: 8px;">{{itemEnti.industryFirstType}}</div>
+            <div class="deali_font_style" v-if="itemEnti.industryFirstType!=''"  style="color: #333333;margin-top: 8px;">{{itemEnti.industryFirstType}}</div>
+             <div class="deali_font_style" v-if="itemEnti.industryFirstType==''"   style="color: #333333;margin-top: 8px;">暂无</div>
           </div>
         </div>
 
@@ -258,7 +260,8 @@
                 <img src="../../../../../assets/img/1icon-zjdm.png"  class="deali_small_img_style"  />
                 <div class="deali_font_style" style="color: #999999;">法人联系方式</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.zdgcProComInfoId.legalPhone}}</div>
+              <div class="deali_font_style" v-if="itemEnti.zdgcProComInfoId.legalPhone!=''" style="color: #333333;margin-top: 8px;">{{itemEnti.zdgcProComInfoId.legalPhone}}</div>
+              <div class="deali_font_style" v-if="itemEnti.zdgcProComInfoId.legalPhone==''" style="color: #333333;margin-top: 8px;">暂无</div>
             </div>
           </div>
         </div>
@@ -448,12 +451,12 @@
               <img src="../../../../../assets/img/deimg.jpg" style="width: 35%;" />
               <div style="margin-left:10px;text-align: left;width: 65%;font-size: 15px">
                 <div class="deali_jdhb_font_style" style="color:#333333;">{{item.reportDate}}</div>
-                <textarea
+                <div class="van-multi-ellipsis--l3" style="-webkit-line-clamp:4;font-size:14px;">{{item.imageProgress}}</div>
+                <!-- <textarea
                 class="deali_jdhb_font_style"
                   style="color:#999999;height: 80px;width: 100%;border:none;resize: none;overflow:hidden"
-                  v-model="item.imageProgress"
                   readonly
-                ></textarea>
+                ></textarea> -->
               </div>
             </div>
           </van-list>

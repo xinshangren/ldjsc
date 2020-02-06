@@ -20,7 +20,7 @@
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">0</div>
       <div style="width:48%;color:#1976d2;margin-top:6px;font-size:16px;">个</div>
     </div>
-    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
+    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" style="top:230px;">
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
           v-for="(item,index) in list"
@@ -109,10 +109,10 @@
                 <img style="height:14px;" src="../../../../assets/img/project_list_icon5.png" />
                 <div style="display: flex;position: absolute;top: 0px;left:23px;">
                   <div style="font-size:13px;color:#666666;">{{item.chargePhone}}</div>
-                  <img
+                  <!-- <img
                     style="height:15px;margin-top:2px;margin-left:5px;"
                     src="../../../../assets/img/project_list_phone.png"
-                  />
+                  /> -->
                 </div>
               </div>
             </div>
