@@ -4,7 +4,7 @@
       <img :src="img1" style="width:150px;height:56px;margin:auto auto;" @click="changeState(1)" />
       <img :src="img2" style="width: 150px;height:56px;margin:auto auto;" @click="changeState(2)" />
     </div>
-    <van-sticky :offset-top="55">
+    <van-sticky :offset-top="111">
       <div v-if="state==1" style="position: relative;">
         <van-tabs
           v-model="active"
@@ -39,7 +39,7 @@
         </div>
       </div>
     </van-sticky>
-    <van-sticky :offset-top="55">
+    <van-sticky :offset-top="111">
       <div v-if="state==2" style="position: relative;">
         <van-tabs
           v-model="active"

@@ -34,7 +34,22 @@
 	margin-top: 7px;
 	margin-left: 3%;
 }
-
+.index_gonggao_left{
+	height: 18px;width: 2px;background: rgb(255, 255, 255);margin: auto 0;margin-left: 20px;font-weight:600;
+}
+.index_top_style{
+	height: 64px;
+}
+.index_gonggao_style{
+	height: 47px;
+	font-size:14px;
+	color: #ffffff;
+	line-height:47px;
+}
+.index_main_view{
+	margin-top: 111px;
+	/* height: 111px; */
+}
 .home_head_img {
 	border-radius: 4px;
 	height: 130px;

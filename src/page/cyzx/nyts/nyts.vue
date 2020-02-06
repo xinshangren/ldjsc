@@ -22,8 +22,8 @@
 }
 </style>
 <template>
-  <div style="margin-top:61px;">
-    <div class="ui-row-flex ui-whitespace">
+  <div style="margin-top:0px;">
+    <div class="ui-row-flex ui-whitespace" style="padding-top:10px;">
       <div class="ui-col ui-col" @click="selectIndexTab(1)">
         <div class="block_div_style">
           <img id="indexTabImg1" class="top_img" :src="indexTabImg1" />
@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <van-sticky id="twoLeveltab" :offset-top="50">
+    <van-sticky id="twoLeveltab" :offset-top="111">
       <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
         <div @click="showHideLeftSelect()" class="twoLevel_left_div">
           <img style="height: 21px;margin-top: 9px;margin-left: 7px;" :src="TwoLevelTabImg1" />
