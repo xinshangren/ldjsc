@@ -88,7 +88,7 @@
                 </ul>
 
                 <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
-                <div style="display: flex;background: #f3f3f3;height:110px;">
+                <div style="display: flex;background: #f3f3f3;height:110px;font-size:14px;">
                     <div @click="clearType"
                         style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;">重置
                     </div>
