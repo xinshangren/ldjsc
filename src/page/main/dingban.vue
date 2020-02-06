@@ -13,9 +13,9 @@
       title-active-color="#2796e7"
       @change="tabsclick"
     >
-      <van-tab id="tabone" v-show="isShowTabOne" title="工作群">
+      <!-- <van-tab id="tabone" v-show="isShowTabOne" title="工作群">
         <child5 @getWorkGroupList="getWorkGroupList"></child5>
-      </van-tab>
+      </van-tab> -->
       <van-tab title="市委常委" id="8a8180c9700ff44e01701014c9940006">
         <child1 v-on:addPhone="addPhone"></child1>
       </van-tab>

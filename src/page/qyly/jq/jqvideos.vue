@@ -180,7 +180,7 @@ export default {
 @import "../../../assets/css/frozenui.css";
 .mescroll {
   position: fixed;
-  top: 160px;
+  top: 220px;
   bottom: 0px;
   height: auto;
 }

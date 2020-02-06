@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:54px;">
+  <div style="margin-top:0px;">
     <div
       id="showSelectDiv"
       style="z-index: 99;position: fixed;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
@@ -10,7 +10,7 @@
         <img style="height: 18px;margin-top: 9px;" src="../../../assets/img/eco_tab_iconlist.png" />
       </div>
     </div>
-    <van-sticky id="jjyx_tabs" :offset-top="55">
+    <van-sticky id="jjyx_tabs" :offset-top="111">
       <div style="display:flex;">
         <van-tabs
           @touchmove.prevent
@@ -63,7 +63,7 @@
     </van-sticky>
     <div
       id="selectTabDiv"
-      style=" display:none;background: rgb(255, 255, 255);top: 140px;position: fixed;z-index: 1;box-shadow: 5px 1px 1px 2px #f3f3f3;"
+      style=" display:none;background: rgb(255, 255, 255);top: 156px;position: fixed;z-index: 1;box-shadow: 5px 1px 1px 2px #f3f3f3;"
     >
       <!-- <div style="padding-top:9px;font-size: 14px;margin-left:17px;">进度分类</div> -->
       <ul

@@ -1,0 +1,14 @@
+.indexFontstyle{
+    color: #333333;
+    font-size:14px;
+}
+.indexLiStyle{
+    text-align: center;
+    margin-top: 30px;
+}
+.indexLiContentImgStyle{
+     height: 54px;
+}
+.indexLiContentDivStyle{
+    margin-top: 4px;
+}

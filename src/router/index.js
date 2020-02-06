@@ -14,7 +14,7 @@ import srdVue from '@/page/dingban/srd.vue'
 import newsdetileVue from '@/page/toutiao/newsdetile.vue'
 import ldzcVue from '@/page/toutiao/ldzc.vue'
 import zwgkVue from '@/page/toutiao/zwgk.vue'
-import mainVue from '@/page/main/main.vue'
+import mainVue from '@/page/main/main_new.vue'
 import hbgjVue from '@/page/zdgz/hbgj/hbgj.vue'
 import zdgcVue from '@/page/zdgz/zdgc/zdgc.vue'
 import zdgc_xmdealiVue from '@/page/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali.vue'
@@ -46,7 +46,7 @@ import workqDealiVue from '@/page/dingban/workq/workqDeali/workqDeali.vue'
 import cq_dingbanVue from '@/page/qxztc/cq/cq_dingban.vue'
 import cq_dingbanDetailVue from '@/page/qxztc/cq/cq_dingbanDetail.vue'
 import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDealiFj.vue'
-
+import qxtz_newVue from '@/page/main/qxtz_new.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -245,10 +245,10 @@ export default new Router({
       path: '/qxztc/cq/cq_dingbanDetail',
       name: 'cq_dingbanDetail',
       component: cq_dingbanDetailVue
+    },{
+      path: '/main/qxtz_new',
+      name: 'qxtz_new',
+      component: qxtz_newVue
     }
-    
-
-    
-    
   ]
 })

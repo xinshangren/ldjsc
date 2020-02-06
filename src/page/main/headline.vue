@@ -3,6 +3,7 @@
     <van-tabs
       @click="onClick"
       v-model="active"
+      :offset-top="111"
       :sticky="false"
       :ellipsis="false"
       line-width="25%"
@@ -41,7 +42,7 @@ export default {
     };
   },
   mounted() {
-    this.$parent.isDeali=false;
+    this.$parent.isDeali = false;
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
@@ -51,10 +52,10 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     console.log("headline");
-     next(vm => {
-          vm.$parent.isDeali=false;
-        });
-    
+    next(vm => {
+      vm.$parent.isDeali = false;
+    });
+
     next();
   },
   methods: {

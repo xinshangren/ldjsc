@@ -10,7 +10,7 @@
         :formatter="formatter"
       />
     </van-popup>
-    <van-sticky :offset-top="97">
+    <van-sticky :offset-top="154">
       <div style="display: flex;background: rgb(255, 255, 255);height: 40px;">
         <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
           <div class="ui-col ui-col" @click="upYearClick">
@@ -34,13 +34,13 @@
 
     <div
       id="show_menu_Id"
-      style="position: fixed;left: 20px;background: #ffffff;top: 127px;padding: 3px;z-index:99;"
+      style="position: fixed;left: 20px;background: #ffffff;top: 180px;padding: 3px;z-index:99;height:40px;"
     >
       <img style="height:23px;" src="../../../../assets/img/data_list_menu.png" />
     </div>
     <div
       id="menu_ul_id"
-      style="display:none; position: fixed;left: 20px;background: #ffffff;top: 157px;padding: 3px;z-index:1;"
+      style="display:none; position: fixed;left: 20px;background: #ffffff;top: 210px;padding: 3px;z-index:1;"
     >
       <ul id="menu_ul">
         <li @click="returnCom(1)" class="menuliClass" style="display:flex;">

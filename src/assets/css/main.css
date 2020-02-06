@@ -29,12 +29,33 @@
     text-align:center;
 	font-size:13px;
 }
+
+.index_top_div_style{
+    text-align:center;
+	/* font-size:13px; */
+}
 .home_top_img {
-	height: 35%;
-	margin-top: 7px;
+	height: 15px;
+	margin-top: 12px;
 	margin-left: 3%;
 }
+.appvueRightFont{
+	font-size:14px;
+}
+.index_gonggao_left{
+	height: 18px;width: 2px;background: rgb(255, 255, 255);margin: auto 0;margin-left: 20px;font-weight:600;
+}
 
+.index_gonggao_style{
+	
+	font-size:14px;
+	color: #ffffff;
+
+}
+.index_main_view{
+	margin-top: 111px;
+	/* height: 111px; */
+}
 .home_head_img {
 	border-radius: 4px;
 	height: 130px;

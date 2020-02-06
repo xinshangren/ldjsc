@@ -11,7 +11,7 @@
       style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;"
     >
       <div
-        style="margin-left: 32px;width: 90%;display: flex; position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+        style="margin-left: 32px;width: 90%;display: flex; position: relative; margin-top: 8px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
         v-for="(item,index) of list"
         :key="item.id"
       >
@@ -41,11 +41,11 @@
             style="width: 50px;height:50px;margin-left: 5px;"
             @click="goSms(item)"
           />
-          <img
+          <!-- <img
             src="../../assets/img/ding.png"
             style="width: 50px;height:50px;margin-left: 5px;"
             @click="goDing(item)"
-          />
+          /> -->
         </div>
       </div>
     </van-list>
