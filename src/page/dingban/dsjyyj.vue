@@ -121,7 +121,7 @@ export default {
     errorMsg: function(item) {
       if (item.dingid != null) {
       } else {
-        this.$toast("该用户未在'晋城智能办公平台'");
+        this.$toast("该用户暂未注册");
       }
     },
     onLoad() {
@@ -204,7 +204,7 @@ export default {
           });
         });
       } else {
-        this.$toast("该用户未在'晋城智能办公平台'");
+        this.$toast("该用户暂未注册");
       }
     },
     //发消息
@@ -220,7 +220,7 @@ export default {
           }
         });
       } else {
-        this.$toast("该用户未在'晋城智能办公平台'");
+        this.$toast("该用户暂未注册");
       }
     },
     goDing(item) {
@@ -264,7 +264,7 @@ export default {
           onFail: function() {}
         });
       } else {
-        this.$toast("该用户未在'晋城智能办公平台'");
+        this.$toast("该用户暂未注册");
       }
     },
     toast: function() {

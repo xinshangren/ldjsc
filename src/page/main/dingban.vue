@@ -98,6 +98,7 @@ export default {
           currentUrl.indexOf(window.location.hash)
         );
       }
+      console.log(currentUrl)
       var params = {
         currentUrl: currentUrl
       };
