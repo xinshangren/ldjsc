@@ -2,6 +2,27 @@
   <ul class="ui-row indexFontstyle" style="padding-top:10px;">
     <li @click="godetile(1)" class="ui-col ui-col-25 indexLiStyle">
       <img class="indexLiContentImgStyle" src="../../assets/img/cq_new.png" />
+      <div class="indexLiContentDivStyle">城区</div>
+    </li>
+    <li @click="godetile(2)" class="ui-col ui-col-25 indexLiStyle">
+      <img class="indexLiContentImgStyle" src="../../assets/img/gp_new.png" />
+      <div class="indexLiContentDivStyle">高平市</div>
+    </li>
+    <li @click="godetile(3)" class="ui-col ui-col-25 indexLiStyle">
+      <img class="indexLiContentImgStyle" src="../../assets/img/lc_new.png" />
+      <div class="indexLiContentDivStyle">陵川县</div>
+    </li>
+    <li @click="godetile(4)" class="ui-col ui-col-25 indexLiStyle">
+      <img class="indexLiContentImgStyle" src="../../assets/img/qs_new.png" />
+      <div class="indexLiContentDivStyle">沁水县</div>
+    </li>
+    <li @click="godetile(5)" class="ui-col ui-col-25 indexLiStyle">
+      <img class="indexLiContentImgStyle" src="../../assets/img/yc_new.png" />
+      <div class="indexLiContentDivStyle">阳城县</div>
+    </li>
+      <li @click="godetile(6)" class="ui-col ui-col-25 indexLiStyle">
+      <img class="indexLiContentImgStyle" src="../../assets/img/zz_new.png" />
+      <div class="indexLiContentDivStyle">泽州县</div>
     </li>
   </ul>
 </template>
@@ -29,74 +50,99 @@ export default {
   },
   mounted() {
     var context = this;
+    context.permissionList = this.$route.query.permissionList;
   },
   methods: {
     godetile: function(index) {
       switch (index) {
         case 1:
-          if (this.permissionList.indexOf("重点工程") > -1) {
+          if (this.permissionList.indexOf("城区") > -1) {
+            name = "城区";
             this.$router.push({
-              path: "/zdgz/zdgc/zdgc"
+              path: "/qxztc/cq/cq_dingban",
+              query: {
+                departId: "402809816c1cc114016c1cc3cfc80005",
+                num: "1",
+                menu: "城区"
+              }
             });
-            name = "重点工程";
           } else {
             this.$toast("权限不足");
-            isUploadLog = false;
           }
           break;
         case 2:
-          if (this.permissionList.indexOf("环保攻坚") > -1) {
+          if (this.permissionList.indexOf("泽州县") > -1) {
+            name = "泽州县";
             this.$router.push({
-              path: "/zdgz/hbgj/hbgj"
+              path: "/qxztc/cq/cq_dingban",
+              query: {
+                departId: "402809816c1cc114016c1cc43cff0007",
+                num: "2",
+                menu: "泽州县"
+              }
             });
-            name = "环保攻坚";
           } else {
             this.$toast("权限不足");
-            isUploadLog = false;
           }
           break;
         case 3:
-          if (this.permissionList.indexOf("全域旅游") > -1) {
+          if (this.permissionList.indexOf("高平市") > -1) {
+            name = "高平市";
             this.$router.push({
-              path: "/qyly/qyly"
+              path: "/qxztc/cq/cq_dingban",
+              query: {
+                departId: "402809816c1cc114016c1cc49bb80009",
+                num: "3",
+                menu: "高平市"
+              }
             });
-            name = "全域旅游";
           } else {
             this.$toast("权限不足");
-            isUploadLog = false;
           }
           break;
         case 4:
-          if (this.permissionList.indexOf("文明共创") > -1) {
+          if (this.permissionList.indexOf("阳城县") > -1) {
+            name = "阳城县";
             this.$router.push({
-              path: "/wmgc/wmgc"
+              path: "/qxztc/cq/cq_dingban",
+              query: {
+                departId: "8a8180c970012108017003b8a6fb0045",
+                num: "4",
+                menu: "阳城县"
+              }
             });
-            name = "文明共创";
           } else {
             this.$toast("权限不足");
-            isUploadLog = false;
           }
           break;
         case 5:
-          if (this.permissionList.indexOf("经济运行") > -1) {
+          if (this.permissionList.indexOf("沁水县") > -1) {
+            name = "沁水县";
             this.$router.push({
-              path: "/jjyx/jjyx_ztts/jjyx_ztts"
+              path: "/qxztc/cq/cq_dingban",
+              query: {
+                departId: "8a8180c970012108017003b8e60a0047",
+                num: "5",
+                menu: "沁水县"
+              }
             });
-            name = "经济运行";
           } else {
             this.$toast("权限不足");
-            isUploadLog = false;
           }
           break;
         case 6:
-          if (this.permissionList.indexOf("能源革命") > -1) {
+          if (this.permissionList.indexOf("陵川县") > -1) {
+            name = "陵川县";
             this.$router.push({
-              path: "/cyzx/nyts/nyts"
+              path: "/qxztc/cq/cq_dingban",
+              query: {
+                departId: "8a8180c970012108017003b92b5a0049",
+                num: "6",
+                menu: "陵川县"
+              }
             });
-            name = "能源革命";
           } else {
             this.$toast("权限不足");
-            isUploadLog = false;
           }
           break;
         default:
