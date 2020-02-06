@@ -590,6 +590,12 @@ export default {
         $("#pmJjdivid p").each(function() {
           $(this).attr("style", "font-size:15px;");
         });
+        $("#pmJjdivid div").each(function() {
+          $(this).attr("style", "width:100%;font-size:15px;");
+        });
+         $("#pmJjdivid span").each(function() {
+          $(this).attr("style", "font-size:15px;");
+        });
       }, 100);
     },
     imgPreview: function(index) {

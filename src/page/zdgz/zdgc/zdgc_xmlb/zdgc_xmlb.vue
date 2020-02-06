@@ -105,7 +105,7 @@
                 src="../../../../assets/img/project_list_icon3.png"
               />
               <div style="font-size:13px;margin-left:6px;">{{item.chargeName}}</div>
-              <div style="position: absolute;right: 125px;" v-if="item.chargePhone!=''">
+              <div style="position: absolute;right: 125px;" v-if="item.chargePhone!=''"  @click="callPhone(item.chargePhone,$event)">
                 <img style="height:14px;" src="../../../../assets/img/project_list_icon5.png" />
                 <div style="display: flex;position: absolute;top: 0px;left:23px;">
                   <div style="font-size:13px;color:#666666;">{{item.chargePhone}}</div>
@@ -234,6 +234,10 @@ export default {
     this.getDyTypeList();
   },
   methods: {
+    callPhone:function(phone,event){
+      window.location.href = "tel://"+phone;
+      event.stopPropagation();
+    },
     openApp: function(item, e) {
       var isTip = localStorage.getItem("isTip");
       if (isTip != undefined) {
@@ -342,6 +346,7 @@ export default {
     },
     openPop: function() {
       //地域类型
+        $("#dylxDialogId li").off("click");
       $("#dylxDialogId li").click(function(e) {
         $(this)
           .siblings("li")
@@ -355,6 +360,7 @@ export default {
         $(this).removeClass("dialogNoSelect");
         $(this).addClass("dialogSelect");
       });
+       $("#jdflDialogId li").off("click");
       //选择进度类型
       $("#jdflDialogId li").click(function(e) {
         $(this)
@@ -369,6 +375,7 @@ export default {
         $(this).removeClass("dialogNoSelect");
         $(this).addClass("dialogSelect");
       });
+       $("#xmlxDialogId li").off("click");
       //选择项目类型
       $("#xmlxDialogId li").click(function(e) {
         if ($(this).hasClass("dialogSelect")) {

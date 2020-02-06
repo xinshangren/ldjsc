@@ -5,12 +5,14 @@ export const echarsEnti = {
     let option = {
       tooltip: {
         trigger: 'axis',
+        show: false,
         position: ['30%', '30%'],
         axisPointer: { // 坐标轴指示器，坐标轴触发有效
           type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
         }
       },
       legend: {
+        selectedMode: false,
         orient: 'horizontal',
         show: true,
         itemHeight: 7,
@@ -305,7 +307,7 @@ export const echarsEnti = {
       legend: {
         orient: 'horizontal',
         show: true,
-        left: '50%',  //图例距离左的距离
+        left: '40%',  //图例距离左的距离
         y: 'center',
         itemHeight: 7,
         height: 10,
@@ -349,7 +351,7 @@ export const echarsEnti = {
         type: 'pie',
         roseType: 'radius',
         center: ['25%', '50%'],
-        radius: [30, 80],
+        radius: [25, 55],
         avoidLabelOverlap: false,
         label: {
           normal: {
@@ -528,7 +530,7 @@ export const echarsEnti = {
         show: true,
         itemHeight: 7,
         left: '41%',  //图例距离左的距离
-        top:"20%",
+        top: "20%",
         data: ["基础设施", "产业转型", "传统产业升级"],
         formatter: function (name) {
           let target;

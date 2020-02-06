@@ -40,7 +40,7 @@
         <div>{{date2}}</div>
       </div>
       <div
-      @click="query_button"
+        @click="query_button"
         style="background: rgb(39, 150, 231);height: 26px;color: #ffffff;padding: 1px 10px;font-size: 14px;line-height: 26px;border-radius: 4px;margin-left: 20px;"
       >查询</div>
     </div>
@@ -93,7 +93,10 @@
                 style="height:14px;margin-left:16px;margin-top:3px;"
                 src="../../../../assets/img/project_list_problem.png"
               />
-              <div class="van-multi-ellipsis--l2" style="font-size:13px;margin-left:6px;">{{item.existingProblem}}</div>
+              <div
+                class="van-multi-ellipsis--l2"
+                style="font-size:13px;margin-left:6px;"
+              >{{item.existingProblem}}</div>
             </div>
 
             <div style="display:flex;margin-top:6px;position:relative;">
@@ -102,7 +105,6 @@
                 src="../../../../assets/img/project_list_icon4.png"
               />
               <div style="font-size:13px;margin-left:6px;color:#00cc00;">{{item.completionRate}}%</div>
-             
             </div>
           </div>
         </div>
@@ -164,11 +166,9 @@ export default {
       }
     };
   },
-  mounted() {
-   
-  },
+  mounted() {},
   methods: {
-    query_button:function(){
+    query_button: function() {
       this.mescroll.resetUpScroll();
     },
     showDatePicker(index) {
@@ -180,13 +180,15 @@ export default {
       let year = time.getFullYear();
       let month = time.getMonth() + 1;
       let day = time.getDate();
-      return year + "-" + month + "-" + day;
+      return year + "-" + month;
     },
     onconfirm() {
       if (this.flage == 1) {
         this.date1 = this.timeFormat(this.currentDate);
+        this.starttime = this.date1;
       } else {
         this.date2 = this.timeFormat(this.currentDate);
+        this.endtime = this.date2;
       }
       this.showPop = false;
     },
@@ -218,8 +220,8 @@ export default {
             if (page.num == 1) {
               this.list = [];
               this.$refs.totalCountId.innerHTML = res.total;
-              this.date1=res.reportDate;
-              this.date2=res.reportDate;
+              this.date1 = res.reportDate;
+              this.date2 = res.reportDate;
             }
             var data = res.dataList;
             if (data && data.length > 0) {
