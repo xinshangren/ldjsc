@@ -396,8 +396,8 @@ export const echarsEnti = {
 			orient: 'horizontal',
 			show: true,
 			itemHeight: 7,
-			itemWidth: 13,
-			x: '14%',
+			itemWidth: 10,
+			x: 'center',
 			data: lengdList,
 			textStyle: {
 				rich: {
@@ -406,11 +406,11 @@ export const echarsEnti = {
 					}
 				},
 				textFont: '11px verdana'
-			}
+			},
 		},
 		grid: {
 			right: '2%',
-			top: '15%',
+			top: '24%',
 			left: '2%',
 			bottom: '8%',
 			containLabel: true
