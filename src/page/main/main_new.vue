@@ -13,12 +13,14 @@
 </template>
 
 <script>
-import { Search } from "vant";
+import Vue from "vue";
+import { Search,Dialog } from "vant";
 import $ from "jquery";
 import { mainJs } from "../main/main.js";
 import global_variable from "../../api/global_variable.js";
 import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
+Vue.use(Search).use(Dialog);
 export default {
   name: "mainVue",
   beforeCreate() {
@@ -93,7 +95,7 @@ export default {
       //   "市长热线",
       //    "区县直通",
       // ]
-    permissionList: []
+      permissionList: []
     };
   },
   mounted() {
@@ -188,7 +190,7 @@ export default {
           if (this.permissionList.indexOf("一键直连") > -1) {
             name = "一键直连";
             this.$router.push({
-              path: '/main/dingban'
+              path: "/main/dingban"
             });
           } else {
             this.$toast("权限不足");
@@ -370,7 +372,7 @@ export default {
             this.$router.push({
               path: "/main/qxtz_new",
               query: {
-                permissionList: this.permissionList,
+                permissionList: this.permissionList
               }
             });
           } else {
@@ -378,7 +380,7 @@ export default {
             isUploadLog = false;
           }
           break;
-        
+
         case 65:
           if (this.permissionList.indexOf("每日要情") > -1) {
             id = "65";
@@ -472,6 +474,13 @@ export default {
                     self.doAddAppLog(global_variable.userId);
                   } else {
                     console.log("关闭应用");
+                    Dialog.alert({
+                      message: "权限不足，请联系管理员！"
+                    }).then(() => {
+                      dd.ready(function() {
+                        dd.biz.navigation.close();
+                      });
+                    });
                   }
                 } else if (res.success == "0") {
                 }
