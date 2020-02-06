@@ -17,14 +17,14 @@
       >
         <input
           v-if="item.dingid != null"
-          :id="'dsjyyjid'+index"
+          :id="'testdingban'+index"
           hidden
           type="checkbox"
           :value="item.dingid"
           v-model="callPhoneList"
           @change="addPhone"
         />
-        <label @click="errorMsg(item)" :for="'dsjyyjid'+index" class="active"></label>
+        <label @click="errorMsg(item)" :for="'testdingban'+index" class="active"></label>
         <img :src="item.img" style="margin: 14px 14px 15px 22px;  width: 45px; height: 45px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
@@ -83,15 +83,15 @@ export default {
   },
   methods: {
     addPhone: function() {
-      console.log("dsjyyj页面");
+      console.log("testdingban页面");
       this.map.callPhoneList = this.callPhoneList;
-      this.map.flag = "dsjyyj";
+      this.map.flag = "testdingban";
       console.log(this.map);
       this.$emit("addPhone", this.map);
     },
     getUserOrDepart: function() {
       var params = {
-        departId: "8a8180c9700ff44e017010166e88000d"
+        departId: "8a8180c97018f74601701a042cf4001c"
       };
       httpMethod
         .getUserOrDepart(params)

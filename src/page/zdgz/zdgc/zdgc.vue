@@ -88,7 +88,8 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     console.log(from);
-    if (from.path != "/") {
+     console.log(to);
+    if (from.path == "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali") {
       if (to.path == "/zdgz/zdgc/zdgc") {
         to.meta.keepAlive = true;
       } else {

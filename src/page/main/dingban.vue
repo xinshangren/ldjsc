@@ -15,7 +15,7 @@
     >
       <!-- <van-tab id="tabone" v-show="isShowTabOne" title="工作群">
         <child5 @getWorkGroupList="getWorkGroupList"></child5>
-      </van-tab> -->
+      </van-tab>-->
       <van-tab title="市委常委" id="8a8180c9700ff44e01701014c9940006">
         <child1 v-on:addPhone="addPhone"></child1>
       </van-tab>
@@ -32,6 +32,9 @@
       </van-tab>
       <van-tab title="各区县政府" id="402809816c1cc114016c1cc330320003">
         <child6 style v-on:addPhone="addPhone"></child6>
+      </van-tab>
+      <van-tab title="测试工作组" id="8a8180c97018f74601701a042cf4001c">
+        <child7 style v-on:addPhone="addPhone"></child7>
       </van-tab>
     </van-tabs>
     <img
@@ -54,6 +57,7 @@ import child3 from "@/page/dingban/szx.vue";
 import child4 from "@/page/dingban/dsjyyj.vue";
 import child6 from "@/page/dingban/qxqkfq.vue";
 import child5 from "@/page/dingban/workq/workq.vue";
+import child7 from "@/page/dingban/testdingban.vue";
 import { httpMethod } from "../../api/getData.js";
 import global_variable from "../../api/global_variable.js";
 import vhtmlpanel from "@/components/HtmlPanel.vue";
@@ -62,12 +66,13 @@ export default {
   name: "headline",
   data() {
     return {
-      corpId:"",
+      corpId: "",
       swszf: [],
       srd: [],
       szx: [],
       dsjyyj: [],
-      qxqkfq:[],
+      qxqkfq: [],
+      testdingban:[],
       callPhoneList: [],
       callButton: false,
       active: 0,
@@ -90,10 +95,10 @@ export default {
     this.gojq();
   },
   methods: {
-     gojq: function() {
+    gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
-       var number=currentUrl.indexOf("#");
-      currentUrl = currentUrl.substring(0,number);
+      var number = currentUrl.indexOf("#");
+      currentUrl = currentUrl.substring(0, number);
       console.log(currentUrl);
       var params = {
         currentUrl: currentUrl
@@ -134,7 +139,7 @@ export default {
                   "biz.util.uploadImage",
                   "biz.chat.openSingleChat",
                   "biz.ding.create",
-                   "biz.chat.toConversation"
+                  "biz.chat.toConversation"
                 ]
               });
               dd.error(function(error) {
@@ -159,17 +164,20 @@ export default {
           this.szx = map.callPhoneList;
         } else if (map.flag == "dsjyyj") {
           this.dsjyyj = map.callPhoneList;
-        }else if (map.flag == "qxqkfq") {
+        } else if (map.flag == "qxqkfq") {
           this.qxqkfq = map.callPhoneList;
+        }else if (map.flag == "testdingban") {
+          this.testdingban = map.callPhoneList;
         }
       }
       var a = [];
-      var b = a.concat(this.swszf)
-      var c = b.concat(this.szx)
-      var d = c.concat(this.srd)
-      var e = d.concat(this.dsjyyj)
-      var f = e.concat(this.qxqkfq)
-      this.callPhoneList = f;
+      var b = a.concat(this.swszf);
+      var c = b.concat(this.szx);
+      var d = c.concat(this.srd);
+      var e = d.concat(this.dsjyyj);
+      var f = e.concat(this.qxqkfq);
+      var g = f.concat(this.testdingban);
+      this.callPhoneList = g;
       console.log("父页面");
       console.log(this.callPhoneList);
       if (this.callPhoneList != null && this.callPhoneList.length > 0) {
@@ -288,7 +296,8 @@ export default {
     child3,
     child4,
     child5,
-    child6
+    child6,
+    child7
   }
 };
 </script>
