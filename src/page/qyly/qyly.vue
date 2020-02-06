@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;">
+    <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;padding-top:8px;">
       <img :src="img1" style="width:150px;height:56px;margin:auto auto;" @click="changeState(1)" />
       <img :src="img2" style="width: 150px;height:56px;margin:auto auto;" @click="changeState(2)" />
     </div>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </van-sticky>
-    <van-sticky :offset-top="111">
+    <van-sticky :offset-top="101">
       <div v-if="state==2" style="position: relative;">
         <van-tabs
           v-model="active"

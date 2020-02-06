@@ -1,5 +1,5 @@
 <template>
-  <ul class="ui-row indexFontstyle" style="padding-top:10px;">
+  <ul class="ui-row indexFontstyle" style="padding-top:0px;">
     <li
       v-for="(item,index) in tabImage"
       :key="index"
@@ -375,6 +375,7 @@ export default {
             });
           } else {
             this.$toast("权限不足");
+            isUploadLog = false;
           }
           break;
         

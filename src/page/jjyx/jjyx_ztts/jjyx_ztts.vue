@@ -10,7 +10,7 @@
         <img style="height: 18px;margin-top: 9px;" src="../../../assets/img/eco_tab_iconlist.png" />
       </div>
     </div>
-    <van-sticky id="jjyx_tabs" :offset-top="111">
+    <van-sticky id="jjyx_tabs" :offset-top="101">
       <div style="display:flex;">
         <van-tabs
           @touchmove.prevent

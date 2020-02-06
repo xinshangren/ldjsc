@@ -4,7 +4,7 @@
       @touchmove.prevent
       v-model="active"
       title-active-color="#2599e6"
-      :offset-top="111"
+      :offset-top="101"
       title-inactive-color="#333333"
       :sticky="true"
       line-width="75px"

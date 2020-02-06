@@ -10,7 +10,7 @@
         :formatter="formatter"
       />
     </van-popup>
-    <van-sticky :offset-top="154">
+    <van-sticky :offset-top="146">
       <div style="display: flex;background: rgb(255, 255, 255);height: 40px;">
         <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
           <div class="ui-col ui-col" @click="upYearClick">

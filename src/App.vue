@@ -4,15 +4,15 @@
     <!--搜索框部分start-->
     <div style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;">
       <div style="display: flex;">
-        <div  id="appVueleftId" style="width:68%;">
-        <van-search
-          placeholder="搜索"
-          shape="round"
-          background="rgb(255, 255, 255,0)"
-          v-model="seach_value"
-          class="index_top_style"
-          style="width:100%;height: 64px;"
-        />
+        <div id="appVueleftId" style="width:85%;">
+          <van-search
+            placeholder="搜索"
+            shape="round"
+            background="rgb(255, 255, 255,0)"
+            v-model="seach_value"
+            class="index_top_style"
+            style="width:100%;height: 64px;"
+          />
         </div>
         <!-- <div
           id="appVuerightId"
@@ -34,23 +34,28 @@
         </div>-->
 
         <div
-        id="appVuerightId"
+          id="appVuerightId"
           class="ui-row-flex ui-whitespace"
-          style="color:#ffffff;width:32%;height: 64px;font-size:14px;padding:0px;"
+          style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;"
         >
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
             <div class="appvueRightFont">首页</div>
           </div>
-          <div class="ui-col ui-col index_top_div_style">
+          <!-- <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_message.png" class="home_top_img" @click="toast()" />
             <div class="appvueRightFont">消息</div>
-          </div>
+          </div> -->
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_user.png" class="home_top_img" @click="toast()" />
             <div class="appvueRightFont">我的</div>
           </div>
-          <div id="yjzlid" class="ui-col ui-col index_top_div_style" style="display:none;">
+          <div
+            id="yjzlid"
+            class="ui-col ui-col index_top_div_style"
+            style="display:none;"
+            @click="gotoYjzl()"
+          >
             <img src="@/assets/img/zl.png" class="home_top_img" />
             <div class="appvueRightFont">直连</div>
           </div>
@@ -58,7 +63,7 @@
       </div>
       <div
         class="index_gonggao_style"
-        style="display:flex;background: #3098fb;height: 47px;	line-height:47px;border-top:1px solid #ffffff;"
+        style="display:flex;background: #3098fb;height: 36px;	line-height:36px;border-top:1px solid #ffffff;"
       >
         <div class="index_gonggao_left"></div>
         <div style="margin-left:7px;font-weight:600;">公告</div>
@@ -68,9 +73,9 @@
     <!--搜索框部分end-->
     <!-- <router-view></router-view> -->
     <keep-alive>
-      <router-view style="margin-top: 111px;" class="index_main_view" v-if="$route.meta.keepAlive"></router-view>
+      <router-view style="margin-top: 101px;" class="index_main_view" v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
-    <router-view style="margin-top: 111px;" v-if="!$route.meta.keepAlive"></router-view>
+    <router-view style="margin-top: 101px;" v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
@@ -100,17 +105,22 @@ export default {
       var path = this.$route.path;
       if (path == "/") {
         $("#yjzlid").hide();
-        $("#appVuerightId").css("width", "32%");
-        $("#appVueleftId").css("width", "68%");
+        $("#appVuerightId").css("width", "25%");
+        $("#appVueleftId").css("width", "85%");
       } else {
         $("#yjzlid").show();
-        $("#appVuerightId").css("width", "37%");
-        $("#appVueleftId").css("width", "61%");
+        $("#appVuerightId").css("width", "31%");
+        $("#appVueleftId").css("width", "68%");
       }
       console.log(this.$route.path);
     },
     toast: function() {
       this.$toast("功能开发中");
+    },
+    gotoYjzl: function() {
+      this.$router.replace({
+        path: "/main/dingban"
+      });
     },
     gotoHome: function() {
       //console.log(global_variable.indexTabId);
