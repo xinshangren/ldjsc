@@ -2,41 +2,67 @@
   <div id="app">
     <loading v-show="LOADING" style="z-index:3;"></loading>
     <!--搜索框部分start-->
-    <div
-      style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;"
-    >
+    <div style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;">
       <div style="display: flex;">
+        <div  id="appVueleftId" style="width:68%;">
         <van-search
           placeholder="搜索"
           shape="round"
           background="rgb(255, 255, 255,0)"
           v-model="seach_value"
           class="index_top_style"
-          style="width:68%;"
+          style="width:100%;height: 64px;"
         />
-        <div class="index_top_style" style="display:flex;color:#ffffff;width:32%;">
+        </div>
+        <!-- <div
+          id="appVuerightId"
+          class="index_top_style"
+          style="display:flex;color:#ffffff;width:32%;height: 64px;"
+        >
           <div class="index_top_img_jg1">
-            <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
-            <div>首页</div>
+           
           </div>
           <div class="index_top_img_jg">
+        
+          </div>
+          <div class="index_top_img_jg">
+           
+          </div>
+          <div id="yjzlid" class="index_top_img_jg" style="display:none;">
+        
+          </div>
+        </div>-->
+
+        <div
+        id="appVuerightId"
+          class="ui-row-flex ui-whitespace"
+          style="color:#ffffff;width:32%;height: 64px;font-size:14px;padding:0px;"
+        >
+          <div class="ui-col ui-col index_top_div_style">
+            <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
+            <div class="appvueRightFont">首页</div>
+          </div>
+          <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_message.png" class="home_top_img" @click="toast()" />
-            <div>消息</div>
+            <div class="appvueRightFont">消息</div>
           </div>
-          <div s class="index_top_img_jg">
+          <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_user.png" class="home_top_img" @click="toast()" />
-            <div>我的</div>
+            <div class="appvueRightFont">我的</div>
           </div>
-           <div s class="index_top_img_jg">
+          <div id="yjzlid" class="ui-col ui-col index_top_div_style" style="display:none;">
             <img src="@/assets/img/zl.png" class="home_top_img" />
-            <div>直连</div>
+            <div class="appvueRightFont">直连</div>
           </div>
         </div>
       </div>
-      <div class="index_gonggao_style" style="display:flex;background: #3098fb;">
+      <div
+        class="index_gonggao_style"
+        style="display:flex;background: #3098fb;height: 47px;	line-height:47px;border-top:1px solid #ffffff;"
+      >
         <div class="index_gonggao_left"></div>
         <div style="margin-left:7px;font-weight:600;">公告</div>
-        <div style="margin-left:7px;" >这里是公告内容</div>
+        <div style="margin-left:7px;">无</div>
       </div>
     </div>
     <!--搜索框部分end-->
@@ -49,6 +75,7 @@
 </template>
 
 <script>
+import $ from "jquery";
 import { mapState } from "vuex";
 import Loading from "../src/store/loading.vue";
 export default {
@@ -70,6 +97,16 @@ export default {
   },
   methods: {
     getPath() {
+      var path = this.$route.path;
+      if (path == "/") {
+        $("#yjzlid").hide();
+        $("#appVuerightId").css("width", "32%");
+        $("#appVueleftId").css("width", "68%");
+      } else {
+        $("#yjzlid").show();
+        $("#appVuerightId").css("width", "37%");
+        $("#appVueleftId").css("width", "61%");
+      }
       console.log(this.$route.path);
     },
     toast: function() {
@@ -101,4 +138,5 @@ export default {
 
 <style>
 @import "assets/css/main.css";
+@import "assets/css/frozenui.css";
 </style>

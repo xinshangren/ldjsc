@@ -59,40 +59,40 @@ export default {
         "综合信息"
       ],
       tabIdList: ["8", "65", "1", "5", "2", "3", "6", "", "4", "7"],
-      permissionList: [
-        "每日要情",
-        "重大改革",
-        "文明共创",
-        "重点工程",
-        "环保攻坚",
-        "经济运行",
-        "三大产业",
-        "招商引资",
-        "能源革命",
-        "热点问题",
-        "热点事件",
-        "工作效能",
-        "教育服务",
-        "12345",
-        "就业服务",
-        "行政审批",
-        "行政监督",
-        "全域旅游",
-        "游客画像",
-        "非遗保护",
-        "远程调度",
-        "城区",
-        "泽州县",
-        "高平市",
-        "阳城县",
-        "沁水县",
-        "陵川县",
-        "综合信息",
-        "13710督办",
-        "一键直连",
-        "市长热线"
-      ]
-      //  permissionList: []
+      // permissionList: [
+      //   "每日要情",
+      //   "重大改革",
+      //   "文明共创",
+      //   "重点工程",
+      //   "环保攻坚",
+      //   "经济运行",
+      //   "三大产业",
+      //   "招商引资",
+      //   "能源革命",
+      //   "热点问题",
+      //   "热点事件",
+      //   "工作效能",
+      //   "教育服务",
+      //   "12345",
+      //   "就业服务",
+      //   "行政审批",
+      //   "行政监督",
+      //   "全域旅游",
+      //   "游客画像",
+      //   "非遗保护",
+      //   "远程调度",
+      //   "城区",
+      //   "泽州县",
+      //   "高平市",
+      //   "阳城县",
+      //   "沁水县",
+      //   "陵川县",
+      //   "综合信息",
+      //   "13710督办",
+      //   "一键直连",
+      //   "市长热线"
+      // ]
+       permissionList: []
     };
   },
   mounted() {
@@ -134,7 +134,6 @@ export default {
               path: "/qyly/qyly"
             });
             name = "全域旅游";
-           
           } else {
             this.$toast("权限不足");
             isUploadLog = false;
@@ -146,7 +145,6 @@ export default {
               path: "/wmgc/wmgc"
             });
             name = "文明共创";
-          
           } else {
             this.$toast("权限不足");
             isUploadLog = false;
@@ -158,7 +156,6 @@ export default {
               path: "/jjyx/jjyx_ztts/jjyx_ztts"
             });
             name = "经济运行";
-          
           } else {
             this.$toast("权限不足");
             isUploadLog = false;
@@ -170,7 +167,6 @@ export default {
               path: "/cyzx/nyts/nyts"
             });
             name = "能源革命";
-          
           } else {
             this.$toast("权限不足");
             isUploadLog = false;
@@ -179,6 +175,9 @@ export default {
         case 7:
           if (this.permissionList.indexOf("综合信息") > -1) {
             name = "综合信息";
+            this.$router.push({
+              path: "/main/headline"
+            });
           } else {
             this.$toast("权限不足");
             isUploadLog = false;
@@ -186,9 +185,10 @@ export default {
           break;
         case 8:
           if (this.permissionList.indexOf("一键直连") > -1) {
-            name = "钉办";
-            // this.$parent.changeTabStyle("2");
-            // this.$parent.addEvent();
+            name = "一键直连";
+            this.$router.push({
+              path: '/main/dingban'
+            });
           } else {
             this.$toast("权限不足");
             isUploadLog = false;

@@ -29,22 +29,28 @@
     text-align:center;
 	font-size:13px;
 }
+
+.index_top_div_style{
+    text-align:center;
+	/* font-size:13px; */
+}
 .home_top_img {
-	height: 35%;
-	margin-top: 7px;
+	height: 15px;
+	margin-top: 12px;
 	margin-left: 3%;
+}
+.appvueRightFont{
+	font-size:14px;
 }
 .index_gonggao_left{
 	height: 18px;width: 2px;background: rgb(255, 255, 255);margin: auto 0;margin-left: 20px;font-weight:600;
 }
-.index_top_style{
-	height: 64px;
-}
+
 .index_gonggao_style{
-	height: 47px;
+	
 	font-size:14px;
 	color: #ffffff;
-	line-height:47px;
+
 }
 .index_main_view{
 	margin-top: 111px;
