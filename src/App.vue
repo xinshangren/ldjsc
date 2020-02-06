@@ -63,7 +63,7 @@
       </div>
       <div
         class="index_gonggao_style"
-        style="display:flex;background: #3098fb;height: 47px;	line-height:47px;border-top:1px solid #ffffff;"
+        style="display:flex;background: #3098fb;height: 36px;	line-height:36px;border-top:1px solid #ffffff;"
       >
         <div class="index_gonggao_left"></div>
         <div style="margin-left:7px;font-weight:600;">公告</div>
@@ -73,9 +73,9 @@
     <!--搜索框部分end-->
     <!-- <router-view></router-view> -->
     <keep-alive>
-      <router-view style="margin-top: 111px;" class="index_main_view" v-if="$route.meta.keepAlive"></router-view>
+      <router-view style="margin-top: 101px;" class="index_main_view" v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
-    <router-view style="margin-top: 111px;" v-if="!$route.meta.keepAlive"></router-view>
+    <router-view style="margin-top: 101px;" v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 

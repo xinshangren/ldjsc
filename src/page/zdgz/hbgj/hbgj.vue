@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <van-sticky :offset-top="111">
+    <van-sticky :offset-top="101">
       <div style="display:flex;border-bottom:1px solid #f3f3f3;">
         <div @click="showHideLeftSelect()" class="twoLevel_left_div">
           <img style="height: 24px; margin-top: 8px;margin-left: 10px;" :src="TwoLevelTabImg1" />

@@ -4,7 +4,7 @@
       @click="onClick"
       v-model="active"
       :sticky="true"
-      :offset-top="111"
+      :offset-top="101"
       :ellipsis="false"
       line-width="25%"
       style="font-size: 14px;"

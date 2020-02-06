@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <van-sticky id="twoLeveltab" :offset-top="111">
+    <van-sticky id="twoLeveltab" :offset-top="101">
       <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
         <div @click="showHideLeftSelect()" class="twoLevel_left_div">
           <img style="height: 21px;margin-top: 9px;margin-left: 7px;" :src="TwoLevelTabImg1" />
