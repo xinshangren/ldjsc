@@ -48,7 +48,7 @@
             style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
           >
             <div class="ui-col ui-col" style="text-align: center;">地区</div>
-            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度</div>
+            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度(万元)</div>
             <div class="ui-col ui-col" style="text-align: center;">
               <div style="margin-left: 5px;">同比±%</div>
             </div>
@@ -87,7 +87,7 @@
             style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
           >
             <div class="ui-col ui-col" style="text-align: center;">地区</div>
-            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度</div>
+            <div class="ui-col ui-col" style="text-align: center;">1-{{indexQuarter}}季度(万元)</div>
             <div class="ui-col ui-col" style="text-align: center;">
               <div style="margin-left: 5px;">同比±%</div>
             </div>
