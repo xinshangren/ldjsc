@@ -58,7 +58,7 @@ export default {
         "文明共创",
         "综合信息"
       ],
-      tabIdList: ["8", "65", "1", "5", "2", "3", "6", "", "4", "7"],
+      tabIdList: ["8", "65", "1", "5", "2", "3", "6", "23", "4", "7"],
       permissionList: [
         "每日要情",
         "重大改革",
@@ -90,9 +90,10 @@ export default {
         "综合信息",
         "13710督办",
         "一键直连",
-        "市长热线"
+        "市长热线",
+         "区县直通",
       ]
-      //  permissionList: []
+    // permissionList: []
     };
   },
   mounted() {
@@ -364,95 +365,19 @@ export default {
           }
           break;
         case 23:
-          if (this.permissionList.indexOf("城区") > -1) {
-            name = "城区";
+          if (this.permissionList.indexOf("区县直通") > -1) {
+            name = "区县直通";
             this.$router.push({
-              path: "/qxztc/cq/cq_dingban",
+              path: "/main/qxtz_new",
               query: {
-                departId: "402809816c1cc114016c1cc3cfc80005",
-                num: "23",
-                menu: "城区"
+                permissionList: this.permissionList,
               }
             });
           } else {
             this.$toast("权限不足");
           }
           break;
-        case 24:
-          if (this.permissionList.indexOf("泽州县") > -1) {
-            name = "泽州县";
-            this.$router.push({
-              path: "/qxztc/cq/cq_dingban",
-              query: {
-                departId: "402809816c1cc114016c1cc43cff0007",
-                num: "24",
-                menu: "泽州县"
-              }
-            });
-          } else {
-            this.$toast("权限不足");
-          }
-          break;
-        case 25:
-          if (this.permissionList.indexOf("高平市") > -1) {
-            name = "高平市";
-            this.$router.push({
-              path: "/qxztc/cq/cq_dingban",
-              query: {
-                departId: "402809816c1cc114016c1cc49bb80009",
-                num: "25",
-                menu: "高平市"
-              }
-            });
-          } else {
-            this.$toast("权限不足");
-          }
-          break;
-        case 26:
-          if (this.permissionList.indexOf("阳城县") > -1) {
-            name = "阳城县";
-            this.$router.push({
-              path: "/qxztc/cq/cq_dingban",
-              query: {
-                departId: "8a8180c970012108017003b8a6fb0045",
-                num: "26",
-                menu: "阳城县"
-              }
-            });
-          } else {
-            this.$toast("权限不足");
-          }
-          break;
-        case 27:
-          if (this.permissionList.indexOf("沁水县") > -1) {
-            name = "沁水县";
-            this.$router.push({
-              path: "/qxztc/cq/cq_dingban",
-              query: {
-                departId: "8a8180c970012108017003b8e60a0047",
-                num: "27",
-                menu: "沁水县"
-              }
-            });
-          } else {
-            this.$toast("权限不足");
-          }
-          break;
-        case 28:
-          if (this.permissionList.indexOf("陵川县") > -1) {
-            name = "陵川县";
-            this.$router.push({
-              path: "/qxztc/cq/cq_dingban",
-              query: {
-                departId: "8a8180c970012108017003b92b5a0049",
-                num: "28",
-                menu: "陵川县"
-              }
-            });
-          } else {
-            this.$toast("权限不足");
-          }
-          break;
+        
         case 65:
           if (this.permissionList.indexOf("每日要情") > -1) {
             id = "65";
