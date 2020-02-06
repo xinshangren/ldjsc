@@ -4,23 +4,23 @@
       <img class="indexLiContentImgStyle" src="../../assets/img/cq_new.png" />
       <div class="indexLiContentDivStyle">城区</div>
     </li>
-    <li @click="godetile(2)" class="ui-col ui-col-25 indexLiStyle">
+    <li @click="godetile(3)" class="ui-col ui-col-25 indexLiStyle">
       <img class="indexLiContentImgStyle" src="../../assets/img/gp_new.png" />
       <div class="indexLiContentDivStyle">高平市</div>
     </li>
-    <li @click="godetile(3)" class="ui-col ui-col-25 indexLiStyle">
+    <li @click="godetile(6)" class="ui-col ui-col-25 indexLiStyle">
       <img class="indexLiContentImgStyle" src="../../assets/img/lc_new.png" />
       <div class="indexLiContentDivStyle">陵川县</div>
     </li>
-    <li @click="godetile(4)" class="ui-col ui-col-25 indexLiStyle">
+    <li @click="godetile(5)" class="ui-col ui-col-25 indexLiStyle">
       <img class="indexLiContentImgStyle" src="../../assets/img/qs_new.png" />
       <div class="indexLiContentDivStyle">沁水县</div>
     </li>
-    <li @click="godetile(5)" class="ui-col ui-col-25 indexLiStyle">
+    <li @click="godetile(4)" class="ui-col ui-col-25 indexLiStyle">
       <img class="indexLiContentImgStyle" src="../../assets/img/yc_new.png" />
       <div class="indexLiContentDivStyle">阳城县</div>
     </li>
-      <li @click="godetile(6)" class="ui-col ui-col-25 indexLiStyle">
+      <li @click="godetile(2)" class="ui-col ui-col-25 indexLiStyle">
       <img class="indexLiContentImgStyle" src="../../assets/img/zz_new.png" />
       <div class="indexLiContentDivStyle">泽州县</div>
     </li>
