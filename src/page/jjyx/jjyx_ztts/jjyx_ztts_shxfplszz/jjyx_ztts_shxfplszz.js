@@ -369,7 +369,7 @@ export const echarsEnti = {
 			show: true,
 			itemHeight: 7,
 			itemWidth: 13,
-			x: '14%',
+			x: 'center',
 			data: lengdList,
 			textStyle: {
 				rich: {
