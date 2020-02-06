@@ -387,7 +387,9 @@ export const echarsEnti = {
 			  minValueSpan: 4,
 			  start: 0,
 			  end: 15,
-			  show:true,        
+			  show:true,  
+			  bottom: '0px',     
+			  height:'15px' 
 			}
 		  ],
 		grid: {
@@ -395,6 +397,7 @@ export const echarsEnti = {
 			top: '16%',
 			left: '2%',
 			bottom: '8%',
+			height:'210px',
 			containLabel: true
 		},
 		tooltip: {
