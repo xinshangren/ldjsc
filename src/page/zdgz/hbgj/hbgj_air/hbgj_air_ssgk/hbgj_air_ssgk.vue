@@ -66,7 +66,7 @@
     <van-swipe @change="swipeChange" indicator-color="#1976d2">
       <van-swipe-item>
         <div style="background:#ffffff;height:300px;width:100%;margin-top:8px;padding-top:7px;">
-          <div class="echars_titile_div">省内空气质量排名</div>
+          <div class="echars_titile_div">省内空气质量日排名</div>
           <div
             class="van-hairline--bottom"
             style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
@@ -130,8 +130,8 @@
             class="ui-row-flex ui-whitespace"
             style="color:#333333;background:#e2f3ff;padding-top: 6px;padding-bottom: 6px;"
           >
-            <div class="ui-col ui-col">{{item.stationName}}</div>
-            <div class="ui-col ui-col">{{item.stationType}}</div>
+            <div class="ui-col ui-col" style="word-break:break-all;">{{item.stationName}}</div>
+            <div class="ui-col ui-col"  style="word-break:break-all;">{{item.stationType}}</div>
             <div class="ui-col ui-col">{{item.dataAqi}}</div>
             <div class="ui-col ui-col" v-if="item.dataAqiLevel=='6'">严重</div>
             <div class="ui-col ui-col" v-if="item.dataAqiLevel=='5'">重度</div>
