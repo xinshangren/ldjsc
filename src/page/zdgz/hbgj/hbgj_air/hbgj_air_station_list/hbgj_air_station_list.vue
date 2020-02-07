@@ -11,9 +11,9 @@
         @click="queryList"
       />
     </div>
-    <div id="count_id" style="display:flex;z-index:99999">
-      <div style="width:100%;text-align:center;color:#1976d2;margin-top:6px;font-size:15px;z-index:99999999">
-        共<span ref="totalCountId"></span>个站点
+    <div id="count_id" style="display:flex;">
+      <div style="width:100%;text-align:center;color:#1976d2;margin-top:6px;font-size:15px;">
+        共<span ref="totalCountId">0</span>个站点
       </div>
     </div>
 
@@ -543,6 +543,7 @@ export default {
         console.log(this.selectWrwNames);
       });
       //站点列表
+      $("#zdlbDialogId li").unbind();
       $("#zdlbDialogId li").click(function(e) {
         if ($(this).hasClass("dialogSelect")) {
           $(this).removeClass("dialogSelect");
