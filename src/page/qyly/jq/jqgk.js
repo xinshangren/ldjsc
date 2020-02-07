@@ -123,6 +123,13 @@ export const echarsEnti = {
 
     // console.log(total);
     let option = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: "{c} (人次)"
+      },
       grid: {
         top: '10%',
         left: '5%',

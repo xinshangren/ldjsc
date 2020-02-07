@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;padding-top:8px;">
+  <div @click="closeState">
+    <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;">
       <img :src="img1" style="width:150px;height:56px;margin:auto auto;" @click="changeState(1)" />
       <img :src="img2" style="width: 150px;height:56px;margin:auto auto;" @click="changeState(2)" />
     </div>
@@ -23,7 +23,7 @@
           <van-tab title="景区列表"></van-tab>
           <van-tab title="景区介绍"></van-tab>
         </van-tabs>
-        <div
+        <div id="topselect"
           @click="showState()"
           style="position:absolute; top: 0;left: 0; width: 38%;display: flex;height: 44px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;"
         >
@@ -58,7 +58,7 @@
           <van-tab title="示范村列表"></van-tab>
         </van-tabs>
 
-        <div
+        <div id="topselect"
           @click="showState()"
           style="position: absolute;top:0;left: 0; width: 33%;display: flex;height: 44px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;"
         >
@@ -76,7 +76,7 @@
     </van-sticky>
 
     <div :is="currentView"></div>
-    <div
+    <div 
       v-show="show"
       style=" position: absolute;top:155px;left:10px;width: 30%;box-shadow: 2px 2px #f3f3f3;border: 1px #f3f3f3 solid;"
     >
@@ -119,6 +119,13 @@ export default {
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F7F7F7");
+//     document.addEventListener('click',function(e){
+//               if(e.target.className != 'topselect'){
+//                     document.getElementById("topselectlist").style.display="none"
+//               }else{
+//                     document.getElementById("topselectlist").style.display="block"
+//               }
+//             })
   },
   activated() {
     //返回保留页面记录
@@ -225,6 +232,18 @@ export default {
     },
     showState: function() {
       this.show = true;
+    },
+    // closeState:function(){
+    //   this.show = false;
+    // },
+    closeState(event) {
+      var myPanel = document.getElementById('topselect')// 得到点击出现的节点
+      console.log(myPanel);
+      if (myPanel) {
+        if (!(myPanel.contains(event.target))) { // 这句是说如果我们点击到了id为myPanel以外的区域，为false
+          this.show = false// 消失
+        }
+      }
     },
     changeState: function(state) {
       this.state = state;
