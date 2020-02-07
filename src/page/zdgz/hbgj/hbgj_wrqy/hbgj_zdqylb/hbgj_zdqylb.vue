@@ -289,6 +289,7 @@ export default {
           }
         });
         //所处区县单选
+        $("#scqxDialogId li").unbind();
         $("#scqxDialogId li").click(function(e) {
           $(this)
             .siblings("li")
@@ -303,6 +304,7 @@ export default {
           $(this).addClass("dialogSelect");
         });
         //关注程度
+        $("#gzcdDialogId li").unbind();
         $("#gzcdDialogId li").click(function(e) {
           if ($(this).hasClass("dialogSelect")) {
             $(this).removeClass("dialogSelect");
