@@ -1,26 +1,26 @@
 <template>
   <div>
     <div
-      style="border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin: 0px 0px -4px -4px;background: #ffffff;"
+      style="border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin: 0px 0px -4px -4px; width:100%;background: #ffffff;"
     >
       <img
         id="all_pick"
         style="height: 20px;margin: 5px 0px 5px 12px;"
         v-if="all_pick_flag"
-        src="../../../assets/img/choice2.png"
+        src="../../assets/img/choice2.png"
         @click="all_pick"
       />
       <img
         id="all_pick"
         style="height: 20px;margin: 5px 0px 5px 12px;"
         v-else
-        src="../../../assets/img/choice1.png"
+        src="../../assets/img/choice1.png"
         @click="all_pick"
       />
       <div style="font-size: 14px;margin: 5px 0px 5px 12px;">全选</div>
     </div>
     <van-list
-      id="newslist1"
+      id="newslist7"
       v-model="loading"
       :finished="finished"
       @load="onLoad"
@@ -30,20 +30,20 @@
       style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;"
     >
       <div
-        style="width: 100%;display: flex; position: relative; margin-top: 4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+        style="width:100%;display: flex; position: relative; margin-top:4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
         v-for="(item,index) of list"
         :key="item.id"
       >
         <input
           v-if="item.dingid != null"
-          :id="'id'+index"
+          :id="'szxid'+index"
           hidden
           type="checkbox"
           :value="item.dingid"
           v-model="callPhoneList"
-          @change="addPhone"
+          v-on:change="addPhone($event)"
         />
-        <label @click="errorMsg(item)" :for="'id'+index" class="active"></label>
+        <label @click="errorMsg(item)" :for="'szxid'+index" class="active"></label>
         <img :src="item.img" style="margin: 16px 14px 15px 7px;  width: 55px; height: 55px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
@@ -51,55 +51,37 @@
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 20px;">
           <img
-            src="../../../assets/img/phonecall.png"
+            src="../../assets/img/phonecall.png"
             style="width: 50px;height:50px;"
             @click="goDetile(item)"
           />
           <!-- <img
-            src="../../../assets/img/sms.png"
+            src="../../assets/img/sms.png"
             style="width: 50px;height:50px;margin-left: 5px;"
             @click="goSms(item)"
           />-->
           <!-- <img
-            src="../../../assets/img/ding.png"
+            src="../../assets/img/ding.png"
             style="width: 50px;height:50px;margin-left: 5px;"
             @click="goDing(item)"
           />-->
         </div>
-        <img v-show="isshow" style="width:100%;" src="../../../assets/img/no-data.jpg" />
       </div>
     </van-list>
-    <div
-      id="callButton"
-      style="z-index: 2;display: none; width: 100%; height: 50px; position: absolute;bottom: 0px;
-      right: 0px;background-color:#ffffff;"
-    >
-      <div style=" width:100%;vertical-align: middle;display: flex;margin: 18px 0px 14px 14px;">
-        <div style="font-size: 14px;margin-left: 3px;">已选人数:</div>
-        <div
-          style="font-size: 14px;width: 49%; margin-left: 1px;color: rgb(48, 152, 251) "
-        >{{callPhoneList.length}}人</div>
-        <img
-          id="leftAreaDivId"
-          style="height: 36px; margin: -9px -3px 0px;"
-          src="../../../assets/img/dingtalk_more.png"
-          @click="goDingPhone"
-        />
-      </div>
-    </div>
   </div>
 </template>
 <script>
 import Vue from "vue";
 import { PullRefresh } from "vant";
-import { httpMethod } from "../../../api/getData.js";
+import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
 Vue.use(PullRefresh);
 export default {
   name: "picsnews",
+  props: ["callPhoneList_p"],
   data() {
     return {
-      userId: "", //暂时默认
+      userId: "8ae4804f6d39da6a016d4c928ede0119", //暂时默认
       error: false,
       list: [],
       loading: false, //是否处于加载状态
@@ -108,17 +90,16 @@ export default {
       page: 1,
       pageSize: 4,
       corpId: "",
-      isshow: false,
       callPhoneList: [],
-      all_pick_flag: false,
-      callButton:false,
+      callButton: false,
+      map: {},
+      all_pick_flag: false
     };
   },
-  props: ["departId"],
   mounted() {
     var orderHight1 = document.documentElement.clientHeight;
     var heightlist = orderHight1 - 196;
-    document.getElementById("newslist1").style.height = heightlist + "px";
+    document.getElementById("newslist7").style.height = heightlist + "px";
     this.gojq();
   },
   methods: {
@@ -126,14 +107,27 @@ export default {
       var self = this;
       if (self.all_pick_flag) {
         self.all_pick_flag = false;
+
         self.callPhoneList = [];
+        self.addPhone(null);
       } else {
-        if (self.callPhoneList.length > 35) {
+        var list = self.list;
+        var list1 = [];
+        list.forEach(element => {
+          if (element.dingid != null) {
+            if (self.callPhoneList_p.indexOf(element.dingid) > -1) {
+            } else {
+              list1.push(element.dingid);
+            }
+          }
+        });
+        var ls = list1.length;
+        var ll = self.callPhoneList_p.length;
+        if (ll + ls > 35) {
           this.$toast("多人通话选择人数不得大于35人");
           return false;
         } else {
           self.all_pick_flag = true;
-          var list = self.list;
           list.forEach(element => {
             if (element.dingid != null) {
               if (self.callPhoneList.indexOf(element.dingid) > -1) {
@@ -142,66 +136,46 @@ export default {
               }
             }
           });
+          self.addPhone(null);
         }
       }
-      self.addPhone();
     },
-    goDingPhone() {
-      var ddd = this.corpId;
-      var users = this.callPhoneList;
-      console.log(users);
-      if (users.length > 0 && users.length <= 35) {
-        dd.ready(function() {
-          dd.biz.telephone.call({
-            users: users, //用户列表，工号
-            corpId: ddd, //企业id
-            onSuccess: function() {},
-            onFail: function(e) {
-              alert("打电话错误" + JSON.stringify(e));
-            }
-          });
-        });
-      } else if (users.length > 35) {
-        this.$toast("多人通话选择人数不得大于35人");
-      } else {
-        this.$toast("请选择多人通话参与人");
+    addPhone: function(e) {
+      var self = this;
+      if (e != null && e.target.checked) {
+        if (self.callPhoneList_p.length >= 35) {
+          console.log(self.callPhoneList);
+          e.target.checked = false;
+          self.callPhoneList.pop();
+          console.log(self.callPhoneList);
+          this.$toast("多人通话选择人数不得大于35人");
+          return false;
+        }
       }
-    },
-    addPhone: function() {
-      if (this.callPhoneList != null && this.callPhoneList.length > 0) {
-        this.callButton = true;
-        $("#callButton").slideDown("slow");
-      } else {
-        this.callButton = false;
-        this.all_pick_flag = false;
-        $("#callButton").slideUp("slow");
+      if (self.callPhoneList.length == 0) {
+        self.all_pick_flag = false;
       }
+      console.log("gqxwsj页面");
+      this.map.callPhoneList = this.callPhoneList;
+      this.map.flag = "gqxwsj";
+      console.log(this.map);
+      this.$emit("addPhone", this.map);
     },
-    errorMsg: function(item) {
-      if (item.dingid != null) {
-      } else {
-        this.$toast("该用户暂未注册");
-      }
-    },
-    getUserOrDepart: function(departId) {
+    getUserOrDepart: function() {
       var params = {
-        departId: departId
+        departId: "8a8180c9701a1a4b01701ef148c60034"
       };
       httpMethod
         .getUserOrDepart(params)
         .then(res => {
+          console.log(res);
           if (res.success == "1") {
-            if (res.userList != null) {
-              this.list = this.list.concat(res.userList);
-              for (var i = 0; i < this.list.length; i++) {
-                this.list[i].img =
-                  httpMethod.returnBaseUrlFun() + this.list[i].img;
-              }
-              this.finished = true;
-              this.isshow = false;
-            } else {
-              this.isshow = true;
+            this.list = this.list.concat(res.userList);
+            for (var i = 0; i < this.list.length; i++) {
+              this.list[i].img =
+                httpMethod.returnBaseUrlFun() + this.list[i].img;
             }
+            this.finished = true;
           } else if (res.success == "0") {
             this.error = true;
           }
@@ -221,16 +195,10 @@ export default {
       //上拉加载
       this.error = false;
       console.log("onLoad");
-      this.getUserOrDepart(this.departId);
+      this.getUserOrDepart();
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
-      // if (window.location.hash == "#/" || window.location.hash == "#/qxztc/cq/cq_dingban") {
-      //   currentUrl = currentUrl.substring(
-      //     0,
-      //     currentUrl.indexOf(window.location.hash)
-      //   );
-      // }
       var number = currentUrl.indexOf("#");
       currentUrl = currentUrl.substring(0, number);
       console.log(currentUrl);
@@ -287,6 +255,12 @@ export default {
         .catch(err => {
           this.$toast(err);
         });
+    },
+    errorMsg: function(item) {
+      if (item.dingid != null) {
+      } else {
+        this.$toast("该用户暂未注册");
+      }
     },
     //打电话
     goDetile(item) {
@@ -374,5 +348,5 @@ export default {
 </script>
 
 <style socped>
-@import "../../dingban/dingban.css";
+@import "./dingban.css";
 </style>

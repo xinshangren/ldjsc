@@ -13,14 +13,17 @@
         v-for="(item,index) of list" :key="item.id">
         <input v-if="item.dingid != null" :id="'id'+index" hidden type="checkbox" :value="item.dingid"
           v-model="callPhoneList" v-on:change="addPhone($event)" />
-        <label @click="errorMsg(item)" :for="'id'+index" class="active"></label>
+        <label @click="errorMsg(item)" v-if="index != 0" :for="'id'+index" class="active"></label>
+        <div v-else style="width: 26px;"></div>
         <img :src="item.img" style="margin: 16px 14px 15px 7px;  width: 55px; height: 55px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
           <div style="margin-top: 16px;font-size: 13px;">{{item.dutyName}}</div>
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 20px;">
-          <img src="../../assets/img/phonecall.png" style="width: 50px;height:50px;" @click="goDetile(item)" />
+          <img v-if="index != 0" src="../../assets/img/phonecall.png" style="width: 50px;height:50px;" @click="goDetile(item)" />
+          <img v-else src="../../assets/img/no_phonecall.png"  style="width: 50px;height:50px;" />
+         
           <!-- <img
             src="../../assets/img/sms.png"
             style="width: 50px;height:50px;margin-left: 5px;"
