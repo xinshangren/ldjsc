@@ -50,14 +50,14 @@
     <div ref="nyts_nymtgk_echars_id" style="width: 100%;height: 270px;"></div>
 
     <div style="display:flex;width:100%;height: 70px;padding:10px;">
-      <div style="width:46%;background-color: #fffebf;">
+      <div style="width:46%;background-color: #e9f8ff;">
         <div style="display:flex;margin-left: 30px;margin-top: 12px;">
           <div id="nyts_mt_gk_gyzcz_count_id" style="color: #5eb0ef;font-size: 16px;">{{ymcl}}</div>
           <div style="margin-top: 5px;font-size: 12px;">万吨</div>
         </div>
         <div style="margin-left: 30px;font-size: 12px;">原煤产量</div>
       </div>
-      <div style="width:46%;background-color: #fffebf;">
+      <div style="width:46%;background-color: #e9f8ff;">
         <div style="display:flex;margin-left: 30px;margin-top: 12px;">
           <div id="nyts_mt_gk_xjxscz_count_id" style="color: #fab52a;font-size: 16px;">{{ktcl}}</div>
           <div style="margin-top: 5px;font-size: 12px;">万吨</div>

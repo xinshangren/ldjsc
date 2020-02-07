@@ -79,7 +79,7 @@ export const nytsMcqQylbDetailJs = {
                 show: true,
                 itemHeight: 7,
                 itemWidth: 5,
-                x: '14%',
+                x: '29%',
                 data: lengdList,
                 textStyle: {
                     rich: {
@@ -92,7 +92,7 @@ export const nytsMcqQylbDetailJs = {
             },
             grid: {
                 right: '2%',
-                top: '10%',
+                top: '15%',
                 left: '2%',
                 bottom: '8%',
                 containLabel: true
@@ -125,7 +125,7 @@ export const nytsMcqQylbDetailJs = {
                 }
             }],
             yAxis: [{
-                name: '',
+                name: '(万立方米)',
                 type: 'value',
                 axisLabel: {
                     textStyle: {

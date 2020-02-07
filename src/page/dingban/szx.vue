@@ -22,7 +22,7 @@
           type="checkbox"
           :value="item.dingid"
           v-model="callPhoneList"
-          @change="addPhone"
+          v-on:change="addPhone($event)"
         />
         <label @click="errorMsg(item)" :for="'szxid'+index" class="active"></label>
         <img :src="item.img" style="margin: 14px 14px 15px 22px; width: 45px; height: 45px;" />
@@ -30,7 +30,7 @@
           <div style="max-width:60px;">{{item.realname}}</div>
           <div style="margin-top: 23px;margin-left: -53px;font-size: 13px;">{{item.dutyName}}</div>
         </div>
-        <div style="display: flex; position: absolute; right: 10px;top: 10px;">
+        <div style="display: flex; position: absolute; right: 10px;top: 20px;">
           <img
             src="../../assets/img/phonecall.png"
             style="width: 50px;height:50px;"
@@ -49,6 +49,15 @@
         </div>
       </div>
     </van-list>
+    <div style="border-radius:31px;box-shadow: rgba(34, 34, 34, 0.2) 0px 0px 5px;border: 1px solid rgba(34, 34, 34, 0.1);z-index: 2;display: flex; width: 25%; height: 44px; position: absolute;
+      left: 5px;bottom: 5px;background-color:#ffffff">
+      <div style=" width:100%;vertical-align: middle;display: flex;margin: 13px;">
+        <img id="all_pick" style="height: 20px;" v-if="all_pick_flag" src="../../assets/img/choice2.png"
+          @click="all_pick" />
+        <img id="all_pick" style="height: 20px;" v-else src="../../assets/img/choice1.png" @click="all_pick" />
+        <div style="font-size: 14px;margin-left: 10px;">全选</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -59,6 +68,7 @@ import dd from "dingtalk-jsapi";
 Vue.use(PullRefresh);
 export default {
   name: "picsnews",
+  props:["callPhoneList_p"],
   data() {
     return {
       userId: "8ae4804f6d39da6a016d4c928ede0119", //暂时默认
@@ -72,17 +82,67 @@ export default {
       corpId: "",
       callPhoneList: [],
       callButton: false,
-      map: {}
+      map: {},
+       all_pick_flag: false,
     };
   },
   mounted() {
     var orderHight1 = document.documentElement.clientHeight;
-    var heightlist = orderHight1 - 175;
+    var heightlist = orderHight1 - 158;
     document.getElementById("newslist4").style.height = heightlist + "px";
     this.gojq();
   },
   methods: {
-    addPhone: function() {
+      all_pick: function () {
+        var self = this;
+        if(self.all_pick_flag){
+          self.all_pick_flag = false;
+         
+          self.callPhoneList = [];
+          self.addPhone(null);
+        }else{
+          var list = self.list;
+          var list1 = [];
+          list.forEach(element => {
+            if(element.dingid!=null){
+               if(self.callPhoneList_p.indexOf(element.dingid)>-1){
+              }else{
+                list1.push(element.dingid);
+              }
+            }
+          });
+          var ls = list1.length;
+          var ll = self.callPhoneList_p.length;
+          if(ll+ls>35){
+            this.$toast("多人通话选择人数不得大于35人");
+            return false;
+          }else{
+            self.all_pick_flag = true;
+            list.forEach(element => {
+              if(element.dingid!=null){
+                if(self.callPhoneList.indexOf(element.dingid)>-1){
+
+                }else{
+                  self.callPhoneList.push(element.dingid);
+                }
+              }
+            });
+            self.addPhone(null);
+          }
+        }
+      },
+    addPhone: function(e) {
+       var self = this;
+        if(e!= null && e.target.checked){
+          if (self.callPhoneList_p.length >= 35) {
+            console.log(self.callPhoneList)
+            e.target.checked = false;
+            self.callPhoneList.pop();
+            console.log(self.callPhoneList)
+            this.$toast("多人通话选择人数不得大于35人");
+            return false;
+          }
+        }
       console.log("sxz页面");
       this.map.callPhoneList = this.callPhoneList;
       this.map.flag = "szx";

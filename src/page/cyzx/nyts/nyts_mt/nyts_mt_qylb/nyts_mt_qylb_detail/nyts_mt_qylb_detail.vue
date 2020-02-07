@@ -2,6 +2,7 @@
     .mt_qyxq_icon {
         height: 20px;
     }
+
     .wry_tj_table_title_p {
         font-size: 16px;
         text-align: center;
@@ -10,13 +11,16 @@
         margin: 0 auto;
         writing-mode: tb-rl;
     }
+
     .trigger {
         text-align: center;
     }
+
     tr {
         height: 40px;
     }
-    #compDetail span{
+
+    #compDetail span {
         margin-left: -18px;
     }
 </style>
@@ -30,18 +34,20 @@
                         <div>
                             <img style="float: left;" class="mt_qyxq_icon "
                                 src="../../../../../../assets/img/details_icon17.png" />
-                            <div class="mt_qylb_deali_font_style" style=" margin-left: 25px;color: gray;width: 50%;">地址</div>
+                            <div class="mt_qylb_deali_font_style" style=" margin-left: 25px;color: gray;width: 50%;">地址
+                            </div>
                         </div>
                         <div class="mt_qylb_deali_content_font_style">
                             <span style="width: 50%;">{{compDetail.ent_address}}</span>
                         </div>
                     </div>
                     <div style="min-height: 60px;margin-top: 15px;">
-                        <div style="width: 50%;float: left;">
+                        <div style="width: 46%;float: left;">
                             <div>
                                 <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon3.png" />
-                                <div class="mt_qylb_deali_font_style" style=" margin-left: 25px;font-size: 14px;color: gray;">法人代表</div>
+                                <div class="mt_qylb_deali_font_style"
+                                    style=" margin-left: 25px;font-size: 14px;color: gray;">法人代表</div>
                             </div>
                             <div class="mt_qylb_deali_content_font_style">
                                 <span>{{compDetail.legal_behalf}}</span>
@@ -54,19 +60,19 @@
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">联系方式</div>
                             </div>
                             <div class="mt_qylb_deali_content_font_style">
-                                <span >{{compDetail.phone_contacts}}</span>
+                                <span>{{compDetail.phone_contacts}}</span>
                             </div>
                         </div>
                     </div>
                     <div style="min-height: 60px;margin-top: 1px;">
-                        <div style="width: 50%;float: left;">
+                        <div style="width: 46%;float: left;">
                             <div>
                                 <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon26.png" />
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">隶属主体</div>
                             </div>
                             <div class="mt_qylb_deali_content_font_style">
-                                <span >{{compDetail.ent_nature}}</span>
+                                <span>{{compDetail.ent_nature}}</span>
                             </div>
                         </div>
                         <div style="width: 50%;float: right;">
@@ -81,7 +87,7 @@
                         </div>
                     </div>
                     <div style="min-height: 60px;margin-top: 15px;">
-                        <div style="width: 50%;float: left;">
+                        <div style="width: 46%;float: left;">
                             <div>
                                 <img style="float: left;" class="mt_qyxq_icon"
                                     src="../../../../../../assets/img/details_icon27.png" />
@@ -98,7 +104,7 @@
                                 <div style=" margin-left: 25px;font-size: 14px;color: gray;">煤矿性质</div>
                             </div>
                             <div class="mt_qylb_deali_content_font_style">
-                                <span >{{compDetail.ent_type}}</span>
+                                <span>{{compDetail.ent_type}}</span>
                             </div>
                         </div>
                     </div>
@@ -147,7 +153,8 @@
                             style='margin-top: 5px;width:100%;border: #d3edff;border-collapse: collapse;'>
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec; width: 12%;" rowspan="4">
-                                    <p class="wry_tj_table_title_p">原&nbsp&nbsp&nbsp煤&nbsp&nbsp&nbsp产&nbsp&nbsp&nbsp量
+                                    <p class="wry_tj_table_title_p">
+                                        原&nbsp&nbsp&nbsp煤&nbsp&nbsp&nbsp产&nbsp&nbsp&nbsp量（万吨）
                                     </p>
                                 </td>
                                 <td class='trigger ' style="background-color: #e9f6ff;width: 58%;">
@@ -187,7 +194,8 @@
                             </tr>
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec;" rowspan="4">
-                                    <p class="wry_tj_table_title_p">商&nbsp&nbsp品&nbsp&nbsp煤&nbsp&nbsp产&nbsp&nbsp量</p>
+                                    <p class="wry_tj_table_title_p">商&nbsp&nbsp品&nbsp&nbsp煤&nbsp&nbsp产&nbsp&nbsp量（万吨）
+                                    </p>
                                 </td>
                                 <td class='trigger ' style="background-color: #e9f6ff;">
                                     本月实际
@@ -226,7 +234,7 @@
                             </tr>
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec; " rowspan="4">
-                                    <p class="wry_tj_table_title_p">动&nbsp力&nbsp精&nbsp炼&nbsp煤&nbsp产&nbsp量</p>
+                                    <p class="wry_tj_table_title_p">动&nbsp力&nbsp精&nbsp炼&nbsp煤&nbsp产&nbsp量（万吨）</p>
                                 </td>
                                 <td class='trigger ' style="background-color: #e9f6ff;">
                                     本月实际
@@ -265,7 +273,8 @@
                             </tr>
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec;" rowspan="4">
-                                    <p class="wry_tj_table_title_p">工&nbsp&nbsp业&nbsp&nbsp总&nbsp&nbsp产&nbsp&nbsp值</p>
+                                    <p class="wry_tj_table_title_p">工&nbsp&nbsp业&nbsp&nbsp总&nbsp&nbsp产&nbsp&nbsp值（万元）
+                                    </p>
                                 </td>
                                 <td class='trigger ' style="background-color: #e9f6ff;">
                                     本月实际
@@ -304,7 +313,7 @@
                             </tr>
                             <tr id="table_title1">
                                 <td style="background: #3ca1ec; " rowspan="4">
-                                    <p class="wry_tj_table_title_p">工&nbsp业&nbsp销&nbsp售&nbsp产&nbsp值</p>
+                                    <p class="wry_tj_table_title_p">工&nbsp业&nbsp销&nbsp售&nbsp产&nbsp值（万元）</p>
                                 </td>
                                 <td class='trigger ' style="background-color: #e9f6ff;">
                                     本月实际
@@ -347,11 +356,11 @@
                 </div>
             </div>
         </div>
-        <van-popup @opened="openPopYear"  v-model="show" position="bottom" :style="{ height: '200px' }">
+        <van-popup @opened="openPopYear" v-model="show" position="bottom" :style="{ height: '200px' }">
             <van-datetime-picker v-model="currentDate" type="year-month" style="height: 200px;" :min-date="minDate"
                 :max-date="maxDate" @confirm="onconfirm" :formatter="formatter" @cancel="hideDataPicker" />
         </van-popup>
-        <van-popup  v-model="show1" position="bottom" :style="{ height: '200px' }">
+        <van-popup v-model="show1" position="bottom" :style="{ height: '200px' }">
             <van-datetime-picker v-model="currentDate1" type="year-month" style="height: 200px;" :min-date="minDate"
                 :max-date="maxDate" @confirm="onconfirm1" :formatter="formatter1" @cancel="hideDataPicker1" />
         </van-popup>
@@ -416,13 +425,13 @@
         },
         methods: {
             //开启年时间选择
-    openPopYear: function() {
-      console.log("111");
-      $(".van-picker__columns")
-        .find(".van-picker-column")
-        .eq(1)
-        .hide();
-    },
+            openPopYear: function () {
+                console.log("111");
+                $(".van-picker__columns")
+                    .find(".van-picker-column")
+                    .eq(1)
+                    .hide();
+            },
             getHomeData: function (id, yearDate, monthDate) {
                 var self = this;
                 var params = {
@@ -449,7 +458,7 @@
                             this.getOneEchars(echarts, myCharts1, res.tjList);
                             var data1 = res.mapcl;
                             var data2 = res.mapcz;
-                            if(data1 != null){
+                            if (data1 != null) {
 
                                 if (data1.lmcl_this_month == null || data1.lmcl_this_month == "") {
                                     data1.lmcl_this_month = 0;
@@ -507,7 +516,7 @@
                                 }
                             }
                             this.mapcl = data1;
-                            if(data2 != null){
+                            if (data2 != null) {
                                 if (data2.value_this_month == null || data2.value_this_month == "") {
                                     data2.value_this_month = 0;
                                 }
@@ -546,7 +555,7 @@
                                 }
                             }
                             this.mapcz = data2;
-                      
+
                         }
                     })
                     .catch(err => { });

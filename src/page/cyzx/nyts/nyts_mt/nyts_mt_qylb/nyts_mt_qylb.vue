@@ -139,7 +139,6 @@
           <div
             v-for="(item,index) in bloc_dataList"
             :key="index"
-            @click="goDetail(item)"
             style="position:relative;"
           >
             <div style="padding:7px;">

@@ -2,7 +2,7 @@
     <div style="margin-top:0px;overflow:hidden;">
         <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
             <form action="/" style="width: 84%;margin-left:13px;margin-top:8px;">
-                <van-search placeholder="请输入企业名称" @search="onSearch" v-model="seach_value" />
+                <van-search placeholder="请输入企业名称" @search="onSearch" v-model="pro_name" />
             </form>
             <img src="../../../../../assets/img/project_filtrate.png"
                 style="height: 27px;margin-top: 10px;margin-left:5px;" @click="queryList" />
@@ -23,7 +23,7 @@
                             <p
                             class="xnyxmlb_font_style"
                                 style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-                                {{item.ent_name}}</p>
+                                {{item.pro_name}}</p>
                         </div>
                         <div style="display:flex;position:relative;font-size:15px;">
                             <div style="margin-left: 10px;margin-top: 3px;">
@@ -174,6 +174,8 @@
                 httpMethod
                     .getXnyProjectList(params)
                     .then(res => {
+                        console.log(params)
+                        console.log(res)
                         if (res.success == "1") {
                             this.xmjd_dataList = res.xnyphase.dataList;
                             this.xmlx_dataList = res.xnytype.dataList;
@@ -226,6 +228,7 @@
                 this.show = true;
             },
             onSearch() {
+                this.comp_dataList = [];
                 this.mescroll.resetUpScroll();
             },
             downCallback: function () {
@@ -294,6 +297,7 @@
                     counties: "",
                     project_phase: "",
                 }),
+                self.comp_dataList = [];
                     self.mescroll.resetUpScroll();
                 self.show = false;
             },
@@ -328,6 +332,7 @@
                 self.query_params.counties = self.counties;
                 self.query_params.project_phase = self.project_phase;
                 self.show = false;
+                 self.comp_dataList = [];
                 console.log(self.query_params);
                 this.mescroll.resetUpScroll();
             },

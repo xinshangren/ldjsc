@@ -25,7 +25,6 @@ export const nytsXnyGkJs = {
 		var option = {
 			tooltip: {
 				trigger: 'item',
-				position: ['30%', '30%'],
 				formatter: "{b}: {c}%"
 			},
 			legend: {

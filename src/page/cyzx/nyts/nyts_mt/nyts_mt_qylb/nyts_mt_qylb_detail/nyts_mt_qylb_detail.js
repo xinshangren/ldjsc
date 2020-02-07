@@ -126,9 +126,9 @@ export const nytsMtQylbDetailJs = {
                 }
             },
             grid: {
-                right: '1%',
+                right: '4%',
                 top: '34%',
-                left: '5%',
+                left: '4%',
                 bottom: '',
                 containLabel: true
             },
@@ -157,7 +157,7 @@ export const nytsMtQylbDetailJs = {
                 data: xLabel
             }],
             yAxis: [{
-                name: '产值',
+                name: '产值（万元）',
                 type: 'value',
                 axisLabel: {
                     textStyle: {
@@ -171,7 +171,7 @@ export const nytsMtQylbDetailJs = {
                 }
             },
             {
-                name: '产量',
+                name: '产量（万吨）',
                 type: 'value',
                 axisLabel: {
                     formatter: '{value}',

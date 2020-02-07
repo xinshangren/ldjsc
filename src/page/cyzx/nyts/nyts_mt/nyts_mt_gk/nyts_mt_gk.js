@@ -200,7 +200,7 @@ export const nytsMtGkJs = {
 				}
 			},
 			grid: {
-				top: '10%',
+				top: '13%',
 				left: '2%',
 				right: '4%',
 				bottom: '0%',
@@ -219,7 +219,7 @@ export const nytsMtGkJs = {
 				}
 			},
 			yAxis: {
-				type: 'value',
+				name: '万吨',
 				type: 'value',
 				splitLine: { //网格线
 					show: false
@@ -323,7 +323,7 @@ export const nytsMtGkJs = {
 				left: '6%',
 				right: '10%',
 				bottom: '7%',
-				top: '7%',
+				top: '13%',
 				containLabel: true
 			},
 			xAxis: {
