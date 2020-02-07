@@ -66,7 +66,7 @@
     <van-swipe @change="swipeChange" indicator-color="#1976d2">
       <van-swipe-item>
         <div style="background:#ffffff;height:300px;width:100%;margin-top:8px;padding-top:7px;">
-          <div class="echars_titile_div">省内空气质量排名</div>
+          <div class="echars_titile_div">省内空气质量日排名</div>
           <div
             class="van-hairline--bottom"
             style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
