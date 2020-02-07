@@ -266,6 +266,7 @@ export default {
       setTimeout(function() {
         var self = this;
         //污染源类型最少选一
+        $("#wrylxDialogId li").unbind();
         $("#wrylxDialogId li").click(function(e) {
           if ($(this).hasClass("dialogSelect")) {
             //循环获取选中的
