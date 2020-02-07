@@ -6,7 +6,7 @@
         style="margin-left: 32px;width: 90%;display: flex; position: relative; margin-top: 4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
         v-for="(item,index) of list" :key="item.id">
         <input v-if="item.dingid != null" :id="'id'+index" hidden type="checkbox" :value="item.dingid"
-          v-model="callPhoneList" @change="addPhone" />
+          v-model="callPhoneList" v-on:change="addPhone($event)" />
         <label @click="errorMsg(item)" :for="'id'+index" class="active"></label>
         <img :src="item.img" style="margin: 14px 14px 15px 22px;  width: 45px; height: 45px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
@@ -34,7 +34,7 @@
         <img id="all_pick" style="height: 20px;" v-if="all_pick_flag" src="../../assets/img/choice2.png"
           @click="all_pick" />
         <img id="all_pick" style="height: 20px;" v-else src="../../assets/img/choice1.png" @click="all_pick" />
-        <div style="font-size: 15px;margin-left: 15px;">全选</div>
+        <div style="font-size: 14px;margin-left: 10px;">全选</div>
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@
         all_pick_flag: false,
       };
     },
-    props:["callPhoneList_p"],
+    props: ["callPhoneList_p"],
     mounted() {
       var orderHight1 = document.documentElement.clientHeight;
       var heightlist = orderHight1 - 158;
@@ -74,52 +74,69 @@
     methods: {
       all_pick: function () {
         var self = this;
-        if(self.all_pick_flag){
+        if (self.all_pick_flag) {
           self.all_pick_flag = false;
-         
+
           self.callPhoneList = [];
-          self.addPhone();
-        }else{
+          self.addPhone(null);
+        } else {
           var list = self.list;
           var list1 = [];
           list.forEach(element => {
-            if(element.dingid!=null){
-              if(self.callPhoneList_p.indexOf(element.dingid)>-1){
-              }else{
+            if (element.dingid != null) {
+              if (self.callPhoneList_p.indexOf(element.dingid) > -1) {
+              } else {
                 list1.push(element.dingid);
               }
             }
           });
           var ls = list1.length;
           var ll = self.callPhoneList_p.length;
-          if(ll+ls>35){
+          if (ll + ls > 35) {
             this.$toast("多人通话选择人数不得大于35人");
             return false;
-          }else{
+          } else {
             self.all_pick_flag = true;
             list.forEach(element => {
-              if(element.dingid!=null){
-                if(self.callPhoneList.indexOf(element.dingid)>-1){
+              if (element.dingid != null) {
+                if (self.callPhoneList.indexOf(element.dingid) > -1) {
 
-                }else{
+                } else {
                   self.callPhoneList.push(element.dingid);
                 }
               }
             });
-            self.addPhone();
+            self.addPhone(null);
           }
         }
       },
-      addPhone: function () {
+      addPhone: function (e) {
+        var self = this;
+        if(e!= null && e.target.checked){
+          if (self.callPhoneList_p.length >= 35) {
+            console.log(self.callPhoneList)
+            e.target.checked = false;
+            self.callPhoneList.pop();
+            console.log(self.callPhoneList)
+            this.$toast("多人通话选择人数不得大于35人");
+            return false;
+          }
+        }
         console.log("swszf页面")
         this.map.callPhoneList = this.callPhoneList;
         this.map.flag = 'swszf';
         console.log(this.map)
         this.$emit('addPhone', this.map);
       },
-      errorMsg: function (item) {
+      errorMsg: function (item,id) {
+        var self = this;
         if (item.dingid != null) {
-
+          // console.log(self.callPhoneList_p)
+          // if (self.callPhoneList_p.length >= 35) {
+          //   $("id"+id).css("background-image","../../assets/img/choice1.png");
+          //   this.$toast("多人通话选择人数不得大于35人");
+          //   return false;
+          // }
         } else {
           this.$toast("该用户暂未注册");
         }

@@ -22,7 +22,7 @@
           type="checkbox"
           :value="item.dingid"
           v-model="callPhoneList"
-          @change="addPhone"
+          v-on:change="addPhone($event)"
         />
         <label @click="errorMsg(item)" :for="'dsjyyjid'+index" class="active"></label>
         <img :src="item.img" style="margin: 14px 14px 15px 22px;  width: 45px; height: 45px;" />
@@ -55,7 +55,7 @@
         <img id="all_pick" style="height: 20px;" v-if="all_pick_flag" src="../../assets/img/choice2.png"
           @click="all_pick" />
         <img id="all_pick" style="height: 20px;" v-else src="../../assets/img/choice1.png" @click="all_pick" />
-        <div style="font-size: 15px;margin-left: 15px;">全选</div>
+        <div style="font-size: 14px;margin-left: 10px;">全选</div>
       </div>
     </div>
   </div>
@@ -99,7 +99,7 @@ export default {
           self.all_pick_flag = false;
          
           self.callPhoneList = [];
-          self.addPhone();
+          self.addPhone(null);
         }else{
           var list = self.list;
           var list1 = [];
@@ -126,11 +126,22 @@ export default {
                 }
               }
             });
-            self.addPhone();
+            self.addPhone(null);
           }
         }
       },
-    addPhone: function() {
+    addPhone: function(e) {
+       var self = this;
+        if(e!= null && e.target.checked){
+          if (self.callPhoneList_p.length >= 35) {
+            console.log(self.callPhoneList)
+            e.target.checked = false;
+            self.callPhoneList.pop();
+            console.log(self.callPhoneList)
+            this.$toast("多人通话选择人数不得大于35人");
+            return false;
+          }
+        }
       console.log("dsjyyj页面");
       this.map.callPhoneList = this.callPhoneList;
       this.map.flag = "dsjyyj";

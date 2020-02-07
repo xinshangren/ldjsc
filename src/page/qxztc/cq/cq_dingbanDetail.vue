@@ -69,7 +69,7 @@
           src="../../../assets/img/choice1.png"
           @click="all_pick"
         />
-        <div style="font-size: 15px;margin-left: 15px;">全选</div>
+        <div style="font-size: 14px;margin-left: 10px;">全选</div>
       </div>
     </div>
     <div
@@ -77,8 +77,8 @@
       right: 0px;background-color:#ffffff"
     >
       <div style=" width:55%;vertical-align: middle;display: flex;margin: 16px 0px 16px 0px;">
-        <div style="font-size: 15px;margin-left: 15px;">已选人数:</div>
-        <div style="font-size: 15px; margin-left: 1px;color:rgb(48, 152, 251)">{{callPhoneList.length}}人</div>
+        <div style="font-size: 14px;margin-left: 19px;">已选人数:</div>
+        <div style="font-size: 14px; margin-left: 1px;color:rgb(48, 152, 251)">{{callPhoneList.length}}人</div>
       </div>
       <div style=" vertical-align: middle;display:flex;">
         <img
