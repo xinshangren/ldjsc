@@ -156,8 +156,8 @@ export default {
             var pay = res.sourceList;
             this.wryCount=res.sourceNum;//污染源
             this.jgPersonCount=res.leaderNum + res.personNum
-            this.showEcharsView1(echarts, this.$refs.myCharts1,res.leaderNum, res.personNum, pay, res.countyList);
-              this.showEcharsView2(echarts, this.$refs.myCharts2,res.leaderNum, res.personNum, pay, res.countyList);
+            this.showEcharsView1(echarts, this.$refs.myCharts2,res.leaderNum, res.personNum, pay, res.countyList);
+              this.showEcharsView2(echarts, this.$refs.myCharts1,res.leaderNum, res.personNum, pay, res.countyList);
           }
         })
         .catch(err => {
