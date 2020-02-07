@@ -113,14 +113,12 @@
             style="display: flex;width: 100px;border-radius: 10px;background: #f3f3f3;margin:0 84px;"
           >
             <div
-              style="color: rgb(48, 151, 251);font-size: 14px;line-height: 22px;text-align: right;width: 70%;"
+              style="color: rgb(48, 151, 251);font-size: 14px;line-height: 22px;text-align: center;width: 70%;"
             >{{currentYear5}}</div>
-            <div style="width:50%;">
               <img
-                style="height: 11px;margin-top: 6px;margin-left: 5px;"
+                style="height: 11px;margin-top: 6px;margin-left:0px;"
                 src="../../../../../assets/img/air_data_arrow.png"
               />
-            </div>
           </div>
         </div>
         <div id="echar2typeId" class="chars_title_select">
