@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="piclist" style="background: #ffffff;overflow-y: auto;">
     <img src="../../assets/img/banner.png" style="width: 95%;height: 130px;margin: 2.5%;" @click='gopzjc()'>
     <div style="width: 100%;background: #ffffff;">
       <img src="../../assets/img/yzjc.png" style="margin-left: 35%;width: 30%; height: 25px;margin-top: 10px;">
@@ -131,7 +131,6 @@
 
     </div>
 
-
   </div>
 </template>
 <script>
@@ -150,6 +149,12 @@
       //游在晋城
       this.getCmsArticleContentList("18674");
       this.getlmjcZL();
+
+    //设置内容高度
+    var orderHight1 = document.documentElement.clientHeight;
+    var heightlist = orderHight1 - 192;
+    $("#piclist").css("height", heightlist + "px");
+
     },
     data() {
       return {
