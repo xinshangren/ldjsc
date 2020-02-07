@@ -14,7 +14,7 @@
 
 <script>
 import Vue from "vue";
-import { Search,Dialog } from "vant";
+import { Search, Dialog } from "vant";
 import $ from "jquery";
 import { mainJs } from "../main/main.js";
 import global_variable from "../../api/global_variable.js";
@@ -61,46 +61,49 @@ export default {
         "综合信息"
       ],
       tabIdList: ["8", "65", "1", "5", "2", "3", "6", "23", "4", "7"],
-      // permissionList: [
-      //   "每日要情",
-      //   "重大改革",
-      //   "文明共创",
-      //   "重点工程",
-      //   "环保攻坚",
-      //   "经济运行",
-      //   "三大产业",
-      //   "招商引资",
-      //   "能源革命",
-      //   "热点问题",
-      //   "热点事件",
-      //   "工作效能",
-      //   "教育服务",
-      //   "12345",
-      //   "就业服务",
-      //   "行政审批",
-      //   "行政监督",
-      //   "全域旅游",
-      //   "游客画像",
-      //   "非遗保护",
-      //   "远程调度",
-      //   "城区",
-      //   "泽州县",
-      //   "高平市",
-      //   "阳城县",
-      //   "沁水县",
-      //   "陵川县",
-      //   "综合信息",
-      //   "13710督办",
-      //   "一键直连",
-      //   "市长热线",
-      //    "区县直通",
-      // ]
-      permissionList: []
+      permissionList: [
+        "每日要情",
+        "重大改革",
+        "文明共创",
+        "重点工程",
+        "环保攻坚",
+        "经济运行",
+        "三大产业",
+        "招商引资",
+        "能源革命",
+        "热点问题",
+        "热点事件",
+        "工作效能",
+        "教育服务",
+        "12345",
+        "就业服务",
+        "行政审批",
+        "行政监督",
+        "全域旅游",
+        "游客画像",
+        "非遗保护",
+        "远程调度",
+        "城区",
+        "泽州县",
+        "高平市",
+        "阳城县",
+        "沁水县",
+        "陵川县",
+        "综合信息",
+        "13710督办",
+        "一键直连",
+        "市长热线",
+        "区县直通"
+      ]
+      // permissionList: []
     };
   },
-  mounted() {
+  created() {
     var context = this;
     context.getCuruserid();
+  },
+  mounted() {
+    //  this.$store.commit('showLoadingBig')
   },
   methods: {
     godetile: function(index, idValue) {

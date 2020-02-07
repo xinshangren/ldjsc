@@ -63,13 +63,13 @@
     </van-sticky>
     <div
       id="selectTabDiv"
-      style=" display:none;background: rgb(255, 255, 255);top: 156px;position: fixed;z-index: 1;box-shadow: 5px 1px 1px 2px #f3f3f3;"
+      style=" display:none;background: rgb(255, 255, 255);top: 156px;position: fixed;z-index: 99;box-shadow: 5px 1px 1px 2px #f3f3f3;"
     >
       <!-- <div style="padding-top:9px;font-size: 14px;margin-left:17px;">进度分类</div> -->
       <ul
         id="jdflDialogId"
         class="ui-row"
-        style="margin-top: 11px;margin-right: 15px;margin-bottom:12px;"
+        style="margin-top: 11px;margin-bottom:12px;"
       >
         <li id="0" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">完成概况</li>
         <li id="1" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">GDP</li>

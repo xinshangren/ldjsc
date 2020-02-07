@@ -175,7 +175,8 @@ export default new Router({
     },{
       path: '/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali',
       name: 'zdgc_xmdeali',
-      component: zdgc_xmdealiVue
+      component: zdgc_xmdealiVue,
+      meta:{keepAlive:false}
     }, {
       path: '/zdgz/zdgc/zdgc_czwt/zdgc_czwt_dali/zdgc_czwt_deali',
       name: 'zdgc_czwt_deali',

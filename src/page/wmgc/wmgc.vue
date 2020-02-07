@@ -49,6 +49,20 @@ export default {
       active: 0
     };
   },
+   beforeRouteLeave (to, from, next) {
+       console.log(from);
+     console.log(to);
+     if (from.name == "wmgc") {
+      if (to.name != "main") {
+        from.meta.keepAlive = true;
+      } else {
+        from.meta.keepAlive = false;
+      }
+    } else {
+      from.meta.keepAlive = false;
+    }
+     next();
+  },
   mounted() {
     this.doAddAppLogList(
       global_variable.logId,

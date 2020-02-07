@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <loading v-show="LOADING" style="z-index:3;"></loading>
+    <LoadingBig v-show="BIGLOADING" style="z-index:3;"></LoadingBig>
     <!--搜索框部分start-->
     <div style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;">
       <div style="display: flex;">
@@ -45,7 +46,7 @@
           <!-- <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_message.png" class="home_top_img" @click="toast()" />
             <div class="appvueRightFont">消息</div>
-          </div> -->
+          </div>-->
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_user.png" class="home_top_img" @click="toast()" />
             <div class="appvueRightFont">我的</div>
@@ -83,6 +84,7 @@
 import $ from "jquery";
 import { mapState } from "vuex";
 import Loading from "../src/store/loading.vue";
+import LoadingBig from "../src/store/loadingBig.vue";
 export default {
   name: "App",
   activated: function() {
@@ -112,6 +114,7 @@ export default {
         $("#appVuerightId").css("width", "31%");
         $("#appVueleftId").css("width", "68%");
       }
+      var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
       console.log(this.$route.path);
     },
     toast: function() {
@@ -138,10 +141,11 @@ export default {
     document.querySelector("body").setAttribute("style", "background:#f7f7f7");
   },
   computed: {
-    ...mapState(["LOADING"])
+    ...mapState(["LOADING","BIGLOADING"])
   },
   components: {
-    Loading
+    Loading,
+    LoadingBig
   }
 };
 </script>
