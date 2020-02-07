@@ -708,17 +708,32 @@ export const hbgjAirJs = {
                         textStyle: {
                             fontSize: 12 //文字的字体大小
                         },
-                        formatter: function (a) {
-                            var value = a['percent'];
-                            if (value > 0) {
-                                return (a.name + "(" + a['percent'] + "%)");
-                            } else {
-                                return (a.name + "(0%)");
+                        // formatter: function (a) {
+                        //     var value = a['percent'];
+                        //     if (value > 0) {
+                        //         return (a.name + "(" + a['percent'] + "%)");
+                        //     } else {
+                        //         return (a.name + "(0%)");
+                        //     }
+                        // },
+                        formatter(v) {
+                            let text =  v.name+ ':' +Math.round(v.percent)+'%'
+                            if(text.length <= 8)
+                            {
+                                return text;
+                            }else if(text.length > 8 && text.length <= 16){
+                                return text = `${text.slice(0,8)}\n${text.slice(8)}`
+                            }else if(text.length > 16 && text.length <= 24){
+                                return text = `${text.slice(0,8)}\n${text.slice(8,16)}\n${text.slice(16)}`
+                            }else if(text.length > 24 && text.length <= 30){
+                                return text = `${text.slice(0,8)}\n${text.slice(8,16)}\n${text.slice(16,24)}\n${text.slice(24)}`
+                            }else if(text.length > 30){
+                                return text = `${text.slice(0,8)}\n${text.slice(8,16)}\n${text.slice(16,24)}\n${text.slice(24,30)}\n${text.slice(30)}`
                             }
-                        }
+                        },
                     },
                     emphasis: {
-                        show: false,
+                        show: true,
                         textStyle: {}
                     }
                 },
