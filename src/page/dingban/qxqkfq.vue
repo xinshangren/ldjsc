@@ -40,21 +40,34 @@
             src="../../assets/img/sms.png"
             style="width: 50px;height:50px;margin-left: 5px;"
             @click="goSms(item)"
-          /> -->
+          />-->
           <!-- <img
             src="../../assets/img/ding.png"
             style="width: 50px;height:50px;margin-left: 5px;"
             @click="goDing(item)"
-          /> -->
+          />-->
         </div>
       </div>
     </van-list>
-    <div style="border-radius:31px; border:1px solid #F7F7F7;z-index: 2;display: flex; width: 25%; height: 44px; position: absolute;
-      left: 5px;bottom: 5px;background-color:#ffffff">
+    <div
+      style="border-radius:31px;box-shadow: rgba(34, 34, 34, 0.2) 0px 0px 5px;border: 1px solid rgba(34, 34, 34, 0.1);z-index: 2;display: flex; width: 25%; height: 44px; position: absolute;
+      left: 5px;bottom: 5px;background-color:#ffffff"
+    >
       <div style=" width:100%;vertical-align: middle;display: flex;margin: 13px;">
-        <img id="all_pick" style="height: 20px;" v-if="all_pick_flag" src="../../assets/img/choice2.png"
-          @click="all_pick" />
-        <img id="all_pick" style="height: 20px;" v-else src="../../assets/img/choice1.png" @click="all_pick" />
+        <img
+          id="all_pick"
+          style="height: 20px;"
+          v-if="all_pick_flag"
+          src="../../assets/img/choice2.png"
+          @click="all_pick"
+        />
+        <img
+          id="all_pick"
+          style="height: 20px;"
+          v-else
+          src="../../assets/img/choice1.png"
+          @click="all_pick"
+        />
         <div style="font-size: 15px;margin-left: 15px;">全选</div>
       </div>
     </div>
@@ -68,7 +81,7 @@ import dd from "dingtalk-jsapi";
 Vue.use(PullRefresh);
 export default {
   name: "picsnews",
-  props:["callPhoneList_p"],
+  props: ["callPhoneList_p"],
   data() {
     return {
       userId: "8ae4804f6d39da6a016d4c928ede0119", //暂时默认
@@ -83,7 +96,7 @@ export default {
       callPhoneList: [],
       callButton: false,
       map: {},
-       all_pick_flag: false,
+      all_pick_flag: false
     };
   },
   mounted() {
@@ -93,37 +106,46 @@ export default {
     this.gojq();
   },
   methods: {
-      all_pick: function () {
-        var self = this;
-        if(self.all_pick_flag){
-          self.all_pick_flag = false;
-         
-          self.callPhoneList = [];
-          self.addPhone();
-        }else{
-          var list = self.list;
-          var list1 = [];
+    all_pick: function() {
+      var self = this;
+      if (self.all_pick_flag) {
+        self.all_pick_flag = false;
+
+        self.callPhoneList = [];
+        self.addPhone();
+      } else {
+        var list = self.list;
+        var list1 = [];
+        list.forEach(element => {
+          if (element.dingid != null) {
+             if(self.callPhoneList_p.indexOf(element.dingid)>-1){
+              }else{
+                list1.push(element.dingid);
+              }
+          }
+        });
+        var ls = list1.length;
+        var ll = self.callPhoneList_p.length;
+        if (ll + ls > 35) {
+          this.$toast("多人通话选择人数不得大于35人");
+          return false;
+        } else {
+          self.all_pick_flag = true;
           list.forEach(element => {
-            if(element.dingid!=null){
-              list1.push(element.dingid);
+            if (element.dingid != null) {
+              if (element.dingid != null) {
+                if(self.callPhoneList.indexOf(element.dingid)>-1){
+
+                }else{
+                  self.callPhoneList.push(element.dingid);
+                }
+              }
             }
           });
-          var ls = list1.length;
-          var ll = self.callPhoneList_p.length;
-          if(ll+ls>35){
-            this.$toast("多人通话选择人数不得大于35人");
-            return false;
-          }else{
-            self.all_pick_flag = true;
-            list.forEach(element => {
-              if(element.dingid!=null){
-                self.callPhoneList.push(element.dingid);
-              }
-            });
-            self.addPhone();
-          }
+          self.addPhone();
         }
-      },
+      }
+    },
     addPhone: function() {
       console.log("qxqkfq页面");
       this.map.callPhoneList = this.callPhoneList;
@@ -169,8 +191,8 @@ export default {
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
-      var number=currentUrl.indexOf("#");
-      currentUrl = currentUrl.substring(0,number);
+      var number = currentUrl.indexOf("#");
+      currentUrl = currentUrl.substring(0, number);
       console.log(currentUrl);
       var params = {
         currentUrl: currentUrl

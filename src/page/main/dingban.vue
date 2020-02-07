@@ -28,11 +28,11 @@
       </van-tab>
     </van-tabs>
     <div
-      style="border-radius:31px 0px 0px 0px; border:1px solid #F7F7F7;z-index: 2;display: flex; width: 63%; height: 53px; position: absolute;bottom: 0px;
+      style="border-radius:31px 0px 0px 0px;box-shadow: rgba(34, 34, 34, 0.2) 0px 0px 5px;border: 1px solid rgba(34, 34, 34, 0.1);z-index: 2;display: flex; width: 63%; height: 53px; position: absolute;bottom: 0px;
       right: 0px;background-color:#ffffff">
       <div style=" width:55%;vertical-align: middle;display: flex;margin: 16px 0px 16px 0px;">
         <div style="font-size: 15px;margin-left: 15px;">已选人数:</div>
-        <div style="font-size: 15px; margin-left: 1px;color: blue;">{{callPhoneList.length}}人</div>
+        <div style="font-size: 15px; margin-left: 1px;color: rgb(48, 152, 251)">{{callPhoneList.length}}人</div>
       </div>
       <div style=" vertical-align: middle;display:flex;">
         <img id="leftAreaDivId" style="height: 35px;margin: 9px -7px;" src="../../assets/img/dingtalk_more.png"
