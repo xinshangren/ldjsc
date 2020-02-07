@@ -30,7 +30,7 @@
           <div style="max-width:60px;">{{item.realname}}</div>
           <div style="margin-top: 23px;margin-left: -53px;font-size: 13px;">{{item.dutyName}}</div>
         </div>
-        <div style="display: flex; position: absolute; right: 10px;top: 10px;">
+        <div style="display: flex; position: absolute; right: 10px;top: 20px;">
           <img
             src="../../assets/img/phonecall.png"
             style="width: 50px;height:50px;"
@@ -49,6 +49,15 @@
         </div>
       </div>
     </van-list>
+    <div style="border-radius:31px; border:1px solid #F7F7F7;z-index: 2;display: flex; width: 25%; height: 44px; position: absolute;
+      left: 5px;bottom: 5px;background-color:#ffffff">
+      <div style=" width:100%;vertical-align: middle;display: flex;margin: 13px;">
+        <img id="all_pick" style="height: 20px;" v-if="all_pick_flag" src="../../assets/img/choice2.png"
+          @click="all_pick" />
+        <img id="all_pick" style="height: 20px;" v-else src="../../assets/img/choice1.png" @click="all_pick" />
+        <div style="font-size: 15px;margin-left: 15px;">全选</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -72,16 +81,49 @@ export default {
       corpId: "",
       callPhoneList: [],
       callButton: false,
-      map: {}
+      map: {},
+        all_pick_flag: false,
     };
   },
   mounted() {
     var orderHight1 = document.documentElement.clientHeight;
-    var heightlist = orderHight1 - 175;
+    var heightlist = orderHight1 - 158;
     document.getElementById("newslist1").style.height = heightlist + "px";
     this.gojq();
   },
+  props:["callPhoneList_p"],
   methods: {
+      all_pick: function () {
+        var self = this;
+        if(self.all_pick_flag){
+          self.all_pick_flag = false;
+         
+          self.callPhoneList = [];
+          self.addPhone();
+        }else{
+          var list = self.list;
+          var list1 = [];
+          list.forEach(element => {
+            if(element.dingid!=null){
+              list1.push(element.dingid);
+            }
+          });
+          var ls = list1.length;
+          var ll = self.callPhoneList_p.length;
+          if(ll+ls>35){
+            this.$toast("多人通话选择人数不得大于35人");
+            return false;
+          }else{
+            self.all_pick_flag = true;
+            list.forEach(element => {
+              if(element.dingid!=null){
+                self.callPhoneList.push(element.dingid);
+              }
+            });
+            self.addPhone();
+          }
+        }
+      },
     addPhone: function() {
       console.log("dsjyyj页面");
       this.map.callPhoneList = this.callPhoneList;
