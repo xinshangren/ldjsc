@@ -130,8 +130,8 @@
             class="ui-row-flex ui-whitespace"
             style="color:#333333;background:#e2f3ff;padding-top: 6px;padding-bottom: 6px;"
           >
-            <div class="ui-col ui-col">{{item.stationName}}</div>
-            <div class="ui-col ui-col">{{item.stationType}}</div>
+            <div class="ui-col ui-col" style="word-break:break-all;">{{item.stationName}}</div>
+            <div class="ui-col ui-col"  style="word-break:break-all;">{{item.stationType}}</div>
             <div class="ui-col ui-col">{{item.dataAqi}}</div>
             <div class="ui-col ui-col" v-if="item.dataAqiLevel=='6'">严重</div>
             <div class="ui-col ui-col" v-if="item.dataAqiLevel=='5'">重度</div>
