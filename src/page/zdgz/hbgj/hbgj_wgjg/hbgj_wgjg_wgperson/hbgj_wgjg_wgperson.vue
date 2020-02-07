@@ -111,6 +111,10 @@
           </div>
           <div style="width: 100%;height: 2px;background: #f3f3f3;margin-top: 10px;"></div>
         </div>
+
+        <div v-if="leaderList==null || leaderList.length==0" style="text-align:center">
+           <img style="height:118px;" src="../../../../../assets/img/no_data.png" />
+        </div>
       </div>
 
       <div v-show="flag==2">
@@ -139,6 +143,9 @@
             </div>
           </div>
           <div style="width: 100%;height: 2px;background: #f3f3f3;margin-top: 10px;"></div>
+        </div>
+        <div v-if="personList==null || personList.length==0" style="text-align:center">
+           <img style="height:118px;" src="../../../../../assets/img/no_data.png" />
         </div>
       </div>
     </div>
