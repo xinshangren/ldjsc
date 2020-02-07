@@ -11,10 +11,10 @@
         @click="queryList"
       />
     </div>
-    <div id="count_id" style="display:flex;">
-      <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:15px;">共</div>
-      <div ref="totalCountId" style="color:#1976d2;font-size:24px;">0</div>
-      <div style="width:48%;color:#1976d2;margin-top:6px;font-size:15px;">个站点</div>
+    <div id="count_id" style="display:flex;z-index:99999">
+      <div style="width:100%;text-align:center;color:#1976d2;margin-top:6px;font-size:15px;z-index:99999999">
+        共<span ref="totalCountId"></span>个站点
+      </div>
     </div>
 
     <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
