@@ -28,14 +28,12 @@
       </van-tab>
     </van-tabs>
     <div
-      style="border-radius:31px 0px 0px 0px;box-shadow: rgba(34, 34, 34, 0.2) 0px 0px 5px;border: 1px solid rgba(34, 34, 34, 0.1);z-index: 2;display: flex; width: 63%; height: 53px; position: absolute;bottom: 0px;
-      right: 0px;background-color:#ffffff">
-      <div style=" width:55%;vertical-align: middle;display: flex;margin: 16px 0px 16px 0px;">
-        <div style="font-size: 14px;margin-left: 19px;">已选人数:</div>
-        <div style="font-size: 14px; margin-left: 1px;color: rgb(48, 152, 251) ">{{callPhoneList.length}}人</div>
-      </div>
-      <div style=" vertical-align: middle;display:flex;">
-        <img id="leftAreaDivId" style="height: 35px;margin: 9px -7px;" src="../../assets/img/dingtalk_more.png"
+     id="callButton" style="z-index: 2;display: none; width: 100%; height: 45px; position: absolute;bottom: 0px;
+      right: 0px;background-color:#ffffff;">
+      <div style=" width:100%;vertical-align: middle;display: flex;margin: 14px 0px 14px 14px;">
+        <div style="font-size: 14px;margin-left: 3px;">已选人数:</div>
+        <div style="font-size: 14px;width: 49%; margin-left: 1px;color: rgb(48, 152, 251) ">{{callPhoneList.length}}人</div>
+        <img id="leftAreaDivId" style="height: 33px;margin: -8px 0px 0px 0px;" src="../../assets/img/dingtalk_more.png"
           @click="goDingPhone" />
       </div>
     </div>
@@ -178,8 +176,10 @@
           console.log(this.callPhoneList);
           if (this.callPhoneList != null && this.callPhoneList.length > 0) {
             this.callButton = true;
+            $("#callButton").slideDown("slow");
           } else {
             this.callButton = false;
+            $("#callButton").slideUp("slow");
           }
           console.log(this.callButton);
         }
