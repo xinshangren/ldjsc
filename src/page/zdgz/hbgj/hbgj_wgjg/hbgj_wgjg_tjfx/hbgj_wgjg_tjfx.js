@@ -490,7 +490,7 @@ export const hbgjAirJs = {
                         show: true,
                         position: 'left', //标签的位置
                         textStyle: {
-                            fontSize: 12 //文字的字体大小
+                            fontSize: 10 //文字的字体大小
                         },
                         formatter: function (a) {
                             var value = a['percent'];
@@ -499,10 +499,10 @@ export const hbgjAirJs = {
                             } else {
                                 return (a.name + "(0%)");
                             }
-                        }
+                        },
                     },
                     emphasis: {
-                        show: false,
+                        show: true,
                         textStyle: {}
                     }
                 },
