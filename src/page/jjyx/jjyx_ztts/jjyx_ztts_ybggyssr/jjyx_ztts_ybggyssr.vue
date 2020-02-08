@@ -76,58 +76,50 @@
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
       ></div>
-      <div id="ybggyssrTableId1" style="border: 1px solid #cccccc;">
-        <div
-          class="ui-row-flex ui-whitespace"
-          style="background:#3ba1eb;color:#ffffff; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
-        >
-          <div class="ui-col ui-col" style="text-align: center;"></div>
-          <div class="ui-col ui-col" style="text-align: center;">1-{{indexMonth}}月</div>
-          <div class="ui-col ui-col" style="text-align: center;">
-            <div style="margin-left: 23px;">同比±%</div>
-          </div>
-          <div class="ui-col ui-col" style="text-align: center;">{{indexMonth}}月</div>
-          <div class="ui-col ui-col" style="text-align: center;">
-            <div style="margin-left: 0px;">同比±%</div>
-          </div>
-        </div>
-        <div
-          class="ui-row-flex ui-whitespace"
-          style="background:#ffffff;font-size:13px; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;"
+
+      <table id="ybggyssrTableId1" width="100%">
+        <thead>
+          <tr style="background:#3ba1eb;color:#ffffff;height: 40px;border-bottom:1px solid #cccccc; line-height: 41px;">
+            <th width="20%" style="text-align:center">类型</th>
+            <th width="20%" style="text-align:center">1-{{indexMonth}}月</th>
+            <th width="20%" style="text-align:center">同比±%</th>
+            <th width="20%" style="text-align:center">{{indexMonth}}月</th>
+            <th width="20%" style="text-align:center">同比±%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#ffffff;font-size:12px; margin-top: 0px;padding: 0;height: 40px;border-bottom:1px solid #cccccc; "
           v-for="(item,index) in dataList"
-          :key="index"
-        >
-          <div class="ui-col ui-col" style="text-align: center;">{{item.statis_name}}</div>
-          <div class="ui-col ui-col" style="text-align: center;">{{item.lj_index}}</div>
-          <div class="ui-col ui-col" style="text-align: center;display: flex;">
-            <div style="color: red;margin-left: 23px;">{{item.lj_yony}}%</div>
-            <img
-              v-if="item.lj_yony>=0"
-              style="height: 15px;margin-top: 13px;margin:auto;"
-              src="../../../../assets/img/eco_rise.png"
-            />
-            <img
-              v-if="item.lj_yony<0"
-              style="height: 15px;margin-top: 13px;margin:auto;"
-              src="../../../../assets/img/eco_down.png"
-            />
-          </div>
-          <div class="ui-col ui-col" style="text-align: center;">{{item.dy_index}}</div>
-          <div class="ui-col ui-col" style="text-align: center;display: flex;">
-            <div style="color: red;margin-left: 2px;">{{item.dy_yony}}%</div>
-            <img
-              v-if="item.dy_yony>=0"
-              style="height: 15px;margin-top: 13px;margin:auto;"
-              src="../../../../assets/img/eco_rise.png"
-            />
-            <img
-              v-if="item.dy_yony<0"
-              style="height: 15px;margin-top: 13px;margin:auto;"
-              src="../../../../assets/img/eco_down.png"
-            />
-          </div>
-        </div>
-      </div>
+                :key="index">
+            <td style="text-align:center">{{item.statis_name}}</td>
+            <td style="text-align:center">{{item.lj_index}}</td>
+            <td style="text-align:center">{{item.lj_yony}}%
+              <img
+                    v-if="item.lj_yony>=0"
+                    style="height: 15px;margin-top: 13px;margin:auto;"
+                    src="../../../../assets/img/eco_rise.png"
+                  />
+              <img
+                    v-if="item.lj_yony<0"
+                    style="height: 15px;margin-top: 13px;margin:auto;"
+                    src="../../../../assets/img/eco_down.png"
+                  /></td>
+            <td style="text-align:center">{{item.dy_index}}</td>
+            <td style="text-align:center">{{item.dy_yony}}%
+                  <img
+                    v-if="item.dy_yony>=0"
+                    style="height: 15px;margin-top: 13px;margin:auto;"
+                    src="../../../../assets/img/eco_rise.png"
+                  />
+                  <img
+                    v-if="item.dy_yony<0"
+                    style="height: 15px;margin-top: 13px;margin:auto;"
+                    src="../../../../assets/img/eco_down.png"
+                  />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
