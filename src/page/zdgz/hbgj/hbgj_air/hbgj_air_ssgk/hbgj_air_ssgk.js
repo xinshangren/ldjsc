@@ -4,7 +4,7 @@ export const hbgjAirJs = {
         var dataPollutant = res.data.dataPollutant;//首要污染物
         var dataTemperature = res.data.dataTemperature;//度数
         $("#nowwd_id").html(dataTemperature);
-        $("#fldj_id").html(res.data.dataWindDirection + "\t\t\t\t" + res.data.dataWindLevel);
+        $("#fldj_id").html(res.data.dataWindDirection + "&nbsp;" + res.data.dataWindLevel);
        
         var dataAqi = res.data.dataAqi;
         $("#indexaqi_value_id").html(dataAqi);

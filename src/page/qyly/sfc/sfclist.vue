@@ -16,13 +16,13 @@
           <div style="color: #333333;font-size: 14px;margin-top: 8px;margin-left: 10px;">{{item.name}}</div>
           <div style="display:flex;margin-top: 10px;">
             <img src="../../../assets/img/mj.png" style="width: 14px;height: 14px;margin-left: 10px;">
-            <div style="color: #666666;font-size: 12px;">{{item.area}}万平米</div>
+            <div style="color: #666666;font-size: 12px;">{{item.area}}平方公里</div>
             <img src="../../../assets/img/hs.png" style="width: 14px;height: 14px;margin-left: 10px;">
-            <div style="color: #666666;font-size: 12px;">{{item.households}}</div>
+            <div style="color: #666666;font-size: 12px;">{{item.households}}户</div>
           </div>
           <div style="display:flex;margin-top: 10px;">
             <img src="../../../assets/img/rs.png" style="width: 14px;height: 14px;margin-left: 10px;">
-            <div style="color: #666666;font-size: 12px;">{{item.people}}</div>
+            <div style="color: #666666;font-size: 12px;">{{item.people}}人</div>
           </div>
         </div>
         </div>

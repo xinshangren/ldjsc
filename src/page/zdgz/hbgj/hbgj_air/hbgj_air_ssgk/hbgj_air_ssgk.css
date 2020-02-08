@@ -74,3 +74,9 @@
     border-left:2px solid #1976d2;font-size:14px;margin-left:12px;
     padding-left: 10px;
 }
+.tianqi{
+    position:relative;
+    height:200px;
+    background-image:url('../../../../../assets/img/air_home_bg.jpg');
+    background-size:100% 200px;
+}

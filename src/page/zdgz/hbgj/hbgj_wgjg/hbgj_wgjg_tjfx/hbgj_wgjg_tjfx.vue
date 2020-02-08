@@ -34,12 +34,8 @@
             src="../../../../../assets/img/air_data_arrow.png"
           />
         </div>
-      </div>
-      <div
-        class="van-hairline--bottom"
-        style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
-      ></div>
-      <div
+
+         <div
         @click="showSelectTime(2)"
         style="display: flex;width: 80px;border-radius: 10px;background: #f3f3f3;margin: 0 auto;"
       >
@@ -51,6 +47,12 @@
             src="../../../../../assets/img/air_data_arrow.png"
           />
       </div>
+      </div>
+      <div
+        class="van-hairline--bottom"
+        style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
+      ></div>
+     
       <div ref="myCharts2" style="height:210px;width:100%;"></div>
       <div style="display:flex;margin: 0 auto;">
         <div style="width:50%;">
@@ -88,12 +90,7 @@
             src="../../../../../assets/img/air_data_arrow.png"
           />
         </div>
-      </div>
-      <div
-        class="van-hairline--bottom"
-        style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
-      ></div>
-      <div
+        <div
         @click="showSelectTime(4)"
         style="display: flex;width: 80px;border-radius: 10px;background: #f3f3f3;margin: 0 auto;"
       >
@@ -105,6 +102,12 @@
             src="../../../../../assets/img/air_data_arrow.png"
           />
       </div>
+      </div>
+      <div
+        class="van-hairline--bottom"
+        style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
+      ></div>
+      
       <div ref="myCharts4" style="height:210px;width:100%;"></div>
       <div style="display:flex;margin: 0 auto;">
         <div style="width:50%;">
