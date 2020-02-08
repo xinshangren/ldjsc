@@ -6,7 +6,7 @@
     </van-popup>
     <div style="display: flex; border-bottom: 1px #e5e5e4 solid;margin-left: 15px;margin-right:15px;">
       <div style="line-height: 25px;min-height: 180px;">
-        <div style="color: #3097fb;font-size: 18px;">
+        <div style="width: 65%;color: #3097fb;font-size: 18px;">
           {{data.name}}
         </div>
         <div style="color: #ff3319;font-size: 15px;">
@@ -15,10 +15,10 @@
         <div style="width: 50%; color: #565656;font-size: 16px;">
           {{data.address}}
         </div>
-        <div style="color: #525252;font-size: 15px;">
+        <div v-if="data.incomeTotal" style="color: #525252;font-size: 15px;">
           年收入：{{(data.incomeTotal/10000).toFixed(2)}}亿
         </div>
-        <div style="color: #525252;font-size: 15px;">
+        <div v-if="data.expenditureTotal" style="color: #525252;font-size: 15px;">
           年支出：{{(data.expenditureTotal/10000).toFixed(2)}}亿
         </div>
         <div style="color: #525252;font-size: 15px;display: flex;">
