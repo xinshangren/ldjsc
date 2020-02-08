@@ -23,7 +23,7 @@
         </div>
         <div style="color: #525252;font-size: 15px;display: flex;">
           累计游客：
-          <div style="color:#ff0000;">{{data.visitorTotal}}万</div>
+          <div style="color:#ff0000;">{{data.visitorTotal}}万人</div>
         </div>
       </div>
       <div style="position: absolute;right: 15px;">
