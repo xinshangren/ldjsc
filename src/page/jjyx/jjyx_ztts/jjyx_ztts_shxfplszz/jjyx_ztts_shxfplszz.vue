@@ -9,9 +9,9 @@
           src="../../../../assets/img/data_icon1.png"
         />
         <div>
-          <div style="display:flex;line-height:27px;">
-            <div style="color:#0b91ed;font-size:20px;">{{totalData.indexdata}}</div>
-            <div>亿元</div>
+          <div style="line-height:27px;">
+            <span style="color:#0b91ed;font-size:20px;">{{totalData.indexdata}}</span>
+            <span>亿元</span>
           </div>
           <div style="font-size:12px;color:#666666;">社会消费品零售总额</div>
         </div>
@@ -23,8 +23,8 @@
           src="../../../../assets/img/data_icon2.png"
         />
         <div>
-          <div style="display:flex;">
-            <div>{{totalData.yonydata}}</div>
+          <div style="display:flex;font-size:20px;">
+            <div  style="color:#ffd06b;">{{totalData.yonydata}}</div>
             <div>%</div>
             <img
               v-if="totalData.yonydata>0||totalData.yonydata==0"
