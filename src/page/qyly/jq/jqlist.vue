@@ -200,6 +200,7 @@ export default {
     },
     openPop: function() {
       //选择项目类型
+      $("#ajlxDialogId li").unbind();
       $("#ajlxDialogId li").click(function(e) {
         if ($(this).hasClass("dialogSelect")) {
           $(this).removeClass("dialogSelect");
