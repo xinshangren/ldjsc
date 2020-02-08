@@ -2,7 +2,7 @@
   <div style="margin-top: 70px;">
 
     <div style="margin-left: 15px;margin-right:15px;">
-      <div style="color:#3ca1ec;font-size:18px;">{{villagename}}</div>
+      <div style="color:#3ca1ec;font-size:18px;">{{data.village_name}}</div>
       <div style="display:flex;line-height: 20px;line-height: 25px;">
         <img src="../../../assets/img/dz.png" class="imgclass">
         <div style="color: #333333;font-size: 15px;">
@@ -86,7 +86,6 @@
       };
     },
     mounted() {
-      this.villagename = this.$route.params.villagename;
       var id = this.$route.params.entity;
       this.getQylyVillageBasic(id);
     },
