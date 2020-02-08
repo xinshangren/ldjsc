@@ -109,7 +109,8 @@
           path: "/qyly/sfc/sfcdetile",
           name: "sfcdetile",
           params: {
-            entity: item.id
+            entity: item.id,
+            villagename:item.name
           }
         });
       }

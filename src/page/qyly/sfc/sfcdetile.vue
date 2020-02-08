@@ -2,7 +2,7 @@
   <div style="margin-top: 70px;">
 
     <div style="margin-left: 15px;margin-right:15px;">
-      <div style="color:#3ca1ec;font-size:18px;">司徒村</div>
+      <div style="color:#3ca1ec;font-size:18px;">{{villagename}}</div>
       <div style="display:flex;line-height: 20px;line-height: 25px;">
         <img src="../../../assets/img/dz.png" class="imgclass">
         <div style="color: #333333;font-size: 15px;">
@@ -26,7 +26,7 @@
         <div style="display:flex;width:50%;">
           <img src="../../../assets/img/rs.png" class="imgclass">
           <div style="color: #333333;font-size: 15px;">
-            村名：{{data.people_number}}人
+            村民：{{data.people_number}}人
           </div>
         </div>
 
@@ -34,21 +34,21 @@
       <div style="display:flex;line-height: 20px;line-height: 25px;">
         <img src="../../../assets/img/jdyk.png" class="imgclass">
         <div style="color: #333333;font-size: 15px;">
-          接待游客：{{data.visitor}}人
+          接待游客：{{data.visitor?data.visitor+"人":"暂无数据"}}
         </div>
       </div>
       <div style="display:flex;line-height: 20px;line-height: 25px;">
         <div style="display:flex;width:50%;">
           <img src="../../../assets/img/lysr.png" class="imgclass">
           <div style="color: #333333;font-size: 15px;">
-            旅游收入：{{data.income}}
+            旅游收入：{{data.income?data.income+"万元":"暂无数据"}}
           </div>
         </div>
 
         <div style="display:flex;width:50%;line-height: 25px;">
           <img src="../../../assets/img/rjsr.png" class="imgclass">
           <div style="color: #333333;font-size: 15px;">
-            人均收入：{{data.perincome}}
+            人均收入：{{data.perincome?data.perincome+"元":"暂无数据"}}
           </div>
         </div>
 
@@ -86,6 +86,7 @@
       };
     },
     mounted() {
+      this.villagename = this.$route.params.villagename;
       var id = this.$route.params.entity;
       this.getQylyVillageBasic(id);
     },
