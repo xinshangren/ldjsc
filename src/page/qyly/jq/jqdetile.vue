@@ -5,7 +5,7 @@
 
     </van-popup>
     <div style="display: flex; border-bottom: 1px #e5e5e4 solid;margin-left: 15px;margin-right:15px;">
-      <div style="line-height: 25px;height: 180px;">
+      <div style="line-height: 25px;min-height: 180px;">
         <div style="color: #3097fb;font-size: 18px;">
           {{data.name}}
         </div>
