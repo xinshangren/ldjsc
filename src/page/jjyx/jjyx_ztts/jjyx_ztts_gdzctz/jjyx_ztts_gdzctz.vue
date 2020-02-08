@@ -53,7 +53,7 @@
     </div>
 
     <div style="background:#ffffff;height:660px;width:100%;margin-top:8px;padding-top:7px;">
-      <div class="echars_titile_div">民间投资、工业投资、基础投资、投资额和增速</div>
+      <div class="echars_titile_div">民间投资、工业投资、基础投资的投资额和增速</div>
       <div
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
