@@ -200,6 +200,7 @@
         if(users.length == 1 && users[0] == global_variable.userId){
           this.$toast("无法拨打自己电话");
         }else{
+          
           if(users.length>0 && users.length <= 35){
             dd.ready(function () {
               dd.biz.telephone.call({
