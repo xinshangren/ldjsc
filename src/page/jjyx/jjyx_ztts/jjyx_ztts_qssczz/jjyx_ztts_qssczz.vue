@@ -22,8 +22,8 @@
         />
         <div>
           <div style="display:flex;">
-            <div>{{totalData.yonydata}}</div>
-            <div>%</div>
+            <div style="color:#ffd06b;font-size:20px;">{{totalData.yonydata}}</div>
+            <div style="font-size:20px;">%</div>
             <img v-if="totalData.yonydata>0||totalData.yonydata==0" style="height: 13px;margin-top: 4px;" src="../../../../assets/img/eco_rise.png" />
              <img v-if="totalData.yonydata<0" style="height: 13px;margin-top: 4px;" src="../../../../assets/img/eco_down.png" />
           </div>

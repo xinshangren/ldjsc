@@ -23,8 +23,8 @@
           src="../../../../assets/img/data_icon2.png"
         />
         <div>
-          <div style="display:flex;">
-            <div>{{totalData.zeRatio}}</div>
+          <div style="display:flex;font-size:20px;">
+            <div style="color:#ffd06b;">{{totalData.zeRatio}}</div>
             <div>%</div>
             <img
               v-if="totalData.zeRatio>0||totalData.zeRatio==0"

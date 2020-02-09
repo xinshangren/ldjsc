@@ -23,24 +23,32 @@
         <div
           v-for="(item,index) in list"
           :key="index"
-          style="height:80px;padding-top:7px;padding-bottom:7px;border-bottom:1px #e4e4e4 solid ; position:relative;display: flex;"
+          style="height:auto;min-height:80px;padding-top:7px;padding-bottom:7px;border-bottom:1px #e4e4e4 solid ; position:relative;display: flex;"
           @click="goDetile(item)"
         >
-        <div>
-          <div style="display:flex;">
-            <div v-if="index<5" :style="backgroundDiv" style="color: #ffffff; margin-left: 10px; font-size: 9px;line-height: 58px; text-align:center;width:25px; height:37px; background: no-repeat center top;background-size: contain;">
-            {{index+1}}
+        <div style="width:100%;display:flex;flex-direction: row;flex-shrink: 0;">
+          <div style="width:60%;">
+            <div style="width:100%;display:flex;flex-direction: row;flex-shrink: 0;">
+              <div :style="item.LEVEL?'width:60%':'width:100%'" style="display:flex;flex-direction: row;flex-shrink: 0;">
+                <div v-if="index<5" :style="backgroundDiv" style="color: #ffffff; margin-left: 10px; font-size: 9px;line-height: 58px; text-align:center;width:13%; height:37px; background: no-repeat center top;background-size: contain;">
+                {{index+1}}
+                </div>
+                <!-- <img src="../../../assets/img/hot.png" style="width: 20px;height:30px;margin-left: 15px;"> -->
+                <div :style="item.LEVEL?'width:60%':'width:100%'" style="color: #333333;font-size: 14px;margin-top: 8px;margin-left: 10px;">{{item.NAME}}</div>
+              </div>
+              <div v-if="item.LEVEL" style="width:32%;color: #ff290d;font-size: 14px;margin-top: 8px;right:0;text">{{item.LEVEL}}</div>
             </div>
-            <!-- <img src="../../../assets/img/hot.png" style="width: 20px;height:30px;margin-left: 15px;"> -->
-          <div style="color: #333333;font-size: 14px;margin-top: 8px;margin-left: 10px;">{{item.NAME}}</div>
-            <div style="color: #ff290d;font-size: 14px;margin-top: 8px;position: absolute;right: 110px;">{{item.LEVEL}}</div>
+
+            <div style="width:100%;display:flex;flex-direction: row;flex-shrink: 0;margin-top: 10px;">
+              <img src="../../../assets/img/dw.png" style="width: 18px;height: 20px;margin-left: 10px;">
+              <div style="color: #666666;font-size: 12px;width:80%;word-wrap: break-word;word-break: normal; ">{{item.address}}</div>
+            </div>
+            
           </div>
-          <div style="display:flex;margin-top: 10px;">
-            <img src="../../../assets/img/dw.png" style="width: 18px;height: 20px;margin-left: 10px;">
-            <div style="color: #666666;font-size: 12px;">{{item.address}}</div>
+          <div style="width:40%;text-align:right">
+            <img :src=item.path style="width: 100px;height: 70px;">
           </div>
         </div>
-        <img :src=item.path style="width: 100px;height: 70px;position: absolute;right: 0;">
         </div>
       </div>
     </mescroll-vue>
@@ -200,6 +208,7 @@ export default {
     },
     openPop: function() {
       //选择项目类型
+      $("#ajlxDialogId li").unbind();
       $("#ajlxDialogId li").click(function(e) {
         if ($(this).hasClass("dialogSelect")) {
           $(this).removeClass("dialogSelect");

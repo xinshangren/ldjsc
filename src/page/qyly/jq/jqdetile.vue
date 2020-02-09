@@ -5,8 +5,8 @@
 
     </van-popup>
     <div style="display: flex; border-bottom: 1px #e5e5e4 solid;margin-left: 15px;margin-right:15px;">
-      <div style="line-height: 25px;height: 180px;">
-        <div style="color: #3097fb;font-size: 18px;">
+      <div style="line-height: 25px;min-height: 180px;">
+        <div style="width: 65%;color: #3097fb;font-size: 18px;">
           {{data.name}}
         </div>
         <div style="color: #ff3319;font-size: 15px;">
@@ -15,15 +15,15 @@
         <div style="width: 50%; color: #565656;font-size: 16px;">
           {{data.address}}
         </div>
-        <div style="color: #525252;font-size: 15px;">
+        <div v-if="data.incomeTotal" style="color: #525252;font-size: 15px;">
           年收入：{{(data.incomeTotal/10000).toFixed(2)}}亿
         </div>
-        <div style="color: #525252;font-size: 15px;">
+        <div v-if="data.expenditureTotal" style="color: #525252;font-size: 15px;">
           年支出：{{(data.expenditureTotal/10000).toFixed(2)}}亿
         </div>
         <div style="color: #525252;font-size: 15px;display: flex;">
           累计游客：
-          <div style="color:#ff0000;">{{data.visitorTotal}}万</div>
+          <div style="color:#ff0000;">{{data.visitorTotal}}万人</div>
         </div>
       </div>
       <div style="position: absolute;right: 15px;">
@@ -121,7 +121,8 @@
         this.myPlayer = this.$video(myVideo, {
           //确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
           controls: true,
-          //自动播放属性,muted:静音播放
+          //自动播放属性,
+          muted:false,//静音播放
           autoplay: true,
           //建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
           preload: "auto",

@@ -23,8 +23,8 @@
           src="../../../../assets/img/data_icon2.png"
         />
         <div>
-          <div style="display:flex;">
-            <div>{{totalData.yonydata}}</div>
+          <div style="display:flex;font-size:20px;">
+            <div style="color:#ffd06b">{{totalData.yonydata}}</div>
             <div>%</div>
             <img
               v-if="totalData.yonydata>0||totalData.yonydata==0"
@@ -53,7 +53,7 @@
     </div>
 
     <div style="background:#ffffff;height:660px;width:100%;margin-top:8px;padding-top:7px;">
-      <div class="echars_titile_div">民间投资、工业投资、基础投资、投资额和增速</div>
+      <div class="echars_titile_div">民间投资、工业投资、基础投资的投资额和增速</div>
       <div
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"

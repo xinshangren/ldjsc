@@ -2,8 +2,7 @@
   <div style="
     overflow: auto;
 ">
-    <div style="position:relative;height:200px;">
-      <img class="ssgk_title_img" src="../../../../../assets/img/air_home_bg.jpg" />
+    <div class="tianqi">
       <div id="indexaqi_value_id" class="ssgk_title1">0</div>
       <div style="display:flex;margin-top:0px;">
         <div class="ssgk_title1_div">AQI</div>
@@ -30,7 +29,7 @@
           <div class="ssgk_title1_div">
             <div style="display: flex;position: absolute;left: 0;">
               <img style="height:19px;" src="../../../../../assets/img/air_icon_wind.png" />
-              <div id="fldj_id" style="color:#333333;"></div>
+              <div id="fldj_id" style="width:100px;color:#333333;text-align:left"></div>
             </div>
           </div>
         </div>

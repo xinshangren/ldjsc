@@ -1,5 +1,5 @@
 <template>
-  <div @click="closeState">
+  <div class="body-container" @click="closeState">
     <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;">
       <img :src="img1" style="width:150px;height:56px;margin:auto auto;" @click="changeState(1)" />
       <img :src="img2" style="width: 150px;height:56px;margin:auto auto;" @click="changeState(2)" />
@@ -76,9 +76,9 @@
     </van-sticky>
 
     <div :is="currentView"></div>
-    <div 
+    <div id="topselectTip"
       v-show="show"
-      style=" position: absolute;top:155px;left:10px;width: 30%;box-shadow: 2px 2px #f3f3f3;border: 1px #f3f3f3 solid;"
+      :style="topselectstyle"
     >
       <div
         @click="changeState(1)"
@@ -153,7 +153,16 @@ export default {
       state: 1,
       active: 2,
       dataArrList: ["0", "0", "0", "0", "0", "0"],
-      dataTime: []
+      dataTime: [],
+      topselectstyle:{
+        position: "absolute",
+        top:"120px",
+        left:"10px",
+        width: "30%",
+        "box-shadow":"2px 2px #f3f3f3",
+        border: "1px #f3f3f3 solid",
+        "z-index":999999
+      }
     };
   },
   mounted() {
@@ -163,6 +172,8 @@ export default {
       "23",
       "景区"
     );
+    this.handleScroll();
+    window.addEventListener('scroll', this.handleScroll);
   },
   methods: {
     //获取记录日志的logid
@@ -233,9 +244,6 @@ export default {
     showState: function() {
       this.show = true;
     },
-    // closeState:function(){
-    //   this.show = false;
-    // },
     closeState(event) {
       var myPanel = document.getElementById('topselect')// 得到点击出现的节点
       console.log(myPanel);
@@ -244,6 +252,17 @@ export default {
           this.show = false// 消失
         }
       }
+    },
+    handleScroll:function(){
+      var top = document.body.scrollTop || document.documentElement.scrollTop || window.pageXOffset;
+      if(top>=56){
+        this.topselectstyle.top='112px'
+        this.topselectstyle.position='fixed'
+      }else{
+        this.topselectstyle.top='155px'
+        this.topselectstyle.position='absolute'
+      }
+		  console.log(top)
     },
     changeState: function(state) {
       this.state = state;
@@ -317,5 +336,6 @@ export default {
 };
 </script>
 
-<style>
+<style socped>
+.body-container{height:100%}
 </style>

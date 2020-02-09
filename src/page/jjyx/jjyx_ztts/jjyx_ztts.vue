@@ -351,6 +351,10 @@ export default {
     upYearClick: function() {
       var year = this.nowYear.split("-")[0];
       var month = this.nowYear.split("-")[1];
+
+      var minYear = this.minDate.getFullYear();
+      var minMonth = this.minDate.getMonth();
+
       if (parseInt(month) == 2) {
         year = parseInt(year) - 1;
         month = 12;
@@ -360,6 +364,11 @@ export default {
       if (parseInt(month) < 10) {
         month = "0" + month;
       }
+      if((year<minYear)||(year == minYear&&month < minMonth)){
+        this.$toast("前一年没有数据");
+        return;
+      }
+
       this.nowYear = year + "-" + month;
       this.$refs.child1.changeTitme(this.nowYear);
     },

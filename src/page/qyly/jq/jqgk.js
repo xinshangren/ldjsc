@@ -196,7 +196,14 @@ export const echarsEnti = {
         trigger: 'axis',
         axisPointer: {
           type: 'shadow'
-        }
+        },formatter:function(params){
+          var relVal = params[0].name+"年"; 
+          //alert(JSON.stringify(params))
+          for (var i = 0, l = params.length; i < l; i++) {  
+              relVal += '<br/>' +params[i].marker+ params[i].seriesName+":"+ params[i].value+"元";  
+          } 
+          return relVal;  
+      }
       },
       legend: {
         orient: 'horizontal', // 'vertical'
