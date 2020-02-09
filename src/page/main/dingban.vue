@@ -20,7 +20,7 @@
       <van-tab title="市政府工作部门" id="8a8180c9700ff44e017010166e88000d">
         <child4 style v-on:addPhone="addPhone" :callPhoneList_p="callPhoneList"></child4>
       </van-tab>
-      <van-tab title="各区县委书记" id="8a8180c9701a1a4b01701ef148c60034">
+      <van-tab title="各区县委" id="8a8180c9701a1a4b01701ef148c60034">
         <child8 style v-on:addPhone="addPhone" :callPhoneList_p="callPhoneList"></child8>
       </van-tab>
       <van-tab title="各区县委政府" id="402809816c1cc114016c1cc330320003">
@@ -33,8 +33,8 @@
     <div
      id="callButton" style="z-index: 2;display: none; width: 100%; height: 53px; position: absolute;bottom: 0px;
       right: 0px;background-color:#ffffff;">
-      <div style=" width:100%;vertical-align: middle;display: flex;margin: 18px 0px 14px 14px;">
-        <div style="font-size: 14px;margin-left: 3px;">已选人数:</div>
+      <div style=" width:100%;vertical-align: middle;display: flex;margin: 18px 0px 0px 0px;">
+        <div style="font-size: 14px;margin-left: 15px;">已选人数:</div>
         <div style="font-size: 14px;width: 49%; margin-left: 1px;color: rgb(48, 152, 251) ">{{callPhoneList.length}}人</div>
         <img id="leftAreaDivId" style=" height: 36px; margin: -9px -3px 0px;" src="../../assets/img/dingtalk_more.png"
           @click="goDingPhone" />
@@ -197,21 +197,25 @@
         var ddd = this.corpId;
         var users = this.callPhoneList;
         console.log(users);
-        if(users.length>0 && users.length <= 35){
-          dd.ready(function () {
-            dd.biz.telephone.call({
-              users: users, //用户列表，工号
-              corpId: ddd, //企业id
-              onSuccess: function () { },
-              onFail: function (e) {
-                alert("打电话错误" + JSON.stringify(e));
-              }
-            });
-          });
-        }else if(users.length>35){
-          this.$toast("多人通话选择人数不得大于35人");
+        if(users.length == 1 && users[0] == global_variable.userId){
+          this.$toast("无法拨打自己电话");
         }else{
-          this.$toast("请选择多人通话参与人");
+          if(users.length>0 && users.length <= 35){
+            dd.ready(function () {
+              dd.biz.telephone.call({
+                users: users, //用户列表，工号
+                corpId: ddd, //企业id
+                onSuccess: function () { },
+                onFail: function (e) {
+                  alert("打电话错误" + JSON.stringify(e));
+                }
+              });
+            });
+          }else if(users.length>35){
+            this.$toast("多人通话选择人数不得大于35人");
+          }else{
+            this.$toast("请选择多人通话参与人");
+          }
         }
       },
       //获取工作群

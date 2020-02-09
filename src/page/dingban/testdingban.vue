@@ -18,6 +18,9 @@
         @click="all_pick"
       />
       <div style="font-size: 14px;margin: 5px 0px 5px 12px;">全选</div>
+      <div
+        style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)"
+      >（{{callPhoneList.length}}/{{list.length}}）</div>
     </div>
     <van-list
       id="newslist6"
@@ -75,6 +78,7 @@ import Vue from "vue";
 import { PullRefresh } from "vant";
 import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
+import global_variable from "../../api/global_variable.js";
 Vue.use(PullRefresh);
 export default {
   name: "picsnews",
@@ -264,17 +268,23 @@ export default {
     //打电话
     goDetile(item) {
       if (item.dingid != null) {
-        var ddd = this.corpId;
-        dd.ready(function() {
-          dd.biz.telephone.call({
-            users: [item.dingid], //用户列表，工号
-            corpId: ddd, //企业id
-            onSuccess: function() {},
-            onFail: function(e) {
-              alert("打电话错误" + JSON.stringify(e));
-            }
+        if (
+         item.dingid == global_variable.userId
+        ) {
+          this.$toast("无法拨打自己电话");
+        } else {
+          var ddd = this.corpId;
+          dd.ready(function() {
+            dd.biz.telephone.call({
+              users: [item.dingid], //用户列表，工号
+              corpId: ddd, //企业id
+              onSuccess: function() {},
+              onFail: function(e) {
+                alert("打电话错误" + JSON.stringify(e));
+              }
+            });
           });
-        });
+        }
       } else {
         this.$toast("该用户暂未注册");
       }

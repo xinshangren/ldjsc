@@ -18,6 +18,9 @@
         @click="all_pick"
       />
       <div style="font-size: 14px;margin: 5px 0px 5px 12px;">全选</div>
+      <div
+        style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)"
+      >（{{callPhoneList.length}}/{{list.length}}）</div>
     </div>
     <van-list
       id="newslist1"
@@ -74,8 +77,8 @@
       style="z-index: 2;display: none; width: 100%; height: 50px; position: absolute;bottom: 0px;
       right: 0px;background-color:#ffffff;"
     >
-      <div style=" width:100%;vertical-align: middle;display: flex;margin: 18px 0px 14px 14px;">
-        <div style="font-size: 14px;margin-left: 3px;">已选人数:</div>
+      <div style=" width:100%;vertical-align: middle;display: flex;margin: 18px 0px 0px 0px;">
+        <div style="font-size: 14px;margin-left: 15px;">已选人数:</div>
         <div
           style="font-size: 14px;width: 49%; margin-left: 1px;color: rgb(48, 152, 251) "
         >{{callPhoneList.length}}人</div>
@@ -94,6 +97,7 @@ import Vue from "vue";
 import { PullRefresh } from "vant";
 import { httpMethod } from "../../../api/getData.js";
 import dd from "dingtalk-jsapi";
+import global_variable from "../../../api/global_variable.js";
 Vue.use(PullRefresh);
 export default {
   name: "picsnews",
@@ -111,7 +115,7 @@ export default {
       isshow: false,
       callPhoneList: [],
       all_pick_flag: false,
-      callButton:false,
+      callButton: false
     };
   },
   props: ["departId"],
@@ -150,21 +154,25 @@ export default {
       var ddd = this.corpId;
       var users = this.callPhoneList;
       console.log(users);
-      if (users.length > 0 && users.length <= 35) {
-        dd.ready(function() {
-          dd.biz.telephone.call({
-            users: users, //用户列表，工号
-            corpId: ddd, //企业id
-            onSuccess: function() {},
-            onFail: function(e) {
-              alert("打电话错误" + JSON.stringify(e));
-            }
-          });
-        });
-      } else if (users.length > 35) {
-        this.$toast("多人通话选择人数不得大于35人");
+      if (users.length == 1 && users[0] == global_variable.userId) {
+        this.$toast("无法拨打自己电话");
       } else {
-        this.$toast("请选择多人通话参与人");
+        if (users.length > 0 && users.length <= 35) {
+          dd.ready(function() {
+            dd.biz.telephone.call({
+              users: users, //用户列表，工号
+              corpId: ddd, //企业id
+              onSuccess: function() {},
+              onFail: function(e) {
+                alert("打电话错误" + JSON.stringify(e));
+              }
+            });
+          });
+        } else if (users.length > 35) {
+          this.$toast("多人通话选择人数不得大于35人");
+        } else {
+          this.$toast("请选择多人通话参与人");
+        }
       }
     },
     addPhone: function() {
@@ -291,17 +299,21 @@ export default {
     //打电话
     goDetile(item) {
       if (item.dingid != null) {
-        var ddd = this.corpId;
-        dd.ready(function() {
-          dd.biz.telephone.call({
-            users: [item.dingid], //用户列表，工号
-            corpId: ddd, //企业id
-            onSuccess: function() {},
-            onFail: function(e) {
-              alert("打电话错误" + JSON.stringify(e));
-            }
+        if (item.dingid == global_variable.userId) {
+          this.$toast("无法拨打自己电话");
+        } else {
+          var ddd = this.corpId;
+          dd.ready(function() {
+            dd.biz.telephone.call({
+              users: [item.dingid], //用户列表，工号
+              corpId: ddd, //企业id
+              onSuccess: function() {},
+              onFail: function(e) {
+                alert("打电话错误" + JSON.stringify(e));
+              }
+            });
           });
-        });
+        }
       } else {
         this.$toast("该用户暂未注册");
       }

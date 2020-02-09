@@ -5,6 +5,7 @@
         @click="all_pick" />
       <img id="all_pick" style="height: 20px;margin: 5px 0px 5px 12px;" v-else src="../../assets/img/choice1.png" @click="all_pick" />
       <div style="font-size: 14px;margin: 5px 0px 5px 12px;">全选</div>
+      <div style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)">（{{callPhoneList.length}}/{{list.length-1}}）</div>
     </div>
     <van-list id="newslist3" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error"
       error-text="查询失败" style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
@@ -44,6 +45,7 @@
   import { PullRefresh } from "vant";
   import { httpMethod } from "../../api/getData.js";
   import dd from "dingtalk-jsapi";
+  import global_variable from "../../api/global_variable.js";
   Vue.use(PullRefresh);
   export default {
     name: "picsnews",
@@ -244,17 +246,21 @@
       //打电话
       goDetile(item) {
         if (item.dingid != null) {
-          var ddd = this.corpId;
-          dd.ready(function () {
-            dd.biz.telephone.call({
-              users: [item.dingid], //用户列表，工号
-              corpId: ddd, //企业id
-              onSuccess: function () { },
-              onFail: function (e) {
-                alert("打电话错误" + JSON.stringify(e));
-              }
+          if( item.dingid == global_variable.userId){
+            this.$toast("无法拨打自己电话");
+          }else{
+            var ddd = this.corpId;
+            dd.ready(function () {
+              dd.biz.telephone.call({
+                users: [item.dingid], //用户列表，工号
+                corpId: ddd, //企业id
+                onSuccess: function () { },
+                onFail: function (e) {
+                  alert("打电话错误" + JSON.stringify(e));
+                }
+              });
             });
-          });
+          }
         } else {
           this.$toast("该用户暂未注册");
         }
