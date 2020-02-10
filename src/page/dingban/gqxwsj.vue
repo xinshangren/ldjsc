@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      style="border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin:0px 0px -4px -4px;width:100%;background: #ffffff;"
+      style="border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin: 0px 0px -4px -4px; width:100%;background: #ffffff;"
     >
       <img
         id="all_pick"
@@ -18,12 +18,10 @@
         @click="all_pick"
       />
       <div style="font-size: 14px;margin: 5px 0px 5px 12px;">全选</div>
-      <div
-        style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)"
-      >（{{callPhoneList.length}}/{{list.length}}）</div>
+      <div style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)">（{{callPhoneList.length}}/{{list.length}}）</div>
     </div>
     <van-list
-      id="newslist1"
+      id="newslist7"
       v-model="loading"
       :finished="finished"
       @load="onLoad"
@@ -33,20 +31,20 @@
       style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;"
     >
       <div
-        style="width:100%;display: flex; position: relative; margin-top: 4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+        style="width:100%;display: flex; position: relative; margin-top:4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
         v-for="(item,index) of list"
         :key="item.id"
       >
         <input
           v-if="item.dingid != null"
-          :id="'dsjyyjid'+index"
+          :id="'gqxwsjid'+index"
           hidden
           type="checkbox"
           :value="item.dingid"
           v-model="callPhoneList"
           v-on:change="addPhone($event)"
         />
-        <label @click="errorMsg(item)" :for="'dsjyyjid'+index" class="active"></label>
+        <label @click="errorMsg(item)" :for="'gqxwsjid'+index" class="active"></label>
         <img :src="item.img" style="margin: 16px 14px 15px 7px;  width: 55px; height: 55px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
@@ -78,13 +76,14 @@ import Vue from "vue";
 import { PullRefresh } from "vant";
 import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
-import global_variable from "../../api/global_variable.js";
+  import global_variable from "../../api/global_variable.js";
 Vue.use(PullRefresh);
 export default {
   name: "picsnews",
+  props: ["callPhoneList_p"],
   data() {
     return {
-      userId: "", //暂时默认
+      userId: "8ae4804f6d39da6a016d4c928ede0119", //暂时默认
       error: false,
       list: [],
       loading: false, //是否处于加载状态
@@ -102,10 +101,9 @@ export default {
   mounted() {
     var orderHight1 = document.documentElement.clientHeight;
     var heightlist = orderHight1 - 196;
-    document.getElementById("newslist1").style.height = heightlist + "px";
+    document.getElementById("newslist7").style.height = heightlist + "px";
     this.gojq();
   },
-  props: ["callPhoneList_p"],
   methods: {
     all_pick: function() {
       var self = this;
@@ -159,19 +157,20 @@ export default {
       if (self.callPhoneList.length == 0) {
         self.all_pick_flag = false;
       }
-      console.log("dsjyyj页面");
+      console.log("gqxwsj页面");
       this.map.callPhoneList = this.callPhoneList;
-      this.map.flag = "dsjyyj";
+      this.map.flag = "gqxwsj";
       console.log(this.map);
       this.$emit("addPhone", this.map);
     },
     getUserOrDepart: function() {
       var params = {
-        departId: "8a8180c9700ff44e017010166e88000d"
+        departId: "8a8180c9701a1a4b01701ef148c60034"
       };
       httpMethod
         .getUserOrDepart(params)
         .then(res => {
+          console.log(res);
           if (res.success == "1") {
             this.list = this.list.concat(res.userList);
             for (var i = 0; i < this.list.length; i++) {
@@ -193,12 +192,6 @@ export default {
     onRefresh() {
       this.isLoading = false;
       this.finished = true;
-    },
-    errorMsg: function(item) {
-      if (item.dingid != null) {
-      } else {
-        this.$toast("该用户暂未注册");
-      }
     },
     onLoad() {
       //上拉加载
@@ -264,6 +257,12 @@ export default {
         .catch(err => {
           this.$toast(err);
         });
+    },
+    errorMsg: function(item) {
+      if (item.dingid != null) {
+      } else {
+        this.$toast("该用户暂未注册");
+      }
     },
     //打电话
       goDetile(item) {

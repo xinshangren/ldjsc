@@ -20,6 +20,9 @@
       <van-tab title="市政府工作部门" id="8a8180c9700ff44e017010166e88000d">
         <child4 style v-on:addPhone="addPhone" :callPhoneList_p="callPhoneList"></child4>
       </van-tab>
+      <van-tab title="各区县委" id="8a8180c9701a1a4b01701ef148c60034">
+        <child8 style v-on:addPhone="addPhone" :callPhoneList_p="callPhoneList"></child8>
+      </van-tab>
       <van-tab title="各区县委政府" id="402809816c1cc114016c1cc330320003">
         <child6 style v-on:addPhone="addPhone" :callPhoneList_p="callPhoneList"></child6>
       </van-tab>
@@ -28,14 +31,12 @@
       </van-tab>
     </van-tabs>
     <div
-      style="border-radius:31px 0px 0px 0px;box-shadow: rgba(34, 34, 34, 0.2) 0px 0px 5px;border: 1px solid rgba(34, 34, 34, 0.1);z-index: 2;display: flex; width: 63%; height: 53px; position: absolute;bottom: 0px;
-      right: 0px;background-color:#ffffff">
-      <div style=" width:55%;vertical-align: middle;display: flex;margin: 16px 0px 16px 0px;">
-        <div style="font-size: 14px;margin-left: 19px;">已选人数:</div>
-        <div style="font-size: 14px; margin-left: 1px;color: rgb(48, 152, 251) ">{{callPhoneList.length}}人</div>
-      </div>
-      <div style=" vertical-align: middle;display:flex;">
-        <img id="leftAreaDivId" style="height: 35px;margin: 9px -7px;" src="../../assets/img/dingtalk_more.png"
+     id="callButton" style="z-index: 2;display: none; width: 100%; height: 53px; position: absolute;bottom: 0px;
+      right: 0px;background-color:#ffffff;">
+      <div style=" width:100%;vertical-align: middle;display: flex;margin: 18px 0px 0px 0px;">
+        <div style="font-size: 14px;margin-left: 15px;">已选人数:</div>
+        <div style="font-size: 14px;width: 49%; margin-left: 1px;color: rgb(48, 152, 251) ">{{callPhoneList.length}}人</div>
+        <img id="leftAreaDivId" style=" height: 36px; margin: -9px -3px 0px;" src="../../assets/img/dingtalk_more.png"
           @click="goDingPhone" />
       </div>
     </div>
@@ -50,6 +51,7 @@
   import child6 from "@/page/dingban/qxqkfq.vue";
   import child5 from "@/page/dingban/workq/workq.vue";
   import child7 from "@/page/dingban/testdingban.vue";
+  import child8 from "@/page/dingban/gqxwsj.vue";
   import { httpMethod } from "../../api/getData.js";
   import global_variable from "../../api/global_variable.js";
   import vhtmlpanel from "@/components/HtmlPanel.vue";
@@ -65,6 +67,7 @@
         dsjyyj: [],
         qxqkfq: [],
         testdingban: [],
+        gqxwsj: [],
         callPhoneList: [],
         callButton: false,
         active: 0,
@@ -160,6 +163,8 @@
             this.qxqkfq = map.callPhoneList;
           } else if (map.flag == "testdingban") {
             this.testdingban = map.callPhoneList;
+          } else if (map.flag == "gqxwsj") {
+            this.gqxwsj = map.callPhoneList;
           }
         }
         var a = [];
@@ -169,17 +174,20 @@
         var e = d.concat(this.dsjyyj);
         var f = e.concat(this.qxqkfq);
         var g = f.concat(this.testdingban);
-        if(g.length>35){
+        var h = g.concat(this.gqxwsj);
+        if(h.length>35){
           this.$toast("多人通话选择人数不得大于35人");
           return false;
         }else{
-          this.callPhoneList = g;
+          this.callPhoneList = h;
           console.log("父页面");
           console.log(this.callPhoneList);
           if (this.callPhoneList != null && this.callPhoneList.length > 0) {
             this.callButton = true;
+            $("#callButton").slideDown("slow");
           } else {
             this.callButton = false;
+            $("#callButton").slideUp("slow");
           }
           console.log(this.callButton);
         }
@@ -189,21 +197,27 @@
         var ddd = this.corpId;
         var users = this.callPhoneList;
         console.log(users);
-        if(users.length>0 && users.length <= 35){
-          dd.ready(function () {
-            dd.biz.telephone.call({
-              users: users, //用户列表，工号
-              corpId: ddd, //企业id
-              onSuccess: function () { },
-              onFail: function (e) {
-                alert("打电话错误" + JSON.stringify(e));
-              }
-            });
-          });
-        }else if(users.length>35){
-          this.$toast("多人通话选择人数不得大于35人");
+        if(users.length == 1 && users[0] == global_variable.userId){
+          this.$toast("无法拨打自己电话");
         }else{
-          this.$toast("请选择多人通话参与人");
+          
+          if(users.length>0 && users.length <= 35){
+            dd.ready(function () {
+              dd.biz.telephone.call({
+                users: users, //用户列表，工号
+                corpId: ddd, //企业id
+                onSuccess: function () { },
+                onFail: function (e) {
+                  console.log(e)
+                  this.$toast("钉钉资源不足，请稍后再试");
+                }
+              });
+            });
+          }else if(users.length>35){
+            this.$toast("多人通话选择人数不得大于35人");
+          }else{
+            this.$toast("请选择多人通话参与人");
+          }
         }
       },
       //获取工作群
@@ -300,7 +314,8 @@
       child4,
       child5,
       child6,
-      child7
+      child7,
+      child8
     }
   };
 </script>

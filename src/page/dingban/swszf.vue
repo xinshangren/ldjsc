@@ -1,20 +1,30 @@
 <template>
-  <div>
+  <div >
+    <div style="border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin: 0px 0px -4px -4px;background: #ffffff;">
+      <img id="all_pick" style="height: 20px;margin: 5px 0px 5px 12px;" v-if="all_pick_flag" src="../../assets/img/choice2.png"
+        @click="all_pick" />
+      <img id="all_pick" style="height: 20px;margin: 5px 0px 5px 12px;" v-else src="../../assets/img/choice1.png" @click="all_pick" />
+      <div style="font-size: 14px;margin: 5px 0px 5px 12px;">全选</div>
+      <div style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)">（{{callPhoneList.length}}/{{list.length-1}}）</div>
+    </div>
     <van-list id="newslist3" v-model="loading" :finished="finished" @load="onLoad" :offset="60" :error.sync="error"
       error-text="查询失败" style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
       <div
-        style="margin-left: 32px;width: 90%;display: flex; position: relative; margin-top: 4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+        style="width:100%;display: flex; position: relative; margin-top: 4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
         v-for="(item,index) of list" :key="item.id">
         <input v-if="item.dingid != null" :id="'id'+index" hidden type="checkbox" :value="item.dingid"
           v-model="callPhoneList" v-on:change="addPhone($event)" />
-        <label @click="errorMsg(item)" :for="'id'+index" class="active"></label>
-        <img :src="item.img" style="margin: 14px 14px 15px 22px;  width: 45px; height: 45px;" />
+        <label @click="errorMsg(item)" v-if="index != 0" :for="'id'+index" class="active"></label>
+        <div v-else style="width: 26px;"></div>
+        <img :src="item.img" style="margin: 16px 14px 15px 7px;  width: 55px; height: 55px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
-          <div style="margin-top: 23px;margin-left: -53px;font-size: 13px;">{{item.dutyName}}</div>
+          <div style="margin-top: 16px;font-size: 13px;">{{item.dutyName}}</div>
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 20px;">
-          <img src="../../assets/img/phonecall.png" style="width: 50px;height:50px;" @click="goDetile(item)" />
+          <img v-if="index != 0" src="../../assets/img/phonecall.png" style="width: 50px;height:50px;" @click="goDetile(item)" />
+          <img v-else src="../../assets/img/no_phonecall.png"  style="width: 50px;height:50px;" />
+         
           <!-- <img
             src="../../assets/img/sms.png"
             style="width: 50px;height:50px;margin-left: 5px;"
@@ -28,15 +38,6 @@
         </div>
       </div>
     </van-list>
-    <div style="border-radius:31px;box-shadow: rgba(34, 34, 34, 0.2) 0px 0px 5px;border: 1px solid rgba(34, 34, 34, 0.1);z-index: 2;display: flex; width: 25%; height: 44px; position: absolute;
-      left: 5px;bottom: 5px;background-color:#ffffff">
-      <div style=" width:100%;vertical-align: middle;display: flex;margin: 13px;">
-        <img id="all_pick" style="height: 20px;" v-if="all_pick_flag" src="../../assets/img/choice2.png"
-          @click="all_pick" />
-        <img id="all_pick" style="height: 20px;" v-else src="../../assets/img/choice1.png" @click="all_pick" />
-        <div style="font-size: 14px;margin-left: 10px;">全选</div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -44,6 +45,7 @@
   import { PullRefresh } from "vant";
   import { httpMethod } from "../../api/getData.js";
   import dd from "dingtalk-jsapi";
+  import global_variable from "../../api/global_variable.js";
   Vue.use(PullRefresh);
   export default {
     name: "picsnews",
@@ -67,7 +69,7 @@
     props: ["callPhoneList_p"],
     mounted() {
       var orderHight1 = document.documentElement.clientHeight;
-      var heightlist = orderHight1 - 158;
+      var heightlist = orderHight1 - 196;
       document.getElementById("newslist3").style.height = heightlist + "px";
       this.gojq();
     },
@@ -121,6 +123,11 @@
             this.$toast("多人通话选择人数不得大于35人");
             return false;
           }
+        }
+        console.log('调试')
+        console.log(self.callPhoneList)
+        if(self.callPhoneList.length == 0){
+          self.all_pick_flag = false;
         }
         console.log("swszf页面")
         this.map.callPhoneList = this.callPhoneList;
@@ -239,17 +246,22 @@
       //打电话
       goDetile(item) {
         if (item.dingid != null) {
-          var ddd = this.corpId;
-          dd.ready(function () {
-            dd.biz.telephone.call({
-              users: [item.dingid], //用户列表，工号
-              corpId: ddd, //企业id
-              onSuccess: function () { },
-              onFail: function (e) {
-                alert("打电话错误" + JSON.stringify(e));
-              }
+          if( item.dingid == global_variable.userId){
+            this.$toast("无法拨打自己电话");
+          }else{
+            var ddd = this.corpId;
+            dd.ready(function () {
+              dd.biz.telephone.call({
+                users: [item.dingid], //用户列表，工号
+                corpId: ddd, //企业id
+                onSuccess: function () { },
+                onFail: function (e) {
+                  console.log(e);
+                  this.$toast("钉钉资源不足，请稍后再试");
+                }
+              });
             });
-          });
+          }
         } else {
           this.$toast("该用户暂未注册");
         }

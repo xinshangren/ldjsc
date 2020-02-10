@@ -1,5 +1,27 @@
 <template>
   <div>
+    <div
+      style="border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin: 0px 0px -4px -4px;background: #ffffff;"
+    >
+      <img
+        id="all_pick"
+        style="height: 20px;margin: 5px 0px 5px 12px;"
+        v-if="all_pick_flag"
+        src="../../../assets/img/choice2.png"
+        @click="all_pick"
+      />
+      <img
+        id="all_pick"
+        style="height: 20px;margin: 5px 0px 5px 12px;"
+        v-else
+        src="../../../assets/img/choice1.png"
+        @click="all_pick"
+      />
+      <div style="font-size: 14px;margin: 5px 0px 5px 12px;">全选</div>
+      <div
+        style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)"
+      >（{{callPhoneList.length}}/{{list.length}}）</div>
+    </div>
     <van-list
       id="newslist1"
       v-model="loading"
@@ -11,7 +33,7 @@
       style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;"
     >
       <div
-        style="margin-left: 32px;width: 90%;display: flex; position: relative; margin-top: 4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
+        style="width: 100%;display: flex; position: relative; margin-top: 4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
         v-for="(item,index) of list"
         :key="item.id"
       >
@@ -25,10 +47,10 @@
           @change="addPhone"
         />
         <label @click="errorMsg(item)" :for="'id'+index" class="active"></label>
-        <img :src="item.img" style="margin: 14px 14px 15px 22px;  width: 45px; height: 45px;" />
+        <img :src="item.img" style="margin: 16px 14px 15px 7px;  width: 55px; height: 55px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
-          <div style="margin-top: 23px;margin-left: -53px;font-size: 13px;">{{item.dutyName}}</div>
+          <div style="margin-top: 16px;font-size: 13px;">{{item.dutyName}}</div>
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 20px;">
           <img
@@ -51,39 +73,18 @@
       </div>
     </van-list>
     <div
-      style="border-radius:31px;box-shadow: rgba(34, 34, 34, 0.2) 0px 0px 5px;border: 1px solid rgba(34, 34, 34, 0.1);z-index: 2;display: flex; width: 25%; height: 44px; position: absolute;
-      left: 5px;bottom: 5px;background-color:#ffffff"
+      id="callButton"
+      style="z-index: 2;display: none; width: 100%; height: 50px; position: absolute;bottom: 0px;
+      right: 0px;background-color:#ffffff;"
     >
-      <div style=" width:100%;vertical-align: middle;display: flex;margin: 13px;">
-        <img
-          id="all_pick"
-          style="height: 20px;"
-          v-if="all_pick_flag"
-          src="../../../assets/img/choice2.png"
-          @click="all_pick"
-        />
-        <img
-          id="all_pick"
-          style="height: 20px;"
-          v-else
-          src="../../../assets/img/choice1.png"
-          @click="all_pick"
-        />
-        <div style="font-size: 14px;margin-left: 10px;">全选</div>
-      </div>
-    </div>
-    <div
-      style="border-radius:31px 0px 0px 0px;box-shadow: rgba(34, 34, 34, 0.2) 0px 0px 5px;border: 1px solid rgba(34, 34, 34, 0.1);z-index: 2;display: flex; width: 63%; height: 53px; position: absolute;bottom: 0px;
-      right: 0px;background-color:#ffffff"
-    >
-      <div style=" width:55%;vertical-align: middle;display: flex;margin: 16px 0px 16px 0px;">
-        <div style="font-size: 14px;margin-left: 19px;">已选人数:</div>
-        <div style="font-size: 14px; margin-left: 1px;color:rgb(48, 152, 251)">{{callPhoneList.length}}人</div>
-      </div>
-      <div style=" vertical-align: middle;display:flex;">
+      <div style=" width:100%;vertical-align: middle;display: flex;margin: 18px 0px 0px 0px;">
+        <div style="font-size: 14px;margin-left: 15px;">已选人数:</div>
+        <div
+          style="font-size: 14px;width: 49%; margin-left: 1px;color: rgb(48, 152, 251) "
+        >{{callPhoneList.length}}人</div>
         <img
           id="leftAreaDivId"
-          style="height: 35px;margin: 9px -7px;"
+          style="height: 36px; margin: -9px -3px 0px;"
           src="../../../assets/img/dingtalk_more.png"
           @click="goDingPhone"
         />
@@ -96,6 +97,7 @@ import Vue from "vue";
 import { PullRefresh } from "vant";
 import { httpMethod } from "../../../api/getData.js";
 import dd from "dingtalk-jsapi";
+import global_variable from "../../../api/global_variable.js";
 Vue.use(PullRefresh);
 export default {
   name: "picsnews",
@@ -112,13 +114,14 @@ export default {
       corpId: "",
       isshow: false,
       callPhoneList: [],
-      all_pick_flag: false
+      all_pick_flag: false,
+      callButton: false
     };
   },
   props: ["departId"],
   mounted() {
     var orderHight1 = document.documentElement.clientHeight;
-    var heightlist = orderHight1 - 158;
+    var heightlist = orderHight1 - 196;
     document.getElementById("newslist1").style.height = heightlist + "px";
     this.gojq();
   },
@@ -129,7 +132,7 @@ export default {
         self.all_pick_flag = false;
         self.callPhoneList = [];
       } else {
-        if (self.callPhoneList.length>35) {
+        if (self.callPhoneList.length > 35) {
           this.$toast("多人通话选择人数不得大于35人");
           return false;
         } else {
@@ -137,38 +140,51 @@ export default {
           var list = self.list;
           list.forEach(element => {
             if (element.dingid != null) {
-              if(self.callPhoneList.indexOf(element.dingid)>-1){
-
-                }else{
-                  self.callPhoneList.push(element.dingid);
-                }
+              if (self.callPhoneList.indexOf(element.dingid) > -1) {
+              } else {
+                self.callPhoneList.push(element.dingid);
+              }
             }
           });
         }
       }
+      self.addPhone();
     },
     goDingPhone() {
       var ddd = this.corpId;
       var users = this.callPhoneList;
       console.log(users);
-      if (users.length > 0 && users.length <= 35) {
-        dd.ready(function() {
-          dd.biz.telephone.call({
-            users: users, //用户列表，工号
-            corpId: ddd, //企业id
-            onSuccess: function() {},
-            onFail: function(e) {
-              alert("打电话错误" + JSON.stringify(e));
-            }
-          });
-        });
-      } else if (users.length > 35) {
-        this.$toast("多人通话选择人数不得大于35人");
+      if (users.length == 1 && users[0] == global_variable.userId) {
+        this.$toast("无法拨打自己电话");
       } else {
-        this.$toast("请选择多人通话参与人");
+        if (users.length > 0 && users.length <= 35) {
+          dd.ready(function() {
+            dd.biz.telephone.call({
+              users: users, //用户列表，工号
+              corpId: ddd, //企业id
+              onSuccess: function() {},
+              onFail: function(e) {
+                this.$toast("钉钉资源不足，请稍后再试");
+              }
+            });
+          });
+        } else if (users.length > 35) {
+          this.$toast("多人通话选择人数不得大于35人");
+        } else {
+          this.$toast("请选择多人通话参与人");
+        }
       }
     },
-    addPhone: function() {},
+    addPhone: function() {
+      if (this.callPhoneList != null && this.callPhoneList.length > 0) {
+        this.callButton = true;
+        $("#callButton").slideDown("slow");
+      } else {
+        this.callButton = false;
+        this.all_pick_flag = false;
+        $("#callButton").slideUp("slow");
+      }
+    },
     errorMsg: function(item) {
       if (item.dingid != null) {
       } else {
@@ -283,17 +299,21 @@ export default {
     //打电话
     goDetile(item) {
       if (item.dingid != null) {
-        var ddd = this.corpId;
-        dd.ready(function() {
-          dd.biz.telephone.call({
-            users: [item.dingid], //用户列表，工号
-            corpId: ddd, //企业id
-            onSuccess: function() {},
-            onFail: function(e) {
-              alert("打电话错误" + JSON.stringify(e));
-            }
+        if (item.dingid == global_variable.userId) {
+          this.$toast("无法拨打自己电话");
+        } else {
+          var ddd = this.corpId;
+          dd.ready(function() {
+            dd.biz.telephone.call({
+              users: [item.dingid], //用户列表，工号
+              corpId: ddd, //企业id
+              onSuccess: function() {},
+              onFail: function(e) {
+                this.$toast("钉钉资源不足，请稍后再试");
+              }
+            });
           });
-        });
+        }
       } else {
         this.$toast("该用户暂未注册");
       }
