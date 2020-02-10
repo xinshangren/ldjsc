@@ -14,7 +14,7 @@
 
 <script>
 import Vue from "vue";
-import { Search,Dialog } from "vant";
+import { Search, Dialog } from "vant";
 import $ from "jquery";
 import { mainJs } from "../main/main.js";
 import global_variable from "../../api/global_variable.js";
@@ -46,6 +46,8 @@ export default {
         require("@/assets/img/icon-nyts.png"),
         require("@/assets/img/icon-qxzt.png"),
         require("@/assets/img/icon-wmgc.png"),
+        require("@/assets/img/icon-zhxx.png"),
+        require("@/assets/img/icon-zhxx.png"),
         require("@/assets/img/icon-zhxx.png")
       ],
       tabNameList: [
@@ -58,49 +60,68 @@ export default {
         "能源革命",
         "区县直通",
         "文明共创",
-        "综合信息"
+        "综合信息",
+        "疫情地图",
+        "疫情数据"
       ],
-      tabIdList: ["8", "65", "1", "5", "2", "3", "6", "23", "4", "7"],
-      // permissionList: [
-      //   "每日要情",
-      //   "重大改革",
-      //   "文明共创",
-      //   "重点工程",
-      //   "环保攻坚",
-      //   "经济运行",
-      //   "三大产业",
-      //   "招商引资",
-      //   "能源革命",
-      //   "热点问题",
-      //   "热点事件",
-      //   "工作效能",
-      //   "教育服务",
-      //   "12345",
-      //   "就业服务",
-      //   "行政审批",
-      //   "行政监督",
-      //   "全域旅游",
-      //   "游客画像",
-      //   "非遗保护",
-      //   "远程调度",
-      //   "城区",
-      //   "泽州县",
-      //   "高平市",
-      //   "阳城县",
-      //   "沁水县",
-      //   "陵川县",
-      //   "综合信息",
-      //   "13710督办",
-      //   "一键直连",
-      //   "市长热线",
-      //    "区县直通",
-      // ]
-      permissionList: []
+      tabIdList: [
+        "8",
+        "65",
+        "1",
+        "5",
+        "2",
+        "3",
+        "6",
+        "23",
+        "4",
+        "7",
+        "999",
+        "1000"
+      ],
+      permissionList: [
+        "每日要情",
+        "重大改革",
+        "文明共创",
+        "重点工程",
+        "环保攻坚",
+        "经济运行",
+        "三大产业",
+        "招商引资",
+        "能源革命",
+        "热点问题",
+        "热点事件",
+        "工作效能",
+        "教育服务",
+        "12345",
+        "就业服务",
+        "行政审批",
+        "行政监督",
+        "全域旅游",
+        "游客画像",
+        "非遗保护",
+        "远程调度",
+        "城区",
+        "泽州县",
+        "高平市",
+        "阳城县",
+        "沁水县",
+        "陵川县",
+        "综合信息",
+        "13710督办",
+        "一键直连",
+        "市长热线",
+        "区县直通"
+      ]
+      // permissionList: []
     };
   },
-  mounted() {
+  created() {
     var context = this;
     context.getCuruserid();
+  },
+  mounted() {
+
+     
   },
   methods: {
     godetile: function(index, idValue) {
@@ -398,6 +419,26 @@ export default {
           this.$toast("部署中");
           isUploadLog = false;
           break;
+        case 999:
+          this.$router.push({
+            path: "/yqdata/yqdata",
+              name: 'yqdataVue',
+            params: {
+              entity: "https://m.carelink.cn/activity/epidemic/yqdt_jd.html?ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends&from=singlemessage&isappinstalled=0"
+            }
+          });
+          isUploadLog = false;
+          break;
+        case 1000:
+          this.$router.push({
+            path: "/yqdata/yqdata",
+              name: 'yqdataVue',
+            params: {
+              entity: "https://m.carelink.cn/activity/epidemic/ssbb_jd.html?ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends&from=singlemessage&isappinstalled=0"
+            }
+          });
+          isUploadLog = false;
+          break;
         default:
           this.$toast("功能开发中");
           isUploadLog = false;
@@ -446,6 +487,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == "1") {
+            
           }
         })
         .catch(err => {

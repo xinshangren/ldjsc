@@ -151,10 +151,7 @@ export const echarsEnti = {
 		barWidth: 30, //柱子宽度
 		itemStyle: {
 			normal: {
-				color: function(params) {
-					var colorList = ['#E3F2FF'];
-					return colorList[params.dataIndex]
-				}
+				color:'#E3F2FF'
 			}
 		},
 		barGap: '-80%',

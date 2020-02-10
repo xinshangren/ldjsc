@@ -5,7 +5,8 @@ Vue.use(Vuex);
  
 const store = new Vuex.Store({
     state: {
-        LOADING: false
+        LOADING: false,
+        BIGLOADING:false
     },
     mutations: {
         showLoading(state){
@@ -13,6 +14,12 @@ const store = new Vuex.Store({
         },
         hideLoading (state) {
             state.LOADING = false
+        },
+        showLoadingBig(state){
+            state.BIGLOADING = true    
+        },
+        hideLoadingBig(state) {
+            state.BIGLOADING = false
         }
     }
 })

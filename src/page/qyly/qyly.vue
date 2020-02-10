@@ -1,101 +1,115 @@
 <template>
-  <div class="body-container" @click="closeState">
-    <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;">
-      <img :src="img1" style="width:150px;height:56px;margin:auto auto;" @click="changeState(1)" />
-      <img :src="img2" style="width: 150px;height:56px;margin:auto auto;" @click="changeState(2)" />
-    </div>
-    <van-sticky :offset-top="111">
-      <div v-if="state==1" style="position: relative;">
-        <van-tabs
-          v-model="active"
-          :ellipsis="false"
-          line-width="25%"
-          @click="jqTab_select"
-          style="font-size: 14px;"
-          color="#2796e7"
-          title-inactive-color="#999999"
-          title-active-color="#2796e7"
-        >
-          <van-tab title="站位标识"></van-tab>
-
-          <van-tab title="站位标识"></van-tab>
-          <van-tab title="景区概况"></van-tab>
-          <van-tab title="景区列表"></van-tab>
-          <van-tab title="景区介绍"></van-tab>
-        </van-tabs>
-        <div id="topselect"
-          @click="showState()"
-          style="position:absolute; top: 0;left: 0; width: 38%;display: flex;height: 44px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;"
-        >
-          <img
-            style="height: 25px; margin-top: 6px;margin-left: 15px;"
-            src="../../assets/img/icon-jq2.png"
-          />
-          <div style="font-size: 14px;line-height: 40px;">景 区</div>
-          <img
-            style="height: 14px;margin-top: 14px;margin-left: 20px"
-            src="../../assets/img/air_home_tab_arrow.png"
-          />
-        </div>
-      </div>
-    </van-sticky>
-    <van-sticky :offset-top="101">
-      <div v-if="state==2" style="position: relative;">
-        <van-tabs
-          v-model="active"
-          :ellipsis="false"
-          line-width="25%"
-          style="font-size: 14px;"
-          color="#2796e7"
-          @click="jqTab_select"
-          title-inactive-color="#999999"
-          title-active-color="#2796e7"
-        >
-          <van-tab title="站位标识"></van-tab>
-
-          <van-tab title="示范村概况"></van-tab>
-
-          <van-tab title="示范村列表"></van-tab>
-        </van-tabs>
-
-        <div id="topselect"
-          @click="showState()"
-          style="position: absolute;top:0;left: 0; width: 33%;display: flex;height: 44px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;"
-        >
-          <img
-            style="height: 25px; margin-top: 6px;margin-left: 15px;"
-            src="../../assets/img/icon-sfc2.png"
-          />
-          <div style="font-size: 14px;line-height: 40px;">示范村</div>
-          <img
-            style="height: 14px;margin-top: 14px;margin-left: 20px"
-            src="../../assets/img/air_home_tab_arrow.png"
-          />
-        </div>
-      </div>
-    </van-sticky>
-
-    <div :is="currentView"></div>
-    <div id="topselectTip"
-      v-show="show"
-      :style="topselectstyle"
+  <div>
+    <div
+      id="qcbutton"
+      style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;padding-top:8px;"
     >
-      <div
-        @click="changeState(1)"
-        style="display: flex;height: 44px;background: #ffffff;border-bottom: 1px #f3f3f3 solid;"
-      >
-        <img
-          style="height: 25px; margin-top: 6px;margin-left: 15px;"
-          src="../../assets/img/icon-jq2.png"
-        />
-        <div style="font-size: 14px;line-height: 40px;margin-left: 5px;">景 区</div>
-      </div>
-      <div @click="changeState(2)" style="display: flex;height: 44px;background: #ffffff;">
-        <img
-          style="height: 25px; margin-top: 6px;margin-left: 15px;"
-          src="../../assets/img/icon-sfc2.png"
-        />
-        <div style="font-size: 14px;line-height: 40px;margin-left: 5px;">示范村</div>
+      <div class="body-container" @click="closeState">
+        <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;">
+          <img
+            :src="img1"
+            style="width:150px;height:56px;margin:auto auto;"
+            @click="changeState(1)"
+          />
+          <img
+            :src="img2"
+            style="width: 150px;height:56px;margin:auto auto;"
+            @click="changeState(2)"
+          />
+        </div>
+        <van-sticky :offset-top="111">
+          <div v-if="state==1" style="position: relative;">
+            <van-tabs
+              v-model="active"
+              :ellipsis="false"
+              line-width="25%"
+              @click="jqTab_select"
+              style="font-size: 14px;"
+              color="#2796e7"
+              title-inactive-color="#999999"
+              title-active-color="#2796e7"
+            >
+              <van-tab title="站位标识"></van-tab>
+
+              <van-tab title="站位标识"></van-tab>
+              <van-tab title="景区概况"></van-tab>
+              <van-tab title="景区列表"></van-tab>
+              <van-tab title="景区介绍"></van-tab>
+            </van-tabs>
+            <div
+              id="topselect"
+              @click="showState()"
+              style="position:absolute; top: 0;left: 0; width: 38%;display: flex;height: 44px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;"
+            >
+              <img
+                style="height: 25px; margin-top: 6px;margin-left: 15px;"
+                src="../../assets/img/icon-jq2.png"
+              />
+              <div style="font-size: 14px;line-height: 40px;">景 区</div>
+              <img
+                style="height: 14px;margin-top: 14px;margin-left: 20px"
+                src="../../assets/img/air_home_tab_arrow.png"
+              />
+            </div>
+          </div>
+        </van-sticky>
+        <van-sticky :offset-top="101">
+          <div v-if="state==2" style="position: relative;">
+            <van-tabs
+              v-model="active"
+              :ellipsis="false"
+              line-width="25%"
+              style="font-size: 14px;"
+              color="#2796e7"
+              @click="jqTab_select"
+              title-inactive-color="#999999"
+              title-active-color="#2796e7"
+            >
+              <van-tab title="站位标识"></van-tab>
+
+              <van-tab title="示范村概况"></van-tab>
+
+              <van-tab title="示范村列表"></van-tab>
+            </van-tabs>
+
+            <div
+              id="topselect"
+              @click="showState()"
+              style="position: absolute;top:0;left: 0; width: 33%;display: flex;height: 44px;background: #ffffff;border-right: 1px solid #f3f3f3;margin-top: 1px;"
+            >
+              <img
+                style="height: 25px; margin-top: 6px;margin-left: 15px;"
+                src="../../assets/img/icon-sfc2.png"
+              />
+              <div style="font-size: 14px;line-height: 40px;">示范村</div>
+              <img
+                style="height: 14px;margin-top: 14px;margin-left: 20px"
+                src="../../assets/img/air_home_tab_arrow.png"
+              />
+            </div>
+          </div>
+        </van-sticky>
+
+        <div :is="currentView"></div>
+        <div id="topselectTip" v-show="show" :style="topselectstyle">
+          <div
+            @click="changeState(1)"
+            style="display: flex;height: 44px;background: #ffffff;border-bottom: 1px #f3f3f3 solid;"
+          >
+            <img
+              style="height: 25px; margin-top: 6px;margin-left: 15px;"
+              src="../../assets/img/icon-jq2.png"
+            />
+            <div style="font-size: 14px;line-height: 40px;margin-left: 5px;">景 区</div>
+          </div>
+          <div @click="changeState(2)" style="display: flex;height: 44px;background: #ffffff;">
+            <img
+              style="height: 25px; margin-top: 6px;margin-left: 15px;"
+              src="../../assets/img/icon-sfc2.png"
+            />
+            <div style="font-size: 14px;line-height: 40px;margin-left: 5px;">示范村</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -119,13 +133,13 @@ export default {
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F7F7F7");
-//     document.addEventListener('click',function(e){
-//               if(e.target.className != 'topselect'){
-//                     document.getElementById("topselectlist").style.display="none"
-//               }else{
-//                     document.getElementById("topselectlist").style.display="block"
-//               }
-//             })
+    //     document.addEventListener('click',function(e){
+    //               if(e.target.className != 'topselect'){
+    //                     document.getElementById("topselectlist").style.display="none"
+    //               }else{
+    //                     document.getElementById("topselectlist").style.display="block"
+    //               }
+    //             })
   },
   activated() {
     //返回保留页面记录
@@ -154,14 +168,14 @@ export default {
       active: 2,
       dataArrList: ["0", "0", "0", "0", "0", "0"],
       dataTime: [],
-      topselectstyle:{
+      topselectstyle: {
         position: "absolute",
-        top:"120px",
-        left:"10px",
+        top: "120px",
+        left: "10px",
         width: "30%",
-        "box-shadow":"2px 2px #f3f3f3",
+        "box-shadow": "2px 2px #f3f3f3",
         border: "1px #f3f3f3 solid",
-        "z-index":999999
+        "z-index": 999999
       }
     };
   },
@@ -173,7 +187,7 @@ export default {
       "景区"
     );
     this.handleScroll();
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
     //获取记录日志的logid
@@ -245,24 +259,28 @@ export default {
       this.show = true;
     },
     closeState(event) {
-      var myPanel = document.getElementById('topselect')// 得到点击出现的节点
+      var myPanel = document.getElementById("topselect"); // 得到点击出现的节点
       console.log(myPanel);
       if (myPanel) {
-        if (!(myPanel.contains(event.target))) { // 这句是说如果我们点击到了id为myPanel以外的区域，为false
-          this.show = false// 消失
+        if (!myPanel.contains(event.target)) {
+          // 这句是说如果我们点击到了id为myPanel以外的区域，为false
+          this.show = false; // 消失
         }
       }
     },
-    handleScroll:function(){
-      var top = document.body.scrollTop || document.documentElement.scrollTop || window.pageXOffset;
-      if(top>=56){
-        this.topselectstyle.top='112px'
-        this.topselectstyle.position='fixed'
-      }else{
-        this.topselectstyle.top='155px'
-        this.topselectstyle.position='absolute'
+    handleScroll: function() {
+      var top =
+        document.body.scrollTop ||
+        document.documentElement.scrollTop ||
+        window.pageXOffset;
+      if (top >= 56) {
+        this.topselectstyle.top = "112px";
+        this.topselectstyle.position = "fixed";
+      } else {
+        this.topselectstyle.top = "155px";
+        this.topselectstyle.position = "absolute";
       }
-		  console.log(top)
+      console.log(top);
     },
     changeState: function(state) {
       this.state = state;
@@ -337,5 +355,7 @@ export default {
 </script>
 
 <style socped>
-.body-container{height:100%}
+.body-container {
+  height: 100%;
+}
 </style>

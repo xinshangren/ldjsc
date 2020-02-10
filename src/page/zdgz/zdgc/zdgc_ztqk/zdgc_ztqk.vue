@@ -247,7 +247,7 @@ export default {
     getThreeEchars: function(echarts, value, data) {
       // this.$store.commit('showLoading');//加载loading
       //this.$store.commit('hideLoading');//解除loading
-      echarsEnti.createEcharsThree(echarts, value, data);
+      echarsEnti.createEcharsThree(echarts, value, data,this.nowYear);
     },
     upYearClick: function() {
       this.nowYear = parseInt(this.nowYear) - 1 + "";

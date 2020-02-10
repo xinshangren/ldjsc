@@ -1,6 +1,6 @@
 //获取第1个图表
 export const echarsEnti = {
-  createEcharsOne: function (echarts, value, dataEntity) {
+  createEcharsOne: function (echarts, value, dataEntity,gkdateselect) {
     const myCharts = echarts.init(value);
 
     var data = [];
@@ -127,6 +127,9 @@ export const echarsEnti = {
       }]
     };
     myCharts.setOption(option);
+    myCharts.on('click',function(params){
+      // gkdateselect.style.display="none";
+  });
   },
   createEcharsTwo: function (echarts, value, dataEntity) {
     const myCharts = echarts.init(value);

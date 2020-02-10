@@ -125,7 +125,7 @@ export const echarsEnti = {
     };
     myCharts.setOption(option);
   },
-  createEcharsThree: function (echarts, value, dataentity) {
+  createEcharsThree: function (echarts, value, dataentity,year) {
     const myCharts = echarts.init(value);
     var dataXname = dataentity.axisX;
     var axisY = dataentity.axisY;
@@ -135,6 +135,15 @@ export const echarsEnti = {
         trigger: 'axis',
         axisPointer: { // 坐标轴指示器，坐标轴触发有效
           type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+        }, formatter: function (paramss) {
+          var params=paramss[0];
+          console.log(params);
+          // var color = params.color;//图例颜色
+          var htmlStr = '';
+          htmlStr += year+"-"+params.name + '<br/>';//x轴的名称
+          htmlStr += params.seriesName + '：' + params.value + '个';
+
+          return htmlStr;
         }
       },
       grid: {
@@ -202,7 +211,7 @@ export const echarsEnti = {
         axisLabel: {}
       }],
       series: [{
-        name: '生产总值',
+        name: '问题数量',
         type: 'bar',
         barWidth: '17px',
         yAxisIndex: "0",

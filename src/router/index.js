@@ -48,6 +48,7 @@ import cq_dingbanVue from '@/page/qxztc/cq/cq_dingban.vue'
 import cq_dingbanDetailVue from '@/page/qxztc/cq/cq_dingbanDetail.vue'
 import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDealiFj.vue'
 import qxtz_newVue from '@/page/main/qxtz_new.vue'
+import yqdataVue from '@/page/yqdata/yqdata.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -176,7 +177,8 @@ export default new Router({
     },{
       path: '/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali',
       name: 'zdgc_xmdeali',
-      component: zdgc_xmdealiVue
+      component: zdgc_xmdealiVue,
+      meta:{keepAlive:false}
     }, {
       path: '/zdgz/zdgc/zdgc_czwt/zdgc_czwt_dali/zdgc_czwt_deali',
       name: 'zdgc_czwt_deali',
@@ -254,6 +256,12 @@ export default new Router({
       path: '/dingban/gqxwsj',
       name: 'gqxwsj',
       component: gqxwsjVue
+    },{
+      path: '/yqdata/yqdata',
+      name: 'yqdataVue',
+      component: yqdataVue
     }
+
+    
   ]
 })
