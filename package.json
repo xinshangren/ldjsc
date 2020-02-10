@@ -15,7 +15,6 @@
     "dingtalk-jsapi": "^2.8.33",
     "echarts": "^4.5.0",
     "eruda": "^2.0.1",
-    "js-audio-recorder": "^1.0.1",
     "mescroll.js": "^1.4.1",
     "postcss-pxtorem": "^4.0.1",
     "react-html5video": "^2.5.1",

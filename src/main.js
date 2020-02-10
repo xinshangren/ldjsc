@@ -19,7 +19,7 @@ import router from './router'
 Vue.prototype.GLOBAL=global_
 Vue.config.productionTip = false
 Vue.use(Vant);
-// eruda.init();
+eruda.init();
 // const vConsole = new Vconsole();
 // Vue.use(vConsole)
 /* eslint-disable no-new */
