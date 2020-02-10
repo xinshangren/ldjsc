@@ -256,7 +256,8 @@
                 corpId: ddd, //企业id
                 onSuccess: function () { },
                 onFail: function (e) {
-                  alert("打电话错误" + JSON.stringify(e));
+                  console.log(e);
+                  this.$toast("钉钉资源不足，请稍后再试");
                 }
               });
             });
