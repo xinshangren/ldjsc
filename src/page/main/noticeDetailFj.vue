@@ -1,19 +1,7 @@
 <template>
   <div style="margin-top:54px;background:#ffffff;">
     <div :style="backgroundDiv" style="width: 92%;padding: 2% 4% 2% 4%;background-size: 100% 100%;">
-      <div id="pmJjdivid" style="width:100%;font-size:15px;" v-html="itemEnti.content"></div>
-      <div
-        v-if="fileListnew.length>0"
-        style="font-size: 15px;margin-left: 10px;color: #666666;"
-      >附件查看:</div>
-      <div v-for="(item,index) of fileListnew" :key="index">
-        <div style="height: 31px;line-height: 14px;">
-          <span
-            @click="openFj(item)"
-            style="font-size: 15px;margin-left: 10px;color: #3098FB;border-bottom: 1px solid #3098FB;width: auto;"
-          >{{item.tSAttachmentName}}</span>
-        </div>
-      </div>
+      <div id="pmJjdivid" style="width:100%;font-size:15px;" v-html="itemEnti.html"></div>
     </div>
   </div>
 </template>
@@ -29,9 +17,9 @@ export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
   },
-  name: "zdgz_mryqVue",
+  name: "mryqDealiFjVue",
   data() {
-    return {
+    return { 
       list: [],
       itemEnti: {},
       fileList: [],
@@ -44,37 +32,17 @@ export default {
   },
   mounted() {
     this.itemEnti = this.$route.params.entity;
-    console.log(this.itemEnti)
-    this.fileList = this.itemEnti.fileList;
-    this.fileListnew = [];
-    this.fileListnew = this.fileList;
-    for (var i = 0; i < this.fileList.length; i++) {
-      var url = this.fileList[i].url;
-      var index = url.lastIndexOf(".");
-      var changeUrl = url.substring(index + 1, url.length);
-      // console.log(changeUrl);
-      var tSAttachmentName = this.fileList[i].tSAttachmentName;
-      if (tSAttachmentName.indexOf(".") == -1) {
-        this.fileListnew[i].tSAttachmentName =
-          tSAttachmentName + "." + changeUrl;
-      }
-    }
-
-    //console.log(this.itemEnti);
+    console.log(this.itemEnti);
     $("#pmJjdivid p").each(function() {
       $(this).attr("style", "font-size:15px;");
+    });
+    $("#pmJjdivid img").each(function() {
+      $(this).attr("style", "width:100%;");
     });
   },
   methods: {
     openFj: function(item) {
       console.log(item);
-       this.$router.push({
-        path: "/main/noticeDetailFj",
-        name: "noticeDetailFj",
-        params: {
-          entity: item
-        }
-      });
     },
     //获取记录日志的logid
     doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
@@ -95,10 +63,19 @@ export default {
           // this.$toast(err);
         });
     },
+    goDetile(item) {
+      this.$router.push({
+        path: "/toutiao/newsdetile",
+        name: "newsdetile",
+        params: {
+          articleId: id
+        }
+      });
+    }
   }
 };
 </script>
 
 <style >
-@import "../../page/zdgz/mryq/mryqDeali/mryqDeali.css";
+@import "../zdgz/mryq/mryqDeali/mryqDealiFj/mryqDealiFj.css";
 </style>

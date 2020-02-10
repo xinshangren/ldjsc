@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top:54px;">
     <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
-      <div id="newsList" style="padding-left:10px;padding-right:10px;margin-top:10px;">
+      <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
           style="position: relative;padding: 10px;border-bottom: 1px solid #EFEFEF; background: #ffffff;height: 80px;"
           v-for="(item,index) of list"
@@ -10,7 +10,7 @@
         >
           <div style="color: #333333;font-size: 16px;width: 100%; overflow: hidden;">{{item.title}}</div>
 
-          <div style="display:flex;margin-top:13px;">
+          <div style="display:flex;margin-top:13px;position: absolute; width: 95%;bottom: 17px;">
             <div style="font-size:15px;">来源:{{item.source}}</div>
             <div
               style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 5px;line-height: 13px;vertical-align: middle; margin-top: 5px;"
@@ -167,7 +167,7 @@ export default {
     goDetile(item) {
       this.$router.push({
         path: "/main/noticeDetail",
-        name: "noticeDetailVue",
+        name: "noticeDetail",
         params: {
           entity: item
         }

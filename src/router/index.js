@@ -4,6 +4,7 @@ import homeVue from '@/page/main/home.vue'
 import dingbanVue from '@/page/main/dingban.vue'
 import noticeVue from '@/page/main/notice.vue'
 import noticeDetailVue from '@/page/main/noticeDetail.vue'
+import noticeDetailFjVue from '@/page/main/noticeDetailFj.vue'
 import headlineVue from '@/page/main/headline.vue'
 import picsnewsVue from '@/page/toutiao/picsnews.vue'
 import mljcVue from '@/page/toutiao/mljc.vue'
@@ -80,6 +81,10 @@ export default new Router({
       path: 'main/noticeDetail',
       name: 'noticeDetail',
       component: noticeDetailVue
+    },{
+      path: 'main/noticeDetailFj',
+      name: 'noticeDetailFj',
+      component: noticeDetailFjVue
     },{
       path: '/toutiao/picsnews',
       name: 'picsnews',
