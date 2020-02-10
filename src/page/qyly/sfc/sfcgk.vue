@@ -15,7 +15,7 @@
       style="display: flex;line-height: 16px;vertical-align: bottom;margin-left: 20px;height: 50px;border-bottom: 1px #c6c6c6 solid;margin-right: 10px;">
       <div
         style="margin-top: 15px;color: #333333;font-size: 12px;border-left: 2px #3ca1ec solid;height:16px;padding-left: 20px;">
-        接待游客数TOP10</div>
+        接待游客数(人次)TOP10</div>
     </div>
     <div ref="myCharts2" style=" height:300px;margin-bottom:10px;"></div>
    

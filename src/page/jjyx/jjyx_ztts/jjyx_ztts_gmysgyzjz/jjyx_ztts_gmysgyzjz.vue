@@ -9,8 +9,8 @@
           src="../../../../assets/img/data_icon2.png"
         />
         <div>
-          <div style="display:flex;">
-            <div>{{totalData[1].rate}}</div>
+          <div style="display:flex;font-size:20px;">
+            <div style="color:#ffd06b;">{{totalData[1].rate}}</div>
             <div>%</div>
             <img
               v-if="totalData[1].rate>0||totalData[1].rate==0"
@@ -33,8 +33,8 @@
           src="../../../../assets/img/data_icon3.png"
         />
         <div>
-          <div style="display:flex;">
-            <div>{{totalData[0].rate}}</div>
+          <div style="display:flex;font-size:20px;">
+            <div style="color:#ff7550;">{{totalData[0].rate}}</div>
             <div>%</div>
             <img
               v-if="totalData[0].rate>0||totalData[0].rate==0"

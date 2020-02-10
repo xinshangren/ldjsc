@@ -23,8 +23,8 @@
           src="../../../../assets/img/data_icon2.png"
         />
         <div>
-          <div style="display:flex;">
-            <div>{{totalData.yonydata}}</div>
+          <div style="display:flex;font-size:20px;">
+            <div style="color:#ffd06b">{{totalData.yonydata}}</div>
             <div>%</div>
             <img
               v-if="totalData.yonydata>0||totalData.yonydata==0"

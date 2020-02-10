@@ -17,7 +17,7 @@
       <div class="ui-row-flex ui-whitespace" style="margin-top:13px;">
         <div class="ui-col ui-col" @click="changeList(1)">
           <div style="height:2px;width:76%;background:#2796e7;margin:0 auto;"></div>
-          <div style="display:flex;margin-top:8px;font-size:14px;">
+          <div :style="flag==1?'border-top:1px solid #2796e7;border-left:1px solid #2796e7;border-right:1px solid #2796e7;border-radius:5px 5px 0 0;':''" style="display:flex;margin-top:8px;font-size:14px; ">
             <div style="width:35%;text-align:right;">
               <img
                 style="height: 17px;margin-top: 3px;"
@@ -26,14 +26,13 @@
             </div>
             <div style="width:60%;color: #666666;font-size: 14px;">网格长</div>
           </div>
-          <div style="display:flex;line-height:20px;">
-            <div style="color:#2796e7;font-size:17px;width:50%;text-align:right;">{{leaderCount}}</div>
-            <div style="color:#333333;font-size:13px;width:50%;">名</div>
+          <div :style="flag==1?'border-bottom:1px solid #2796e7;border-left:1px solid #2796e7;border-right:1px solid #2796e7;border-radius:0 0 5px 5px;':''" style="display:flex;line-height:20px;">
+            <div style="color:#2796e7;font-size:17px;width:100%;text-align:center;">{{leaderCount}}<span style="font-size:13px;color:black">名</span></div>
           </div>
         </div>
         <div class="ui-col ui-col" @click="changeList(2)">
           <div style="height:2px;width:76%;background:#13dbe8;margin:0 auto;"></div>
-          <div style="display:flex;margin-top:8px;font-size:14px;">
+          <div :style="flag==2?'border-top:1px solid #13dbe8;border-left:1px solid #13dbe8;border-right:1px solid #13dbe8;border-radius:5px 5px 0 0;':''" style="display:flex;margin-top:8px;font-size:14px;">
             <div style="width:35%;text-align:right;">
               <img
                 style="height: 17px;margin-top: 3px;"
@@ -42,9 +41,8 @@
             </div>
             <div style="width:60%;color: #666666;font-size: 14px;">网格员</div>
           </div>
-          <div style="display:flex;line-height:20px;">
-            <div style="color:#13dbe8;font-size:17px;width:50%;text-align:right;">{{personCount}}</div>
-            <div style="color:#333333;font-size:13px;width:50%;">名</div>
+          <div :style="flag==2?'border-bottom:1px solid #13dbe8;border-left:1px solid #13dbe8;border-right:1px solid #13dbe8;border-radius:0 0 5px 5px;':''" style="display:flex;line-height:20px;">
+            <div style="color:#13dbe8;font-size:17px;width:100%;text-align:center;">{{personCount}}<span style="font-size:13px;color:black">名</span></div>
           </div>
         </div>
         <div class="ui-col ui-col">
@@ -59,8 +57,7 @@
             <div style="width:60%;color: #666666;font-size: 14px;">网格</div>
           </div>
           <div style="display:flex;line-height:20px;">
-            <div style="color:#fab01b;font-size:17px;width:50%;text-align:right;">{{gridCount}}</div>
-            <div style="color:#333333;font-size:13px;width:50%;">个</div>
+            <div style="color:#fab01b;font-size:17px;width:100%;text-align:center;">{{gridCount}}<span style="font-size:13px;color:black">个</span></div>
           </div>
         </div>
         <div class="ui-col ui-col">
@@ -75,8 +72,7 @@
             <div style="width:60%;color: #666666;font-size: 14px;">污染源</div>
           </div>
           <div style="display:flex;line-height:20px;">
-            <div style="color:#fc621f;font-size:17px;width:50%;text-align:right;">{{sourceCount}}</div>
-            <div style="color:#333333;font-size:13px;width:50%;">家</div>
+            <div style="color:#fc621f;font-size:17px;width:100%;text-align:center;">{{sourceCount}}<span style="font-size:13px;color:black">家</span></div>
           </div>
         </div>
       </div>

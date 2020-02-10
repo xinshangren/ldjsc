@@ -39,7 +39,7 @@ export const echarsEnti = {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
       },
-      color: ['#3ca1ec', '#33d1f8', '#3ECBB2', '#FAAD14', '#D7FA14', 'F65454'],
+      color: ['#3ca1ec', '#33d1f8', '#3ECBB2', '#FAAD14', '#D7FA14', '#F65454'],
       legend: {
         itemHeight: 8,
         itemWidth: 8,
