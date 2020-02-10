@@ -66,11 +66,7 @@
       style=" display:none;background: rgb(255, 255, 255);top: 156px;position: fixed;z-index: 99;box-shadow: 5px 1px 1px 2px #f3f3f3;"
     >
       <!-- <div style="padding-top:9px;font-size: 14px;margin-left:17px;">进度分类</div> -->
-      <ul
-        id="jdflDialogId"
-        class="ui-row"
-        style="margin-top: 11px;margin-bottom:12px;"
-      >
+      <ul id="jdflDialogId" class="ui-row" style="margin-top: 11px;margin-bottom:12px;">
         <li id="0" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">完成概况</li>
         <li id="1" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">GDP</li>
         <li id="2" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">固定资产投资</li>
@@ -84,12 +80,13 @@
     </div>
     <div style="margin-top:46px;z-index: -1;overflow: auto;">
       <div
+      id="childId"
         :is="currentView"
         @changeTime="changeTime"
         ref="child1"
         :getChild="nowYear"
         :getChildMax="maxDate"
-       style="font-size:15px;"
+        style="font-size:15px;"
       ></div>
       <!-- <child1 v-show="active=='0'" @changeTime="changeTime" ref="child1" :getChild="nowYear" :getChildMax="maxDate"></child1>
 
@@ -246,6 +243,15 @@ export default {
     },
     //空气子选项卡选择
     smallTab_select: function(name, title) {
+      var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+      // console.log(scrollTop);
+      document.documentElement.scrollTop=0;
+      // let dom = document.getElementById("childId");
+      // if (dom != null) {
+      //   if (dom.scrollTop > 0) {
+      //     dom.scrollTop = 0;
+      //   }
+      // }
       console.log(name, title);
       switch (name) {
         case 0:
@@ -364,7 +370,7 @@ export default {
       if (parseInt(month) < 10) {
         month = "0" + month;
       }
-      if((year<minYear)||(year == minYear&&month < minMonth)){
+      if (year < minYear || (year == minYear && month < minMonth)) {
         this.$toast("前一年没有数据");
         return;
       }
