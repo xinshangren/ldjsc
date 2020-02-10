@@ -360,10 +360,7 @@ export const echarsEnti = {
       barWidth: 20, //柱子宽度
       itemStyle: {
         normal: {
-          color: function (params) {
-            var colorList = ['#EEEEEE'];
-            return colorList[params.dataIndex]
-          }
+          color:'#f1f1f1'
         }
       },
       barGap: '-80%',

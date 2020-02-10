@@ -114,7 +114,8 @@
           </div>
           <div class="ui-col ui-col" style="text-align: center;">{{item.dy_index}}</div>
           <div class="ui-col ui-col" style="text-align: center;display: flex;">
-            <div style="color: red;margin-left: 2px;">{{item.dy_yony}}%</div>
+            <div v-if="item.dy_yony>=1000" style="color: red;margin-left: 2px;font-size:11px;">{{item.dy_yony}}%</div>
+            <div v-if="item.dy_yony<1000" style="color: red;margin-left: 2px;">{{item.dy_yony}}%</div>
             <img
               v-if="item.dy_yony>=0"
               style="height: 15px;margin-top: 13px;margin:auto;"

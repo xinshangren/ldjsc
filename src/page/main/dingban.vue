@@ -7,7 +7,7 @@
         <child5 @getWorkGroupList="getWorkGroupList"></child5>
       </van-tab>-->
       <van-tab title="市委常委" id="8a8180c9700ff44e01701014c9940006">
-        <child1 v-on:addPhone="addPhone" :callPhoneList_p="callPhoneList"></child1>
+        <child1 v-on:addPhone="addPhone" :callPhoneList_p="callPhoneList" ></child1>
       </van-tab>
 
       <van-tab title="市政府" id="8a8180c9700ff44e01701015295f0008">

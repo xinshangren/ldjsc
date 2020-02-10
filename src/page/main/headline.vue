@@ -35,6 +35,7 @@ import child4 from "@/page/toutiao/mljc.vue";
 import { httpMethod } from "../../api/getData.js";
 import global_variable from "../../api/global_variable.js";
 export default {
+  
   name: "headline",
   data() {
     return {

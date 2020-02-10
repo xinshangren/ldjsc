@@ -46,6 +46,8 @@ export default {
         require("@/assets/img/icon-nyts.png"),
         require("@/assets/img/icon-qxzt.png"),
         require("@/assets/img/icon-wmgc.png"),
+        require("@/assets/img/icon-zhxx.png"),
+        require("@/assets/img/icon-zhxx.png"),
         require("@/assets/img/icon-zhxx.png")
       ],
       tabNameList: [
@@ -58,9 +60,24 @@ export default {
         "能源革命",
         "区县直通",
         "文明共创",
-        "综合信息"
+        "综合信息",
+        "疫情地图",
+        "疫情数据"
       ],
-      tabIdList: ["8", "65", "1", "5", "2", "3", "6", "23", "4", "7"],
+      tabIdList: [
+        "8",
+        "65",
+        "1",
+        "5",
+        "2",
+        "3",
+        "6",
+        "23",
+        "4",
+        "7",
+        "999",
+        "1000"
+      ],
       permissionList: [
         "每日要情",
         "重大改革",
@@ -103,7 +120,8 @@ export default {
     context.getCuruserid();
   },
   mounted() {
-    //  this.$store.commit('showLoadingBig')
+
+     
   },
   methods: {
     godetile: function(index, idValue) {
@@ -401,6 +419,26 @@ export default {
           this.$toast("部署中");
           isUploadLog = false;
           break;
+        case 999:
+          this.$router.push({
+            path: "/yqdata/yqdata",
+              name: 'yqdataVue',
+            params: {
+              entity: "https://m.carelink.cn/activity/epidemic/yqdt_jd.html?ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends&from=singlemessage&isappinstalled=0"
+            }
+          });
+          isUploadLog = false;
+          break;
+        case 1000:
+          this.$router.push({
+            path: "/yqdata/yqdata",
+              name: 'yqdataVue',
+            params: {
+              entity: "https://m.carelink.cn/activity/epidemic/ssbb_jd.html?ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends&from=singlemessage&isappinstalled=0"
+            }
+          });
+          isUploadLog = false;
+          break;
         default:
           this.$toast("功能开发中");
           isUploadLog = false;
@@ -449,6 +487,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == "1") {
+            
           }
         })
         .catch(err => {
