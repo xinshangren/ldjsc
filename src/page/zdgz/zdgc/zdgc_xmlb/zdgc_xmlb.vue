@@ -4,7 +4,7 @@
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入重点工程项目名称" @search="onSearch" v-model="seach_value" />
       </form>
-      <img src="../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
+      <img @click="recorderStart()" src="../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
       <img
         src="../../../../assets/img/project_filtrate.png"
         style="height: 27px;margin-top: 10px;margin-left:5px;"
@@ -213,6 +213,7 @@ export default {
   name: "zdgc_xmlb_vue",
   data() {
     return {
+      recorder: null,
       activeClassUldy: -1,
       listZdgcType: [],
       listZdgcDyType: [],
@@ -248,27 +249,22 @@ export default {
   mounted() {
     this.getTypeList();
     this.getDyTypeList();
-    let recorder = new Recorder();
-    recorder.start();
-
-    setTimeout(() => {
-      recorder.stop();
-      recorder.downloadWAV();
-      this.$toast("录音结束");
-    }, 2000);
-    recorder.onprocess = function(duration) {
-      console.log(duration);
-    };
-    let dataArray = recorder.getRecordAnalyseData();
-    recorder.onprogress = function(params) {
-      console.log(params);
-      console.log("录音时长", params.duration);
-      console.log("已录音文件大小（字节）", params.fileSize);
-      console.log("录音音量百分比", params.vol);
-      console.log("当前录音的总数据", params.data);
-    };
+    this.recorder = new Recorder();
   },
   methods: {
+    recorderStart: function() {
+      this.recorder.start();
+      this.recorder.onprocess = function(duration) {
+        console.log(duration);
+      };
+      setTimeout(() => {
+        this.recorder.stop();
+        this.recorder.downloadWAV();
+        this.$toast("录音结束");
+        // let dataArray = this.recorder.getRecordAnalyseData();
+        // console.log(dataArray);
+      }, 2000);
+    },
     callPhone: function(phone, event) {
       window.location.href = "tel://" + phone;
       event.stopPropagation();
