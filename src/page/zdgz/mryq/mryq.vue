@@ -65,16 +65,17 @@ export default {
       }
     };
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteLeave(to, from, next) {
     console.log(from);
-    if (from.path != "/") {
-      if (to.path == "/zdgz/mryq/mryq") {
-        to.meta.keepAlive = true;
-      } else {
-        to.meta.keepAlive = false;
-      }
-    } else {
+    console.log(to);
+    if (from.name == "main") {
       to.meta.keepAlive = false;
+    } else {
+      if (from.name == "zdgz_mryqVue") {
+        if (to.name == "mryqDealiVue") {
+           to.meta.keepAlive = false;
+        } 
+      }
     }
     next();
   },

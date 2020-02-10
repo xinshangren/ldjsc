@@ -2,7 +2,7 @@
   <div>
     <div
       id="qcbutton"
-      style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;padding-top:8px;"
+      style="margin-top: 60px;"
     >
       <div class="body-container" @click="closeState">
         <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;">
