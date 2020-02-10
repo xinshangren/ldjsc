@@ -2,11 +2,7 @@
   <div style="margin-top:0px;overflow:hidden;">
     <div class="div_flex" style="background:#ffffff;height:49px;">
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
-      <van-search
-        placeholder="请输入重点工程项目名称"
-        @search="onSearch"
-        v-model="seach_value"
-      />
+        <van-search placeholder="请输入重点工程项目名称" @search="onSearch" v-model="seach_value" />
       </form>
       <img src="../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
       <img
@@ -20,7 +16,13 @@
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">0</div>
       <div style="width:48%;color:#1976d2;margin-top:6px;font-size:16px;">个</div>
     </div>
-    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" style="top:230px;">
+    <mescroll-vue
+      ref="mescroll"
+      :down="mescrollDown"
+      :up="mescrollUp"
+      @init="mescrollInit"
+      style="top:230px;"
+    >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
           v-for="(item,index) in list"
@@ -30,12 +32,12 @@
           @click="goDetile(item)"
         >
           <img
-              v-if="item.hasCamera=='1'"
-              @click="openApp(item,$event)"
-              style="height: 22px;position: absolute;right: 18px;top:29px;"
-              src="../../../../assets/img/details_camera.png"
-            />
-          <div  >
+            v-if="item.hasCamera=='1'"
+            @click="openApp(item,$event)"
+            style="height: 22px;position: absolute;right: 18px;top:29px;"
+            src="../../../../assets/img/details_camera.png"
+          />
+          <div>
             <div style="display:flex;">
               <div class="li_div_title">{{item.projectName}}</div>
               <img
@@ -89,9 +91,18 @@
               <div style="position: relative;margin-left:3px;">
                 <img style="height:15px;" src="../../../../assets/img/project_list_icon4.png" />
                 <div style="display: flex;position: absolute;top: 0px;left:23px;">
-                  <div v-if="item.rate!=undefined&&item.rate<51" style="font-size:13px;color:#FF4F26;">{{item.rate}}%</div>
-                    <div v-if="item.rate!=undefined&&item.rate>50&&item.rate< 76" style="font-size:13px;color:#FFB423;">{{item.rate}}%</div>
-                    <div v-if="item.rate!=undefined&&item.rate>75&&item.rate< 1000" style="font-size:13px;color:#01CC00;">{{item.rate}}%</div>
+                  <div
+                    v-if="item.rate!=undefined&&item.rate<51"
+                    style="font-size:13px;color:#FF4F26;"
+                  >{{item.rate}}%</div>
+                  <div
+                    v-if="item.rate!=undefined&&item.rate>50&&item.rate< 76"
+                    style="font-size:13px;color:#FFB423;"
+                  >{{item.rate}}%</div>
+                  <div
+                    v-if="item.rate!=undefined&&item.rate>75&&item.rate< 1000"
+                    style="font-size:13px;color:#01CC00;"
+                  >{{item.rate}}%</div>
                 </div>
               </div>
             </div>
@@ -105,14 +116,18 @@
                 src="../../../../assets/img/project_list_icon3.png"
               />
               <div style="font-size:13px;margin-left:6px;">{{item.chargeName}}</div>
-              <div style="position: absolute;right: 125px;" v-if="item.chargePhone!=''"  @click="callPhone(item.chargePhone,$event)">
+              <div
+                style="position: absolute;right: 125px;"
+                v-if="item.chargePhone!=''"
+                @click="callPhone(item.chargePhone,$event)"
+              >
                 <img style="height:14px;" src="../../../../assets/img/project_list_icon5.png" />
                 <div style="display: flex;position: absolute;top: 0px;left:23px;">
                   <div style="font-size:13px;color:#666666;">{{item.chargePhone}}</div>
                   <!-- <img
                     style="height:15px;margin-top:2px;margin-left:5px;"
                     src="../../../../assets/img/project_list_phone.png"
-                  /> -->
+                  />-->
                 </div>
               </div>
             </div>
@@ -181,15 +196,16 @@
 <script>
 import $ from "jquery";
 import MescrollVue from "mescroll.js/mescroll.vue";
-
+import Recorder from "js-audio-recorder";
 import echarts from "echarts";
 import { echarsEnti } from "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.js";
 import { httpMethod } from "../../../../api/getData.js";
 import Vue from "vue";
-import { Search, PullRefresh, Popup,Dialog } from "vant";
+import { Search, PullRefresh, Popup, Dialog } from "vant";
 Vue.use(Search)
   .use(PullRefresh)
-  .use(Popup).use(Dialog);
+  .use(Popup)
+  .use(Dialog);
 export default {
   components: {
     MescrollVue // 注册mescroll组件
@@ -232,10 +248,29 @@ export default {
   mounted() {
     this.getTypeList();
     this.getDyTypeList();
+    let recorder = new Recorder();
+    recorder.start();
+
+    setTimeout(() => {
+      recorder.stop();
+      recorder.downloadWAV();
+      this.$toast("录音结束");
+    }, 2000);
+    recorder.onprocess = function(duration) {
+      console.log(duration);
+    };
+    let dataArray = recorder.getRecordAnalyseData();
+    recorder.onprogress = function(params) {
+      console.log(params);
+      console.log("录音时长", params.duration);
+      console.log("已录音文件大小（字节）", params.fileSize);
+      console.log("录音音量百分比", params.vol);
+      console.log("当前录音的总数据", params.data);
+    };
   },
   methods: {
-    callPhone:function(phone,event){
-      window.location.href = "tel://"+phone;
+    callPhone: function(phone, event) {
+      window.location.href = "tel://" + phone;
       event.stopPropagation();
     },
     openApp: function(item, e) {
@@ -346,7 +381,7 @@ export default {
     },
     openPop: function() {
       //地域类型
-        $("#dylxDialogId li").off("click");
+      $("#dylxDialogId li").off("click");
       $("#dylxDialogId li").click(function(e) {
         $(this)
           .siblings("li")
@@ -360,7 +395,7 @@ export default {
         $(this).removeClass("dialogNoSelect");
         $(this).addClass("dialogSelect");
       });
-       $("#jdflDialogId li").off("click");
+      $("#jdflDialogId li").off("click");
       //选择进度类型
       $("#jdflDialogId li").click(function(e) {
         $(this)
@@ -375,7 +410,7 @@ export default {
         $(this).removeClass("dialogNoSelect");
         $(this).addClass("dialogSelect");
       });
-       $("#xmlxDialogId li").off("click");
+      $("#xmlxDialogId li").off("click");
       //选择项目类型
       $("#xmlxDialogId li").click(function(e) {
         if ($(this).hasClass("dialogSelect")) {

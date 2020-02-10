@@ -298,6 +298,7 @@ export default {
         .catch(err => {});
     },
     openPop: function() {
+       $("#xmlxDialogId li").off("click");
       //地域类型
       $("#xmlxDialogId li").click(function(e) {
         $(this)
@@ -312,6 +313,7 @@ export default {
         $(this).removeClass("dialogNoSelect");
         $(this).addClass("dialogSelect");
       });
+       $("#jdflDialogId li").off("click");
       //选择污染源类型
       $("#jdflDialogId li").click(function(e) {
         if ($(this).hasClass("dialogSelect")) {
