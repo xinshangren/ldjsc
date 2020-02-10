@@ -423,7 +423,10 @@ export const httpMethod = {
     getGroupInfo: function (params) {
         return get("dingTalkController.action?getGroupInfo", params);
     },
-
+    //获取公告信息
+    getCmsGG: function (params) {
+        return get("cmsAppInsideController.action?getCmsGG", params);
+    },
     
 
 

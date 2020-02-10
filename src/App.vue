@@ -67,7 +67,7 @@
         style="display:flex;background: #3098fb;height: 36px;	line-height:36px;border-top:1px solid #ffffff;"
       >
         <div class="index_gonggao_left"></div>
-        <div style="margin-left:7px;font-weight:600;">公告</div>
+        <div style="margin-left:7px;font-weight:600;" @click="goNotice">公告</div>
         <div style="margin-left:7px;">无</div>
       </div>
     </div>
@@ -135,6 +135,11 @@ export default {
       } else {
         this.$router.push("/");
       }
+    },
+    goNotice:function(){
+      this.$router.push({
+        path: "/main/notice"
+      });
     }
   },
   beforeCreate() {

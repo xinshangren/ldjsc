@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import homeVue from '@/page/main/home.vue'
 import dingbanVue from '@/page/main/dingban.vue'
+import noticeVue from '@/page/main/notice.vue'
+import noticeDetailVue from '@/page/main/noticeDetail.vue'
 import headlineVue from '@/page/main/headline.vue'
 import picsnewsVue from '@/page/toutiao/picsnews.vue'
 import mljcVue from '@/page/toutiao/mljc.vue'
@@ -70,8 +72,15 @@ export default new Router({
       path: '/main/headline',
       name: 'headline',
       component: headlineVue
-    }, 
-    {
+    }, {
+      path: '/main/notice',
+      name: 'notice',
+      component: noticeVue
+    },{
+      path: 'main/noticeDetail',
+      name: 'noticeDetail',
+      component: noticeDetailVue
+    },{
       path: '/toutiao/picsnews',
       name: 'picsnews',
       component: picsnewsVue
