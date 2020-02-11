@@ -128,7 +128,7 @@ export const echarsEnti = {
         axisPointer: {
           type: 'shadow'
         },
-        formatter: "{c} (人次)"
+        formatter: "{c} (万人次)"
       },
       grid: {
         top: '10%',
