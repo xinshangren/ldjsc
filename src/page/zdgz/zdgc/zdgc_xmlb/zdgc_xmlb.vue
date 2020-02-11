@@ -199,8 +199,14 @@
       <img style="height:74px;margin-top:32px;margin-left:16px;" :src="recordUrl9" />
       <div style="font-size: 18px;color: #ffffff;">{{countSize}}秒</div>
       <div style="display:flex;">
-        <div style="width:50%;font-size: 16px;color: #ffffff;text-align:center;">完成识别</div>
-        <div style="width:50%;font-size: 16px;color: #ffffff;text-align:center;">取消识别</div>
+        <div
+          @click="stopRecord(1)"
+          style="width:50%;font-size: 16px;color: #ffffff;text-align:center;"
+        >完成识别</div>
+        <div
+          @click="stopRecord(2)"
+          style="width:50%;font-size: 16px;color: #ffffff;text-align:center;"
+        >取消识别</div>
       </div>
     </div>
   </div>
@@ -228,6 +234,7 @@ export default {
     return {
       countSize: 5,
       imgIndex: "9",
+      mediaId: "",
       backgroundDiv: {
         background:
           'url("../../../../assets/img/project_filtrate.png") 28px 16px / 64px 104px no-repeat, url("../../../../assets/img/ic_record_ripple@2x-9.png") 111.2px 32px / 28.8px 88px no-repeat rgba(0, 0, 0, 0.7)'
@@ -276,16 +283,75 @@ export default {
       console.log("开始录音");
       dd.ready(function() {
         dd.device.audio.startRecord({
+          maxDuration: 5,
           onSuccess: function() {
             //支持最长为300秒（包括）的音频录制，默认60秒(包括)。
             console.log("开始录音成功");
           },
           onFail: function(err) {
-              var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
-              blackBoxSpeak.style.display = "none";
+            var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+            blackBoxSpeak.style.display = "none";
           }
         });
       });
+    },
+    stopRecord: function(flag) {
+      var self = this;
+      console.log("停止录音");
+      if (flag == 1) {
+        //完成识别
+        dd.ready(function() {
+          dd.device.audio.stopRecord({
+            onSuccess: function(res) {
+              console.log("停止录音成功");
+              console.log(res.mediaId);
+              console.log(res.duration);
+              self.mediaId = res.mediaId;
+              self.translateVoice(res.mediaId);
+            },
+            onFail: function(err) {}
+          });
+        });
+        var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+        blackBoxSpeak.style.display = "none";
+      } else {
+        var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+        blackBoxSpeak.style.display = "none";
+        //取消识别
+      }
+    },
+    //语音识别
+    translateVoice: function(mediaIds) {
+      var self = this;
+      dd.ready(function() {
+        dd.device.audio.translateVoice({
+          mediaId: mediaIds,
+          duration: 5.0,
+          onSuccess: function(res) {
+            // res.mediaId; // 转换的语音的mediaId
+            console.log(res.content);
+            self.seach_value = res.content; // 语音转换的文字内容
+          }
+        });
+      });
+    },
+    onRecordEnd: function() {
+      var self = this;
+      console.log("监听停止录音");
+      dd.ready(function() {
+        dd.device.audio.onRecordEnd({
+          onSuccess: function(res) {
+            console.log("监听停止录音成功");
+            console.log(res.mediaId);
+            console.log(res.duration);
+            self.mediaId = res.mediaId;
+            self.translateVoice(res.mediaId);
+          },
+          onFail: function(err) {}
+        });
+      });
+      var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+      blackBoxSpeak.style.display = "none";
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
@@ -360,9 +426,10 @@ export default {
       var timerJs = null; //用于倒计时60s
       //直接开启轮播模式
       var indexNum = 5;
-      this.setTimer(timer,timerJs,blackBoxSpeak,num,indexNum,index);
+      this.setTimer(timer, timerJs, blackBoxSpeak, num, indexNum, index);
       blackBoxSpeak.style.display = "block";
       this.startRecord();
+      this.onRecordEnd(); //监听是否
     },
     setTimer: function(timer, timerJs, blackBoxSpeak, num, indexNum, index) {
       var self = this;
