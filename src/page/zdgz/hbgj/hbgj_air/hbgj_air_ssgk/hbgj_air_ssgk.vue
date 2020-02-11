@@ -3,6 +3,7 @@
     overflow: auto;
 ">
     <div class="tianqi">
+      <div style="text-align:right;font-size:14px;color:#ccc">最新时间：<span id="updatetime"></span></div>
       <div id="indexaqi_value_id" class="ssgk_title1">0</div>
       <div style="display:flex;margin-top:0px;">
         <div class="ssgk_title1_div">AQI</div>

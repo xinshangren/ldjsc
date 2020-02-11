@@ -1,4 +1,12 @@
 export const hbgjAirJs = {
+    changeTime(time){
+            var commonTime = "";
+            if(time){
+                var unixTimestamp = new Date(time*1) ;
+                commonTime = unixTimestamp.toLocaleString();
+            }
+             return commonTime;
+        },
     //显示顶部数据
     showTopTip: function (res, list) {
         var dataPollutant = res.data.dataPollutant;//首要污染物
@@ -7,6 +15,7 @@ export const hbgjAirJs = {
         $("#fldj_id").html(res.data.dataWindDirection + "&nbsp;" + res.data.dataWindLevel);
        
         var dataAqi = res.data.dataAqi;
+        $("#updatetime").html(this.changeTime(res.data.dataUpdatetime));
         $("#indexaqi_value_id").html(dataAqi);
         var levelCodeIndex = "";
         for (var i = 0; i < list.length; i++) {
