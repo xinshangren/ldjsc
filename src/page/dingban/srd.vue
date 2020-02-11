@@ -18,7 +18,9 @@
         @click="all_pick"
       />
       <div style="font-size: 14px;margin: 5px 0px 5px 12px;">全选</div>
-      <div style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)">（{{callPhoneList.length}}/{{list.length}}）</div>
+      <div
+        style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)"
+      >（{{callPhoneList.length}}/{{list.length-1}}）</div>
     </div>
     <van-list
       id="newslist2"
@@ -44,7 +46,8 @@
           v-model="callPhoneList"
           v-on:change="addPhone($event)"
         />
-        <label @click="errorMsg(item)" :for="'srdid'+index" class="active"></label>
+        <label @click="errorMsg(item)" v-if="index != 0 " :for="'srdid'+index" class="active"></label>
+        <div v-else style="width: 26px;"></div>
         <img :src="item.img" style="margin: 16px 14px 15px 7px;  width: 55px; height: 55px;" />
         <div style="color: #333333;font-size: 15px;margin-top: 20px;">
           <div style="max-width:60px;">{{item.realname}}</div>
@@ -52,10 +55,12 @@
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 20px;">
           <img
+            v-if="index != 0  "
             src="../../assets/img/phonecall.png"
             style="width: 50px;height:50px;"
             @click="goDetile(item)"
           />
+          <img v-else src="../../assets/img/no_phonecall.png" style="width: 50px;height:50px;" />
           <!-- <img
             src="../../assets/img/sms.png"
             style="width: 50px;height:50px;margin-left: 5px;"
@@ -76,7 +81,7 @@ import Vue from "vue";
 import { PullRefresh } from "vant";
 import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
-  import global_variable from "../../api/global_variable.js";
+import global_variable from "../../api/global_variable.js";
 Vue.use(PullRefresh);
 export default {
   name: "picsnews",
@@ -117,9 +122,15 @@ export default {
         var list1 = [];
         list.forEach(element => {
           if (element.dingid != null) {
-            if (self.callPhoneList_p.indexOf(element.dingid) > -1) {
+            if (
+              element.realname == "刘锋" &&
+              element.dutyName.indexOf("市长") > -1
+            ) {
             } else {
-              list1.push(element.dingid);
+              if (self.callPhoneList_p.indexOf(element.dingid) > -1) {
+              } else {
+                list1.push(element.dingid);
+              }
             }
           }
         });
@@ -132,9 +143,15 @@ export default {
           self.all_pick_flag = true;
           list.forEach(element => {
             if (element.dingid != null) {
-              if (self.callPhoneList.indexOf(element.dingid) > -1) {
+              if (
+                element.realname == "刘锋" &&
+                element.dutyName.indexOf("市长") > -1
+              ) {
               } else {
-                self.callPhoneList.push(element.dingid);
+                if (self.callPhoneList.indexOf(element.dingid) > -1) {
+                } else {
+                  self.callPhoneList.push(element.dingid);
+                }
               }
             }
           });
@@ -265,27 +282,27 @@ export default {
         });
     },
     //打电话
-      goDetile(item) {
-        if (item.dingid != null) {
-          if( item.dingid == global_variable.userId){
-            this.$toast("无法拨打自己电话");
-          }else{
-            var ddd = this.corpId;
-            dd.ready(function () {
-              dd.biz.telephone.call({
-                users: [item.dingid], //用户列表，工号
-                corpId: ddd, //企业id
-                onSuccess: function () { },
-                onFail: function (e) {
-                  this.$toast("钉钉资源不足，请稍后再试");
-                }
-              });
-            });
-          }
+    goDetile(item) {
+      if (item.dingid != null) {
+        if (item.dingid == global_variable.userId) {
+          this.$toast("无法拨打自己电话");
         } else {
-          this.$toast("该用户暂未注册");
+          var ddd = this.corpId;
+          dd.ready(function() {
+            dd.biz.telephone.call({
+              users: [item.dingid], //用户列表，工号
+              corpId: ddd, //企业id
+              onSuccess: function() {},
+              onFail: function(e) {
+                this.$toast("钉钉资源不足，请稍后再试");
+              }
+            });
+          });
         }
-      },
+      } else {
+        this.$toast("该用户暂未注册");
+      }
+    },
     //发消息
     goSms(item) {
       if (item.dingid != null) {
