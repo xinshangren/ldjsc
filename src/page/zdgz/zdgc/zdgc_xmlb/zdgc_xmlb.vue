@@ -327,14 +327,14 @@ export default {
     //语音识别
     translateVoice: function(mediaIds) {
       var self = this;
-       console.log("录音识别开始");
+      console.log("录音识别开始");
       dd.ready(function() {
         dd.device.audio.translateVoice({
           mediaId: mediaIds,
           duration: 5.0,
           onSuccess: function(res) {
             // res.mediaId; // 转换的语音的mediaId
-            console.log("录音识别结果："+res.content);
+            console.log("录音识别结果：" + res.content);
             self.seach_value = res.content; // 语音转换的文字内容
           }
         });
@@ -362,12 +362,8 @@ export default {
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
-      if (window.location.hash == "#/") {
-        currentUrl = currentUrl.substring(
-          0,
-          currentUrl.indexOf(window.location.hash)
-        );
-      }
+      var number = currentUrl.indexOf("#");
+      currentUrl = currentUrl.substring(0, number);
       console.log(currentUrl);
       var params = {
         currentUrl: currentUrl
