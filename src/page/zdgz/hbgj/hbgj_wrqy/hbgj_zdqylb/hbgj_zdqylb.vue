@@ -21,7 +21,7 @@
     </div>
 
     <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
-      <div id="newsList" style="padding-left:10px;padding-right:10px;">
+      <div id="newsList" style="margin-top:45px;padding-left:10px;padding-right:10px;">
         <div
           v-for="(item,index) in list"
           :key="index"
