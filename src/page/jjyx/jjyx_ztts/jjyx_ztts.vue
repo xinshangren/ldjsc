@@ -365,7 +365,7 @@ export default {
         month = "0" + month;
       }
       if((year<minYear)||(year == minYear&&month < minMonth)){
-        this.$toast("前一年没有数据");
+        this.$toast("前一月没有数据");
         return;
       }
 
@@ -388,7 +388,7 @@ export default {
         month = "0" + month;
       }
       if (year > maxYear) {
-        this.$toast("下一年没有数据");
+        this.$toast("下一月没有数据");
         return;
       } else if (year == maxYear) {
         if (month > maxMonth) {
