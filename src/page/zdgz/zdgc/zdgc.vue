@@ -23,7 +23,14 @@
         <child4 style="overflow-y:auto;overflow-x:hidden;"></child4>
       </van-tab>
     </van-tabs>
-
+    <!-- <div style="margin-top:46px;z-index: -1;overflow: auto;">
+      <div
+        id="childId"
+        :is="currentView"
+        ref="child1"
+        style="font-size:15px;"
+      ></div>
+    </div> -->
     <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
       <div id="rightAreaDivId" style="display:none;">
         <div
@@ -83,12 +90,13 @@ export default {
   data() {
     return {
       seach_value: "",
-      active: 0
+      active: 0,
+       currentView: "child1",
     };
   },
   beforeRouteEnter(to, from, next) {
     console.log(from);
-     console.log(to);
+    console.log(to);
     if (from.path == "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali") {
       if (to.path == "/zdgz/zdgc/zdgc") {
         to.meta.keepAlive = true;
@@ -127,6 +135,7 @@ export default {
             "9",
             "总体情况"
           );
+           this.currentView = "child1";
           break;
         case 1:
           this.doAddAppLogList(
@@ -135,6 +144,7 @@ export default {
             "10",
             "项目列表"
           );
+           this.currentView = "child2";
           break;
         case 2:
           this.doAddAppLogList(
@@ -143,6 +153,7 @@ export default {
             "11",
             "存在问题"
           );
+           this.currentView = "child3";
           break;
         case 3:
           this.doAddAppLogList(
@@ -151,6 +162,7 @@ export default {
             "12",
             "统计分析"
           );
+           this.currentView = "child4";
           break;
         default:
           break;

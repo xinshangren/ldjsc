@@ -67,15 +67,15 @@
     >
       <!-- <div style="padding-top:9px;font-size: 14px;margin-left:17px;">进度分类</div> -->
       <ul id="jdflDialogId" class="ui-row" style="margin-top: 11px;margin-bottom:12px;">
-        <li id="0" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">完成概况</li>
-        <li id="1" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">GDP</li>
-        <li id="2" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">固定资产投资</li>
-        <li id="3" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">一般公共预算收入</li>
-        <li id="4" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">社会消费品零售总额</li>
-        <li id="5" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">人均可支配收入</li>
-        <li id="6" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">工业增加值</li>
-        <li id="7" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">海关进出口总额</li>
-        <li id="8" class="ui-col ui-col-50 dialogNoSelect" style="width:45%;">区县情况</li>
+        <li id="0" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">完成概况</li>
+        <li id="1" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">GDP</li>
+        <li id="2" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">固定资产投资</li>
+        <li id="3" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">一般公共预算收入</li>
+        <li id="4" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">社会消费品零售总额</li>
+        <li id="5" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">人均可支配收入</li>
+        <li id="6" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">工业增加值</li>
+        <li id="7" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">海关进出口总额</li>
+        <li id="8" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">区县情况</li>
       </ul>
     </div>
     <div style="margin-top:46px;z-index: -1;overflow: auto;">

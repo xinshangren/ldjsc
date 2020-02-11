@@ -50,7 +50,13 @@
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">0</div>
       <div style="width:48%;color:#1976d2;margin-top:6px;font-size:14px;">个项目存在问题</div>
     </div>
-    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" style="top: 264px;">
+    <mescroll-vue
+      ref="mescroll"
+      :down="mescrollDown"
+      :up="mescrollUp"
+      @init="mescrollInit"
+      style="top: 264px;"
+    >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
           v-for="(item,index) in list"
@@ -203,8 +209,23 @@ export default {
       this.mescroll.resetUpScroll();
       //this.upCallback()
     },
+    compareDate(date1, date2) {
+      var oDate1 = new Date(date1);
+      var oDate2 = new Date(date2);
+      if (oDate1.getTime() > oDate2.getTime()) {
+        return true; //第一个大
+      } else {
+        return false; //第二个大
+      }
+    },
     //项目列表
     upCallback: function(page, mescroll) {
+      if (this.starttime != "" && this.endtime != "") {
+        var isflag = this.compareDate(this.starttime, this.endtime);
+        if (isflag) {
+          this.$toast("结束时间应该大于开始时间");
+        }
+      }
       var params = {
         starttime: this.starttime,
         projectName: this.seach_value,
@@ -220,17 +241,27 @@ export default {
             if (page.num == 1) {
               this.list = [];
               this.$refs.totalCountId.innerHTML = res.total;
-              this.date1 = res.reportDate;
-              this.date2 = res.reportDate;
+              if (res.reportDate != null) {
+                this.date1 = res.reportDate;
+                 this.starttime = this.date1;
+              }
+              if (res.reportDate != null) {
+                this.date2 = res.reportDate;
+                 this.endtime = this.date2;
+              }
             }
             var data = res.dataList;
             if (data && data.length > 0) {
+              this.list = this.list.concat(data);
+            }else{
               this.list = this.list.concat(data);
             }
 
             this.$nextTick(() => {
               this.mescroll.endBySize(data.length, res.total);
             });
+          } else {
+            this.list = [];
           }
         })
         .catch(err => {

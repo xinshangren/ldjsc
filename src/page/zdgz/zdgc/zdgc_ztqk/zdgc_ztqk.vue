@@ -9,28 +9,29 @@
         :formatter="formatter"
       />
     </van-popup>
-
-    <div
-      style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 0;"
-    >
-      <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
-        <div class="ui-col ui-col" @click="upYearClick">
-          <div class="div_next_style">前一年</div>
-        </div>
-        <div class="ui-col ui-col" @click="showDatePicker()">
-          <div class="div_flex" style="background: #f1f1f1;border-radius: 6px;">
-            <img
-              src="../../../../assets/img/project_calendar.png"
-              style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
-            />
-            <div class="div_next_style">{{nowYear}}年</div>
+    <van-sticky :offset-top="121">
+      <div
+        style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 999;"
+      >
+        <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
+          <div class="ui-col ui-col" @click="upYearClick">
+            <div class="div_next_style">前一年</div>
+          </div>
+          <div class="ui-col ui-col" @click="showDatePicker()">
+            <div class="div_flex" style="background: #f1f1f1;border-radius: 6px;">
+              <img
+                src="../../../../assets/img/project_calendar.png"
+                style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
+              />
+              <div class="div_next_style">{{nowYear}}年</div>
+            </div>
+          </div>
+          <div class="ui-col ui-col" @click="downYearClick">
+            <div class="div_next_style" style="text-align:right;">后一年</div>
           </div>
         </div>
-        <div class="ui-col ui-col" @click="downYearClick">
-          <div class="div_next_style" style="text-align:right;">后一年</div>
-        </div>
       </div>
-    </div>
+    </van-sticky>
     <div style>
       <div class="ui-row-flex ui-whitespace" style="height: 88px;margin-top: 55px;">
         <div class="ui-col ui-col backgroundDiv1">
@@ -131,12 +132,13 @@ import echarts from "echarts";
 import { echarsEnti } from "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.js";
 import { httpMethod } from "../../../../api/getData.js";
 import Vue from "vue";
-import { Tab, Tabs, Progress, Popup, DatetimePicker } from "vant";
+import { Tab, Tabs, Progress, Popup, DatetimePicker, Sticky } from "vant";
 Vue.use(Tab)
   .use(Tabs)
   .use(Progress)
   .use(Popup)
-  .use(DatetimePicker);
+  .use(DatetimePicker)
+  .use(Sticky);
 export default {
   name: "zdgc_ztqk_vue",
   data() {
@@ -151,7 +153,7 @@ export default {
       jhtze: 0,
       wctze: 0,
       czwtCount: 0,
-      indexyear:"",
+      indexyear: "",
       bottomList: [
         { projectName: "", percentage: 0 },
         { projectName: "", percentage: 0 },
@@ -179,7 +181,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == "1") {
-            this.nowYear=res.data.year;
+            this.nowYear = res.data.year;
             this.zdgcsl = res.data.gcslmk.gcsl;
             this.getOneEchars(echarts, this.$refs.myCharts1, res.data.gcslmk);
             this.jhtze = res.data.jhtz;
@@ -241,13 +243,13 @@ export default {
     getOneEchars: function(echarts, value, data) {
       // this.$store.commit('showLoading');//加载loading
       //this.$store.commit('hideLoading');//解除loading
-      echarsEnti.createEcharsOne(echarts, value, data,httpMethod);
+      echarsEnti.createEcharsOne(echarts, value, data, httpMethod);
     },
     //初始化第二个图表
     getThreeEchars: function(echarts, value, data) {
       // this.$store.commit('showLoading');//加载loading
       //this.$store.commit('hideLoading');//解除loading
-      echarsEnti.createEcharsThree(echarts, value, data,this.nowYear);
+      echarsEnti.createEcharsThree(echarts, value, data, this.nowYear);
     },
     upYearClick: function() {
       this.nowYear = parseInt(this.nowYear) - 1 + "";

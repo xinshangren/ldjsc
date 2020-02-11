@@ -59,7 +59,7 @@
         <div v-for="(item,index) in dataList" :key="index">
           <div style="display:flex;margin-top:14px;">
             <div class="vantlist_block">
-              <div style="margin-top:9px;">{{index+1}}</div>
+              <div style="margin-top:9px;font-size:17px;">{{index+1}}</div>
             </div>
 
             <div>
