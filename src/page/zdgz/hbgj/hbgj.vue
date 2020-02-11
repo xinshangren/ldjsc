@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:0px;">
+  <div style="margin-top:0px;"  @click="closeState">
     <div class="ui-row-flex ui-whitespace" style="padding-top:10px;">
       <div class="ui-col ui-col" @click="selectIndexTab(1)">
         <div class="block_div_style">
@@ -22,7 +22,7 @@
     </div>
     <van-sticky :offset-top="101">
       <div style="display:flex;border-bottom:1px solid #f3f3f3;">
-        <div @click="showHideLeftSelect()" class="twoLevel_left_div">
+        <div @click="showHideLeftSelect()" id="twoLevel_left_div" class="twoLevel_left_div">
           <img style="height: 24px; margin-top: 8px;margin-left: 10px;" :src="TwoLevelTabImg1" />
           <div id="selectDivName" style="font-size: 14px;line-height: 40px;">空气</div>
           <img
@@ -546,6 +546,22 @@ export default {
           break;
         default:
           break;
+      }
+    },
+    closeState(event) {
+      var myPanel = document.getElementById('leftSelectDivId');// 得到点击出现的节点
+      var myPanel2 = document.getElementById('leftUlId');// 得到点击出现的节点
+      
+      var  twolevel= document.getElementById('twoLevel_left_div');// 得到点击出现的节点
+      if(twolevel.contains(event.target)){
+        return;
+      }
+      console.log(myPanel);
+      if (myPanel||myPanel2) {
+        if (!(myPanel.contains(event.target))&&!(myPanel2.contains(event.target))) { // 这句是说如果我们点击到了id为myPanel以外的区域，为false
+          // this.show = false// 消失
+          $("#leftSelectDivId").hide();
+        }
       }
     }
   }
