@@ -200,6 +200,14 @@ export default {
       this.child_phoneList.forEach(element => {
         a = a.concat(element.callPhoneList);
       });
+      for(var i=0; i<a.length; i++){
+            for(var j=i+1; j<a.length; j++){
+                if(a[i]==a[j]){         //第一个等同于第二个，splice方法删除第二个
+                    a.splice(j,1);
+                    j--;
+                }
+            }
+        }
       if (a.length > 35) {
         this.$toast("多人通话选择人数不得大于35人");
         return false;
