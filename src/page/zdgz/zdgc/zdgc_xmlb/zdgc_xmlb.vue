@@ -234,6 +234,7 @@ export default {
     return {
       timer: null, //用于清除计时器
       timerJs: null, //用于倒计时60s
+      recordId: "0",
       countSize: 5,
       imgIndex: "9",
       mediaId: "",
@@ -282,6 +283,7 @@ export default {
   },
   methods: {
     startRecord: function() {
+      this.recordId = "1";
       console.log("开始录音");
       dd.ready(function() {
         dd.device.audio.startRecord({
@@ -303,6 +305,7 @@ export default {
       clearInterval(self.timer);
       clearInterval(self.timerJs);
       if (flag == 1) {
+        self.recordId = "1";
         //完成识别
         dd.ready(function() {
           dd.device.audio.stopRecord({
@@ -322,23 +325,36 @@ export default {
         var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
         blackBoxSpeak.style.display = "none";
         //取消识别
+        self.recordId = "0";
       }
     },
     //语音识别
     translateVoice: function(mediaIds) {
       var self = this;
       console.log("录音识别开始");
-      dd.ready(function() {
-        dd.device.audio.translateVoice({
-          mediaId: mediaIds,
-          duration: 5.0,
-          onSuccess: function(res) {
-            // res.mediaId; // 转换的语音的mediaId
-            console.log("录音识别结果：" + res.content);
-            self.seach_value = res.content; // 语音转换的文字内容
-          }
+      if (self.recordId == "1") {
+        self.$store.commit("showLoadingBig");
+        dd.ready(function() {
+          dd.device.audio.translateVoice({
+            mediaId: mediaIds,
+            duration: 5.0,
+            onSuccess: function(res) {
+              self.$store.commit("hideLoadingBig");
+              // res.mediaId; // 转换的语音的mediaId
+              console.log("录音识别结果：" + res.content);
+              var result=self.palindrome(res.content);
+              console.log("录音识别结果1：" + result);
+              self.seach_value = result; // 语音转换的文字内容
+              self.onSearch();
+            },
+            onFail: function(err) {
+              self.$store.commit("hideLoadingBig");
+              // var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+              // blackBoxSpeak.style.display = "none";
+            }
+          });
         });
-      });
+      }
     },
     onRecordEnd: function() {
       var self = this;
@@ -359,6 +375,19 @@ export default {
           onFail: function(err) {}
         });
       });
+    },
+    palindrome: function(str) {
+      var arr = str.split("");
+      arr = arr.filter(function(val) {
+        return (
+          val !== " " &&
+          val !== "," &&
+          val !== "." &&
+          val !== "。" 
+        );
+      });
+      console.log(arr.join("")); //arr变为"0000";
+      return arr.join("");
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
