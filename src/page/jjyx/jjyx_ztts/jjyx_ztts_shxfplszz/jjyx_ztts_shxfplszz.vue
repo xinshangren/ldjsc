@@ -216,11 +216,11 @@ export default {
             // var dateZb = res.dateZb; //城乡零售占比及增速
             // var listObj = res.listObj;
             this.totalData = res.totalData[0]; //标题
-            if(this.totalData.indexdata&&!isNaN(this.totalData.indexdata))
-              this.totalData.indexdata = parseFloat(
-                this.totalData.indexdata / 10000
-              ).toFixed(2);
-            else totalData.indexdata = 0;
+            // if(this.totalData.indexdata)
+            //   this.totalData.indexdata = parseFloat(
+            //     this.totalData.indexdata / 10000
+            //   ).toFixed(2);
+            // else totalData.indexdata = 0;
             // this.dataList = res.dateForm;
             var urbanOrTownData = res.urbanOrTownData; //城乡零售占比及增速
             var consumerGoodsRate = res.consumerGoodsRate;

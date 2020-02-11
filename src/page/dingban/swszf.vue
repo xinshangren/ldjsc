@@ -246,6 +246,7 @@ export default {
         currentUrl: currentUrl
       };
 
+<<<<<<< HEAD
       httpMethod
         .getConfig(params)
         .then(res => {
@@ -283,6 +284,50 @@ export default {
                   "biz.ding.create",
                   "biz.chat.toConversation"
                 ]
+=======
+        httpMethod
+          .getConfig(params)
+          .then(res => {
+            if (res.success == "1") {
+              var data = JSON.parse(res.config);
+              this.corpId = data.corpId;
+              dd.ready(function () {
+                dd.config({
+                  agentId: data.agentId,
+                  corpId: data.corpId,
+                  timeStamp: data.timeStamp,
+                  nonceStr: data.nonceStr,
+                  signature: data.signature,
+                  jsApiList: [
+                    "runtime.info",
+                    "biz.contact.choose",
+                    "device.notification.confirm",
+                    "device.notification.alert",
+                    "device.notification.prompt",
+                    "biz.ding.post",
+                    "biz.util.openLink",
+                    "device.audio",
+                    "device.audio.startRecord",
+                    "device.audio.stopRecord",
+                    "device.audio.translateVoice",
+                    "device.audio.onRecordEnd",
+                    "biz.ding.create",
+                    "biz.telephone.call",
+                    "biz.contact.complexPicker",
+                    "biz.util.open",
+                    "biz.chat.open",
+                    "biz.chat.pickConversation",
+                    "biz.user.get",
+                    "biz.util.uploadImage",
+                    "biz.chat.openSingleChat",
+                    "biz.ding.create",
+                    "biz.chat.toConversation"
+                  ]
+                });
+                dd.error(function (error) {
+                  alert("dd error: " + JSON.stringify(error));
+                });
+>>>>>>> 3df87437665f073161c9e27bd98e4f0a27e99e81
               });
               dd.error(function(error) {
                 alert("dd error: " + JSON.stringify(error));

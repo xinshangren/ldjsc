@@ -8,7 +8,7 @@
     </div>
     <div
       id="menu_ul_id"
-      style="display:none; position: fixed;left: 20px;background: #ffffff;top: 157px;padding: 3px;z-index:1;"
+      style="display:none; position: fixed;left: 20px;background: #ffffff;top: 157px;padding: 3px;z-index:100;"
     >
       <ul id="menu_ul">
         <li @click="returnCom(1)" class="menuliClass" style="display:flex;">

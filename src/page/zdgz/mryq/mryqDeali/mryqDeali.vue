@@ -1,6 +1,10 @@
 <template>
   <div style="margin-top:54px;background:#ffffff;">
-    <div :style="backgroundDiv" style="width: 92%;padding: 2% 4% 2% 4%;background-size: 100% 100%;">
+    <div
+      id="contentId"
+      :style="backgroundDiv"
+      style="width: 92%;padding: 2% 4% 2% 4%;background-size: 100% 100%;"
+    >
       <div id="pmJjdivid" style="width:100%;font-size:15px;" v-html="itemEnti.content"></div>
       <div
         v-if="fileListnew.length>0"
@@ -27,7 +31,7 @@ import { httpMethod } from "../../../../api/getData.js";
 import global_variable from "../../../../api/global_variable.js";
 export default {
   beforeCreate() {
-    document.querySelector("body").setAttribute("style", "background:#F1F4F6");
+    document.querySelector("body").setAttribute("style", "background:#ffffff");
   },
   name: "zdgz_mryqVue",
   data() {
@@ -58,16 +62,27 @@ export default {
           tSAttachmentName + "." + changeUrl;
       }
     }
+    console.log(document.body.clientHeight);
 
+    var height = document.body.clientHeight;
+    // $("#contentId").css("height",height+200+"px");
     //console.log(this.itemEnti);
     $("#pmJjdivid p").each(function() {
       $(this).attr("style", "font-size:15px;");
     });
+    setTimeout(() => {
+      var o = document.getElementById("pmJjdivid");
+      var h = o.clientHeight || o.offsetHeight;
+      if(h<height){
+            $("#pmJjdivid").css("height",height-101+"px");
+      }
+      console.log(h);
+    }, 100);
   },
   methods: {
     openFj: function(item) {
       console.log(item);
-       this.$router.push({
+      this.$router.push({
         path: "/zdgz/mryq/mryq/mryqDeali/mryqDealiFj",
         name: "mryqDealiFjVue",
         params: {

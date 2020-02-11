@@ -1,6 +1,6 @@
 <template>
   <div style="overflow:hidden;background: #ffffff;">
-    <van-swipe :autoplay="3000" style="margin-left: 15px;margin-right: 15px;">
+    <van-swipe :autoplay="3000" style="margin-left: 15px;margin-right: 15px;z-index:999;">
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img v-lazy="image" style="width: 100%;height: 150px;" @click="goDetile(imageids[index])" />
       </van-swipe-item>
@@ -168,7 +168,7 @@ export default {
 @import "../../assets/css/frozenui.css";
 .mescroll {
   position: fixed;
-  top: 260px;
+  top: 315px;
   bottom: 0px;
   height: auto;
 }

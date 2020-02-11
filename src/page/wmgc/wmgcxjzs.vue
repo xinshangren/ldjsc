@@ -123,6 +123,7 @@
       :features="features"
       :events="events"
       style="margin-top: -40px;"
+      @click="hideSelect()"
     >
       <el-amap-marker
         v-for="(marker, index) in markers"
@@ -170,7 +171,9 @@ export default {
       events: {
         moveend: () => {},
         zoomchange: () => {},
-        click: e => {}
+        click: e => {
+          $("#dateselect").css("display", "none");
+        }
       },
       defaultLayer: null,
       map: null,
@@ -183,9 +186,11 @@ export default {
     // });
     // 设置地图高度
     var orderHight1 = document.documentElement.clientHeight;
-    var heightlist = orderHight1 - 60;
+    console.log(orderHight1);
+    var heightlist = orderHight1 - 140;
     $("#mapid").css("height", heightlist + "px");
     $("#mapid").click(function(){
+      console.log("111");
         $("#dateselect").css("display", "none");
     });
     var _this = this;
@@ -254,6 +259,9 @@ export default {
     _this.getLevelBasicList();
   },
   methods: {
+    hideSelect:function(){
+  $("#dateselect").css("display", "none");
+    },
     //
     getLevelBasicList: function() {
       var _this = this;
