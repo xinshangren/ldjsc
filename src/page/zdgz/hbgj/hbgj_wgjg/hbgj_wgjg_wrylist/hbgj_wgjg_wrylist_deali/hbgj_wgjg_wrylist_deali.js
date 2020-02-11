@@ -33,7 +33,18 @@ export const hbgjAirJs = {
                 },
                 textStyle: {
                     align: 'left'
-                }
+                },
+                formatter:function(params){
+                   var relVal = params[0].name+"月"; 
+                   //alert(JSON.stringify(params))
+                   for (var i = 0, l = params.length; i < l; i++) {  
+                       if(params[i].seriesName =='办结率')
+                       relVal += '<br/>' +params[i].marker+ params[i].seriesName+":"+ params[i].value+"%";  
+                       else
+                       relVal += '<br/>' +params[i].marker+ params[i].seriesName+":"+ params[i].value+"";  
+                   } 
+                   return relVal;  
+               }
             },
             grid: {
                 left: '5%',
