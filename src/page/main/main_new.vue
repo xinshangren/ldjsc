@@ -51,7 +51,7 @@ export default {
         // require("@/assets/img/icon-zhxx.png")
       ],
       tabNameList: [
-        "一键直连",
+        "一键直联",
         "每日要情",
         "重点工程",
         "经济运行",
