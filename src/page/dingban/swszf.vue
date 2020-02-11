@@ -218,6 +218,7 @@
                     "device.audio.startRecord",
                     "device.audio.stopRecord",
                     "device.audio.translateVoice",
+                    "device.audio.onRecordEnd",
                     "biz.ding.create",
                     "biz.telephone.call",
                     "biz.contact.complexPicker",
