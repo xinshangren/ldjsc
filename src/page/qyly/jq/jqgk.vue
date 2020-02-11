@@ -27,12 +27,12 @@
       style="margin-top: 15px;color: #333333;font-size: 12px;border-left: 2px #3ca1ec solid;height:16px;padding-left: 20px;">
       本年旅游  收入</div>
     <div style="margin-top: 15px;color: #3ca1ec;font-size: 16px;">{{incomeTotal}}</div>
-    <div style="margin-top: 15px;color: #3ca1ec;font-size: 12px;">亿元</div>
+    <div style="margin-top: 15px;color: #3ca1ec;font-size: 12px;">万元</div>
     <div
       style="margin-top: 15px;color: #333333;font-size: 12px;height:16px;margin-left: 15px;">
       支出</div>
     <div style="margin-top: 15px;color: #faad14;font-size: 16px;">{{expenditureTotal}}</div>
-    <div style="margin-top: 15px;color: #faad14;font-size: 12px;">亿元</div>
+    <div style="margin-top: 15px;color: #faad14;font-size: 12px;">万元</div>
   </div>
   <div ref="myCharts3" style=" height:200px;margin-bottom:10px;"></div>
   </div>

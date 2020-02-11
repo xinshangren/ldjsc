@@ -51,6 +51,7 @@
           v-for="(item,index) in listPmList"
           :key="index"
           :id="(index)"
+          :style="index>=3?'margin-top:20px':''"
           style="text-align:center;"
         >
           <div class="yuanquan" v-if="item.colorvalue=='1'" style="background:#75d492;"></div>
