@@ -175,7 +175,7 @@ export default {
       nowYear: "",
       currentDate: new Date(),
       maxDate: new Date(),
-      minDate: new Date(2018, 0, 1),
+      minDate: new Date(2016, 0, 1),
       maxDataDate: ""
     };
   },

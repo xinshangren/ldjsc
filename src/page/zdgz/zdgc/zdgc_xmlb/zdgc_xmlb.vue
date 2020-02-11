@@ -196,7 +196,6 @@
 <script>
 import $ from "jquery";
 import MescrollVue from "mescroll.js/mescroll.vue";
-import Recorder from "js-audio-recorder";
 import echarts from "echarts";
 import { echarsEnti } from "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.js";
 import { httpMethod } from "../../../../api/getData.js";

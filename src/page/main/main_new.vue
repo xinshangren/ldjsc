@@ -47,8 +47,8 @@ export default {
         require("@/assets/img/icon-qxzt.png"),
         require("@/assets/img/icon-wmgc.png"),
         require("@/assets/img/icon-zhxx.png"),
-        require("@/assets/img/icon-zhxx.png"),
-        require("@/assets/img/icon-zhxx.png")
+        // require("@/assets/img/icon-zhxx.png"),
+        // require("@/assets/img/icon-zhxx.png")
       ],
       tabNameList: [
         "一键直连",
@@ -61,8 +61,8 @@ export default {
         "区县直通",
         "文明共创",
         "综合信息",
-        "疫情地图",
-        "疫情数据"
+        // "疫情地图",
+        // "疫情数据"
       ],
       tabIdList: [
         "8",
@@ -75,8 +75,8 @@ export default {
         "23",
         "4",
         "7",
-        "999",
-        "1000"
+        // "999",
+        // "1000"
       ],
       permissionList: [
         "每日要情",
