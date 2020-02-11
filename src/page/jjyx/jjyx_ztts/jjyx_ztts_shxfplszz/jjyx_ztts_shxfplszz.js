@@ -39,7 +39,7 @@ export const echarsEnti = {
 	const colorList = ['#faad14', '#3ca1ec'];
 	var option = {
 		title: {
-			text: '\t\t\t零售总额\n\t\t\t' + allData + "\n\t\t\t\t\t万元",
+			text: '\t\t\t零售总额\n\t\t\t' + allData + "\n\t\t\t\t\t亿元",
 			textStyle: {
 				color: '#666666',
 				fontSize: 14,

@@ -4,7 +4,11 @@
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入重点工程项目名称" @search="onSearch" v-model="seach_value" />
       </form>
-      <img src="../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
+      <img
+        @click="showRecord()"
+        src="../../../../assets/img/project_voice.png"
+        style="height: 27px;margin-top: 10px;"
+      />
       <img
         src="../../../../assets/img/project_filtrate.png"
         style="height: 27px;margin-top: 10px;margin-left:5px;"
@@ -190,6 +194,15 @@
         </div>
       </div>
     </van-popup>
+    <div class="blackBoxSpeak">
+      <img style="height:74px;margin-top:32px;" src="../../../../assets/img/ic_record@2x.png" />
+      <img style="height:74px;margin-top:32px;margin-left:16px;" :src="recordUrl9" />
+      <div style="font-size: 18px;color: #ffffff;">{{countSize}}秒</div>
+      <div style="display:flex;">
+        <div style="width:50%;font-size: 16px;color: #ffffff;text-align:center;">完成识别</div>
+        <div style="width:50%;font-size: 16px;color: #ffffff;text-align:center;">取消识别</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -200,6 +213,7 @@ import echarts from "echarts";
 import { echarsEnti } from "../../../../page/zdgz/zdgc/zdgc_ztqk/zdgc_ztqk.js";
 import { httpMethod } from "../../../../api/getData.js";
 import Vue from "vue";
+import dd from "dingtalk-jsapi";
 import { Search, PullRefresh, Popup, Dialog } from "vant";
 Vue.use(Search)
   .use(PullRefresh)
@@ -212,6 +226,14 @@ export default {
   name: "zdgc_xmlb_vue",
   data() {
     return {
+      countSize: 5,
+      imgIndex: "9",
+      backgroundDiv: {
+        background:
+          'url("../../../../assets/img/project_filtrate.png") 28px 16px / 64px 104px no-repeat, url("../../../../assets/img/ic_record_ripple@2x-9.png") 111.2px 32px / 28.8px 88px no-repeat rgba(0, 0, 0, 0.7)'
+      },
+      recordUrlBack: require("../../../../assets/img/ic_record@2x.png"),
+      recordUrl9: require("../../../../assets/img/ic_record_ripple@2x-9.png"),
       activeClassUldy: -1,
       listZdgcType: [],
       listZdgcDyType: [],
@@ -247,8 +269,125 @@ export default {
   mounted() {
     this.getTypeList();
     this.getDyTypeList();
+    this.gojq();
   },
   methods: {
+    startRecord: function() {
+      console.log("开始录音");
+      dd.ready(function() {
+        dd.device.audio.startRecord({
+          onSuccess: function() {
+            //支持最长为300秒（包括）的音频录制，默认60秒(包括)。
+            console.log("开始录音成功");
+          },
+          onFail: function(err) {
+              var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+              blackBoxSpeak.style.display = "none";
+          }
+        });
+      });
+    },
+    gojq: function() {
+      var currentUrl = window.location.href; //当前页面地址
+      if (window.location.hash == "#/") {
+        currentUrl = currentUrl.substring(
+          0,
+          currentUrl.indexOf(window.location.hash)
+        );
+      }
+      console.log(currentUrl);
+      var params = {
+        currentUrl: currentUrl
+      };
+
+      httpMethod
+        .getConfig(params)
+        .then(res => {
+          if (res.success == "1") {
+            var data = JSON.parse(res.config);
+            console.log(data);
+            this.corpId = data.corpId;
+            dd.ready(function() {
+              dd.config({
+                agentId: data.agentId,
+                corpId: data.corpId,
+                timeStamp: data.timeStamp,
+                nonceStr: data.nonceStr,
+                signature: data.signature,
+                jsApiList: [
+                  "runtime.info",
+                  "biz.contact.choose",
+                  "device.notification.confirm",
+                  "device.notification.alert",
+                  "device.notification.prompt",
+                  "biz.ding.post",
+                  "biz.util.openLink",
+                  "device.audio",
+                  "device.audio.startRecord",
+                  "device.audio.stopRecord",
+                  "device.audio.translateVoice",
+                  "biz.ding.create",
+                  "biz.telephone.call",
+                  "biz.contact.complexPicker",
+                  "biz.util.open",
+                  "biz.chat.open",
+                  "biz.chat.pickConversation",
+                  "biz.user.get",
+                  "biz.util.uploadImage",
+                  "biz.chat.openSingleChat",
+                  "biz.ding.create",
+                  "biz.chat.toConversation"
+                ]
+              });
+              dd.error(function(error) {
+                console.log("dd error: " + JSON.stringify(error));
+              });
+            });
+          } else if (res.success == "0") {
+            // this.error = true;
+          }
+        })
+        .catch(err => {
+          // this.$toast(err);
+        });
+    },
+    showRecord: function() {
+      var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+      var index = [9, 8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      var num = index.length;
+      var timer = null; //用于清除计时器
+      var timerJs = null; //用于倒计时60s
+      //直接开启轮播模式
+      var indexNum = 5;
+      this.setTimer(timer,timerJs,blackBoxSpeak,num,indexNum,index);
+      blackBoxSpeak.style.display = "block";
+      this.startRecord();
+    },
+    setTimer: function(timer, timerJs, blackBoxSpeak, num, indexNum, index) {
+      var self = this;
+      timer = setInterval(function() {
+        setTimeout(function() {
+          num++;
+          // this.imgIndex = num;
+          self.recordUrl9 = require("../../../../assets/img/ic_record_ripple@2x-" +
+            index[num] +
+            ".png");
+        }, 70);
+        if (num >= index.length - 1) {
+          num = 0;
+        }
+      }, 70);
+      timerJs = setInterval(function() {
+        console.log(indexNum);
+        self.countSize = indexNum;
+        indexNum = indexNum - 1;
+        if (indexNum == 0) {
+          blackBoxSpeak.style.display = "none";
+          clearInterval(timer);
+          clearInterval(timerJs);
+        }
+      }, 1000);
+    },
     callPhone: function(phone, event) {
       window.location.href = "tel://" + phone;
       event.stopPropagation();
@@ -476,4 +615,18 @@ export default {
 <style scoped>
 @import "../../../../page/zdgz/zdgc/zdgc_xmlb/zdgc_xmlb.css";
 @import "../../../../assets/css/frozenui.css";
+.blackBoxSpeak {
+  width: 156px;
+  height: 176px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  border-radius: 12px;
+  text-align: center;
+}
 </style>

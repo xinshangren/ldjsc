@@ -69,7 +69,7 @@
           <div style="color: #0b91ed;font-size: 20px;">{{electricityDatalj.indexdata}}</div>
           <div style="font-size:12px;">亿千瓦时</div>
         </div>
-        <div style="font-size: 12px;color: #666666;">1-{{indexMonth}}月一般公共预算收入</div>
+        <div style="font-size: 12px;color: #666666;">1-{{indexMonth}}月全社会用电量</div>
         <div style="display:flex;line-height:21px;">
           <div style="color: #0b91ed;font-size: 20px;">{{electricityDatalj.yonydata}}</div>
           <div style="font-size:12px;">%</div>
@@ -92,7 +92,7 @@
           <div style="color: #0b91ed;font-size: 20px;">{{electricityDatady.indexdata}}</div>
           <div style="font-size:12px;">亿千瓦时</div>
         </div>
-        <div style="font-size: 12px;color: #666666;">{{indexMonth}}月一般公共预算收入</div>
+        <div style="font-size: 12px;color: #666666;">{{indexMonth}}月全社会用电量</div>
         <div style="display:flex;line-height:21px;">
           <div style="color: #0b91ed;font-size: 20px;">{{electricityDatady.yonydata}}</div>
           <div style="font-size:12px;">%</div>

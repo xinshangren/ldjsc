@@ -486,9 +486,9 @@ export default {
                     this.shxfplszeEnti.indexdata != null &&
                     this.shxfplszeEnti.indexdata != undefined
                   ) {
-                    this.shxfplszeEnti.indexdata = parseFloat(
-                      this.shxfplszeEnti.indexdata / 10000
-                    ).toFixed(2);
+                    // this.shxfplszeEnti.indexdata = parseFloat(
+                    //   this.shxfplszeEnti.indexdata / 10000
+                    // ).toFixed(2);
                   } else {
                     this.shxfplszeEnti.indexdata = "-";
                   }
