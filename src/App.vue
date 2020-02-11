@@ -82,7 +82,7 @@
         <div style="margin-left:7px;">
           <div class="marquee-wrap">
             <ul class="marquee-list" :class="{'animate-up': animateUp}">
-              <li v-for="(item, index) in scroll_notice" :key="index">{{item}}</li>
+              <li v-for="(item, index) in scroll_notice" :key="index" @click="goNoticeDetail(item.obj)">{{item.name}}</li>
             </ul>
           </div>
         </div>
@@ -184,12 +184,16 @@
               var data = res.dataList;
               if (data.length <= 5) {
                 data.forEach(element => {
+                  var map = {};
+                  map.obj = element;
                   if (element.title.length > 20) {
+                    map.name = element.title.substring(0, 20) + "...";
                     self.scroll_notice.push(
-                      element.title.substring(0, 20) + "..."
+                      map
                     );
                   } else {
-                    self.scroll_notice.push(element.title);
+                    map.name = element.title
+                    self.scroll_notice.push(map);
                   }
                 });
               } else {
@@ -203,22 +207,36 @@
                   }
                 });
                 for (var i = 0; i < 5; i++) {
+                  var map = {};
+                  map.obj = data[i];
                   if (data[i].title.length > 20) {
+                    map.name =  data[i].title.substring(0, 20) + "..."
                     self.scroll_notice.push(
-                      data[i].title.substring(0, 20) + "..."
+                      map
                     );
                   } else {
-                    self.scroll_notice.push(data[i].title);
+                    map.name = data[i].title
+                    self.scroll_notice.push(map);
                   }
                 }
               }
             } else {
-              self.scroll_notice.push("暂无公告");
+              self.scroll_notice.push("无");
             }
             console.log(self.scroll_notice)
           }
         });
-      }
+      },
+      goNoticeDetail(item) {
+      this.$router.push({
+        path: "/main/noticeDetail",
+        name: "noticeDetail",
+        params: {
+          entity: item
+        }
+      });
+    }
+    
     },
     beforeCreate() {
       document.querySelector("body").setAttribute("style", "background:#f7f7f7");
