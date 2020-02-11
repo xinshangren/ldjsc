@@ -83,7 +83,7 @@
     </van-sticky>
     <div
       id="leftSelectDivId"
-      style="display:none; position: absolute;top: 164px;height: 97px;background: rgb(255, 255, 255);z-index: 1;padding: 5px 10px;border-radius: 5px;left: 8px;"
+      style="display:none; position: fixed;top: 164px;height: 97px;background: rgb(255, 255, 255);z-index: 1;padding: 5px 10px;border-radius: 5px;left: 8px;"
     >
       <ul id="leftUlId">
         <li style="display: flex;border-bottom: 1px solid #cccccc;">
