@@ -200,7 +200,7 @@ export const echarsEnti = {
           var relVal = params[0].name+"年"; 
           //alert(JSON.stringify(params))
           for (var i = 0, l = params.length; i < l; i++) {  
-              relVal += '<br/>' +params[i].marker+ params[i].seriesName+":"+ params[i].value+"元";  
+              relVal += '<br/>' +params[i].marker+ params[i].seriesName+":"+ params[i].value+"万元";  
           } 
           return relVal;  
       }
