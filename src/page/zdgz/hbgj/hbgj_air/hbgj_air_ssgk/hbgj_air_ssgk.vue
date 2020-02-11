@@ -135,6 +135,7 @@
             <div class="ui-col ui-col" v-if="item.dataAqiLevel=='6'">严重</div>
             <div class="ui-col ui-col" v-if="item.dataAqiLevel=='5'">重度</div>
             <div class="ui-col ui-col" v-if="item.dataAqiLevel=='4'">中度</div>
+            <div class="ui-col ui-col" v-if="item.dataAqiLevel">&nbsp;</div>
           </div>
         </div>
       </div>
