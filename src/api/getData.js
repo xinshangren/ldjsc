@@ -427,10 +427,12 @@ export const httpMethod = {
     getCmsGG: function (params) {
         return get("cmsAppInsideController.action?getCmsGG", params);
     },
+    //获取一键直连部门信息
+    getDirectCon: function (params) {
+        return get("dingAppInsideController.action?getDirectCon", params);
+    },
+
     
-
-
-
 
 
 

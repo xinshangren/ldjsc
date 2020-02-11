@@ -15,6 +15,7 @@ import dsjyyjVue from '@/page/dingban/dsjyyj.vue'
 import qxqkfqVue from '@/page/dingban/qxqkfq.vue'
 import gqxwsjVue from '@/page/dingban/gqxwsj.vue'
 import srdVue from '@/page/dingban/srd.vue'
+import dingbanDetailVue from '@/page/dingban/dingbanDetail.vue'
 import newsdetileVue from '@/page/toutiao/newsdetile.vue'
 import ldzcVue from '@/page/toutiao/ldzc.vue'
 import zwgkVue from '@/page/toutiao/zwgk.vue'
@@ -117,7 +118,11 @@ export default new Router({
       path: '/dingban/qxqkfq',
       name: 'qxqkfq',
       component: qxqkfqVue
-    }, {
+    },{
+      path: '/dingban/dingbanDetail',
+      name: 'dingbanDetail',
+      component: dingbanDetailVue
+    },{
       path: '/toutiao/newsdetile',
       name: 'newsdetile',
       component: newsdetileVue
