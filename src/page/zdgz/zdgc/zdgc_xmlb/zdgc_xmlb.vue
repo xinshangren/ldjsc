@@ -232,6 +232,8 @@ export default {
   name: "zdgc_xmlb_vue",
   data() {
     return {
+      timer: null, //用于清除计时器
+      timerJs: null, //用于倒计时60s
       countSize: 5,
       imgIndex: "9",
       mediaId: "",
@@ -289,8 +291,8 @@ export default {
             console.log("开始录音成功");
           },
           onFail: function(err) {
-            var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
-            blackBoxSpeak.style.display = "none";
+            // var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+            // blackBoxSpeak.style.display = "none";
           }
         });
       });
@@ -298,6 +300,8 @@ export default {
     stopRecord: function(flag) {
       var self = this;
       console.log("停止录音");
+      clearInterval(self.timer);
+      clearInterval(self.timerJs);
       if (flag == 1) {
         //完成识别
         dd.ready(function() {
@@ -323,13 +327,14 @@ export default {
     //语音识别
     translateVoice: function(mediaIds) {
       var self = this;
+       console.log("录音识别开始");
       dd.ready(function() {
         dd.device.audio.translateVoice({
           mediaId: mediaIds,
           duration: 5.0,
           onSuccess: function(res) {
             // res.mediaId; // 转换的语音的mediaId
-            console.log(res.content);
+            console.log("录音识别结果："+res.content);
             self.seach_value = res.content; // 语音转换的文字内容
           }
         });
@@ -346,12 +351,14 @@ export default {
             console.log(res.duration);
             self.mediaId = res.mediaId;
             self.translateVoice(res.mediaId);
+            clearInterval(self.timer);
+            clearInterval(self.timerJs);
+            var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+            blackBoxSpeak.style.display = "none";
           },
           onFail: function(err) {}
         });
       });
-      var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
-      blackBoxSpeak.style.display = "none";
     },
     gojq: function() {
       var currentUrl = window.location.href; //当前页面地址
@@ -419,21 +426,29 @@ export default {
         });
     },
     showRecord: function() {
+      this.countSize = 5;
       var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
       var index = [9, 8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9];
       var num = index.length;
-      var timer = null; //用于清除计时器
-      var timerJs = null; //用于倒计时60s
+      this.timer = null; //用于清除计时器
+      this.timerJs = null; //用于倒计时60s
       //直接开启轮播模式
       var indexNum = 5;
-      this.setTimer(timer, timerJs, blackBoxSpeak, num, indexNum, index);
+      this.setTimer(
+        this.timer,
+        this.timerJs,
+        blackBoxSpeak,
+        num,
+        indexNum,
+        index
+      );
       blackBoxSpeak.style.display = "block";
       this.startRecord();
       this.onRecordEnd(); //监听是否
     },
     setTimer: function(timer, timerJs, blackBoxSpeak, num, indexNum, index) {
       var self = this;
-      timer = setInterval(function() {
+      self.timer = setInterval(function() {
         setTimeout(function() {
           num++;
           // this.imgIndex = num;
@@ -445,14 +460,16 @@ export default {
           num = 0;
         }
       }, 70);
-      timerJs = setInterval(function() {
+      self.timerJs = setInterval(function() {
         console.log(indexNum);
         self.countSize = indexNum;
         indexNum = indexNum - 1;
         if (indexNum == 0) {
-          blackBoxSpeak.style.display = "none";
-          clearInterval(timer);
-          clearInterval(timerJs);
+          setTimeout(function() {
+            blackBoxSpeak.style.display = "none";
+          }, 1000);
+          clearInterval(self.timer);
+          clearInterval(self.timerJs);
         }
       }, 1000);
     },
