@@ -135,6 +135,12 @@ export const echarsEnti = {
         },
         splitArea: {
           show: false
+        },
+        axisLabel: {
+          interval: 0,
+          formatter: function (value) {
+            return value + "%";
+          }
         }
       },
       yAxis: {
