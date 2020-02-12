@@ -101,7 +101,7 @@
           <van-steps direction="vertical" :active="-1">
             <van-step  v-for="(itemchild,index1) in item.data"
               :key="index1">
-              <div style="color:#333333;" class="van-multi-ellipsis--l3">{{itemchild.value}}</div>
+              <div style="color:#333333;" class="">{{itemchild.value}}</div>
               <!-- <h3>{{itemchild.value}}</h3> -->
               <!-- <p>2016-07-11 10:00</p> -->
             </van-step>
