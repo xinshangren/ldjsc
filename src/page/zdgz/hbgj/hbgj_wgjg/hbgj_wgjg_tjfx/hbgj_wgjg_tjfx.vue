@@ -140,7 +140,7 @@
     <div
       id="wgsx_show_div_select_id1"
       class="top_menu_wgsx_div"
-      style="display:none;left: 0px;top: 179px;width: 100%;font-size:18px"
+      style="display:none;left: 0px;top: 179px;width: 100%;font-size:14px"
     >
       <img
         id="close_wgsx_show_div_select_id1"
