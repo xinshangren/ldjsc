@@ -234,9 +234,9 @@ export default {
         this.map.del_list = [];
         this.map.del_list.push(e.target.value);
       }
-      if (self.callPhoneList.length == 0) {
-        self.all_pick_flag = false;
-      } else if (self.callPhoneList_length < this.list_true.length) {
+      if (self.callPhoneList.length == self.list_true.length ) {
+        self.all_pick_flag = true;
+      } else {
         self.all_pick_flag = false;
       }
       this.$emit("addPhone", this.map);
