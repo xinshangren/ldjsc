@@ -3,9 +3,20 @@ export const hbgjAirJs = {
             var commonTime = "";
             if(time){
                 var unixTimestamp = new Date(time*1) ;
-                commonTime = unixTimestamp.toLocaleString();
+                    var vYear = unixTimestamp.getFullYear();
+                    var vMon = unixTimestamp.getMonth()+1;
+                    var vDay = unixTimestamp.getDate();
+                    var hours = unixTimestamp.getHours();
+                    var minutes = unixTimestamp.getMinutes();
+                    var s = unixTimestamp.getSeconds();
+                    var currDay = unixTimestamp.getDate()+2;
+                    var current = vYear + "-" + (vMon < 10 ? "0" + vMon : vMon) + "-"
+                                + (currDay<10 ?  "0"+ currDay : currDay) + " "
+                                + (hours < 10 ? "0" + hours : hours) + ":"
+                                + (minutes < 10 ? "0" + minutes : minutes) + ":"
+                                + (s < 10 ? "0" + s : s)
             }
-             return commonTime;
+             return current;
         },
     //显示顶部数据
     showTopTip: function (res, list) {
