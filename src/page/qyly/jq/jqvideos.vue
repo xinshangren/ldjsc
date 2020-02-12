@@ -99,8 +99,9 @@ export default {
     closePop: function() {
       this.showVido = false;
       if (this.myPlayer != null) {
-        this.myPlayer.dispose();
-        this.myPlayer = null;
+       this.myPlayer.pause();
+       this.myPlayer.dispose();
+       this.myPlayer = null;
       }
     },
     intvideo: function() {
@@ -122,7 +123,15 @@ export default {
         width: "800px",
         //设置视频播放器的显示高度（以像素为单位）
         height: "400px"
-      });
+      }, function() {
+          var newbtn = document.createElement('button');
+          newbtn.setAttribute("class", "vjs-fullscreen-control vjs-control vjs-button");     
+          newbtn.setAttribute("type", "button");     
+          newbtn.setAttribute("id", "downloadButton");     
+          newbtn.innerHTML = '<span aria-hidden="true" style="font-size:26px">×</span><span class="vjs-control-text" aria-live="polite">closeVideo</span>';
+          var controlBar = document.getElementsByClassName('vjs-control-bar')[0];
+          controlBar.appendChild(newbtn);
+        });
     },
     mescrollInit(mescroll) {
       this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
