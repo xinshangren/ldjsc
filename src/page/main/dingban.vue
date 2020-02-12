@@ -225,13 +225,15 @@
           this.$toast("无法拨打自己电话");
         } else {
           if (users.length > 0 && users.length <= 35) {
+            var self= this;
             dd.ready(function () {
               dd.biz.telephone.call({
                 users: users, //用户列表，工号
                 corpId: ddd, //企业id
                 onSuccess: function () { },
                 onFail: function (e) {
-                  this.$toast("钉钉资源不足，请稍后再试");
+                  console.log(e)
+                  self.$toast("钉钉系统原因导致无法拨打，请联系管理员");
                 }
               });
             });

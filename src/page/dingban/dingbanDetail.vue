@@ -16,8 +16,8 @@
                 v-for="(item,index) of list" :key="item.id">
                 <input v-if="item.dingid != null" :id="item.dingid+depart_flag" hidden type="checkbox"
                     :value="item.dingid" v-model="callPhoneList" @change="addPhone($event,null)" />
-                <label @click="errorMsg(item)" v-if=" item.realname != '张志川'"
-                    :for="item.dingid+depart_flag" class="active"></label>
+                <label @click="errorMsg(item)" v-if=" item.realname != '张志川'" :for="item.dingid+depart_flag"
+                    class="active"></label>
                 <div v-else style="width: 26px;"></div>
                 <img :src="item.img" style="margin: 16px 14px 15px 7px;  width: 55px; height: 55px;" />
                 <div style="color: #333333;font-size: 15px;margin-top: 20px;">
@@ -194,7 +194,7 @@
                 }
                 if (self.callPhoneList.length == 0) {
                     self.all_pick_flag = false;
-                }else if(self.callPhoneList_length < this.list_true.length){
+                } else if (self.callPhoneList_length < this.list_true.length) {
                     self.all_pick_flag = false;
                 }
                 this.$emit("addPhone", this.map);
@@ -338,18 +338,21 @@
             },
             //打电话
             goDetile(item) {
+                console.log(item)
                 if (item.dingid != null) {
                     if (item.dingid == global_variable.userId) {
                         this.$toast("无法拨打自己电话");
                     } else {
                         var ddd = this.corpId;
+                        var self= this;
                         dd.ready(function () {
                             dd.biz.telephone.call({
                                 users: [item.dingid], //用户列表，工号
                                 corpId: ddd, //企业id
                                 onSuccess: function () { },
                                 onFail: function (e) {
-                                    this.$toast("钉钉资源不足，请稍后再试");
+                                    console.log(e)
+                                    self.$toast("钉钉系统原因导致无法拨打，请联系管理员");
                                 }
                             });
                         });
