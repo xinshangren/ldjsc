@@ -150,10 +150,10 @@
       <div style="width: 30%;text-align: center;">
         <ul id="top_wgsx_ul1_list" style="height: 100%;overflow: auto;"></ul>
       </div>
-      <div id="top_wgsx_ul2_list1_div" style="width:30%;text-align: center;">
+      <div id="top_wgsx_ul2_list1_div" style="width:40%;text-align: center;">
         <ul id="top_wgsx_ul2_list" style="height: 100%;background:#F9F9F9;overflow: auto;"></ul>
       </div>
-      <div id="top_wgsx_ul3_list1_div" style="width:60%;text-align: center;">
+      <div id="top_wgsx_ul3_list1_div" style="width:40%;text-align: center;">
         <ul
           id="top_wgsx_ul3_list"
           style="padding-top:1px;height: 100%;background:#F0F0F0;overflow: auto;"
