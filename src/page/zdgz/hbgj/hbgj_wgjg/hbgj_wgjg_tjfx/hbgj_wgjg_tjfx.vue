@@ -140,7 +140,7 @@
     <div
       id="wgsx_show_div_select_id1"
       class="top_menu_wgsx_div"
-      style="display:none;left: 0px;top: 179px;width: 100%;font-size:18px"
+      style="display:none;left: 0px;top: 179px;width: 100%;font-size:14px"
     >
       <img
         id="close_wgsx_show_div_select_id1"
@@ -150,10 +150,10 @@
       <div style="width: 30%;text-align: center;">
         <ul id="top_wgsx_ul1_list" style="height: 100%;overflow: auto;"></ul>
       </div>
-      <div id="top_wgsx_ul2_list1_div" style="width:30%;text-align: center;">
+      <div id="top_wgsx_ul2_list1_div" style="width:40%;text-align: center;">
         <ul id="top_wgsx_ul2_list" style="height: 100%;background:#F9F9F9;overflow: auto;"></ul>
       </div>
-      <div id="top_wgsx_ul3_list1_div" style="width:60%;text-align: center;">
+      <div id="top_wgsx_ul3_list1_div" style="width:40%;text-align: center;">
         <ul
           id="top_wgsx_ul3_list"
           style="padding-top:1px;height: 100%;background:#F0F0F0;overflow: auto;"
@@ -535,6 +535,17 @@ export default {
         .getGridInfoList(params)
         .then(res => {
           console.log(res);
+          var vv = "";
+
+          $("#top_wgsx_ul1_list").each(function(){
+              $.each(this.attributes,function(){
+                if(this.name.indexOf("data-v")>=0){
+                  vv = this.name;
+                  return;
+                }
+              });
+          })
+         
           if (res.success == "1") {
             var wgjg_left_area_code = this.wgjg_left_area_codes;
             var result = res.gridList;
@@ -545,7 +556,7 @@ export default {
               var html = "";
               if (wgjg_left_area_code < 2) {
                 html +=
-                  "<li id='555555' class='top_wgsx_li1_noselect'>全部</li>";
+                  "<li id='555555' "+vv+" class='top_wgsx_li1_noselect'>全部</li>";
               } else {
                 //							html += "<li id='555555' class='top_wgsx_li1_noselect'>全部</li>";
               }
@@ -560,7 +571,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -571,7 +582,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -582,7 +593,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -593,7 +604,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -604,7 +615,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -615,7 +626,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -627,14 +638,14 @@ export default {
                         html +=
                           "<li id='" +
                           code +
-                          "' class='top_wgsx_li1_select'>" +
+                          "' "+vv+" class='top_wgsx_li1_select'>" +
                           name +
                           "</li>";
                       } else {
                         html +=
                           "<li id='" +
                           code +
-                          "' class='top_wgsx_li1_noselect'>" +
+                          "' "+vv+" class='top_wgsx_li1_noselect'>" +
                           name +
                           "</li>";
                       }
@@ -642,7 +653,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_noselect'>" +
+                        "' "+vv+" class='top_wgsx_li1_noselect'>" +
                         name +
                         "</li>";
                     }
@@ -696,14 +707,14 @@ export default {
                     html +=
                       "<li id='" +
                       code +
-                      "' class='top_wgsx_li2_select'>" +
+                      "' "+vv+" class='top_wgsx_li2_select'>" +
                       name +
                       "</li>";
                   } else {
                     html +=
                       "<li id='" +
                       code +
-                      "' class='top_wgsx_li2_noselect'>" +
+                      "' "+vv+" class='top_wgsx_li2_noselect'>" +
                       name +
                       "</li>";
                   }
@@ -711,7 +722,7 @@ export default {
                   html +=
                     "<li id='" +
                     code +
-                    "' class='top_wgsx_li2_noselect'>" +
+                    "' "+vv+" class='top_wgsx_li2_noselect'>" +
                     name +
                     "</li>";
                 }
@@ -761,14 +772,14 @@ export default {
                   html +=
                     "<li id='" +
                     code +
-                    "' class='top_wgsx_li3_noselect'>" +
+                    "' "+vv+" class='top_wgsx_li3_noselect'>" +
                     name +
                     "</li>";
                 } else {
                   html +=
                     "<li id='" +
                     code +
-                    "' class='top_wgsx_li3_noselect'>" +
+                    "' "+vv+" class='top_wgsx_li3_noselect'>" +
                     name +
                     "</li>";
                 }

@@ -1,42 +1,43 @@
 <template>
   <div>
   <div
-      id="show_menu_Id"
-      style="position: fixed;left: 20px;background: #ffffff;top: 127px;padding: 3px;z-index:100;"
+      
+      style="display:flex;position: fixed;background: #ffffff;top: 101px;z-index:100;height:100%"
     >
-      <img style="height:23px;" src="../../../../assets/img/data_list_menu.png" />
-    </div>
-    <div
+      <div
       id="menu_ul_id"
-      style="display:none; position: fixed;left: 20px;background: #ffffff;top: 157px;padding: 3px;z-index:100;"
+      style="display:none;left: 20px;background: #e8f4ff;top: 157px;z-index:100;"
     >
       <ul id="menu_ul">
-        <li @click="returnCom(1)" class="menuliClass" style="display:flex;">
-          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+        <li @click="returnCom(1)" class="menuliClass" style="display:flex;margin-top: 10px;">
           <div class="menu_li_div">生产总值</div>
-        </li>
-        <li @click="returnCom(2)" class="menuliClass" style="display:flex;margin-top:4px;">
           <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+        </li>
+        <li @click="returnCom(2)" class="menuliClass" style="display:flex;margin-top:10px;">
           <div class="menu_li_div">社会消费品零售总额</div>
-        </li>
-        <li @click="returnCom(3)" class="menuliClass" style="display:flex;margin-top:4px;">
           <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+        </li>
+        <li @click="returnCom(3)" class="menuliClass" style="display:flex;margin-top:10px;">
           <div class="menu_li_div">工业增加值增加速度</div>
-        </li>
-        <li @click="returnCom(4)" class="menuliClass" style="display:flex;margin-top:4px;">
           <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+        </li>
+        <li @click="returnCom(4)" class="menuliClass" style="display:flex;margin-top:10px;">
           <div class="menu_li_div">固定资产投资</div>
-        </li>
-        <li @click="returnCom(5)" class="menuliClass" style="display:flex;margin-top:4px;">
           <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+        </li>
+        <li @click="returnCom(5)" class="menuliClass" style="display:flex;margin-top:10px;">
           <div class="menu_li_div">一般公共预算收入</div>
-        </li>
-        <li @click="returnCom(6)" class="menuliClass" style="display:flex;margin-top:4px;">
           <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
+        </li>
+        <li @click="returnCom(6)" class="menuliClass" style="display:flex;margin-top:10px;">
           <div class="menu_li_div">人均可支配收入</div>
+          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
         </li>
       </ul>
     </div>
+      <img id="show_menu_Id" style="height:28px;position: absolute; top: 3px; right: -36px;" src="../../../../assets/img/data_list_menu.png" />
+    </div>
+    
 
     <!--生产总值表格-->
     <div style="background:#ffffff;height:337px;width:100%;margin-top:8px;padding-top:7px;">
