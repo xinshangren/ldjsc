@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import homeVue from '@/page/main/home.vue'
 import dingbanVue from '@/page/main/dingban.vue'
+import noticeVue from '@/page/main/notice.vue'
+import noticeDetailVue from '@/page/main/noticeDetail.vue'
+import noticeDetailFjVue from '@/page/main/noticeDetailFj.vue'
 import headlineVue from '@/page/main/headline.vue'
 import picsnewsVue from '@/page/toutiao/picsnews.vue'
 import mljcVue from '@/page/toutiao/mljc.vue'
@@ -12,6 +15,7 @@ import dsjyyjVue from '@/page/dingban/dsjyyj.vue'
 import qxqkfqVue from '@/page/dingban/qxqkfq.vue'
 import gqxwsjVue from '@/page/dingban/gqxwsj.vue'
 import srdVue from '@/page/dingban/srd.vue'
+import dingbanDetailVue from '@/page/dingban/dingbanDetail.vue'
 import newsdetileVue from '@/page/toutiao/newsdetile.vue'
 import ldzcVue from '@/page/toutiao/ldzc.vue'
 import zwgkVue from '@/page/toutiao/zwgk.vue'
@@ -70,8 +74,19 @@ export default new Router({
       path: '/main/headline',
       name: 'headline',
       component: headlineVue
-    }, 
-    {
+    }, {
+      path: '/main/notice',
+      name: 'notice',
+      component: noticeVue
+    },{
+      path: 'main/noticeDetail',
+      name: 'noticeDetail',
+      component: noticeDetailVue
+    },{
+      path: 'main/noticeDetailFj',
+      name: 'noticeDetailFj',
+      component: noticeDetailFjVue
+    },{
       path: '/toutiao/picsnews',
       name: 'picsnews',
       component: picsnewsVue
@@ -103,7 +118,11 @@ export default new Router({
       path: '/dingban/qxqkfq',
       name: 'qxqkfq',
       component: qxqkfqVue
-    }, {
+    },{
+      path: '/dingban/dingbanDetail',
+      name: 'dingbanDetail',
+      component: dingbanDetailVue
+    },{
       path: '/toutiao/newsdetile',
       name: 'newsdetile',
       component: newsdetileVue
