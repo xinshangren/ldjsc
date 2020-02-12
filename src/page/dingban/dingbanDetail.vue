@@ -14,9 +14,9 @@
             error-text="查询失败" style="background: #F7F7F7;padding: 0 13px 13px 13px;overflow-y: auto;">
             <div style="width: 100%;display: flex; position: relative; margin-top: 4px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 87px;"
                 v-for="(item,index) of list" :key="item.id">
-                <input v-if="item.dingid != null" :id="item.dingid+depart_flag" hidden type="checkbox" :value="item.dingid"
-                    v-model="callPhoneList" @change="addPhone($event)" />
-                <label @click="errorMsg(item)" v-if="item.realname != '刘锋' && item.realname != '张志川'"
+                <input v-if="item.dingid != null" :id="item.dingid+depart_flag" hidden type="checkbox"
+                    :value="item.dingid" v-model="callPhoneList" @change="addPhone($event,null)" />
+                <label @click="errorMsg(item)" v-if=" item.realname != '张志川'"
                     :for="item.dingid+depart_flag" class="active"></label>
                 <div v-else style="width: 26px;"></div>
                 <img :src="item.img" style="margin: 16px 14px 15px 7px;  width: 55px; height: 55px;" />
@@ -25,7 +25,7 @@
                     <div style="margin-top: 16px;font-size: 13px;">{{item.dutyName}}</div>
                 </div>
                 <div style="display: flex; position: absolute; right: 10px;top: 20px;">
-                    <img v-if="item.realname != '刘锋' && item.realname != '张志川' " src="../../assets/img/phonecall.png"
+                    <img v-if="item.realname != '张志川' " src="../../assets/img/phonecall.png"
                         style="width: 50px;height:50px;" @click="goDetile(item)" />
                     <img v-else src="../../assets/img/no_phonecall.png" style="width: 50px;height:50px;" />
                     <!-- <img
@@ -74,23 +74,44 @@
                 list_true: [],
             };
         },
-        props: ["departId", "callPhoneList_p", "depart_flag"],
+        props: ["departId", "callPhoneList_p", "depart_flag", "child_phoneList"],
         mounted() {
             var orderHight1 = document.documentElement.clientHeight;
             var heightlist = orderHight1 - 196;
             document.getElementById(this.departId).style.height = heightlist + "px";
             this.gojq();
             this.getUserOrDepart(this.departId);
-            console.log(this.callPhoneList_p);
-            console.log(this.callPhoneList)
+
+            this.$root.$on('test11', data => {
+                this.change_list(data);
+            })
         },
         methods: {
+            change_list: function (data) {
+                console.log(data)
+                this.list_true.forEach(e => {
+                    if (data.indexOf(e.dingid) > -1) {
+                        if (this.callPhoneList.indexOf(e.dingid) > -1) {
+                        } else {
+                            this.callPhoneList.push(e.dingid);
+                        }
+                    } else {
+                        if (this.callPhoneList.indexOf(e.dingid) > -1) {
+                            var index = this.callPhoneList.indexOf(e.dingid);
+                            this.callPhoneList.splice(index, 1);
+                        } else {
+                        }
+                    }
+                });
+                this.addPhone(null, null)
+                console.log(this.callPhoneList)
+            },
             all_pick: function () {
                 var self = this;
                 if (self.all_pick_flag) {
                     self.all_pick_flag = false;
                     self.callPhoneList = [];
-                    self.addPhone(null);
+                    self.addPhone(null, false);
                 } else {
                     var list = self.list_true;
                     var list1 = [];
@@ -119,7 +140,7 @@
                                 }
                             }
                         });
-                        self.addPhone(null);
+                        self.addPhone(null, true);
                     }
                 }
             },
@@ -147,8 +168,17 @@
                     }
                 }
             },
-            addPhone: function (e) {
+            addPhone: function (e, flag) {
                 var self = this;
+                this.map.callPhoneList = this.callPhoneList;
+                this.map.flag = self.depart_flag;
+                if (e == null && flag != null && !flag) {
+                    this.map.del_list = [];
+                    this.list_true.forEach(element => {
+                        this.map.del_list.push(element.dingid);
+                    });
+                }
+
                 if (e != null && e.target.checked) {
                     if (self.callPhoneList_p.length >= 35) {
                         e.target.checked = false;
@@ -159,14 +189,14 @@
                 }
                 if (e != null && !e.target.checked) {
                     e.target.checked = false;
+                    this.map.del_list = [];
+                    this.map.del_list.push(e.target.value)
                 }
                 if (self.callPhoneList.length == 0) {
                     self.all_pick_flag = false;
+                }else if(self.callPhoneList_length < this.list_true.length){
+                    self.all_pick_flag = false;
                 }
-                this.map.callPhoneList = this.callPhoneList;
-                this.map.flag = self.depart_flag;
-                console.log("子页面返回参数");
-                console.log(this.map);
                 this.$emit("addPhone", this.map);
             },
             errorMsg: function (item) {
@@ -182,16 +212,12 @@
                 httpMethod
                     .getUserOrDepart(params)
                     .then(res => {
-                        console.log(params);
-                        console.log(res);
                         if (res.success == "1") {
                             if (res.userList != null) {
                                 var count = 0
                                 var datalist = [];
                                 res.userList.forEach(element => {
-                                    if (element.realname == '刘锋') {
-                                        count++;
-                                    } else if (element.realname == '张志川') {
+                                    if (element.realname == '张志川') {
                                         count++;
                                     } else {
                                         datalist.push(element);
@@ -200,18 +226,23 @@
                                 this.list = this.list.concat(res.userList);
                                 this.list_true = this.list_true.concat(datalist);
                                 this.callPhoneList_length = this.list.length - count;
-                                var count = 0;
-                                this.callPhoneList_p.forEach(element => {
-                                    this.list_true.forEach(element1 => {
-                                        if (element == element1.dingid) {
-                                            count++;
-                                            this.callPhoneList.push(element1.dingid);
+                                var child_list = this.child_phoneList;
+                                var phone_list = this.callPhoneList_p;
+                                this.list_true.forEach(e => {
+                                    if (phone_list.indexOf(e.dingid) > -1) {
+                                        if (this.callPhoneList.indexOf(e.dingid) > -1) {
+                                        } else {
+                                            this.callPhoneList.push(e.dingid);
                                         }
-                                    });
+                                    } else {
+                                        if (this.callPhoneList.indexOf(e.dingid) > -1) {
+                                            var index = this.callPhoneList.indexOf(e.dingid);
+                                            this.callPhoneList.splice(index, 1);
+                                        } else {
+                                        }
+                                    }
                                 });
-                                if(count == 0){
-                                    this.callPhoneList = [];
-                                }
+                                this.addPhone(null, null);
                                 for (var i = 0; i < this.list.length; i++) {
                                     this.list[i].img =
                                         httpMethod.returnBaseUrlFun() + this.list[i].img;
@@ -239,7 +270,7 @@
             onLoad() {
                 //上拉加载
                 this.error = false;
-               
+
             },
             gojq: function () {
                 var currentUrl = window.location.href; //当前页面地址

@@ -71,7 +71,7 @@
           </div>
           <div id="yjzlid" class="ui-col ui-col index_top_div_style" style="display:none;" @click="gotoYjzl()">
             <img src="@/assets/img/zl.png" class="home_top_img" />
-            <div class="appvueRightFont">直联</div>
+            <div class="appvueRightFont">直连</div>
           </div>
         </div>
       </div>
