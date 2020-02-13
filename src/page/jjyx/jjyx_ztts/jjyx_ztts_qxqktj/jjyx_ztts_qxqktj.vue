@@ -6,42 +6,10 @@
 
 <template>
   <div>
-    <div id="menu_ul_id"
-      style=" display:flex;position: fixed;background: rgb(232, 244, 255);top: 101px;z-index:100;height:100%;left: -163px;">
-      <div style="left: 20px;background: rgb(232, 244, 255);top: 157px;z-index:100;">
-        <ul id="menu_ul">
-          <li @click="returnCom(1)" class="menuliClass" style="display:flex;margin-top: 10px;">
-            <div class="menu_li_div">生产总值</div>
-            <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          </li>
-          <li @click="returnCom(2)" class="menuliClass" style="display:flex;margin-top:10px;">
-            <div class="menu_li_div">社会消费品零售总额</div>
-            <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          </li>
-          <li @click="returnCom(3)" class="menuliClass" style="display:flex;margin-top:10px;">
-            <div class="menu_li_div">工业增加值增加速度</div>
-            <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          </li>
-          <li @click="returnCom(4)" class="menuliClass" style="display:flex;margin-top:10px;">
-            <div class="menu_li_div">固定资产投资</div>
-            <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          </li>
-          <li @click="returnCom(5)" class="menuliClass" style="display:flex;margin-top:10px;">
-            <div class="menu_li_div">一般公共预算收入</div>
-            <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          </li>
-          <li @click="returnCom(6)" class="menuliClass" style="display:flex;margin-top:10px;">
-            <div class="menu_li_div">人均可支配收入</div>
-            <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          </li>
-        </ul>
-      </div>
-      <img id="show_menu_Id" style="height:28px;position: absolute; top: 3px; right: -36px;"
-        src="../../../../assets/img/data_list_menu.png" />
-    </div>
+    
 
     <!--生产总值表格-->
-    <div class="content" style="background:#ffffff;height:337px;width:100%;margin-top:8px;padding-top:7px;">
+    <div class="content" style="background:#ffffff;height:337px;width:100%;margin-top:0px;padding-top:7px;">
       <div class="echars_titile_div" style="margin-top: 4px;">生产总值</div>
       <div class="van-hairline--bottom" style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"></div>
       <div id="sczzTable" style="border: 1px solid #cccccc;width: 93%;margin: auto;margin-top: 20px;">
@@ -399,42 +367,15 @@
           .siblings("li")
           .css("background", "#ffffff");
       });
-      $("#show_menu_Id").click(function () {
-        // if ($("#menu_ul_id").is(":hidden")) {
-        //   $("#menu_ul_id").animate({left:"-287"},600);
-        //   $(".content").animate({ 'left': '156px' }, 500);
-        //   $('#jjyx_tabs').animate({ 'left': '156px' }, 500);
-        // } else {
-        //   $("#menu_ul_id").slideUp("slow");
-        //   $(".content").removeClass('right');
-        //   $('#jjyx_tabs').css('margin-left', '0px');
-        // }
-        if ($("#menu_ul_id").css('left') == '-163px') {
-          $("#menu_ul_id").animate({ 'left': '0px' }, 500);
-          $(".content").animate({ 'margin-left': '156px' }, 500);
-          $('#jjyx_tabs').animate({ 'margin-left': '156px' }, 500);
-        } else {
-          $("#menu_ul_id").animate({ 'left': '-163px' }, 500);
-          $(".content").animate({ 'margin-left': '0px' }, 500);
-          $('#jjyx_tabs').animate({ 'margin-left': '0px' }, 500);
-        }
-      });
-      $('body').click(function (e) {
-        if (e.target.id != 'show_menu_Id')
-          if ($("#menu_ul_id").css('left') == '-163px') {
-          } else {
-            $("#menu_ul_id").animate({ 'left': '-163px' }, 500);
-            $(".content").animate({ 'margin-left': '0px' }, 500);
-            $('#jjyx_tabs').animate({ 'margin-left': '0px' }, 500);
-          }
-      })
+     
     },
     methods: {
       returnCom(flag) {
+        $('.menuliClass').css('background','rgb(255,243,255)')
         var returnEle = null;
         $("#menu_ul_id").animate({ 'left': '-163px' }, 500);
-        $(".content").animate({ 'margin-left': '0px' }, 500);
-        $('#jjyx_tabs').animate({ 'margin-left': '0px' }, 500);
+          $("#child_page").animate({ 'left': '0px' }, 500);
+          $('#jjyx_tabs').animate({ 'left': '0px' }, 500);
         switch (flag) {
           case 1:
             returnEle = document.getElementById("sczzTable");
@@ -459,7 +400,7 @@
         }
         //  $("#myCharts6").scrollIntoView(true);
         if (returnEle) {
-          returnEle.scrollIntoView();
+          returnEle.scrollIntoView({block: "end"});
         }
       },
       selectTab: function (flag) {
