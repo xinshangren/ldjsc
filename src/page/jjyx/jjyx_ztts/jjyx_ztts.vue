@@ -37,7 +37,7 @@
       </div>
 
       <div
-        style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 1;"
+        id="monthSelect" style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 1;"
       >
         <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
           <div class="ui-col ui-col" @click="upYearClick">
