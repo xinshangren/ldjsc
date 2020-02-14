@@ -12,14 +12,14 @@
       <van-tab name="1">
         <div slot="title" style="font-size:15px;display:flex;">
           <img id="tab1" :src="img1" class="tabimg" />
-          <div id="tab1_div"  style="margin-left:4px;">项目详情</div>
+          <div id="tab1_div" style="margin-left:4px;">项目详情</div>
         </div>
 
         <div style="height:46px;background:#F1F4F6;">
           <div style="position:relative;height:46px;padding-left: 18px;">
             <div style="height: 11px;"></div>
             <div
-            class="deali_title_style"
+              class="deali_title_style"
               style="border-left:2px solid #3097FB;color: #3097FB;text-align: left;padding-left: 13px;height: 20px;"
             >项目基本详情</div>
             <img
@@ -39,25 +39,39 @@
             <img class="deali_small_img_style" src="../../../../../assets/img/1icon-xmbh.png" />
             <div class="deali_font_style" style="color: #999999;">项目编号</div>
           </div>
-          <div class="deali_font_style" style="color: #333333;margin-top: 10px;">{{itemEnti.projectCode}}</div>
+          <div
+            class="deali_font_style"
+            style="color: #333333;margin-top: 10px;"
+          >{{itemEnti.projectCode}}</div>
         </div>
         <div style="margin: 20px;text-align: left;font-size:18px;">
           <div style="display:flex;">
-            <img class="deali_small_img_style" src="../../../../../assets/img/1icon-xmmc.png"  />
+            <img class="deali_small_img_style" src="../../../../../assets/img/1icon-xmmc.png" />
             <div class="deali_font_style" style="color: #999999;">项目名称</div>
           </div>
-          <div class="deali_font_style" style="color: #333333;margin-top: 10px;">{{itemEnti.projectName}}</div>
+          <div
+            class="deali_font_style"
+            style="color: #333333;margin-top: 10px;"
+          >{{itemEnti.projectName}}</div>
         </div>
         <van-divider :style="{ padding: '0 20px' }"></van-divider>
         <div style="margin: 20px;text-align: left;font-size:18px;">
           <div style="display:flex;">
             <div style="width: 48%;">
               <div style=" display:flex;">
-                <img class="deali_small_img_style" src="../../../../../assets/img/1icon-ry.png"  />
+                <img class="deali_small_img_style" src="../../../../../assets/img/1icon-ry.png" />
                 <div class="deali_font_style" style="color: #999999;">包联领导</div>
               </div>
-              <div class="deali_font_style" v-if="itemEnti.contractPerson!=''" style="color: #333333;margin-top: 8px;">{{itemEnti.contractPerson}}</div>
-              <div class="deali_font_style" v-if="itemEnti.contractPerson==''"  style="color: #333333;margin-top: 8px;">暂无</div>
+              <div
+                class="deali_font_style"
+                v-if="itemEnti.contractPerson!=''"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.contractPerson}}</div>
+              <div
+                class="deali_font_style"
+                v-if="itemEnti.contractPerson==''"
+                style="color: #333333;margin-top: 8px;"
+              >暂无</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
@@ -67,16 +81,22 @@
                 <img class="deali_small_img_style" src="../../../../../assets/img/1icon-xmjsxz.png" />
                 <div class="deali_font_style" style="color: #999999;">项目建设性质</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.projectNatureName}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.projectNatureName}}</div>
             </div>
           </div>
           <div style="display:flex;margin-top: 20px;">
             <div style="width: 48%;">
               <div style=" display:flex;">
-                <img class="deali_small_img_style" src="../../../../../assets/img/1icon-zdxmlx.png"  />
+                <img class="deali_small_img_style" src="../../../../../assets/img/1icon-zdxmlx.png" />
                 <div class="deali_font_style" style="color: #999999;">重点项目类型</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.zdProTypeName}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.zdProTypeName}}</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
@@ -84,59 +104,82 @@
             <div style="width: 48%;">
               <div style="display:flex;">
                 <img class="deali_small_img_style" src="../../../../../assets/img/1icon-zdxmdj.png" />
-                <div class="deali_font_style"  style="color: #999999;">重点项目等级</div>
+                <div class="deali_font_style" style="color: #999999;">重点项目等级</div>
               </div>
-              <div class="deali_font_style"  style="color: #333333;margin-top: 8px;">{{itemEnti.zdProLevelName}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.zdProLevelName}}</div>
             </div>
           </div>
         </div>
         <div style="display:flex;margin: 20px;text-align: left;font-size:18px;">
           <div style="width: 48%;">
             <div style=" display:flex;">
-              <img class="deali_small_img_style"  src="../../../../../assets/img/1icon-xmsuhy.png" />
-              <div class="deali_font_style"  style="color: #999999;">项目所属行业</div>
+              <img class="deali_small_img_style" src="../../../../../assets/img/1icon-xmsuhy.png" />
+              <div class="deali_font_style" style="color: #999999;">项目所属行业</div>
             </div>
-            <div class="deali_font_style"  style="color: #333333;margin-top: 8px;">{{itemEnti.projectIndustryName}}</div>
+            <div
+              class="deali_font_style"
+              style="color: #333333;margin-top: 8px;"
+            >{{itemEnti.projectIndustryName}}</div>
           </div>
           <div
             style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
           ></div>
           <div style="width: 48%;">
             <div style="display:flex;">
-              <img class="deali_small_img_style"  src="../../../../../assets/img/1icon-cylxdl.png" />
-              <div class="deali_font_style"  style="color: #999999;">产业类型大类</div>
+              <img class="deali_small_img_style" src="../../../../../assets/img/1icon-cylxdl.png" />
+              <div class="deali_font_style" style="color: #999999;">产业类型大类</div>
             </div>
-            <div class="deali_font_style" v-if="itemEnti.industryFirstType!=''"  style="color: #333333;margin-top: 8px;">{{itemEnti.industryFirstType}}</div>
-             <div class="deali_font_style" v-if="itemEnti.industryFirstType==''"   style="color: #333333;margin-top: 8px;">暂无</div>
+            <div
+              class="deali_font_style"
+              v-if="itemEnti.industryFirstType!=''"
+              style="color: #333333;margin-top: 8px;"
+            >{{itemEnti.industryFirstType}}</div>
+            <div
+              class="deali_font_style"
+              v-if="itemEnti.industryFirstType==''"
+              style="color: #333333;margin-top: 8px;"
+            >暂无</div>
           </div>
         </div>
 
         <div style="margin: 20px;text-align: left;">
           <div style="display:flex;">
-            <img class="deali_small_img_style"  src="../../../../../assets/img/1icon-cylx.png" />
-            <div class="deali_font_style"  style="color: #999999;">产业类型</div>
+            <img class="deali_small_img_style" src="../../../../../assets/img/1icon-cylx.png" />
+            <div class="deali_font_style" style="color: #999999;">产业类型</div>
           </div>
-          <div class="deali_font_style"  style="color: #333333;margin-top: 10px;">{{itemEnti.industryType}}</div>
+          <div
+            class="deali_font_style"
+            style="color: #333333;margin-top: 10px;"
+          >{{itemEnti.industryType}}</div>
         </div>
         <van-divider :style="{ padding: '0 20px' }"></van-divider>
         <div style="margin: 20px;text-align: left;font-size:18px;">
           <div style="display:flex;">
             <div style="width: 48%;">
               <div style=" display:flex;">
-                <img src="../../../../../assets/img/1icon-jhkgnx.png"  class="deali_small_img_style"  />
-                <div class="deali_font_style"  style="color: #999999;">计划开工年限</div>
+                <img src="../../../../../assets/img/1icon-jhkgnx.png" class="deali_small_img_style" />
+                <div class="deali_font_style" style="color: #999999;">计划开工年限</div>
               </div>
-              <div class="deali_font_style"  style="color: #333333;margin-top: 8px;">{{itemEnti.planWorkDate}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.planWorkDate}}</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
             ></div>
             <div style="width: 48%;">
               <div style="display:flex;">
-                <img src="../../../../../assets/img/1icon-jhwgnx.png"  class="deali_small_img_style"  />
-                <div class="deali_font_style"  style="color: #999999;">计划完工年限</div>
+                <img src="../../../../../assets/img/1icon-jhwgnx.png" class="deali_small_img_style" />
+                <div class="deali_font_style" style="color: #999999;">计划完工年限</div>
               </div>
-              <div class="deali_font_style"  style="color: #333333;margin-top: 8px;">{{itemEnti.planEndDate}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.planEndDate}}</div>
             </div>
           </div>
         </div>
@@ -144,62 +187,83 @@
           <div style="display:flex;">
             <div style="width: 48%;">
               <div style=" display:flex;">
-                <img src="../../../../../assets/img/1icon-xmgsztz.png"  class="deali_small_img_style"  />
-                <div class="deali_font_style"  style="color: #999999;">项目估算总投资</div>
+                <img
+                  src="../../../../../assets/img/1icon-xmgsztz.png"
+                  class="deali_small_img_style"
+                />
+                <div class="deali_font_style" style="color: #999999;">项目估算总投资</div>
               </div>
-              <div class="deali_font_style"  style="color: #333333;margin-top: 8px;">{{itemEnti.projectEstimatedTotal}}亿</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.projectEstimatedTotal}}亿</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
             ></div>
             <div style="width: 48%;">
               <div style="display:flex;">
-                <img src="../../../../../assets/img/1icon-bnjhtz.png"  class="deali_small_img_style"  />
-                <div class="deali_font_style"  style="color: #999999;">本年计划投资</div>
+                <img src="../../../../../assets/img/1icon-bnjhtz.png" class="deali_small_img_style" />
+                <div class="deali_font_style" style="color: #999999;">本年计划投资</div>
               </div>
-              <div class="deali_font_style"  style="color: #333333;margin-top: 8px;">{{itemEnti.yearPlanInvest}}亿</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.yearPlanInvest}}亿</div>
             </div>
           </div>
         </div>
         <div style="margin: 20px;text-align: left;">
           <div style="display:flex;">
-            <img src="../../../../../assets/img/1icon-tzwce.png"  class="deali_small_img_style"  />
-            <div class="deali_font_style"  style="color: #999999;">投资完成额</div>
+            <img src="../../../../../assets/img/1icon-tzwce.png" class="deali_small_img_style" />
+            <div class="deali_font_style" style="color: #999999;">投资完成额</div>
           </div>
-          <div class="deali_font_style" style="color: #333333;margin-top: 10px;">{{itemEnti.investment}}亿</div>
+          <div
+            class="deali_font_style"
+            style="color: #333333;margin-top: 10px;"
+          >{{itemEnti.investment}}亿</div>
         </div>
         <van-divider :style="{ padding: '0 20px' }"></van-divider>
         <div style="margin:20px;display:flex;">
-          <img src="../../../../../assets/img/1icon-xpxx.png"  class="deali_small_img_style"  />
-          <div class="deali_font_style"  style="color: #3ca1ec;">审批信息</div>
+          <img src="../../../../../assets/img/1icon-xpxx.png" class="deali_small_img_style" />
+          <div class="deali_font_style" style="color: #3ca1ec;">审批信息</div>
         </div>
         <div style="display: flex;margin-left: 20px;text-align: left;font-size: 18px;">
           <img src="../../../../../assets/img/sp.png" class="deali_jdimg_style" style="width: 7px;" />
           <div style="margin-left:20px;">
-            <div class="deali_font_style"  style="color: #999999;">国土审批文号</div>
-            <div class="deali_font_style"  style="margin-top:10px;color: #333333;">{{itemEnti.land}}</div>
-            <div class="deali_font_style"  style="margin-top:15px;color: #999999;">环保审批文号</div>
-            <div class="deali_font_style"  style="margin-top:10px;color: #333333;">{{itemEnti.eia}}</div>
+            <div class="deali_font_style" style="color: #999999;">国土审批文号</div>
+            <div class="deali_font_style" style="margin-top:10px;color: #333333;">{{itemEnti.land}}</div>
+            <div class="deali_font_style" style="margin-top:15px;color: #999999;">环保审批文号</div>
+            <div class="deali_font_style" style="margin-top:10px;color: #333333;">{{itemEnti.eia}}</div>
             <div class="deali_font_style" style="margin-top:15px;color: #999999;">立项审批文号</div>
-            <div class="deali_font_style"  style="margin-top:10px;color: #333333;">{{itemEnti.approval}}</div>
-            <div class="deali_font_style"  style="margin-top:15px;color: #999999;">规划审批文号</div>
-            <div class="deali_font_style"  style="margin-top:10px;color: #333333;">{{itemEnti.plan}}</div>
+            <div
+              class="deali_font_style"
+              style="margin-top:10px;color: #333333;"
+            >{{itemEnti.approval}}</div>
+            <div class="deali_font_style" style="margin-top:15px;color: #999999;">规划审批文号</div>
+            <div class="deali_font_style" style="margin-top:10px;color: #333333;">{{itemEnti.plan}}</div>
           </div>
         </div>
         <van-divider :style="{ padding: '0 20px' }"></van-divider>
         <div style="margin: 20px;text-align: left;">
           <div style="display:flex;">
-            <img src="../../../../../assets/img/1icon-jsgmjnr.png"  class="deali_small_img_style"  />
+            <img src="../../../../../assets/img/1icon-jsgmjnr.png" class="deali_small_img_style" />
             <div class="deali_font_style" style="color: #999999;">建设规模及内容</div>
           </div>
-          <div class="deali_font_style" style="color: #333333;margin-top: 10px;">{{itemEnti.scaleAndContent}}</div>
+          <div
+            class="deali_font_style"
+            style="color: #333333;margin-top: 10px;"
+          >{{itemEnti.scaleAndContent}}</div>
         </div>
         <div style="margin: 20px;text-align: left;">
           <div style="display:flex;">
-            <img src="../../../../../assets/img/1icon-bnjsnr.png"  class="deali_small_img_style"  />
+            <img src="../../../../../assets/img/1icon-bnjsnr.png" class="deali_small_img_style" />
             <div class="deali_font_style" style="color: #999999;">本年建设内容</div>
           </div>
-          <div class="deali_font_style" style="color: #333333;margin-top: 10px;">{{itemEnti.mainContent}}</div>
+          <div
+            class="deali_font_style"
+            style="color: #333333;margin-top: 10px;"
+          >{{itemEnti.mainContent}}</div>
         </div>
         <div style="height:47px;background:#F1F4F6;">
           <div style="position:relative;height:46px;padding-left: 18px;">
@@ -218,50 +282,70 @@
           <div style="display:flex;">
             <div style="width: 48%;">
               <div style=" display:flex;">
-                <img src="../../../../../assets/img/1icon-dw.png"  class="deali_small_img_style"  />
-                <div  class="deali_font_style" style="color: #999999;">建设单位</div>
+                <img src="../../../../../assets/img/1icon-dw.png" class="deali_small_img_style" />
+                <div class="deali_font_style" style="color: #999999;">建设单位</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.comName}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.comName}}</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
             ></div>
             <div style="width: 48%;">
               <div style="display:flex;">
-                <img src="../../../../../assets/img/1icon-dw.png"  class="deali_small_img_style"  />
-                <div  class="deali_font_style" style="color: #999999;">负责单位</div>
+                <img src="../../../../../assets/img/1icon-dw.png" class="deali_small_img_style" />
+                <div class="deali_font_style" style="color: #999999;">负责单位</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.comName}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.comName}}</div>
             </div>
           </div>
         </div>
         <div style="margin: 20px;text-align: left;font-size:18px;">
           <div style="display:flex;">
-            <img src="../../../../../assets/img/1icon-zjdm.png"  class="deali_small_img_style"  />
+            <img src="../../../../../assets/img/1icon-zjdm.png" class="deali_small_img_style" />
             <div class="deali_font_style" style="color: #999999;">证照代码</div>
           </div>
-          <div class="deali_font_style" style="color: #333333;margin-top: 10px;">{{itemEnti.licenceCode}}</div>
+          <div
+            class="deali_font_style"
+            style="color: #333333;margin-top: 10px;"
+          >{{itemEnti.licenceCode}}</div>
         </div>
         <van-divider :style="{ padding: '0 20px' }"></van-divider>
         <div style="margin: 20px;text-align: left;font-size:18px;">
           <div style="display:flex;">
             <div style="width: 48%;">
               <div style=" display:flex;">
-                <img src="../../../../../assets/img/1icon-ry.png"  class="deali_small_img_style"  />
+                <img src="../../../../../assets/img/1icon-ry.png" class="deali_small_img_style" />
                 <div class="deali_font_style" style="color: #999999;">法人代表姓名</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.zdgcProComInfoId.legalPerson}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.zdgcProComInfoId.legalPerson}}</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
             ></div>
             <div style="width: 48%;">
               <div style="display:flex;">
-                <img src="../../../../../assets/img/1icon-zjdm.png"  class="deali_small_img_style"  />
+                <img src="../../../../../assets/img/1icon-zjdm.png" class="deali_small_img_style" />
                 <div class="deali_font_style" style="color: #999999;">法人联系方式</div>
               </div>
-              <div class="deali_font_style" v-if="itemEnti.zdgcProComInfoId.legalPhone!=''" style="color: #333333;margin-top: 8px;">{{itemEnti.zdgcProComInfoId.legalPhone}}</div>
-              <div class="deali_font_style" v-if="itemEnti.zdgcProComInfoId.legalPhone==''" style="color: #333333;margin-top: 8px;">暂无</div>
+              <div
+                class="deali_font_style"
+                v-if="itemEnti.zdgcProComInfoId.legalPhone!=''"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.zdgcProComInfoId.legalPhone}}</div>
+              <div
+                class="deali_font_style"
+                v-if="itemEnti.zdgcProComInfoId.legalPhone==''"
+                style="color: #333333;margin-top: 8px;"
+              >暂无</div>
             </div>
           </div>
         </div>
@@ -269,20 +353,26 @@
           <div style="display:flex;">
             <div style="width: 48%;">
               <div style=" display:flex;">
-                <img src="../../../../../assets/img/1icon-ry.png"  class="deali_small_img_style"  />
+                <img src="../../../../../assets/img/1icon-ry.png" class="deali_small_img_style" />
                 <div class="deali_font_style" style="color: #999999;">负责人姓名</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.zdgcProComInfoId.chargeName}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.zdgcProComInfoId.chargeName}}</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
             ></div>
             <div style="width: 48%;">
               <div style="display:flex;">
-                <img src="../../../../../assets/img/1icon-zjdm.png"  class="deali_small_img_style"  />
+                <img src="../../../../../assets/img/1icon-zjdm.png" class="deali_small_img_style" />
                 <div class="deali_font_style" style="color: #999999;">负责人联系方式</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.zdgcProComInfoId.chargePhone}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.zdgcProComInfoId.chargePhone}}</div>
             </div>
           </div>
         </div>
@@ -290,26 +380,32 @@
           <div style="display:flex;">
             <div style="width: 48%;">
               <div style=" display:flex;">
-                <img src="../../../../../assets/img/1icon-ry.png"  class="deali_small_img_style"  />
+                <img src="../../../../../assets/img/1icon-ry.png" class="deali_small_img_style" />
                 <div class="deali_font_style" style="color: #999999;">报表人姓名</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.zdgcProComInfoId.reportName}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.zdgcProComInfoId.reportName}}</div>
             </div>
             <div
               style="height: 25px;width: 1px;background: #dddddd;margin-right:4%;margin-top: 10px;"
             ></div>
             <div style="width: 48%;">
               <div style="display:flex;">
-                <img src="../../../../../assets/img/1icon-zjdm.png"  class="deali_small_img_style"  />
+                <img src="../../../../../assets/img/1icon-zjdm.png" class="deali_small_img_style" />
                 <div class="deali_font_style" style="color: #999999;">报表人联系方式</div>
               </div>
-              <div class="deali_font_style" style="color: #333333;margin-top: 8px;">{{itemEnti.zdgcProComInfoId.reportPhone}}</div>
+              <div
+                class="deali_font_style"
+                style="color: #333333;margin-top: 8px;"
+              >{{itemEnti.zdgcProComInfoId.reportPhone}}</div>
             </div>
           </div>
         </div>
         <van-divider :style="{ padding: '0 20px' }"></van-divider>
         <div style="margin: 20px;text-align: left;font-size:18px;">
-          <div   class="deali_title_style" style="color: #333333;">项目规划图</div>
+          <div class="deali_title_style" style="color: #333333;">项目规划图</div>
           <van-swipe :autoplay="3000">
             <van-swipe-item v-for="(image, index) in images" :key="index">
               <img v-lazy="image" style="width: 100%;" @click="imgPreview(index)" />
@@ -389,7 +485,7 @@
                 v-show="isFlag"
                 style="height: 300px;padding: 28px;line-height: 26px;overflow: auto;"
               ></div>
-              <div v-show="!isFlag" style="height:346px;">
+              <div v-show="!isFlag" style="height:346px;margin-top:12px;">
                 <div
                   v-for="(item,index) in dataList"
                   :key="index"
@@ -409,7 +505,7 @@
                       >暂无</div>
                       <div
                         class="van-multi-ellipsis--l2"
-                         v-if="item.existingProblem!=''"
+                        v-if="item.existingProblem!=''"
                         style="font-size: 12px;margin-left: 11px;width: 243px;"
                       >{{item.existingProblem}}</div>
                     </div>
@@ -431,13 +527,11 @@
                 </div>
               </div>
               <div
-              class="volice_out_img_style"
+                @click="doTTS()"
+                class="volice_out_img_style"
                 style="background: rgb(39, 150, 231);border-radius: 50%;text-align: center;margin: 0 auto;position: absolute;bottom: 10px;left: 42%;"
               >
-                <img
-                  class="volice_img_style" style="padding-bottom:4px;"
-                  src="../../../../../assets/img/icon_voice.png"
-                />
+                <img class="volice_img_style" style="padding-bottom:4px;" :src="stopImg" />
               </div>
             </div>
           </van-popup>
@@ -451,18 +545,31 @@
               <img src="../../../../../assets/img/deimg.jpg" style="width: 35%;" />
               <div style="margin-left:10px;text-align: left;width: 65%;font-size: 15px">
                 <div class="deali_jdhb_font_style" style="color:#333333;">{{item.reportDate}}</div>
-                <div class="van-multi-ellipsis--l3" style="-webkit-line-clamp:4;font-size:14px;">{{item.imageProgress}}</div>
+                <div
+                  class="van-multi-ellipsis--l3"
+                  style="-webkit-line-clamp:4;font-size:14px;"
+                >{{item.imageProgress}}</div>
                 <!-- <textarea
                 class="deali_jdhb_font_style"
                   style="color:#999999;height: 80px;width: 100%;border:none;resize: none;overflow:hidden"
                   readonly
-                ></textarea> -->
+                ></textarea>-->
               </div>
             </div>
           </van-list>
         </div>
       </van-tab>
     </van-tabs>
+    <div id="bdtts_div_id">
+      <!-- <audio id="tts_autio_id" autoplay="autoplay">
+        <source
+          id="tts_source_id"
+          src="http://tts.baidu.com/text2audio?lan=zh&amp;ie=UTF-8&amp;spd=5&amp;per=1&amp;text=请输入文字"
+          type="audio/mpeg"
+        />
+        <embed id="tts_embed_id" height="0" width="0" src />
+      </audio>-->
+    </div>
   </div>
 </template>
 <script>
@@ -476,7 +583,7 @@ import Vant, { Lazyload } from "vant";
 import { ImagePreview } from "vant";
 import { PullRefresh } from "vant";
 import { Field } from "vant";
-import { Popup,Dialog} from "vant";
+import { Popup, Dialog } from "vant";
 
 Vue.use(Popup);
 Vue.use(PullRefresh);
@@ -485,7 +592,9 @@ Vue.use(ImagePreview);
 Vue.use(Lazyload);
 Vue.use(Swipe).use(SwipeItem);
 Vue.use(Divider);
-Vue.use(Tab).use(Tabs).use(Dialog);
+Vue.use(Tab)
+  .use(Tabs)
+  .use(Dialog);
 export default {
   name: "zdgcdetile",
   beforeCreate() {
@@ -513,6 +622,10 @@ export default {
       isFlag: true,
       tabimg1: require("../../../../../assets/img/icon_report1_selected.png"),
       tabimg2: require("../../../../../assets/img/icon_report2.png"),
+      // stopImg: require("../../../../../assets/img/icon_voice_stop.png"),
+      stopImg: require("../../../../../assets/img/icon_voice.png"),
+      isAutoPlay: false,
+      ttsAudio:null,
       images: [],
       jjEntity: [{ content: "" }],
       list: [],
@@ -537,7 +650,67 @@ export default {
   },
   updated() {},
   methods: {
-    
+    doTTS: function() {
+      var ttsDiv = document.getElementById("bdtts_div_id");
+      this.ttsAudio = document.getElementById("tts_autio_id");
+      var ttsText = "";
+      if (this.isFlag) {
+        ttsText = $("#jiedContent").html();
+        ttsText = ttsText.replace("#", "");
+        // ttsText = "12345";
+      } else {
+        var listStr = "";
+        // this.dataList=this.dataList.concat(this.dataList);
+        // console.log(this.dataList);
+        if (this.dataList.length > 0) {
+          for (var i = 0; i < this.dataList.length; i++) {
+            var entity = this.dataList[i];
+            var existingProblem = entity.existingProblem;
+            listStr += "第" + (i + 1) + "条" + existingProblem;
+          }
+        }
+        console.log(listStr);
+        ttsText = listStr;
+      }
+      console.log(ttsText);
+      console.log(this.ttsAudio);
+      if (!this.isAutoPlay) {
+        this.isAutoPlay = true;
+        // 文字转语音
+        if (this.ttsAudio != null) {
+          ttsDiv.removeChild(this.ttsAudio);
+        }
+
+        var au1 = '<audio id="tts_autio_id" autoplay="autoplay">';
+        var sss =
+          '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&per=3&spd=5&text=' +
+          ttsText +
+          '" type="audio/mpeg">';
+        var eee = '<embed id="tts_embed_id" height="0" width="0" src="">';
+        var au2 = "</audio>";
+        ttsDiv.innerHTML = au1 + sss + eee + au2;
+
+        this.ttsAudio = document.getElementById("tts_autio_id");
+
+        this.ttsAudio.play();
+        this.stopImg = require("../../../../../assets/img/icon_voice_stop.png");
+        this.ttsAudio.loop = false;
+        var self = this;
+        self.ttsAudio.addEventListener(
+          "ended",
+          function() {
+            self.stopImg = require("../../../../../assets/img/icon_voice.png");
+            self.ttsAudio.pause();
+            self.isAutoPlay = false;
+          },
+          false
+        );
+      } else {
+        this.stopImg = require("../../../../../assets/img/icon_voice.png");
+        this.ttsAudio.pause();
+        this.isAutoPlay = false;
+      }
+    },
     openApp: function(item, e) {
       var isTip = localStorage.getItem("isTip");
       if (isTip != undefined) {
@@ -564,6 +737,9 @@ export default {
     },
     selectTab: function(flag) {
       console.log(flag);
+      this.stopImg = require("../../../../../assets/img/icon_voice.png");
+        this.ttsAudio.pause();
+        this.isAutoPlay = false;
       switch (flag) {
         case 1: //形象进度
           this.isFlag = true;
@@ -596,7 +772,7 @@ export default {
         $("#pmJjdivid div").each(function() {
           $(this).attr("style", "width:100%;font-size:15px;");
         });
-         $("#pmJjdivid span").each(function() {
+        $("#pmJjdivid span").each(function() {
           $(this).attr("style", "font-size:15px;");
         });
       }, 100);
