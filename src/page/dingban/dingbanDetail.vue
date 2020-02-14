@@ -48,7 +48,7 @@
         />
         <label
           @click="errorMsg(item)"
-          v-if=" item.realname != '张志川'"
+          v-if=" item.call_flag"
           :for="item.dingid+depart_flag"
           class="active"
         ></label>
@@ -60,7 +60,7 @@
         </div>
         <div style="display: flex; position: absolute; right: 10px;top: 20px;">
           <img
-            v-if="item.realname != '张志川' "
+            v-if="item.call_flag"
             src="../../assets/img/phonecall.png"
             style="width: 50px;height:50px;"
             @click="goDetile(item)"
@@ -254,20 +254,33 @@ export default {
       httpMethod
         .getUserOrDepart(params)
         .then(res => {
+          console.log(res)          
           if (res.success == "1") {
             if (res.userList != null) {
               var count = 0;
               var datalist = [];
-              res.userList.forEach(element => {
-                if (element.realname == "张志川") {
-                  count++;
-                } else {
-                  datalist.push(element);
-                }
+              var call_flag = true;
+              res.userList.forEach(e => {
+               if(e.phoneJurisdiction == 1){
+                 call_flag = false;
+               }else if(e.phoneJurisdiction == 3){
+                 if(phoneJurisdictionDingid != null && phoneJurisdictionDingid.length>0){
+                   if(phoneJurisdictionDingid.indexOf(this.corpId)>-1){
+                     call_flag = true;
+                     datalist.push(e);
+                   }else{
+                     call_flag = false;
+                   }
+                 }
+               }else{
+                 call_flag = true;
+                 datalist.push(e);
+               }
+               e.call_flag = call_flag;
               });
               this.list = this.list.concat(res.userList);
               this.list_true = this.list_true.concat(datalist);
-              this.callPhoneList_length = this.list.length - count;
+              this.callPhoneList_length = this.list_true.length;
               var child_list = this.child_phoneList;
               var phone_list = this.callPhoneList_p;
               this.list_true.forEach(e => {
