@@ -361,13 +361,6 @@
 
       this.indexMonth = month.replace(/\b(0+)/gi, "");
       this.getHomeData(year, month);
-      $("#menu_ul li").click(function () {
-        $(this).css("background", "#e1f3ff");
-        $(this)
-          .siblings("li")
-          .css("background", "#ffffff");
-      });
-     
     },
     methods: {
       returnCom(flag) {
