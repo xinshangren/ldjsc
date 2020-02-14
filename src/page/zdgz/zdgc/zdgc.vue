@@ -84,7 +84,11 @@
         style="font-size:15px;"
       ></div>
     </div>-->
-    <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
+    <div
+      id="moveId"
+      style="height: 50px;position:absolute;right: 0px;bottom: 11px;display:flex;"
+      @touchmove.prevent
+    >
       <div id="rightAreaDivId" style="display:none;">
         <div
           style="display: flex;width: 268px;height: 44px;margin-right: -20px;margin-top: 3px;background: rgb(255, 255, 255);border-radius: 30px 0px 0px 30px;box-shadow:#f67b09 1px 1px 8px 1px"
@@ -116,6 +120,7 @@
         </div>
       </div>
       <img
+        @touchmove.prevent
         id="leftAreaDivId"
         style="height:53px;margin-right:15px;"
         src="../../../assets/img/phone_button.png"
@@ -145,7 +150,19 @@ export default {
       seach_value: "",
       active: 0,
       currentView: "child1",
-      md_show: false
+      flag: false,
+      nx: null,
+      ny: null,
+      dx: null,
+      dy: null,
+      x: null,
+      y: null,
+      cur: {
+        x: 0,
+        y: 0
+      },
+      div1: null,
+      div2: null
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -163,42 +180,119 @@ export default {
     next();
   },
   mounted() {
-    $("#leftAreaDivId").click(function() {
-      $("#rightAreaDivId").animate({
-        width: "toggle"
-      });
-    });
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
       "9",
       "总体情况"
     );
-     $("#show_menu_Id").click(function () {
-        if ($("#menu_ul_id").css('left') == '-163px') {
-          $("#menu_ul_id").animate({ 'left': '0px' }, 500);
-          $("#tabs").animate({ 'left': '156px' }, 500);
-          console.log($("#tjfx_tab"))
-          $(".van-sticky").animate({ 'left': '156px' }, 500);
-        } else {
-          $("#menu_ul_id").animate({ 'left': '-163px' }, 500);
-          $("#tabs").animate({ 'left': '0px' }, 500);
-          $(".van-sticky").animate({ 'left': '0px' }, 500);
-        }
-      });
-      $('body').click(function (e) {
-        if (e.target.id != 'show_menu_Id')
-          if ($("#menu_ul_id").css('left') == '-163px') {
-          } else {
-            $("#menu_ul_id").animate({ 'left': '-163px' }, 500);
-          $("#tabs").animate({ 'left': '0px' }, 500);
-          $(".van-sticky").animate({ 'left': '0px' }, 500);
-          }
-      })
+    this.div1 = document.getElementById("moveId");
+    this.div2 = document.getElementById("moveId");
+    var self = this;
+    this.div1.addEventListener(
+      "mousedown",
+      function() {
+        self.down();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchstart",
+      function() {
+        self.down();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "mousemove",
+      function() {
+        self.move();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchmove",
+      function() {
+        self.move();
+      },
+      false
+    );
+    document.body.addEventListener(
+      "mouseup",
+      function() {
+        self.end();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchend",
+      function() {
+        self.end();
+      },
+      false
+    );
   },
   methods: {
-    returnCom: function(x) {
+    down: function() {
+      var self = this;
+      self.flag = true;
+      var touch;
+      console.log(event);
+      if (event.touches) {
+        touch = event.touches[0];
+      } else {
+        touch = event;
+      }
+      self.cur.x = touch.clientX;
+      self.cur.y = touch.clientY;
+      self.dx = self.div2.offsetLeft;
+      self.dy = self.div2.offsetTop;
+    },
+    move: function() {
+      var self = this;
+      if (self.flag) {
+        var touch;
+        if (event.touches) {
+          touch = event.touches[0];
+        } else {
+          touch = event;
+        }
+        self.nx = touch.clientX - self.cur.x;
+        self.ny = touch.clientY - self.cur.y;
+        self.x = self.dx + self.nx;
+        self.y = self.dy + self.ny;
 
+        var clientWidth = document.body.clientWidth;
+        // console.log(self.x + "--" + self.y + "--" + clientWidth);
+        if (self.x > 0) {
+        }
+        self.div2.style.left = self.x + "px";
+        self.div2.style.top = self.y + "px";
+        //阻止页面的滑动默认事件
+        document.addEventListener(
+          "touchmove",
+          function() {
+            event.preventDefault();
+          },
+          false
+        );
+      }
+    },
+    //鼠标释放时候的函数
+    end: function() {
+      console.log("end");
+      if (this.flag) {
+        $("#leftAreaDivId").off("click");
+        $("#leftAreaDivId").click(function() {
+            $("#moveId").css("left","");
+         $("#moveId").css("top","");
+          $("#rightAreaDivId").animate({
+            width: "toggle"
+          });
+        });
+      }
+      this.flag = false;
+     
     },
     callPhone: function() {
       window.location.href = "tel://13935612128";
@@ -241,7 +335,6 @@ export default {
             "12",
             "统计分析"
           );
-          this.md_show = true;
           this.currentView = "child4";
           break;
         default:

@@ -330,6 +330,7 @@ export default {
     },
     //语音识别
     translateVoice: function(mediaIds) {
+      
       var self = this;
       console.log("录音识别开始");
       if (self.recordId == "1") {

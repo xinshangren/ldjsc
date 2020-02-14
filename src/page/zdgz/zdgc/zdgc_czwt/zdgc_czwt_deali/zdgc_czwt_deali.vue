@@ -99,9 +99,8 @@
             <div style="font-size:13px;color:#3ca1ec;">时间：{{item.time}}</div>
           </div>
           <van-steps direction="vertical" :active="-1">
-            <van-step  v-for="(itemchild,index1) in item.data"
-              :key="index1">
-              <div style="color:#333333;" class="van-multi-ellipsis--l3">{{itemchild.value}}</div>
+            <van-step v-for="(itemchild,index1) in item.data" :key="index1">
+              <div style="color:#333333;" class>{{itemchild.value}}</div>
               <!-- <h3>{{itemchild.value}}</h3> -->
               <!-- <p>2016-07-11 10:00</p> -->
             </van-step>
@@ -116,7 +115,7 @@
               bg-color="#3ca1ec"
               style
             >{{itemchild.value}}</timeline-item>
-          </timeline> -->
+          </timeline>-->
         </div>
       </van-tab>
     </van-tabs>
@@ -129,7 +128,7 @@ import LightTimeline from "vue-light-timeline";
 Vue.use(LightTimeline);
 import { httpMethod } from "../../../../../api/getData.js";
 import Vue from "vue";
-import { Tab, Tabs,Step, Steps } from "vant";
+import { Tab, Tabs, Step, Steps } from "vant";
 Vue.use(Step).use(Steps);
 export default {
   name: "zdgc_czwt_deali",

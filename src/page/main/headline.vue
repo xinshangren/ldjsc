@@ -51,12 +51,20 @@ export default {
       "头条"
     );
   },
-  beforeRouteEnter(to, from, next) {
-    console.log("headline");
-    next(vm => {
-      vm.$parent.isDeali = false;
-    });
-
+  beforeRouteLeave(to, from, next) {
+    console.log(from);
+    console.log(to);
+    if (from.name == "main") {
+      to.meta.keepAlive = false;
+    } else {
+      if (from.name == "headline") {
+        if (to.name == "newsdetile") {
+           from.meta.keepAlive = true;
+        }else{
+          from.meta.keepAlive = false;
+        } 
+      }
+    }
     next();
   },
   methods: {
