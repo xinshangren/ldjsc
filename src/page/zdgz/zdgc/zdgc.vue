@@ -1,6 +1,58 @@
+<style scoped>
+.menu_li_img {
+  height: 12px;
+  margin-top: 4px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.menu_li_div {
+  color: #3098fb;
+  margin-left: 3px;
+  font-size: 15px;
+  width: 90%;
+}
+</style>
 <template>
   <div style="margin-top:54px;">
+    <div
+      id="menu_ul_id"
+      v-show="md_show"
+      style="width:43%; display:flex;position: fixed;background: #e8f4ff;top:101px;z-index:100;height:100%;left: -163px;"
+    >
+      <div style="left: 20px;background: #e8f4ff;top: 157px;z-index:100;">
+        <div @click=" (1)" style="display:flex;margin-top: 10px;background: #e8f4ff;">
+          <div class="menu_li_div">重点项目各阶段项目数量统计</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(2)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">区县统计各阶段项目数量</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(3)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">各区县实际投资额占比</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(4)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">各区县实际投资额完成率</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(5)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">各类型实际投资额占比</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(6)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">各类型投资完成率</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+      </div>
+      <img
+        id="show_menu_Id"
+        style="height:35px;position: absolute;top: 71px;right: -44px;"
+        src="../../../assets/img/data_list_menu.png"
+      />
+    </div>
     <van-tabs
+      id="tabs"
       @touchmove.prevent
       v-model="active"
       title-active-color="#2599e6"
@@ -8,6 +60,7 @@
       title-inactive-color="#333333"
       :sticky="true"
       line-width="75px"
+      style="width: 100%;"
       @change="tabsclick"
     >
       <van-tab title="总体情况">
@@ -245,6 +298,7 @@ export default {
       window.location.href = "tel://13935612128";
     },
     tabsclick: function(name, title) {
+      this.md_show = false;
       console.log(name);
       switch (parseInt(name)) {
         case 0:
