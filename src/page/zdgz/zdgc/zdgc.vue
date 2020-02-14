@@ -73,7 +73,7 @@
         <child3 style></child3>
       </van-tab>
       <van-tab title="统计分析">
-        <child4 style="overflow-y:auto;overflow-x:hidden;"></child4>
+        <child4 ref="child4" style="overflow-y:auto;overflow-x:hidden;"></child4>
       </van-tab>
     </van-tabs>
     <!-- <div style="margin-top:46px;z-index: -1;overflow: auto;">
@@ -162,7 +162,8 @@ export default {
         y: 0
       },
       div1: null,
-      div2: null
+      div2: null,
+      md_show: false
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -231,8 +232,28 @@ export default {
       },
       false
     );
+    $("#show_menu_Id").click(function() {
+      if ($("#menu_ul_id").css("left") == "-163px") {
+        $("#menu_ul_id").animate({ left: "0px" }, 500);
+        $("#tabs").animate({ left: "156px" }, 500);
+      } else {
+        $("#menu_ul_id").animate({ left: "-163px" }, 500);
+        $("#tabs").animate({ left: "0px" }, 500);
+      }
+    });
+    $("body").click(function(e) {
+      if (e.target.id != "show_menu_Id")
+        if ($("#menu_ul_id").css("left") == "-163px") {
+        } else {
+          $("#menu_ul_id").animate({ left: "-163px" }, 500);
+          $("#tabs").animate({ left: "0px" }, 500);
+        }
+    });
   },
   methods: {
+    returnCom: function(x) {
+      this.$refs.child4.returnCom(x);
+    },
     down: function() {
       var self = this;
       self.flag = true;
@@ -284,20 +305,25 @@ export default {
       if (this.flag) {
         $("#leftAreaDivId").off("click");
         $("#leftAreaDivId").click(function() {
-            $("#moveId").css("left","");
-         $("#moveId").css("top","");
+          $("#moveId").css("left", "");
+          $("#moveId").css("top", "");
           $("#rightAreaDivId").animate({
             width: "toggle"
           });
         });
       }
       this.flag = false;
-     
     },
     callPhone: function() {
       window.location.href = "tel://13935612128";
     },
     tabsclick: function(name, title) {
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
+      // console.log(scrollTop);
+      document.documentElement.scrollTop = 0;
       this.md_show = false;
       console.log(name);
       switch (parseInt(name)) {
@@ -335,6 +361,7 @@ export default {
             "12",
             "统计分析"
           );
+          this.md_show = true;
           this.currentView = "child4";
           break;
         default:

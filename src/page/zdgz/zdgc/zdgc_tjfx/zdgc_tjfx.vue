@@ -10,7 +10,9 @@
         :formatter="formatter"
       />
     </van-popup>
-    <div style="display: flex;background: rgb(255, 255, 255);height: 40px; position: fixed; width: 100%;z-index:1">
+    <div
+      style="display: flex;background: rgb(255, 255, 255);height: 40px; position: fixed; width: 100%;z-index:1"
+    >
       <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
         <div class="ui-col ui-col" @click="upYearClick">
           <div class="div_next_style">前一年</div>
@@ -122,7 +124,8 @@ export default {
   methods: {
     returnCom(flag) {
       var returnEle = null;
-      $("#menu_ul_id").hide();
+      $("#menu_ul_id").animate({ left: "-163px" }, 500);
+      $("#tabs").animate({ left: "0px" }, 500);
       switch (flag) {
         case 1:
           returnEle = document.getElementById("myCharts1");
@@ -147,7 +150,7 @@ export default {
       }
       //  $("#myCharts6").scrollIntoView(true);
       if (returnEle) {
-        returnEle.scrollIntoView();
+        returnEle.scrollIntoView({block: "end"});
       }
     },
     upYearClick: function() {
