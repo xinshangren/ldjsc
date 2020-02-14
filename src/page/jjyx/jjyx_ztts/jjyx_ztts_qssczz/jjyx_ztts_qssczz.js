@@ -101,7 +101,7 @@ export const echarsEnti = {
       dataAxis.push(statisname);
       dataAP.push(yonydata);
     }
-    var yMax = Math.max.apply(null, dataAP);
+   /* var yMax = Math.max.apply(null, dataAP);
     for (var i = 0; i < dataAP.length; i++) {
       if (dataAP[i] < 0) {
         dataShadow.push(-yMax);
@@ -109,7 +109,7 @@ export const echarsEnti = {
         dataShadow.push(yMax);
       }
 
-    }
+    }*/
 
     var option = {
       tooltip: {
@@ -521,7 +521,7 @@ export const echarsEnti = {
           minValueSpan: 4,
           start: 0,
           end: 15,
-          show:true,        
+          show:true,
         }
       ],
       grid: {
