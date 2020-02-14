@@ -646,6 +646,6 @@ export default {
   display: none;
   border-radius: 12px;
   text-align: center;
-  z-index:999;
+  z-index:1000;
 }
 </style>
