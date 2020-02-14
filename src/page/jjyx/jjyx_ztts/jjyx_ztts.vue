@@ -1,8 +1,16 @@
+<style scoped> 
+  .menu_li_img{
+    height: 12px;margin-top: 4px;margin-right: 5px;margin-left: 5px;
+}
+.menu_li_div{
+    color: #3098fb;margin-left: 3px;font-size: 15px;width: 90%;
+}
+</style> 
 <template>
   <div style="margin-top:0px;">
     <div
       id="showSelectDiv"
-      style="z-index: 99;position: fixed;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
+      style="z-index:100;position: fixed;top:101px;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
     >
       <div
         style="background: rgb(247, 247, 247);height: 35px;width: 40px;margin-top: 5px;margin-left: 7px;font-size:15px;"
@@ -10,14 +18,45 @@
         <img style="height: 18px;margin-top: 9px;" src="../../../assets/img/eco_tab_iconlist.png" />
       </div>
     </div>
-    <van-sticky id="jjyx_tabs" :offset-top="101">
-      <div style="display:flex;">
+    <div id="menu_ul_id" v-show="md_show"
+      style=" display:flex;position: fixed;background: #e8f4ff;top:100px;z-index:100;height:100%;left: -163px;">
+      <div style="left: 20px;background: #e8f4ff;top: 157px;z-index:100;">
+          <div @click="returnCom(1)"  style="display:flex;margin-top: 10px;background: #e8f4ff;">
+            <div class="menu_li_div">生产总值</div>
+            <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+          </div>
+          <div @click="returnCom(2)"  style="display:flex;margin-top:10px;background: #e8f4ff;">
+            <div class="menu_li_div">社会消费品零售总额</div>
+            <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+          </div>
+          <div @click="returnCom(3)"  style="display:flex;margin-top:10px;background: #e8f4ff;">
+            <div class="menu_li_div">工业增加值增加速度</div>
+            <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+          </div>
+          <div @click="returnCom(4)"  style="display:flex;margin-top:10px;background: #e8f4ff;">
+            <div class="menu_li_div">固定资产投资</div>
+            <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+          </div>
+          <div @click="returnCom(5)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+            <div class="menu_li_div">一般公共预算收入</div>
+            <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+          </div>
+          <div @click="returnCom(6)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+            <div class="menu_li_div">人均可支配收入</div>
+            <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+          </div>
+      </div>
+      <img id="show_menu_Id" style="height:35px;position: absolute;top: 71px;right: -44px;"
+        src="../../../assets/img/data_list_menu.png" />
+    </div>
+    <div id="jjyx_tabs" style="position:fixed;top: 100px;z-index: 99;">
+      <div style="display:flex;position:fixed;">
         <van-tabs
           @touchmove.prevent
           @click="smallTab_select"
           v-model="active"
           title-active-color="#2599e6"
-          :offset-top="55"
+          :offset-top="99"
           title-inactive-color="#333333"
           :sticky="true"
           line-width="75px"
@@ -37,7 +76,7 @@
       </div>
 
       <div
-        style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 1;"
+        id="monthSelect" style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;top: 143px;width: 100%;z-index: 1;"
       >
         <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
           <div class="ui-col ui-col" @click="upYearClick">
@@ -60,7 +99,7 @@
           </div>
         </div>
       </div>
-    </van-sticky>
+    </div>
     <div
       id="selectTabDiv"
       style=" display:none;background: rgb(255, 255, 255);top: 156px;position: fixed;z-index: 99;box-shadow: 5px 1px 1px 2px #f3f3f3;"
@@ -78,7 +117,7 @@
         <li id="8" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">区县情况</li>
       </ul>
     </div>
-    <div style="margin-top:46px;z-index: -1;overflow: auto;">
+    <div id="child_page" style="position:absolute;top: 193px;z-index: -1;overflow: auto;width: 100%;">
       <div
       id="childId"
         :is="currentView"
@@ -176,7 +215,8 @@ export default {
       currentDate: new Date(),
       maxDate: new Date(),
       minDate: new Date(2016, 0, 1),
-      maxDataDate: ""
+      maxDataDate: "",
+      md_show:false,
     };
   },
   mounted() {
@@ -217,8 +257,33 @@ export default {
       "30",
       "完成概况"
     );
+    $("#show_menu_Id").click(function () {
+        if ($("#menu_ul_id").css('left') == '-163px') {
+          $("#menu_ul_id").animate({ 'left': '0px' }, 500);
+          $("#child_page").animate({ 'left': '156px' }, 500);
+          $('#jjyx_tabs').animate({ 'left': '156px' }, 500);
+        } else {
+          $("#menu_ul_id").animate({ 'left': '-163px' }, 500);
+          $("#child_page").animate({ 'left': '0px' }, 500);
+          $('#jjyx_tabs').animate({ 'left': '0px' }, 500);
+        }
+      });
+      $('body').click(function (e) {
+        if (e.target.id != 'show_menu_Id')
+          if ($("#menu_ul_id").css('left') == '-163px') {
+          } else {
+            $("#menu_ul_id").animate({ 'left': '-163px' }, 500);
+          $("#child_page").animate({ 'left': '0px' }, 500);
+          $('#jjyx_tabs').animate({ 'left': '0px' }, 500);
+          }
+      })
+
+
   },
   methods: {
+    returnCom:function(x){
+      this.$refs.child1.returnCom(x);
+    },
     //获取记录日志的logid
     doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
       var params = {
@@ -252,6 +317,7 @@ export default {
       //     dom.scrollTop = 0;
       //   }
       // }
+      this.md_show = false;
       console.log(name, title);
       switch (name) {
         case 0:
@@ -261,8 +327,10 @@ export default {
             "30",
             "完成概况"
           );
+          
           this.active = 0;
           this.currentView = "child1";
+         
           break;
         case 1:
           this.doAddAppLogList(
@@ -341,6 +409,7 @@ export default {
             "38",
             "区县情况"
           );
+          this.md_show = true;
           this.active = 8;
           this.currentView = "child9";
           break;
