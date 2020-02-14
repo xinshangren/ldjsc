@@ -73,10 +73,26 @@ export default {
     setTimeout(() => {
       var o = document.getElementById("pmJjdivid");
       var h = o.clientHeight || o.offsetHeight;
-      if(h<height){
-            $("#pmJjdivid").css("height",height-101+"px");
+      if (h < height) {
+        $("#pmJjdivid").css("height", height - 80 + "px");
       }
       console.log(h);
+      $("#pmJjdivid p").each(function() {
+        if ($(this).children("img").length > 0) {
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+        } else {
+          // console.log("没有");
+        }
+      });
+       $("#pmJjdivid div").each(function() {
+        if ($(this).find("img").length > 0) {
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+        } else {
+          // console.log("没有");
+        }
+      });
     }, 100);
   },
   methods: {
