@@ -208,6 +208,7 @@ export default {
     this.getGridSpecificList("140502", this.wgName);
     $("#close_wgsx_show_div_select_id1").click(function(e) {
       $("#wgsx_show_div_select_id1").hide();
+      $('body').css('overflow','auto')
     });
   },
   methods: {
@@ -217,6 +218,7 @@ export default {
     },
     showSelectArea: function() {
       $("#wgsx_show_div_select_id1").show();
+      $('body').css('overflow','hidden')
     },
     //获取网格列表
     //获取网格列表
