@@ -77,8 +77,8 @@
         </div>
       </div>
     </div>
-    <div
-      style="background:#ffffff;margin-left: 10px;margin-right: 10px;border-radius: 0px;box-shadow: 0px 1px 8px 3px #f3f3f3;margin-top: 7px;"
+    <div id="wgingoId"
+      style="overflow-y: auto;background:#ffffff;margin-left: 10px;margin-right: 10px;border-radius: 0px;box-shadow: 0px 1px 8px 3px #f3f3f3;margin-top: 7px;"
     >
       <div v-show="flag==1">
         <div v-for="(item,index) in leaderList" :key="index" style="margin-bottom: 0px;">
@@ -148,7 +148,7 @@
     <div
       id="wgsx_show_div_select_id1"
       class="top_menu_wgsx_div"
-      style="display:none;left: 0px;top: 179px;width: 100%;font-size:14px"
+      style="display:none;left: 0px;bottom:0px;width: 100%;font-size:14px"
     >
       <img
         id="close_wgsx_show_div_select_id1"
@@ -209,6 +209,9 @@ export default {
     $("#close_wgsx_show_div_select_id1").click(function(e) {
       $("#wgsx_show_div_select_id1").hide();
       $('body').css('overflow','auto')
+
+      var s = window.innerHeight - $("#wgingoId").offset().top;
+      $("#wgingoId").css("height", s);
     });
   },
   methods: {
