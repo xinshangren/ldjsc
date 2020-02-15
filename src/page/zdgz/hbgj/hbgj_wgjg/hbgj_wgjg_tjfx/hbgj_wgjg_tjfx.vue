@@ -52,7 +52,7 @@
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
       ></div>
-     
+
       <div ref="myCharts2" style="height:210px;width:100%;"></div>
       <div style="display:flex;margin: 0 auto;">
         <div style="width:50%;">
@@ -107,7 +107,7 @@
         class="van-hairline--bottom"
         style="margin-top: 8px;margin-left: 10px;margin-right: 10px;"
       ></div>
-      
+
       <div ref="myCharts4" style="height:210px;width:100%;"></div>
       <div style="display:flex;margin: 0 auto;">
         <div style="width:50%;">
@@ -235,6 +235,7 @@ export default {
     this.barTask();
     $("#close_wgsx_show_div_select_id1").click(function(e) {
       $("#wgsx_show_div_select_id1").hide();
+      $('body').css('overflow','auto');
     });
     $("#echar1typeId div").click(function(e) {
       $(this).removeClass("chars_div_time_noselect");
@@ -277,6 +278,7 @@ export default {
     },
     showSelectArea: function(index) {
       this.wgType = index;
+      $('body').css('overflow','hidden');
       $("#wgsx_show_div_select_id1").show();
     },
     //格式化事件
@@ -545,7 +547,7 @@ export default {
                 }
               });
           })
-         
+
           if (res.success == "1") {
             var wgjg_left_area_code = this.wgjg_left_area_codes;
             var result = res.gridList;
