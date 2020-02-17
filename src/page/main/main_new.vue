@@ -497,6 +497,7 @@ export default {
     getCuruserid: function() {
       var self = this;
       dd.ready(function() {
+        dd.ui.webViewBounce.disable()
         dd.runtime.permission.requestAuthCode({
           corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
           onSuccess: function(info) {
