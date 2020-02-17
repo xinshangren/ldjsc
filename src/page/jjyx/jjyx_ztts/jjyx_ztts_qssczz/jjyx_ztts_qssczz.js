@@ -108,7 +108,6 @@ export const echarsEnti = {
       } else {
         dataShadow.push(yMax);
       }
-
     }
     var option = {
      tooltip: {
@@ -285,7 +284,6 @@ export const echarsEnti = {
   },
   showQssczzData: function (echarts, value, dataList1) {
     const myCharts = echarts.init(value);
-    console.log(dataList1);
     var dataList = dataList1.reverse();
     var allYear = [];
     var xLabel = [];
