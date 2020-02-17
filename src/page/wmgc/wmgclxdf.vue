@@ -429,9 +429,6 @@ export default {
   z-index: 5;
   border-right: 2px solid #f3d6b4;
   background: #f3f4f8;
-  div {
-    word-break: break-all;
-  }
 }
 .cross1 {
   background: #fefbce;
@@ -461,10 +458,8 @@ table td {
     // // width:50px;
 
     border-bottom: 0.02rem solid #eee;
-    white-space: normal;
-    word-break: keep-all;
-    height: 0.86rem;
-    line-height: 0.86rem;
+    height: 0.76rem;
+    line-height: 0.76rem;
     padding: 0 0.2rem;
   }
   th {
@@ -486,8 +481,13 @@ tr {
   background-color: #fff;
 }
 .cols {
-  max-width: 150px;
+  // max-width: 150px;
   background: #f3f4f8;
   border-right: 2px solid #f3d6b4;
+  div {
+   white-space: normal;
+    word-break: break-word;
+    width: 130px;
+  }
 }
 </style>
