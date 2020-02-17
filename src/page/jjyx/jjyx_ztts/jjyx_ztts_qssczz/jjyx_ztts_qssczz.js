@@ -103,7 +103,6 @@ export const echarsEnti = {
     }
     var yMax = Math.max.apply(null, dataAP);
     for (var i = 0; i < dataAP.length; i++) {
-      console.log("-----------------")
       if (dataAP[i] < 0) {
         dataShadow.push(-yMax);
       } else {
@@ -111,7 +110,6 @@ export const echarsEnti = {
       }
 
     }
-    console.log(dataShadow);
 
     var option = {
      tooltip: {
