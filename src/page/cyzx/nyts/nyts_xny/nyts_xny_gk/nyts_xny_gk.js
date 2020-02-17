@@ -25,7 +25,7 @@ export const nytsXnyGkJs = {
 		var option = {
 			tooltip: {
 				trigger: 'item',
-				formatter: "{b}: {c}%"
+				formatter: "{b}: {c}个"
 			},
 			legend: {
 				orient: 'horizontal',
