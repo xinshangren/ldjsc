@@ -17,10 +17,10 @@
     <div
       id="menu_ul_id"
       v-show="md_show"
-      style="width:43%; display:flex;position: fixed;background: #e8f4ff;top:101px;z-index:100;height:100%;left: -163px;"
+      style="width:41.5%; display:flex;position: fixed;background: #e8f4ff;top:101px;z-index:100;height:100%;left: -163px;"
     >
       <div style="left: 20px;background: #e8f4ff;top: 157px;z-index:100;">
-        <div @click=" (1)" style="display:flex;margin-top: 10px;background: #e8f4ff;">
+        <div @click="returnCom(1)" style="display:flex;margin-top: 10px;background: #e8f4ff;">
           <div class="menu_li_div">重点项目各阶段项目数量统计</div>
           <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
         </div>

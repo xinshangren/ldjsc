@@ -142,7 +142,7 @@ export default {
         case 5:
           returnEle = document.getElementById("myCharts5");
           break;
-        case 5:
+        case 6:
           returnEle = document.getElementById("myCharts6");
           break;
         default:
@@ -150,7 +150,7 @@ export default {
       }
       //  $("#myCharts6").scrollIntoView(true);
       if (returnEle) {
-        returnEle.scrollIntoView({block: "end"});
+        returnEle.scrollIntoView(false);
       }
     },
     upYearClick: function() {

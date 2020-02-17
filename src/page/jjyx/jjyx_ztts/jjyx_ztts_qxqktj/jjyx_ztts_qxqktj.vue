@@ -393,7 +393,7 @@
         }
         //  $("#myCharts6").scrollIntoView(true);
         if (returnEle) {
-          returnEle.scrollIntoView({block: "end"});
+          returnEle.scrollIntoView(false);
         }
       },
       selectTab: function (flag) {
