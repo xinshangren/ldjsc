@@ -101,22 +101,25 @@ export const echarsEnti = {
       dataAxis.push(statisname);
       dataAP.push(yonydata);
     }
-   /* var yMax = Math.max.apply(null, dataAP);
+    var yMax = Math.max.apply(null, dataAP);
     for (var i = 0; i < dataAP.length; i++) {
+      console.log("-----------------")
       if (dataAP[i] < 0) {
         dataShadow.push(-yMax);
       } else {
         dataShadow.push(yMax);
       }
 
-    }*/
+    }
+    console.log(dataShadow);
 
     var option = {
-      tooltip: {
+     tooltip: {
         trigger: 'axis',
         axisPointer: { // 坐标轴指示器，坐标轴触发有效
           type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-        }
+        },
+        formatter: "{b0}: {c0}"
       },
       grid: {
         top: '0%',
@@ -149,9 +152,6 @@ export const echarsEnti = {
         axisLine: {
           show: false
         },
-        axisLabel: {
-          show: true
-        },
         axisTick: {
           show: false
         },
@@ -160,6 +160,7 @@ export const echarsEnti = {
         },
         data: dataAxis,
         axisLabel: {
+          show: true,
           interval: 0,
           formatter: function (value) {
             var isFlag = false;
