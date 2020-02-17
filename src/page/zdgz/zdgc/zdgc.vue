@@ -1,6 +1,58 @@
+<style scoped>
+.menu_li_img {
+  height: 12px;
+  margin-top: 4px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.menu_li_div {
+  color: #3098fb;
+  margin-left: 3px;
+  font-size: 15px;
+  width: 90%;
+}
+</style>
 <template>
   <div style="margin-top:54px;">
+    <div
+      id="menu_ul_id"
+      v-show="md_show"
+      style="width:41.5%; display:flex;position: fixed;background: #e8f4ff;top:101px;z-index:100;height:100%;left: -163px;"
+    >
+      <div style="left: 20px;background: #e8f4ff;top: 157px;z-index:100;">
+        <div @click="returnCom(1)" style="display:flex;margin-top: 10px;background: #e8f4ff;">
+          <div class="menu_li_div">重点项目各阶段项目数量统计</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(2)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">区县统计各阶段项目数量</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(3)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">各区县实际投资额占比</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(4)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">各区县实际投资额完成率</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(5)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">各类型实际投资额占比</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(6)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">各类型投资完成率</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+      </div>
+      <img
+        id="show_menu_Id"
+        style="height:35px;position: absolute;top: 71px;right: -44px;"
+        src="../../../assets/img/data_list_menu.png"
+      />
+    </div>
     <van-tabs
+      id="tabs"
       @touchmove.prevent
       v-model="active"
       title-active-color="#2599e6"
@@ -8,6 +60,7 @@
       title-inactive-color="#333333"
       :sticky="true"
       line-width="75px"
+      style="width: 100%;"
       @change="tabsclick"
     >
       <van-tab title="总体情况">
@@ -20,7 +73,7 @@
         <child3 style></child3>
       </van-tab>
       <van-tab title="统计分析">
-        <child4 style="overflow-y:auto;overflow-x:hidden;"></child4>
+        <child4 ref="child4" style="overflow-y:auto;overflow-x:hidden;"></child4>
       </van-tab>
     </van-tabs>
     <!-- <div style="margin-top:46px;z-index: -1;overflow: auto;">
@@ -30,8 +83,12 @@
         ref="child1"
         style="font-size:15px;"
       ></div>
-    </div> -->
-    <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
+    </div>-->
+    <div
+      id="moveId"
+      style="height: 50px;position:absolute;right: 0px;bottom: 11px;display:flex;"
+      @touchmove.prevent
+    >
       <div id="rightAreaDivId" style="display:none;">
         <div
           style="display: flex;width: 268px;height: 44px;margin-right: -20px;margin-top: 3px;background: rgb(255, 255, 255);border-radius: 30px 0px 0px 30px;box-shadow:#f67b09 1px 1px 8px 1px"
@@ -63,6 +120,7 @@
         </div>
       </div>
       <img
+        @touchmove.prevent
         id="leftAreaDivId"
         style="height:53px;margin-right:15px;"
         src="../../../assets/img/phone_button.png"
@@ -91,7 +149,21 @@ export default {
     return {
       seach_value: "",
       active: 0,
-       currentView: "child1",
+      currentView: "child1",
+      flag: false,
+      nx: null,
+      ny: null,
+      dx: null,
+      dy: null,
+      x: null,
+      y: null,
+      cur: {
+        x: 0,
+        y: 0
+      },
+      div1: null,
+      div2: null,
+      md_show: false
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -109,23 +181,150 @@ export default {
     next();
   },
   mounted() {
-    $("#leftAreaDivId").click(function() {
-      $("#rightAreaDivId").animate({
-        width: "toggle"
-      });
-    });
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
       "9",
       "总体情况"
     );
+    this.div1 = document.getElementById("moveId");
+    this.div2 = document.getElementById("moveId");
+    var self = this;
+    this.div1.addEventListener(
+      "mousedown",
+      function() {
+        self.down();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchstart",
+      function() {
+        self.down();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "mousemove",
+      function() {
+        self.move();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchmove",
+      function() {
+        self.move();
+      },
+      false
+    );
+    document.body.addEventListener(
+      "mouseup",
+      function() {
+        self.end();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchend",
+      function() {
+        self.end();
+      },
+      false
+    );
+    $("#show_menu_Id").click(function() {
+      if ($("#menu_ul_id").css("left") == "-163px") {
+        $("#menu_ul_id").animate({ left: "0px" }, 500);
+        $("#tabs").animate({ left: "156px" }, 500);
+      } else {
+        $("#menu_ul_id").animate({ left: "-163px" }, 500);
+        $("#tabs").animate({ left: "0px" }, 500);
+      }
+    });
+    $("body").click(function(e) {
+      if (e.target.id != "show_menu_Id")
+        if ($("#menu_ul_id").css("left") == "-163px") {
+        } else {
+          $("#menu_ul_id").animate({ left: "-163px" }, 500);
+          $("#tabs").animate({ left: "0px" }, 500);
+        }
+    });
   },
   methods: {
+    returnCom: function(x) {
+      this.$refs.child4.returnCom(x);
+    },
+    down: function() {
+      var self = this;
+      self.flag = true;
+      var touch;
+      console.log(event);
+      if (event.touches) {
+        touch = event.touches[0];
+      } else {
+        touch = event;
+      }
+      self.cur.x = touch.clientX;
+      self.cur.y = touch.clientY;
+      self.dx = self.div2.offsetLeft;
+      self.dy = self.div2.offsetTop;
+    },
+    move: function() {
+      var self = this;
+      if (self.flag) {
+        var touch;
+        if (event.touches) {
+          touch = event.touches[0];
+        } else {
+          touch = event;
+        }
+        self.nx = touch.clientX - self.cur.x;
+        self.ny = touch.clientY - self.cur.y;
+        self.x = self.dx + self.nx;
+        self.y = self.dy + self.ny;
+
+        var clientWidth = document.body.clientWidth;
+        // console.log(self.x + "--" + self.y + "--" + clientWidth);
+        if (self.x > 0) {
+        }
+        self.div2.style.left = self.x + "px";
+        self.div2.style.top = self.y + "px";
+        //阻止页面的滑动默认事件
+        document.addEventListener(
+          "touchmove",
+          function() {
+            event.preventDefault();
+          },
+          false
+        );
+      }
+    },
+    //鼠标释放时候的函数
+    end: function() {
+      console.log("end");
+      if (this.flag) {
+        $("#leftAreaDivId").off("click");
+        $("#leftAreaDivId").click(function() {
+          $("#moveId").css("left", "");
+          $("#moveId").css("top", "");
+          $("#rightAreaDivId").animate({
+            width: "toggle"
+          });
+        });
+      }
+      this.flag = false;
+    },
     callPhone: function() {
       window.location.href = "tel://13935612128";
     },
     tabsclick: function(name, title) {
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
+      // console.log(scrollTop);
+      document.documentElement.scrollTop = 0;
+      this.md_show = false;
       console.log(name);
       switch (parseInt(name)) {
         case 0:
@@ -135,7 +334,7 @@ export default {
             "9",
             "总体情况"
           );
-           this.currentView = "child1";
+          this.currentView = "child1";
           break;
         case 1:
           this.doAddAppLogList(
@@ -144,7 +343,7 @@ export default {
             "10",
             "项目列表"
           );
-           this.currentView = "child2";
+          this.currentView = "child2";
           break;
         case 2:
           this.doAddAppLogList(
@@ -153,7 +352,7 @@ export default {
             "11",
             "存在问题"
           );
-           this.currentView = "child3";
+          this.currentView = "child3";
           break;
         case 3:
           this.doAddAppLogList(
@@ -162,7 +361,8 @@ export default {
             "12",
             "统计分析"
           );
-           this.currentView = "child4";
+          this.md_show = true;
+          this.currentView = "child4";
           break;
         default:
           break;

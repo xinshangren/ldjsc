@@ -10,67 +10,28 @@
         :formatter="formatter"
       />
     </van-popup>
-    <van-sticky :offset-top="146">
-      <div style="display: flex;background: rgb(255, 255, 255);height: 40px;">
-        <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
-          <div class="ui-col ui-col" @click="upYearClick">
-            <div class="div_next_style">前一年</div>
-          </div>
-          <div class="ui-col ui-col" @click="showDatePicker()">
-            <div class="div_flex" style="background: #f1f1f1;border-radius: 6px;">
-              <img
-                src="../../../../assets/img/project_calendar.png"
-                style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
-              />
-              <div class="div_next_style">{{nowYear}}年</div>
-            </div>
-          </div>
-          <div class="ui-col ui-col" @click="downYearClick">
-            <div class="div_next_style" style="text-align:right;">后一年</div>
+    <div
+      style="display: flex;background: rgb(255, 255, 255);height: 40px; position: fixed; width: 100%;z-index:1"
+    >
+      <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
+        <div class="ui-col ui-col" @click="upYearClick">
+          <div class="div_next_style">前一年</div>
+        </div>
+        <div class="ui-col ui-col" @click="showDatePicker()">
+          <div class="div_flex" style="background: #f1f1f1;border-radius: 6px;">
+            <img
+              src="../../../../assets/img/project_calendar.png"
+              style="height: 17px;margin-top: 3px;margin-right: 10px;margin-left: 21px;"
+            />
+            <div class="div_next_style">{{nowYear}}年</div>
           </div>
         </div>
+        <div class="ui-col ui-col" @click="downYearClick">
+          <div class="div_next_style" style="text-align:right;">后一年</div>
+        </div>
       </div>
-    </van-sticky>
-
-    <div
-      id="show_menu_Id"
-      style="position: fixed;left: 20px;background: #ffffff;top: 180px;padding: 3px;z-index:99;height:40px;"
-    >
-      <img style="height:23px;" src="../../../../assets/img/data_list_menu.png" />
     </div>
-    <div
-      id="menu_ul_id"
-      style="display:none; position: fixed;left: 20px;background: #ffffff;top: 210px;padding: 3px;z-index:1;"
-    >
-      <ul id="menu_ul">
-        <li @click="returnCom(1)" class="menuliClass" style="display:flex;">
-          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          <div class="menu_li_div">重点项目各阶段项目数量统计</div>
-        </li>
-        <li @click="returnCom(2)" class="menuliClass" style="display:flex;margin-top:4px;">
-          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          <div class="menu_li_div">区县统计各阶段项目数量</div>
-        </li>
-        <li @click="returnCom(3)" class="menuliClass" style="display:flex;margin-top:4px;">
-          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          <div class="menu_li_div">各区县实际投资额占比</div>
-        </li>
-        <li @click="returnCom(4)" class="menuliClass" style="display:flex;margin-top:4px;">
-          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          <div class="menu_li_div">各区县实际投资额完成率</div>
-        </li>
-        <li @click="returnCom(5)" class="menuliClass" style="display:flex;margin-top:4px;">
-          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          <div class="menu_li_div">各类型实际投资额占比</div>
-        </li>
-        <li @click="returnCom(6)" class="menuliClass" style="display:flex;margin-top:4px;">
-          <img class="menu_li_img" src="../../../../assets/img/data_arrow_right.png" />
-          <div class="menu_li_div">各类型投资完成率</div>
-        </li>
-      </ul>
-    </div>
-
-    <div>
+    <div style="margin-top: 47px;">
       <div style="background:#ffffff;height:220px;width:100%;margin-top:8px;padding-top:7px;">
         <div class="echars_titile_div">重点项目各阶段项目数量统计</div>
         <div
@@ -159,26 +120,12 @@ export default {
     this.statisticsNdPercentage();
     this.statisticsLbNdProportion();
     this.statisticsLbNdPercentage();
-
-    $("#menu_ul li").click(function() {
-      $(this).css("background", "#e1f3ff");
-      $(this)
-        .siblings("li")
-        .css("background", "#ffffff");
-    });
-    $("#show_menu_Id").click(function() {
-      if ($("#menu_ul_id").is(":hidden")) {
-         $("#menu_ul_id").show();
-      } else {
-        $("#menu_ul_id").hide();
-      }
-     
-    });
   },
   methods: {
     returnCom(flag) {
       var returnEle = null;
-      $("#menu_ul_id").hide();
+      $("#menu_ul_id").animate({ left: "-163px" }, 500);
+      $("#tabs").animate({ left: "0px" }, 500);
       switch (flag) {
         case 1:
           returnEle = document.getElementById("myCharts1");
@@ -195,7 +142,7 @@ export default {
         case 5:
           returnEle = document.getElementById("myCharts5");
           break;
-        case 5:
+        case 6:
           returnEle = document.getElementById("myCharts6");
           break;
         default:
@@ -203,7 +150,7 @@ export default {
       }
       //  $("#myCharts6").scrollIntoView(true);
       if (returnEle) {
-        returnEle.scrollIntoView();
+        returnEle.scrollIntoView(false);
       }
     },
     upYearClick: function() {

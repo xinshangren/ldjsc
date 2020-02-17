@@ -3,7 +3,7 @@
     overflow: auto;
 ">
     <div style="background:#ffffff;border-top:7px solid #F1F4F6;">
-      <div style="position:relative;height:93px;z-index:0;">
+      <div style="position:relative;height:105px;z-index:0;">
         <img class="wrqy_qygk_top" src="../../../../../assets/img/company_situation_bg.png" />
         <div style="padding-top:35px;">
           <div style="display:flex;line-height:27px;">

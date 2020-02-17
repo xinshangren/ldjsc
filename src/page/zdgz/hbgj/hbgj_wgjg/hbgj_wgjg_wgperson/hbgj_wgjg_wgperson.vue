@@ -1,6 +1,6 @@
 <template>
   <div style="
-    overflow: auto;
+    margin-top:0px;overflow:hidden;
 ">
     <div
       style="background: rgb(255, 255, 255);height: 100px;margin-left: 10px;margin-right: 10px;border-radius: 6px;box-shadow: 0px 1px 8px 3px #f3f3f3;margin-top: 7px;"

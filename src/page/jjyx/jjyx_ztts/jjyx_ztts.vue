@@ -1,8 +1,22 @@
+<style scoped>
+.menu_li_img {
+  height: 12px;
+  margin-top: 4px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.menu_li_div {
+  color: #3098fb;
+  margin-left: 3px;
+  font-size: 15px;
+  width: 90%;
+}
+</style> 
 <template>
   <div style="margin-top:0px;">
     <div
       id="showSelectDiv"
-      style="z-index: 99;position: fixed;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
+      style="z-index:100;position: fixed;top:101px;right: 0px;background: #ffffff;width: 14%;height: 44px;text-align: center;"
     >
       <div
         style="background: rgb(247, 247, 247);height: 35px;width: 40px;margin-top: 5px;margin-left: 7px;font-size:15px;"
@@ -10,14 +24,51 @@
         <img style="height: 18px;margin-top: 9px;" src="../../../assets/img/eco_tab_iconlist.png" />
       </div>
     </div>
-    <van-sticky id="jjyx_tabs" :offset-top="101">
-      <div style="display:flex;">
+    <div
+      id="menu_ul_id"
+      v-show="md_show"
+      style=" display:flex;position: fixed;background: #e8f4ff;top:100px;z-index:100;height:100%;left: -163px;"
+    >
+      <div style="left: 20px;background: #e8f4ff;top: 157px;z-index:100;">
+        <div @click="returnCom(1)" style="display:flex;margin-top: 10px;background: #e8f4ff;">
+          <div class="menu_li_div">生产总值</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(2)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">社会消费品零售总额</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(3)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">工业增加值增加速度</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(4)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">固定资产投资</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(5)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">一般公共预算收入</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+        <div @click="returnCom(6)" style="display:flex;margin-top:10px;background: #e8f4ff;">
+          <div class="menu_li_div">人均可支配收入</div>
+          <img class="menu_li_img" src="../../../assets/img/data_arrow_right.png" />
+        </div>
+      </div>
+      <img
+        id="show_menu_Id"
+        style="height:35px;position: absolute;top: 71px;right: -44px;"
+        src="../../../assets/img/data_list_menu.png"
+      />
+    </div>
+    <div id="jjyx_tabs" style="position:fixed;top: 100px;z-index: 99;">
+      <div style="display:flex;position:fixed;">
         <van-tabs
           @touchmove.prevent
           @click="smallTab_select"
           v-model="active"
           title-active-color="#2599e6"
-          :offset-top="55"
+          :offset-top="99"
           title-inactive-color="#333333"
           :sticky="true"
           line-width="75px"
@@ -37,7 +88,8 @@
       </div>
 
       <div
-        style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;width: 100%;z-index: 1;"
+        id="monthSelect"
+        style="display: flex;background: rgb(255, 255, 255);height: 40px;position: fixed;top: 143px;width: 100%;z-index: 1;"
       >
         <div class="ui-row-flex ui-whitespace" style="margin-top: 9px;">
           <div class="ui-col ui-col" @click="upYearClick">
@@ -60,7 +112,7 @@
           </div>
         </div>
       </div>
-    </van-sticky>
+    </div>
     <div
       id="selectTabDiv"
       style=" display:none;background: rgb(255, 255, 255);top: 156px;position: fixed;z-index: 99;box-shadow: 5px 1px 1px 2px #f3f3f3;"
@@ -78,9 +130,12 @@
         <li id="8" class="ui-col ui-col-50 dialogNoSelect" style="width:43%;">区县情况</li>
       </ul>
     </div>
-    <div style="margin-top:46px;z-index: -1;overflow: auto;">
+    <div
+      id="child_page"
+      style="position:absolute;top: 193px;z-index: -1;overflow: auto;width: 100%;"
+    >
       <div
-      id="childId"
+        id="childId"
         :is="currentView"
         @changeTime="changeTime"
         ref="child1"
@@ -93,7 +148,7 @@
       <child2 v-show="active=='1'" @changeTime="changeTime" ref="child2" :getChild="nowYear" :getChildMax="maxDate"></child2>-->
     </div>
 
-    <div style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;">
+    <div  id="moveId" style="height: 50px;position: fixed;right: 0px;bottom: 11px;display:flex;" @touchmove.prevent>
       <div id="rightAreaDivId" style="display:none;">
         <div
           style="display: flex;width: 268px;height: 44px;margin-right: -20px;margin-top: 3px;background: rgb(255, 255, 255);border-radius: 30px 0px 0px 30px;box-shadow:#f67b09 1px 1px 8px 1px"
@@ -125,6 +180,7 @@
         </div>
       </div>
       <img
+        @touchmove.prevent
         id="leftAreaDivId"
         style="height:53px;margin-right:15px;"
         src="../../../assets/img/phone_button.png"
@@ -176,7 +232,21 @@ export default {
       currentDate: new Date(),
       maxDate: new Date(),
       minDate: new Date(2016, 0, 1),
-      maxDataDate: ""
+      maxDataDate: "",
+      md_show: false,
+       flag: false,
+      nx: null,
+      ny: null,
+      dx: null,
+      dy: null,
+      x: null,
+      y: null,
+      cur: {
+        x: 0,
+        y: 0
+      },
+      div1: null,
+      div2: null
     };
   },
   mounted() {
@@ -217,8 +287,135 @@ export default {
       "30",
       "完成概况"
     );
+    $("#show_menu_Id").click(function() {
+      if ($("#menu_ul_id").css("left") == "-163px") {
+        $("#menu_ul_id").animate({ left: "0px" }, 500);
+        $("#child_page").animate({ left: "156px" }, 500);
+        $("#jjyx_tabs").animate({ left: "156px" }, 500);
+      } else {
+        $("#menu_ul_id").animate({ left: "-163px" }, 500);
+        $("#child_page").animate({ left: "0px" }, 500);
+        $("#jjyx_tabs").animate({ left: "0px" }, 500);
+      }
+    });
+    $("body").click(function(e) {
+      if (e.target.id != "show_menu_Id")
+        if ($("#menu_ul_id").css("left") == "-163px") {
+        } else {
+          $("#menu_ul_id").animate({ left: "-163px" }, 500);
+          $("#child_page").animate({ left: "0px" }, 500);
+          $("#jjyx_tabs").animate({ left: "0px" }, 500);
+        }
+    });
+    this.div1 = document.getElementById("moveId");
+    this.div2 = document.getElementById("moveId");
+    this.div1.addEventListener(
+      "mousedown",
+      function() {
+        self.down();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchstart",
+      function() {
+        self.down();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "mousemove",
+      function() {
+        self.move();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchmove",
+      function() {
+        self.move();
+      },
+      false
+    );
+    document.body.addEventListener(
+      "mouseup",
+      function() {
+        self.end();
+      },
+      false
+    );
+    this.div1.addEventListener(
+      "touchend",
+      function() {
+        self.end();
+      },
+      false
+    );
   },
   methods: {
+    down: function() {
+      var self = this;
+      self.flag = true;
+      var touch;
+      console.log(event);
+      if (event.touches) {
+        touch = event.touches[0];
+      } else {
+        touch = event;
+      }
+      self.cur.x = touch.clientX;
+      self.cur.y = touch.clientY;
+      self.dx = self.div2.offsetLeft;
+      self.dy = self.div2.offsetTop;
+    },
+    move: function() {
+      var self = this;
+      if (self.flag) {
+        var touch;
+        if (event.touches) {
+          touch = event.touches[0];
+        } else {
+          touch = event;
+        }
+        self.nx = touch.clientX - self.cur.x;
+        self.ny = touch.clientY - self.cur.y;
+        self.x = self.dx + self.nx;
+        self.y = self.dy + self.ny;
+
+        var clientWidth = document.body.clientWidth;
+        // console.log(self.x + "--" + self.y + "--" + clientWidth);
+        if (self.x > 0) {
+        }
+        self.div2.style.left = self.x + "px";
+        self.div2.style.top = self.y + "px";
+        //阻止页面的滑动默认事件
+        document.addEventListener(
+          "touchmove",
+          function() {
+            event.preventDefault();
+          },
+          false
+        );
+      }
+    },
+    //鼠标释放时候的函数
+    end: function() {
+      console.log("end");
+      if (this.flag) {
+        $("#leftAreaDivId").off("click");
+        $("#leftAreaDivId").click(function() {
+          $("#moveId").css("left", "");
+          $("#moveId").css("top", "");
+          $("#rightAreaDivId").animate({
+            width: "toggle"
+          });
+        });
+      }
+      this.flag = false;
+    },
+    returnCom: function(x) {
+      this.$refs.child1.returnCom(x);
+    },
     //获取记录日志的logid
     doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
       var params = {
@@ -243,15 +440,19 @@ export default {
     },
     //空气子选项卡选择
     smallTab_select: function(name, title) {
-      var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
       // console.log(scrollTop);
-      document.documentElement.scrollTop=0;
+      document.documentElement.scrollTop = 0;
       // let dom = document.getElementById("childId");
       // if (dom != null) {
       //   if (dom.scrollTop > 0) {
       //     dom.scrollTop = 0;
       //   }
       // }
+      this.md_show = false;
       console.log(name, title);
       switch (name) {
         case 0:
@@ -261,8 +462,10 @@ export default {
             "30",
             "完成概况"
           );
+
           this.active = 0;
           this.currentView = "child1";
+
           break;
         case 1:
           this.doAddAppLogList(
@@ -341,6 +544,7 @@ export default {
             "38",
             "区县情况"
           );
+          this.md_show = true;
           this.active = 8;
           this.currentView = "child9";
           break;
@@ -373,7 +577,7 @@ export default {
       if (year < minYear || (year == minYear && month < minMonth)) {
         this.$toast("前一年没有数据");
       }
-      if((year<minYear)||(year == minYear&&month < minMonth)){
+      if (year < minYear || (year == minYear && month < minMonth)) {
         this.$toast("前一月没有数据");
         return;
       }

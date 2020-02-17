@@ -7,7 +7,11 @@
         v-model="seach_value"
         style="width:85%;margin-left:13px;"
       />
-      <img src="../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
+      <img
+        @click="showRecord()"
+        src="../../../../assets/img/project_voice.png"
+        style="height: 27px;margin-top: 10px;"
+      />
     </div>
     <div style="display: flex;background: #ffffff;height: 36px;">
       <van-popup v-model="showPop" position="bottom" :style="{ height: '200px' }">
@@ -116,6 +120,21 @@
         </div>
       </div>
     </mescroll-vue>
+    <div class="blackBoxSpeak">
+      <img style="height:74px;margin-top:32px;" src="../../../../assets/img/ic_record@2x.png" />
+      <img style="height:74px;margin-top:32px;margin-left:16px;" :src="recordUrl9" />
+      <div style="font-size: 18px;color: #ffffff;">{{countSize}}秒</div>
+      <div style="display:flex;">
+        <div
+          @click="stopRecord(1)"
+          style="width:50%;font-size: 16px;color: #ffffff;text-align:center;"
+        >完成识别</div>
+        <div
+          @click="stopRecord(2)"
+          style="width:50%;font-size: 16px;color: #ffffff;text-align:center;"
+        >取消识别</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -125,6 +144,7 @@ import MescrollVue from "mescroll.js/mescroll.vue";
 import { httpMethod } from "../../../../api/getData.js";
 import Vue from "vue";
 import { Search, PullRefresh, Popup } from "vant";
+import dd from "dingtalk-jsapi";
 Vue.use(Search)
   .use(PullRefresh)
   .use(Popup);
@@ -135,6 +155,18 @@ export default {
   name: "zdgc_czwt",
   data() {
     return {
+      timer: null, //用于清除计时器
+      timerJs: null, //用于倒计时60s
+      recordId: "0",
+      countSize: 5,
+      imgIndex: "9",
+      mediaId: "",
+      backgroundDiv: {
+        background:
+          'url("../../../../assets/img/project_filtrate.png") 28px 16px / 64px 104px no-repeat, url("../../../../assets/img/ic_record_ripple@2x-9.png") 111.2px 32px / 28.8px 88px no-repeat rgba(0, 0, 0, 0.7)'
+      },
+      recordUrlBack: require("../../../../assets/img/ic_record@2x.png"),
+      recordUrl9: require("../../../../assets/img/ic_record_ripple@2x-9.png"),
       date1: "开始时间",
       date2: "结束时间",
       flage: 1,
@@ -172,8 +204,221 @@ export default {
       }
     };
   },
-  mounted() {},
+  mounted() {
+    this.gojq();
+  },
   methods: {
+    startRecord: function() {
+      this.recordId = "1";
+      console.log("开始录音");
+      dd.ready(function() {
+        dd.device.audio.startRecord({
+          maxDuration: 5,
+          onSuccess: function() {
+            //支持最长为300秒（包括）的音频录制，默认60秒(包括)。
+            console.log("开始录音成功");
+          },
+          onFail: function(err) {
+            // var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+            // blackBoxSpeak.style.display = "none";
+          }
+        });
+      });
+    },
+    stopRecord: function(flag) {
+      var self = this;
+      console.log("停止录音");
+      clearInterval(self.timer);
+      clearInterval(self.timerJs);
+      if (flag == 1) {
+        self.recordId = "1";
+        //完成识别
+        dd.ready(function() {
+          dd.device.audio.stopRecord({
+            onSuccess: function(res) {
+              console.log("停止录音成功");
+              console.log(res.mediaId);
+              console.log(res.duration);
+              self.mediaId = res.mediaId;
+              self.translateVoice(res.mediaId);
+            },
+            onFail: function(err) {}
+          });
+        });
+        var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+        blackBoxSpeak.style.display = "none";
+      } else {
+        var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+        blackBoxSpeak.style.display = "none";
+        //取消识别
+        self.recordId = "0";
+      }
+    },
+    //语音识别
+    translateVoice: function(mediaIds) {
+      var self = this;
+      console.log("录音识别开始");
+      if (self.recordId == "1") {
+        self.$store.commit("showLoadingBig");
+        dd.ready(function() {
+          dd.device.audio.translateVoice({
+            mediaId: mediaIds,
+            duration: 5.0,
+            onSuccess: function(res) {
+              self.$store.commit("hideLoadingBig");
+              // res.mediaId; // 转换的语音的mediaId
+              console.log("录音识别结果：" + res.content);
+              var result = self.palindrome(res.content);
+              console.log("录音识别结果1：" + result);
+              self.seach_value = result; // 语音转换的文字内容
+              self.onSearch();
+            },
+            onFail: function(err) {
+              self.$store.commit("hideLoadingBig");
+              // var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+              // blackBoxSpeak.style.display = "none";
+            }
+          });
+        });
+      }
+    },
+    onRecordEnd: function() {
+      var self = this;
+      console.log("监听停止录音");
+      dd.ready(function() {
+        dd.device.audio.onRecordEnd({
+          onSuccess: function(res) {
+            console.log("监听停止录音成功");
+            console.log(res.mediaId);
+            console.log(res.duration);
+            self.mediaId = res.mediaId;
+            self.translateVoice(res.mediaId);
+            clearInterval(self.timer);
+            clearInterval(self.timerJs);
+            var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+            blackBoxSpeak.style.display = "none";
+          },
+          onFail: function(err) {}
+        });
+      });
+    },
+    palindrome: function(str) {
+      var arr = str.split("");
+      arr = arr.filter(function(val) {
+        return val !== " " && val !== "," && val !== "." && val !== "。";
+      });
+      console.log(arr.join("")); //arr变为"0000";
+      return arr.join("");
+    },
+    gojq: function() {
+      var currentUrl = window.location.href; //当前页面地址
+      var number = currentUrl.indexOf("#");
+      currentUrl = currentUrl.substring(0, number);
+      console.log(currentUrl);
+      var params = {
+        currentUrl: currentUrl
+      };
+
+      httpMethod
+        .getConfig(params)
+        .then(res => {
+          if (res.success == "1") {
+            var data = JSON.parse(res.config);
+            console.log(data);
+            this.corpId = data.corpId;
+            dd.ready(function() {
+              dd.config({
+                agentId: data.agentId,
+                corpId: data.corpId,
+                timeStamp: data.timeStamp,
+                nonceStr: data.nonceStr,
+                signature: data.signature,
+                jsApiList: [
+                  "runtime.info",
+                  "biz.contact.choose",
+                  "device.notification.confirm",
+                  "device.notification.alert",
+                  "device.notification.prompt",
+                  "biz.ding.post",
+                  "biz.util.openLink",
+                  "device.audio",
+                  "device.audio.startRecord",
+                  "device.audio.stopRecord",
+                  "device.audio.translateVoice",
+                  "device.audio.onRecordEnd",
+                  "biz.ding.create",
+                  "biz.telephone.call",
+                  "biz.contact.complexPicker",
+                  "biz.util.open",
+                  "biz.chat.open",
+                  "biz.chat.pickConversation",
+                  "biz.user.get",
+                  "biz.util.uploadImage",
+                  "biz.chat.openSingleChat",
+                  "biz.ding.create",
+                  "biz.chat.toConversation"
+                ]
+              });
+              dd.error(function(error) {
+                console.log("dd error: " + JSON.stringify(error));
+              });
+            });
+          } else if (res.success == "0") {
+            // this.error = true;
+          }
+        })
+        .catch(err => {
+          // this.$toast(err);
+        });
+    },
+    showRecord: function() {
+      this.countSize = 5;
+      var blackBoxSpeak = document.querySelector(".blackBoxSpeak");
+      var index = [9, 8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      var num = index.length;
+      this.timer = null; //用于清除计时器
+      this.timerJs = null; //用于倒计时60s
+      //直接开启轮播模式
+      var indexNum = 5;
+      this.setTimer(
+        this.timer,
+        this.timerJs,
+        blackBoxSpeak,
+        num,
+        indexNum,
+        index
+      );
+      blackBoxSpeak.style.display = "block";
+      this.startRecord();
+      this.onRecordEnd(); //监听是否
+    },
+    setTimer: function(timer, timerJs, blackBoxSpeak, num, indexNum, index) {
+      var self = this;
+      self.timer = setInterval(function() {
+        setTimeout(function() {
+          num++;
+          // this.imgIndex = num;
+          self.recordUrl9 = require("../../../../assets/img/ic_record_ripple@2x-" +
+            index[num] +
+            ".png");
+        }, 70);
+        if (num >= index.length - 1) {
+          num = 0;
+        }
+      }, 70);
+      self.timerJs = setInterval(function() {
+        console.log(indexNum);
+        self.countSize = indexNum;
+        indexNum = indexNum - 1;
+        if (indexNum == 0) {
+          setTimeout(function() {
+            blackBoxSpeak.style.display = "none";
+          }, 1000);
+          clearInterval(self.timer);
+          clearInterval(self.timerJs);
+        }
+      }, 1000);
+    },
     query_button: function() {
       this.mescroll.resetUpScroll();
     },
@@ -243,17 +488,17 @@ export default {
               this.$refs.totalCountId.innerHTML = res.total;
               if (res.reportDate != null) {
                 this.date1 = res.reportDate;
-                 this.starttime = this.date1;
+                this.starttime = this.date1;
               }
               if (res.reportDate != null) {
                 this.date2 = res.reportDate;
-                 this.endtime = this.date2;
+                this.endtime = this.date2;
               }
             }
             var data = res.dataList;
             if (data && data.length > 0) {
               this.list = this.list.concat(data);
-            }else{
+            } else {
               this.list = this.list.concat(data);
             }
 
@@ -285,4 +530,18 @@ export default {
 <style scoped>
 @import "../../../../page/zdgz/zdgc/zdgc_czwt/zdgc_czwt.css";
 @import "../../../../assets/css/frozenui.css";
+.blackBoxSpeak {
+  width: 156px;
+  height: 176px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  border-radius: 12px;
+  text-align: center;
+}
 </style>

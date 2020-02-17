@@ -73,7 +73,8 @@ export default new Router({
     },  {
       path: '/main/headline',
       name: 'headline',
-      component: headlineVue
+      component: headlineVue,
+      meta:{keepAlive:true}
     }, {
       path: '/main/notice',
       name: 'notice',

@@ -81,10 +81,10 @@
 }
 .mescroll {
     position: fixed;
-    top: 300px;
+    top: 300PX;
     bottom: 0px;
     height: auto;
-    z-index: 999;
+    /* z-index: 1; */
   }
   .dialogNoSelect {
 	border: 1px solid #cccccc;
