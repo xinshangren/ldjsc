@@ -290,26 +290,26 @@ export default {
       "30",
       "完成概况"
     );
-    $("#show_menu_Id").click(function() {
-      if ($("#menu_ul_id").css("left") == "-163px") {
-        $("#menu_ul_id").animate({ left: "0px" }, 500);
-        $("#child_page").animate({ left: "156px" }, 500);
-        $("#jjyx_tabs").animate({ left: "156px" }, 500);
-      } else {
-        $("#menu_ul_id").animate({ left: "-163px" }, 500);
-        $("#child_page").animate({ left: "0px" }, 500);
-        $("#jjyx_tabs").animate({ left: "0px" }, 500);
-      }
-    });
-    $("body").click(function(e) {
-      if (e.target.id != "show_menu_Id")
-        if ($("#menu_ul_id").css("left") == "-163px") {
-        } else {
-          $("#menu_ul_id").animate({ left: "-163px" }, 500);
-          $("#child_page").animate({ left: "0px" }, 500);
-          $("#jjyx_tabs").animate({ left: "0px" }, 500);
-        }
-    });
+    // $("#show_menu_Id").click(function() {
+    //   if ($("#menu_ul_id").css("left") == "-163px") {
+    //     $("#menu_ul_id").animate({ left: "0px" }, 500);
+    //     $("#child_page").animate({ left: "156px" }, 500);
+    //     $("#jjyx_tabs").animate({ left: "156px" }, 500);
+    //   } else {
+    //     $("#menu_ul_id").animate({ left: "-163px" }, 500);
+    //     $("#child_page").animate({ left: "0px" }, 500);
+    //     $("#jjyx_tabs").animate({ left: "0px" }, 500);
+    //   }
+    // });
+    // $("body").click(function(e) {
+    //   if (e.target.id != "show_menu_Id")
+    //     if ($("#menu_ul_id").css("left") == "-163px") {
+    //     } else {
+    //       $("#menu_ul_id").animate({ left: "-163px" }, 500);
+    //       $("#child_page").animate({ left: "0px" }, 500);
+    //       $("#jjyx_tabs").animate({ left: "0px" }, 500);
+    //     }
+    // });
     this.div1 = document.getElementById("moveId");
     this.div2 = document.getElementById("moveId");
     this.div1.addEventListener(
