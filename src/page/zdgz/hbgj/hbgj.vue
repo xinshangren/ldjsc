@@ -470,6 +470,8 @@ export default {
       this.airactive = name;
       switch (name) {
         case 0:
+          this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -479,6 +481,8 @@ export default {
           this.currentView = "child1";
           break;
         case 1:
+          this.$store.commit("setSeach_placeholder", "请输入站点名称");
+           this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -488,6 +492,8 @@ export default {
           this.currentView = "child2";
           break;
         case 2:
+           this.$store.commit("setSeach_placeholder", "搜索");
+            this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -506,6 +512,8 @@ export default {
       this.wgjgactive = name;
       switch (name) {
         case 0:
+           this.$store.commit("setSeach_placeholder", "搜索");
+            this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -515,6 +523,8 @@ export default {
           this.currentView = "child4";
           break;
         case 1:
+           this.$store.commit("setSeach_placeholder", "请输入污染源名称");
+            this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -524,6 +534,8 @@ export default {
           this.currentView = "child5";
           break;
         case 2:
+           this.$store.commit("setSeach_placeholder", "搜索");
+            this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -533,6 +545,8 @@ export default {
           this.currentView = "child6";
           break;
         case 3:
+           this.$store.commit("setSeach_placeholder", "搜索");
+            this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -549,6 +563,8 @@ export default {
       this.zdqyactive = name;
       switch (name) {
         case 0:
+          this.$store.commit("setSeach_placeholder", "搜索");
+           this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -558,6 +574,8 @@ export default {
           this.currentView = "child8";
           break;
         case 1:
+          this.$store.commit("setSeach_placeholder", "请输入污染源名称");
+           this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -579,6 +597,8 @@ export default {
       this.Bigflag = index;
       switch (index) {
         case 1:
+           this.$store.commit("setSeach_placeholder", "搜索");
+            this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -592,12 +612,15 @@ export default {
           this.$refs.tabId1.resize();
           switch (this.airactive) {
             case 0:
+               this.$store.commit("setSeach_placeholder", "搜索");
               this.currentView = "child1";
               break;
             case 1:
+               this.$store.commit("setSeach_placeholder", "请输入站点名称");
               this.currentView = "child2";
               break;
             case 2:
+               this.$store.commit("setSeach_placeholder", "搜索");
               this.currentView = "child3";
               break;
             default:
@@ -617,6 +640,8 @@ export default {
           this.indexTabImg3 = require("../../../assets/img/air_home_tab3.png");
           break;
         case 2:
+           this.$store.commit("setSeach_placeholder", "搜索");
+            this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -642,6 +667,8 @@ export default {
           this.wgjgactive = 0;
           break;
         case 3:
+          this.$store.commit("setSeach_placeholder", "搜索");
+           this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,

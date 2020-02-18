@@ -211,6 +211,8 @@ export default {
     },
     jqTab_select: function(name, title) {
       if (title == "景区概况") {
+        this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
         this.doAddAppLogList(
           global_variable.logId,
           global_variable.ddPhone,
@@ -219,6 +221,8 @@ export default {
         );
         this.currentView = "child1";
       } else if (title == "景区列表") {
+        this.$store.commit("setSeach_placeholder", "请输入景区名称");
+          this.$store.commit("setSeach_value", "");
         this.doAddAppLogList(
           global_variable.logId,
           global_variable.ddPhone,
@@ -227,6 +231,8 @@ export default {
         );
         this.currentView = "child2";
       } else if (title == "景区介绍") {
+        this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
         this.doAddAppLogList(
           global_variable.logId,
           global_variable.ddPhone,
@@ -235,6 +241,8 @@ export default {
         );
         this.currentView = "child3";
       } else if (title == "示范村概况") {
+        this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
         this.doAddAppLogList(
           global_variable.logId,
           global_variable.ddPhone,
@@ -243,6 +251,8 @@ export default {
         );
         this.currentView = "child4";
       } else if (title == "示范村列表") {
+        this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
         this.doAddAppLogList(
           global_variable.logId,
           global_variable.ddPhone,
@@ -286,6 +296,8 @@ export default {
       this.state = state;
       this.show = false;
       if (state == 2) {
+        this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
         this.doAddAppLogList(
           global_variable.logId,
           global_variable.ddPhone,
@@ -297,6 +309,8 @@ export default {
         this.img1 = require("../../assets/img/teb-jq1.png");
         this.img2 = require("../../assets/img/teb-sfc2.png");
       } else {
+        this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
         this.doAddAppLogList(
           global_variable.logId,
           global_variable.ddPhone,

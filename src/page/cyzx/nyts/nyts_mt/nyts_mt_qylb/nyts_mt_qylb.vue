@@ -9,17 +9,17 @@
 </style>
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
+    <!-- <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
       <form action="/" style="width: 84%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入企业或集团名称" @search="onSearch" v-model="seach_value" />
-      </form>
-      <img
-        id="query_show"
-        src="../../../../../assets/img/project_filtrate.png"
-        style="height: 27px;margin-top: 10px;margin-left:5px;"
-        @click="queryList"
-      />
-    </div>
+    </form>-->
+    <img
+      id="query_list"
+      src="../../../../../assets/img/project_filtrate_white.png"
+      style=" height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;"
+      @click="queryList"
+    />
+    <!-- </div> -->
     <van-tabs
       color="#2796e7"
       id="tabId"
@@ -50,7 +50,7 @@
               <div style="padding:7px;">
                 <div style="display:flex;position:relative;">
                   <p
-                  class="mt_qylb_title_style"
+                    class="mt_qylb_title_style"
                     style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                   >{{item.ent_name}}</p>
                 </div>
@@ -91,7 +91,7 @@
                     src="../../../../../assets/img/details_icon17.png"
                   />
                   <span
-                 class="mt_qylb_title_style"
+                    class="mt_qylb_title_style"
                     style="margin-left: 5px;color: gray;width: 330px;"
                   >地址：{{item.ent_address}}</span>
                 </div>
@@ -101,7 +101,7 @@
                     src="../../../../../assets/img/iconmt-lszt.png"
                   />
                   <span
-                  class="mt_qylb_title_style"
+                    class="mt_qylb_title_style"
                     style="margin-left: 5px;color: gray;width: 330px;"
                   >隶属集团：{{item.ent_nature}}</span>
                 </div>
@@ -111,7 +111,7 @@
                     src="../../../../../assets/img/iconmt-qygm.png"
                   />
                   <span
-                  class="mt_qylb_title_style"
+                    class="mt_qylb_title_style"
                     style="margin-left: 5px;color: gray;width: 330px;"
                   >企业规模：{{item.ent_scale}}万吨/年</span>
                 </div>
@@ -136,29 +136,24 @@
           id="newsList"
           style="margin-top:3px;margin-left:10px;margin-right:10px;box-shadow:1px 1px 2px 3px  #f3f3f3;"
         >
-          <div
-            v-for="(item,index) in bloc_dataList"
-            :key="index"
-            style="position:relative;"
-          >
+          <div v-for="(item,index) in bloc_dataList" :key="index" style="position:relative;">
             <div style="padding:7px;">
               <div style="display:flex;position:relative;">
                 <p
-                 class="mt_qylb_title_style"
+                  class="mt_qylb_title_style"
                   style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                 >{{item.ent_nature}}</p>
               </div>
 
               <div style="display:flex;position:relative;">
-                
-                  <img
-                    style="height: 12px;margin-top:6px;"
-                    src="../../../../../assets/img/iconmt-lszt.png"
-                  />
-                  <span
-                   class="mt_qylb_title_style"
-                    style="margin-left: 5px;color: gray;width: 330px;"
-                  >下属企业{{item.num}}家</span>
+                <img
+                  style="height: 12px;margin-top:6px;"
+                  src="../../../../../assets/img/iconmt-lszt.png"
+                />
+                <span
+                  class="mt_qylb_title_style"
+                  style="margin-left: 5px;color: gray;width: 330px;"
+                >下属企业{{item.num}}家</span>
               </div>
             </div>
             <div style="width: 100%;height: 4px;background: #f3f3f3;"></div>
@@ -286,13 +281,33 @@ export default {
   mounted() {
     this.changeFoneColor();
   },
+  computed: {
+    listenComponentState() {
+      return this.$store.state.seach_value;
+    }
+  },
+  watch: {
+    //监听全局变量componentId的变化
+    listenComponentState: function(val, oldval) {
+      if (val != oldval) {
+        this.seach_value = this.$store.state.seach_value;
+        console.log(this.$store.state.seach_value);
+        //alert(this.searchkey);
+        this.mescroll.resetUpScroll();
+      }
+    }
+  },
+  
   methods: {
     changeFoneColor: function() {
+      this.$store.commit("setSeach_value", "");
       if (this.airactive == 0) {
+        $("#query_list").show();
         $("#font_color2").css("color", "#2796e7");
         $("#font_color1").css("color", "#ffffff");
         $("#query_show").css("display", "");
       } else {
+        $("#query_list").hide();
         $("#font_color1").css("color", "#2796e7");
         $("#font_color2").css("color", "#ffffff");
         $("#query_show").css("display", "none");
@@ -335,11 +350,11 @@ export default {
               this.compCount = res.total;
               this.bloc_dataList = [];
             }
-           
-              this.comp_dataList = this.comp_dataList.concat(res.dataList);
-         
-              this.bloc_dataList = this.bloc_dataList.concat(res.ent_nature);
-         
+
+            this.comp_dataList = this.comp_dataList.concat(res.dataList);
+
+            this.bloc_dataList = this.bloc_dataList.concat(res.ent_nature);
+
             this.bloc_count = res.ent_nature.length;
             this.qyxz_dataList = res.mtQyxz.dataList;
             this.ssqy_dataList = res.mtSsqx.dataList;
