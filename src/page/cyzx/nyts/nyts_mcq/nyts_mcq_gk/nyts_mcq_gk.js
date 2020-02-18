@@ -9,7 +9,7 @@ export const nytsMcqGkJs = {
 	},
     //煤炭概况第一个统计图
     showjmrjsrEchars1: function (echarts,value,dataList){
-	const myCharts = echarts.init(value);  
+  const myCharts = echarts.init(value);
     var xLabel = [];
 	var searList = [];
 	var dataListValue1 = [];
@@ -35,8 +35,9 @@ export const nytsMcqGkJs = {
 		itemStyle: {
 			normal: {
 				color: function(params) {
-					var colorList = ['#EEEEEE'];
-					return colorList[params.dataIndex]
+				  return "#ffcc33"
+					/*var colorList = ['#EEEEEE'];
+					return colorList[params.dataIndex]*/
 				}
 			}
 		},
@@ -50,7 +51,7 @@ export const nytsMcqGkJs = {
 		name: lengdList[1],
 		type: 'bar',
 		barWidth: 10, //柱子宽度
-		color: '#00DB7B',
+		color: '#3399ff',
 		data: dataListValue2
 	}
 	var map5 = {
@@ -75,6 +76,7 @@ export const nytsMcqGkJs = {
 	searList.push(map5);
 
 	var option = {
+    color:['#ffcc33','#3399ff','#00DB7B'],
 		legend: {
 			orient: 'horizontal',
 			show: true,
@@ -173,7 +175,6 @@ export const nytsMcqGkJs = {
     }
 
 
-    
 
 
 }

@@ -34,11 +34,11 @@
             </div>
           </li>
         </ul>
-       
+
       </div>
        <div style="text-align:center;"></div>
     </mescroll-vue>
-    
+
   </div>
 </template>
 
@@ -66,7 +66,7 @@ export default {
       imageids: [],
       list: [],
       mescroll: null, // mescroll实例对象
-      mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
+      mescrollDown: {isLock: true}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       mescrollUp: {
         // 上拉加载的配置.
         callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }

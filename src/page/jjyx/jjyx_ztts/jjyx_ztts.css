@@ -9,10 +9,10 @@
 
 .dialogNoSelect {
 	border: 1px solid #cccccc;
-	padding: 1px 15px 1px 15px;
+	padding: 1PX 15PX 1PX 15PX;
 	border-radius: 33px;
 	font-size: 13px;
-	margin-left: 10px;
+	/* margin-left: 10PX; */
 	text-align: center;
 	margin-top: 4px;
 	background: #ffffff;

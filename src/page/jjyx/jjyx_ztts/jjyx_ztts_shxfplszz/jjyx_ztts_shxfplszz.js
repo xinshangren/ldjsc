@@ -28,7 +28,11 @@ export const echarsEnti = {
 
 	}
 	var dataList = [];
+	console.log(entList);
 	for(let i = 0; i < entList.length; i++) {
+		if(entList[i].indexdata=='-'){
+      entList[i].indexdata=0;
+		}
 		var map = {
 			name: entList[i].statisname,
 			value: entList[i].indexdata
@@ -395,7 +399,7 @@ export const echarsEnti = {
 		grid: {
 			right: '2%',
 			top: '16%',
-			left: '2%',
+			left: '4%',
 			bottom: '8%',
 			height:'210px',
 			containLabel: true

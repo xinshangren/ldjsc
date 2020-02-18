@@ -215,7 +215,12 @@ export default {
           if (code == "1") {
             // var dateZb = res.dateZb; //城乡零售占比及增速
             // var listObj = res.listObj;
-            this.totalData = res.totalData[0]; //标题
+            if(res.totalData.length>0){
+  this.totalData = res.totalData[0]; //标题
+            }else{
+                this.totalData ={indexdata:"-",yonydata:"-"}; //标题
+            }
+          
             // if(this.totalData.indexdata)
             //   this.totalData.indexdata = parseFloat(
             //     this.totalData.indexdata / 10000

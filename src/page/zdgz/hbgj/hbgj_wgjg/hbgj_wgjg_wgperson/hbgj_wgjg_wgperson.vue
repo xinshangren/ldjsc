@@ -77,8 +77,8 @@
         </div>
       </div>
     </div>
-    <div
-      style="background:#ffffff;margin-left: 10px;margin-right: 10px;border-radius: 0px;box-shadow: 0px 1px 8px 3px #f3f3f3;margin-top: 7px;"
+    <div id="wgingoId"
+      style="overflow-y: auto;background:#ffffff;margin-left: 10px;margin-right: 10px;border-radius: 0px;box-shadow: 0px 1px 8px 3px #f3f3f3;margin-top: 7px;"
     >
       <div v-show="flag==1">
         <div v-for="(item,index) in leaderList" :key="index" style="margin-bottom: 0px;">
@@ -148,7 +148,7 @@
     <div
       id="wgsx_show_div_select_id1"
       class="top_menu_wgsx_div"
-      style="display:none;left: 0px;top: 278px;width: 100%;"
+      style="display:none;left: 0px;bottom:0px;width: 100%;font-size:14px"
     >
       <img
         id="close_wgsx_show_div_select_id1"
@@ -156,15 +156,15 @@
         style="height: 32px;position: absolute;right: 2px;top: -10px;"
       />
       <div style="width: 30%;text-align: center;">
-        <ul id="top_wgsx_ul1_list" style="height: 100%;overflow: auto;font-size:14px;"></ul>
+        <ul id="top_wgsx_ul1_list" style="height: 100%;overflow: auto;"></ul>
       </div>
-      <div id="top_wgsx_ul2_list1_div" style="width:30%;text-align: center;">
-        <ul id="top_wgsx_ul2_list" style="height: 100%;background:#F9F9F9;overflow: auto;font-size:14px;"></ul>
+      <div id="top_wgsx_ul2_list1_div" style="width:40%;text-align: center;">
+        <ul id="top_wgsx_ul2_list" style="height: 100%;background:#F9F9F9;overflow: auto;"></ul>
       </div>
-      <div id="top_wgsx_ul3_list1_div" style="width:60%;text-align: center;">
+      <div id="top_wgsx_ul3_list1_div" style="width:40%;text-align: center;">
         <ul
           id="top_wgsx_ul3_list"
-          style="padding-top:1px;height: 100%;background:#F0F0F0;overflow: auto;font-size:14px;"
+          style="padding-top:1px;height: 100%;background:#F0F0F0;overflow: auto;"
         ></ul>
       </div>
     </div>
@@ -208,6 +208,10 @@ export default {
     this.getGridSpecificList("140502", this.wgName);
     $("#close_wgsx_show_div_select_id1").click(function(e) {
       $("#wgsx_show_div_select_id1").hide();
+      $('body').css('overflow','auto')
+
+      var s = window.innerHeight - $("#wgingoId").offset().top;
+      $("#wgingoId").css("height", s);
     });
   },
   methods: {
@@ -217,7 +221,9 @@ export default {
     },
     showSelectArea: function() {
       $("#wgsx_show_div_select_id1").show();
+      $('body').css('overflow','hidden')
     },
+    //获取网格列表
     //获取网格列表
     getGridInfoListFuns: function(flag, gridCode) {
       var self = this;
@@ -228,6 +234,17 @@ export default {
         .getGridInfoList(params)
         .then(res => {
           console.log(res);
+          var vv = "";
+
+          $("#top_wgsx_ul1_list").each(function(){
+            $.each(this.attributes,function(){
+              if(this.name.indexOf("data-v")>=0){
+                vv = this.name;
+                return;
+              }
+            });
+          })
+
           if (res.success == "1") {
             var wgjg_left_area_code = this.wgjg_left_area_codes;
             var result = res.gridList;
@@ -238,7 +255,7 @@ export default {
               var html = "";
               if (wgjg_left_area_code < 2) {
                 html +=
-                  "<li id='555555' class='top_wgsx_li1_noselect'>全部</li>";
+                  "<li id='555555' "+vv+" class='top_wgsx_li1_noselect'>全部</li>";
               } else {
                 //							html += "<li id='555555' class='top_wgsx_li1_noselect'>全部</li>";
               }
@@ -253,7 +270,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -264,7 +281,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -275,7 +292,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -286,7 +303,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -297,7 +314,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -308,7 +325,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_select'>" +
+                        "' "+vv+" class='top_wgsx_li1_select'>" +
                         name +
                         "</li>";
                     }
@@ -320,14 +337,14 @@ export default {
                         html +=
                           "<li id='" +
                           code +
-                          "' class='top_wgsx_li1_select'>" +
+                          "' "+vv+" class='top_wgsx_li1_select'>" +
                           name +
                           "</li>";
                       } else {
                         html +=
                           "<li id='" +
                           code +
-                          "' class='top_wgsx_li1_noselect'>" +
+                          "' "+vv+" class='top_wgsx_li1_noselect'>" +
                           name +
                           "</li>";
                       }
@@ -335,7 +352,7 @@ export default {
                       html +=
                         "<li id='" +
                         code +
-                        "' class='top_wgsx_li1_noselect'>" +
+                        "' "+vv+" class='top_wgsx_li1_noselect'>" +
                         name +
                         "</li>";
                     }
@@ -356,8 +373,25 @@ export default {
                 var code = $(this).attr("id");
                 var name = $(this).html();
                 self.getGridInfoListFuns("2", code);
-                self.getGridSpecificList(code, name);
+                // self.getGridSpecificList(code, name);
                 self.wgName = name;
+
+                switch (self.wgType) {
+                  case 1:
+                    $("#oneTimeDivId").html(name);
+                    self.echars_gridCode2 = code;
+                    self.lineGridRecord();
+                    self.barGridRecord();
+                    break;
+                  case 2:
+                    $("#twoTimeDivId").html(name);
+                    self.echars_gridCode3 = code;
+                    self.lineTask();
+                    self.barTask();
+                    break;
+                  default:
+                    break;
+                }
               });
             } else if (flag == "2") {
               $("#top_wgsx_ul2_list").html("");
@@ -372,14 +406,14 @@ export default {
                     html +=
                       "<li id='" +
                       code +
-                      "' class='top_wgsx_li2_select'>" +
+                      "' "+vv+" class='top_wgsx_li2_select'>" +
                       name +
                       "</li>";
                   } else {
                     html +=
                       "<li id='" +
                       code +
-                      "' class='top_wgsx_li2_noselect'>" +
+                      "' "+vv+" class='top_wgsx_li2_noselect'>" +
                       name +
                       "</li>";
                   }
@@ -387,7 +421,7 @@ export default {
                   html +=
                     "<li id='" +
                     code +
-                    "' class='top_wgsx_li2_noselect'>" +
+                    "' "+vv+" class='top_wgsx_li2_noselect'>" +
                     name +
                     "</li>";
                 }
@@ -408,8 +442,24 @@ export default {
                 var code = $(this).attr("id");
                 var name = $(this).html();
                 self.getGridInfoListFuns("3", code);
-                self.getGridSpecificList(code, name);
+                // self.getGridSpecificList(code, name);
                 self.wgName = name;
+                switch (self.wgType) {
+                  case 1:
+                    $("#oneTimeDivId").html(name);
+                    self.echars_gridCode2 = code;
+                    self.lineGridRecord();
+                    self.barGridRecord();
+                    break;
+                  case 2:
+                    $("#twoTimeDivId").html(name);
+                    self.echars_gridCode3 = code;
+                    self.lineTask();
+                    self.barTask();
+                    break;
+                  default:
+                    break;
+                }
               });
             } else if (flag == "3") {
               $("#top_wgsx_ul3_list").html("");
@@ -421,14 +471,14 @@ export default {
                   html +=
                     "<li id='" +
                     code +
-                    "' class='top_wgsx_li3_noselect'>" +
+                    "' "+vv+" class='top_wgsx_li3_noselect'>" +
                     name +
                     "</li>";
                 } else {
                   html +=
                     "<li id='" +
                     code +
-                    "' class='top_wgsx_li3_noselect'>" +
+                    "' "+vv+" class='top_wgsx_li3_noselect'>" +
                     name +
                     "</li>";
                 }
@@ -447,8 +497,24 @@ export default {
                   .addClass("top_wgsx_li3_noselect");
                 var code = $(this).attr("id");
                 var name = $(this).html();
-                self.getGridSpecificList(code, name);
+                // self.getGridSpecificList(code, name);
                 self.wgName = name;
+                switch (self.wgType) {
+                  case 1:
+                    $("#oneTimeDivId").html(name);
+                    self.echars_gridCode2 = code;
+                    self.lineGridRecord();
+                    self.barGridRecord();
+                    break;
+                  case 2:
+                    $("#twoTimeDivId").html(name);
+                    self.echars_gridCode3 = code;
+                    self.lineTask();
+                    self.barTask();
+                    break;
+                  default:
+                    break;
+                }
               });
             }
           }

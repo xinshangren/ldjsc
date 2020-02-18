@@ -22,7 +22,7 @@
 }
 </style>
 <template>
-  <div style="margin-top:0px;">
+  <div style="margin-top:0px;" @click="closeState">
     <div class="ui-row-flex ui-whitespace" style="padding-top:10px;">
       <div class="ui-col ui-col" @click="selectIndexTab(1)">
         <div class="block_div_style">
@@ -47,7 +47,7 @@
     </div>
     <van-sticky id="twoLeveltab" :offset-top="101">
       <div class="child_tab" style="display:flex;border-bottom:1px solid #f3f3f3;">
-        <div @click="showHideLeftSelect()" class="twoLevel_left_div">
+        <div @click="showHideLeftSelect()" class="twoLevel_left_div" id="twoLevel_left_div">
           <img style="height: 21px;margin-top: 9px;margin-left: 7px;" :src="TwoLevelTabImg1" />
           <div id="selectDivName" style="font-size: 14px;line-height: 40px;margin-left: 3px;">煤炭</div>
           <img
@@ -262,7 +262,15 @@ export default {
           // this.$toast(err);
         });
     },
-
+    closeState(event) {
+      var myPanel = document.getElementById("twoLevel_left_div"); // 得到点击出现的节点
+      console.log(myPanel);
+      if (myPanel) {
+        if (!myPanel.contains(event.target)) {
+          $("#leftSelectDivId").hide();
+        }
+      }
+    },
     selectLeftTab: function(index) {
       switch (index) {
         case 0:
