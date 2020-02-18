@@ -50,13 +50,13 @@
                             </div>
                         </div>
                         <div style="display:flex;position:relative;">
-                            
+
                                 <img style="height: 13px;margin-top:3px;"
                                     src="../../../../../assets/img/details_icon17.png" />
                                 <span
                                 class="xnyxmlb_font_style"
                                     style="margin-left: 5px;color: gray;width: 330px;">所属区县：{{item.counties}}</span>
-                            
+
                         </div>
                     </div>
                     <div class="van-hairline--bottom"></div>
@@ -305,6 +305,8 @@
             clickUlDy: function () {
                 var self = this;
                 self.ent_scale = "";
+                self.pro_type = "";
+                self.project_phase = "";
                 self.counties = "";
                 self.ent_nature = "";
                 self.ent_type = "";
