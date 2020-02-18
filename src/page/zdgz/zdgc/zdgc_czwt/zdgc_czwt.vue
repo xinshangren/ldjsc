@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <div class="div_flex" style="background:#ffffff;height:49px;">
+    <!-- <div class="div_flex" style="background:#ffffff;height:49px;">
       <van-search
         placeholder="请输入重点工程项目名称"
         @search="onSearch"
@@ -12,7 +12,7 @@
         src="../../../../assets/img/project_voice.png"
         style="height: 27px;margin-top: 10px;"
       />
-    </div>
+    </div> -->
     <div style="display: flex;background: #ffffff;height: 36px;">
       <van-popup v-model="showPop" position="bottom" :style="{ height: '200px' }">
         <van-datetime-picker
@@ -59,7 +59,7 @@
       :down="mescrollDown"
       :up="mescrollUp"
       @init="mescrollInit"
-      style="top: 264px;"
+      style="top: 218px;"
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
@@ -206,6 +206,22 @@ export default {
   },
   mounted() {
     this.gojq();
+  },
+  computed: {
+    listenComponentState() {
+      return this.$store.state.seach_value;
+    }
+  },
+  watch: {
+    //监听全局变量componentId的变化
+    listenComponentState: function(val, oldval) {
+      if (val != oldval) {
+        this.seach_value = this.$store.state.seach_value;
+        console.log(this.$store.state.seach_value);
+        //alert(this.searchkey);
+        this.mescroll.resetUpScroll();
+      }
+    }
   },
   methods: {
     startRecord: function() {

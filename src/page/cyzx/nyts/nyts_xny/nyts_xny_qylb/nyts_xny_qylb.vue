@@ -1,15 +1,15 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
+    <!-- <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
       <form action="/" style="width: 84%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入企业名称" @search="onSearch" v-model="seach_value" />
-      </form>
-      <img
-        src="../../../../../assets/img/project_filtrate.png"
-        style="height: 27px;margin-top: 10px;margin-left:5px;"
-        @click="queryList"
-      />
-    </div>
+      </form> -->
+    <img
+      src="../../../../../assets/img/project_filtrate_white.png"
+      style=" height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;"
+      @click="queryList"
+    />
+    <!-- </div> -->
     <div id="count_id" style="display:flex;">
       <div style="width:48%;text-align:right;margin-top:8px;font-size:15px;">企业总数</div>
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">{{compCount}}</div>
@@ -268,6 +268,23 @@ export default {
   activated() {
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#ffffff");
+  },
+   computed: {
+    listenComponentState() {
+      return this.$store.state.seach_value;
+    }
+  },
+  watch: {
+    //监听全局变量componentId的变化
+    listenComponentState: function(val, oldval) {
+      if (val != oldval) {
+        this.seach_value = this.$store.state.seach_value;
+        console.log(this.$store.state.seach_value);
+        //alert(this.searchkey);
+         this.comp_dataList = [];
+        this.mescroll.resetUpScroll();
+      }
+    }
   },
   methods: {
     //企业列表

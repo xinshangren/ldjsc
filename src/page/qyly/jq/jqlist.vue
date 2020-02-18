@@ -1,19 +1,20 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;background: #ffffff;">
-    <div style="background:#ffffff;height:45px;display: flex; margin-top: 5px;">
+    <!-- <div style="background:#ffffff;height:45px;display: flex; margin-top: 5px;">
       <form action="/"  style="width:85%;margin-left:13px;">
       <van-search
         placeholder="请输入景点名称"
         @search="onSearch"
         v-model="seach_value"
       />
-    </form>
-      <img src="../../../assets/img/project_filtrate.png"
-        style="height: 27px;margin-top: 5px;margin-left:5px;"
-        @click="queryList"
-      />
-    </div>
-    <div id="count_id" style="display:flex;margin-top: -10px;">
+    </form> -->
+        <img
+      src="../../../assets/img/project_filtrate_white.png"
+      style=" height: 31px; top:17px; position: absolute; right: 121px; z-index: 3;"
+      @click="queryList"
+    />
+    <!-- </div> -->
+    <div id="count_id" style="display:flex;margin-top: ;">
       <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:14px;">共</div>
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">0</div>
       <div style="width:48%;color:#1976d2;margin-top:6px;font-size:14px;">个</div>
@@ -160,6 +161,25 @@ export default {
     // this.getTypeList();
     // this.getDyTypeList();
   },
+   computed: {
+    listenComponentState() {
+      return this.$store.state.seach_value;
+    }
+  },
+  watch: {
+    //监听全局变量componentId的变化
+    listenComponentState: function(val, oldval) {
+      if (val != oldval) {
+        this.seach_value = this.$store.state.seach_value;
+        console.log(this.$store.state.seach_value);
+        //alert(this.searchkey);
+        this.mescroll.resetUpScroll();
+      }
+    }
+  },
+  destroyed(){
+     this.$store.commit("setSeach_placeholder", "搜索");
+  },
   methods: {
     queryList: function() {
       this.show = true;
@@ -267,7 +287,7 @@ export default {
   @import "../../../assets/css/frozenui.css";
   .mescroll {
     position: fixed;
-    top: 240px;
+    top: 194px;
     bottom: 0px;
     height: auto;
   }

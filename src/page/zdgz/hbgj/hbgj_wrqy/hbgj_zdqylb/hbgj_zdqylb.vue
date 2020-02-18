@@ -2,17 +2,17 @@
   <div style="
     margin-top:0px;overflow:hidden;
 ">
-    <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
+    <!-- <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入污染源名称" @search="onSearch" v-model="seach_value" />
       </form>
-      <img  @click="showRecord()" src="../../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 11px;" />
-      <img
-        src="../../../../../assets/img/project_filtrate.png"
-        style="height: 27px;margin-top: 11px;margin-left:5px;"
-        @click="queryList"
-      />
-    </div>
+      <img  @click="showRecord()" src="../../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 11px;" /> -->
+         <img
+      src="../../../../../assets/img/project_filtrate_white.png"
+      style=" height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;"
+      @click="queryList"
+    />
+    <!-- </div> -->
 
     <div id="count_id" style="display:flex;">
       <div style="width:33%;text-align:right;color:#1976d2;margin-top:6px;font-size:14px;">共</div>
@@ -221,6 +221,25 @@ export default {
   mounted() {
     this.getQueryForFound();
     this.gojq();
+  },
+   computed: {
+    listenComponentState() {
+      return this.$store.state.seach_value;
+    }
+  },
+  watch: {
+    //监听全局变量componentId的变化
+    listenComponentState: function(val, oldval) {
+      if (val != oldval) {
+        this.seach_value = this.$store.state.seach_value;
+        console.log(this.$store.state.seach_value);
+        //alert(this.searchkey);
+        this.mescroll.resetUpScroll();
+      }
+    }
+  },
+  destroyed(){
+     this.$store.commit("setSeach_placeholder", "搜索");
   },
   methods: {
     startRecord: function() {

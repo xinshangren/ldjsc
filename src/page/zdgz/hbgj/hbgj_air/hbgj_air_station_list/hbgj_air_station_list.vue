@@ -1,19 +1,24 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
+    <!-- <div class="div_flex" style="background:#ffffff;height:49px;display:flex;">
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入站点名称" @search="onSearch" v-model="seach_value" />
       </form>
-      <img   @click="showRecord()" src="../../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 10px;" />
       <img
-        src="../../../../../assets/img/project_filtrate.png"
-        style="height: 27px;margin-top: 10px;margin-left:5px;"
-        @click="queryList"
-      />
-    </div>
+        @click="showRecord()"
+        src="../../../../../assets/img/project_voice.png"
+        style="height: 27px;margin-top: 10px;"
+      /> -->
+       <img
+      src="../../../../../assets/img/project_filtrate_white.png"
+      style=" height: 31px; top:19px; position: absolute; right: 121px; z-index: 3;"
+      @click="queryList"
+    />
+    <!-- </div> -->
     <div id="count_id" style="display:flex;">
       <div style="width:100%;text-align:center;color:#1976d2;margin-top:6px;font-size:15px;">
-        共<span ref="totalCountId">0</span>个站点
+        共
+        <span ref="totalCountId">0</span>个站点
       </div>
     </div>
 
@@ -25,7 +30,7 @@
         <div
           v-for="(item,index) in list"
           :key="index"
-         class="backgroundDivPhotonohave"
+          class="backgroundDivPhotonohave"
           style="position:relative;"
           @click="goDetile(item)"
         >
@@ -170,7 +175,7 @@
         </div>
       </div>
     </van-popup>
-      <div class="blackBoxSpeak">
+    <div class="blackBoxSpeak">
       <img style="height:74px;margin-top:32px;" src="../../../../../assets/img/ic_record@2x.png" />
       <img style="height:74px;margin-top:32px;margin-left:16px;" :src="recordUrl9" />
       <div style="font-size: 18px;color: #ffffff;">{{countSize}}秒</div>
@@ -210,7 +215,7 @@ export default {
   },
   data() {
     return {
-        timer: null, //用于清除计时器
+      timer: null, //用于清除计时器
       timerJs: null, //用于倒计时60s
       recordId: "0",
       countSize: 5,
@@ -272,8 +277,27 @@ export default {
     this.getStationTypeList();
     this.gojq();
   },
+  computed: {
+    listenComponentState() {
+      return this.$store.state.seach_value;
+    }
+  },
+  watch: {
+    //监听全局变量componentId的变化
+    listenComponentState: function(val, oldval) {
+      if (val != oldval) {
+        this.seach_value = this.$store.state.seach_value;
+        console.log(this.$store.state.seach_value);
+        //alert(this.searchkey);
+        this.mescroll.resetUpScroll();
+      }
+    }
+  },
+  destroyed() {
+    this.$store.commit("setSeach_placeholder", "搜索");
+  },
   methods: {
-      startRecord: function() {
+    startRecord: function() {
       this.recordId = "1";
       console.log("开始录音");
       dd.ready(function() {
@@ -321,7 +345,6 @@ export default {
     },
     //语音识别
     translateVoice: function(mediaIds) {
-      
       var self = this;
       console.log("录音识别开始");
       if (self.recordId == "1") {
@@ -334,7 +357,7 @@ export default {
               self.$store.commit("hideLoadingBig");
               // res.mediaId; // 转换的语音的mediaId
               console.log("录音识别结果：" + res.content);
-              var result=self.palindrome(res.content);
+              var result = self.palindrome(res.content);
               console.log("录音识别结果1：" + result);
               self.seach_value = result; // 语音转换的文字内容
               self.onSearch();
@@ -371,12 +394,7 @@ export default {
     palindrome: function(str) {
       var arr = str.split("");
       arr = arr.filter(function(val) {
-        return (
-          val !== " " &&
-          val !== "," &&
-          val !== "." &&
-          val !== "。" 
-        );
+        return val !== " " && val !== "," && val !== "." && val !== "。";
       });
       console.log(arr.join("")); //arr变为"0000";
       return arr.join("");
@@ -641,28 +659,28 @@ export default {
               var name = "";
               switch (parseInt(this.curwuwlx)) {
                 case 0:
-                  name="PM10"
+                  name = "PM10";
                   break;
                 case 1:
-                    name="PM25"
+                  name = "PM25";
                   break;
                 case 2:
-                    name="SO2"
+                  name = "SO2";
                   break;
                 case 3:
-                    name="NO2"
+                  name = "NO2";
                   break;
                 case 4:
-                    name="CO"
+                  name = "CO";
                   break;
                 case 5:
-                    name="O3"
+                  name = "O3";
                   break;
                 case 6:
-                    name="AQI"
+                  name = "AQI";
                   break;
                 case 7:
-                    name="TVOC"
+                  name = "TVOC";
                   break;
                 default:
                   break;
@@ -1004,6 +1022,6 @@ export default {
   display: none;
   border-radius: 12px;
   text-align: center;
-  z-index:999;
+  z-index: 999;
 }
 </style>

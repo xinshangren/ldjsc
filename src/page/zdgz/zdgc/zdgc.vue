@@ -328,6 +328,8 @@ export default {
       console.log(name);
       switch (parseInt(name)) {
         case 0:
+          this.$store.commit("setSeach_placeholder", "搜索");
+           this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -337,6 +339,8 @@ export default {
           this.currentView = "child1";
           break;
         case 1:
+          this.$store.commit("setSeach_placeholder", "请输入重点工程项目名称");
+          this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -346,6 +350,8 @@ export default {
           this.currentView = "child2";
           break;
         case 2:
+          this.$store.commit("setSeach_placeholder", "请输入重点工程项目名称");
+          this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -355,6 +361,8 @@ export default {
           this.currentView = "child3";
           break;
         case 3:
+          this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,

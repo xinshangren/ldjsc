@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <div class="div_flex" style="background:#ffffff;height:49px;">
+    <!-- <div class="div_flex" style="background:#ffffff;height:49px;">
       <form action="/" style="width:77%;margin-left:13px;margin-top:8px;">
         <van-search placeholder="请输入重点工程项目名称" @search="onSearch" v-model="seach_value" />
       </form>
@@ -8,13 +8,13 @@
         @click="showRecord()"
         src="../../../../assets/img/project_voice.png"
         style="height: 27px;margin-top: 10px;"
-      />
-      <img
-        src="../../../../assets/img/project_filtrate.png"
-        style="height: 27px;margin-top: 10px;margin-left:5px;"
-        @click="queryList"
-      />
-    </div>
+    />-->
+    <img
+      src="../../../../assets/img/project_filtrate_white.png"
+      style=" height: 31px; top: -83px; position: absolute; right: 121px; z-index: 3;"
+      @click="queryList"
+    />
+    <!-- </div> -->
     <div id="count_id" style="display:flex;">
       <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:16px;">共</div>
       <div ref="totalCountId" style="color:#1976d2;font-size:24px;">0</div>
@@ -25,7 +25,7 @@
       :down="mescrollDown"
       :up="mescrollUp"
       @init="mescrollInit"
-      style="top:230px;"
+      style="top:183px;"
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
@@ -221,6 +221,7 @@ import { httpMethod } from "../../../../api/getData.js";
 import Vue from "vue";
 import dd from "dingtalk-jsapi";
 import { Search, PullRefresh, Popup, Dialog } from "vant";
+import global_variable from "../../../../api/global_variable.js";
 Vue.use(Search)
   .use(PullRefresh)
   .use(Popup)
@@ -248,7 +249,6 @@ export default {
       listZdgcType: [],
       listZdgcDyType: [],
       show: false,
-      seach_value: "",
       active: 0,
       list: [],
       zdProType: "",
@@ -280,6 +280,26 @@ export default {
     this.getTypeList();
     this.getDyTypeList();
     this.gojq();
+    var self = this;
+  },
+  computed: {
+    listenComponentState() {
+      return this.$store.state.seach_value;
+    }
+  },
+  watch: {
+    //监听全局变量componentId的变化
+    listenComponentState: function(val, oldval) {
+      if (val != oldval) {
+        this.seach_value = this.$store.state.seach_value;
+        console.log(this.$store.state.seach_value);
+        //alert(this.searchkey);
+        this.mescroll.resetUpScroll();
+      }
+    }
+  },
+  destroyed(){
+     this.$store.commit("setSeach_placeholder", "搜索");
   },
   methods: {
     startRecord: function() {
@@ -330,7 +350,6 @@ export default {
     },
     //语音识别
     translateVoice: function(mediaIds) {
-      
       var self = this;
       console.log("录音识别开始");
       if (self.recordId == "1") {
@@ -343,7 +362,7 @@ export default {
               self.$store.commit("hideLoadingBig");
               // res.mediaId; // 转换的语音的mediaId
               console.log("录音识别结果：" + res.content);
-              var result=self.palindrome(res.content);
+              var result = self.palindrome(res.content);
               console.log("录音识别结果1：" + result);
               self.seach_value = result; // 语音转换的文字内容
               self.onSearch();
@@ -380,12 +399,7 @@ export default {
     palindrome: function(str) {
       var arr = str.split("");
       arr = arr.filter(function(val) {
-        return (
-          val !== " " &&
-          val !== "," &&
-          val !== "." &&
-          val !== "。" 
-        );
+        return val !== " " && val !== "," && val !== "." && val !== "。";
       });
       console.log(arr.join("")); //arr变为"0000";
       return arr.join("");
@@ -534,8 +548,6 @@ export default {
       this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
     },
     onSearch() {
-      //alert(this.searchkey);
-      this.mescroll.resetUpScroll();
       //this.upCallback()
     },
     //项目列表

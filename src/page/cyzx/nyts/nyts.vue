@@ -232,6 +232,9 @@ export default {
       }
     });
   },
+  destroyed() {
+    this.$store.commit("setSeach_placeholder", "搜索");
+  },
   methods: {
     showHideLeftSelect: function() {
       if ($("#leftSelectDivId").is(":hidden")) {
@@ -344,6 +347,8 @@ export default {
             "43",
             "概况"
           );
+          this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           break;
         case 1:
           this.airactive = 1;
@@ -353,6 +358,8 @@ export default {
             "44",
             "企业列表"
           );
+          this.$store.commit("setSeach_placeholder", "请输入企业或集团名称");
+          this.$store.commit("setSeach_value", "");
           break;
         case 2:
           this.airactive = 2;
@@ -362,6 +369,8 @@ export default {
             "45",
             "项目列表"
           );
+          this.$store.commit("setSeach_placeholder", "请输入项目名称");
+          this.$store.commit("setSeach_value", "");
           break;
 
         default:
@@ -372,6 +381,8 @@ export default {
     smallTab_select_xny: function(name, title) {
       switch (name) {
         case 0:
+           this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           this.airactive1 = 0;
           this.doAddAppLogList(
             global_variable.logId,
@@ -381,6 +392,8 @@ export default {
           );
           break;
         case 1:
+           this.$store.commit("setSeach_placeholder", "请输入企业名称");
+          this.$store.commit("setSeach_value", "");
           this.airactive1 = 1;
           this.doAddAppLogList(
             global_variable.logId,
@@ -390,6 +403,8 @@ export default {
           );
           break;
         case 2:
+            this.$store.commit("setSeach_placeholder", "请输入项目名称");
+          this.$store.commit("setSeach_value", "");
           this.airactive1 = 2;
           this.doAddAppLogList(
             global_variable.logId,
@@ -408,6 +423,8 @@ export default {
     smallTab_select_mcq: function(name, title) {
       switch (name) {
         case 0:
+            this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           this.airactive2 = 0;
           this.doAddAppLogList(
             global_variable.logId,
@@ -417,6 +434,8 @@ export default {
           );
           break;
         case 1:
+            this.$store.commit("setSeach_placeholder", "请输入站点名称");
+          this.$store.commit("setSeach_value", "");
           this.airactive2 = 1;
           this.doAddAppLogList(
             global_variable.logId,
@@ -434,6 +453,8 @@ export default {
       this.flag = index;
       switch (index) {
         case 1:
+          this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -451,6 +472,8 @@ export default {
           this.indexTabImg4 = require("../../../assets/img/energy_pic_tab.png");
           break;
         case 2:
+          this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -468,6 +491,8 @@ export default {
           this.indexTabImg4 = require("../../../assets/img/energy_pic_tab.png");
           break;
         case 3:
+          this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
@@ -485,6 +510,8 @@ export default {
           this.indexTabImg4 = require("../../../assets/img/energy_pic_tab.png");
           break;
         case 4:
+          this.$store.commit("setSeach_placeholder", "搜索");
+          this.$store.commit("setSeach_value", "");
           this.doAddAppLogList(
             global_variable.logId,
             global_variable.ddPhone,
