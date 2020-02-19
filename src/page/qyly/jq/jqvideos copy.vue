@@ -1,8 +1,8 @@
 <template>
   <div style="overflow:hidden;background: #ffffff;">
     <van-popup
-      id="popup"
-      v-model="show"
+      id="popupJQVido"
+      v-model="showVido"
       position="top"
       :style="{height: '100%' }"
       @opened="openPop"
@@ -10,8 +10,8 @@
       :closeable="true"
       @click="closePop"
       style="overflow:hidden;background:rgb(0, 0, 0);"
-    ></van-popup>
-
+    >
+</van-popup>
     <mescroll-vue
       ref="mescroll"
       :down="mescrollDown"
@@ -24,7 +24,7 @@
           v-for="(item,index) in list"
           :key="index"
           style="float:left; width:48%; height:130px;padding-top:7px;padding-bottom:7px;position:relative;margin-right: 2%;"
-          @click="goDetile(item.realpath)"
+          @click="goVideo(item.realpath)"
         >
           <div style="position: relative;">
             <img id style="border-radius:3px ;width:100%;height:95px;" :src="item.surface_picture" />
@@ -68,7 +68,7 @@ export default {
     return {
       myPlayer: {},
       curpath: "",
-      show: false,
+      showVido: false,
       list: [],
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
@@ -97,14 +97,15 @@ export default {
       this.intvideo();
     },
     closePop: function() {
-      this.show = false;
+      this.showVido = false;
       if (this.myPlayer != null) {
-        this.myPlayer.dispose();
-        this.myPlayer = null;
+       this.myPlayer.pause();
+       this.myPlayer.dispose();
+       this.myPlayer = null;
       }
     },
     intvideo: function() {
-      $("#popup").html(
+      $("#popupJQVido").html(
         '<video id="myVideo" class="video-js" style="width: 100%;">' +
           "<source src=" +
           this.curpath +
@@ -122,7 +123,15 @@ export default {
         width: "800px",
         //设置视频播放器的显示高度（以像素为单位）
         height: "400px"
-      });
+      }, function() {
+          var newbtn = document.createElement('button');
+          newbtn.setAttribute("class", "vjs-fullscreen-control vjs-control vjs-button");     
+          newbtn.setAttribute("type", "button");     
+          newbtn.setAttribute("id", "downloadButton");     
+          newbtn.innerHTML = '<span aria-hidden="true" style="font-size:26px">×</span><span class="vjs-control-text" aria-live="polite">closeVideo</span>';
+          var controlBar = document.getElementsByClassName('vjs-control-bar')[0];
+          controlBar.appendChild(newbtn);
+        });
     },
     mescrollInit(mescroll) {
       this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
@@ -162,6 +171,10 @@ export default {
           mescroll.endErr();
         });
     },
+     goVideo: function (curpath) {
+        this.showVido = true;
+        this.curpath = curpath;
+      },
     goDetile(item) {
       this.$router.push({
         path: "/qyly/jq/mryq/jqvideos_deali",

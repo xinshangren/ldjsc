@@ -1,17 +1,25 @@
 <template>
   <div style="overflow:hidden;background: #ffffff;">
     <van-popup
-      id="popup"
-      v-model="show"
+      id="popupJQVido"
+      v-model="showVido"
       position="top"
       :style="{height: '100%' }"
-      @opened="openPop"
       :overlay="true"
       :closeable="true"
       @click="closePop"
       style="overflow:hidden;background:rgb(0, 0, 0);"
-    ></van-popup>
-
+    >
+    <video-player style="margin-top:100px" class="video-player vjs-custom-skin"
+      ref="videoPlayer"
+      :playsinline="true"
+      :options="playerOptions"
+      @play="onPlayerPlay($event)"
+      @pause="onPlayerPause($event)"
+      @ended="onPalyerEnd($event)"
+  >
+  </video-player>
+</van-popup>
     <mescroll-vue
       ref="mescroll"
       :down="mescrollDown"
@@ -24,7 +32,7 @@
           v-for="(item,index) in list"
           :key="index"
           style="float:left; width:48%; height:130px;padding-top:7px;padding-bottom:7px;position:relative;margin-right: 2%;"
-          @click="goDetile(item.realpath)"
+          @click="goVideo(item.realpath)"
         >
           <div style="position: relative;">
             <img id style="border-radius:3px ;width:100%;height:95px;" :src="item.surface_picture" />
@@ -55,20 +63,58 @@ import { PullRefresh, Popup, Dialog } from "vant";
 Vue.use(PullRefresh)
   .use(Popup)
   .use(Dialog);
-import Video from "video.js";
+import VideoPlayer from 'vue-video-player';
 import "video.js/dist/video-js.css";
-Vue.prototype.$video = Video;
+import "vue-video-player/src/custom-theme.css";
+Vue.use(VideoPlayer);
 
 export default {
   components: {
-    MescrollVue // 注册mescroll组件
+    MescrollVue, // 注册mescroll组件
   },
   name: "zdgc_xmlb_vue",
   data() {
     return {
+
+playerOptions: {
+//  playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
+  autoplay: false, //如果true,浏览器准备好时开始回放。
+  muted: false, // 默认情况下将会消除任何音频。
+  loop: false, // 导致视频一结束就重新开始。
+  preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+  language: 'zh-CN',
+  aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+  fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+  sources: [{
+   type: "video/mp4",//application/x-mpegURL
+   src: "video.m3u8" //你的m3u8地址（必填）
+  }],
+  poster: "poster.jpg", //你的封面地址
+  width: document.documentElement.clientWidth,
+  notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+//  controlBar: {
+//   timeDivider: true,
+//   durationDisplay: true,
+//   remainingTimeDisplay: false,
+//   fullscreenToggle: true //全屏按钮
+//  }
+controlBar: {
+            fullscreenToggle: true,
+            pictureInPictureToggle: false,
+            volumePanel: false,
+            currentTimeDisplay: true,
+            timeDivider: true,
+            durationDisplay: true,
+            remainingTimeDisplay: false,
+            progressControl:false,
+            playbackRateMenuButton: false,//这个必须，不然你得网页会出现两个调整播放速率的显示
+          }
+  },
+
+
       myPlayer: {},
       curpath: "",
-      show: false,
+      showVido: false,
       list: [],
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
@@ -94,35 +140,16 @@ export default {
   mounted() {},
   methods: {
     openPop: function() {
-      this.intvideo();
     },
     closePop: function() {
-      this.show = false;
+      this.showVido = false;
+      this.$refs.videoPlayer.player.pause();
+      // this.$refs.videoPlayer.player.dispose();
       if (this.myPlayer != null) {
-        this.myPlayer.dispose();
-        this.myPlayer = null;
+       this.myPlayer.pause();
+       this.myPlayer.dispose();
+       this.myPlayer = null;
       }
-    },
-    intvideo: function() {
-      $("#popup").html(
-        '<video id="myVideo" class="video-js" style="width: 100%;">' +
-          "<source src=" +
-          this.curpath +
-          ' type="video/mp4">' +
-          "</video>"
-      );
-      this.myPlayer = this.$video(myVideo, {
-        //确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
-        controls: true,
-        //自动播放属性,muted:静音播放
-        autoplay: true,
-        //建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
-        preload: "auto",
-        //设置视频播放器的显示宽度（以像素为单位）
-        width: "800px",
-        //设置视频播放器的显示高度（以像素为单位）
-        height: "400px"
-      });
     },
     mescrollInit(mescroll) {
       this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
@@ -162,16 +189,19 @@ export default {
           mescroll.endErr();
         });
     },
-    goDetile(item) {
-      this.$router.push({
-        path: "/qyly/jq/mryq/jqvideos_deali",
-        name: "jqvideos_dealVue",
-        params: {
-          entity: item
-        }
-      });
-      // this.curpath = item;
-      // this.show = true;
+     goVideo: function (curpath) {
+        this.showVido = true;
+        this.curpath = curpath;
+        this.playerOptions.sources[0].src="http://192.168.1.78:8080/jeecg/upload/DialRotation.mp4";
+      },
+    onPlayerPlay(player) {
+    },
+    onPlayerPause(player){
+    },
+    onPalyerEnd(player){
+      this.showVido = false;
+      player.pause();
+      // player.dispose();
     }
   }
 };

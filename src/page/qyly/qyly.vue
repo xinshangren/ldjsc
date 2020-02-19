@@ -166,6 +166,10 @@ export default {
     };
   },
   mounted() {
+    if(this.$route.params.tabsel){
+      this.currentView=this.$route.params.tabsel;
+      this.active =this.$route.params.active;
+    }
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
