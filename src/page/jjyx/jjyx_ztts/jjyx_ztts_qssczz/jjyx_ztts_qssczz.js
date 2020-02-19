@@ -115,7 +115,9 @@ export const echarsEnti = {
         axisPointer: { // 坐标轴指示器，坐标轴触发有效
           type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
         },
-       formatter: "{b0}: {c1}"
+       formatter:function(param){
+         return param[0].name+"<br>"+param[0].marker+param[1].value
+       }
       },
       grid: {
         top: '0%',
