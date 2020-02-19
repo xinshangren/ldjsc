@@ -79,8 +79,8 @@ Vue.use(VideoPlayer);
       };
     },
     mounted() {
-      this.curpath = "http://192.168.1.78:8080/jeecg/upload/DialRotation.mp4";//this.$route.params.entity;
-      this.playerOptions.sources[0].src="http://192.168.1.78:8080/jeecg/upload/DialRotation.mp4";
+      this.curpath = this.$route.params.entity;
+      this.playerOptions.sources[0].src=this.$route.params.entity;
       this.show=true;
       console.log(this.$route.params.entity);
     },
