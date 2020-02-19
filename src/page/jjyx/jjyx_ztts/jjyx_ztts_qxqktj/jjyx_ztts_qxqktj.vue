@@ -369,6 +369,7 @@
         $("#menu_ul_id").animate({ 'left': '-163px' }, 500);
           $("#child_page").animate({ 'left': '0px' }, 500);
           $('#jjyx_tabs').animate({ 'left': '0px' }, 500);
+          $(".selectTab").animate({ left: "0px" }, 500);
         switch (flag) {
           case 1:
             returnEle = document.getElementById("sczzTable");
