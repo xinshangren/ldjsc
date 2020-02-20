@@ -14,7 +14,7 @@
 .selectTab{
   display:flex;position:fixed;right:50px;
 }
-</style> 
+</style>
 <template>
   <div style="margin-top:0px;">
     <div
@@ -135,7 +135,7 @@
     </div>
     <div
       id="child_page"
-      style="position:absolute;top: 193px;z-index: -1;overflow: auto;width: 100%;"
+      style="position:absolute;top: 193px;z-index: 1;overflow: auto;width: 100%;"
     >
       <div
         id="childId"

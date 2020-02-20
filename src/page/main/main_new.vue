@@ -38,6 +38,7 @@ export default {
       seach_value: "",
       tabImage: [
         require("@/assets/img/icon-yjzl.png"),
+        require("@/assets/img/icon_pz.png"),
         require("@/assets/img/icon-mryw.png"),
         require("@/assets/img/icon-zdgc.png"),
         require("@/assets/img/icon-jjyx.png"),
@@ -46,12 +47,13 @@ export default {
         require("@/assets/img/icon-nyts.png"),
         require("@/assets/img/icon-qxzt.png"),
         require("@/assets/img/icon-wmgc.png"),
-        require("@/assets/img/icon-zhxx.png"),
+        require("@/assets/img/icon-zhxx.png")
         // require("@/assets/img/icon-zhxx.png"),
         // require("@/assets/img/icon-zhxx.png")
       ],
       tabNameList: [
         "一键直连",
+        "批件流转",
         "每日要情",
         "重点工程",
         "经济运行",
@@ -60,12 +62,13 @@ export default {
         "能源革命",
         "区县直通",
         "文明共创",
-        "综合信息",
+        "综合信息"
         // "疫情地图",
         // "疫情数据"
       ],
       tabIdList: [
         "8",
+        "100",
         "65",
         "1",
         "5",
@@ -74,7 +77,7 @@ export default {
         "6",
         "23",
         "4",
-        "7",
+        "7"
         // "999",
         // "1000"
       ],
@@ -110,7 +113,8 @@ export default {
         "13710督办",
         "一键直连",
         "市长热线",
-        "区县直通"
+        "区县直通",
+        "批件流转"
       ]
       // permissionList: []
     };
@@ -119,10 +123,7 @@ export default {
     var context = this;
     context.getCuruserid();
   },
-  mounted() {
-
-     
-  },
+  mounted() {},
   methods: {
     godetile: function(index, idValue) {
       console.log(index + "-" + idValue);
@@ -422,9 +423,10 @@ export default {
         case 999:
           this.$router.push({
             path: "/yqdata/yqdata",
-              name: 'yqdataVue',
+            name: "yqdataVue",
             params: {
-              entity: "https://m.carelink.cn/activity/epidemic/yqdt_jd.html?ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends&from=singlemessage&isappinstalled=0"
+              entity:
+                "https://m.carelink.cn/activity/epidemic/yqdt_jd.html?ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends&from=singlemessage&isappinstalled=0"
             }
           });
           isUploadLog = false;
@@ -432,12 +434,26 @@ export default {
         case 1000:
           this.$router.push({
             path: "/yqdata/yqdata",
-              name: 'yqdataVue',
+            name: "yqdataVue",
             params: {
-              entity: "https://m.carelink.cn/activity/epidemic/ssbb_jd.html?ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends&from=singlemessage&isappinstalled=0"
+              entity:
+                "https://m.carelink.cn/activity/epidemic/ssbb_jd.html?ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends&from=singlemessage&isappinstalled=0"
             }
           });
           isUploadLog = false;
+          break;
+        case 100:
+          if (this.permissionList.indexOf("批件流转") > -1) {
+            id = "100";
+            name = "批件流转";
+            this.$router.push({
+              path: "/pjlz/pjlz"
+            });
+            // this.$parent.removeEvent();
+          } else {
+            this.$toast("权限不足");
+            isUploadLog = false;
+          }
           break;
         default:
           this.$toast("功能开发中");
@@ -487,7 +503,6 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == "1") {
-            
           }
         })
         .catch(err => {
@@ -497,7 +512,7 @@ export default {
     getCuruserid: function() {
       var self = this;
       dd.ready(function() {
-        dd.ui.webViewBounce.disable()
+        dd.ui.webViewBounce.disable();
         dd.runtime.permission.requestAuthCode({
           corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
           onSuccess: function(info) {
