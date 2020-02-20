@@ -54,6 +54,8 @@ import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDeal
 import qxtz_newVue from '@/page/main/qxtz_new.vue'
 import yqdataVue from '@/page/yqdata/yqdata.vue'
 import pjlzVue from '@/page/pjlz/pjlz.vue'
+import pjlzDetail_cb_Vue from '@/page/pjlz/pjlzDetail_cb/pjlzDetail_cb.vue'
+import pjlzDetail_fk_Vue from '@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -284,8 +286,17 @@ export default new Router({
       path: '/pjlz/pjlz',
       name: 'pjlzListvue',
       component: pjlzVue
+    },{
+      path: '/pjlz/pjlzDetail_cb/pjlzDetail_cb',
+      name: 'pjlzDetail_cb',
+      component: pjlzDetail_cb_Vue
+    }
+    ,{
+      path: '/pjlz/pjlzDetail_fk/pjlzDetail_fk',
+      name: 'pjlzDetail_fk',
+      component: pjlzDetail_fk_Vue
     }
 
-    
+   
   ]
 })
