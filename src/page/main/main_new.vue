@@ -447,7 +447,7 @@ export default {
             id = "100";
             name = "批件流转";
             this.$router.push({
-              path: "/pjlz/pjlzList"
+              path: "/pjlz/pjlz"
             });
             // this.$parent.removeEvent();
           } else {
