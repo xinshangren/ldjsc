@@ -738,7 +738,9 @@ export default {
     selectTab: function(flag) {
       console.log(flag);
       this.stopImg = require("../../../../../assets/img/icon_voice.png");
-        this.ttsAudio.pause();
+       if(this.ttsAudio!=null){
+          this.ttsAudio.pause();
+       }
         this.isAutoPlay = false;
       switch (flag) {
         case 1: //形象进度

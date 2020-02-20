@@ -38,7 +38,7 @@ export default {
       seach_value: "",
       tabImage: [
         require("@/assets/img/icon-yjzl.png"),
-        require("@/assets/img/icon-yjzl.png"),
+        require("@/assets/img/icon_pz.png"),
         require("@/assets/img/icon-mryw.png"),
         require("@/assets/img/icon-zdgc.png"),
         require("@/assets/img/icon-jjyx.png"),

@@ -53,7 +53,7 @@ import cq_dingbanDetailVue from '@/page/qxztc/cq/cq_dingbanDetail.vue'
 import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDealiFj.vue'
 import qxtz_newVue from '@/page/main/qxtz_new.vue'
 import yqdataVue from '@/page/yqdata/yqdata.vue'
-import pjlzListVue from '@/page/pjlz/pjlzList.vue'
+import pjlzVue from '@/page/pjlz/pjlz.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -281,9 +281,9 @@ export default new Router({
       name: 'yqdataVue',
       component: yqdataVue
     },{
-      path: '/pjlz/pjlzList',
+      path: '/pjlz/pjlz',
       name: 'pjlzListvue',
-      component: pjlzListVue
+      component: pjlzVue
     }
 
     
