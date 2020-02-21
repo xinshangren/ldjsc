@@ -132,12 +132,18 @@ export default {
   mounted() {
     this.getCuruserid(); //免登获取当前用户的角色
     //  console.log(this.$children, '子')
+
+     this.$router.push({
+              path: "/pjlz/pjfkMessage/pjfkMessage"
+            });
   },
   components: {
     child1
   },
   methods: {
+    //添加标题右上方按钮
     showRightMenu: function() {
+      var self =this;
       dd.ready(function() {
         dd.biz.navigation.setMenu({
           items: [
@@ -146,13 +152,13 @@ export default {
               iconId: "file",
               text: "消息",
               url:
-                "http://img.alicdn.com/tps/TB1XLjqNVXXXXc4XVXXXXXXXXXX-170-64.png"
+                "../../assets/img/hicon_info.png"
             }
           ],
           onSuccess: function(data) {
-            /*
-        {"id":"1"}
-        */
+            self.$router.push({
+              path: "/pjlz/pjfkMessage/pjfkMessage"
+            });
           },
           onFail: function(err) {}
         });

@@ -54,6 +54,7 @@ import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDeal
 import qxtz_newVue from '@/page/main/qxtz_new.vue'
 import yqdataVue from '@/page/yqdata/yqdata.vue'
 import pjlzVue from '@/page/pjlz/pjlz.vue'
+import pjfkMessageVue from '@/page/pjlz/pjfkMessage/pjfkMessage.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -284,8 +285,12 @@ export default new Router({
       path: '/pjlz/pjlz',
       name: 'pjlzListvue',
       component: pjlzVue
+    },{
+      path: '/pjlz/pjfkMessage/pjfkMessage',
+      name: 'pjfkMessageVue',
+      component: pjfkMessageVue
     }
-
+    
     
   ]
 })
