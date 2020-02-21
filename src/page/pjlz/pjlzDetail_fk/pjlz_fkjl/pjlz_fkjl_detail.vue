@@ -27,7 +27,7 @@
             top: 26px;
             left: 145px;'>工作反馈</div>
             <div id="content_box">
-                <div style="font-size: 15px;margin: 0px 0px 0px 30px;padding-top: 25px;color:#666666 ;">
+                <div style="font-size: 15px;margin: 0px 0px 0px 30px;padding-top: 30px;color:#666666 ;">
                     <div style="display: flex;">
                         <img style="height: 18px;" src="../../../../assets/img/icon_people.png" />
                         <div style="margin-left: 2px;">反馈人:</div>
@@ -82,7 +82,7 @@
                 margin-top: 15px;
                 height: 40px;
                 margin-bottom: 15px;">
-                <div style="margin: auto;margin-top: 6px; color: #ffffff;font-size: 18px;">提交
+                <div style="margin: auto;margin-top: 6px; color: #ffffff;font-size: 18px;">修改
                 </div>
             </div>
 

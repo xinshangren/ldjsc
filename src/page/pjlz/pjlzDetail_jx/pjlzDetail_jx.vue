@@ -16,6 +16,14 @@
         margin: 13px;
         font-size: 15px;
     }
+
+    #refuse_div {
+        background: url('../../../assets/img/pop_bg.png');
+        background-size: 100% 100%;
+        height: 270px;
+        width: 300px;
+        position: relative;
+    }
 </style>
 <template>
     <div style="margin-top:54px;background:#f7f7f7">
@@ -177,7 +185,8 @@
                     <van-divider />
                 </div>
             </div>
-            <div @click="show_jl" style="background: #deefff;height: 40px;color:#2599e6; margin:0px 10px;font-size: 16px;">
+            <div @click="show_jl"
+                style="background: #deefff;height: 40px;color:#2599e6; margin:0px 10px;font-size: 16px;">
                 <div style="display: flex;width: 28%;
                margin: auto;
                padding-top: 8px;">
@@ -186,28 +195,63 @@
                 </div>
             </div>
         </div>
-        <div style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 230px;">
+        <div style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 196px;">
             <div style="padding:10px 15px 0px 15px;position: relative;">
                 <div style="display: flex;font-size: 15px;margin-top: 13px">
                     申请说明
                 </div>
-                <div
-                    style="display: flex;font-size: 15px;margin-top: 5px;color: #666666;">
+                <div style="display: flex;font-size: 15px;margin-top: 5px;color: #666666;">
                     <div style="margin:10px ;">
                         被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容
                     </div>
                 </div>
-                <div style="display: flex;background: #28bcfe;border-radius:20px;width: 30%;
-                margin: auto;
-                margin-top: 15px;
-                height: 40px;">
-                    <img src="../../../assets/img/icon_reject.png"/>
-                    <div style="margin: auto;margin-top: 6px; color: #ffffff;font-size: 18px;">同意结项
+                <div style="display: flex;">
+                    <div style="display: flex;background: #ffffff;border-radius:20px;width: 39%;border: 1px solid #f44118;
+                    margin: auto;
+                    margin-top: 8px;
+                    height: 40px;" @click="refuse">
+                        <img style="height: 18px; margin: 11px 0px 5px 26px;"
+                            src="../../../assets/img/icon_reject.png" />
+                        <div style="margin-top: 9px; margin-left: 3px; color: #f44118;font-size: 15px;">拒绝结项
+                        </div>
+                    </div>
+                    <div style="display: flex;background: #28bcfe;border-radius:20px;width: 39%;border: 1px solid #28bcfe;
+                    margin: auto;
+                    margin-top: 8px;
+                    height: 40px;">
+                        <img style="height: 18px; margin: 11px 0px 5px 26px;"
+                            src="../../../assets/img/icon_agree.png" />
+                        <div style="margin-top: 9px; margin-left: 3px; color: #ffffff;font-size: 15px;">同意结项
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
+        <van-popup v-model="show" round style="border-radius:13px" >
+            <div id="refuse_div">
+                <img @click="close" style="height: 25px; position: absolute;right: 0px;" src="../../../assets/img/pop_close.png"/>
+                <textarea v-model="textarea" placeholder="请输入拒绝理由"   style="resize: none; font-size: 16px;
+                border-radius: 5px;
+                margin-top: 75px;
+                margin-left: 20px;
+                height: 125px;
+                width: 257px;"></textarea>
+                <div style="margin-top:5px;margin-left: 20px;display: flex;width: 257px;">
+                    <div style="display: flex;background: #ffffff;border-radius:20px;width: 40%;border: 1px solid #28bcfe;
+                    margin: auto;
+                    height: 35px;" @click="close">
+                        <div style="margin-top: 6px; margin: auto; color: #28bcfe;font-size: 15px;">取消
+                        </div>
+                    </div>
+                    <div style="display: flex;background: #28bcfe;border-radius:20px;width: 40%;border: 1px solid #28bcfe;
+                    margin: auto;
+                    height: 35px;" >
+                        <div style="margin-top: 6px; margin: auto; color: #ffffff;font-size: 15px;">提交
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </van-popup>
     </div>
 </template>
 
@@ -235,24 +279,34 @@
                 all_jl_flag: true,
                 all_jl_photo: require('../../../assets/img/hide.png'),
                 all_jl_word: "收起记录",
-                file_list:[],
+                file_list: [],
+                show: false,
+                textarea:'',
             };
         },
         mounted() {
 
         },
         methods: {
-            gofkjl_list:function(){
+            refuse: function () {
+                var self = this;
+                self.show = true;
+            },
+            close:function(){
+                var self = this;
+                self.show = false;
+            },
+            gofkjl_list: function () {
                 this.$router.push({
                     path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl",
                     name: "pjlz_fkjl",
-                });     
+                });
             },
-            gofkjl_list_detail:function(){
+            gofkjl_list_detail: function () {
                 this.$router.push({
                     path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail",
                     name: "pjlz_fkjl_detail",
-                });     
+                });
             },
             show_jl: function () {
                 var self = this;
@@ -268,7 +322,7 @@
                     $("#all_jl").slideDown("slow");
                 }
             },
-           
+
 
         }
     };
