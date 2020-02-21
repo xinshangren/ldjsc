@@ -54,6 +54,11 @@ import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDeal
 import qxtz_newVue from '@/page/main/qxtz_new.vue'
 import yqdataVue from '@/page/yqdata/yqdata.vue'
 import pjlzVue from '@/page/pjlz/pjlz.vue'
+import pjlzDetail_cb_Vue from '@/page/pjlz/pjlzDetail_cb/pjlzDetail_cb.vue'
+import pjlzDetail_fk_Vue from '@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'
+import pjlzDetail_jx_Vue from '@/page/pjlz/pjlzDetail_jx/pjlzDetail_jx.vue'
+import pjlz_fkjl_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl.vue'
+import pjlz_fkjl_detail_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail.vue'
 import pjfkMessageVue from '@/page/pjlz/pjfkMessage/pjfkMessage.vue'
 Vue.use(Router)
 
@@ -285,6 +290,27 @@ export default new Router({
       path: '/pjlz/pjlz',
       name: 'pjlzListvue',
       component: pjlzVue
+    },{
+      path: '/pjlz/pjlzDetail_cb/pjlzDetail_cb',
+      name: 'pjlzDetail_cb',
+      component: pjlzDetail_cb_Vue
+    }
+    ,{
+      path: '/pjlz/pjlzDetail_fk/pjlzDetail_fk',
+      name: 'pjlzDetail_fk',
+      component: pjlzDetail_fk_Vue
+    },{
+      path: '/pjlz/pjlzDetail_jx/pjlzDetail_jx',
+      name: 'pjlzDetail_jx',
+      component: pjlzDetail_jx_Vue
+    },{
+      path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl',
+      name: 'pjlz_fkjl',
+      component: pjlz_fkjl_Vue
+    },{
+      path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail',
+      name: 'pjlz_fkjl_detail',
+      component: pjlz_fkjl_detail_Vue
     },{
       path: '/pjlz/pjfkMessage/pjfkMessage',
       name: 'pjfkMessageVue',
