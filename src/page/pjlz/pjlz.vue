@@ -20,7 +20,10 @@
         <van-tab title="工作项"></van-tab>
         <van-tab title="数据统计"></van-tab>
       </van-tabs>
-      <div style="display: flex;height: 40px;margin-top: 7px;margin-left: 10px;margin-right: 10px;">
+      <div
+        v-if="gzxOrStatic==0"
+        style="display: flex;height: 40px;margin-top: 7px;margin-left: 10px;margin-right: 10px;"
+      >
         <div style="width:50%;position:relative;">
           <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_select_div1">
             <div style="margin:0 auto;">办理中</div>
@@ -92,6 +95,7 @@ import $ from "jquery";
 import Vue from "vue";
 import { Tab, Tabs, Search, Overlay, Field } from "vant";
 import child1 from "@/page/pjlz/pjlzList/pjlzList.vue";
+import child2 from "@/page/pjlz/pjlzStatic/pjlzStatic.vue";
 import dd from "dingtalk-jsapi";
 Vue.use(Tab)
   .use(Tabs)
@@ -99,6 +103,7 @@ Vue.use(Tab)
   .use(Overlay)
   .use(Field);
 import global_variable from "../../api/global_variable.js";
+import { httpMethod } from "../../api/getData.js";
 export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
@@ -111,39 +116,52 @@ export default {
       active1: 0,
       flag: 0, //判断角色
       currentView: "child1",
-      sqjxshow: false,
-      sqjxmessage: ""
+      sqjxshow: false, //申请结伴标记
+      sqjxmessage: "", //申请结伴内容
+      gzxOrStatic: 0 //0=工作项1=数据统计
     };
   },
   beforeRouteEnter(to, from, next) {
     console.log(from);
     console.log(to);
-    // if (from.path == "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali") {
-    //   if (to.path == "/zdgz/zdgc/zdgc") {
-    //     to.meta.keepAlive = true;
-    //   } else {
-    //     to.meta.keepAlive = false;
-    //   }
-    // } else {
-    //   to.meta.keepAlive = false;
-    // }
     next();
   },
   mounted() {
-    this.getCuruserid(); //免登获取当前用户的角色
-    //  console.log(this.$children, '子')
-
-    //  this.$router.push({
-    //           path: "/pjlz/pjfkMessage/pjfkMessage"
-    //         });
+    this.getUserInfo(); //免登获取当前用户的角色
   },
   components: {
-    child1
+    child1,
+    child2
   },
   methods: {
+    //获取用户角色
+    getUserInfo: function() {
+      var self = this;
+      dd.ready(function() {
+        dd.runtime.permission.requestAuthCode({
+          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          onSuccess: function(info) {
+            var code = info.code; // 通过该免登授权码可以获取用户身份
+            var params = {
+              method:"getUserInfo",
+              code: code
+            };
+            httpMethod.getApprovalInfo().then(res => {
+              console.log(res);
+              if (res.success == "1") {
+                
+              }
+            });
+          },
+          onFail: function(err) {
+            alert("dd error: " + JSON.stringify(err));
+          }
+        });
+      });
+    },
     //添加标题右上方按钮
     showRightMenu: function() {
-      var self =this;
+      var self = this;
       dd.ready(function() {
         dd.biz.navigation.setMenu({
           items: [
@@ -151,8 +169,7 @@ export default {
               id: "1",
               iconId: "file",
               text: "消息",
-              url:
-                "../../assets/img/hicon_info.png"
+              url: "../../assets/img/hicon_info.png"
             }
           ],
           onSuccess: function(data) {
@@ -202,73 +219,18 @@ export default {
     //领导的tab切换
     tabsclick: function(name, title) {
       console.log(name + "--" + title);
+      var index = parseInt(name);
+      this.gzxOrStatic = index;
+      if (index === 0) {
+        this.currentView = "child1";
+      } else {
+        this.currentView = "child2";
+      }
     },
     //承办人和文电科tab切换
     tabsclick1: function(name, title) {
       console.log(name + "--" + title);
     },
-    getCuruserid: function() {
-      var self = this;
-      dd.ready(function() {
-        dd.ui.webViewBounce.disable();
-        dd.runtime.permission.requestAuthCode({
-          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
-          onSuccess: function(info) {
-            var code = info.code; // 通过该免登授权码可以获取用户身份
-            var params = {
-              code: code
-            };
-            httpMethod
-              .getUser(params)
-              .then(res => {
-                console.log(res);
-                if (res.success == "1") {
-                  if (res.functions != null) {
-                    self.permissionList = res.functions;
-                    console.log("main权限" + res.functions);
-                    global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
-                    self.doAddAppLog(global_variable.userId);
-                  } else {
-                    console.log("关闭应用");
-                    Dialog.alert({
-                      message: "权限不足，请联系管理员！"
-                    }).then(() => {
-                      dd.ready(function() {
-                        dd.biz.navigation.close();
-                      });
-                    });
-                  }
-                } else if (res.success == "0") {
-                }
-              })
-              .catch(err => {
-                //self.$toast(err);
-              });
-          },
-          onFail: function(err) {
-            alert("dd error: " + JSON.stringify(err));
-          }
-        });
-      });
-    },
-    doAddAppLogList: function(logId, ddPhone, grouping_id, grouping_name) {
-      var params = {
-        logId: logId,
-        ddPhone: ddPhone,
-        grouping_id: grouping_id,
-        grouping_name: grouping_name
-      };
-      httpMethod
-        .doAddAppLogList(params)
-        .then(res => {
-          console.log(res);
-          if (res.success == "1") {
-          }
-        })
-        .catch(err => {
-          // this.$toast(err);
-        });
-    }
   }
 };
 </script>
