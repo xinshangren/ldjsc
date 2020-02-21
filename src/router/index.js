@@ -56,6 +56,9 @@ import yqdataVue from '@/page/yqdata/yqdata.vue'
 import pjlzVue from '@/page/pjlz/pjlz.vue'
 import pjlzDetail_cb_Vue from '@/page/pjlz/pjlzDetail_cb/pjlzDetail_cb.vue'
 import pjlzDetail_fk_Vue from '@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'
+import pjlzDetail_jx_Vue from '@/page/pjlz/pjlzDetail_jx/pjlzDetail_jx.vue'
+import pjlz_fkjl_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl.vue'
+import pjlz_fkjl_detail_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -295,8 +298,20 @@ export default new Router({
       path: '/pjlz/pjlzDetail_fk/pjlzDetail_fk',
       name: 'pjlzDetail_fk',
       component: pjlzDetail_fk_Vue
+    },{
+      path: '/pjlz/pjlzDetail_jx/pjlzDetail_jx',
+      name: 'pjlzDetail_jx',
+      component: pjlzDetail_jx_Vue
+    },{
+      path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl',
+      name: 'pjlz_fkjl',
+      component: pjlz_fkjl_Vue
+    },{
+      path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail',
+      name: 'pjlz_fkjl_detail',
+      component: pjlz_fkjl_detail_Vue
     }
 
-   
+    
   ]
 })

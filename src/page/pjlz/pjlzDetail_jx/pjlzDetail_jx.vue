@@ -189,29 +189,20 @@
         <div style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 230px;">
             <div style="padding:10px 15px 0px 15px;position: relative;">
                 <div style="display: flex;font-size: 15px;margin-top: 13px">
-                    工作反馈
+                    申请说明
                 </div>
                 <div
-                    style="display: flex;font-size: 14px;margin-top: 15px;border: 1px solid #9f9f9f;border-radius: 4px;">
+                    style="display: flex;font-size: 15px;margin-top: 5px;color: #666666;">
                     <div style="margin:10px ;">
                         被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容
                     </div>
                 </div>
-                <van-uploader v-model="file_list" :after-read="afterRead" :preview-image="false">
-                    <div style="display: flex;font-size: 15px;margin-top: 15px;color:#2599e6">
-                        <img style="height: 18px;" src="../../../assets/img/icon_accessory.png" />
-                        <div style="margin-left: 5px;">添加附件</div>
-                    </div>
-                </van-uploader>
-                <div  v-for="(item,index) of file_list" style="display: flex;font-size: 14px;color:#2599e6 ;" >
-                    <div @click="preview_adjunct(item)">{{item.file.name}}</div>
-                    <img @click="delete_adjunct(index)" style="height: 20px;margin-left: 5px;" src="../../../assets/img/icon_delete.png" />
-                </div>
-                <div style="display: flex;background: #28bcfe;border-radius:20px;width: 64%;
+                <div style="display: flex;background: #28bcfe;border-radius:20px;width: 30%;
                 margin: auto;
                 margin-top: 15px;
                 height: 40px;">
-                    <div style="margin: auto;margin-top: 6px; color: #ffffff;font-size: 18px;">提交
+                    <img src="../../../assets/img/icon_reject.png"/>
+                    <div style="margin: auto;margin-top: 6px; color: #ffffff;font-size: 18px;">同意结项
                     </div>
                 </div>
             </div>
@@ -237,7 +228,7 @@
         beforeCreate() {
             document.querySelector("body").setAttribute("style", "background:#F1F4F6");
         },
-        name: "pjlzDetail_cb",
+        name: "pjlzDetail_jx",
         data() {
             return {
                 overdue: true,
@@ -277,18 +268,7 @@
                     $("#all_jl").slideDown("slow");
                 }
             },
-            //附件读取后操作
-            afterRead:function(){
-                console.log(this.file_list)
-            },
-            //删除上传附件
-            delete_adjunct:function(index){
-                this.file_list.splice(index, 1);
-            },
-            //预览
-            preview_adjunct:function(item){
-                
-            }
+           
 
         }
     };

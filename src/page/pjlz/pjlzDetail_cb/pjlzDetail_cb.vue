@@ -71,115 +71,115 @@
             </div>
         </div>
         <div id="jl_content" style="margin:10px 0px 10px;background:#ffffff;">
-            <div id="all_jl" style="height:360px">
-            <div id="fkjl" style="padding:15px 15px 0px 15px;position: relative;">
-                <div style="display: flex;font-size: 16px;">
-                    <div style="width: 80%;display: flex;">
-                        <div>反馈记录</div>
-                        <div style="background: #f22e16;width: 20px;
+            <div id="all_jl" style="height:350px;padding-top: 15px;">
+                <div id="fkjl" style="padding:0px 15px 0px 15px;position: relative;">
+                    <div style="display: flex;font-size: 16px;">
+                        <div style="width: 80%;display: flex;">
+                            <div>反馈记录</div>
+                            <div style="background: #f22e16;width: 20px;
                         height: 16px;
                         margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;">99</div>
+                        </div>
+                        <div  @click="gofkjl_list" style="width: 30%;display: flex;color: #2599e6;text-align: right;">
+                            <img style='height: 22px;' src="../../../assets/img/icon_record_more.png" />
+                            <div>更多记录</div>
+                        </div>
                     </div>
-                    <div style="width: 30%;display: flex;color: #2599e6;text-align: right;">
-                        <img style='height: 22px;' src="../../../assets/img/icon_record_more.png" />
-                        <div>更多记录</div>
-                    </div>
-                </div>
-                <div style="display: flex;font-size: 15px;margin-top: 13px;">
-                    <div style="width: 80%;">
-                        我局领导已经安排相关科室办理中
-                    </div>
+                    <div style="display: flex;font-size: 15px;margin-top: 13px;">
+                        <div style="width: 80%;">
+                            我局领导已经安排相关科室办理中
+                        </div>
 
-                </div>
-                <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
-                    <div style="display: flex;">
-                        <img style="height: 18px;" src="../../../assets/img/icon_people.png" />
-                        <div style="margin-left: 2px;">反馈人:</div>
-                        <div style="margin-left: 2px;">张三</div>
                     </div>
-                    <div style="display: flex;padding-left:10px;">
-                        <img style="height: 18px;" src="../../../assets/img/icon_time.png" />
-                        <div style="margin-left: 2px;">反馈时间:</div>
-                        <div style="margin-left: 2px;">2020-01-01 22:22</div>
+                    <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+                        <div style="display: flex;">
+                            <img style="height: 18px;" src="../../../assets/img/icon_people.png" />
+                            <div style="margin-left: 2px;">反馈人:</div>
+                            <div style="margin-left: 2px;">张三</div>
+                        </div>
+                        <div style="display: flex;padding-left:10px;">
+                            <img style="height: 18px;" src="../../../assets/img/icon_time.png" />
+                            <div style="margin-left: 2px;">反馈时间:</div>
+                            <div style="margin-left: 2px;">2020-01-01 22:22</div>
+                        </div>
                     </div>
+                    <img  @click="gofkjl_list_detail" style="right: 15px; top: 43px;; width: 30px;position: absolute;"
+                        src="../../../assets/img/icon_more.png" />
+                    <van-divider />
                 </div>
-                <img style="right: 15px; top: 56px; width: 30px;position: absolute;"
-                    src="../../../assets/img/icon_more.png" />
-                <van-divider />
-            </div>
-            <div id="cbjl" style="padding:0px 15px;position: relative;">
-                <div style="display: flex;font-size: 16px;">
-                    <div style="width: 80%;display: flex;">
-                        <div>催办记录</div>
-                        <div style="background: #f22e16;width: 20px;
+                <div id="cbjl" style="padding:0px 15px;position: relative;">
+                    <div style="display: flex;font-size: 16px;">
+                        <div style="width: 80%;display: flex;">
+                            <div>催办记录</div>
+                            <div style="background: #f22e16;width: 20px;
                         height: 16px;
                         margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;">99</div>
+                        </div>
+                        <div style="width: 30%;display: flex;color: #2599e6;text-align: right;">
+                            <img style='height: 22px;' src="../../../assets/img/icon_record_more.png" />
+                            <div>更多记录</div>
+                        </div>
                     </div>
-                    <div style="width: 30%;display: flex;color: #2599e6;text-align: right;">
-                        <img style='height: 22px;' src="../../../assets/img/icon_record_more.png" />
-                        <div>更多记录</div>
+                    <div style="display: flex;font-size: 15px;margin-top: 13px;">
+                        <div style="">
+                            我局领导已经安排相关科室办理中
+                        </div>
+                        <img style="height: 20px;margin-left: 5px;" src="../../../assets/img/icon_way2.png" />
                     </div>
+                    <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+                        <div style="display: flex;">
+                            <img style="height: 18px;" src="../../../assets/img/icon_people.png" />
+                            <div style="margin-left: 2px;">催办人:</div>
+                            <div style="margin-left: 2px;">张三</div>
+                        </div>
+                        <div style="display: flex;padding-left:10px;">
+                            <img style="height: 18px;" src="../../../assets/img/icon_time.png" />
+                            <div style="margin-left: 2px;">催办时间:</div>
+                            <div style="margin-left: 2px;">2020-01-01 22:22</div>
+                        </div>
+                    </div>
+                    <img style="right: 15px; top: 43px;; width: 30px;position: absolute;"
+                        src="../../../assets/img/icon_more.png" />
+                    <van-divider />
                 </div>
-                <div style="display: flex;font-size: 15px;margin-top: 13px;">
-                    <div style="">
-                        我局领导已经安排相关科室办理中
-                    </div>
-                    <img style="height: 20px;margin-left: 5px;" src="../../../assets/img/icon_way2.png" />
-                </div>
-                <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
-                    <div style="display: flex;">
-                        <img style="height: 18px;" src="../../../assets/img/icon_people.png" />
-                        <div style="margin-left: 2px;">催办人:</div>
-                        <div style="margin-left: 2px;">张三</div>
-                    </div>
-                    <div style="display: flex;padding-left:10px;">
-                        <img style="height: 18px;" src="../../../assets/img/icon_time.png" />
-                        <div style="margin-left: 2px;">催办时间:</div>
-                        <div style="margin-left: 2px;">2020-01-01 22:22</div>
-                    </div>
-                </div>
-                <img style="right: 15px; top: 56px; width: 30px;position: absolute;"
-                    src="../../../assets/img/icon_more.png" />
-                <van-divider />
-            </div>
-            <div id="jxjl" style="padding:0px 15px;position: relative;">
-                <div style="display: flex;font-size: 16px;">
-                    <div style="width: 80%;display: flex;">
-                        <div>申请结项记录</div>
-                        <div style="background: #f22e16;width: 20px;
+                <div id="jxjl" style="padding:0px 15px;position: relative;">
+                    <div style="display: flex;font-size: 16px;">
+                        <div style="width: 80%;display: flex;">
+                            <div>申请结项记录</div>
+                            <div style="background: #f22e16;width: 20px;
                         height: 16px;
                         margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;">99</div>
+                        </div>
+                        <div style="width: 30%;display: flex;color: #2599e6;text-align: right;">
+                            <img style='height: 22px;' src="../../../assets/img/icon_record_more.png" />
+                            <div>更多记录</div>
+                        </div>
                     </div>
-                    <div style="width: 30%;display: flex;color: #2599e6;text-align: right;">
-                        <img style='height: 22px;' src="../../../assets/img/icon_record_more.png" />
-                        <div>更多记录</div>
+                    <div style="display: flex;font-size: 15px;margin-top: 13px;">
+                        <div style="">
+                            我局领导已经安排相关科室办理中
+                        </div>
+                        <img style="height: 20px;margin-left: 5px;" src="../../../assets/img/icon_edit.png" />
+                        <div style="color:#2599e6 ;margin-left: 3px;">编辑</div>
                     </div>
+                    <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+                        <div style="display: flex;">
+                            <img style="height: 18px;" src="../../../assets/img/icon_people.png" />
+                            <div style="margin-left: 2px;">申请人:</div>
+                            <div style="margin-left: 2px;">张三</div>
+                        </div>
+                        <div style="display: flex;padding-left:10px;">
+                            <img style="height: 18px;" src="../../../assets/img/icon_time.png" />
+                            <div style="margin-left: 2px;">申请时间:</div>
+                            <div style="margin-left: 2px;">2020-01-01 22:22</div>
+                        </div>
+                    </div>
+                    <img style="right: 15px; top: 43px;; width: 30px;position: absolute;"
+                        src="../../../assets/img/icon_more.png" />
+                    <van-divider />
                 </div>
-                <div style="display: flex;font-size: 15px;margin-top: 13px;">
-                    <div style="">
-                        我局领导已经安排相关科室办理中
-                    </div>
-                    <img style="height: 20px;margin-left: 5px;" src="../../../assets/img/icon_edit.png" />
-                    <div style="color:#2599e6 ;margin-left: 3px;">编辑</div>
-                </div>
-                <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
-                    <div style="display: flex;">
-                        <img style="height: 18px;" src="../../../assets/img/icon_people.png" />
-                        <div style="margin-left: 2px;">申请人:</div>
-                        <div style="margin-left: 2px;">张三</div>
-                    </div>
-                    <div style="display: flex;padding-left:10px;">
-                        <img style="height: 18px;" src="../../../assets/img/icon_time.png" />
-                        <div style="margin-left: 2px;">申请时间:</div>
-                        <div style="margin-left: 2px;">2020-01-01 22:22</div>
-                    </div>
-                </div>
-                <img style="right: 15px; top: 56px; width: 30px;position: absolute;"
-                    src="../../../assets/img/icon_more.png" />
-                <van-divider />
             </div>
-            </div>
-            <div @click="show_jl" style="background: #deefff;height: 40px;color:#2599e6; margin:5px 10px;font-size: 16px;">
+            <div @click="show_jl" style="background: #deefff;height: 40px;color:#2599e6; margin:0px 10px;font-size: 16px;">
                 <div style="display: flex;width: 28%;
                margin: auto;
                padding-top: 8px;">
@@ -273,6 +273,18 @@
 
         },
         methods: {
+            gofkjl_list:function(){
+                this.$router.push({
+                    path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl",
+                    name: "pjlz_fkjl",
+                });     
+            },
+            gofkjl_list_detail:function(){
+                this.$router.push({
+                    path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail",
+                    name: "pjlz_fkjl_detail",
+                });     
+            },
             choose_cbfs: function (str) {
                 var self = this;
                 if (str == 'yytz') {
