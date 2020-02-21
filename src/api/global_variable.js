@@ -8,7 +8,7 @@ const pageSize = 10
 const logId=''
 const ddPhone=''
 const indexTabId=0;
-
+const roleJs={};//用户信息
 export default {
   baseURL,
   defaultImg,
@@ -19,5 +19,6 @@ export default {
   downjtJtImg,
   logId,
   ddPhone,
-  indexTabId
+  indexTabId,
+  roleJs
 }

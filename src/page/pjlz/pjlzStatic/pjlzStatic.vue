@@ -1,6 +1,6 @@
 
 <template>
-  <div style="margin-top: 44px;font-size: 15px;border-top: 1px solid #f1f1f1;padding-top:16px;">
+  <div style="font-size: 15px;border-top: 1px solid #f1f1f1;padding-top:10px;">
       <div style="display:flex;">
          <div class="pjlzStaticTitile">工作完成情况</div>
 

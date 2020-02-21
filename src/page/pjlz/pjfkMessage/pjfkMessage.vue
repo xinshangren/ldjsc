@@ -1,7 +1,7 @@
 
 <template>
   <div style="margin-top:0px;">
-    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
+    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" style=" top: 110px;">
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div v-for="(item,index) in list" :key="index" class="pjkMessageListDiv">
           <div class="pjkMessageRedPoint"></div>

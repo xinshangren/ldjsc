@@ -1,10 +1,7 @@
 
 <template>
   <div>
-    <div
-      v-show="flag==0"
-      style="z-index: 2000;position: fixed;width: 100%;top: 101px;background: #f1f1f1;"
-    >
+    <div v-show="flag.role=='ld'" style="z-index: 2000;width: 100%;background: #f1f1f1;">
       <van-tabs
         id="tabs"
         @touchmove.prevent
@@ -25,7 +22,7 @@
         style="display: flex;height: 40px;margin-top: 7px;margin-left: 10px;margin-right: 10px;"
       >
         <div style="width:50%;position:relative;">
-          <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_select_div1">
+          <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_noselect_div1">
             <div style="margin:0 auto;">办理中</div>
           </div>
         </div>
@@ -37,7 +34,7 @@
       </div>
     </div>
 
-    <div v-show="flag==1">
+    <div v-show="flag.role!='ld'">
       <van-tabs
         id="tabs1"
         @touchmove.prevent
@@ -56,10 +53,11 @@
 
       <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
     </div>
-    <div id="child_page" style="overflow: auto;width: 100%;position:relative;">
+    <!-- <div id="child_page" style="overflow: auto;width: 100%;position:relative;">
       <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
-    </div>
-
+    </div>-->
+    <child1 style="position:relative;" v-if="flag.role=='ld'&&currentView===0"></child1>
+    <child2 style="position:relative;" v-if="flag.role=='ld'&&currentView===1"></child2>
     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="10000">
       <div class="wrapper">
         <div class="block" @click.stop>
@@ -114,8 +112,13 @@ export default {
       seach_value: "",
       active: 0,
       active1: 0,
-      flag: 0, //判断角色
-      currentView: "child1",
+      flag: {
+        dingUserId: "",
+        role: "ld",
+        department: "",
+        username: ""
+      }, //判断角色
+      currentView: 0,
       sqjxshow: false, //申请结伴标记
       sqjxmessage: "", //申请结伴内容
       gzxOrStatic: 0 //0=工作项1=数据统计
@@ -124,6 +127,23 @@ export default {
   beforeRouteEnter(to, from, next) {
     console.log(from);
     console.log(to);
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    // dd.ready(function() {
+    //   dd.biz.navigation.setRight({
+    //     show: false, //控制按钮显示， true 显示， false 隐藏， 默认true
+    //     control: true, //是否控制点击事件，true 控制，false 不控制， 默认false
+    //     text: "", //控制显示文本，空字符串表示显示默认文本
+    //     onSuccess: function(result) {
+    //       //如果control为true，则onSuccess将在发生按钮点击事件被回调
+    //       /*
+    //     {}
+    //     */
+    //     },
+    //     onFail: function(err) {}
+    //   });
+    // });
     next();
   },
   mounted() {
@@ -143,13 +163,36 @@ export default {
           onSuccess: function(info) {
             var code = info.code; // 通过该免登授权码可以获取用户身份
             var params = {
-              method:"getUserInfo",
+              method: "getUserInfo",
               code: code
             };
-            httpMethod.getApprovalInfo().then(res => {
-              console.log(res);
+            httpMethod.getApprovalInfo(params).then(res => {
+              console.log(JSON.stringify(res));
               if (res.success == "1") {
-                
+                // global_variable.roleJs = res.data;
+                self.flag = Object.assign({}, self.flag, {
+                  dingUserId: res.data.dingUserId,
+                  username: res.data.username,
+                  // role: res.data.role,
+                  role: "ld",
+                  department: res.data.department
+                });
+                global_variable.roleJs = Object.assign(
+                  {},
+                  global_variable.roleJs,
+                  {
+                    dingUserId: res.data.dingUserId,
+                    username: res.data.username,
+                    role: res.data.role,
+                    department: res.data.department
+                  }
+                );
+                if (res.data.role != "ld") {
+                  self.showRightMenu();
+                }
+                console.log(global_variable.roleJs);
+                // var roleCode=res.data.role;
+                // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
               }
             });
           },
@@ -169,7 +212,9 @@ export default {
               id: "1",
               iconId: "file",
               text: "消息",
-              url: "../../assets/img/hicon_info.png"
+              url:
+                httpMethod.returnBaseUrlFun() +
+                "jcsldjscApp/static/icon_info.png"
             }
           ],
           onSuccess: function(data) {
@@ -198,15 +243,23 @@ export default {
     },
     selectTab: function(flag) {
       // console.log(flag);
-      this.$children[3].changeListState(flag);
+      for (var i = 0; i < this.$children.length; i++) {
+        var entity = this.$children[i];
+      
+        if (entity.$options._componentTag == "child1") {
+            console.log(entity);
+          entity.changetabState(flag);
+        }
+      }
+
       switch (flag) {
-        case 1: //形象进度
+        case 1: //办理中
           $("#tabdiv1").removeClass("pop_tab_noselect_div1");
           $("#tabdiv1").addClass("pop_tab_select_div1");
           $("#tabdiv2").addClass("pop_tab_noselect_div2");
           $("#tabdiv2").removeClass("pop_tab_select_div2");
           break;
-        case 2: //存在问题
+        case 2: //已办结
           $("#tabdiv1").removeClass("pop_tab_select_div1");
           $("#tabdiv1").addClass("pop_tab_noselect_div1");
           $("#tabdiv2").addClass("pop_tab_select_div2");
@@ -222,15 +275,16 @@ export default {
       var index = parseInt(name);
       this.gzxOrStatic = index;
       if (index === 0) {
-        this.currentView = "child1";
+        this.currentView = 0;
       } else {
-        this.currentView = "child2";
+        this.currentView = 1;
       }
+      console.log(this.currentView);
     },
     //承办人和文电科tab切换
     tabsclick1: function(name, title) {
       console.log(name + "--" + title);
-    },
+    }
   }
 };
 </script>

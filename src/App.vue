@@ -25,10 +25,7 @@
 }
 .shaixuanImg{
   
-    position: absolute;
-    right: 23px;
-    top: 24px;
-    height: 20px;
+  
 
 }
 </style>
@@ -50,7 +47,7 @@
             class="index_top_style"
             style="width:100%;height: 64px;"
           />
-          <img ref="shaixuanImgId" class="shaixuanImg" style="display:none;" src="@/assets/img/icon_filtrate.png"/>
+          <img ref="shaixuanImgId" class="shaixuanImg" style="display:none;  position: absolute;right: 23px;top: 24px;height: 20px;" src="@/assets/img/icon_filtrate.png"/>
         </div>
         <!-- <div
           id="appVuerightId"

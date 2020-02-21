@@ -433,7 +433,7 @@ export const httpMethod = {
     },
     //批件流转接口通用
     getApprovalInfo: function (params) {
-        return get("dingAppInsideController.action?getApprovalInfo", params);
+        return get("dingTalkController.action?getApprovalInfo", params);
     },
 
     

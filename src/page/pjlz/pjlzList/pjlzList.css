@@ -39,6 +39,27 @@
     margin:auto 0;
     margin-left: 12px;
 }
+.pjlzListyfk{
+
+    border: 1px solid #2599e6;
+    border-radius: 6px;
+    padding: 0px 10px 0px 13px;
+    font-size: 12px;
+    height: 17px;
+    color:#2599e6; 
+    margin:auto 0;
+    margin-left: 12px;
+}
+.pjlzListwfk{
+    border: 1px solid #f89636;
+    border-radius: 6px;
+    padding: 0px 10px 0px 13px;
+    font-size: 12px;
+    height: 17px;
+    color:#f89636; 
+    margin:auto 0;
+    margin-left: 12px;
+}
 .pjlzListTitle{
     width: 60%;
     line-height: 28px;
@@ -60,7 +81,6 @@ margin-left: 7px
 }
 .mescroll{
     position: fixed;
-    top: 190px;
     bottom: 0px;
     height: auto;
 }

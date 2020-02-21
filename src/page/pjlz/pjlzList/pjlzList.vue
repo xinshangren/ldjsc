@@ -1,7 +1,13 @@
 
 <template>
-  <div style="margin-top:0px;">
-    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
+  <div style="margin-top:0px;overflow:hidden;">
+    <mescroll-vue
+      ref="mescroll"
+      :down="mescrollDown"
+      :up="mescrollUp"
+      @init="mescrollInit"
+      style=" top: 195px;"
+    >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
           v-for="(item,index) in list"
@@ -12,53 +18,74 @@
             <div style="display:flex;">
               <img style="height:30px;" src="../../../assets/img/no_overdue.png" />
               <!-- <img style="height:30px;" src="../../../assets/img/noverdue.png" /> -->
-              <div class="van-ellipsis pjlzListTitle">就初步确定的2020年就初步确定的2020年</div>
-              <div class="pjlzListblz">办理中</div>
-              <!-- <div class="pjlzListybj">已办结</div> -->
-              <!-- <div class="pjlzListsqjx">申请结项</div> -->
+              <div class="van-ellipsis pjlzListTitle">{{item.approval_name}}</div>
+              <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
+              <div v-if="item.approval_status==1" class="pjlzListyfk">已反馈</div>
+              <div v-if="item.approval_status==2" class="pjlzListwfk">未反馈</div>
+              <div v-if="item.approval_status==3" class="pjlzListsqjx">申请结项</div>
+              <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>
 
-              <!-- <div class="pjlzListjjjx">拒绝结项</div> -->
+              <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div>
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>
-              <div class="pjlzListSmallDivFont">张三</div>
+              <div
+                class="pjlzListSmallDivFont"
+                style="margin-left:19px;"
+              >{{item.approval_manage_person}}</div>
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
               <div class="pjlzListSmallDivFont">办理期限：</div>
-              <div class="pjlzListSmallDivFont">3个工作日</div>
+              <div class="pjlzListSmallDivFont">{{item.approval_limit_time}}</div>
             </div>
             <div class="pjlzListSmallDiv" style="margin-bottom:11px;">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">交办时间：</div>
-              <div class="pjlzListSmallDivFont">2020年3月10日</div>
+              <div class="pjlzListSmallDivFont">{{item.approval_create_date}}</div>
             </div>
 
-            <!-- <div class="pjlzListyjcb">
+            <div
+              @click="openYjcbFun(item,$event)"
+              v-if="(flag.role=='ld'||flag.role=='wdk')&&item.approval_status!=4"
+              class="pjlzListyjcb"
+            >
               <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
               <div class="pjlzListyjcbfont">一键催办</div>
-            </div> -->
+            </div>
 
-            <div class="pjlzListyjcb"  @click="openSqjxFun(item,$event)">
+            <div
+              v-if="flag.role=='cbr'&&item.approval_status==1"
+              class="pjlzListyjcb"
+              @click="openSqjxFun(item,$event)"
+            >
               <img class="pjlzListyjcbImg" src="../../../assets/img/icon_complete.png" />
               <div class="pjlzListyjcbfont">申请结项</div>
             </div>
 
-            <!-- <div class="pjlzListyjcb">
+            <div
+              @click="openShsqFun(item,$event)"
+              v-if="flag.role=='wdk'&&item.approval_status==3"
+              class="pjlzListyjcb"
+            >
               <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
               <div class="pjlzListyjcbfont">审核申请</div>
-            </div>-->
+            </div>
 
-            <!-- <div class="pjlzListyjcb">
+            <div
+              @click="openFkFun(item,$event)"
+              v-if="flag.role=='cbr'&&(item.approval_status==2||item.approval_status==0||item.approval_status==5)"
+              class="pjlzListyjcb"
+            >
               <img class="pjlzListyjcbImg" src="../../../assets/img/icon_feedback.png" />
               <div class="pjlzListyjcbfont">反馈</div>
-            </div>-->
+            </div>
           </div>
         </div>
       </div>
     </mescroll-vue>
-     <!-- 挂载到 #app 节点下 -->
+    <!-- 挂载到 #app 节点下 -->
     <!-- 自定义图标 -->
     <van-popup
       id="openPopId"
@@ -73,7 +100,7 @@
       <div style="background:#ffffff;">
         <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否超期</div>
         <ul id="sfcqDialogId" class="ui-row" style="margin-top: 11px;">
-          <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">全部</li>
+          <li id="0" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
           <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">超期</li>
           <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未超期</li>
         </ul>
@@ -82,10 +109,10 @@
         <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否结办</div>
 
         <ul class="ui-row" id="sfbjDialogId" style="margin-top: 11px;">
-          <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">全部</li>
+          <li id="0" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
           <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">办理中</li>
           <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已办结</li>
-           <li id="3" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">申请办结</li>
+          <li id="3" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">申请办结</li>
         </ul>
         <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
         <div style="display: flex;background: #f3f3f3;height:110px;">
@@ -100,14 +127,13 @@
         </div>
       </div>
     </van-popup>
-    
   </div>
 </template>
 
 <script>
 import $ from "jquery";
 import Vue from "vue";
-import { Tab, Tabs, Search,Popup } from "vant";
+import { Tab, Tabs, Search, Popup } from "vant";
 import dd from "dingtalk-jsapi";
 import MescrollVue from "mescroll.js/mescroll.vue";
 Vue.use(Tab)
@@ -128,10 +154,17 @@ export default {
     return {
       seach_value: "",
       active: 0,
-      flag: 0, //判断角色
+      flag: {
+        dingUserId: "",
+        role: "ld",
+        department: "",
+        username: ""
+      }, //判断角色
       currentView: "child1",
+      isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
+      status: "0", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       list: [],
-      Popshow:false,
+      Popshow: false,
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       mescrollUp: {
@@ -159,21 +192,28 @@ export default {
     next();
   },
   mounted() {
-    var shaixuan=(this.$parent.$root.$children)[0].$refs.shaixuanImgId;
+    // this.flag=global_variable.roleJs;
+    var shaixuan = this.$parent.$root.$children[0].$refs.shaixuanImgId;
     // console.log(shaixuan);
-    var self=this;
-    shaixuan.addEventListener('click',function(){
+    var self = this;
+    shaixuan.addEventListener("click", function() {
       console.log("openPop");
-           self.Popshow=true;
+      self.Popshow = true;
     });
   },
   methods: {
-    openPopStart:function(){
-        $("#openPopId").css("z-index","10003");
+    //切换办理中和已办结
+    changetabState: function(state) {
+      console.log(state);
+      this.mescroll.resetUpScroll();
+      this.status=state;
     },
-     openPop: function() {
-       console.log("openPop");
-       $("#openPopId").css("z-index","10003");
+    openPopStart: function() {
+      $("#openPopId").css("z-index", "10003");
+    },
+    openPop: function() {
+      console.log("openPop");
+      $("#openPopId").css("z-index", "10003");
       //是否办结
       $("#sfbjDialogId li").off("click");
       $("#sfbjDialogId li").click(function(e) {
@@ -190,7 +230,7 @@ export default {
         $(this).addClass("dialogSelect");
       });
       $("#sfcqDialogId li").off("click");
-      //选择进度类型
+      //是否超期
       $("#sfcqDialogId li").click(function(e) {
         $(this)
           .siblings("li")
@@ -212,7 +252,7 @@ export default {
         var isSelect = $(this).hasClass("dialogSelect");
         if (isSelect) {
           console.log($(this).attr("id"));
-          context.projectNature = $(this).attr("id");
+          context.status = $(this).attr("id");
         }
       });
 
@@ -220,7 +260,7 @@ export default {
       $("#sfcqDialogId li").each(function() {
         var isSelect = $(this).hasClass("dialogSelect");
         if (isSelect) {
-          context.buildAddr = $(this).attr("id");
+          context.isOvertime = $(this).attr("id");
         }
       });
       this.mescroll.resetUpScroll();
@@ -244,14 +284,11 @@ export default {
         $(this).addClass("dialogNoSelect");
       });
 
-      context.zdProType = "";
-      context.buildAddr = "";
-      context.projectNature = "";
+      context.isOvertime = "";
+      context.status = "";
+      // context.projectNature = "";
       this.mescroll.resetUpScroll();
       this.show = false;
-    },
-    changeListState: function(state) {
-      console.log(state);
     },
     mescrollInit(mescroll) {
       this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
@@ -259,11 +296,19 @@ export default {
     //项目列表
     upCallback: function(page, mescroll) {
       var params = {
-        page: page.num,
-        pageSize: page.size
+        method: "getApprovalInfoList",
+        pageNo: page.num,
+        pageSize: page.size,
+        dingUserId: "086404191926187734",
+        // dingUserId: global_variable.roleJs.dingUserId,
+        approvalKeywords: this.seach_value, //关键词
+        isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
+        status: this.status, //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
+        createDateBegin: "",
+        createDateEnd: ""
       };
       httpMethod
-        .getProReportInfoByzdProType(params)
+        .getApprovalInfo(params)
         .then(res => {
           console.log(res);
           if (res.success == "1") {
@@ -271,13 +316,14 @@ export default {
               this.list = [];
               // this.$refs.totalCountId.innerHTML = res.total;
             }
-            var data = res.dataList;
+            var data = res.data.approvallist;
             if (data && data.length > 0) {
+              //  this.list = [];
               this.list = this.list.concat(data);
             }
 
             this.$nextTick(() => {
-              this.mescroll.endBySize(data.length, res.total);
+              this.mescroll.endBySize(data.length, res.data.total);
             });
           }
         })
@@ -287,9 +333,21 @@ export default {
         });
     },
     //申请结项
-    openSqjxFun:function(item,e){
+    openSqjxFun: function(item, e) {
       this.$parent.showSqjxPop(item);
-       e.stopPropagation(); //非IE浏览器
+      e.stopPropagation();
+    },
+    //一键催办跳转
+    openYjcbFun: function(item, e) {
+      e.stopPropagation();
+    },
+    //审核申请跳转
+    openShsqFun: function(item, e) {
+      e.stopPropagation();
+    },
+    //反馈跳转
+    openFkFun: function(item, e) {
+      e.stopPropagation();
     }
   }
 };
@@ -297,7 +355,7 @@ export default {
 
 <style >
 @import "../../../page/pjlz/pjlzList/pjlzList.css";
-.van-popup--top{
+.van-popup--top {
   z-index: 100000;
 }
 </style>
