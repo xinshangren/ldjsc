@@ -23,6 +23,14 @@
   transition: all 1s ease-in-out;
   transform: translateY(-35px);
 }
+.shaixuanImg{
+  
+    position: absolute;
+    right: 23px;
+    top: 24px;
+    height: 20px;
+
+}
 </style>
 
 <template>
@@ -32,7 +40,7 @@
     <!--搜索框部分start-->
     <div style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;">
       <div style="display: flex;">
-        <div id="appVueleftId" style="width:63%;">
+        <div id="appVueleftId" style="width:63%;position:relative;">
           <van-search
             id="search_all"
             :placeholder="seach_placeholder"
@@ -42,6 +50,7 @@
             class="index_top_style"
             style="width:100%;height: 64px;"
           />
+          <img ref="shaixuanImgId" class="shaixuanImg" style="display:none;" src="@/assets/img/icon_filtrate.png"/>
         </div>
         <!-- <div
           id="appVuerightId"
@@ -169,6 +178,11 @@ export default {
         $("#appVueleftId").css("width", "63%");
       }
       var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
+      if(path=='/pjlz/pjlz'){
+            $(".shaixuanImg").show();
+      }else{
+         $(".shaixuanImg").hide();
+      }
       console.log(this.$route.path);
     },
     toast: function() {

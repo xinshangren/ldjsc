@@ -3,7 +3,7 @@
   <div>
     <div
       v-show="flag==0"
-      style="z-index: 9999;position: fixed;width: 100%;top: 101px;background: #f1f1f1;"
+      style="z-index: 2000;position: fixed;width: 100%;top: 101px;background: #f1f1f1;"
     >
       <van-tabs
         id="tabs"
@@ -53,14 +53,14 @@
 
       <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
     </div>
-    <div id="child_page" style="z-index: 1;overflow: auto;width: 100%;position:relative;">
+    <div id="child_page" style="overflow: auto;width: 100%;position:relative;">
       <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
     </div>
 
-    <van-overlay :show="sqjxshow" @click="closePop()" :z-index="10000">
-      <div class="wrapper" @click.stop>
-        <div class="block">
-          <img class="pjlzSqjxClose" src="../../assets/img/pop_close.png" />
+    <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="10000">
+      <div class="wrapper">
+        <div class="block" @click.stop>
+          <img @click="sqjxshow=false" class="pjlzSqjxClose" src="../../assets/img/pop_close.png" />
           <div class="pjlzSqjx">申请结项</div>
 
           <van-field
@@ -73,14 +73,14 @@
             show-word-limit
             class="pjlzSqjxContent"
           />
-          <div style="display:flex;margin-top:24px;">
+          <div style="display:flex;margin-top:24px;"  @click="sqjxshow=false">
             <div style="width:50%;text-align: center;">
               <div class="pjlzSqjxCancelButton1">取消</div>
             </div>
-            <div style="width:50%;text-align: center;">
+            <div style="width:50%;text-align: center;"  @click="queryJxFun">
               <div class="pjlzSqjxCancelButton2">确定</div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     </van-overlay>
@@ -111,7 +111,7 @@ export default {
       active1: 0,
       flag: 0, //判断角色
       currentView: "child1",
-      sqjxshow: true,
+      sqjxshow: false,
       sqjxmessage: ""
     };
   },
@@ -137,9 +137,17 @@ export default {
     child1
   },
   methods: {
-    closePop:function(){
-      console.log("111");
-        this.sqjxshow=false;
+    queryJxFun:function(){
+      console.log(this.sqjxmessage);
+      this.sqjxshow = false;
+    },
+    //显示申请结项
+    showSqjxPop: function(item) {
+      console.log(item);
+      this.sqjxshow = true;
+    },
+    closePop: function() {
+      this.sqjxshow = false;
     },
     onSearch(val) {
       console.log(val);
