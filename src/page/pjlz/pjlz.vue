@@ -133,9 +133,9 @@ export default {
     this.getCuruserid(); //免登获取当前用户的角色
     //  console.log(this.$children, '子')
 
-     this.$router.push({
-              path: "/pjlz/pjfkMessage/pjfkMessage"
-            });
+    //  this.$router.push({
+    //           path: "/pjlz/pjfkMessage/pjfkMessage"
+    //         });
   },
   components: {
     child1
