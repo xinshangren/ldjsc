@@ -1,7 +1,10 @@
 
 <template>
-  <div style="margin-top:54px;">
-    <div v-show="flag==0">
+  <div>
+    <div
+      v-show="flag==0"
+      style="z-index: 9999;position: fixed;width: 100%;top: 101px;background: #f1f1f1;"
+    >
       <van-tabs
         id="tabs"
         @touchmove.prevent
@@ -17,9 +20,7 @@
         <van-tab title="工作项"></van-tab>
         <van-tab title="数据统计"></van-tab>
       </van-tabs>
-      <div
-        style="display: flex;height: 40px;margin-top: 20px;margin-left: 10px;margin-right: 10px;"
-      >
+      <div style="display: flex;height: 40px;margin-top: 7px;margin-left: 10px;margin-right: 10px;">
         <div style="width:50%;position:relative;">
           <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_select_div1">
             <div style="margin:0 auto;">办理中</div>
@@ -35,16 +36,16 @@
 
     <div v-show="flag==1">
       <van-tabs
-        id="tabs"
+        id="tabs1"
         @touchmove.prevent
-        v-model="active"
+        v-model="active1"
         title-active-color="#2599e6"
         :offset-top="101"
         title-inactive-color="#333333"
         :sticky="true"
         line-width="75px"
         style="width: 100%;"
-        @change="tabsclick"
+        @change="tabsclick1"
       >
         <van-tab title="办理中"></van-tab>
         <van-tab title="已办结"></van-tab>
@@ -52,35 +53,66 @@
 
       <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
     </div>
-    <div
-      id="childId"
-      :is="currentView"
-      ref="child1"
-      style="font-size:15px;"
-    ></div>
+    <div id="child_page" style="z-index: 1;overflow: auto;width: 100%;position:relative;">
+      <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
+    </div>
+
+    <van-overlay :show="sqjxshow" @click="closePop()" :z-index="10000">
+      <div class="wrapper" @click.stop>
+        <div class="block">
+          <img class="pjlzSqjxClose" src="../../assets/img/pop_close.png" />
+          <div class="pjlzSqjx">申请结项</div>
+
+          <van-field
+            v-model="sqjxmessage"
+            rows="4"
+            autosize
+            type="textarea"
+            maxlength="150"
+            placeholder="请输入结项说明"
+            show-word-limit
+            class="pjlzSqjxContent"
+          />
+          <div style="display:flex;margin-top:24px;">
+            <div style="width:50%;text-align: center;">
+              <div class="pjlzSqjxCancelButton1">取消</div>
+            </div>
+            <div style="width:50%;text-align: center;">
+              <div class="pjlzSqjxCancelButton2">确定</div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
 import $ from "jquery";
 import Vue from "vue";
-import { Tab, Tabs, Search } from "vant";
+import { Tab, Tabs, Search, Overlay, Field } from "vant";
+import child1 from "@/page/pjlz/pjlzList/pjlzList.vue";
 import dd from "dingtalk-jsapi";
 Vue.use(Tab)
   .use(Tabs)
-  .use(Search);
+  .use(Search)
+  .use(Overlay)
+  .use(Field);
 import global_variable from "../../api/global_variable.js";
 export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
   },
-  name: "pjlzListvue",
+  name: "pjlzvue",
   data() {
     return {
       seach_value: "",
       active: 0,
+      active1: 0,
       flag: 0, //判断角色
-      currentView: "child1"
+      currentView: "child1",
+      sqjxshow: true,
+      sqjxmessage: ""
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -99,13 +131,22 @@ export default {
   },
   mounted() {
     this.getCuruserid(); //免登获取当前用户的角色
+    //  console.log(this.$children, '子')
+  },
+  components: {
+    child1
   },
   methods: {
+    closePop:function(){
+      console.log("111");
+        this.sqjxshow=false;
+    },
     onSearch(val) {
       console.log(val);
     },
     selectTab: function(flag) {
-      console.log(flag);
+      // console.log(flag);
+      this.$children[3].changeListState(flag);
       switch (flag) {
         case 1: //形象进度
           $("#tabdiv1").removeClass("pop_tab_noselect_div1");
@@ -125,6 +166,10 @@ export default {
     },
     //领导的tab切换
     tabsclick: function(name, title) {
+      console.log(name + "--" + title);
+    },
+    //承办人和文电科tab切换
+    tabsclick1: function(name, title) {
       console.log(name + "--" + title);
     },
     getCuruserid: function() {

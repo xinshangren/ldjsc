@@ -1,10 +1,11 @@
 .pop_tab_select_div1{
     box-shadow: 2px 5px 3px #f3f3f3;
     margin: 0 auto;
-    width: 75px;
+    width: 55px;
     position: absolute;
     text-align: center;
     right: 0px;
+    border: 1px solid #4ba9ef;
     color: rgb(255, 255, 255);
     background: #4ba9ef;display: flex;
     border-radius:5px 0px 0px 5px;line-height: 25px;font-size: 14px;
@@ -13,30 +14,92 @@
 .pop_tab_noselect_div1{
     box-shadow: 2px 5px 3px #f3f3f3;
     margin: 0 auto;
-    width: 75px;
-    position: absolute;;
+    width: 55px;
+    position: absolute;
+    border: 1px solid #4ba9ef;
     right: 0px;
-    color: #4ba9ef;
+    color: #333333;
     background: #ffffff;display: flex;
     border-radius:5px 0px 0px 5px;line-height: 25px;font-size: 14px;
     padding: 3px 10px;
 }
 .pop_tab_noselect_div2{
     margin: 0 auto;
-    width: 75px;
+    width: 55px;
     position: absolute;;
     left: 0px;
+    border: 1px solid #4ba9ef;
     box-shadow: 2px 5px 3px #f3f3f3;
-    color: #3ea2ec;background: #ffffff;display: flex;
+    color: #333333;background: #ffffff;display: flex;
     border-radius: 0px 5px 5px 0px;line-height: 25px;font-size: 14px;padding: 3px 10px;
 }
 .pop_tab_select_div2{
     margin: 0 auto;
-    width: 75px;
+    width: 55px;
     position: absolute;;
     left: 0px;
+    border: 1px solid #4ba9ef;
     box-shadow: 2px 5px 3px #f3f3f3;
     color: #ffffff;
     background: #4ba9ef;display: flex;
     border-radius: 0px 5px 5px 0px;line-height: 25px;font-size: 14px;padding: 3px 10px;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .block {
+    width: 81%;
+    height: 45%;
+    max-height:50%;
+    background:url(../../assets/img/pop_bg.png);
+    background-size:100% 100%;
+    position:relative;
+  }
+
+  .pjlzSqjx{
+    text-align: center;
+    font-size: 16px;
+    color: #ffffff;
+    margin-top: 11px;
+  }
+  .pjlzSqjxClose{ 
+    position: absolute;
+    right: -11px;
+    height: 25px;
+    top: -10px;
+  }
+  .pjlzSqjxContent{ 
+    margin-top: 22px;border: 1px solid #f1f1f1;border-radius: 10px;margin-left: 10px;margin-right: 10px;width: 94%;
+    background-color:rgb(0,0,0,0);
+    height: 160px;
+  }
+.pjlzSqjxCancelButton1{
+    font-size: 14px;
+    color: #3098fb;
+    border: 1px solid #3098fb;
+    width: 30%;
+    text-align: center;
+    height: 33px;
+    line-height: 33px;
+    border-radius: 50px;
+    margin:0 auto;
+    width: 75%;
+}
+.pjlzSqjxCancelButton2{
+   
+    font-size: 14px;
+    color: #ffffff;
+    border: 1px solid #3098fb;
+    width: 30%;
+    text-align: center;
+    height: 33px;
+    line-height: 33px;
+    border-radius: 50px;
+    background: #27c4fe;
+    width: 75%;
+    margin:0 auto;
 }
