@@ -431,6 +431,12 @@ export const httpMethod = {
     getDirectCon: function (params) {
         return get("dingAppInsideController.action?getDirectCon", params);
     },
+    //批件流转接口通用
+    getApprovalInfo: function (params) {
+        return get("dingAppInsideController.action?getApprovalInfo", params);
+    },
+
+    
 
     
 

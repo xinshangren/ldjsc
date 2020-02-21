@@ -59,6 +59,7 @@ import pjlzDetail_fk_Vue from '@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'
 import pjlzDetail_jx_Vue from '@/page/pjlz/pjlzDetail_jx/pjlzDetail_jx.vue'
 import pjlz_fkjl_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl.vue'
 import pjlz_fkjl_detail_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail.vue'
+import pjfkMessageVue from '@/page/pjlz/pjfkMessage/pjfkMessage.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -310,8 +311,12 @@ export default new Router({
       path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail',
       name: 'pjlz_fkjl_detail',
       component: pjlz_fkjl_detail_Vue
+    },{
+      path: '/pjlz/pjfkMessage/pjfkMessage',
+      name: 'pjfkMessageVue',
+      component: pjfkMessageVue
     }
-
+    
     
   ]
 })

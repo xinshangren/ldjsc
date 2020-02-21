@@ -35,15 +35,15 @@
               <div class="pjlzListSmallDivFont">2020年3月10日</div>
             </div>
 
-            <div class="pjlzListyjcb">
+            <!-- <div class="pjlzListyjcb">
               <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
               <div class="pjlzListyjcbfont">一键催办</div>
-            </div>
+            </div> -->
 
-            <!-- <div class="pjlzListyjcb">
+            <div class="pjlzListyjcb"  @click="openSqjxFun(item,$event)">
               <img class="pjlzListyjcbImg" src="../../../assets/img/icon_complete.png" />
               <div class="pjlzListyjcbfont">申请结项</div>
-            </div>-->
+            </div>
 
             <!-- <div class="pjlzListyjcb">
               <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
@@ -58,7 +58,48 @@
         </div>
       </div>
     </mescroll-vue>
+     <!-- 挂载到 #app 节点下 -->
+    <!-- 自定义图标 -->
+    <van-popup
+      id="openPopId"
+      v-model="Popshow"
+      position="top"
+      get-container="body"
+      :style="{ height: '45%' }"
+      @opened="openPop"
+      @open="openPopStart"
+      style="overflow:hidden;background:rgb(243, 243, 243);"
+    >
+      <div style="background:#ffffff;">
+        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否超期</div>
+        <ul id="sfcqDialogId" class="ui-row" style="margin-top: 11px;">
+          <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">全部</li>
+          <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">超期</li>
+          <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未超期</li>
+        </ul>
 
+        <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否结办</div>
+
+        <ul class="ui-row" id="sfbjDialogId" style="margin-top: 11px;">
+          <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">全部</li>
+          <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">办理中</li>
+          <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已办结</li>
+           <li id="3" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">申请办结</li>
+        </ul>
+        <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+        <div style="display: flex;background: #f3f3f3;height:110px;">
+          <div
+            @click="clearType"
+            style="width: 50%;height: 36px;background: #ffffff;line-height: 36px;text-align: center;font-size:14px;"
+          >重置</div>
+          <div
+            @click="clickUlDy"
+            style="background:#3ca1ec;width: 50%;height: 36px;color:#ffffff;line-height: 36px;text-align: center;font-size:14px;"
+          >确定</div>
+        </div>
+      </div>
+    </van-popup>
     
   </div>
 </template>
@@ -66,13 +107,13 @@
 <script>
 import $ from "jquery";
 import Vue from "vue";
-import { Tab, Tabs, Search,Overlay } from "vant";
+import { Tab, Tabs, Search,Popup } from "vant";
 import dd from "dingtalk-jsapi";
 import MescrollVue from "mescroll.js/mescroll.vue";
 Vue.use(Tab)
   .use(Tabs)
   .use(Search)
-  .use(Overlay);
+  .use(Popup);
 import global_variable from "../../../api/global_variable.js";
 import { httpMethod } from "../../../api/getData.js";
 export default {
@@ -90,6 +131,7 @@ export default {
       flag: 0, //判断角色
       currentView: "child1",
       list: [],
+      Popshow:false,
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       mescrollUp: {
@@ -116,8 +158,98 @@ export default {
     console.log(to);
     next();
   },
-  mounted() {},
+  mounted() {
+    var shaixuan=(this.$parent.$root.$children)[0].$refs.shaixuanImgId;
+    // console.log(shaixuan);
+    var self=this;
+    shaixuan.addEventListener('click',function(){
+      console.log("openPop");
+           self.Popshow=true;
+    });
+  },
   methods: {
+    openPopStart:function(){
+        $("#openPopId").css("z-index","10003");
+    },
+     openPop: function() {
+       console.log("openPop");
+       $("#openPopId").css("z-index","10003");
+      //是否办结
+      $("#sfbjDialogId li").off("click");
+      $("#sfbjDialogId li").click(function(e) {
+        $(this)
+          .siblings("li")
+          .removeClass("dialogSelect");
+        $(this)
+          .siblings("li")
+          .removeClass("dialogNoSelect");
+        $(this)
+          .siblings("li")
+          .addClass("dialogNoSelect");
+        $(this).removeClass("dialogNoSelect");
+        $(this).addClass("dialogSelect");
+      });
+      $("#sfcqDialogId li").off("click");
+      //选择进度类型
+      $("#sfcqDialogId li").click(function(e) {
+        $(this)
+          .siblings("li")
+          .removeClass("dialogSelect");
+        $(this)
+          .siblings("li")
+          .removeClass("dialogNoSelect");
+        $(this)
+          .siblings("li")
+          .addClass("dialogNoSelect");
+        $(this).removeClass("dialogNoSelect");
+        $(this).addClass("dialogSelect");
+      });
+    },
+    clickUlDy: function() {
+      var context = this;
+      //循环获取选中的是否办结
+      $("#sfbjDialogId li").each(function() {
+        var isSelect = $(this).hasClass("dialogSelect");
+        if (isSelect) {
+          console.log($(this).attr("id"));
+          context.projectNature = $(this).attr("id");
+        }
+      });
+
+      //循环获取选中的是否超期
+      $("#sfcqDialogId li").each(function() {
+        var isSelect = $(this).hasClass("dialogSelect");
+        if (isSelect) {
+          context.buildAddr = $(this).attr("id");
+        }
+      });
+      this.mescroll.resetUpScroll();
+      this.Popshow = false;
+    },
+    clearType: function() {
+      var context = this;
+      //循环重置查询条件
+      $("#jdflDialogId li").each(function() {
+        $(this).removeClass("dialogSelect");
+        $(this).addClass("dialogNoSelect");
+      });
+      //循环重置查询条件
+      $("#xmlxDialogId li").each(function() {
+        $(this).removeClass("dialogSelect");
+        $(this).addClass("dialogNoSelect");
+      });
+      //循环重置查询条件
+      $("#dylxDialogId li").each(function() {
+        $(this).removeClass("dialogSelect");
+        $(this).addClass("dialogNoSelect");
+      });
+
+      context.zdProType = "";
+      context.buildAddr = "";
+      context.projectNature = "";
+      this.mescroll.resetUpScroll();
+      this.show = false;
+    },
     changeListState: function(state) {
       console.log(state);
     },
@@ -153,6 +285,11 @@ export default {
           // this.$toast(err);
           mescroll.endErr();
         });
+    },
+    //申请结项
+    openSqjxFun:function(item,e){
+      this.$parent.showSqjxPop(item);
+       e.stopPropagation(); //非IE浏览器
     }
   }
 };
@@ -160,4 +297,7 @@ export default {
 
 <style >
 @import "../../../page/pjlz/pjlzList/pjlzList.css";
+.van-popup--top{
+  z-index: 100000;
+}
 </style>
