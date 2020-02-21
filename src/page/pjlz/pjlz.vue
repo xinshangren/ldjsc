@@ -73,11 +73,11 @@
             show-word-limit
             class="pjlzSqjxContent"
           />
-          <div style="display:flex;margin-top:24px;"  @click="sqjxshow=false">
+          <div style="display:flex;margin-top:24px;" @click="sqjxshow=false">
             <div style="width:50%;text-align: center;">
               <div class="pjlzSqjxCancelButton1">取消</div>
             </div>
-            <div style="width:50%;text-align: center;"  @click="queryJxFun">
+            <div style="width:50%;text-align: center;" @click="queryJxFun">
               <div class="pjlzSqjxCancelButton2">确定</div>
             </div>
           </div>
@@ -137,7 +137,28 @@ export default {
     child1
   },
   methods: {
-    queryJxFun:function(){
+    showRightMenu: function() {
+      dd.ready(function() {
+        dd.biz.navigation.setMenu({
+          items: [
+            {
+              id: "1",
+              iconId: "file",
+              text: "消息",
+              url:
+                "http://img.alicdn.com/tps/TB1XLjqNVXXXXc4XVXXXXXXXXXX-170-64.png"
+            }
+          ],
+          onSuccess: function(data) {
+            /*
+        {"id":"1"}
+        */
+          },
+          onFail: function(err) {}
+        });
+      });
+    },
+    queryJxFun: function() {
       console.log(this.sqjxmessage);
       this.sqjxshow = false;
     },
