@@ -1,7 +1,10 @@
 
 <template>
   <div>
-    <div v-show="flag.role=='ld'" style="z-index: 2000;width: 100%;background: #f1f1f1;">
+    <div
+      v-show="flag.role=='ld'"
+      style="z-index: 2000;width: 100%;background: #f1f1f1;position:fixed;"
+    >
       <van-tabs
         id="tabs"
         @touchmove.prevent
@@ -56,7 +59,7 @@
     <!-- <div id="child_page" style="overflow: auto;width: 100%;position:relative;">
       <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
     </div>-->
-    <child1 style="position:relative;" v-if="flag.role=='ld'&&currentView===0"></child1>
+    <child1 style="position:relative;" v-if="currentView===0"></child1>
     <child2 style="position:relative;" v-if="flag.role=='ld'&&currentView===1"></child2>
     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="10000">
       <div class="wrapper">
@@ -114,7 +117,7 @@ export default {
       active1: 0,
       flag: {
         dingUserId: "",
-        role: "ld",
+        role: "cbr",
         department: "",
         username: ""
       }, //判断角色
@@ -239,15 +242,22 @@ export default {
       this.sqjxshow = false;
     },
     onSearch(val) {
-      console.log(val);
+      for (var i = 0; i < this.$children.length; i++) {
+        var entity = this.$children[i];
+        if (entity.$options._componentTag == "child1") {
+          // console.log(entity);
+          entity.resetUpScroll(val);
+        }
+      }
+      // console.log(val);
     },
     selectTab: function(flag) {
       // console.log(flag);
       for (var i = 0; i < this.$children.length; i++) {
         var entity = this.$children[i];
-      
+
         if (entity.$options._componentTag == "child1") {
-            console.log(entity);
+          console.log(entity);
           entity.changetabState(flag);
         }
       }
@@ -283,7 +293,16 @@ export default {
     },
     //承办人和文电科tab切换
     tabsclick1: function(name, title) {
-      console.log(name + "--" + title);
+      var flag = parseInt(name) + 1;
+      console.log(flag);
+      for (var i = 0; i < this.$children.length; i++) {
+        var entity = this.$children[i];
+
+        if (entity.$options._componentTag == "child1") {
+          console.log(entity);
+          entity.changetabState(flag);
+        }
+      }
     }
   }
 };

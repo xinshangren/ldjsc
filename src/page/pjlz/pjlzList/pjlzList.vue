@@ -1,7 +1,8 @@
 
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <mescroll-vue
+    <mescroll-vue  
+      id="mescroll"
       ref="mescroll"
       :down="mescrollDown"
       :up="mescrollUp"
@@ -156,7 +157,7 @@ export default {
       active: 0,
       flag: {
         dingUserId: "",
-        role: "ld",
+        role: "cbr",
         department: "",
         username: ""
       }, //判断角色
@@ -200,13 +201,25 @@ export default {
       console.log("openPop");
       self.Popshow = true;
     });
+    if(self.flag.role!="ld"){
+          self.createListTop();
+    }
   },
   methods: {
+    createListTop:function(top){
+         $("#mescroll").css("top","210px");
+    },
     //切换办理中和已办结
     changetabState: function(state) {
       console.log(state);
+       this.status=state;
       this.mescroll.resetUpScroll();
-      this.status=state;
+    },
+    //切换办理中和已办结
+    resetUpScroll: function(name) {
+      // console.log(name);
+      this.seach_value=name;
+      this.mescroll.resetUpScroll();
     },
     openPopStart: function() {
       $("#openPopId").css("z-index", "10003");
@@ -320,6 +333,8 @@ export default {
             if (data && data.length > 0) {
               //  this.list = [];
               this.list = this.list.concat(data);
+              //  this.list = this.list.concat(data);
+              //   this.list = this.list.concat(data);
             }
 
             this.$nextTick(() => {
