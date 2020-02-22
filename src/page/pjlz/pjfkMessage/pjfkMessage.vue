@@ -1,7 +1,7 @@
 
 <template>
   <div style="margin-top:0px;">
-    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" style=" top: 110px;">
+    <mescroll-vue id="mescroll" ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" style=" top: 110px;">
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div v-for="(item,index) in list" :key="index" class="pjkMessageListDiv">
           <div class="pjkMessageRedPoint"></div>
@@ -93,15 +93,28 @@ export default {
     next();
   },
   mounted() {
-    var shaixuan = this.$parent.$root.$children[0].$refs.shaixuanImgId;
-    // console.log(shaixuan);
-    var self = this;
-    shaixuan.addEventListener("click", function() {
-      console.log("openPop");
-      self.Popshow = true;
-    });
+     this.pdSingleApp();
   },
   methods: {
+     //判断是否是单独app
+    pdSingleApp: function() {
+      String.prototype.getValue = function(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+        var r = this.substr(this.indexOf("?") + 1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      };
+      var hrefUrl = window.location.href;
+      var indexUrl = hrefUrl.replace("#", "");
+
+      var url = decodeURI(hrefUrl);
+      console.log(url);
+      var detail = url.getValue("type");
+      console.log("type===" + detail);
+      if (detail == 1) {
+        $("#mescroll").css("top","10px");
+      }
+    },
     mescrollInit(mescroll) {
       this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
     },

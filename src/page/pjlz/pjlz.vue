@@ -1,7 +1,10 @@
 
 <template>
   <div>
-    <div v-show="flag.role=='ld'" style="z-index: 2000;width: 100%;background: #f1f1f1;">
+    <div
+      v-show="flag.role=='ld'"
+      style="z-index: 2000;width: 100%;background: #f1f1f1;position:fixed;"
+    >
       <van-tabs
         id="tabs"
         @touchmove.prevent
@@ -40,7 +43,7 @@
         @touchmove.prevent
         v-model="active1"
         title-active-color="#2599e6"
-        :offset-top="101"
+        :offset-top="top"
         title-inactive-color="#333333"
         :sticky="true"
         line-width="75px"
@@ -56,7 +59,7 @@
     <!-- <div id="child_page" style="overflow: auto;width: 100%;position:relative;">
       <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
     </div>-->
-    <child1 style="position:relative;" v-if="flag.role=='ld'&&currentView===0"></child1>
+    <child1 style="position:relative;" v-if="currentView===0"></child1>
     <child2 style="position:relative;" v-if="flag.role=='ld'&&currentView===1"></child2>
     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="10000">
       <div class="wrapper">
@@ -114,14 +117,15 @@ export default {
       active1: 0,
       flag: {
         dingUserId: "",
-        role: "ld",
+        role: "",
         department: "",
         username: ""
       }, //判断角色
       currentView: 0,
       sqjxshow: false, //申请结伴标记
       sqjxmessage: "", //申请结伴内容
-      gzxOrStatic: 0 //0=工作项1=数据统计
+      gzxOrStatic: 0, //0=工作项1=数据统计
+      top: 10
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -130,77 +134,38 @@ export default {
     next();
   },
   beforeRouteLeave(to, from, next) {
-    // dd.ready(function() {
-    //   dd.biz.navigation.setRight({
-    //     show: false, //控制按钮显示， true 显示， false 隐藏， 默认true
-    //     control: true, //是否控制点击事件，true 控制，false 不控制， 默认false
-    //     text: "", //控制显示文本，空字符串表示显示默认文本
-    //     onSuccess: function(result) {
-    //       //如果control为true，则onSuccess将在发生按钮点击事件被回调
-    //       /*
-    //     {}
-    //     */
-    //     },
-    //     onFail: function(err) {}
-    //   });
-    // });
     next();
   },
   mounted() {
-    this.getUserInfo(); //免登获取当前用户的角色
+    this.flag = global_variable.roleJs;
+    console.log(global_variable.roleJs);
+    console.log(this.flag);
+    this.pdSingleApp();
   },
   components: {
     child1,
     child2
   },
   methods: {
-    //获取用户角色
-    getUserInfo: function() {
-      var self = this;
-      dd.ready(function() {
-        dd.runtime.permission.requestAuthCode({
-          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
-          onSuccess: function(info) {
-            var code = info.code; // 通过该免登授权码可以获取用户身份
-            var params = {
-              method: "getUserInfo",
-              code: code
-            };
-            httpMethod.getApprovalInfo(params).then(res => {
-              console.log(JSON.stringify(res));
-              if (res.success == "1") {
-                // global_variable.roleJs = res.data;
-                self.flag = Object.assign({}, self.flag, {
-                  dingUserId: res.data.dingUserId,
-                  username: res.data.username,
-                  // role: res.data.role,
-                  role: "ld",
-                  department: res.data.department
-                });
-                global_variable.roleJs = Object.assign(
-                  {},
-                  global_variable.roleJs,
-                  {
-                    dingUserId: res.data.dingUserId,
-                    username: res.data.username,
-                    role: res.data.role,
-                    department: res.data.department
-                  }
-                );
-                if (res.data.role != "ld") {
-                  self.showRightMenu();
-                }
-                console.log(global_variable.roleJs);
-                // var roleCode=res.data.role;
-                // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
-              }
-            });
-          },
-          onFail: function(err) {
-            alert("dd error: " + JSON.stringify(err));
-          }
-        });
-      });
+    //判断是否是单独app
+    pdSingleApp: function() {
+      String.prototype.getValue = function(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+        var r = this.substr(this.indexOf("?") + 1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      };
+      var hrefUrl = window.location.href;
+      var indexUrl = hrefUrl.replace("#", "");
+
+      var url = decodeURI(hrefUrl);
+      console.log(url);
+      var detail = url.getValue("type");
+      console.log("type===" + detail);
+      if (detail == 1) {
+        this.top = 0;
+        this.showRightMenu();
+      }
     },
     //添加标题右上方按钮
     showRightMenu: function() {
@@ -239,15 +204,22 @@ export default {
       this.sqjxshow = false;
     },
     onSearch(val) {
-      console.log(val);
+      for (var i = 0; i < this.$children.length; i++) {
+        var entity = this.$children[i];
+        if (entity.$options._componentTag == "child1") {
+          // console.log(entity);
+          entity.resetUpScroll(val);
+        }
+      }
+      // console.log(val);
     },
     selectTab: function(flag) {
       // console.log(flag);
       for (var i = 0; i < this.$children.length; i++) {
         var entity = this.$children[i];
-      
+
         if (entity.$options._componentTag == "child1") {
-            console.log(entity);
+          console.log(entity);
           entity.changetabState(flag);
         }
       }
@@ -283,7 +255,16 @@ export default {
     },
     //承办人和文电科tab切换
     tabsclick1: function(name, title) {
-      console.log(name + "--" + title);
+      var flag = parseInt(name) + 1;
+      console.log(flag);
+      for (var i = 0; i < this.$children.length; i++) {
+        var entity = this.$children[i];
+
+        if (entity.$options._componentTag == "child1") {
+          console.log(entity);
+          entity.changetabState(flag);
+        }
+      }
     }
   }
 };
