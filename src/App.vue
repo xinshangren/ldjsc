@@ -23,7 +23,12 @@
   transition: all 1s ease-in-out;
   transform: translateY(-35px);
 }
-
+.singleApp{
+ margin-top: 0px;
+}
+.nosingleApp{
+ margin-top: 101px;
+}
 </style>
 
 <template>
@@ -31,8 +36,8 @@
     <loading v-show="LOADING" style="z-index:3;"></loading>
     <LoadingBig v-show="BIGLOADING" style="z-index:3;"></LoadingBig>
     <!--搜索框部分start-->
-    <div style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;">
-      <div style="display: flex;">
+    <div v-if="isSingleApp==false" style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;">
+      <div  style="display: flex;">
         <div id="appVueleftId" style="width:63%;position:relative;">
           <van-search
             id="search_all"
@@ -119,9 +124,9 @@
     <!--搜索框部分end-->
     <!-- <router-view></router-view> -->
     <keep-alive>
-      <router-view style="margin-top: 101px;" class="index_main_view" v-if="$route.meta.keepAlive"></router-view>
+      <router-view :class="isSingleApp==true?'singleApp':'nosingleApp'"   v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
-    <router-view style="margin-top: 101px;" v-if="!$route.meta.keepAlive"></router-view>
+    <router-view :class="isSingleApp==true?'singleApp':'nosingleApp'" v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
@@ -143,11 +148,30 @@ export default {
     return {
       scroll_notice: [],
       animateUp: false,
-      timer: null
+      timer: null,
+      isSingleApp:false,
     };
   },
   mounted() {
-    //this.gotoHome();
+    String.prototype.getValue = function(parm) {
+      var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+      var r = this.substr(this.indexOf("?") + 1).match(reg);
+      if (r != null) return unescape(r[2]);
+      return null;
+    };
+    var hrefUrl = window.location.href;
+    var indexUrl = hrefUrl.replace("#", "");
+        
+    var url = decodeURI(hrefUrl);
+    console.log(url);
+    var detail = url.getValue("type");
+    console.log(detail);
+    if(detail!=null){
+        if(detail==1){
+            this.isSingleApp=true;
+            global_variable.singleApp=1;//独立app判断
+        }
+    }
     this.getUserInfo();
     this.getFiveNotice();
     this.timer = setInterval(this.scrollAnimate, 5000);

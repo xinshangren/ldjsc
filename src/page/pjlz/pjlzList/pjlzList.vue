@@ -1,7 +1,7 @@
 
 <template>
   <div style="margin-top:0px;overflow:hidden;">
-    <mescroll-vue  
+    <mescroll-vue
       id="mescroll"
       ref="mescroll"
       :down="mescrollDown"
@@ -171,6 +171,7 @@ export default {
       mescrollUp: {
         // 上拉加载的配置.
         callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }
+        auto:false,
         //以下是一些常用的配置,当然不写也可以的.
         page: {
           num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
@@ -197,33 +198,60 @@ export default {
     var shaixuan = this.$parent.$root.$children[0].$refs.shaixuanImgId;
     // console.log(shaixuan);
     var self = this;
-    shaixuan.addEventListener("click", function() {
-      console.log("openPop");
-      self.Popshow = true;
-    });
+    if (global_variable.singleApp != 1) {
+      shaixuan.addEventListener("click", function() {
+        console.log("openPop");
+        self.Popshow = true;
+      });
+    }
+
     console.log(global_variable.roleJs);
-    if(global_variable.roleJs!=null){
-       self.flag=global_variable.roleJs;
+    if (global_variable.roleJs != null) {
+      self.flag = global_variable.roleJs;
     }
     console.log(self.flag);
-    if(self.flag.role!="ld"){
-          self.createListTop();
+    if (self.flag.role != "ld") {
+      self.createListTop();
     }
+    self.pdSingleApp();
   },
   methods: {
-    createListTop:function(top){
-         $("#mescroll").css("top","210px");
+    //判断是否是单独app
+    pdSingleApp: function() {
+      String.prototype.getValue = function(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+        var r = this.substr(this.indexOf("?") + 1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      };
+      var hrefUrl = window.location.href;
+      var indexUrl = hrefUrl.replace("#", "");
+
+      var url = decodeURI(hrefUrl);
+      console.log(url);
+      var detail = url.getValue("type");
+      console.log("type===" + detail);
+      if (detail =="1") {
+         $("#mescroll").css("top","107px");
+        // this.showRightMenu();
+        this.getUserInfo();
+      }else{
+        this.mescroll.resetUpScroll();
+      }
+    },
+    createListTop: function(top) {
+      $("#mescroll").css("top", "210px");
     },
     //切换办理中和已办结
     changetabState: function(state) {
       console.log(state);
-       this.status=state;
+      this.status = state;
       this.mescroll.resetUpScroll();
     },
     //切换办理中和已办结
     resetUpScroll: function(name) {
       // console.log(name);
-      this.seach_value=name;
+      this.seach_value = name;
       this.mescroll.resetUpScroll();
     },
     openPopStart: function() {
@@ -261,6 +289,46 @@ export default {
           .addClass("dialogNoSelect");
         $(this).removeClass("dialogNoSelect");
         $(this).addClass("dialogSelect");
+      });
+    },
+    //获取用户角色
+    getUserInfo: function() {
+      var self = this;
+      dd.ready(function() {
+        dd.runtime.permission.requestAuthCode({
+          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          onSuccess: function(info) {
+            var code = info.code; // 通过该免登授权码可以获取用户身份
+            var params = {
+              method: "getUserInfo",
+              code: code
+            };
+            httpMethod.getApprovalInfo(params).then(res => {
+              console.log(JSON.stringify(res));
+              if (res.success == "1") {
+                global_variable.roleJs = Object.assign(
+                  {},
+                  global_variable.roleJs,
+                  {
+                    dingUserId: res.data.dingUserId,
+                    username: res.data.username,
+                    role: res.data.role,
+                    department: res.data.department
+                  }
+                );
+                self.flag = global_variable.roleJs;
+                self.mescroll.resetUpScroll();
+                console.log(global_variable.roleJs);
+                 console.log(self.flag);
+                // var roleCode=res.data.role;
+                // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
+              }
+            });
+          },
+          onFail: function(err) {
+            alert("dd error: " + JSON.stringify(err));
+          }
+        });
       });
     },
     clickUlDy: function() {

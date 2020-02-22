@@ -43,7 +43,7 @@
         @touchmove.prevent
         v-model="active1"
         title-active-color="#2599e6"
-        :offset-top="101"
+        :offset-top="top"
         title-inactive-color="#333333"
         :sticky="true"
         line-width="75px"
@@ -124,7 +124,8 @@ export default {
       currentView: 0,
       sqjxshow: false, //申请结伴标记
       sqjxmessage: "", //申请结伴内容
-      gzxOrStatic: 0 //0=工作项1=数据统计
+      gzxOrStatic: 0, //0=工作项1=数据统计
+      top: 10
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -136,19 +137,36 @@ export default {
     next();
   },
   mounted() {
-    this.flag=global_variable.roleJs;
-
+    this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
-    console.log( this.flag);
-    if (global_variable.roleJs.role != "ld") {
-      this.showRightMenu();
-    }
+    console.log(this.flag);
+    this.pdSingleApp();
   },
   components: {
     child1,
     child2
   },
   methods: {
+    //判断是否是单独app
+    pdSingleApp: function() {
+      String.prototype.getValue = function(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+        var r = this.substr(this.indexOf("?") + 1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      };
+      var hrefUrl = window.location.href;
+      var indexUrl = hrefUrl.replace("#", "");
+
+      var url = decodeURI(hrefUrl);
+      console.log(url);
+      var detail = url.getValue("type");
+      console.log("type===" + detail);
+      if (detail == 1) {
+        this.top = 0;
+        this.showRightMenu();
+      }
+    },
     //添加标题右上方按钮
     showRightMenu: function() {
       var self = this;

@@ -14,7 +14,7 @@ const roleJs = {
   department: "",
   username: ""
 };//用户信息
-
+const singleApp=0;
 export default {
   baseURL,
   defaultImg,
@@ -26,5 +26,6 @@ export default {
   logId,
   ddPhone,
   indexTabId,
-  roleJs
+  roleJs,
+  singleApp
 }
