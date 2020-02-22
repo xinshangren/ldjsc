@@ -1,0 +1,333 @@
+
+<template>
+  <div>
+    <div style="margin:101px 0px 10px;background:#ffffff;min-height: 202px;">
+      <div style="display: flex;padding-top: 10px;">
+        <img
+          v-if="pj_detail.approval_warn_flag == 0"
+          src="../../assets/img/no_overdue.png"
+          style="height:38px"
+        />
+        <img v-else src="../../assets/img/noverdue.png" style="height:38px" />
+        <div
+          style="font-weight: 600;width: 65%; font-size: 16px; white-space: nowrap; overflow: hidden;padding:7px 0px 7px 7px;text-overflow: ellipsis;"
+        >{{pj_detail.approval_name}}</div>
+        <div
+          style="font-size: 15px;border:1px solid #2599e6 ;border-radius: 5px;color:#2599e6;height: 20px;
+                text-align: center;
+                margin-top: 7px"
+        >{{pj_detail.approval_status}}</div>
+      </div>
+      <div style="color: #666666;font-size: 16px;width: 94%;">
+        <div style="display: flex;margin-top: 10px;">
+          <div style="width: 30%;text-align: right;">事项类型：</div>
+          <div>{{pj_detail.approval_type}}</div>
+        </div>
+        <div style="display: flex;margin-top: 15px;">
+          <div style="width: 30%;text-align: right;">承办人：</div>
+          <div>
+            <div style="height: 25px;">牵头人：{{pj_detail.approval_main_person}}</div>
+            <div
+              v-if="pj_detail.approval_manage_person != null && pj_detail.approval_manage_person.length>0"
+              v-for="person in pj_detail.approval_manage_person"
+              style="height: 25px;"
+            >相关人：{{person}}</div>
+          </div>
+        </div>
+        <div style="display: flex;margin-top: 15px;">
+          <div style="width: 30%;text-align: right;">事项内容：</div>
+          <div style="border:1px solid #666666 ;border-radius: 5px;width: 70%;">
+            <div
+              style="font-size: 15px;
+                        line-height: 23px;
+                        margin: 5px;"
+            >{{pj_detail.approval_content}}</div>
+          </div>
+        </div>
+        <div style="display: flex;margin-top: 15px;padding-bottom: 15px;">
+          <div style="width: 30%;text-align: right;">附件：</div>
+          <div style="width: 70%;color:#2599e6;font-size: 15px;">
+            <div
+              v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0"
+              v-for="attach in pj_detail.attachlist"
+              style="display: flex;margin-left: 10px; margin-top: 5px;"
+            >
+              <div @click="openFj(attach.attach_view_url)">{{attach.attach_name}}</div>
+              <img style="height: 22px;margin-left: 8px;" src="../../assets/img/icon_download.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="jl_content" style="margin:10px 0px 10px;background:#ffffff;">
+      <div id="all_jl" style="height:350px;padding-top: 15px;">
+        <div id="fkjl" style="padding:0px 15px 0px 15px;position: relative;">
+          <div style="display: flex;font-size: 16px;">
+            <div style="width: 80%;display: flex;">
+              <div>反馈记录</div>
+              <div
+                style="background: #f22e16;width: 20px;
+                        height: 16px;
+                        margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;"
+              >{{pj_detail.approval_feedback_time == null?0:pj_detail.approval_feedback_time}}</div>
+            </div>
+            <div
+              v-show="fkjl_null" 
+              @click="gofkjl_list"
+              style="width: 30%;display: flex;color: #2599e6;text-align: right;"
+            >
+              <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
+              <div >更多记录</div>
+            </div>
+          </div>
+          <div style="display: flex;font-size: 15px;margin-top: 13px;">
+            <div
+              style="height:20px; width: 70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
+            >
+              <!-- {{pj_detail.approval_feedback.feedback_content}} -->
+              {{last_feedback.feedback_content}}
+            </div>
+          </div>
+          <div v-if="fkjl_null" style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+            <div style="display: flex;">
+              <img style="height: 18px;" src="../../assets/img/icon_people.png" />
+              <div style="margin-left: 2px;">反馈人:</div>
+              <div style="margin-left: 2px;">{{last_feedback.feedback_person}}</div>
+            </div>
+            <div style="display: flex;padding-left:5px;">
+              <img style="height: 18px;" src="../../assets/img/icon_time.png" />
+              <div style="margin-left: 2px;">反馈时间:</div>
+              <div style="margin-left: 2px;">{{last_feedback.feedback_time}}</div>
+            </div>
+          </div>
+          <div v-else style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+            <div style="display: flex;">
+              <div style="margin-left: 2px;">暂无反馈记录</div>
+            </div>
+          </div>
+          <img
+            v-show="fkjl_null"
+            @click="gofkjl_list_detail"
+            style="right: 15px; top: 43px;; width: 30px;position: absolute;"
+            src="../../assets/img/icon_more.png"
+          />
+          <van-divider />
+        </div>
+        <div id="cbjl" style="padding:0px 15px;position: relative;">
+          <div style="display: flex;font-size: 16px;">
+            <div style="width: 80%;display: flex;">
+              <div>催办记录</div>
+              <div
+                style="background: #f22e16;width: 20px;
+                        height: 16px;
+                        margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;"
+              >{{pj_detail.approval_warn_time== null?0:pj_detail.approval_warn_time}}</div>
+            </div>
+            <div v-show="cbjl_null" style="width: 30%;display: flex;color: #2599e6;text-align: right;">
+              <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
+              <div>更多记录</div>
+            </div>
+          </div>
+          <div style="display: flex;font-size: 15px;margin-top: 13px;">
+            <div
+              style="height: 20px;width: 70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
+            >{{last_warn.warn_content}}</div>
+            <!-- <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_way2.png" /> -->
+          </div>
+          <div v-if="cbjl_null" style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+            <div style="display: flex;">
+              <img style="height: 18px;" src="../../assets/img/icon_people.png" />
+              <div style="margin-left: 2px;">催办人:</div>
+              <div style="margin-left: 2px;">{{last_warn.warn_person}}</div>
+            </div>
+            <div style="display: flex;padding-left:5px;">
+              <img style="height: 18px;" src="../../assets/img/icon_time.png" />
+              <div style="margin-left: 2px;">催办时间:</div>
+              <div style="margin-left: 2px;">{{last_warn.time}}</div>
+            </div>
+          </div>
+          <div v-else style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+            <div style="display: flex;">
+              <div style="margin-left: 2px;">暂无催办记录</div>
+            </div>
+          </div>
+          <van-divider />
+        </div>
+        <div id="jxjl" style="padding:0px 15px;position: relative;">
+          <div style="display: flex;font-size: 16px;">
+            <div style="width: 80%;display: flex;">
+              <div>申请结项记录</div>
+              <div
+                style="background: #f22e16;width: 20px;
+                        height: 16px;
+                        margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;"
+              >{{pj_detail.approval_done_time == null?0:pj_detail.approval_done_time}}</div>
+            </div>
+            <div v-show="jxjl_null" style="width: 30%;display: flex;color: #2599e6;text-align: right;">
+              <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
+              <div>更多记录</div>
+            </div>
+          </div>
+          <div style="display: flex;font-size: 15px;margin-top: 13px;">
+            <div
+              style="height: 20px;width:70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
+            >{{last_done.done_content}}</div>
+            <!-- <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_edit.png" />
+            <div style="color:#2599e6 ;margin-left: 3px;">编辑</div>-->
+          </div>
+          <div v-if="jxjl_null" style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+            <div style="display: flex;">
+              <img style="height: 18px;" src="../../assets/img/icon_people.png" />
+              <div style="margin-left: 2px;">申请人:</div>
+              <div style="margin-left: 2px;">{{last_done.done_person}}</div>
+            </div>
+            <div style="display: flex;padding-left:5px;">
+              <img style="height: 18px;" src="../../assets/img/icon_time.png" />
+              <div style="margin-left: 2px;">申请时间:</div>
+              <div style="margin-left: 2px;">{{last_done.done_time}}</div>
+            </div>
+          </div>
+          <div v-else="jxjl_null" style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+            <div style="display: flex;">
+              <div style="margin-left: 2px;">暂无申请结项记录</div>
+            </div>
+          </div>
+          <van-divider />
+        </div>
+      </div>
+      <div
+        @click="show_jl"
+        style="background: #deefff;height: 40px;color:#2599e6; margin:0px 10px;font-size: 16px;"
+      >
+        <div
+          style="display: flex;width: 28%;
+               margin: auto;
+               padding-top: 8px;"
+        >
+          <div>{{all_jl_word}}</div>
+          <img style="height: 20px; margin-left: 5px;" :src="all_jl_photo" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import $ from "jquery";
+import Vue from "vue";
+import { Tab, Tabs, Search } from "vant";
+import dd from "dingtalk-jsapi";
+import { Divider } from "vant";
+import { httpMethod } from "../../api/getData.js";
+Vue.use(Divider);
+Vue.use(Tab)
+  .use(Tabs)
+  .use(Search);
+import global_variable from "../../api/global_variable.js";
+export default {
+  beforeCreate() {
+    document.querySelector("body").setAttribute("style", "background:#F1F4F6");
+  },
+  name: "pjlzDetail_cb",
+  props: ["pj_detail"],
+  data() {
+    return {
+      overdue: true,
+      all_jl_flag: true,
+      all_jl_photo: require("../../assets/img/hide.png"),
+      all_jl_word: "收起记录",
+      last_feedback: {},
+      last_warn: {},
+      last_done: {},
+      fkjl_null:true,
+      cbjl_null:true,
+      jxjl_null:true,
+    };
+  },
+  mounted() {
+      this.inint();
+  },
+  methods: {
+    inint: function() {
+      var self = this;
+      if (self.pj_detail.approval_feedback != null) {
+        self.last_feedback = self.pj_detail.approval_feedback;
+      }else{
+         self.fkjl_null = false;
+      }
+      if (self.pj_detail.approval_warn != null) {
+        self.last_warn = self.pj_detail.approval_warn;
+      }else{
+         self.cbjl_null = false;
+      }
+      if (self.pj_detail.approval_done != null) {
+        self.last_done = self.pj_detail.approval_done;
+      }else{
+         self.jxjl_null = false;
+      }
+    },
+    openFj: function(item) {
+      console.log(item);
+      this.$router.push({
+        path: "/pjlz/pjlz_fj",
+        name: "pjlz_fj",
+        params: {
+          entity: item
+        }
+      });
+    },
+    gofkjl_list: function() {
+        console.log(this.pj_detail)
+      this.$router.push({
+        path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl",
+        name: "pjlz_fkjl",
+        params: {
+          id: this.pj_detail.id
+        }
+      });
+    },
+    gocbjl_list: function() {
+      this.$router.push({
+        path: "/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl",
+        name: "pjlz_cbjl",
+        params: {
+          id: this.pj_detail.id
+        }
+      });
+    },
+    gojxjl_list: function() {
+        
+      this.$router.push({
+        path: "/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl",
+        name: "pjlz_jxjl",
+        params: {
+          id: this.pj_detail.id
+        }
+      });
+    },
+    gofkjl_list_detail: function() {
+      this.$router.push({
+        path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail",
+        name: "pjlz_fkjl_detail"
+      });
+    },
+    
+    show_jl: function() {
+      var self = this;
+      if (self.all_jl_flag) {
+        $("#all_jl").slideUp("slow");
+        self.all_jl_flag = false;
+        self.all_jl_word = "展开记录";
+        self.all_jl_photo = require("../../assets/img/show.png");
+      } else {
+        self.all_jl_flag = true;
+        self.all_jl_word = "收起记录";
+        self.all_jl_photo = require("../../assets/img/hide.png");
+        $("#all_jl").slideDown("slow");
+      }
+    }
+  }
+};
+</script>
+
+<style>
+</style>

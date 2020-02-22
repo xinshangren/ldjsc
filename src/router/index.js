@@ -54,10 +54,14 @@ import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDeal
 import qxtz_newVue from '@/page/main/qxtz_new.vue'
 import yqdataVue from '@/page/yqdata/yqdata.vue'
 import pjlzVue from '@/page/pjlz/pjlz.vue'
+import pjlzDetailVue from '@/page/pjlz/pjlzDetail.vue'
+import pjlz_fj_Vue from '@/page/pjlz/pjlz_fj.vue'
 import pjlzDetail_cb_Vue from '@/page/pjlz/pjlzDetail_cb/pjlzDetail_cb.vue'
 import pjlzDetail_fk_Vue from '@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'
 import pjlzDetail_jx_Vue from '@/page/pjlz/pjlzDetail_jx/pjlzDetail_jx.vue'
 import pjlz_fkjl_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl.vue'
+import pjlz_cbjl_Vue from '@/page/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl.vue'
+import pjlz_jxjl_Vue from '@/page/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl.vue'
 import pjlz_fkjl_detail_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail.vue'
 import pjfkMessageVue from '@/page/pjlz/pjfkMessage/pjfkMessage.vue'
 Vue.use(Router)
@@ -257,7 +261,8 @@ export default new Router({
     },{
       path: '/zdgz/mryq/mryq/mryqDeali/mryqDealiFj',
       name: 'mryqDealiFjVue',
-      component: zdgz_mryqDealiFjVue
+      component: zdgz_mryqDealiFjVue,
+     
     },{
       path: '/qyly/jq/mryq/jqvideos_deali',
       name: 'jqvideos_dealVue',
@@ -291,6 +296,15 @@ export default new Router({
       name: 'pjlzListvue',
       component: pjlzVue
     },{
+      path: '/pjlz/pjlz_fj',
+      name: 'pjlz_fj',
+      component: pjlz_fj_Vue,
+    },{
+      path: '/pjlz/pjlzDetail',
+      name: 'pjlzDetail',
+      component: pjlzDetailVue,
+      meta:{keepAlive:true}
+    },{
       path: '/pjlz/pjlzDetail_cb/pjlzDetail_cb',
       name: 'pjlzDetail_cb',
       component: pjlzDetail_cb_Vue
@@ -307,6 +321,14 @@ export default new Router({
       path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl',
       name: 'pjlz_fkjl',
       component: pjlz_fkjl_Vue
+    },{
+      path: '/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl',
+      name: 'pjlz_cbjl',
+      component: pjlz_cbjl_Vue
+    },{
+      path: '/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl',
+      name: 'pjlz_jxjl',
+      component: pjlz_jxjl_Vue
     },{
       path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail',
       name: 'pjlz_fkjl_detail',
