@@ -21,11 +21,11 @@
         <van-tab title="数据统计"></van-tab>
       </van-tabs>
       <div
-        v-if="gzxOrStatic==0"
-        style="display: flex;height: 40px;margin-top: 7px;margin-left: 10px;margin-right: 10px;"
+        v-if="gzxOrStatic==0&&flag.role=='ld'"
+        style="display: flex;height: 40px;margin-top: 56px;margin-left: 10px;margin-right: 10px;"
       >
         <div style="width:50%;position:relative;">
-          <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_noselect_div1">
+          <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_select_div1">
             <div style="margin:0 auto;">办理中</div>
           </div>
         </div>

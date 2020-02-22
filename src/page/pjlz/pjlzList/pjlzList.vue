@@ -7,7 +7,7 @@
       :down="mescrollDown"
       :up="mescrollUp"
       @init="mescrollInit"
-      style=" top: 195px;"
+      style="top:200px;"
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
@@ -17,8 +17,8 @@
         >
           <div style="position:relative;">
             <div style="display:flex;">
-              <img style="height:30px;" src="../../../assets/img/no_overdue.png" />
-              <!-- <img style="height:30px;" src="../../../assets/img/noverdue.png" /> -->
+              <img v-if="item.approval_status!=2&&item.approval_status!=4" style="height:30px;" src="../../../assets/img/no_overdue.png" />
+              <img v-if="item.approval_status==2||item.approval_status==4" style="height:30px;" src="../../../assets/img/noverdue.png" />
               <div class="van-ellipsis pjlzListTitle">{{item.approval_name}}</div>
               <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
               <div v-if="item.approval_status==1" class="pjlzListyfk">已反馈</div>
@@ -233,7 +233,7 @@ export default {
       var detail = url.getValue("type");
       console.log("type===" + detail);
       if (detail =="1") {
-         $("#mescroll").css("top","107px");
+         $("#mescroll").css("top","113px");
         // this.showRightMenu();
         this.getUserInfo();
         // this.mescroll.resetUpScroll();
