@@ -117,7 +117,7 @@ export default {
       active1: 0,
       flag: {
         dingUserId: "",
-        role: "cbr",
+        role: "",
         department: "",
         username: ""
       }, //判断角色
@@ -133,78 +133,22 @@ export default {
     next();
   },
   beforeRouteLeave(to, from, next) {
-    // dd.ready(function() {
-    //   dd.biz.navigation.setRight({
-    //     show: false, //控制按钮显示， true 显示， false 隐藏， 默认true
-    //     control: true, //是否控制点击事件，true 控制，false 不控制， 默认false
-    //     text: "", //控制显示文本，空字符串表示显示默认文本
-    //     onSuccess: function(result) {
-    //       //如果control为true，则onSuccess将在发生按钮点击事件被回调
-    //       /*
-    //     {}
-    //     */
-    //     },
-    //     onFail: function(err) {}
-    //   });
-    // });
     next();
   },
   mounted() {
-    this.getUserInfo(); //免登获取当前用户的角色
+    this.flag=global_variable.roleJs;
+
+    console.log(global_variable.roleJs);
+    console.log( this.flag);
+    if (global_variable.roleJs.role != "ld") {
+      this.showRightMenu();
+    }
   },
   components: {
     child1,
     child2
   },
   methods: {
-    //获取用户角色
-    getUserInfo: function() {
-      var self = this;
-      dd.ready(function() {
-        dd.runtime.permission.requestAuthCode({
-          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
-          onSuccess: function(info) {
-            var code = info.code; // 通过该免登授权码可以获取用户身份
-            var params = {
-              method: "getUserInfo",
-              code: code
-            };
-            httpMethod.getApprovalInfo(params).then(res => {
-              console.log(JSON.stringify(res));
-              if (res.success == "1") {
-                // global_variable.roleJs = res.data;
-                self.flag = Object.assign({}, self.flag, {
-                  dingUserId: res.data.dingUserId,
-                  username: res.data.username,
-                  // role: res.data.role,
-                  role: "ld",
-                  department: res.data.department
-                });
-                global_variable.roleJs = Object.assign(
-                  {},
-                  global_variable.roleJs,
-                  {
-                    dingUserId: res.data.dingUserId,
-                    username: res.data.username,
-                    role: res.data.role,
-                    department: res.data.department
-                  }
-                );
-                if (res.data.role != "ld") {
-                  self.showRightMenu();
-                }
-                console.log(global_variable.roleJs);
-                // var roleCode=res.data.role;
-                // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
-              }
-            });
-          },
-          onFail: function(err) {
-            alert("dd error: " + JSON.stringify(err));
-          }
-        });
-      });
-    },
     //添加标题右上方按钮
     showRightMenu: function() {
       var self = this;

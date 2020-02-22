@@ -157,7 +157,7 @@ export default {
       active: 0,
       flag: {
         dingUserId: "",
-        role: "cbr",
+        role: "",
         department: "",
         username: ""
       }, //判断角色
@@ -201,6 +201,11 @@ export default {
       console.log("openPop");
       self.Popshow = true;
     });
+    console.log(global_variable.roleJs);
+    if(global_variable.roleJs!=null){
+       self.flag=global_variable.roleJs;
+    }
+    console.log(self.flag);
     if(self.flag.role!="ld"){
           self.createListTop();
     }
@@ -312,8 +317,8 @@ export default {
         method: "getApprovalInfoList",
         pageNo: page.num,
         pageSize: page.size,
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
+        // dingUserId: "086404191926187734",
+        dingUserId: global_variable.roleJs.dingUserId,
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
         status: this.status, //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
