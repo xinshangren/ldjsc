@@ -23,10 +23,11 @@
     <div style="margin-top:54px;background:#f7f7f7">
         <div style="margin:101px 0px 10px;background:#ffffff;min-height: 385px;">
             <div style="display: flex;padding-top: 10px;">
-                <img src="../../../assets/img/no_overdue.png" style="height:38px" />
+                <img v-if="pj_obj.approval_warn_flag === 0" src="../../../assets/img/no_overdue.png" style="height:38px" />
+                <img v-else src="../../../assets/img/noverdue.png" style="height:38px" />
                 <div
                     style="font-weight: 600;width: 65%; font-size: 16px; white-space: nowrap; overflow: hidden;padding:7px 0px 7px 7px;text-overflow: ellipsis;">
-                    就初步确定的2020年10件为民下次再下发按察使发达啊实打实</div>
+                    {{pj_obj.approval_name}}</div>
                 <div style="font-size: 15px;border:1px solid #2599e6 ;border-radius: 5px;color:#2599e6;height: 20px;
                 width: 55px;
                 text-align: center;
@@ -40,9 +41,7 @@
                 <div style="display: flex;margin-top: 15px;">
                     <div style='width: 30%;text-align: right;'>承办人：</div>
                     <div>
-                        <div>部门区县落实件-多部门</div>
-                        <div style='margin-top: 5px;'>部门区县落实件-多部门</div>
-                        <div style='margin-top: 5px;'>部门区县落实件-多部门</div>
+                        <div v-for="str in pj_obj.approval_manage_person" style='height: 25px;'>{{str}}</div>
                     </div>
                 </div>
                 <div style="display: flex;margin-top: 15px;">
@@ -55,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="display: flex;margin-top: 15px;">
+                <div style="display: flex;margin-top: 15px;padding-bottom: 15px;">
                     <div style='width: 30%;text-align: right;'>附件：</div>
                     <div style='display: flex;width: 70%;color:#2599e6;font-size: 15px;'>
                         <div style="display: flex;margin-left: 10px;">
@@ -80,7 +79,7 @@
                         height: 16px;
                         margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;">99</div>
                         </div>
-                        <div  @click="gofkjl_list" style="width: 30%;display: flex;color: #2599e6;text-align: right;">
+                        <div @click="gofkjl_list" style="width: 30%;display: flex;color: #2599e6;text-align: right;">
                             <img style='height: 22px;' src="../../../assets/img/icon_record_more.png" />
                             <div>更多记录</div>
                         </div>
@@ -103,7 +102,7 @@
                             <div style="margin-left: 2px;">2020-01-01 22:22</div>
                         </div>
                     </div>
-                    <img  @click="gofkjl_list_detail" style="right: 15px; top: 43px;; width: 30px;position: absolute;"
+                    <img @click="gofkjl_list_detail" style="right: 15px; top: 43px;; width: 30px;position: absolute;"
                         src="../../../assets/img/icon_more.png" />
                     <van-divider />
                 </div>
@@ -179,7 +178,8 @@
                     <van-divider />
                 </div>
             </div>
-            <div @click="show_jl" style="background: #deefff;height: 40px;color:#2599e6; margin:0px 10px;font-size: 16px;">
+            <div @click="show_jl"
+                style="background: #deefff;height: 40px;color:#2599e6; margin:0px 10px;font-size: 16px;">
                 <div style="display: flex;width: 28%;
                margin: auto;
                padding-top: 8px;">
@@ -215,13 +215,16 @@
                     催办方式
                 </div>
                 <div style="display: flex;">
-                    <div @click="choose_cbfs('yytz')" class="cbfs" id="yytz" style='margin-left: 0px;' :style="{backgroundImage:'url(' + yytz_url + ')',backgroundSize:'cover',backgroundRepeat: 'no-repeat'}">
+                    <div @click="choose_cbfs('yytz')" class="cbfs" id="yytz" style='margin-left: 0px;'
+                        :style="{backgroundImage:'url(' + yytz_url + ')',backgroundSize:'cover',backgroundRepeat: 'no-repeat'}">
                         <div class='tzfs_div'>应用通知</div>
                     </div>
-                    <div @click="choose_cbfs('dxtz')" class="cbfs" id="dxtz":style="{backgroundImage:'url(' + dxtz_url + ')',backgroundSize:'cover',backgroundRepeat: 'no-repeat'}">
+                    <div @click="choose_cbfs('dxtz')" class="cbfs" id="dxtz"
+                        :style="{backgroundImage:'url(' + dxtz_url + ')',backgroundSize:'cover',backgroundRepeat: 'no-repeat'}">
                         <div class='tzfs_div'>短信通知</div>
                     </div>
-                    <div @click="choose_cbfs('dhtz')" class="cbfs" id="dhtz":style="{backgroundImage:'url(' + dhtz_url + ')',backgroundSize:'cover',backgroundRepeat: 'no-repeat'}">
+                    <div @click="choose_cbfs('dhtz')" class="cbfs" id="dhtz"
+                        :style="{backgroundImage:'url(' + dhtz_url + ')',backgroundSize:'cover',backgroundRepeat: 'no-repeat'}">
                         <div class='tzfs_div'>电话通知</div>
                     </div>
                 </div>
@@ -261,29 +264,33 @@
                 yytz_url: require('../../../assets/img/pic_way1.png'),
                 dxtz_url: require('../../../assets/img/pic_way2.png'),
                 dhtz_url: require('../../../assets/img/pic_way3.png'),
-                yytz_flag:false,
-                dxtz_flag:false,
-                dhtz_flag:false,
-                all_jl_flag:true,
-                all_jl_photo:require('../../../assets/img/hide.png'),
-                all_jl_word:"收起记录",
+                yytz_flag: false,
+                dxtz_flag: false,
+                dhtz_flag: false,
+                all_jl_flag: true,
+                all_jl_photo: require('../../../assets/img/hide.png'),
+                all_jl_word: "收起记录",
+                pj_obj:'',
             };
         },
         mounted() {
-
+            this.pj_obj = this.$route.params.obj;
+            this.pj_obj.approval_manage_person = this.pj_obj.approval_manage_person.split(',');
+            
+            console.log(this.pj_obj)
         },
         methods: {
-            gofkjl_list:function(){
+            gofkjl_list: function () {
                 this.$router.push({
                     path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl",
                     name: "pjlz_fkjl",
-                });     
+                });
             },
-            gofkjl_list_detail:function(){
+            gofkjl_list_detail: function () {
                 this.$router.push({
                     path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail",
                     name: "pjlz_fkjl_detail",
-                });     
+                });
             },
             choose_cbfs: function (str) {
                 var self = this;
@@ -294,10 +301,10 @@
                     self.yytz_url = require('../../../assets/img/pic_way1.png')
                     self.dxtz_url = require('../../../assets/img/pic_way2.png')
                     self.dhtz_url = require('../../../assets/img/pic_way3.png')
-                    if(self.yytz_flag){
+                    if (self.yytz_flag) {
                         self.yytz_url = require('../../../assets/img/pic_way1.png')
                         self.yytz_flag = false;
-                    }else{
+                    } else {
                         self.yytz_flag = true;
                         $('#yytz').addClass('choose');
                         self.yytz_url = require('../../../assets/img/pic_way1_selected.png')
@@ -309,10 +316,10 @@
                     self.yytz_url = require('../../../assets/img/pic_way1.png')
                     self.dxtz_url = require('../../../assets/img/pic_way2.png')
                     self.dhtz_url = require('../../../assets/img/pic_way3.png')
-                    if(self.dxtz_flag){
+                    if (self.dxtz_flag) {
                         self.dxtz_flag = false;
                         self.dxtz_url = require('../../../assets/img/pic_way2.png')
-                    }else{
+                    } else {
                         self.dxtz_flag = true;
                         $('#dxtz').addClass('choose');
                         self.dxtz_url = require('../../../assets/img/pic_way2_selected.png')
@@ -324,31 +331,31 @@
                     self.yytz_url = require('../../../assets/img/pic_way1.png')
                     self.dxtz_url = require('../../../assets/img/pic_way2.png')
                     self.dhtz_url = require('../../../assets/img/pic_way3.png')
-                    if(self.dhtz_flag){
+                    if (self.dhtz_flag) {
                         self.dhtz_flag = false;
                         self.dhtz_url = require('../../../assets/img/pic_way3.png')
-                    }else{
-                        self.dhtz_flag  = true;
+                    } else {
+                        self.dhtz_flag = true;
                         $('#dhtz').addClass('choose');
                         self.dhtz_url = require('../../../assets/img/pic_way3_selected.png')
                     }
                 }
             },
-            show_jl:function(){
+            show_jl: function () {
                 var self = this;
-                if(self.all_jl_flag){
+                if (self.all_jl_flag) {
                     $("#all_jl").slideUp("slow");
                     self.all_jl_flag = false;
                     self.all_jl_word = "展开记录";
                     self.all_jl_photo = require('../../../assets/img/show.png');
-                }else{
+                } else {
                     self.all_jl_flag = true;
                     self.all_jl_word = "收起记录";
                     self.all_jl_photo = require('../../../assets/img/hide.png');
                     $("#all_jl").slideDown("slow");
                 }
             }
-        
+
         }
     };
 </script>

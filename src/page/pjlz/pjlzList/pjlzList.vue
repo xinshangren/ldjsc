@@ -206,7 +206,7 @@ export default {
     changetabState: function(state) {
       console.log(state);
       this.mescroll.resetUpScroll();
-      this.status=state;
+      this.status = state;
     },
     openPopStart: function() {
       $("#openPopId").css("z-index", "10003");
@@ -339,14 +339,29 @@ export default {
     },
     //一键催办跳转
     openYjcbFun: function(item, e) {
+      this.$router.push({
+        path: "/pjlz/pjlzDetail_cb/pjlzDetail_cb",
+        name: "pjlzDetail_cb",
+        params:{
+          obj:item
+        }
+      });
       e.stopPropagation();
     },
     //审核申请跳转
     openShsqFun: function(item, e) {
+      this.$router.push({
+        path: "/pjlz/pjlzDetail_jx/pjlzDetail_jx",
+        name: "pjlzDetail_jx"
+      });
       e.stopPropagation();
     },
     //反馈跳转
     openFkFun: function(item, e) {
+       this.$router.push({
+        path: "/pjlz/pjlzDetail_fk/pjlzDetail_fk",
+        name: "pjlzDetail_fk"
+      });
       e.stopPropagation();
     }
   }
