@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <div style="margin:101px 0px 10px;background:#ffffff;min-height: 202px;">
+    <div id="pjlzDeali_fk_id" style="margin:101px 0px 10px;background:#ffffff;min-height: 202px;">
       <div style="display: flex;padding-top: 10px;">
         <img
           v-if="pj_detail.approval_warn_flag == 0"
@@ -245,8 +245,29 @@ export default {
   },
   mounted() {
       this.inint();
+      this.pdSingleApp();
   },
   methods: {
+    //判断是否是单独app
+    pdSingleApp: function() {
+      String.prototype.getValue = function(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+        var r = this.substr(this.indexOf("?") + 1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      };
+      var hrefUrl = window.location.href;
+      var indexUrl = hrefUrl.replace("#", "");
+
+      var url = decodeURI(hrefUrl);
+      console.log(url);
+      var detail = url.getValue("type");
+      console.log("type===" + detail);
+      if (detail == "1") {
+        $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
+        // $("#pjlzDeali_fk_top_id").css("margin-top","0px");
+      } 
+    },
     inint: function() {
       var self = this;
       if (self.pj_detail.approval_feedback != null) {

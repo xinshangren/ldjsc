@@ -210,6 +210,7 @@ export default {
       self.flag = global_variable.roleJs;
     }
     console.log(self.flag);
+    // self.flag.role="cbr";
     if (self.flag.role != "ld") {
       self.createListTop();
     }
@@ -235,6 +236,7 @@ export default {
          $("#mescroll").css("top","107px");
         // this.showRightMenu();
         this.getUserInfo();
+        // this.mescroll.resetUpScroll();
       }else{
         this.mescroll.resetUpScroll();
       }
@@ -440,7 +442,10 @@ export default {
     openShsqFun: function(item, e) {
       this.$router.push({
         path: "/pjlz/pjlzDetail_jx/pjlzDetail_jx",
-        name: "pjlzDetail_jx"
+        name: "pjlzDetail_jx",
+         params:{
+          obj:item
+        }
       });
       e.stopPropagation();
     },
@@ -448,7 +453,10 @@ export default {
     openFkFun: function(item, e) {
        this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlzDetail_fk",
-        name: "pjlzDetail_fk"
+        name: "pjlzDetail_fk",
+         params:{
+          obj:item
+        }
       });
       e.stopPropagation();
     }
