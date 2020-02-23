@@ -19,8 +19,8 @@
 </style>
 <template>
   <div id="pjlzDeali_fk_top_id" style="margin-top:54px;background:#f7f7f7">
-    <pjlzDetailVue  :pj_detail="pj_detail"></pjlzDetailVue>
-    <div  style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 250px;">
+    <pjlzDetailVue :pj_detail="pj_detail"></pjlzDetailVue>
+    <div style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 250px;">
       <div style="padding:10px 15px 10px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">工作反馈</div>
         <textarea
@@ -59,6 +59,7 @@
         >
           <div
             style="margin: auto;margin-top: 6px;margin-bottom: 6px; color: #ffffff;font-size: 18px;"
+            @click="submit_fk"
           >提交</div>
         </div>
       </div>
@@ -106,6 +107,11 @@ export default {
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
+  activated(){
+    this.getdata();
+    this.pdSingleApp();
+    console.log(this.pj_obj);
+  },
   methods: {
     //判断是否是单独app
     pdSingleApp: function() {
@@ -124,8 +130,8 @@ export default {
       console.log("type===" + detail);
       if (detail == "1") {
         // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
-        $("#pjlzDeali_fk_top_id").css("margin-top","0px");
-      } 
+        $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
+      }
     },
     getdata: function() {
       let self = this;
@@ -195,19 +201,19 @@ export default {
     afterRead: function() {
       var file = this.file_list.slice(-1)[0];
       //单个附件上传
-      // var approvalInfoId = self.pj_detail.id;
+      var approvalInfoId = this.pj_detail.id;
       var params = {
         method: "attachUpload",
         dingUserId: "086404191926187734",
         // dingUserId: global_variable.roleJs.dingUserId,
-        corpId: global_variable.corpId, //机构id
-        //approvalInfoId: approvalInfoId, //批件id
-        approvalInfoId: "5",
+         //corpId: global_variable.corpId, //机构id
+        approvalInfoId: approvalInfoId, //批件id
+        // approvalInfoId: "5",
         attach: file.file
       };
       console.log(params);
       httpMethod
-        .getApprovalInfo(params)
+        .fileUpload(params)
         .then(res => {
           console.log(res);
           if (res.success == "1") {
@@ -222,7 +228,39 @@ export default {
       this.file_list.splice(index, 1);
     },
     //预览
-    preview_adjunct: function(item) {}
+    preview_adjunct: function(item) {},
+    submit_fk: function() {
+      let self = this;
+      let approvalInfoId = self.pj_obj.id;
+      let feedbackContent = self.fk_content;
+      if (feedbackContent == "") {
+        this.$toast("请填写反馈内容");
+        return false;
+      }
+      var params = {
+        method: "approvalFeedback",
+        dingUserId: "086404191926187734",
+        // dingUserId: global_variable.roleJs.dingUserId,
+        //corpId: global_variable.corpId, //机构id
+        approvalInfoId: approvalInfoId, //批件id
+        feedbackContent: feedbackContent,
+        attachIds: ""
+      };
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(params);
+          console.log(res);
+          if (res.success == "1") {
+            self.fk_content = "";
+            self.getdata();
+            this.$toast("提交成功");
+          }
+        })
+        .catch(err => {
+          this.$toast(err);
+        });
+    }
   }
 };
 </script>

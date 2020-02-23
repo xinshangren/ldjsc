@@ -307,32 +307,39 @@ export default new Router({
     },{
       path: '/pjlz/pjlzDetail_cb/pjlzDetail_cb',
       name: 'pjlzDetail_cb',
-      component: pjlzDetail_cb_Vue
+      component: pjlzDetail_cb_Vue,
+      meta:{keepAlive:true}
     }
     ,{
       path: '/pjlz/pjlzDetail_fk/pjlzDetail_fk',
       name: 'pjlzDetail_fk',
-      component: pjlzDetail_fk_Vue
+      component: pjlzDetail_fk_Vue,
+      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_jx/pjlzDetail_jx',
       name: 'pjlzDetail_jx',
-      component: pjlzDetail_jx_Vue
+      component: pjlzDetail_jx_Vue,
+      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl',
       name: 'pjlz_fkjl',
-      component: pjlz_fkjl_Vue
+      component: pjlz_fkjl_Vue,
+      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl',
       name: 'pjlz_cbjl',
-      component: pjlz_cbjl_Vue
+      component: pjlz_cbjl_Vue,
+      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl',
       name: 'pjlz_jxjl',
-      component: pjlz_jxjl_Vue
+      component: pjlz_jxjl_Vue,
+      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail',
       name: 'pjlz_fkjl_detail',
-      component: pjlz_fkjl_detail_Vue
+      component: pjlz_fkjl_detail_Vue,
+      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjfkMessage/pjfkMessage',
       name: 'pjfkMessageVue',

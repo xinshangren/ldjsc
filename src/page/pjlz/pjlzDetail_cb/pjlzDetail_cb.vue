@@ -20,7 +20,7 @@
 
 
 <template>
-  <div style="margin-top:54px;background:#f7f7f7">
+  <div id="pjlzDeali_fk_top_id" style="margin-top:54px;background:#f7f7f7">
     <pjlzDetailVue :pj_detail="pj_detail"></pjlzDetailVue>
     <div style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 400px;">
       <div style="padding:15px 15px 0px 15px;position: relative;">
@@ -128,7 +128,32 @@ export default {
     this.getdata();
     console.log(this.pj_obj);
   },
+  activated(){
+    this.getdata();
+    this.pdSingleApp();
+    console.log(this.pj_obj);
+  },
   methods: {
+    //判断是否是单独app
+    pdSingleApp: function() {
+      String.prototype.getValue = function(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+        var r = this.substr(this.indexOf("?") + 1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      };
+      var hrefUrl = window.location.href;
+      var indexUrl = hrefUrl.replace("#", "");
+
+      var url = decodeURI(hrefUrl);
+      console.log(url);
+      var detail = url.getValue("type");
+      console.log("type===" + detail);
+      if (detail == "1") {
+        // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
+        $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
+      }
+    },
     getdata: function() {
       let self = this;
       let approvalInfoId = self.pj_obj.id;
@@ -202,8 +227,9 @@ export default {
       }
       let params = {
         method: "approvalWarn",
-        corpId: corpId,
-        dingUserId: dingUserId,
+        //corpId: corpId,
+        dingUserId: "086404191926187734",
+        //dingUserId: dingUserId,
         approvalInfoId: approvalInfoId,
         warnObjId: warnObjId,
         warnContent: warnContent,
@@ -211,15 +237,17 @@ export default {
       };
       console.log(params);
       //生成催办记录
-      // httpMethod
-      //     .getApprovalInfo(params)
-      //     .then(res => {
-      //         if (res.success == "1") {
-      //             this.$toast(res.msg);
-      //         }
-      //     }).catch(err => {
-      //         this.$toast(err);
-      //     });
+      httpMethod
+          .getApprovalInfo(params)
+          .then(res => {
+            console.log(params)
+            console.log(res)
+              if (res.success == "1") {
+                  this.$toast("催办成功");
+              }
+          }).catch(err => {
+              this.$toast(err);
+          });
 
       //判断催办方式
       // if (warnType == '0') {

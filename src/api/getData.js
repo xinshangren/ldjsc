@@ -435,6 +435,10 @@ export const httpMethod = {
     getApprovalInfo: function (params) {
         return get("dingTalkController.action?getApprovalInfo", params);
     },
+    //批件流转接口 上传通用
+    fileUpload: function (params) {
+        return get("dingTalkController.action?fileUpload", params);
+    },
 
     
 
