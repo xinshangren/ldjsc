@@ -109,7 +109,7 @@
     </ul>
 
     <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
-      <div class="pjlzStaticTitile">工作完成情况</div>
+      <div class="pjlzStaticTitile">每个月工作安排情况</div>
       <div
         class="van-hairline--top"
         style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
@@ -212,6 +212,7 @@ export default {
           var code = res.success;
           if (code == "1") {
             var data = res.data;
+            self.oneData=data;
           }
         })
         .catch(err => {
