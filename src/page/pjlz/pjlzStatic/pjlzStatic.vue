@@ -1,6 +1,6 @@
 
 <template>
-  <div style="font-size: 15px;border-top: 1px solid #f1f1f1;padding-top:10px;">
+  <div style="font-size: 15px;border-top: 1px solid #f1f1f1;padding-top:54px;">
     <van-popup
       v-model="showYear"
       @opened="openPopYear"
@@ -56,7 +56,7 @@
             <div style="width:50%;"></div>
             <div style="width:50%;">
               <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                <div style="font-size:20px;color:#3098fb;">56</div>
+                <div style="font-size:20px;color:#3098fb;">{{oneData.approval_create}}</div>
                 <div style="color: #333333;font-size: 13px;line-height: 29px;">项</div>
               </div>
               <div style="color: #999999;font-size: 13px;">录入工作</div>
@@ -70,7 +70,7 @@
             <div style="width:50%;"></div>
             <div style="width:50%;">
               <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                <div style="font-size:20px;color:#0ed3e5;">20</div>
+                <div style="font-size:20px;color:#0ed3e5;">{{oneData.approval_done}}</div>
                 <div style="color: #333333;font-size: 13px;line-height: 29px;">项</div>
               </div>
               <div style="color: #999999;font-size: 13px;">已完成工作</div>
@@ -79,12 +79,12 @@
         </div>
       </li>
       <li class="ui-col ui-col-50" style="margin-top:14px;">
-       <div class="pjlzStaticModel3">
+        <div class="pjlzStaticModel3">
           <div style="display:flex;">
             <div style="width:50%;"></div>
             <div style="width:50%;">
               <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                <div style="font-size:20px;color:#f9bf4e;">3</div>
+                <div style="font-size:20px;color:#f9bf4e;">{{oneData.approval_undone_normal}}</div>
                 <div style="color: #333333;font-size: 13px;line-height: 29px;">项</div>
               </div>
               <div style="color: #999999;font-size: 13px;">正常未完成</div>
@@ -93,12 +93,12 @@
         </div>
       </li>
       <li class="ui-col ui-col-50" style="margin-top:14px;">
-       <div class="pjlzStaticModel4">
+        <div class="pjlzStaticModel4">
           <div style="display:flex;">
             <div style="width:50%;"></div>
             <div style="width:50%;">
               <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                <div style="font-size:20px;color:#f96a4e;">18</div>
+                <div style="font-size:20px;color:#f96a4e;">{{oneData.approval_undone_overtime}}</div>
                 <div style="color: #333333;font-size: 13px;line-height: 29px;">项</div>
               </div>
               <div style="color: #999999;font-size: 13px;">超时未完成</div>
@@ -109,14 +109,20 @@
     </ul>
 
     <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
-       <div class="pjlzStaticTitile">工作完成情况</div>
-       <div class="van-hairline--top" style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"></div>
-         <div ref="myCharts3" style="height:210px;width:100%;"></div>
+      <div class="pjlzStaticTitile">工作完成情况</div>
+      <div
+        class="van-hairline--top"
+        style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
+      ></div>
+      <div ref="myCharts3" style="height:210px;width:100%;"></div>
     </div>
-     <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
-       <div class="pjlzStaticTitile">本年度累计延期未完成的工作情况</div>
-       <div class="van-hairline--top" style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"></div>
-         <div ref="myCharts4" style="height:210px;width:100%;"></div>
+    <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
+      <div class="pjlzStaticTitile">本年度累计延期未完成的工作情况</div>
+      <div
+        class="van-hairline--top"
+        style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
+      ></div>
+      <div ref="myCharts4" style="height:210px;width:100%;"></div>
     </div>
   </div>
 </template>
@@ -150,7 +156,13 @@ export default {
       currentYearMonth: new Date(),
       currentYearMonthDay: new Date(),
       currentYear1: new Date().getFullYear(),
-      flagindex: 0
+      flagindex: 0,
+      oneData: {
+        approval_create: 0,
+        approval_done: 0,
+        approval_undone_normal: 0,
+        approval_undone_overtime: 0
+      } //工作完成数据实体
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -176,8 +188,80 @@ export default {
       self.flagindex = $(this).index();
     });
     self.getLvCount();
+
+    self.statisticJobDone(); //统计工作完成情况
+    self.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
+    self.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
   },
   methods: {
+    //获取工作完成情况
+    statisticJobDone: function() {
+      var self = this;
+      var params = {
+        method: "statisticJobDone",
+        dingUserId: global_variable.roleJs.dingUserId,
+        // corpId: global_variable.corpId,
+        periodType: self.flagindex,
+        periodData: this.currentYear1
+      };
+      //获取数据
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(res);
+          var code = res.success;
+          if (code == "1") {
+            var data = res.data;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    //按照年份获取每月工作安排情况的统计数据
+    statisticJobCreate: function() {
+      var self = this;
+      var params = {
+        method: "statisticJobCreate",
+        dingUserId: global_variable.roleJs.dingUserId,
+        year: new Date().getFullYear()
+      };
+      //获取数据
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(res);
+          var code = res.success;
+          if (code == "1") {
+            var data = res.data;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    //按照年份获取每月延期未完成工作情况的统计数据
+    statisticJobUndone: function() {
+      var self = this;
+      var params = {
+        method: "statisticJobUndone",
+        dingUserId: global_variable.roleJs.dingUserId,
+        year: new Date().getFullYear()
+      };
+      //获取数据
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(res);
+          var code = res.success;
+          if (code == "1") {
+            var data = res.data;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     //获取首页所属流域
     getLvCount: function() {
       var params = {};
@@ -190,7 +274,7 @@ export default {
           if (code == "1") {
             var data = res.recordList;
             this.showEcharsView3(echarts, this.$refs.myCharts3, res.list);
-             this.showEcharsView4(echarts, this.$refs.myCharts4, res.list);
+            this.showEcharsView4(echarts, this.$refs.myCharts4, res.list);
           }
         })
         .catch(err => {
@@ -272,18 +356,21 @@ export default {
       var date = this.timeFormatYear(this.currentYear);
       this.showYear = false;
       this.currentYear1 = date;
+      this.statisticJobDone(); //统计工作完成情况
     },
     //年月的确定
     onconfirmYearMonth: function() {
       var date = this.timeFormatMonth(this.currentYearMonth);
       this.showYearMonth = false; //年月显示
       this.currentYear1 = date;
+       this.statisticJobDone(); //统计工作完成情况
     },
     //年月日的确定
     onconfirmAlltime: function() {
       var date = this.timeFormatDay(this.currentYearMonthDay);
       this.showAllTime = false; //年月日显示
       this.currentYear1 = date;
+       this.statisticJobDone(); //统计工作完成情况
     },
     //开启年时间选择
     openPopYear: function() {
@@ -299,7 +386,7 @@ export default {
 <style >
 @import "../../../page/pjlz/pjlzStatic/pjlzStatic.css";
 @import "../../../assets/css/frozenui.css";
-.van-hairline--top::after{
+.van-hairline--top::after {
   border: 1px solid #ebedf0;
 }
 </style>

@@ -61,7 +61,7 @@
     </div>-->
     <child1 style="position:relative;" v-if="currentView===0"></child1>
     <child2 style="position:relative;" v-if="flag.role=='ld'&&currentView===1"></child2>
-    <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="10000">
+    <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
       <div class="wrapper">
         <div class="block" @click.stop>
           <img @click="sqjxshow=false" class="pjlzSqjxClose" src="../../assets/img/pop_close.png" />
@@ -77,11 +77,11 @@
             show-word-limit
             class="pjlzSqjxContent"
           />
-          <div style="display:flex;margin-top:24px;" @click="sqjxshow=false">
-            <div style="width:50%;text-align: center;">
+          <div style="display:flex;margin-top:24px;" >
+            <div style="width:50%;text-align: center;" @click="sqjxshow=false">
               <div class="pjlzSqjxCancelButton1">取消</div>
             </div>
-            <div style="width:50%;text-align: center;" @click="queryJxFun">
+            <div style="width:50%;text-align: center;" @click="jxsqFun()">
               <div class="pjlzSqjxCancelButton2">确定</div>
             </div>
           </div>
@@ -125,7 +125,8 @@ export default {
       sqjxshow: false, //申请结伴标记
       sqjxmessage: "", //申请结伴内容
       gzxOrStatic: 0, //0=工作项1=数据统计
-      top: 10
+      top: 10,
+      nowItem: null
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -191,13 +192,10 @@ export default {
         });
       });
     },
-    queryJxFun: function() {
-      console.log(this.sqjxmessage);
-      this.sqjxshow = false;
-    },
     //显示申请结项
     showSqjxPop: function(item) {
       console.log(item);
+      this.nowItem = item;
       this.sqjxshow = true;
     },
     closePop: function() {
@@ -265,6 +263,42 @@ export default {
           entity.changetabState(flag);
         }
       }
+    },
+    restPjListFun: function() {
+      for (var i = 0; i < this.$children.length; i++) {
+        var entity = this.$children[i];
+        if (entity.$options._componentTag == "child1") {
+          entity.resetList();
+        }
+      }
+    },
+    jxsqFun: function() {
+      var self = this;
+      if (self.sqjxmessage == "") {
+        self.$toast("请输入结项说明");
+        return;
+      }
+      var params = {
+        method: "approvalApply",
+        dingUserId: global_variable.roleJs.dingUserId,
+        approvalInfoId: self.nowItem.id,
+        applyReason: self.sqjxmessage
+      };
+      httpMethod.getApprovalInfo(params).then(res => {
+        console.log(JSON.stringify(res));
+        var msg = res.msg;
+        if (res.success == "1") {
+          var result = res.data;
+          if (result == "1") {
+            //成功
+            self.$toast("申请成功");
+            self.sqjxshow = false;
+            self.restPjListFun();//刷新列表
+          }
+        } else {
+          self.$toast(msg);
+        }
+      });
     }
   }
 };

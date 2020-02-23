@@ -49,7 +49,7 @@
 
             <div
               @click="openYjcbFun(item,$event)"
-              v-if="(flag.role=='ld'||flag.role=='wdk')&&item.approval_status!=4"
+              v-if="(flag.role=='ld'||flag.role=='wdk')&&(item.approval_status!=4&&item.approval_status!=3)"
               class="pjlzListyjcb"
             >
               <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
@@ -236,6 +236,7 @@ export default {
          $("#mescroll").css("top","113px");
         // this.showRightMenu();
         this.getUserInfo();
+        // this.status=1;
         this.mescroll.resetUpScroll();
       }else{
         this.mescroll.resetUpScroll();
@@ -254,6 +255,10 @@ export default {
     resetUpScroll: function(name) {
       // console.log(name);
       this.seach_value = name;
+      this.mescroll.resetUpScroll();
+    },
+    //刷新列表
+    resetList: function() {
       this.mescroll.resetUpScroll();
     },
     openPopStart: function() {
@@ -387,6 +392,7 @@ export default {
         method: "getApprovalInfoList",
         pageNo: page.num,
         pageSize: page.size,
+        // corpId:global_variable.corpId,
         // dingUserId: "086404191926187734",
         dingUserId: global_variable.roleJs.dingUserId,
         approvalKeywords: this.seach_value, //关键词
@@ -410,6 +416,10 @@ export default {
               this.list = this.list.concat(data);
               //  this.list = this.list.concat(data);
               //   this.list = this.list.concat(data);
+            }else{
+              data=[];
+              this.list=[];
+              res.data.total=0;
             }
 
             this.$nextTick(() => {
