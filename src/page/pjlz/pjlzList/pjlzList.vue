@@ -236,7 +236,7 @@ export default {
          $("#mescroll").css("top","113px");
         // this.showRightMenu();
         this.getUserInfo();
-        // this.mescroll.resetUpScroll();
+        this.mescroll.resetUpScroll();
       }else{
         this.mescroll.resetUpScroll();
       }
