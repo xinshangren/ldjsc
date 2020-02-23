@@ -36,7 +36,9 @@
         </div>
         <div style="display: flex;margin-top: 15px;">
           <div style="width: 30%;text-align: right;">事项内容：</div>
-          <div style="border:1px solid #666666 ;border-radius: 5px;width: 70%;">
+          <div
+            style="border:1px solid #666666 ;border-radius: 5px;width: 70%;height: 100px;overflow-y: auto;"
+          >
             <div
               style="font-size: 15px;
                         line-height: 23px;
@@ -53,7 +55,7 @@
               style="display: flex;margin-left: 10px; margin-top: 5px;"
             >
               <div @click="openFj(attach.attach_view_url)">{{attach.attach_name}}</div>
-              <img style="height: 22px;margin-left: 8px;" src="../../assets/img/icon_download.png" />
+              <img @click="fj_download(attach.attach_download_url)" style="height: 22px;margin-left: 8px;" src="../../assets/img/icon_download.png" />
             </div>
           </div>
         </div>
@@ -72,12 +74,12 @@
               >{{pj_detail.approval_feedback_time == null?0:pj_detail.approval_feedback_time}}</div>
             </div>
             <div
-              v-show="fkjl_null" 
+              v-show="fkjl_null"
               @click="gofkjl_list"
               style="width: 30%;display: flex;color: #2599e6;text-align: right;"
             >
               <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
-              <div >更多记录</div>
+              <div>更多记录</div>
             </div>
           </div>
           <div style="display: flex;font-size: 15px;margin-top: 13px;">
@@ -88,7 +90,10 @@
               {{last_feedback.feedback_content}}
             </div>
           </div>
-          <div v-if="fkjl_null" style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+          <div
+            v-if="fkjl_null"
+            style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;"
+          >
             <div style="display: flex;">
               <img style="height: 18px;" src="../../assets/img/icon_people.png" />
               <div style="margin-left: 2px;">反馈人:</div>
@@ -107,7 +112,7 @@
           </div>
           <img
             v-show="fkjl_null"
-            @click="gofkjl_list_detail"
+            @click="gofkjl_list_detail(last_feedback.feedback_id)"
             style="right: 15px; top: 43px;; width: 30px;position: absolute;"
             src="../../assets/img/icon_more.png"
           />
@@ -123,7 +128,11 @@
                         margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;"
               >{{pj_detail.approval_warn_time== null?0:pj_detail.approval_warn_time}}</div>
             </div>
-            <div v-show="cbjl_null" style="width: 30%;display: flex;color: #2599e6;text-align: right;">
+            <div
+              v-show="cbjl_null"
+              @click="gocbjl_list"
+              style="width: 30%;display: flex;color: #2599e6;text-align: right;"
+            >
               <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
               <div>更多记录</div>
             </div>
@@ -134,7 +143,10 @@
             >{{last_warn.warn_content}}</div>
             <!-- <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_way2.png" /> -->
           </div>
-          <div v-if="cbjl_null" style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+          <div
+            v-if="cbjl_null"
+            style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;"
+          >
             <div style="display: flex;">
               <img style="height: 18px;" src="../../assets/img/icon_people.png" />
               <div style="margin-left: 2px;">催办人:</div>
@@ -143,7 +155,7 @@
             <div style="display: flex;padding-left:5px;">
               <img style="height: 18px;" src="../../assets/img/icon_time.png" />
               <div style="margin-left: 2px;">催办时间:</div>
-              <div style="margin-left: 2px;">{{last_warn.time}}</div>
+              <div style="margin-left: 2px;">{{last_warn.warn_time}}</div>
             </div>
           </div>
           <div v-else style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
@@ -163,7 +175,11 @@
                         margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;"
               >{{pj_detail.approval_done_time == null?0:pj_detail.approval_done_time}}</div>
             </div>
-            <div v-show="jxjl_null" style="width: 30%;display: flex;color: #2599e6;text-align: right;">
+            <div
+              v-show="jxjl_null"
+              @click="gojxjl_list"
+              style="width: 30%;display: flex;color: #2599e6;text-align: right;"
+            >
               <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
               <div>更多记录</div>
             </div>
@@ -175,7 +191,10 @@
             <!-- <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_edit.png" />
             <div style="color:#2599e6 ;margin-left: 3px;">编辑</div>-->
           </div>
-          <div v-if="jxjl_null" style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+          <div
+            v-if="jxjl_null"
+            style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;"
+          >
             <div style="display: flex;">
               <img style="height: 18px;" src="../../assets/img/icon_people.png" />
               <div style="margin-left: 2px;">申请人:</div>
@@ -187,7 +206,10 @@
               <div style="margin-left: 2px;">{{last_done.done_time}}</div>
             </div>
           </div>
-          <div v-else="jxjl_null" style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+          <div
+            v-else="jxjl_null"
+            style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;"
+          >
             <div style="display: flex;">
               <div style="margin-left: 2px;">暂无申请结项记录</div>
             </div>
@@ -238,14 +260,20 @@ export default {
       last_feedback: {},
       last_warn: {},
       last_done: {},
-      fkjl_null:true,
-      cbjl_null:true,
-      jxjl_null:true,
+      fkjl_null: true,
+      cbjl_null: true,
+      jxjl_null: true
     };
   },
   mounted() {
-      this.inint();
-      this.pdSingleApp();
+    this.pdSingleApp();
+    this.inint();
+  },
+  activated(){
+   this.inint();
+  },
+  watch: {
+    pj_detail: "inint"
   },
   methods: {
     //判断是否是单独app
@@ -266,24 +294,42 @@ export default {
       if (detail == "1") {
         $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
         // $("#pjlzDeali_fk_top_id").css("margin-top","0px");
-      } 
+      }
     },
     inint: function() {
       var self = this;
-      if (self.pj_detail.approval_feedback != null) {
+      if (
+        self.pj_detail.approval_feedback != null &&
+        Object.keys(self.pj_detail.approval_feedback).length > 0
+      ) {
         self.last_feedback = self.pj_detail.approval_feedback;
-      }else{
-         self.fkjl_null = false;
+        self.last_feedback.feedback_time = self.last_feedback.feedback_time.substr(0,self.last_feedback.feedback_time.length-3)
+         self.fkjl_null = true;
+      } else {
+        self.last_feedback = {};
+        self.fkjl_null = false;
       }
-      if (self.pj_detail.approval_warn != null) {
+      if (
+        self.pj_detail.approval_warn != null &&
+        Object.keys(self.pj_detail.approval_warn).length > 0
+      ) {
         self.last_warn = self.pj_detail.approval_warn;
-      }else{
-         self.cbjl_null = false;
+         self.last_warn.warn_time = self.last_warn.warn_time.substr(0,self.last_warn.warn_time.length-3);
+         self.cbjl_null = true;
+      } else {
+        self.last_warn = {};
+        self.cbjl_null = false;
       }
-      if (self.pj_detail.approval_done != null) {
+      if (
+        self.pj_detail.approval_done != null &&
+        Object.keys(self.pj_detail.approval_done).length > 0
+      ) {
         self.last_done = self.pj_detail.approval_done;
-      }else{
-         self.jxjl_null = false;
+        // self.last_done.done_time = self.last_done.done_time.substr(0,self.last_done.done_time.length-3);
+         self.jxjl_null = true;
+      } else {
+        self.last_done = {};
+        self.jxjl_null = false;
       }
     },
     openFj: function(item) {
@@ -297,7 +343,7 @@ export default {
       });
     },
     gofkjl_list: function() {
-        console.log(this.pj_detail)
+      console.log(this.pj_detail);
       this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl",
         name: "pjlz_fkjl",
@@ -306,7 +352,7 @@ export default {
         }
       });
     },
-    gocbjl_list: function() {
+    gocbjl_list: function(id) {
       this.$router.push({
         path: "/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl",
         name: "pjlz_cbjl",
@@ -315,8 +361,7 @@ export default {
         }
       });
     },
-    gojxjl_list: function() {
-        
+    gojxjl_list: function(id) {
       this.$router.push({
         path: "/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl",
         name: "pjlz_jxjl",
@@ -331,7 +376,7 @@ export default {
         name: "pjlz_fkjl_detail"
       });
     },
-    
+
     show_jl: function() {
       var self = this;
       if (self.all_jl_flag) {
@@ -345,6 +390,26 @@ export default {
         self.all_jl_photo = require("../../assets/img/hide.png");
         $("#all_jl").slideDown("slow");
       }
+    },
+    fj_download: function(url) {
+      dd.biz.util.isLocalFileExist({
+        params: [
+          {
+            url:
+              url //本地文件的url，指的是调用DingTalkPC.biz.util.downloadFile接口下载时填入的url，配合DingTalkPC.biz.util.downloadFile使用
+          }
+        ],
+        onSuccess: function(result) {
+          /*
+          [{
+              url: '', //本地文件的url
+              path: '', // 文件的path
+              isExist: true //根据你输入的文件的url检测出的结果，true:存在，false：不存在
+          }]
+        */
+        },
+        onFail: function() {}
+      });
     }
   }
 };
