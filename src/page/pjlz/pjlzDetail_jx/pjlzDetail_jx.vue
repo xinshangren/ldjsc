@@ -32,7 +32,7 @@
       <div style="padding:10px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">申请说明</div>
         <div style="display: flex;font-size: 15px;margin-top: 5px;color: #666666;">
-          <div style="margin:10px ;">被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容</div>
+          <div style="margin:10px ;">{{pj_detail.approval_done.done_content}}</div>
         </div>
         <div style="display: flex;">
           <div
