@@ -21,8 +21,7 @@
           </div>
           <div style="display: flex;padding-left:10px;">
             <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-            <div style="margin-left: 2px;">催办时间:</div>
-            <div style="margin-left: 2px;">{{obj.warn_time}}</div>
+            <div style="margin-left: 2px;">催办时间:{{obj.warn_time}}</div>
           </div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">

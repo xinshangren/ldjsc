@@ -131,6 +131,7 @@ export default {
   },
   activated(){
     this.cb_content = "";
+     this.pj_obj = this.$route.params.obj;
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
@@ -197,7 +198,7 @@ export default {
                 case "4":
                   self.pj_detail.approval_status = "已结项";
                   break;
-                case 5:
+                case "5":
                   self.pj_detail.approval_status = "拒绝结项";
                   break;
                 default:

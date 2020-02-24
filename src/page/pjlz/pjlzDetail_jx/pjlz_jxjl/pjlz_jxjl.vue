@@ -18,8 +18,7 @@
           </div>
           <div style="display: flex;padding-left:10px;">
             <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-            <div style="margin-left: 2px;">申请时间:</div>
-            <div style="margin-left: 2px;">{{obj.apply_time}}</div>
+            <div style="margin-left: 2px;">申请时间:{{obj.apply_time}}</div>
           </div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
@@ -30,8 +29,7 @@
           </div>
           <div style="display: flex;padding-left:10px;">
             <img style="height: 18px;" src="../../../../assets/img/pjjxjl_aduittime.png" />
-            <div style="margin-left: 2px;">审核时间:</div>
-            <div style="margin-left: 2px;">{{obj.done_time}}</div>
+            <div style="margin-left: 2px;">审核时间:{{obj.done_time}}</div>
           </div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
@@ -110,10 +108,10 @@ export default {
                 0,
                 element.done_time.length - 3
               );
-              if(element.done_result != null && element.done_result == '0'){
+              if(element.done_result != null && element.done_result == '1'){
                 element.done_result = "同意结项"
               }
-              if(element.done_result != null && element.done_result == '1'){
+              if(element.done_result != null && element.done_result == '2'){
                 element.done_result = "拒绝结项"
               }
               element.done_result 

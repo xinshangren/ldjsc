@@ -35,8 +35,7 @@
                     </div>
                     <div style="display: flex;margin-top: 7px;">
                         <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-                        <div style="margin-left: 2px;">反馈时间:</div>
-                        <div style="margin-left: 2px;">{{feedback_obj.feedback_time}}</div>
+                        <div style="margin-left: 2px;">反馈时间:{{feedback_obj.feedback_time}}</div>
                     </div>
                     <div style="display: flex;margin-top: 7px;">
                         <img style="height: 18px;" src="../../../../assets/img/icon_content.png" />

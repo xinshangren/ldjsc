@@ -21,8 +21,7 @@
           </div>
           <div style="display: flex;padding-left:10px;">
             <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-            <div style="margin-left: 2px;">反馈时间:</div>
-            <div style="margin-left: 2px;">{{fk.feedback_time}}</div>
+            <div style="margin-left: 2px;">反馈时间:{{fk.feedback_time}}</div>
           </div>
         </div>
         <img
