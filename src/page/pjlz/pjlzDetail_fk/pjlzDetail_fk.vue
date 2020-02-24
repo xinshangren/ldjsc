@@ -103,16 +103,50 @@ export default {
     };
   },
   mounted() {
-    this.getdata();
+    this.fk_content = "";
     this.pdSingleApp();
-    console.log(this.pj_obj);
   },
   activated() {
-    this.getdata();
+    this.fk_content = "";
     this.pdSingleApp();
-    console.log(this.pj_obj);
   },
   methods: {
+    //获取用户角色
+    getUserInfo: function(id) {
+      var self = this;
+      dd.ready(function() {
+        dd.runtime.permission.requestAuthCode({
+          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          onSuccess: function(info) {
+            var code = info.code; // 通过该免登授权码可以获取用户身份
+            var params = {
+              method: "getUserInfo",
+              code: code
+            };
+            httpMethod.getApprovalInfo(params).then(res => {
+              console.log(JSON.stringify(res));
+              if (res.success == "1") {
+                global_variable.roleJs = Object.assign(
+                  {},
+                  global_variable.roleJs,
+                  {
+                    dingUserId: res.data.dingUserId,
+                    username: res.data.username,
+                    role: res.data.role,
+                    department: res.data.department
+                  }
+                );
+                this.pj_obj.id = id;
+                this.getdata();
+              }
+            });
+          },
+          onFail: function(err) {
+            alert("dd error: " + JSON.stringify(err));
+          }
+        });
+      });
+    },
     //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {
@@ -131,11 +165,14 @@ export default {
       if (detail == "1") {
         // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
         $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
+        this.getUserInfo();
+      }else{
+        this.pj_obj = this.$route.params.obj;
+        this.getdata();
       }
     },
     getdata: function() {
       let self = this;
-      self.pj_obj = self.$route.params.obj;
       let approvalInfoId = self.pj_obj.id;
       var params = {
         method: "getApprovalInfo",

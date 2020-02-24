@@ -124,11 +124,13 @@ export default {
     };
   },
   mounted() {
+    this.cb_content = "";
     this.pj_obj = this.$route.params.obj;
     this.getdata();
     console.log(this.pj_obj);
   },
   activated(){
+    this.cb_content = "";
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
