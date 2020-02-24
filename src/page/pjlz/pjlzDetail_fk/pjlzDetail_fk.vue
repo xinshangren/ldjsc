@@ -107,10 +107,26 @@ export default {
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
-  activated(){
+  activated() {
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(from);
+    console.log(to);
+    if (to.name == "pjlzDetail_fk") {
+      to.meta.keepAlive = true;
+    }
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    // console.log(from);
+    // console.log(to);
+    if (to.name == "pjlzListvue") {
+      from.meta.keepAlive = false;
+    }
+    next();
   },
   methods: {
     //判断是否是单独app
@@ -206,22 +222,31 @@ export default {
         method: "attachUpload",
         dingUserId: "086404191926187734",
         // dingUserId: global_variable.roleJs.dingUserId,
-         //corpId: global_variable.corpId, //机构id
+        //corpId: global_variable.corpId, //机构id
         approvalInfoId: approvalInfoId, //批件id
         // approvalInfoId: "5",
         attach: file.file
       };
-      console.log(params);
-      httpMethod
-        .fileUpload(params)
-        .then(res => {
-          console.log(res);
-          if (res.success == "1") {
-          }
-        })
-        .catch(err => {
-          this.$toast(err);
-        });
+      let formData = new FormData();
+      formData.append("method", "attachUpload");
+      formData.append("dingUserId", "086404191926187734");
+      formData.append("approvalInfoId", approvalInfoId);
+      formData.append("attach", file.file);
+      console.log(formData.get("attach"));
+      console.log(formData.get("method"));
+       this.instance.post(httpMethod.returnBaseUrlFun()+"dingTalkController.action?fileUpload",formData).then((res)=>{
+                    console.log(res);
+            })
+      // httpMethod
+      //   .fileUpload(formData)
+      //   .then(res => {
+      //     console.log(res);
+      //     if (res.success == "1") {
+      //     }
+      //   })
+      //   .catch(err => {
+      //     this.$toast(err);
+      //   });
     },
     //删除上传附件
     delete_adjunct: function(index) {
