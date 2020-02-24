@@ -32,7 +32,7 @@
       <div style="padding:10px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">申请说明</div>
         <div style="display: flex;font-size: 15px;margin-top: 5px;color: #666666;">
-          <div style="margin:10px ;">被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容</div>
+          <div style="margin:10px ;">{{pj_detail.approval_done.done_content}}</div>
         </div>
         <div style="display: flex;">
           <div
@@ -46,7 +46,7 @@
               style="height: 18px; margin: 11px 0px 5px 26px;"
               src="../../../assets/img/icon_reject.png"
             />
-            <div  style="margin-top: 9px; margin-left: 3px; color: #f44118;font-size: 15px;">拒绝结项</div>
+            <div style="margin-top: 9px; margin-left: 3px; color: #f44118;font-size: 15px;">拒绝结项</div>
           </div>
           <div
             style="display: flex;background: #28bcfe;border-radius:20px;width: 39%;border: 1px solid #28bcfe;
@@ -58,7 +58,10 @@
               style="height: 18px; margin: 11px 0px 5px 26px;"
               src="../../../assets/img/icon_agree.png"
             />
-            <div @click="submit_sqjx('1')" style="margin-top: 9px; margin-left: 3px; color: #ffffff;font-size: 15px;">同意结项</div>
+            <div
+              @click="submit_sqjx('1')"
+              style="margin-top: 9px; margin-left: 3px; color: #ffffff;font-size: 15px;"
+            >同意结项</div>
           </div>
         </div>
       </div>
@@ -94,7 +97,10 @@
                     margin: auto;
                     height: 35px;"
           >
-            <div @click="submit_sqjx('0')" style="margin-top: 6px; margin: auto; color: #ffffff;font-size: 15px;">提交</div>
+            <div
+              @click="submit_sqjx('0')"
+              style="margin-top: 6px; margin: auto; color: #ffffff;font-size: 15px;"
+            >提交</div>
           </div>
         </div>
       </div>
@@ -137,15 +143,17 @@ export default {
   mounted() {
     this.pj_obj = this.$route.params.obj;
     this.getdata();
+    this.pdSingleApp();
     console.log(this.pj_obj);
   },
-  activated(){
+  activated() {
+    this.pj_obj = this.$route.params.obj;
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
   methods: {
-      //判断是否是单独app
+    //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {
         var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
@@ -206,7 +214,7 @@ export default {
                 case "4":
                   self.pj_detail.approval_status = "已结项";
                   break;
-                case 5:
+                case "5":
                   self.pj_detail.approval_status = "拒绝结项";
                   break;
                 default:
@@ -232,8 +240,8 @@ export default {
       //let approvalInfoId = self.pj_obj.id;
       let doneResult = flag;
       let rejectReason = "";
-      if(flag == "0"){
-        rejectReason = self.refuse_content
+      if (flag == "0") {
+        rejectReason = self.refuse_content;
       }
       if (flag == "0" && rejectReason == "") {
         this.$toast("请填写拒绝理由");
@@ -246,7 +254,7 @@ export default {
         //corpId: global_variable.corpId, //机构id
         approvalInfoId: "8", //批件id
         doneResult: doneResult,
-        rejectReason: rejectReason,
+        rejectReason: rejectReason
       };
       httpMethod
         .getApprovalInfo(params)

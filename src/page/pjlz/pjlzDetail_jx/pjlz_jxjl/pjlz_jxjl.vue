@@ -18,32 +18,30 @@
           </div>
           <div style="display: flex;padding-left:10px;">
             <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-            <div style="margin-left: 2px;">申请时间:</div>
-            <div style="margin-left: 2px;">{{obj.apply_time}}</div>
+            <div style="margin-left: 2px;">申请时间:{{obj.apply_time}}</div>
           </div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
           <div style="display: flex;">
-            <img style="height: 18px;" src="../../../../assets/img/icon_people.png" />
+            <img style="height: 18px;" src="../../../../assets/img/beicuibanren.png" />
             <div style="margin-left: 2px;">审核人:</div>
             <div style="margin-left: 2px;">{{obj.done_person}}</div>
           </div>
           <div style="display: flex;padding-left:10px;">
-            <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-            <div style="margin-left: 2px;">审核时间:</div>
-            <div style="margin-left: 2px;">{{obj.done_time}}</div>
+            <img style="height: 18px;" src="../../../../assets/img/pjjxjl_aduittime.png" />
+            <div style="margin-left: 2px;">审核时间:{{obj.done_time}}</div>
           </div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
           <div style="display: flex;">
-            <img style="height: 18px;" src="../../../../assets/img/icon_people.png" />
+            <img style="height: 18px;" src="../../../../assets/img/pjjxjl_status.png" />
             <div style="margin-left: 2px;">审核结果:</div>
             <div style="margin-left: 2px;">{{obj.done_result}}</div>
           </div>
         </div>
-        <div style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
-          <div style="display: flex;padding-left:10px;">
-            <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
+        <div v-if="obj.done_reject != null && obj.done_reject.length>0" style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
+          <div style="display: flex;">
+            <img style="height: 18px;" src="../../../../assets/img/pjjxjl_refuse.png" />
             <div style="margin-left: 2px;">拒绝结项说明:</div>
             <div style="margin-left: 2px;">{{obj.done_reject}}</div>
           </div>
@@ -98,17 +96,25 @@ export default {
       httpMethod
         .getApprovalInfo(params)
         .then(res => {
+          console.log(params);
           console.log(res);
           if (res.success == "1") {
             res.data.donelist.forEach(element => {
               element.apply_time = element.apply_time.substr(
                 0,
-                element.apply_time.length - 5
+                element.apply_time.length - 3
               );
               element.done_time = element.done_time.substr(
                 0,
-                element.done_time.length - 5
+                element.done_time.length - 3
               );
+              if(element.done_result != null && element.done_result == '1'){
+                element.done_result = "同意结项"
+              }
+              if(element.done_result != null && element.done_result == '2'){
+                element.done_result = "拒绝结项"
+              }
+              element.done_result 
             });
             self.jxjl_list = res.data.donelist;
           }

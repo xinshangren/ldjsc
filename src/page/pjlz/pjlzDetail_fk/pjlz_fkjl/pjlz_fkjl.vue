@@ -21,14 +21,13 @@
           </div>
           <div style="display: flex;padding-left:10px;">
             <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-            <div style="margin-left: 2px;">反馈时间:</div>
-            <div style="margin-left: 2px;">{{fk.feedback_time}}</div>
+            <div style="margin-left: 2px;">反馈时间:{{fk.feedback_time}}</div>
           </div>
         </div>
         <img
           style="right: 8px; top: 10px;width: 30px;position: absolute;"
           src="../../../../assets/img/icon_more.png"
-          @click="goDetail"
+          @click="goDetail(fk.id)"
         />
         <van-divider />
       </div>
@@ -72,10 +71,13 @@ export default {
     this.pdSingleApp();
   },
   methods: {
-    goDetail: function() {
+    goDetail: function(id) {
       this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail",
-        name: "pjlz_fkjl_detail"
+        name: "pjlz_fkjl_detail",
+        params:{
+          id:id
+        }
       });
     },
     getdata: function() {

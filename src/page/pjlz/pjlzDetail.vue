@@ -101,8 +101,7 @@
             </div>
             <div style="display: flex;padding-left:5px;">
               <img style="height: 18px;" src="../../assets/img/icon_time.png" />
-              <div style="margin-left: 2px;">反馈时间:</div>
-              <div style="margin-left: 2px;">{{last_feedback.feedback_time}}</div>
+              <div style="margin-left: 2px;">反馈时间:{{last_feedback.feedback_time}}</div>
             </div>
           </div>
           <div v-else style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
@@ -154,8 +153,7 @@
             </div>
             <div style="display: flex;padding-left:5px;">
               <img style="height: 18px;" src="../../assets/img/icon_time.png" />
-              <div style="margin-left: 2px;">催办时间:</div>
-              <div style="margin-left: 2px;">{{last_warn.warn_time}}</div>
+              <div style="margin-left: 2px;">催办时间:{{last_warn.warn_time}}</div>
             </div>
           </div>
           <div v-else style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
@@ -202,8 +200,7 @@
             </div>
             <div style="display: flex;padding-left:5px;">
               <img style="height: 18px;" src="../../assets/img/icon_time.png" />
-              <div style="margin-left: 2px;">申请时间:</div>
-              <div style="margin-left: 2px;">{{last_done.done_time}}</div>
+              <div style="margin-left: 2px;">申请时间:{{last_done.done_time}}</div>
             </div>
           </div>
           <div
@@ -370,10 +367,13 @@ export default {
         }
       });
     },
-    gofkjl_list_detail: function() {
+    gofkjl_list_detail: function(id) {
       this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail",
-        name: "pjlz_fkjl_detail"
+        name: "pjlz_fkjl_detail",
+        params:{
+          id:id
+        }
       });
     },
 

@@ -31,12 +31,11 @@
                     <div style="display: flex;">
                         <img style="height: 18px;" src="../../../../assets/img/icon_people.png" />
                         <div style="margin-left: 2px;">反馈人:</div>
-                        <div style="margin-left: 2px;">张三</div>
+                        <div style="margin-left: 2px;">{{feedback_obj.feedback_person}}</div>
                     </div>
                     <div style="display: flex;margin-top: 7px;">
                         <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-                        <div style="margin-left: 2px;">反馈时间:</div>
-                        <div style="margin-left: 2px;">2020-01-01 22:22</div>
+                        <div style="margin-left: 2px;">反馈时间:{{feedback_obj.feedback_time}}</div>
                     </div>
                     <div style="display: flex;margin-top: 7px;">
                         <img style="height: 18px;" src="../../../../assets/img/icon_content.png" />
@@ -44,9 +43,7 @@
                         <div
                             style="margin-left: 2px;border: 1px solid #9f9f9f;border-radius: 4px;width: 60%;font-size: 14px;min-height: 100px;">
                             <div style="margin:5px ;">
-                                被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内
-                                被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内
-                                被催办内容被催办内容被催办内容被催办内容被催办内容被催办内容被催办内
+                               {{feedback_obj.feedback_content}}
 
                             </div>
                         </div>
@@ -55,15 +52,11 @@
                         <img style="height: 18px;" src="../../../../assets/img/wjj_gzfk.png" />
                         <div style="margin-left: 2px;">附件:</div>
                         <div style="margin-left: 2px;color:#2599e6">
-                            <div style="display: flex;margin-left: 5px;height:30px">
-                                <div>附件一.jpg</div>
-                                <img src='../../../../assets/img/icon_delete.png'
-                                    style="height: 20px;margin-left: 5px;margin-top: 2px;" />
-                                <img src='../../../../assets/img/icon_download.png'
-                                    style="height: 24px;margin-left: 10px;" />
-                            </div>
-                            <div style="display: flex;margin-left: 5px;height:30px">
-                                <div>附件一.jpg</div>
+                            <div 
+                                v-if="file_list.length>0"
+                                v-for="file in file_list"
+                                 style="display: flex;margin-left: 5px;height:30px">
+                                <div>{{file.attach_name}}</div>
                                 <img src='../../../../assets/img/icon_delete.png'
                                     style="height: 20px;margin-left: 5px;margin-top: 2px;" />
                                 <img src='../../../../assets/img/icon_download.png'
@@ -99,6 +92,7 @@
     import dd from "dingtalk-jsapi";
     import { Divider } from "vant";
     import { Uploader } from "vant";
+    import { httpMethod } from "../../../../api/getData.js";
     Vue.use(Uploader);
     Vue.use(Divider);
     Vue.use(Tab)
@@ -112,15 +106,44 @@
         name: "pjlz_fkjl_detail",
         data() {
             return {
+                feedback_id:'',
+                feedback_obj:"",
+                file_list:[],
             };
         },
         mounted() {
             var s = window.innerHeight - $("#content").offset().top;
             $("#content").css("min-height", s);
+            this.feedback_id = this.$route.params.id;
+            this.getdata();
         },
         methods: {
-
-        }
+             getdata: function() {
+                var self = this;
+                let feedbackId = self.feedback_id;
+                var params = {
+                    method: "approvalFeedbackDetail",
+                    dingUserId: "086404191926187734",
+                    // dingUserId: global_variable.roleJs.dingUserId,
+                    //corpId: global_variable.corpId, //机构id
+                    feedbackId: feedbackId //批件id
+                };
+                httpMethod
+                    .getApprovalInfo(params)
+                    .then(res => {
+                    console.log(res);
+                        if(res.success == 1){
+                            self.feedback_obj = res.data;
+                            if(res.data.attachlist.length>0){
+                                self.file_list = res.data.attachlist;
+                            }
+                        }
+                    })
+                    .catch(err => {
+                    this.$toast(err);
+                    });
+             }
+        },
     };
 </script>
 
