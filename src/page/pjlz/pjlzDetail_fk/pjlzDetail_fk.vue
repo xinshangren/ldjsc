@@ -166,7 +166,7 @@ export default {
         // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
         $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
         this.getUserInfo();
-      }else{
+      } else {
         this.pj_obj = this.$route.params.obj;
         this.getdata();
       }
@@ -250,7 +250,7 @@ export default {
       // };
       let formData = new FormData();
       formData.append("method", "attachUpload");
-      formData.append("dingUserId", "086404191926187734");
+      formData.append("dingUserId", global_variable.roleJs.dingUserId);
       formData.append("approvalInfoId", approvalInfoId);
       formData.append("attach", file.file);
       console.log(formData.get("attach"));
