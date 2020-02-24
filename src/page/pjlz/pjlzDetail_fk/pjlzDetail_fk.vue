@@ -260,7 +260,7 @@ export default {
       // };
       let formData = new FormData();
       formData.append("method", "attachUpload");
-      formData.append("dingUserId", "086404191926187734");
+      formData.append("dingUserId", global_variable.roleJs.dingUserId);
       formData.append("approvalInfoId", approvalInfoId);
       formData.append("attach", file.file);
       console.log(formData.get("attach"));
