@@ -55,7 +55,11 @@
               style="display: flex;margin-left: 10px; margin-top: 5px;"
             >
               <div @click="openFj(attach.attach_view_url)">{{attach.attach_name}}</div>
-              <img @click="fj_download(attach.attach_download_url)" style="height: 22px;margin-left: 8px;" src="../../assets/img/icon_download.png" />
+              <img
+                @click="fj_download(attach.attach_download_url)"
+                style="height: 22px;margin-left: 8px;"
+                src="../../assets/img/icon_download.png"
+              />
             </div>
           </div>
         </div>
@@ -266,8 +270,8 @@ export default {
     this.pdSingleApp();
     this.inint();
   },
-  activated(){
-   this.inint();
+  activated() {
+    this.inint();
   },
   watch: {
     pj_detail: "inint"
@@ -300,8 +304,11 @@ export default {
         Object.keys(self.pj_detail.approval_feedback).length > 0
       ) {
         self.last_feedback = self.pj_detail.approval_feedback;
-        self.last_feedback.feedback_time = self.last_feedback.feedback_time.substr(0,self.last_feedback.feedback_time.length-3)
-         self.fkjl_null = true;
+        self.last_feedback.feedback_time = self.last_feedback.feedback_time.substr(
+          0,
+          self.last_feedback.feedback_time.length - 3
+        );
+        self.fkjl_null = true;
       } else {
         self.last_feedback = {};
         self.fkjl_null = false;
@@ -311,8 +318,11 @@ export default {
         Object.keys(self.pj_detail.approval_warn).length > 0
       ) {
         self.last_warn = self.pj_detail.approval_warn;
-         self.last_warn.warn_time = self.last_warn.warn_time.substr(0,self.last_warn.warn_time.length-3);
-         self.cbjl_null = true;
+        self.last_warn.warn_time = self.last_warn.warn_time.substr(
+          0,
+          self.last_warn.warn_time.length - 3
+        );
+        self.cbjl_null = true;
       } else {
         self.last_warn = {};
         self.cbjl_null = false;
@@ -323,7 +333,7 @@ export default {
       ) {
         self.last_done = self.pj_detail.approval_done;
         // self.last_done.done_time = self.last_done.done_time.substr(0,self.last_done.done_time.length-3);
-         self.jxjl_null = true;
+        self.jxjl_null = true;
       } else {
         self.last_done = {};
         self.jxjl_null = false;
@@ -371,8 +381,8 @@ export default {
       this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail",
         name: "pjlz_fkjl_detail",
-        params:{
-          id:id
+        params: {
+          id: id
         }
       });
     },
@@ -392,24 +402,10 @@ export default {
       }
     },
     fj_download: function(url) {
-      dd.biz.util.isLocalFileExist({
-        params: [
-          {
-            url:
-              url //本地文件的url，指的是调用DingTalkPC.biz.util.downloadFile接口下载时填入的url，配合DingTalkPC.biz.util.downloadFile使用
-          }
-        ],
-        onSuccess: function(result) {
-          /*
-          [{
-              url: '', //本地文件的url
-              path: '', // 文件的path
-              isExist: true //根据你输入的文件的url检测出的结果，true:存在，false：不存在
-          }]
-        */
-        },
-        onFail: function() {}
-      });
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
     }
   }
 };

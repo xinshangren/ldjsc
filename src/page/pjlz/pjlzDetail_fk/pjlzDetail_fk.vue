@@ -165,8 +165,18 @@ export default {
       if (detail == "1") {
         // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
         $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
-        this.getUserInfo();
-      }else{
+        this.$route.meta.title = "批件流转";
+        var id = url.getValue("id");
+        if (id != null && id != "") {
+          //推送页面  跳转
+          this.getUserInfo(id);
+        } else {
+          //独立app 流转批件详情
+          this.pj_obj = this.$route.params.obj;
+          this.getdata();
+        }
+      } else {
+         //领导驾驶舱 流转批件详情
         this.pj_obj = this.$route.params.obj;
         this.getdata();
       }
