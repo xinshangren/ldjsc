@@ -15,10 +15,18 @@
           :key="index"
           style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;font-size:15px;background:#ffffff;"
         >
-          <div style="position:relative;">
+          <div style="position:relative;" @click="openIndexFun(item,$event)">
             <div style="display:flex;">
-              <img v-if="item.approval_status!=2&&item.approval_status!=4" style="height:30px;" src="../../../assets/img/no_overdue.png" />
-              <img v-if="item.approval_status==2||item.approval_status==4" style="height:30px;" src="../../../assets/img/noverdue.png" />
+              <img
+                v-if="item.approval_status!=2&&item.approval_status!=4"
+                style="height:30px;"
+                src="../../../assets/img/no_overdue.png"
+              />
+              <img
+                v-if="item.approval_status==2||item.approval_status==4"
+                style="height:30px;"
+                src="../../../assets/img/noverdue.png"
+              />
               <div class="van-ellipsis pjlzListTitle">{{item.approval_name}}</div>
               <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
               <div v-if="item.approval_status==1" class="pjlzListyfk">已反馈</div>
@@ -171,7 +179,7 @@ export default {
       mescrollUp: {
         // 上拉加载的配置.
         callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }
-        auto:false,
+        auto: false,
         //以下是一些常用的配置,当然不写也可以的.
         page: {
           num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
@@ -232,13 +240,13 @@ export default {
       console.log(url);
       var detail = url.getValue("type");
       console.log("type===" + detail);
-      if (detail =="1") {
-         $("#mescroll").css("top","113px");
+      if (detail == "1") {
+        $("#mescroll").css("top", "113px");
         // this.showRightMenu();
         this.getUserInfo();
         // this.status=1;
         this.mescroll.resetUpScroll();
-      }else{
+      } else {
         this.mescroll.resetUpScroll();
       }
     },
@@ -326,7 +334,7 @@ export default {
                 self.flag = global_variable.roleJs;
                 self.mescroll.resetUpScroll();
                 console.log(global_variable.roleJs);
-                 console.log(self.flag);
+                console.log(self.flag);
                 // var roleCode=res.data.role;
                 // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
               }
@@ -416,10 +424,10 @@ export default {
               this.list = this.list.concat(data);
               //  this.list = this.list.concat(data);
               //   this.list = this.list.concat(data);
-            }else{
-              data=[];
-              this.list=[];
-              res.data.total=0;
+            } else {
+              data = [];
+              this.list = [];
+              res.data.total = 0;
             }
 
             this.$nextTick(() => {
@@ -442,8 +450,8 @@ export default {
       this.$router.push({
         path: "/pjlz/pjlzDetail_cb/pjlzDetail_cb",
         name: "pjlzDetail_cb",
-        params:{
-          obj:item
+        params: {
+          obj: item
         }
       });
       e.stopPropagation();
@@ -453,22 +461,66 @@ export default {
       this.$router.push({
         path: "/pjlz/pjlzDetail_jx/pjlzDetail_jx",
         name: "pjlzDetail_jx",
-         params:{
-          obj:item
+        params: {
+          obj: item
         }
       });
       e.stopPropagation();
     },
     //反馈跳转
     openFkFun: function(item, e) {
-       this.$router.push({
+      this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlzDetail_fk",
         name: "pjlzDetail_fk",
-         params:{
-          obj:item
+        params: {
+          obj: item
         }
       });
       e.stopPropagation();
+    },
+    //所有的点击事件
+    openIndexFun: function(item, e) {
+      var role = this.flag.role;
+      var status = item.approval_status;
+      e.stopPropagation();
+      if ((role == "ld" || role == "wdk") && status != 4 && status != 3) {
+        //一键催办
+        this.$router.push({
+          path: "/pjlz/pjlzDetail_cb/pjlzDetail_cb",
+          name: "pjlzDetail_cb",
+          params: {
+            obj: item
+          }
+        });
+        return;
+      }
+      if (role == "cbr" && status == 1) {
+        //申请结项
+        this.$parent.showSqjxPop(item);
+        return;
+      }
+      if (role == "wdk" && status == 3) {
+        //审核申请
+        this.$router.push({
+          path: "/pjlz/pjlzDetail_jx/pjlzDetail_jx",
+          name: "pjlzDetail_jx",
+          params: {
+            obj: item
+          }
+        });
+        return;
+      }
+      if (role == "cbr" && (status == 2 || status == 0 || status == 5)) {
+        //反馈
+        this.$router.push({
+          path: "/pjlz/pjlzDetail_fk/pjlzDetail_fk",
+          name: "pjlzDetail_fk",
+          params: {
+            obj: item
+          }
+        });
+        return;
+      }
     }
   }
 };
