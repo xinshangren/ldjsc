@@ -1,6 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-
+import axios from 'axios';
 import Vant from 'vant';
 import 'vant/lib/index.css';
 import eruda from 'eruda';
@@ -19,6 +19,14 @@ import router from './router'
 Vue.prototype.GLOBAL=global_
 Vue.config.productionTip = false
 Vue.use(Vant);
+var instance = axios.create({
+  baseURL:'',
+  timeout:10000,
+  headers:{"Content-Type":"multipart/form-data"}
+});
+ 
+Vue.prototype.axios = axios;
+Vue.prototype.instance=instance;
 // eruda.init();
 // const vConsole = new Vconsole();
 // Vue.use(vConsole)

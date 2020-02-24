@@ -145,13 +145,13 @@ export const hbgjAirJs = {
         var nameList = [];
         var valueList = [];
         for (var i = 0; i < data.length; i++) {
-            nameList.push(data[i].ValleyName);
-            valueList.push(data[i].countnum);
+            nameList.push(data[i].approval_create_month+"月");
+            valueList.push(data[i].approval_create_num);
         }
 
         var option = {
             grid: {
-                top: '10%',
+                top: '17%',
                 left: '5%',
                 right: '5%',
                 bottom: '0%',
@@ -160,13 +160,18 @@ export const hbgjAirJs = {
             xAxis: {
                 type: 'category',
                 data: nameList,
+                axisLine: {
+                    lineStyle: {
+                        color: "#666666",
+                    }
+                },
                 axisLabel: {
                     showMaxLabel: true,
                     showMinLabel: true,
                     show: true,
                     interval: 0, //横轴信息全部显示
                     textStyle: {
-                        color: '#000000', //文字颜色
+                        color: '#666666', //文字颜色
                         fontSize: 10
                     },
                     formatter: function (params) {
@@ -196,11 +201,18 @@ export const hbgjAirJs = {
             },
             yAxis: {
                 type: 'value',
+                name:"项",
                 interval: 40,
                 axisLine: {
                     lineStyle: {
-                        color: "#000000",
+                        color: "#666666",
                     }
+                },
+                axisLabel:{
+                    textStyle: {
+                        color: '#666666', //文字颜色
+                        fontSize: 10
+                    },
                 }
             },
             series: [{
@@ -236,28 +248,37 @@ export const hbgjAirJs = {
         var nameList = [];
         var valueList = [];
         for (var i = 0; i < data.length; i++) {
-            nameList.push(data[i].ValleyName);
-            valueList.push(data[i].countnum);
+            var month=data[i].approval_undone_month;
+            if(parseInt(month)<10){
+                month=month.replace("0","");
+            }
+            nameList.push(month+"月");
+            valueList.push(data[i].approval_undone_num);
         }
 
         var option = {
             grid: {
-                top: '10%',
+                top: '17%',
                 left: '5%',
                 right: '5%',
-                bottom: '0%',
+                bottom: '4%',
                 containLabel: true
             },
             xAxis: {
                 type: 'category',
                 data: nameList,
+                axisLine: {
+                    lineStyle: {
+                        color: "#666666",
+                    }
+                },
                 axisLabel: {
                     showMaxLabel: true,
                     showMinLabel: true,
                     show: true,
                     interval: 0, //横轴信息全部显示
                     textStyle: {
-                        color: '#000000', //文字颜色
+                        color: '#666666', //文字颜色
                         fontSize: 10
                     },
                     formatter: function (params) {
@@ -287,18 +308,25 @@ export const hbgjAirJs = {
             },
             yAxis: {
                 type: 'value',
+                name:"项",
                 interval: 40,
                 axisLine: {
                     lineStyle: {
-                        color: "#000000",
+                        color: "#666666",
                     }
+                },
+                axisLabel:{
+                    textStyle: {
+                        color: '#666666', //文字颜色
+                        fontSize: 10
+                    },
                 }
             },
             series: [{
                 itemStyle: {
                     normal: {
                         //每根柱子颜色设置
-                        color: '#54aafc'
+                        color: '#0ed3e5'
                     }
                 },
                 data: valueList,

@@ -107,7 +107,7 @@ export default {
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
-  activated(){
+  activated() {
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
@@ -202,26 +202,41 @@ export default {
       var file = this.file_list.slice(-1)[0];
       //单个附件上传
       var approvalInfoId = this.pj_detail.id;
-      var params = {
-        method: "attachUpload",
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
-         //corpId: global_variable.corpId, //机构id
-        approvalInfoId: approvalInfoId, //批件id
-        // approvalInfoId: "5",
-        attach: file.file
-      };
-      console.log(params);
-      httpMethod
-        .fileUpload(params)
+      // var params = {
+      //   method: "attachUpload",
+      //   dingUserId: "086404191926187734",
+      //   // dingUserId: global_variable.roleJs.dingUserId,
+      //   //corpId: global_variable.corpId, //机构id
+      //   approvalInfoId: approvalInfoId, //批件id
+      //   // approvalInfoId: "5",
+      //   attach: file.file
+      // };
+      let formData = new FormData();
+      formData.append("method", "attachUpload");
+      formData.append("dingUserId", "086404191926187734");
+      formData.append("approvalInfoId", approvalInfoId);
+      formData.append("attach", file.file);
+      console.log(formData.get("attach"));
+      console.log(formData.get("method"));
+      this.instance
+        .post(
+          httpMethod.returnBaseUrlFun() +
+            "dingTalkController.action?fileUpload",
+          formData
+        )
         .then(res => {
           console.log(res);
-          if (res.success == "1") {
-          }
-        })
-        .catch(err => {
-          this.$toast(err);
         });
+      // httpMethod
+      //   .fileUpload(formData)
+      //   .then(res => {
+      //     console.log(res);
+      //     if (res.success == "1") {
+      //     }
+      //   })
+      //   .catch(err => {
+      //     this.$toast(err);
+      //   });
     },
     //删除上传附件
     delete_adjunct: function(index) {
