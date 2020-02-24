@@ -187,7 +187,6 @@ export default {
       console.log($(this).index());
       self.flagindex = $(this).index();
     });
-    self.getLvCount();
 
     self.statisticJobDone(); //统计工作完成情况
     self.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
@@ -235,6 +234,7 @@ export default {
           var code = res.success;
           if (code == "1") {
             var data = res.data;
+               this.showEcharsView3(echarts, this.$refs.myCharts3,data);
           }
         })
         .catch(err => {
@@ -257,25 +257,7 @@ export default {
           var code = res.success;
           if (code == "1") {
             var data = res.data;
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    //获取首页所属流域
-    getLvCount: function() {
-      var params = {};
-      //获取数据
-      httpMethod
-        .getLvCount(params)
-        .then(res => {
-          console.log(res);
-          var code = res.success;
-          if (code == "1") {
-            var data = res.recordList;
-            this.showEcharsView3(echarts, this.$refs.myCharts3, res.list);
-            this.showEcharsView4(echarts, this.$refs.myCharts4, res.list);
+             this.showEcharsView4(echarts, this.$refs.myCharts4,data);
           }
         })
         .catch(err => {

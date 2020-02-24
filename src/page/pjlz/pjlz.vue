@@ -14,7 +14,7 @@
         title-inactive-color="#333333"
         :sticky="true"
         line-width="75px"
-        style="width: 100%;"
+        style="width: 100%;height:47px;"
         @change="tabsclick"
       >
         <van-tab title="工作项"></van-tab>
@@ -22,7 +22,7 @@
       </van-tabs>
       <div
         v-if="gzxOrStatic==0&&flag.role=='ld'"
-        style="display: flex;height: 40px;margin-top: 56px;margin-left: 10px;margin-right: 10px;"
+        style="display: flex;height: 40px;margin-top: 9px;margin-left: 10px;margin-right: 10px;"
       >
         <div style="width:50%;position:relative;">
           <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_select_div1">
