@@ -112,22 +112,6 @@ export default {
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
-  beforeRouteEnter(to, from, next) {
-    console.log(from);
-    console.log(to);
-    if (to.name == "pjlzDetail_fk") {
-      to.meta.keepAlive = true;
-    }
-    next();
-  },
-  beforeRouteLeave(to, from, next) {
-    // console.log(from);
-    // console.log(to);
-    if (to.name == "pjlzListvue") {
-      from.meta.keepAlive = false;
-    }
-    next();
-  },
   methods: {
     //判断是否是单独app
     pdSingleApp: function() {
@@ -218,15 +202,15 @@ export default {
       var file = this.file_list.slice(-1)[0];
       //单个附件上传
       var approvalInfoId = this.pj_detail.id;
-      var params = {
-        method: "attachUpload",
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
-        //corpId: global_variable.corpId, //机构id
-        approvalInfoId: approvalInfoId, //批件id
-        // approvalInfoId: "5",
-        attach: file.file
-      };
+      // var params = {
+      //   method: "attachUpload",
+      //   dingUserId: "086404191926187734",
+      //   // dingUserId: global_variable.roleJs.dingUserId,
+      //   //corpId: global_variable.corpId, //机构id
+      //   approvalInfoId: approvalInfoId, //批件id
+      //   // approvalInfoId: "5",
+      //   attach: file.file
+      // };
       let formData = new FormData();
       formData.append("method", "attachUpload");
       formData.append("dingUserId", "086404191926187734");
@@ -234,9 +218,15 @@ export default {
       formData.append("attach", file.file);
       console.log(formData.get("attach"));
       console.log(formData.get("method"));
-       this.instance.post(httpMethod.returnBaseUrlFun()+"dingTalkController.action?fileUpload",formData).then((res)=>{
-                    console.log(res);
-            })
+      this.instance
+        .post(
+          httpMethod.returnBaseUrlFun() +
+            "dingTalkController.action?fileUpload",
+          formData
+        )
+        .then(res => {
+          console.log(res);
+        });
       // httpMethod
       //   .fileUpload(formData)
       //   .then(res => {
