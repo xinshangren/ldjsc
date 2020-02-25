@@ -38,23 +38,36 @@
               <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>-->
               <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
             </div>
-            <div class="pjlzListSmallDiv">
+            <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>
               <div
                 class="pjlzListSmallDivFont"
                 style="margin-left:19px;"
-              >{{item.approval_manage_person}}</div>
+              >{{item.cbr1}}</div>
+            </div>
+            <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
+              <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
+              <div class="pjlzListSmallDivFont">承办人：</div>
+              <div
+                class="pjlzListSmallDivFont"
+                style="margin-left:19px;"
+              >{{item.cbr2}}</div>
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
               <div class="pjlzListSmallDivFont">办理期限：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_limit_time}}</div>
             </div>
-            <div class="pjlzListSmallDiv" style="margin-bottom:11px;">
+            <div class="pjlzListSmallDiv" style="">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">交办时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_create_date}}</div>
+            </div>
+            <div class="pjlzListSmallDiv" style="margin-bottom:11px;">
+              <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
+              <div class="pjlzListSmallDivFont">截止时间：</div>
+              <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
             </div>
 
             <img
@@ -272,7 +285,7 @@ export default {
     console.log(search_allref);
     var self = this;
     if (global_variable.singleApp != 1) {
-      shaixuan.removeEventListener('click',  function() {
+      shaixuan.removeEventListener("click", function() {
         console.log("openPop");
         self.Popshow = true;
       });
@@ -313,7 +326,7 @@ export default {
         $("#mescroll").css("top", "113px");
         // this.showRightMenu();
         this.getUserInfo();
-        this.status=1;
+        this.status = 1;
         this.mescroll.resetUpScroll();
         var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
         console.log(shaixuanApp);
@@ -323,7 +336,7 @@ export default {
           self.Popshow = true;
         });
       } else {
-        this.status=1;
+        this.status = 1;
         this.mescroll.resetUpScroll();
       }
     },
@@ -493,6 +506,31 @@ export default {
             var data = res.data.approvallist;
             if (data && data.length > 0) {
               //  this.list = [];
+              for (var i = 0; i < data.length; i++) {
+                var entityName = data[i].approval_manage_person;
+                if (entityName.indexOf(",") != -1) {
+                  var namelist = entityName.split(",");
+                  var nameStr2 = "";
+                  if (namelist.length > 0) {
+                    data[i].cbr1 = namelist[0];
+                    for (var j = 0; j < namelist.length; j++) {
+                      if (j > 0) {
+                        if(nameStr2==''){
+                          nameStr2+=namelist[j];
+                        }else{
+                          nameStr2+=","+namelist[j];
+                        }
+                      }
+                    }
+
+                     data[i].cbr2 = nameStr2;
+                  }
+                } else {
+                  data[i].cbr1 = entityName;
+                  data[i].cbr2 = "";
+                }
+              }
+              console.log(data);
               this.list = this.list.concat(data);
               //  this.list = this.list.concat(data);
               //   this.list = this.list.concat(data);
