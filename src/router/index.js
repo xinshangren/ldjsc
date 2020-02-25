@@ -54,6 +54,7 @@ import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDeal
 import qxtz_newVue from '@/page/main/qxtz_new.vue'
 import yqdataVue from '@/page/yqdata/yqdata.vue'
 import pjlzVue from '@/page/pjlz/pjlz.vue'
+import pjlzListSearchVue from '@/page/pjlz/pjlzListSearch/pjlzListSearch.vue'
 import pjlzDetailVue from '@/page/pjlz/pjlzDetail.vue'
 import pjlz_fj_Vue from '@/page/pjlz/pjlz_fj.vue'
 import pjlzDetail_all_Vue from '@/page/pjlz/pjlzDetail_all.vue'
@@ -296,6 +297,10 @@ export default new Router({
       path: '/pjlz/pjlz',
       name: 'pjlzListvue',
       component: pjlzVue
+    },{
+      path: '/pjlz/pjlzListSearch/pjlzListSearch',
+      name: 'pjlzListSearchVue',
+      component: pjlzListSearchVue
     },{
       path: '/pjlz/pjlz_fj',
       name: 'pjlz_fj',

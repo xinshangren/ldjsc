@@ -50,7 +50,7 @@
     </div>
 
     <ul class="ui-row" style="margin-top:20px;">
-      <li class="ui-col ui-col-50">
+      <li class="ui-col ui-col-50" @click="intentSearchList(1)">
         <div class="pjlzStaticModel1">
           <div style="display:flex;">
             <div style="width:50%;"></div>
@@ -64,7 +64,7 @@
           </div>
         </div>
       </li>
-      <li class="ui-col ui-col-50">
+      <li class="ui-col ui-col-50" @click="intentSearchList(2)">
         <div class="pjlzStaticModel2">
           <div style="display:flex;">
             <div style="width:50%;"></div>
@@ -78,7 +78,7 @@
           </div>
         </div>
       </li>
-      <li class="ui-col ui-col-50" style="margin-top:14px;">
+      <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(3)">
         <div class="pjlzStaticModel3">
           <div style="display:flex;">
             <div style="width:50%;"></div>
@@ -92,7 +92,7 @@
           </div>
         </div>
       </li>
-      <li class="ui-col ui-col-50" style="margin-top:14px;">
+      <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(4)">
         <div class="pjlzStaticModel4">
           <div style="display:flex;">
             <div style="width:50%;"></div>
@@ -145,6 +145,10 @@ export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
   },
+  activated() {
+    //返回保留页面记录
+    document.querySelector("body").setAttribute("style", "background:#ffffff");
+  },
   name: "pjlzStaticVue",
   data() {
     return {
@@ -193,6 +197,17 @@ export default {
     self.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
   },
   methods: {
+    //跳转独立的页面
+    intentSearchList: function(flag) {
+      console.log(flag);
+      this.$router.push({
+        path: "/pjlz/pjlzListSearch/pjlzListSearch",
+        name:'pjlzListSearchVue',
+        params: {
+          entity: flag
+        }
+      });
+    },
     //获取工作完成情况
     statisticJobDone: function() {
       var self = this;
@@ -361,7 +376,7 @@ export default {
       var date = this.timeFormatMonth(this.currentYearMonth);
       this.showYearMonth = false; //年月显示
       this.currentYear1 = date;
-       this.statisticJobDone(); //统计工作完成情况
+      this.statisticJobDone(); //统计工作完成情况
       this.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
       this.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
     },
@@ -370,7 +385,7 @@ export default {
       var date = this.timeFormatDay(this.currentYearMonthDay);
       this.showAllTime = false; //年月日显示
       this.currentYear1 = date;
-       this.statisticJobDone(); //统计工作完成情况
+      this.statisticJobDone(); //统计工作完成情况
       this.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
       this.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
     },
