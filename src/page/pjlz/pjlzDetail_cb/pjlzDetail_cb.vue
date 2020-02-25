@@ -271,67 +271,6 @@ export default {
       //     self.goDing(params)
       // }
     },
-    //应用通知
-    goDing(item) {
-      if (item.warnObjId != null) {
-        var ddd = item.dingUserId;
-        dd.biz.ding.create({
-          users: [item.dingid], // 用户列表，工号
-          corpId: ddd, // 企业id
-          type: 1, // 附件类型 1：image  2：link
-          alertType: item.warnType, // 钉发送方式 0:电话, 1:短信, 2:应用内
-          alertDate: { format: "yyyy-MM-dd HH:mm", value: "2019-12-23 08:00" },
-          attachment: {
-            images: [""]
-          }, // 附件信息
-          text: item.warnContent, // 正文
-          bizType: 0, // 业务类型 0：通知DING；1：任务；2：会议；
-          onSuccess: function() {
-            //onSuccess将在点击发送之后调用
-          },
-          onFail: function(e) {
-            this.$toast("钉钉资源不足，请稍后再试");
-          }
-        });
-      } else {
-        this.$toast("该用户暂未注册");
-      }
-    },
-    //短息通知
-    goSms(item) {
-      if (item.warnObjId != null) {
-        var ddd = item.dingUserId;
-        dd.biz.chat.openSingleChat({
-          corpId: ddd, // 企业id,必须是用户所属的企业的corpid
-          userId: item.warnObjId, // 用户的工号
-          text: item.warnContent,
-          onSuccess: function() {},
-          onFail: function(e) {
-            this.$toast("钉钉资源不足，请稍后再试");
-          }
-        });
-      } else {
-        this.$toast("该用户暂未注册");
-      }
-    },
-    //电话通知
-    goCall(item) {
-      if (item.warnObjId != null) {
-        var ddd = item.dingUserId;
-        dd.ready(function() {
-          dd.biz.telephone.call({
-            users: item.warnObjId, //用户列表，工号
-            corpId: ddd, //企业id
-            onSuccess: function() {},
-            onFail: function(e) {
-              this.$toast("钉钉资源不足，请稍后再试");
-            }
-          });
-        });
-      } else {
-        this.$toast("该用户暂未注册");
-      }
-    },
     choose_cbfs: function(str) {
       var self = this;
       self.cb_type = "";
