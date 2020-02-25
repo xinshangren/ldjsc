@@ -56,6 +56,7 @@ import yqdataVue from '@/page/yqdata/yqdata.vue'
 import pjlzVue from '@/page/pjlz/pjlz.vue'
 import pjlzDetailVue from '@/page/pjlz/pjlzDetail.vue'
 import pjlz_fj_Vue from '@/page/pjlz/pjlz_fj.vue'
+import pjlzDetail_all_Vue from '@/page/pjlz/pjlzDetail_all.vue'
 import pjlzDetail_cb_Vue from '@/page/pjlz/pjlzDetail_cb/pjlzDetail_cb.vue'
 import pjlzDetail_fk_Vue from '@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'
 import pjlzDetail_jx_Vue from '@/page/pjlz/pjlzDetail_jx/pjlzDetail_jx.vue'
@@ -303,6 +304,11 @@ export default new Router({
       path: '/pjlz/pjlzDetail',
       name: 'pjlzDetail',
       component: pjlzDetailVue,
+      meta:{keepAlive:true}
+    },{
+      path: '/pjlz/pjlzDetail_all',
+      name: 'pjlzDetail_all',
+      component: pjlzDetail_all_Vue,
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_cb/pjlzDetail_cb',
