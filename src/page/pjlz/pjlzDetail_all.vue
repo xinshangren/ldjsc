@@ -1,24 +1,3 @@
-<style scoped>
-.choose {
-  color: #2099eb;
-}
-
-.cbfs {
-  width: 31%;
-  height: 47px;
-  font-size: 14px;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-.tzfs_div {
-  width: 57%;
-  margin: 13px;
-  font-size: 15px;
-}
-</style>
-
-
 <template>
   <div id="pjlzDeali_fk_top_id" style="margin-top:54px;background:#f7f7f7">
     <pjlzDetailVue :pj_detail="pj_detail"></pjlzDetailVue>
