@@ -178,8 +178,13 @@ export default {
   watch: {
     screenWidth: function(val) {
       //监听屏幕宽度变化
-      var oIframe = document.getElementById(divId);
-      oIframe.style.width = Number(val) - 120 + "px"; //'120'是页面布局调整，可去除
+      if (this.screenHeight > this.screenHeightNow) {
+        $("#popSqjxId").css("height", "80%");
+        $("#popSqjxId").css("max-height", "85%");
+      } else {
+        $("#popSqjxId").css("height", "45%");
+        $("#popSqjxId").css("max-height", "50%");
+      }
     }
   },
   methods: {
