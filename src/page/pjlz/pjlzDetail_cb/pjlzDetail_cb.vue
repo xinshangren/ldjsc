@@ -22,7 +22,7 @@
 <template>
   <div id="pjlzDeali_fk_top_id" style="margin-top:54px;background:#f7f7f7">
     <pjlzDetailVue :pj_detail="pj_detail"></pjlzDetailVue>
-    <div style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 400px;">
+    <div id="cb_div" style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 400px;">
       <div style="padding:15px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">被催办人</div>
         <div
@@ -256,6 +256,7 @@ export default {
             console.log(res)
               if (res.success == "1") {
                   this.$toast("催办成功");
+                  $('#cb_div').hide();
               }
           }).catch(err => {
               this.$toast(err);
