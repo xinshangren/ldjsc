@@ -28,7 +28,7 @@
 <template>
   <div id="pjlzDeali_fk_top_id" style="margin-top:54px;background:#f7f7f7">
     <pjlzDetailVue :pj_detail="pj_detail"></pjlzDetailVue>
-    <div style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 196px;">
+    <div id="jx_div" style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 196px;">
       <div style="padding:10px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">申请说明</div>
         <div style="display: flex;font-size: 15px;margin-top: 5px;color: #666666;">
@@ -270,6 +270,7 @@ export default {
             self.fk_content = "";
             self.getdata();
             this.$toast("提交成功");
+            $('#jx_div').hide()
           }
         })
         .catch(err => {

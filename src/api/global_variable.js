@@ -9,8 +9,8 @@ const logId = ''
 const ddPhone = ''
 const indexTabId = 0;
 const roleJs = {
-  dingUserId: "",
-  role: "",
+  dingUserId: "086404191926187734",
+  role: "cbr",
   // dingUserId: "",
   // role: "",
   department: "",
