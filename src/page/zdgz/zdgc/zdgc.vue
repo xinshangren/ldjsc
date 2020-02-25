@@ -13,7 +13,7 @@
 }
 </style>
 <template>
-  <div style="margin-top:54px;">
+  <div style=";">
     <div
       id="menu_ul_id"
       v-show="md_show"

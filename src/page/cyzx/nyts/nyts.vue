@@ -22,7 +22,7 @@
 }
 </style>
 <template>
-  <div style="margin-top:0px;" @click="closeState">
+  <div style="" @click="closeState">
     <div class="ui-row-flex ui-whitespace" style="padding-top:10px;">
       <div class="ui-col ui-col" @click="selectIndexTab(1)">
         <div class="block_div_style">

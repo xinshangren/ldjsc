@@ -145,7 +145,7 @@ export const hbgjAirJs = {
         var nameList = [];
         var valueList = [];
         for (var i = 0; i < data.length; i++) {
-            nameList.push(data[i].approval_create_month+"月");
+            nameList.push(data[i].approval_create_month);
             valueList.push(data[i].approval_create_num);
         }
 
@@ -153,11 +153,12 @@ export const hbgjAirJs = {
             grid: {
                 top: '17%',
                 left: '5%',
-                right: '5%',
+                right: '10%',
                 bottom: '0%',
                 containLabel: true
             },
             xAxis: {
+                name:"月",
                 type: 'category',
                 data: nameList,
                 axisLine: {
@@ -252,7 +253,7 @@ export const hbgjAirJs = {
             if(parseInt(month)<10){
                 month=month.replace("0","");
             }
-            nameList.push(month+"月");
+            nameList.push(month);
             valueList.push(data[i].approval_undone_num);
         }
 
@@ -260,11 +261,12 @@ export const hbgjAirJs = {
             grid: {
                 top: '17%',
                 left: '5%',
-                right: '5%',
+                right: '10%',
                 bottom: '4%',
                 containLabel: true
             },
             xAxis: {
+                name:"月",
                 type: 'category',
                 data: nameList,
                 axisLine: {

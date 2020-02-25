@@ -17,12 +17,13 @@
         style="width: 100%;height:47px;"
         @change="tabsclick"
       >
-        <van-tab title="工作项"></van-tab>
+        <van-tab title="办理中"></van-tab>
+        <van-tab title="已办结"></van-tab>
         <van-tab title="数据统计"></van-tab>
       </van-tabs>
       <div
         v-if="gzxOrStatic==0&&flag.role=='ld'"
-        style="display: flex;height: 40px;margin-top: 9px;margin-left: 10px;margin-right: 10px;"
+        style="display:none;height: 40px;margin-top: 9px;margin-left: 10px;margin-right: 10px;"
       >
         <div style="width:50%;position:relative;">
           <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_select_div1">
@@ -53,8 +54,15 @@
         <van-tab title="办理中"></van-tab>
         <van-tab title="已办结"></van-tab>
       </van-tabs>
-
-      <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
+      <div style="position:relative;">
+        <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
+        <img
+          ref="PjlzshaixuanImgId"
+          class="shaixuanImg"
+          style=" position: absolute;right: 23px;top: 17px;height: 20px;"
+          src="@/assets/img/icon_filtrate.png"
+        />
+      </div>
     </div>
     <!-- <div id="child_page" style="overflow: auto;width: 100%;position:relative;">
       <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
@@ -77,7 +85,7 @@
             show-word-limit
             class="pjlzSqjxContent"
           />
-          <div style="display:flex;margin-top:24px;" >
+          <div style="display:flex;margin-top:24px;">
             <div style="width:50%;text-align: center;" @click="sqjxshow=false">
               <div class="pjlzSqjxCancelButton1">取消</div>
             </div>
@@ -245,8 +253,28 @@ export default {
       console.log(name + "--" + title);
       var index = parseInt(name);
       this.gzxOrStatic = index;
+      // console.log(flag);
+
       if (index === 0) {
         this.currentView = 0;
+          for (var i = 0; i < this.$children.length; i++) {
+          var entity = this.$children[i];
+
+          if (entity.$options._componentTag == "child1") {
+            console.log(entity);
+            entity.changetabState(index+1);
+          }
+        }
+      } else if (index == 1) {
+        this.currentView = 0;
+         for (var i = 0; i < this.$children.length; i++) {
+          var entity = this.$children[i];
+
+          if (entity.$options._componentTag == "child1") {
+            console.log(entity);
+            entity.changetabState(index+1);
+          }
+        }
       } else {
         this.currentView = 1;
       }
@@ -294,7 +322,7 @@ export default {
             //成功
             self.$toast("申请成功");
             self.sqjxshow = false;
-            self.restPjListFun();//刷新列表
+            self.restPjListFun(); //刷新列表
           }
         } else {
           self.$toast(msg);
