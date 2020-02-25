@@ -182,8 +182,8 @@ export default {
       let approvalInfoId = self.pj_obj.id;
       var params = {
         method: "getApprovalInfo",
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
+        //dingUserId: "086404191926187734",
+        dingUserId: global_variable.roleJs.dingUserId,
         //corpId: this.seach_value, //机构id
         approvalInfoId: approvalInfoId //批件id
       };
@@ -242,7 +242,7 @@ export default {
     },
     submit_sqjx: function(flag) {
       let self = this;
-      //let approvalInfoId = self.pj_obj.id;
+      let approvalInfoId = self.pj_obj.id;
       let doneResult = flag;
       let rejectReason = "";
       if (flag == "0") {
@@ -254,10 +254,10 @@ export default {
       }
       var params = {
         method: "approvalDone",
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
+        //dingUserId: "086404191926187734",
+         dingUserId: global_variable.roleJs.dingUserId,
         //corpId: global_variable.corpId, //机构id
-        approvalInfoId: "8", //批件id
+        approvalInfoId: approvalInfoId, //批件id
         doneResult: doneResult,
         rejectReason: rejectReason
       };

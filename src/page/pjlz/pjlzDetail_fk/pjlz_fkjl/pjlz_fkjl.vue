@@ -85,8 +85,8 @@ export default {
       let approvalInfoId = self.pj_id;
       var params = {
         method: "approvalFeedbackList",
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
+        //dingUserId: "086404191926187734",
+        dingUserId: global_variable.roleJs.dingUserId,
         //corpId: global_variable.corpId, //机构id
         approvalInfoId: approvalInfoId //批件id
       };
@@ -126,6 +126,7 @@ export default {
       if (detail == "1") {
         $("#content").css("margin", "0px 0px 10px");
         // $("#pjlzDeali_fk_top_id").css("margin-top","0px");
+        this.$route.meta.title = "批件流转";
       }
     }
   }
