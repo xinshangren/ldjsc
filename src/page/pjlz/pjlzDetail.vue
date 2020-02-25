@@ -314,7 +314,7 @@ export default {
         Object.keys(self.pj_detail.approval_done).length > 0
       ) {
         self.last_done = self.pj_detail.approval_done;
-        // self.last_done.done_time = self.last_done.done_time.substr(0,self.last_done.done_time.length-3);
+        self.last_done.done_time = self.last_done.done_time.substr(0,self.last_done.done_time.length-3);
         self.jxjl_null = true;
       } else {
         self.last_done = {};

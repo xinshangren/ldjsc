@@ -30,7 +30,7 @@
 
           <div class="van-multi-ellipsis--l2 pjkMessageContentDiv">{{item.msg_content}}</div>
 
-          <div style="height: 24px;position: relative;">
+          <div style="height: 24px;position: relative;" @click="pjlz_fk(item.approval_id)">
             <div class="pjkMessageFkDiv">
               <img class="pjkMessageFkDivimg" src="../../../assets/img/icon_feedback.png" />
               <div class="pjkMessageFkDivtext">反馈</div>
@@ -170,6 +170,15 @@ export default {
           // this.$toast(err);
           mescroll.endErr();
         });
+    },
+    pjlz_fk:function(id){
+      this.$router.push({
+        path: "/pjlz/pjlzDetail_fk/pjlzDetail_fk",
+        name: "pjlzDetail_fk",
+        params: {
+          obj: {id:id}
+        }
+      });
     }
   }
 };
