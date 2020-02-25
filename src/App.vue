@@ -186,6 +186,8 @@ export default {
         this.$route.meta.title = "批件管理";
         global_variable.singleApp = 1; //独立app判断
       }
+    }else{
+       this.$route.meta.title = "晋城市领导驾驶舱";
     }
     this.getUserInfo();
     this.getFiveNotice();
@@ -218,7 +220,7 @@ export default {
         $("#appVueleftId").css("width", "63%");
       }
       var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
-      if (path == "/pjlz/pjlz") {
+      if (path == "/pjlz/pjlz"||path=="/pjlz/pjlzListSearch/pjlzListSearch") {
         $(".shaixuanImg").show();
       } else {
         $(".shaixuanImg").hide();

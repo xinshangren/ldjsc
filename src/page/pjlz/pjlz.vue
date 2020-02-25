@@ -71,7 +71,7 @@
     <child2 style="position:relative;" v-if="flag.role=='ld'&&currentView===1"></child2>
     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
       <div class="wrapper">
-        <div class="block" @click.stop>
+        <div id="popSqjxId" class="block" @click.stop>
           <img @click="sqjxshow=false" class="pjlzSqjxClose" src="../../assets/img/pop_close.png" />
           <div class="pjlzSqjx">申请结项</div>
 
@@ -134,28 +134,66 @@ export default {
       sqjxmessage: "", //申请结伴内容
       gzxOrStatic: 0, //0=工作项1=数据统计
       top: 10,
-      nowItem: null
+      nowItem: null,
+      docmHeight: "0", //默认屏幕高度
+      showHeight: "0", //实时屏幕高度
+      hidshow: true, //显示或者隐藏footer,
+      isResize: false //默认屏幕高度是否已获取
     };
   },
   beforeRouteEnter(to, from, next) {
-    console.log(from);
-    console.log(to);
+    // console.log(from);
+    // console.log(to);
     next();
   },
   beforeRouteLeave(to, from, next) {
-    next();
+      console.log(from);
+     console.log(to);
+     if (from.name == "pjlzListvue") {
+      if (to.name != "main") {
+        from.meta.keepAlive = true;
+      } else {
+        from.meta.keepAlive = false;
+      }
+    } else {
+      from.meta.keepAlive = false;
+    }
+     next();
   },
   mounted() {
     this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
     console.log(this.flag);
     this.pdSingleApp();
+    //  this.$router.push({
+    //           path: "/pjlz/pjfkMessage/pjfkMessage"
+    //         });
+    window.onresize = this.resize();
   },
   components: {
     child1,
     child2
   },
   methods: {
+    resize: function() {
+      if (!this.isResize) {
+        //默认屏幕高度
+        this.docmHeight = document.documentElement.clientHeight;
+        this.isResize = true;
+      } //实时屏幕高度
+      this.showHeight = document.body.clientHeight;
+      console.log( this.docmHeight+"=="+ this.docmHeight);
+      this.showHeightFun();
+    },
+    showHeightFun: function() {
+      if (this.docmHeight >= this.showHeight) {
+        $("#popSqjxId").css("height","80%");
+          $("#popSqjxId").css("max-height","85%");
+      } else {
+           $("#popSqjxId").css("height","45%");
+          $("#popSqjxId").css("max-height","50%");
+      }
+    },
     //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {
@@ -257,22 +295,22 @@ export default {
 
       if (index === 0) {
         this.currentView = 0;
-          for (var i = 0; i < this.$children.length; i++) {
+        for (var i = 0; i < this.$children.length; i++) {
           var entity = this.$children[i];
 
           if (entity.$options._componentTag == "child1") {
             console.log(entity);
-            entity.changetabState(index+1);
+            entity.changetabState(index + 1);
           }
         }
       } else if (index == 1) {
         this.currentView = 0;
-         for (var i = 0; i < this.$children.length; i++) {
+        for (var i = 0; i < this.$children.length; i++) {
           var entity = this.$children[i];
 
           if (entity.$options._componentTag == "child1") {
             console.log(entity);
-            entity.changetabState(index+1);
+            entity.changetabState(index + 1);
           }
         }
       } else {

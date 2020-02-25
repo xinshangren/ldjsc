@@ -1,7 +1,17 @@
 
 <template>
   <div style="margin-top:0px;">
-    <mescroll-vue id="mescroll" ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" style=" top: 110px;">
+    <div v-if="list.length<1" style="text-align: center;">
+      <img style="height: 200px;margin-top: 146px;" src="../../../assets/img/no_data.png" />
+    </div>
+    <mescroll-vue
+      id="mescroll"
+      ref="mescroll"
+      :down="mescrollDown"
+      :up="mescrollUp"
+      @init="mescrollInit"
+      style=" top: 110px;"
+    >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div v-for="(item,index) in list" :key="index" class="pjkMessageListDiv">
           <div class="pjkMessageRedPoint"></div>
@@ -16,21 +26,24 @@
           <!-- <div v-if="index%3==0" style="display:flex;">
             <img class="pjkMessagetitileImg" src="../../../assets/img/icon_source3.png" />
             <div class="pjkMessagetitileDiv">安排人催办</div>
-          </div> -->
+          </div>-->
 
           <div class="van-multi-ellipsis--l2 pjkMessageContentDiv">工作任务XXXXXX，需要您填写反馈情况，请尽快落实反馈。</div>
 
           <div style="height: 24px;position: relative;">
             <div class="pjkMessageFkDiv">
-              <img class="pjkMessageFkDivimg" src="../../../assets/img/icon_feedback.png"/>
+              <img class="pjkMessageFkDivimg" src="../../../assets/img/icon_feedback.png" />
               <div class="pjkMessageFkDivtext">反馈</div>
             </div>
           </div>
-          <div style="margin-left: 13px;margin-right: 13px;margin-top: 8px;" class="van-hairline--top"></div>
+          <div
+            style="margin-left: 13px;margin-right: 13px;margin-top: 8px;"
+            class="van-hairline--top"
+          ></div>
 
           <div style="display:flex;margin-top:14px;">
-             <img class="pjkMessageBottomImg"  src="../../../assets/img/icon_time_pjlz.png"/>
-             <div class="pjkMessageBottomDiv">推送时间：2020-02-21</div>
+            <img class="pjkMessageBottomImg" src="../../../assets/img/icon_time_pjlz.png" />
+            <div class="pjkMessageBottomDiv">推送时间：2020-02-21</div>
           </div>
         </div>
       </div>
@@ -82,7 +95,7 @@ export default {
           //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
           warpId: "newsList", //父布局的id (1.3.5版本支持传入dom元素)
           //icon: "../../../../assets/img/nodata.png", //图标,默认null,支持网络图
-          tip: "暂无相关数据~" //提示
+          tip: "" //提示
         }
       }
     };
@@ -93,10 +106,10 @@ export default {
     next();
   },
   mounted() {
-     this.pdSingleApp();
+    this.pdSingleApp();
   },
   methods: {
-     //判断是否是单独app
+    //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {
         var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
@@ -112,7 +125,7 @@ export default {
       var detail = url.getValue("type");
       console.log("type===" + detail);
       if (detail == 1) {
-        $("#mescroll").css("top","10px");
+        $("#mescroll").css("top", "10px");
       }
     },
     mescrollInit(mescroll) {
@@ -121,11 +134,13 @@ export default {
     //项目列表
     upCallback: function(page, mescroll) {
       var params = {
+        method: "messageList",
+        dingUserId: global_variable.roleJs.dingUserId,
         page: page.num,
         pageSize: page.size
       };
       httpMethod
-        .getProReportInfoByzdProType(params)
+        .getApprovalInfo(params)
         .then(res => {
           console.log(res);
           if (res.success == "1") {
@@ -133,13 +148,20 @@ export default {
               this.list = [];
               // this.$refs.totalCountId.innerHTML = res.total;
             }
-            var data = res.dataList;
+            var data = res.data.approvallist;
             if (data && data.length > 0) {
+              //  this.list = [];
               this.list = this.list.concat(data);
+              //  this.list = this.list.concat(data);
+              //   this.list = this.list.concat(data);
+            } else {
+              data = [];
+              this.list = [];
+              res.data.total = 0;
             }
 
             this.$nextTick(() => {
-              this.mescroll.endBySize(data.length, res.total);
+              this.mescroll.endBySize(data.length, res.data.total);
             });
           }
         })

@@ -2,7 +2,7 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
     <div v-if="list.length<1" style="text-align: center;">
-      <img style="height: 200px;margin-top: 57px;" src="../../../assets/img/no_data.png" />
+      <img style="height: 200px;margin-top: 146px;" src="../../../assets/img/no_data.png" />
     </div>
     <mescroll-vue
       id="mescroll"
@@ -10,7 +10,7 @@
       :down="mescrollDown"
       :up="mescrollUp"
       @init="mescrollInit"
-      style="top:154px;"
+      style="top:108px;"
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
@@ -204,7 +204,7 @@ export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
   },
-  name: "pjlzListvue",
+  name: "pjlzListSearchVue",
   data() {
     return {
       seach_value: "",
@@ -272,10 +272,6 @@ export default {
     console.log(search_allref);
     var self = this;
     if (global_variable.singleApp != 1) {
-      shaixuan.removeEventListener('click',  function() {
-        console.log("openPop");
-        self.Popshow = true;
-      });
       shaixuan.addEventListener("click", function() {
         console.log("openPop");
         self.Popshow = true;
@@ -291,42 +287,32 @@ export default {
     if (self.flag.role != "ld") {
       self.createListTop();
     }
-    self.pdSingleApp();
+    var statusGet = self.$route.params.entity;
+    console.log(statusGet);
+    switch (parseInt(statusGet)) {
+      case 1:
+        self.status = 0;
+        self.isOvertime = 0;
+        break;
+      case 2:
+        self.status = 2;
+        self.isOvertime = 0;
+        break;
+      case 3:
+        self.status = 1;
+        self.isOvertime = 1;
+        break;
+      case 4:
+        self.status = 1;
+        self.isOvertime = 2;
+        break;
+
+      default:
+        break;
+    }
+    self.mescroll.resetUpScroll();
   },
   methods: {
-    //判断是否是单独app
-    pdSingleApp: function() {
-      String.prototype.getValue = function(parm) {
-        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
-        var r = this.substr(this.indexOf("?") + 1).match(reg);
-        if (r != null) return unescape(r[2]);
-        return null;
-      };
-      var hrefUrl = window.location.href;
-      var indexUrl = hrefUrl.replace("#", "");
-
-      var url = decodeURI(hrefUrl);
-      console.log(url);
-      var detail = url.getValue("type");
-      console.log("type===" + detail);
-      if (detail == "1") {
-        $("#mescroll").css("top", "113px");
-        // this.showRightMenu();
-        this.getUserInfo();
-        this.status=1;
-        this.mescroll.resetUpScroll();
-        var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
-        console.log(shaixuanApp);
-        var self = this;
-        shaixuanApp.addEventListener("click", function() {
-          console.log("openPop");
-          self.Popshow = true;
-        });
-      } else {
-        this.status=1;
-        this.mescroll.resetUpScroll();
-      }
-    },
     createListTop: function(top) {
       $("#mescroll").css("top", "210px");
     },
@@ -458,7 +444,7 @@ export default {
       });
 
       context.isOvertime = "";
-      context.status = "1";
+      context.status = "";
       // context.projectNature = "";
       this.mescroll.resetUpScroll();
       this.Popshow = false;
@@ -566,7 +552,7 @@ export default {
 </script>
 
 <style >
-@import "../../../page/pjlz/pjlzList/pjlzList.css";
+@import "../../../page/pjlz/pjlzListSearch/pjlzListSearch.css";
 .van-popup--top {
   z-index: 100000;
 }

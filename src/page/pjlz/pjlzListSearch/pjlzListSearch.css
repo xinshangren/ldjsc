@@ -1,0 +1,141 @@
+.pjlzListblz{
+    
+    border: 1px solid #2599e6;
+    border-radius: 6px;
+    padding: 0px 10px 0px 13px;
+    font-size: 12px;
+    height: 17px;
+    color:#2599e6; 
+    margin:auto 0;
+    margin-left: 12px;
+}
+.pjlzListybj{
+    border: 1px solid #f89636;
+    border-radius: 6px;
+    padding: 0px 10px 0px 13px;
+    font-size: 12px;
+    height: 17px;
+    color:#f89636; 
+    margin:auto 0;
+    margin-left: 12px;
+}
+.pjlzListsqjx{
+    border: 1px solid #06d0b1;
+    border-radius: 6px;
+    padding: 0px 10px 0px 13px;
+    font-size: 12px;
+    height: 17px;
+    color:#06d0b1; 
+    margin:auto 0;
+    margin-left: 12px;
+}
+.pjlzListjjjx{
+    border: 1px solid #f66345;
+    border-radius: 6px;
+    padding: 0px 10px 0px 13px;
+    font-size: 12px;
+    height: 17px;
+    color:#f66345; 
+    margin:auto 0;
+    margin-left: 12px;
+}
+.pjlzListyfk{
+
+    border: 1px solid #2599e6;
+    border-radius: 6px;
+    padding: 0px 10px 0px 13px;
+    font-size: 12px;
+    height: 17px;
+    color:#2599e6; 
+    margin:auto 0;
+    margin-left: 12px;
+}
+.pjlzListwfk{
+    border: 1px solid #f89636;
+    border-radius: 6px;
+    padding: 0px 10px 0px 13px;
+    font-size: 12px;
+    height: 17px;
+    color:#f89636; 
+    margin:auto 0;
+    margin-left: 12px;
+}
+.pjlzListTitle{
+    width: 60%;
+    line-height: 28px;
+    margin-left: 12px;
+    font-size: 14px;
+}
+.pjlzListSmallIcon{
+    height: 15px;
+}
+.pjlzListSmallDiv{
+    display:flex;
+    margin-left:39px;
+    margin-top: 4px;
+}
+.pjlzListSmallDivFont{
+    font-size: 12px;
+color: #666666;
+margin-left: 7px
+}
+.mescroll{
+    position: fixed;
+    bottom: 0px;
+    height: auto;
+}
+.pjlzListyjcb{
+    display: flex;position: absolute;right: 22px;bottom: 0px;border: 1px solid #3098fb;border-radius: 40px;padding: 2px 8px;
+}
+.pjlzListyjcbImg{
+    height: 14px;
+margin: auto 0;
+margin-top:4px;
+}
+.pjlzListyjcbfont{
+    font-size: 14px;
+color: #3098fb;
+margin-left: 3px;
+
+}
+.dialogNoSelect {
+	border: 1px solid #cccccc;
+	padding: 1px 15px 1px 15px;
+	border-radius: 33px;
+	font-size: 13px;
+	margin-left: 10px;
+	text-align: center;
+	margin-top: 4px;
+	background: #ffffff;
+}
+
+.dialogSelect {
+	border: 1px solid #1976D2;
+	padding: 1px 15px 1px 15px;
+	border-radius: 33px;
+	font-size: 13px;
+	margin-left: 10px;
+	text-align: center;
+	margin-top: 4px;
+	background: #f6fbff;
+	color: #1976D2;
+}
+
+
+.pjlzListyjcbNew{
+    display: flex;
+    border-radius: 6px;
+    background: #DBEEFF;
+    margin: 2px 20px;
+    padding: 5px;
+    width: 85%;
+}
+.pjlzListImgRightNew{
+    position: absolute;
+    height: 66px;
+    top: 26px;
+    right: 27px;
+}
+
+
+
