@@ -120,14 +120,14 @@
                 class="pjlzListyjcbNew"
                 @click="openSqjxFun(item,$event)"
               >
-                <div style="width:43%;text-align:right;margin-right:3px;">
+                <div style="width:33%;text-align:right;margin-right:3px;">
                   <img class="pjlzListyjcbImg" src="../../../assets/img/icon_complete.png" />
                 </div>
                 <div class="pjlzListyjcbfont">申请结项</div>
               </div>
               <div
                 @click="openFkFun(item,$event)"
-                v-if="(flag.role=='cbr'&&(item.approval_status==2||item.approval_status==0||item.approval_status==5))"
+                v-if="(flag.role=='cbr'&&(item.approval_status!=4))"
                 class="pjlzListyjcbNew"
               >
                 <div style="width:43%;text-align:right;margin-right:3px;">

@@ -15,20 +15,20 @@
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div v-for="(item,index) in list" :key="index" class="pjkMessageListDiv">
           <div class="pjkMessageRedPoint"></div>
-          <div v-if="index%2==0" style="display:flex;">
+          <div v-if="item.msg_type==0" style="display:flex;">
             <img class="pjkMessagetitileImg" src="../../../assets/img/icon_source1.png" />
             <div class="pjkMessagetitileDiv">系统提示</div>
           </div>
-          <div v-if="index%2!=0" style="display:flex;">
+          <div v-if="item.msg_type==1" style="display:flex;">
             <img class="pjkMessagetitileImg" src="../../../assets/img/icon_source2.png" />
             <div class="pjkMessagetitileDiv">领导催办</div>
           </div>
-          <!-- <div v-if="index%3==0" style="display:flex;">
+          <div v-if="item.msg_type==2" style="display:flex;">
             <img class="pjkMessagetitileImg" src="../../../assets/img/icon_source3.png" />
             <div class="pjkMessagetitileDiv">安排人催办</div>
-          </div>-->
+          </div>
 
-          <div class="van-multi-ellipsis--l2 pjkMessageContentDiv">工作任务XXXXXX，需要您填写反馈情况，请尽快落实反馈。</div>
+          <div class="van-multi-ellipsis--l2 pjkMessageContentDiv">{{item.msg_content}}</div>
 
           <div style="height: 24px;position: relative;">
             <div class="pjkMessageFkDiv">
@@ -43,7 +43,7 @@
 
           <div style="display:flex;margin-top:14px;">
             <img class="pjkMessageBottomImg" src="../../../assets/img/icon_time_pjlz.png" />
-            <div class="pjkMessageBottomDiv">推送时间：2020-02-21</div>
+            <div class="pjkMessageBottomDiv">推送时间：{{item.msg_time}}</div>
           </div>
         </div>
       </div>
@@ -136,7 +136,8 @@ export default {
       var params = {
         method: "messageList",
         dingUserId: global_variable.roleJs.dingUserId,
-        page: page.num,
+        // corpId:global_variable.corpId,
+        pageNo: page.num,
         pageSize: page.size
       };
       httpMethod
@@ -148,7 +149,7 @@ export default {
               this.list = [];
               // this.$refs.totalCountId.innerHTML = res.total;
             }
-            var data = res.data.approvallist;
+            var data = res.data.msglist;
             if (data && data.length > 0) {
               //  this.list = [];
               this.list = this.list.concat(data);

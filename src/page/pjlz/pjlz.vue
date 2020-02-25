@@ -135,10 +135,8 @@ export default {
       gzxOrStatic: 0, //0=工作项1=数据统计
       top: 10,
       nowItem: null,
-      docmHeight: "0", //默认屏幕高度
-      showHeight: "0", //实时屏幕高度
-      hidshow: true, //显示或者隐藏footer,
-      isResize: false //默认屏幕高度是否已获取
+      screenHeight: document.documentElement.clientHeight, //屏幕高度
+      screenHeightNow: 0
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -147,9 +145,9 @@ export default {
     next();
   },
   beforeRouteLeave(to, from, next) {
-      console.log(from);
-     console.log(to);
-     if (from.name == "pjlzListvue") {
+    console.log(from);
+    console.log(to);
+    if (from.name == "pjlzListvue") {
       if (to.name != "main") {
         from.meta.keepAlive = true;
       } else {
@@ -158,7 +156,7 @@ export default {
     } else {
       from.meta.keepAlive = false;
     }
-     next();
+    next();
   },
   mounted() {
     this.flag = global_variable.roleJs;
@@ -168,30 +166,30 @@ export default {
     //  this.$router.push({
     //           path: "/pjlz/pjfkMessage/pjfkMessage"
     //         });
-    window.onresize = this.resize();
+    var _this = this;
+    window.onresize = function() {
+      _this.screenHeightNow = document.documentElement.clientHeight; //窗口高度
+    };
   },
   components: {
     child1,
     child2
   },
+  watch: {
+    screenWidth: function(val) {
+      //监听屏幕宽度变化
+      var oIframe = document.getElementById(divId);
+      oIframe.style.width = Number(val) - 120 + "px"; //'120'是页面布局调整，可去除
+    }
+  },
   methods: {
-    resize: function() {
-      if (!this.isResize) {
-        //默认屏幕高度
-        this.docmHeight = document.documentElement.clientHeight;
-        this.isResize = true;
-      } //实时屏幕高度
-      this.showHeight = document.body.clientHeight;
-      console.log( this.docmHeight+"=="+ this.docmHeight);
-      this.showHeightFun();
-    },
     showHeightFun: function() {
       if (this.docmHeight >= this.showHeight) {
-        $("#popSqjxId").css("height","80%");
-          $("#popSqjxId").css("max-height","85%");
+        $("#popSqjxId").css("height", "80%");
+        $("#popSqjxId").css("max-height", "85%");
       } else {
-           $("#popSqjxId").css("height","45%");
-          $("#popSqjxId").css("max-height","50%");
+        $("#popSqjxId").css("height", "45%");
+        $("#popSqjxId").css("max-height", "50%");
       }
     },
     //判断是否是单独app
@@ -211,7 +209,8 @@ export default {
       console.log("type===" + detail);
       if (detail == "1") {
         this.top = 0;
-        this.$route.meta.title = "批件管理";
+        document.title = "批件管理";
+        // this.$route.meta.title = "批件管理";
         this.showRightMenu();
       }
     },
