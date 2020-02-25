@@ -189,14 +189,14 @@ export default {
           console.log(res);
           if (res.success == "1") {
             self.pj_detail = res.data;
-            if (
-              self.pj_detail.approval_manage_person != null &&
-              self.pj_detail.approval_manage_person != ""
-            ) {
-              self.pj_detail.approval_manage_person = self.pj_detail.approval_manage_person.split(
-                ","
-              );
-            }
+            // if (
+            //   self.pj_detail.approval_manage_person != null &&
+            //   self.pj_detail.approval_manage_person != ""
+            // ) {
+            //   self.pj_detail.approval_manage_person = self.pj_detail.approval_manage_person.split(
+            //     ","
+            //   );
+            // }
             if (self.pj_detail.approval_status != null) {
               switch (self.pj_detail.approval_status) {
                 case "0":

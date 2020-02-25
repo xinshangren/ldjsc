@@ -117,10 +117,10 @@ export default {
       yytz_flag: false,
       dxtz_flag: false,
       dhtz_flag: false,
+      cb_type: "",
       pj_obj: "",
       pj_detail: "",
       cb_content: "",
-      cb_type: ""
     };
   },
   mounted() {
@@ -159,6 +159,14 @@ export default {
     },
     getdata: function() {
       let self = this;
+      self.yytz_url=require("../../../assets/img/pic_way1.png");
+      self.dxtz_url= require("../../../assets/img/pic_way2.png");
+      self.dhtz_url= require("../../../assets/img/pic_way3.png");
+      self.yytz_flag= false;
+      self.dxtz_flag= false;
+      self.dhtz_flag= false;
+      self.cb_type= "";
+      $(".cbfs").removeClass("choose");
       let approvalInfoId = self.pj_obj.id;
       var params = {
         method: "getApprovalInfo",
@@ -173,14 +181,14 @@ export default {
           console.log(res);
           if (res.success == "1") {
             self.pj_detail = res.data;
-            if (
-              self.pj_detail.approval_manage_person != null &&
-              self.pj_detail.approval_manage_person != ""
-            ) {
-              self.pj_detail.approval_manage_person = self.pj_detail.approval_manage_person.split(
-                ","
-              );
-            }
+            // if (
+            //   self.pj_detail.approval_manage_person != null &&
+            //   self.pj_detail.approval_manage_person != ""
+            // ) {
+            //   self.pj_detail.approval_manage_person = self.pj_detail.approval_manage_person.split(
+            //     ","
+            //   );
+            // }
             if (self.pj_detail.approval_status != null) {
               switch (self.pj_detail.approval_status) {
                 case "0":

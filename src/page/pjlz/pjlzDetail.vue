@@ -3,20 +3,20 @@
   <div>
     <div id="pjlzDeali_fk_id" style="margin:101px 0px 10px;background:#ffffff;min-height: 202px;">
       <div style="display: flex;padding-top: 10px;">
-        <img
+        <!-- <img
           v-if="pj_detail.approval_warn_flag == 0"
           src="../../assets/img/no_overdue.png"
           style="height:38px"
         />
-        <img v-else src="../../assets/img/noverdue.png" style="height:38px" />
+        <img v-else src="../../assets/img/noverdue.png" style="height:38px" /> -->
         <div
-          style="font-weight: 600;width: 65%; font-size: 16px; white-space: nowrap; overflow: hidden;padding:7px 0px 7px 7px;text-overflow: ellipsis;"
+          style="font-weight: 600;font-size: 16px; padding:7px 7px 7px 7px;width: 85%;margin: auto;"
         >{{pj_detail.approval_name}}</div>
-        <div
+        <!-- <div
           style="font-size: 15px;border:1px solid #2599e6 ;border-radius: 5px;color:#2599e6;height: 20px;
                 text-align: center;
                 margin-top: 7px"
-        >{{pj_detail.approval_status}}</div>
+        >{{pj_detail.approval_status}}</div> -->
       </div>
       <div style="color: #666666;font-size: 16px;width: 94%;">
         <div style="display: flex;margin-top: 10px;">
@@ -26,12 +26,10 @@
         <div style="display: flex;margin-top: 15px;">
           <div style="width: 30%;text-align: right;">承办人：</div>
           <div>
-            <div style="height: 25px;">牵头人：{{pj_detail.approval_main_person}}</div>
+            <div style="height: 25px;">{{pj_detail.approval_main_person}}</div>
             <div
-              v-if="pj_detail.approval_manage_person != null && pj_detail.approval_manage_person.length>0"
-              v-for="person in pj_detail.approval_manage_person"
-              style="height: 25px;"
-            >相关人：{{person}}</div>
+              style="min-height: 25px;"
+            >{{pj_detail.approval_manage_person}}</div>
           </div>
         </div>
         <div style="display: flex;margin-top: 15px;">
@@ -42,8 +40,8 @@
             <div
               style="font-size: 15px;
                         line-height: 23px;
-                        margin: 5px;"
-            >{{pj_detail.approval_content}}</div>
+                        margin: 5px;" v-html="pj_detail.approval_content"
+            ></div>
           </div>
         </div>
         <div style="display: flex;margin-top: 15px;padding-bottom: 15px;">
@@ -70,12 +68,7 @@
         <div id="fkjl" style="padding:0px 15px 0px 15px;position: relative;">
           <div style="display: flex;font-size: 16px;">
             <div style="width: 80%;display: flex;">
-              <div>反馈记录</div>
-              <div
-                style="background: #f22e16;width: 20px;
-                        height: 16px;
-                        margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;"
-              >{{pj_detail.approval_feedback_time == null?0:pj_detail.approval_feedback_time}}</div>
+              <div>反馈记录({{pj_detail.approval_feedback_time == null?0:pj_detail.approval_feedback_time}})</div>
             </div>
             <div
               v-show="fkjl_null"
@@ -124,12 +117,7 @@
         <div id="cbjl" style="padding:0px 15px;position: relative;">
           <div style="display: flex;font-size: 16px;">
             <div style="width: 80%;display: flex;">
-              <div>催办记录</div>
-              <div
-                style="background: #f22e16;width: 20px;
-                        height: 16px;
-                        margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;"
-              >{{pj_detail.approval_warn_time== null?0:pj_detail.approval_warn_time}}</div>
+              <div>催办记录({{pj_detail.approval_warn_time== null?0:pj_detail.approval_warn_time}})</div>
             </div>
             <div
               v-show="cbjl_null"
@@ -170,12 +158,7 @@
         <div id="jxjl" style="padding:0px 15px;position: relative;">
           <div style="display: flex;font-size: 16px;">
             <div style="width: 80%;display: flex;">
-              <div>申请结项记录</div>
-              <div
-                style="background: #f22e16;width: 20px;
-                        height: 16px;
-                        margin: 3px;border-radius: 15px;color: #ffffff;text-align: center;font-size: 13px;"
-              >{{pj_detail.approval_done_time == null?0:pj_detail.approval_done_time}}</div>
+              <div>结项记录({{pj_detail.approval_done_time == null?0:pj_detail.approval_done_time}})</div>
             </div>
             <div
               v-show="jxjl_null"
