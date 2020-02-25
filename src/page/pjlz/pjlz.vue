@@ -169,6 +169,7 @@ export default {
     var _this = this;
     window.onresize = function() {
       _this.screenHeightNow = document.documentElement.clientHeight; //窗口高度
+      console.log(_this.screenHeightNow);
     };
   },
   components: {
@@ -176,7 +177,7 @@ export default {
     child2
   },
   watch: {
-    screenWidth: function(val) {
+    screenHeightNow: function(newName, oldName) {
       //监听屏幕宽度变化
       if (this.screenHeight > this.screenHeightNow) {
         $("#popSqjxId").css("height", "80%");

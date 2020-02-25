@@ -313,11 +313,11 @@ export default {
         break;
       case 3:
         self.status = 1;
-        self.isOvertime = 1;
+        self.isOvertime = 2;
         break;
       case 4:
         self.status = 1;
-        self.isOvertime = 2;
+        self.isOvertime = 1;
         break;
 
       default:
