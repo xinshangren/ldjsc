@@ -1,6 +1,9 @@
 
 <template>
   <div style="margin-top:0px;overflow:hidden;">
+    <div v-if="list.length<1" style="text-align: center;">
+      <img style="height: 200px;margin-top: 57px;" src="../../../assets/img/no_data.png" />
+    </div>
     <mescroll-vue
       id="mescroll"
       ref="mescroll"
@@ -28,13 +31,12 @@
                 src="../../../assets/img/noverdue.png"
               />
               <div class="van-ellipsis pjlzListTitle">{{item.approval_name}}</div>
-              <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
+              <!-- <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
               <div v-if="item.approval_status==1" class="pjlzListyfk">已反馈</div>
               <div v-if="item.approval_status==2" class="pjlzListwfk">未反馈</div>
               <div v-if="item.approval_status==3" class="pjlzListsqjx">申请结项</div>
-              <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>
-
-              <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div>
+              <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>-->
+              <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
@@ -55,22 +57,51 @@
               <div class="pjlzListSmallDivFont">{{item.approval_create_date}}</div>
             </div>
 
+            <img
+              v-if="item.approval_check_flag==0"
+              class="pjlzListImgRightNew"
+              src="../../../assets/img/state_1.png"
+            />
+            <!-- <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
+              <div v-if="item.approval_status==1" class="pjlzListyfk">已反馈</div>
+              <div v-if="item.approval_status==2" class="pjlzListwfk">未反馈</div>
+              <div v-if="item.approval_status==3" class="pjlzListsqjx">申请结项</div>
+            <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>-->
+            <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==1"
+              class="pjlzListImgRightNew"
+              src="../../../assets/img/state_3.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==2"
+              class="pjlzListImgRightNew"
+              src="../../../assets/img/state_2.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==3"
+              class="pjlzListImgRightNew"
+              src="../../../assets/img/state_4.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==4"
+              class="pjlzListImgRightNew"
+              src="../../../assets/img/state_6.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==5"
+              class="pjlzListImgRightNew"
+              src="../../../assets/img/state_5.png"
+            />
             <div
               @click="openYjcbFun(item,$event)"
               v-if="(flag.role=='ld'||flag.role=='wdk')&&(item.approval_status!=4&&item.approval_status!=3)"
-              class="pjlzListyjcb"
+              class="pjlzListyjcbNew"
             >
-              <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
+              <div style="width:46%;text-align:right;margin-right:3px;">
+                <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
+              </div>
               <div class="pjlzListyjcbfont">一键催办</div>
-            </div>
-
-            <div
-              v-if="flag.role=='cbr'&&item.approval_status==1"
-              class="pjlzListyjcb"
-              @click="openSqjxFun(item,$event)"
-            >
-              <img class="pjlzListyjcbImg" src="../../../assets/img/icon_complete.png" />
-              <div class="pjlzListyjcbfont">申请结项</div>
             </div>
 
             <div
@@ -78,17 +109,32 @@
               v-if="flag.role=='wdk'&&item.approval_status==3"
               class="pjlzListyjcb"
             >
-              <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
+              <div style="width:46%;text-align:right;margin-right:3px;">
+                <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
+              </div>
               <div class="pjlzListyjcbfont">审核申请</div>
             </div>
-
-            <div
-              @click="openFkFun(item,$event)"
-              v-if="flag.role=='cbr'&&(item.approval_status==2||item.approval_status==0||item.approval_status==5)"
-              class="pjlzListyjcb"
-            >
-              <img class="pjlzListyjcbImg" src="../../../assets/img/icon_feedback.png" />
-              <div class="pjlzListyjcbfont">反馈</div>
+            <div style="display:flex;">
+              <div
+                v-if="flag.role=='cbr'&&item.approval_status==1"
+                class="pjlzListyjcbNew"
+                @click="openSqjxFun(item,$event)"
+              >
+                <div style="width:33%;text-align:right;margin-right:3px;">
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_complete.png" />
+                </div>
+                <div class="pjlzListyjcbfont">申请结项</div>
+              </div>
+              <div
+                @click="openFkFun(item,$event)"
+                v-if="(flag.role=='cbr'&&(item.approval_status==2||item.approval_status==0||item.approval_status==5))"
+                class="pjlzListyjcbNew"
+              >
+                <div style="width:46%;text-align:right;margin-right:3px;">
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_feedback.png" />
+                </div>
+                <div class="pjlzListyjcbfont">反馈</div>
+              </div>
             </div>
           </div>
         </div>
@@ -176,6 +222,7 @@ export default {
       Popshow: false,
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
+      nodataImg: require("../../../assets/img/nodata.png"),
       mescrollUp: {
         // 上拉加载的配置.
         callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }
@@ -186,12 +233,12 @@ export default {
           size: 10 //每页数据条数,默认10
         },
         htmlNodata: '<p class="upwarp-nodata">-- END --</p>',
-        noMoreSize: 5,
+        noMoreSize: 3,
         empty: {
           //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
           warpId: "newsList", //父布局的id (1.3.5版本支持传入dom元素)
-          //icon: "../../../../assets/img/nodata.png", //图标,默认null,支持网络图
-          tip: "暂无相关数据~" //提示
+          // icon: "../../../assets/img/nodata.png", //图标,默认null,支持网络图
+          tip: "" //提示
         }
       }
     };
@@ -264,6 +311,13 @@ export default {
         this.getUserInfo();
         // this.status=1;
         this.mescroll.resetUpScroll();
+        var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
+        console.log(shaixuanApp);
+        var self = this;
+        shaixuanApp.addEventListener("click", function() {
+          console.log("openPop");
+          self.Popshow = true;
+        });
       } else {
         this.mescroll.resetUpScroll();
       }
@@ -388,17 +442,12 @@ export default {
     clearType: function() {
       var context = this;
       //循环重置查询条件
-      $("#jdflDialogId li").each(function() {
+      $("#sfbjDialogId li").each(function() {
         $(this).removeClass("dialogSelect");
         $(this).addClass("dialogNoSelect");
       });
       //循环重置查询条件
-      $("#xmlxDialogId li").each(function() {
-        $(this).removeClass("dialogSelect");
-        $(this).addClass("dialogNoSelect");
-      });
-      //循环重置查询条件
-      $("#dylxDialogId li").each(function() {
+      $("#sfcqDialogId li").each(function() {
         $(this).removeClass("dialogSelect");
         $(this).addClass("dialogNoSelect");
       });
@@ -496,49 +545,10 @@ export default {
       });
       e.stopPropagation();
     },
-    //所有的点击事件
+    //列表大块的点击事件
     openIndexFun: function(item, e) {
-      var role = this.flag.role;
-      var status = item.approval_status;
+    
       e.stopPropagation();
-      if ((role == "ld" || role == "wdk") && status != 4 && status != 3) {
-        //一键催办
-        this.$router.push({
-          path: "/pjlz/pjlzDetail_cb/pjlzDetail_cb",
-          name: "pjlzDetail_cb",
-          params: {
-            obj: item
-          }
-        });
-        return;
-      }
-      if (role == "cbr" && status == 1) {
-        //申请结项
-        this.$parent.showSqjxPop(item);
-        return;
-      }
-      if (role == "wdk" && status == 3) {
-        //审核申请
-        this.$router.push({
-          path: "/pjlz/pjlzDetail_jx/pjlzDetail_jx",
-          name: "pjlzDetail_jx",
-          params: {
-            obj: item
-          }
-        });
-        return;
-      }
-      if (role == "cbr" && (status == 2 || status == 0 || status == 5)) {
-        //反馈
-        this.$router.push({
-          path: "/pjlz/pjlzDetail_fk/pjlzDetail_fk",
-          name: "pjlzDetail_fk",
-          params: {
-            obj: item
-          }
-        });
-        return;
-      }
     }
   }
 };
