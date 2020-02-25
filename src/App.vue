@@ -181,7 +181,7 @@ export default {
     var detail = url.getValue("type");
     console.log(detail);
     if (detail != null) {
-      if (detail == 1) {
+      if (detail == "1") {
         this.isSingleApp = true;
         this.$route.meta.title = "批件流转";
         global_variable.singleApp = 1; //独立app判断
