@@ -43,7 +43,7 @@
                         <div
                             style="margin-left: 2px;border: 1px solid #9f9f9f;border-radius: 4px;width: 60%;font-size: 14px;min-height: 100px;">
                             <div style="margin:5px ;">
-                               {{feedback_obj.feedback_content}}
+                                {{feedback_obj.feedback_content}}
 
                             </div>
                         </div>
@@ -52,10 +52,8 @@
                         <img style="height: 18px;" src="../../../../assets/img/wjj_gzfk.png" />
                         <div style="margin-left: 2px;">附件:</div>
                         <div style="margin-left: 2px;color:#2599e6">
-                            <div 
-                                v-if="file_list.length>0"
-                                v-for="file in file_list"
-                                 style="display: flex;margin-left: 5px;height:30px">
+                            <div v-if="file_list.length>0" v-for="file in file_list"
+                                style="display: flex;margin-left: 5px;height:30px">
                                 <div>{{file.attach_name}}</div>
                                 <img src='../../../../assets/img/icon_delete.png'
                                     style="height: 20px;margin-left: 5px;margin-top: 2px;" />
@@ -70,14 +68,14 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex;background: #28bcfe;border-radius:20px;width: 64%;
+            <!-- <div style="display: flex;background: #28bcfe;border-radius:20px;width: 64%;
                 margin: auto;
                 margin-top: 15px;
                 height: 40px;
-                margin-bottom: 15px;">
+                margin-bottom: 15px;" v-show="upd_button">
                 <div style="margin: auto;margin-top: 6px; color: #ffffff;font-size: 18px;">修改
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
@@ -106,20 +104,26 @@
         name: "pjlz_fkjl_detail",
         data() {
             return {
-                feedback_id:'',
-                feedback_obj:"",
-                file_list:[],
+                feedback_id: '',
+                feedback_obj: "",
+                file_list: [],
+                upd_button:false,
             };
         },
         mounted() {
+            this.upd_button = false;
             var s = window.innerHeight - $("#content").offset().top;
             $("#content").css("min-height", s);
             this.feedback_id = this.$route.params.id;
             this.getdata();
         },
         methods: {
-             getdata: function() {
+            getdata: function () {
                 var self = this;
+                //判断 用户角色
+                if(global_variable.roleJs.role == 'cbr'){
+                    self.upd_button = true;
+                }
                 let feedbackId = self.feedback_id;
                 var params = {
                     method: "approvalFeedbackDetail",
@@ -131,18 +135,18 @@
                 httpMethod
                     .getApprovalInfo(params)
                     .then(res => {
-                    console.log(res);
-                        if(res.success == 1){
+                        console.log(res);
+                        if (res.success == 1) {
                             self.feedback_obj = res.data;
-                            if(res.data.attachlist.length>0){
+                            if (res.data.attachlist.length > 0) {
                                 self.file_list = res.data.attachlist;
                             }
                         }
                     })
                     .catch(err => {
-                    this.$toast(err);
+                        this.$toast(err);
                     });
-             }
+            },
         },
     };
 </script>

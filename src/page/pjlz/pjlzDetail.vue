@@ -254,7 +254,6 @@ export default {
     this.inint();
   },
   activated() {
-    this.inint();
   },
   watch: {
     pj_detail: "inint"

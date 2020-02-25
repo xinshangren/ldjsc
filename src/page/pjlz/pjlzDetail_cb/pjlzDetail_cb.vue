@@ -59,14 +59,14 @@
           >
             <div class="tzfs_div">短信通知</div>
           </div>
-          <div
+          <!-- <div
             @click="choose_cbfs('dhtz')"
             class="cbfs"
             id="dhtz"
             :style="{backgroundImage:'url(' + dhtz_url + ')',backgroundSize:'cover',backgroundRepeat: 'no-repeat'}"
           >
             <div class="tzfs_div">电话通知</div>
-          </div>
+          </div> -->
         </div>
         <div
           style="display: flex;background: #28bcfe;border-radius:20px;width: 64%;
