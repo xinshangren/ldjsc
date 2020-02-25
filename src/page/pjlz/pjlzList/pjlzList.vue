@@ -309,7 +309,7 @@ export default {
         $("#mescroll").css("top", "113px");
         // this.showRightMenu();
         this.getUserInfo();
-        // this.status=1;
+        this.status=1;
         this.mescroll.resetUpScroll();
         var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
         console.log(shaixuanApp);
