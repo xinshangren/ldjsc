@@ -32,7 +32,7 @@
       <div style="padding:10px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">申请说明</div>
         <div style="display: flex;font-size: 15px;margin-top: 5px;color: #666666;">
-          <div style="margin:10px ;">{{pj_detail.approval_done.done_content}}</div>
+          <div style="margin:10px ;">{{jx_content}}</div>
         </div>
         <div style="display: flex;">
           <div
@@ -137,16 +137,19 @@ export default {
       show: false,
       refuse_content: "",
       pj_obj: "",
-      pj_detail: ""
+      pj_detail: "",
+      jx_content:""
     };
   },
   mounted() {
+    this.jx_content = "";
     this.pj_obj = this.$route.params.obj;
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
   activated() {
+    this.jx_content = "";
     this.pj_obj = this.$route.params.obj;
     this.getdata();
     this.pdSingleApp();
@@ -220,7 +223,8 @@ export default {
                 default:
                   break;
               }
-            }
+            };
+            self.jx_content = self.pj_detail.approval_done.done_content;
           }
         })
         .catch(err => {
