@@ -7,7 +7,7 @@
       :down="mescrollDown"
       :up="mescrollUp"
       @init="mescrollInit"
-      style="top:200px;"
+      style="top:154px;"
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
@@ -18,12 +18,12 @@
           <div style="position:relative;" @click="openIndexFun(item,$event)">
             <div style="display:flex;">
               <img
-                v-if="item.approval_status!=2&&item.approval_status!=4"
+                v-if="item.approval_warn_flag==0"
                 style="height:30px;"
                 src="../../../assets/img/no_overdue.png"
               />
               <img
-                v-if="item.approval_status==2||item.approval_status==4"
+                v-if="item.approval_warn_flag==1"
                 style="height:30px;"
                 src="../../../assets/img/noverdue.png"
               />
@@ -201,10 +201,28 @@ export default {
     console.log(to);
     next();
   },
+  computed: {
+    listenComponentState() {
+      return this.$store.state.seach_value;
+    }
+  },
+  watch: {
+    //监听全局变量componentId的变化
+    listenComponentState: function(val, oldval) {
+      if (val != oldval) {
+        this.seach_value = this.$store.state.seach_value;
+        console.log(this.$store.state.seach_value);
+        //alert(this.searchkey);
+        this.mescroll.resetUpScroll();
+      }
+    }
+  },
   mounted() {
     // this.flag=global_variable.roleJs;
     var shaixuan = this.$parent.$root.$children[0].$refs.shaixuanImgId;
-    // console.log(shaixuan);
+    var search_allref = this.$parent.$root.$children[0].seach_value;
+
+    console.log(search_allref);
     var self = this;
     if (global_variable.singleApp != 1) {
       shaixuan.addEventListener("click", function() {
@@ -389,7 +407,7 @@ export default {
       context.status = "";
       // context.projectNature = "";
       this.mescroll.resetUpScroll();
-      this.show = false;
+      this.Popshow = false;
     },
     mescrollInit(mescroll) {
       this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置

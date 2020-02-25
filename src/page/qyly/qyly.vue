@@ -2,7 +2,7 @@
   <div>
     <div
       id="qcbutton"
-      style="margin-top: 60px;"
+      style=""
     >
       <div class="body-container" @click="closeState">
         <div id="qcbutton" style="display: flex;margin-top: 60px;width: 90%;margin-left: 5%;">
@@ -17,7 +17,7 @@
             @click="changeState(2)"
           />
         </div>
-        <van-sticky :offset-top="111">
+        <van-sticky :offset-top="101">
           <div v-if="state==1" style="position: relative;">
             <van-tabs
               v-model="active"

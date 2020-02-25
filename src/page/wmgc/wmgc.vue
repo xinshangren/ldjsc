@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:55px;">
+  <div >
     <van-tabs
       @click="onClick"
       v-model="active"

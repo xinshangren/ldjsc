@@ -23,11 +23,11 @@
   transition: all 1s ease-in-out;
   transform: translateY(-35px);
 }
-.singleApp{
- margin-top: 0PX;
+.singleApp {
+  margin-top: 0px;
 }
-.nosingleApp{
- margin-top: 101PX;
+.nosingleApp {
+  margin-top: 101px;
 }
 </style>
 
@@ -36,11 +36,15 @@
     <loading v-show="LOADING" style="z-index:3;"></loading>
     <LoadingBig v-show="BIGLOADING" style="z-index:3;"></LoadingBig>
     <!--搜索框部分start-->
-    <div v-if="isSingleApp==false" style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;">
-      <div  style="display: flex;">
+    <div
+      v-if="isSingleApp==false"
+      style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;"
+    >
+      <div style="display: flex;">
         <div id="appVueleftId" style="width:63%;position:relative;">
           <van-search
             id="search_all"
+            ref="search_allref"
             :placeholder="seach_placeholder"
             shape="round"
             background="rgb(255, 255, 255,0)"
@@ -48,12 +52,12 @@
             class="index_top_style"
             style="width:100%;height: 64px;"
           />
-          <img
+          <!-- <img
             ref="shaixuanImgId"
             class="shaixuanImg"
             style="display:none;  position: absolute;right: 23px;top: 24px;height: 20px;"
             src="@/assets/img/icon_filtrate.png"
-          />
+          />-->
         </div>
         <!-- <div
           id="appVuerightId"
@@ -79,6 +83,13 @@
           class="ui-row-flex ui-whitespace"
           style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;margin-left: 20px;"
         >
+          <img
+          class="shaixuanImg"
+          ref="shaixuanImgId"
+            src="@/assets/img/project_filtrate_white.png"
+            style=" display:none;height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;"
+            
+          />
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
             <div class="appvueRightFont">首页</div>
@@ -124,7 +135,10 @@
     <!--搜索框部分end-->
     <!-- <router-view></router-view> -->
     <keep-alive>
-      <router-view :class="isSingleApp==true?'singleApp':'nosingleApp'"   v-if="$route.meta.keepAlive"></router-view>
+      <router-view
+        :class="isSingleApp==true?'singleApp':'nosingleApp'"
+        v-if="$route.meta.keepAlive"
+      ></router-view>
     </keep-alive>
     <router-view :class="isSingleApp==true?'singleApp':'nosingleApp'" v-if="!$route.meta.keepAlive"></router-view>
   </div>
@@ -149,7 +163,7 @@ export default {
       scroll_notice: [],
       animateUp: false,
       timer: null,
-      isSingleApp:false,
+      isSingleApp: false
     };
   },
   mounted() {
@@ -161,16 +175,17 @@ export default {
     };
     var hrefUrl = window.location.href;
     var indexUrl = hrefUrl.replace("#", "");
-        
+
     var url = decodeURI(hrefUrl);
     console.log(url);
     var detail = url.getValue("type");
     console.log(detail);
-    if(detail!=null){
-        if(detail==1){
-            this.isSingleApp=true;
-            global_variable.singleApp=1;//独立app判断
-        }
+    if (detail != null) {
+      if (detail == 1) {
+        this.isSingleApp = true;
+        this.$route.meta.title = "批件流转";
+        global_variable.singleApp = 1; //独立app判断
+      }
     }
     this.getUserInfo();
     this.getFiveNotice();

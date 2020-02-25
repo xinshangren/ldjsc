@@ -211,7 +211,7 @@ export default {
           var code = res.success;
           if (code == "1") {
             var data = res.data;
-            self.oneData=data;
+            self.oneData = data;
           }
         })
         .catch(err => {
@@ -220,11 +220,18 @@ export default {
     },
     //按照年份获取每月工作安排情况的统计数据
     statisticJobCreate: function() {
+      var yearDate = new Date().getFullYear();
+      if (this.flagindex == 0) {
+        yearDate = this.currentYear1;
+      } else {
+        yearDate = this.currentYear1.split("-")[0];
+      }
+
       var self = this;
       var params = {
         method: "statisticJobCreate",
         dingUserId: global_variable.roleJs.dingUserId,
-        year: new Date().getFullYear()
+        year: yearDate
       };
       //获取数据
       httpMethod
@@ -234,7 +241,7 @@ export default {
           var code = res.success;
           if (code == "1") {
             var data = res.data;
-               this.showEcharsView3(echarts, this.$refs.myCharts3,data);
+            this.showEcharsView3(echarts, this.$refs.myCharts3, data);
           }
         })
         .catch(err => {
@@ -243,11 +250,17 @@ export default {
     },
     //按照年份获取每月延期未完成工作情况的统计数据
     statisticJobUndone: function() {
+      var yearDate = new Date().getFullYear();
+      if (this.flagindex == 0) {
+        yearDate = this.currentYear1;
+      } else {
+        yearDate = this.currentYear1.split("-")[0];
+      }
       var self = this;
       var params = {
         method: "statisticJobUndone",
         dingUserId: global_variable.roleJs.dingUserId,
-        year: new Date().getFullYear()
+        year: yearDate
       };
       //获取数据
       httpMethod
@@ -257,7 +270,7 @@ export default {
           var code = res.success;
           if (code == "1") {
             var data = res.data;
-             this.showEcharsView4(echarts, this.$refs.myCharts4,data);
+            this.showEcharsView4(echarts, this.$refs.myCharts4, data);
           }
         })
         .catch(err => {
@@ -340,6 +353,8 @@ export default {
       this.showYear = false;
       this.currentYear1 = date;
       this.statisticJobDone(); //统计工作完成情况
+      this.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
+      this.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
     },
     //年月的确定
     onconfirmYearMonth: function() {
@@ -347,6 +362,8 @@ export default {
       this.showYearMonth = false; //年月显示
       this.currentYear1 = date;
        this.statisticJobDone(); //统计工作完成情况
+      this.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
+      this.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
     },
     //年月日的确定
     onconfirmAlltime: function() {
@@ -354,6 +371,8 @@ export default {
       this.showAllTime = false; //年月日显示
       this.currentYear1 = date;
        this.statisticJobDone(); //统计工作完成情况
+      this.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
+      this.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
     },
     //开启年时间选择
     openPopYear: function() {
