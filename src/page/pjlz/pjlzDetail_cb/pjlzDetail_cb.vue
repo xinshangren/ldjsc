@@ -155,6 +155,7 @@ export default {
       if (detail == "1") {
         // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
         $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
+         this.$route.meta.title = "批件流转";
       }
     },
     getdata: function() {
@@ -170,8 +171,8 @@ export default {
       let approvalInfoId = self.pj_obj.id;
       var params = {
         method: "getApprovalInfo",
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
+        //dingUserId: "086404191926187734",
+        dingUserId: global_variable.roleJs.dingUserId,
         //corpId: this.seach_value, //机构id
         approvalInfoId: approvalInfoId //批件id
       };
@@ -224,7 +225,7 @@ export default {
       //判断参数
       let approvalInfoId = self.pj_detail.id;
       let corpId = "";
-      let dingUserId = global_variable.userId;
+      let dingUserId = global_variable.roleJs.dingUserId;
       let warnObjId = self.pj_detail.approval_main_person_dingid;
       let warnContent = self.cb_content;
       let warnType = self.cb_type;
@@ -239,8 +240,8 @@ export default {
       let params = {
         method: "approvalWarn",
         //corpId: corpId,
-        dingUserId: "086404191926187734",
-        //dingUserId: dingUserId,
+        //dingUserId: "086404191926187734",
+        dingUserId: dingUserId,
         approvalInfoId: approvalInfoId,
         warnObjId: warnObjId,
         warnContent: warnContent,

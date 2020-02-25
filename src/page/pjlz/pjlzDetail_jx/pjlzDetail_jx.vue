@@ -32,7 +32,7 @@
       <div style="padding:10px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">申请说明</div>
         <div style="display: flex;font-size: 15px;margin-top: 5px;color: #666666;">
-          <div style="margin:10px ;">{{pj_detail.approval_done.done_content}}</div>
+          <div style="margin:10px ;">{{jx_content}}</div>
         </div>
         <div style="display: flex;">
           <div
@@ -137,16 +137,19 @@ export default {
       show: false,
       refuse_content: "",
       pj_obj: "",
-      pj_detail: ""
+      pj_detail: "",
+      jx_content:""
     };
   },
   mounted() {
+    this.jx_content = "";
     this.pj_obj = this.$route.params.obj;
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
   activated() {
+    this.jx_content = "";
     this.pj_obj = this.$route.params.obj;
     this.getdata();
     this.pdSingleApp();
@@ -171,6 +174,7 @@ export default {
       if (detail == "1") {
         // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
         $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
+         this.$route.meta.title = "批件流转";
       }
     },
     getdata: function() {
@@ -178,8 +182,8 @@ export default {
       let approvalInfoId = self.pj_obj.id;
       var params = {
         method: "getApprovalInfo",
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
+        //dingUserId: "086404191926187734",
+        dingUserId: global_variable.roleJs.dingUserId,
         //corpId: this.seach_value, //机构id
         approvalInfoId: approvalInfoId //批件id
       };
@@ -220,7 +224,8 @@ export default {
                 default:
                   break;
               }
-            }
+            };
+            self.jx_content = self.pj_detail.approval_done.done_content;
           }
         })
         .catch(err => {
@@ -237,7 +242,7 @@ export default {
     },
     submit_sqjx: function(flag) {
       let self = this;
-      //let approvalInfoId = self.pj_obj.id;
+      let approvalInfoId = self.pj_obj.id;
       let doneResult = flag;
       let rejectReason = "";
       if (flag == "0") {
@@ -249,10 +254,10 @@ export default {
       }
       var params = {
         method: "approvalDone",
-        dingUserId: "086404191926187734",
-        // dingUserId: global_variable.roleJs.dingUserId,
+        //dingUserId: "086404191926187734",
+         dingUserId: global_variable.roleJs.dingUserId,
         //corpId: global_variable.corpId, //机构id
-        approvalInfoId: "8", //批件id
+        approvalInfoId: approvalInfoId, //批件id
         doneResult: doneResult,
         rejectReason: rejectReason
       };

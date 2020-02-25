@@ -123,8 +123,8 @@
                 let feedbackId = self.feedback_id;
                 var params = {
                     method: "approvalFeedbackDetail",
-                    dingUserId: "086404191926187734",
-                    // dingUserId: global_variable.roleJs.dingUserId,
+                    //dingUserId: "086404191926187734",
+                    dingUserId: global_variable.roleJs.dingUserId,
                     //corpId: global_variable.corpId, //机构id
                     feedbackId: feedbackId //批件id
                 };
