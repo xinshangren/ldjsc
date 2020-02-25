@@ -98,7 +98,7 @@
               v-if="(flag.role=='ld'||flag.role=='wdk')&&(item.approval_status!=4&&item.approval_status!=3)"
               class="pjlzListyjcbNew"
             >
-              <div style="width:46%;text-align:right;margin-right:3px;">
+              <div style="width:43%;text-align:right;margin-right:3px;">
                 <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
               </div>
               <div class="pjlzListyjcbfont">一键催办</div>
@@ -107,9 +107,9 @@
             <div
               @click="openShsqFun(item,$event)"
               v-if="flag.role=='wdk'&&item.approval_status==3"
-              class="pjlzListyjcb"
+              class="pjlzListyjcbNew"
             >
-              <div style="width:46%;text-align:right;margin-right:3px;">
+              <div style="width:43%;text-align:right;margin-right:3px;">
                 <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
               </div>
               <div class="pjlzListyjcbfont">审核申请</div>
@@ -120,7 +120,7 @@
                 class="pjlzListyjcbNew"
                 @click="openSqjxFun(item,$event)"
               >
-                <div style="width:33%;text-align:right;margin-right:3px;">
+                <div style="width:43%;text-align:right;margin-right:3px;">
                   <img class="pjlzListyjcbImg" src="../../../assets/img/icon_complete.png" />
                 </div>
                 <div class="pjlzListyjcbfont">申请结项</div>
@@ -130,7 +130,7 @@
                 v-if="(flag.role=='cbr'&&(item.approval_status==2||item.approval_status==0||item.approval_status==5))"
                 class="pjlzListyjcbNew"
               >
-                <div style="width:46%;text-align:right;margin-right:3px;">
+                <div style="width:43%;text-align:right;margin-right:3px;">
                   <img class="pjlzListyjcbImg" src="../../../assets/img/icon_feedback.png" />
                 </div>
                 <div class="pjlzListyjcbfont">反馈</div>
