@@ -183,7 +183,7 @@ export default {
     if (detail != null) {
       if (detail == "1") {
         this.isSingleApp = true;
-        this.$route.meta.title = "批件流转";
+        this.$route.meta.title = "批件管理";
         global_variable.singleApp = 1; //独立app判断
       }
     }

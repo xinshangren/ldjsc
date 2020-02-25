@@ -217,7 +217,7 @@ export default {
       }, //判断角色
       currentView: "child1",
       isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
-      status: "0", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
+      status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       list: [],
       Popshow: false,
       mescroll: null, // mescroll实例对象
@@ -319,6 +319,7 @@ export default {
           self.Popshow = true;
         });
       } else {
+        this.status=1;
         this.mescroll.resetUpScroll();
       }
     },

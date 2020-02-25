@@ -171,9 +171,9 @@ export default {
       console.log(url);
       var detail = url.getValue("type");
       console.log("type===" + detail);
-      if (detail == 1) {
+      if (detail == "1") {
         this.top = 0;
-        this.$route.meta.title = "批件流转";
+        this.$route.meta.title = "批件管理";
         this.showRightMenu();
       }
     },

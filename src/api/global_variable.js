@@ -9,10 +9,10 @@ const logId = ''
 const ddPhone = ''
 const indexTabId = 0;
 const roleJs = {
+  // dingUserId: "086404191926187734",
+  // role: "ld",
   dingUserId: "",
   role: "",
-  // dingUserId: "",
-  // role: "",
   department: "",
   username: ""
 };//用户信息
