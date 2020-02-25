@@ -277,6 +277,10 @@ export default {
       }
     }
   },
+  activated() {
+    console.log("activated");
+       this.pdSingleApp();
+  },
   mounted() {
     // this.flag=global_variable.roleJs;
     var shaixuan = this.$parent.$root.$children[0].$refs.shaixuanImgId;
