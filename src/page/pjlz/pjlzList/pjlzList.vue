@@ -547,7 +547,13 @@ export default {
     },
     //列表大块的点击事件
     openIndexFun: function(item, e) {
-    
+      this.$router.push({
+        path: "/pjlz/pjlzDetail_all",
+        name: "pjlzDetail_all",
+        params: {
+          obj: item
+        }
+      });
       e.stopPropagation();
     }
   }
