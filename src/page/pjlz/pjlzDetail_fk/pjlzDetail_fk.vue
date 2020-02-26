@@ -97,7 +97,7 @@ export default {
       overdue: true,
       file_one: {},
       file_list: [],
-      pj_obj: "",
+      pj_obj: {},
       pj_detail: "",
       fk_content: ""
     };
@@ -136,8 +136,8 @@ export default {
                     department: res.data.department
                   }
                 );
-                this.pj_obj.id = id;
-                this.getdata();
+                self.pj_obj.id = id;
+                self.getdata();
               }
             });
           },
@@ -194,6 +194,7 @@ export default {
       httpMethod
         .getApprovalInfo(params)
         .then(res => {
+          console.log(params);
           console.log(res);
           if (res.success == "1") {
             self.pj_detail = res.data;
