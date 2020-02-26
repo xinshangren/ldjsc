@@ -20,7 +20,7 @@
 <template>
   <div id="pjlzDeali_fk_top_id" style="margin-top:54px;background:#f7f7f7">
     <pjlzDetailVue :pj_detail="pj_detail"></pjlzDetailVue>
-    <div id="fk_div" style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 250px;">
+    <div id="fk_div" v-show="fk_div" style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 250px;">
       <div style="padding:10px 15px 10px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">工作反馈</div>
         <textarea
@@ -101,7 +101,8 @@ export default {
       pj_obj: {},
       pj_detail: "",
       fk_content: "",
-      upload_file_list: []
+      upload_file_list: [],
+      fk_div:false,
     };
   },
   mounted() {
@@ -140,6 +141,9 @@ export default {
                     department: res.data.department
                   }
                 );
+                if(global_variable.roleJs.role == 'cbr'){
+                  self.fk_div = true;
+                }
                 self.pj_obj.id = id;
                 self.getdata();
               }
