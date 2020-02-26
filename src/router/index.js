@@ -350,7 +350,6 @@ export default new Router({
       path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail',
       name: 'pjlz_fkjl_detail',
       component: pjlz_fkjl_detail_Vue,
-      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjfkMessage/pjfkMessage',
       name: 'pjfkMessageVue',
