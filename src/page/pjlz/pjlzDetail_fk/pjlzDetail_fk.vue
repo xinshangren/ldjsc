@@ -41,12 +41,13 @@
           </div>
         </van-uploader>
         <div
-          v-for="(item,index) of file_list"
+          v-if="upload_file_list.length>0"
+          v-for="(item,index) of upload_file_list"
           style="display: flex;font-size: 14px;color:#2599e6 ;"
         >
-          <div @click="preview_adjunct(item)">{{item.file.name}}</div>
+          <div @click="preview_adjunct(item)">{{item.name}}</div>
           <img
-            @click="delete_adjunct(index)"
+            @click="delete_adjunct(index,item.attachid)"
             style="height: 20px;margin-left: 5px;"
             src="../../../assets/img/icon_delete.png"
           />
@@ -97,17 +98,20 @@ export default {
       overdue: true,
       file_one: {},
       file_list: [],
-      pj_obj: "",
+      pj_obj: {},
       pj_detail: "",
-      fk_content: ""
+      fk_content: "",
+      upload_file_list: []
     };
   },
   mounted() {
     this.fk_content = "";
+    this.upload_file_list = [];
     this.pdSingleApp();
   },
   activated() {
     this.fk_content = "";
+    this.upload_file_list = [];
     this.pdSingleApp();
   },
   methods: {
@@ -136,8 +140,8 @@ export default {
                     department: res.data.department
                   }
                 );
-                this.pj_obj.id = id;
-                this.getdata();
+                self.pj_obj.id = id;
+                self.getdata();
               }
             });
           },
@@ -176,7 +180,7 @@ export default {
           this.getdata();
         }
       } else {
-         //领导驾驶舱 流转批件详情
+        //领导驾驶舱 流转批件详情
         this.pj_obj = this.$route.params.obj;
         this.getdata();
       }
@@ -194,6 +198,7 @@ export default {
       httpMethod
         .getApprovalInfo(params)
         .then(res => {
+          console.log(params);
           console.log(res);
           if (res.success == "1") {
             self.pj_detail = res.data;
@@ -246,18 +251,10 @@ export default {
     },
     //附件读取后操作
     afterRead: function() {
+      var self = this;
       var file = this.file_list.slice(-1)[0];
       //单个附件上传
       var approvalInfoId = this.pj_detail.id;
-      // var params = {
-      //   method: "attachUpload",
-      //   dingUserId: "086404191926187734",
-      //   // dingUserId: global_variable.roleJs.dingUserId,
-      //   //corpId: global_variable.corpId, //机构id
-      //   approvalInfoId: approvalInfoId, //批件id
-      //   // approvalInfoId: "5",
-      //   attach: file.file
-      // };
       let formData = new FormData();
       formData.append("method", "attachUpload");
       formData.append("dingUserId", global_variable.roleJs.dingUserId);
@@ -273,6 +270,13 @@ export default {
         )
         .then(res => {
           console.log(res);
+          if(res.data.success == "1"){
+            var file_upl = res.data.data;
+            file_upl.name = file.file.name;
+            self.upload_file_list.push(file_upl);
+          }else{
+            this.$toast("上传失败");
+          }
         });
       // httpMethod
       //   .fileUpload(formData)
@@ -286,8 +290,31 @@ export default {
       //   });
     },
     //删除上传附件
-    delete_adjunct: function(index) {
-      this.file_list.splice(index, 1);
+    delete_adjunct: function(index, attachId) {
+      let self = this;
+      let approvalInfoId = self.pj_obj.id;
+      var params = {
+        method: "attachDel",
+        //dingUserId: "086404191926187734",
+        dingUserId: global_variable.roleJs.dingUserId,
+        //corpId: this.seach_value, //机构id
+        approvalInfoId: approvalInfoId, //批件id
+        attachId: attachId
+      };
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(params);
+          console.log(res);
+          if (res.success == "1") {
+            self.file_list.splice(index, 1);
+            self.upload_file_list.splice(index, 1);
+            console.log("删除成功");
+          }
+        })
+        .catch(err => {
+          this.$toast(err);
+        });
     },
     //预览
     preview_adjunct: function(item) {},
@@ -299,6 +326,12 @@ export default {
         this.$toast("请填写反馈内容");
         return false;
       }
+      let attachIds = "";
+      if(self.upload_file_list.length>0){
+        self.upload_file_list.forEach(e => {
+          attachIds  = attachIds + e.attachid + ','
+        });
+      }
       var params = {
         method: "approvalFeedback",
         //dingUserId: "086404191926187734",
@@ -306,7 +339,7 @@ export default {
         //corpId: global_variable.corpId, //机构id
         approvalInfoId: approvalInfoId, //批件id
         feedbackContent: feedbackContent,
-        attachIds: ""
+        attachIds: attachIds
       };
       httpMethod
         .getApprovalInfo(params)
