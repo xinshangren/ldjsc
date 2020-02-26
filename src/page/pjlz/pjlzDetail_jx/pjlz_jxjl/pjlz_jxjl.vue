@@ -39,7 +39,7 @@
             <div style="margin-left: 2px;">{{obj.done_result}}</div>
           </div>
         </div>
-        <div v-if="obj.done_reject != null && obj.done_reject.length>0" style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
+        <div v-if="obj.done_reject != null && obj.done_reject.length>0 && obj.done_result == '2'" style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
           <div style="display: flex;">
             <img style="height: 18px;" src="../../../../assets/img/pjjxjl_refuse.png" />
             <div style="margin-left: 2px;">拒绝结项说明:</div>
@@ -79,6 +79,10 @@ export default {
   },
   mounted() {
     this.pj_id = this.$route.params.id;
+    this.getdata();
+    this.pdSingleApp();
+  },
+  activated(){
     this.getdata();
     this.pdSingleApp();
   },

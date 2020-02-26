@@ -149,7 +149,6 @@ export default {
     console.log(this.pj_obj);
   },
   activated() {
-    this.pj_obj = this.$route.params.obj;
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);

@@ -70,6 +70,10 @@ export default {
     this.getdata();
     this.pdSingleApp();
   },
+  activated(){
+    this.getdata();
+    this.pdSingleApp();
+  },
   methods: {
     goDetail: function(id) {
       this.$router.push({

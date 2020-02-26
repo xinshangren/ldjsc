@@ -131,7 +131,6 @@ export default {
   },
   activated(){
     this.cb_content = "";
-     this.pj_obj = this.$route.params.obj;
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);

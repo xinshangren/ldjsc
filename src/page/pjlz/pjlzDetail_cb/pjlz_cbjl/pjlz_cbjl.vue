@@ -76,6 +76,10 @@ export default {
     this.getdata();
     this.pdSingleApp();
   },
+  activated(){
+    this.getdata();
+    this.pdSingleApp();
+  },
   methods: {
     getdata: function() {
       var self = this;
