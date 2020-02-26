@@ -57,7 +57,7 @@
             <div style="width:50%;">
               <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
                 <div style="font-size:20px;color:#3098fb;">{{oneData.approval_create}}</div>
-                <div style="color: #333333;font-size: 13px;line-height: 29px;">项</div>
+                <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
               </div>
               <div style="color: #999999;font-size: 13px;">录入工作</div>
             </div>
@@ -71,7 +71,7 @@
             <div style="width:50%;">
               <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
                 <div style="font-size:20px;color:#0ed3e5;">{{oneData.approval_done}}</div>
-                <div style="color: #333333;font-size: 13px;line-height: 29px;">项</div>
+                <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
               </div>
               <div style="color: #999999;font-size: 13px;">已完成工作</div>
             </div>
@@ -85,7 +85,7 @@
             <div style="width:50%;">
               <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
                 <div style="font-size:20px;color:#f9bf4e;">{{oneData.approval_undone_normal}}</div>
-                <div style="color: #333333;font-size: 13px;line-height: 29px;">项</div>
+                <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
               </div>
               <div style="color: #999999;font-size: 13px;">正常未完成</div>
             </div>
@@ -99,7 +99,7 @@
             <div style="width:50%;">
               <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
                 <div style="font-size:20px;color:#f96a4e;">{{oneData.approval_undone_overtime}}</div>
-                <div style="color: #333333;font-size: 13px;line-height: 29px;">项</div>
+                <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
               </div>
               <div style="color: #999999;font-size: 13px;">超时未完成</div>
             </div>
@@ -200,11 +200,32 @@ export default {
     //跳转独立的页面
     intentSearchList: function(flag) {
       console.log(flag);
+      var dateFormat = /^(\d{4})-(\d{2})-(\d{2})$/;
+      var dateFormatMonth = /^(\d{4})-(\d{2})$/;
+      var dateFormatyear = /^(\d{4})$/;
+      if (this.flagindex == "0") {
+        if (!dateFormatyear.test(this.currentYear1)) {
+          this.$toast("时间格式不对,请先选择时间,请选择年份");
+          return;
+        }
+      } else if (this.flagindex == "1") {
+        if (!dateFormatMonth.test(this.currentYear1)) {
+          this.$toast("时间格式不对,请先选择时间,请选择年月");
+          return;
+        }
+      } else {
+        if (!dateFormat.test(this.currentYear1)) {
+          this.$toast("时间格式不对,请先选择时间，请选择年月日");
+          return;
+        }
+      }
       this.$router.push({
         path: "/pjlz/pjlzListSearch/pjlzListSearch",
-        name:'pjlzListSearchVue',
+        name: "pjlzListSearchVue",
         params: {
-          entity: flag
+          entity: flag,
+          periodType: this.flagindex,
+          time: this.currentYear1
         }
       });
     },

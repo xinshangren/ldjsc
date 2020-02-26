@@ -47,11 +47,11 @@
               >{{item.cbr1}}</div>
             </div>
             <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
-              <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
-              <div class="pjlzListSmallDivFont">承办人：</div>
+              <!-- <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
+              <div class="pjlzListSmallDivFont">承办人：</div> -->
               <div
                 class="pjlzListSmallDivFont"
-                style="margin-left:19px;"
+                style="margin-left:88px;"
               >{{item.cbr2}}</div>
             </div>
             <div class="pjlzListSmallDiv">
@@ -174,13 +174,13 @@
         </ul>
 
         <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
-        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否结办</div>
+        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否签收</div>
 
         <ul class="ui-row" id="sfbjDialogId" style="margin-top: 11px;">
-          <li id="0" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
-          <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">办理中</li>
-          <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已办结</li>
-          <li id="3" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">申请办结</li>
+          <li id="" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
+          <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未签收</li>
+          <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已签收</li>
+         
         </ul>
         <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
         <div style="display: flex;background: #f3f3f3;height:110px;">
@@ -518,7 +518,7 @@ export default {
         dingUserId: global_variable.roleJs.dingUserId,
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
-        status: this.status, //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
+        isChecked: this.status, //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
         createDateBegin: "",
         createDateEnd: ""
       };
@@ -564,7 +564,7 @@ export default {
               //   this.list = this.list.concat(data);
             } else {
               data = [];
-              this.list = [];
+              // this.list = [];
               res.data.total = 0;
             }
 

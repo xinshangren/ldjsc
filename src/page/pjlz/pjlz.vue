@@ -58,7 +58,7 @@
         <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
         <img
           ref="PjlzshaixuanImgId"
-          class="shaixuanImg"
+          class="shaixuanImg1"
           style=" position: absolute;right: 23px;top: 17px;height: 20px;"
           src="@/assets/img/icon_filtrate.png"
         />

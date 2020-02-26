@@ -47,11 +47,11 @@
               >{{item.cbr1}}</div>
             </div>
             <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
-              <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
-              <div class="pjlzListSmallDivFont">承办人：</div>
+              <!-- <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
+              <div class="pjlzListSmallDivFont">承办人：</div> -->
               <div
                 class="pjlzListSmallDivFont"
-                style="margin-left:19px;"
+                style="margin-left:88px;"
               >{{item.cbr2}}</div>
             </div>
             <div class="pjlzListSmallDiv">
@@ -233,6 +233,8 @@ export default {
       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       list: [],
       Popshow: false,
+      periodType:"",
+      periodData:"",
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       nodataImg: require("../../../assets/img/nodata.png"),
@@ -301,7 +303,13 @@ export default {
       self.createListTop();
     }
     var statusGet = self.$route.params.entity;
+    var time = self.$route.params.time;
+     var periodTypes = self.$route.params.periodType;
+    
     console.log(statusGet);
+     console.log(time);
+     this.periodType=periodTypes;
+     this.periodData=time;
     switch (parseInt(statusGet)) {
       case 1:
         self.status = 0;
@@ -478,7 +486,9 @@ export default {
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
         status: this.status, //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
         createDateBegin: "",
-        createDateEnd: ""
+        createDateEnd: "",
+        periodType:this.periodType,
+        periodData:this.periodData
       };
       httpMethod
         .getApprovalInfo(params)
@@ -521,7 +531,7 @@ export default {
               //   this.list = this.list.concat(data);
             } else {
               data = [];
-              this.list = [];
+              // this.list = [];
               res.data.total = 0;
             }
 
