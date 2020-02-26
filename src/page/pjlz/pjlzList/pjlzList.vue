@@ -230,7 +230,8 @@ export default {
       }, //判断角色
       currentView: "child1",
       isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
-      status: "0", //是否签收：0-未签收，1-已签收
+      status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
+      isChecked:"",//是否签收：0-未签收，1-已签收
       list: [],
       Popshow: false,
       mescroll: null, // mescroll实例对象
@@ -330,7 +331,7 @@ export default {
         $("#mescroll").css("top", "113px");
         this.showRightMenu1();
         this.getUserInfo();
-        this.status = 0;
+        this.status = 1;
         this.mescroll.resetUpScroll();
         var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
         console.log(shaixuanApp);
@@ -340,7 +341,7 @@ export default {
           self.Popshow = true;
         });
       } else {
-        this.status =0;
+        this.status =1;
         this.mescroll.resetUpScroll();
       }
     },
@@ -471,7 +472,7 @@ export default {
         var isSelect = $(this).hasClass("dialogSelect");
         if (isSelect) {
           console.log($(this).attr("id"));
-          context.status = $(this).attr("id");
+          context.isChecked = $(this).attr("id");
         }
       });
 
@@ -499,7 +500,7 @@ export default {
       });
 
       context.isOvertime = "";
-      context.status = "1";
+      context.isChecked = "";
       // context.projectNature = "";
       this.mescroll.resetUpScroll();
       this.Popshow = false;
@@ -518,7 +519,8 @@ export default {
         dingUserId: global_variable.roleJs.dingUserId,
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
-        isChecked: this.status, //是否签收：0-未签收，1-已签收
+        isChecked: this.isChecked, //是否签收：0-未签收，1-已签收
+        status:this.status,
         createDateBegin: "",
         createDateEnd: ""
       };
