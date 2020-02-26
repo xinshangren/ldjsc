@@ -157,7 +157,7 @@ export default {
               //   this.list = this.list.concat(data);
             } else {
               data = [];
-              this.list = [];
+              // this.list = [];
               res.data.total = 0;
             }
 
