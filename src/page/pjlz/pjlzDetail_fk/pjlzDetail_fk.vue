@@ -20,7 +20,11 @@
 <template>
   <div id="pjlzDeali_fk_top_id" style="margin-top:54px;background:#f7f7f7">
     <pjlzDetailVue :pj_detail="pj_detail"></pjlzDetailVue>
-    <div id="fk_div" v-show="fk_div" style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 250px;">
+    <div
+      id="fk_div"
+      v-show="fk_div"
+      style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 250px;"
+    >
       <div style="padding:10px 15px 10px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">工作反馈</div>
         <textarea
@@ -102,7 +106,7 @@ export default {
       pj_detail: "",
       fk_content: "",
       upload_file_list: [],
-      fk_div:false,
+      fk_div: true
     };
   },
   mounted() {
@@ -141,8 +145,10 @@ export default {
                     department: res.data.department
                   }
                 );
-                if(global_variable.roleJs.role == 'cbr'){
+                if (global_variable.roleJs.role == "cbr") {
                   self.fk_div = true;
+                } else {
+                  self.fk_div = false;
                 }
                 self.pj_obj.id = id;
                 self.getdata();
@@ -274,11 +280,11 @@ export default {
         )
         .then(res => {
           console.log(res);
-          if(res.data.success == "1"){
+          if (res.data.success == "1") {
             var file_upl = res.data.data;
             file_upl.name = file.file.name;
             self.upload_file_list.push(file_upl);
-          }else{
+          } else {
             this.$toast("上传失败");
           }
         });
@@ -331,9 +337,9 @@ export default {
         return false;
       }
       let attachIds = "";
-      if(self.upload_file_list.length>0){
+      if (self.upload_file_list.length > 0) {
         self.upload_file_list.forEach(e => {
-          attachIds  = attachIds + e.attachid + ','
+          attachIds = attachIds + e.attachid + ",";
         });
       }
       var params = {
