@@ -277,6 +277,10 @@ export default {
       }
     }
   },
+  activated() {
+    console.log("activated");
+       this.pdSingleApp();
+  },
   mounted() {
     // this.flag=global_variable.roleJs;
     var shaixuan = this.$parent.$root.$children[0].$refs.shaixuanImgId;
@@ -324,7 +328,7 @@ export default {
       console.log("type===" + detail);
       if (detail == "1") {
         $("#mescroll").css("top", "113px");
-        // this.showRightMenu();
+        this.showRightMenu1();
         this.getUserInfo();
         this.status = 1;
         this.mescroll.resetUpScroll();
@@ -339,6 +343,30 @@ export default {
         this.status = 1;
         this.mescroll.resetUpScroll();
       }
+    },
+    //添加标题右上方按钮
+    showRightMenu1: function() {
+      var self = this;
+      dd.ready(function() {
+        dd.biz.navigation.setMenu({
+          items: [
+            {
+              id: "1",
+              iconId: "file",
+              text: "消息",
+              url:
+                httpMethod.returnBaseUrlFun() +
+                "jcsldjscApp/static/icon_info.png"
+            }
+          ],
+          onSuccess: function(data) {
+            self.$router.push({
+              path: "/pjlz/pjfkMessage/pjfkMessage"
+            });
+          },
+          onFail: function(err) {}
+        });
+      });
     },
     createListTop: function(top) {
       $("#mescroll").css("top", "210px");

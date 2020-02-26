@@ -10,7 +10,7 @@
       :down="mescrollDown"
       :up="mescrollUp"
       @init="mescrollInit"
-      style=" top: 110px;"
+      style=" top: 10px;"
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div v-for="(item,index) in list" :key="index" class="pjkMessageListDiv">
