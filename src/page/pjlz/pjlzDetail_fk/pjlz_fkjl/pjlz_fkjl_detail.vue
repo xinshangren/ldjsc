@@ -122,7 +122,7 @@
              this.upd_button = false;
             var s = window.innerHeight - $("#content").offset().top;
             $("#content").css("min-height", s);
-            this.feedback_id = this.$route.params.id;
+            this.feedback_id = this.$route.params.id!=null?this.$route.params.id:this.feedback_id;
             this.getdata();
         },
         methods: {
