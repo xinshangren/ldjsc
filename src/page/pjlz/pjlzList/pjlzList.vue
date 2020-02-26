@@ -357,7 +357,7 @@ export default {
               text: "消息",
               url:
                 httpMethod.returnBaseUrlFun() +
-                "jcsldjscApp/static/icon_info.png"
+                "webpage/jcsldjscApp/static/icon_info.png"
             }
           ],
           onSuccess: function(data) {
