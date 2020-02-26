@@ -21,11 +21,11 @@
       <div style="color: #666666;font-size: 16px;width: 94%;">
         <div style="display: flex;margin-top: 10px;">
           <div style="width: 30%;text-align: right;">事项类型：</div>
-          <div>{{pj_detail.approval_type}}</div>
+          <div style="width:70%">{{pj_detail.approval_type}}</div>
         </div>
         <div style="display: flex;margin-top: 15px;">
           <div style="width: 30%;text-align: right;">承办人：</div>
-          <div>
+          <div style="width:70%">
             <div style="height: 25px;">{{pj_detail.approval_main_person}}</div>
             <div
               style="min-height: 25px;"
