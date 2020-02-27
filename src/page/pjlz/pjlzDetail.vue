@@ -35,7 +35,7 @@
         <div style="display: flex;margin-top: 15px;">
           <div style="width: 30%;text-align: right;">事项内容：</div>
           <div
-            style="border:1px solid #666666 ;border-radius: 5px;width: 70%;height: 100px;overflow-y: auto;"
+            style="width: 70%;height: 100px;overflow-y:scroll;"
           >
             <div
               style="font-size: 15px;
