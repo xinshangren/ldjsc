@@ -41,25 +41,19 @@
             <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>
-              <div
-                class="pjlzListSmallDivFont"
-                style="margin-left:19px;"
-              >{{item.cbr1}}</div>
+              <div class="pjlzListSmallDivFont" style="margin-left:19px;">{{item.cbr1}}</div>
             </div>
             <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
               <!-- <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
-              <div class="pjlzListSmallDivFont">承办人：</div> -->
-              <div
-                class="pjlzListSmallDivFont"
-                style="margin-left:88px;"
-              >{{item.cbr2}}</div>
+              <div class="pjlzListSmallDivFont">承办人：</div>-->
+              <div class="pjlzListSmallDivFont" style="margin-left:88px;">{{item.cbr2}}</div>
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
               <div class="pjlzListSmallDivFont">办理期限：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_limit_time}}</div>
             </div>
-            <div class="pjlzListSmallDiv" style="">
+            <div class="pjlzListSmallDiv" style>
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">交办时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_create_date}}</div>
@@ -177,10 +171,9 @@
         <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否签收</div>
 
         <ul class="ui-row" id="sfbjDialogId" style="margin-top: 11px;">
-          <li id="" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
+          <li id class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
           <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未签收</li>
           <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已签收</li>
-         
         </ul>
         <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
         <div style="display: flex;background: #f3f3f3;height:110px;">
@@ -231,7 +224,7 @@ export default {
       currentView: "child1",
       isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
-      isChecked:"",//是否签收：0-未签收，1-已签收
+      isChecked: "", //是否签收：0-未签收，1-已签收
       list: [],
       Popshow: false,
       mescroll: null, // mescroll实例对象
@@ -280,7 +273,7 @@ export default {
   },
   activated() {
     console.log("activated");
-       this.pdSingleApp();
+    this.pdSingleApp();
   },
   mounted() {
     // this.flag=global_variable.roleJs;
@@ -341,7 +334,7 @@ export default {
           self.Popshow = true;
         });
       } else {
-        this.status =1;
+        this.status = 1;
         this.mescroll.resetUpScroll();
       }
     },
@@ -438,7 +431,7 @@ export default {
               code: code
             };
             httpMethod.getApprovalInfo(params).then(res => {
-              console.log(JSON.stringify(res));
+              console.log("getUserInfo====" + JSON.stringify(res));
               if (res.success == "1") {
                 global_variable.roleJs = Object.assign(
                   {},
@@ -451,9 +444,21 @@ export default {
                   }
                 );
                 self.flag = global_variable.roleJs;
-                self.mescroll.resetUpScroll();
                 console.log(global_variable.roleJs);
                 console.log(self.flag);
+                if (self.flag == "ld" || self.flag == "qt") {
+                  console.log("关闭应用");
+                  Dialog.alert({
+                    message: "没有该应用权限"
+                  }).then(() => {
+                    dd.ready(function() {
+                      dd.biz.navigation.close();
+                    });
+                  });
+                }else{
+                  self.mescroll.resetUpScroll();
+                }
+
                 // var roleCode=res.data.role;
                 // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
               }
@@ -520,7 +525,7 @@ export default {
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
         isChecked: this.isChecked, //是否签收：0-未签收，1-已签收
-        status:this.status,
+        status: this.status,
         createDateBegin: "",
         createDateEnd: ""
       };
@@ -545,15 +550,15 @@ export default {
                     data[i].cbr1 = namelist[0];
                     for (var j = 0; j < namelist.length; j++) {
                       if (j > 0) {
-                        if(nameStr2==''){
-                          nameStr2+=namelist[j];
-                        }else{
-                          nameStr2+=","+namelist[j];
+                        if (nameStr2 == "") {
+                          nameStr2 += namelist[j];
+                        } else {
+                          nameStr2 += "," + namelist[j];
                         }
                       }
                     }
 
-                     data[i].cbr2 = nameStr2;
+                    data[i].cbr2 = nameStr2;
                   }
                 } else {
                   data[i].cbr1 = entityName;

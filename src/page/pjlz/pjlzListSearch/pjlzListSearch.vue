@@ -404,7 +404,7 @@ export default {
               code: code
             };
             httpMethod.getApprovalInfo(params).then(res => {
-              console.log(JSON.stringify(res));
+              console.log("getUserInfo===="+JSON.stringify(res));
               if (res.success == "1") {
                 global_variable.roleJs = Object.assign(
                   {},
