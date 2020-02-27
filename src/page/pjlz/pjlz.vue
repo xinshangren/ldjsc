@@ -67,7 +67,7 @@
     <!-- <div id="child_page" style="overflow: auto;width: 100%;position:relative;">
       <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
     </div>-->
-    <child1 style="position:relative;" v-if="currentView===0"></child1>
+    <child1 ref="child1" style="position:relative;" v-if="currentView===0"></child1>
     <child2 style="position:relative;" v-if="flag.role=='ld'&&currentView===1"></child2>
     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
       <div class="wrapper">
@@ -265,14 +265,16 @@ export default {
     },
     selectTab: function(flag) {
       // console.log(flag);
-      for (var i = 0; i < this.$children.length; i++) {
-        var entity = this.$children[i];
 
-        if (entity.$options._componentTag == "child1") {
-          console.log(entity);
-          entity.changetabState(flag);
-        }
-      }
+      this.$refs.child1.changetabState(flag);
+      // for (var i = 0; i < this.$children.length; i++) {
+      //   var entity = this.$children[i];
+
+      //   if (entity.$options._componentTag == "child1") {
+      //     console.log(entity);
+      //     entity.changetabState(flag);
+      //   }
+      // }
 
       switch (flag) {
         case 1: //办理中
@@ -300,24 +302,29 @@ export default {
 
       if (index === 0) {
         this.currentView = 0;
-        for (var i = 0; i < this.$children.length; i++) {
-          var entity = this.$children[i];
+        this.$refs.child1.changetabState(index + 1);
+        // for (var i = 0; i < this.$children.length; i++) {
+        //   var entity = this.$children[i];
 
-          if (entity.$options._componentTag == "child1") {
-            console.log(entity);
-            entity.changetabState(index + 1);
-          }
-        }
+        //   if (entity.$options._componentTag == "child1") {
+        //     // console.log(entity);
+        //     entity.changetabState(index + 1);
+        //   }
+        // }
       } else if (index == 1) {
         this.currentView = 0;
-        for (var i = 0; i < this.$children.length; i++) {
-          var entity = this.$children[i];
-
-          if (entity.$options._componentTag == "child1") {
-            console.log(entity);
-            entity.changetabState(index + 1);
-          }
-        }
+        setTimeout(() => {
+          this.$refs.child1.changetabState(index + 1);
+          
+        }, 100);
+        
+        // for (var i = 0; i < this.$children.length; i++) {
+        //   var entity = this.$children[i];
+        //   console.log(entity);
+        //   if (entity.$options._componentTag == "child1") {
+        //     entity.changetabState(index + 1);
+        //   }
+        // }
       } else {
         this.currentView = 1;
       }
