@@ -5,11 +5,19 @@
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     font-size: 17px;
+  }
+  .btn_tools{
+    height: 27px;
+    margin-left:20px;
+  }
+  .btn1_tools{
+    height: 20px;
+    margin-left:20px;
   }
 </style>
 <template>
@@ -17,12 +25,12 @@
     <div id="sss" class="pdf-box">
       <pdf ref="pdf" :src="pdfSrc" :page="pageNum" @num-pages="pageTotalNum=$event"></pdf>
     </div>
-    <div style="position:absolute;bottom: 0px;width: 100%;height:30px;font-size: 18px;display: flex;background: #ffffff;">
-      <button class="btn-def btn-pre" @click.stop="prePage">上一页</button>
-      <button class="btn-def btn-next" @click.stop="nextPage">下一页</button>
-      <div>{{pageNum}}/{{pageTotalNum}}</div>
-      <button :class="{select:idx==0}" @touchstart="idx=0" @touchend="idx=-1" @click="scaleD">放大</button>
-      <button :class="{select:idx==1}" @touchstart="idx=1" @touchend="idx=-1" @click="scaleX">缩小</button>
+    <div style="position:absolute;bottom: 0px;left:63px;width: 100%;height:35px;font-size: 16px;display: flex;background: #ffffff;  ">
+      <img class="btn_tools" src="../../assets/img/fanye_left.png" @click.stop="prePage" />
+      <img class="btn_tools" src="../../assets/img/fanye_right.png" @click.stop="nextPage"/>
+      <div style="margin-left:20px;">{{pageNum}}&nbsp/&nbsp{{pageTotalNum}}</div>
+      <img class="btn1_tools" src="../../assets/img/suofang_big.png" :class="{select:idx==0}" @touchstart="idx=0" @touchend="idx=-1" @click="scaleD"/>
+      <img class="btn1_tools" src="../../assets/img/suofang_small.png" :class="{select:idx==1}" @touchstart="idx=1" @touchend="idx=-1" @click="scaleX"/>
     </div>
   </div>
 </template>
@@ -83,9 +91,8 @@
         console.log("type===" + detail);
         console.log(window.innerHeight)
         console.log($("#content").offset())
-        var s = window.innerHeight - $("#content").offset().top;
         setTimeout(() => {
-              var height = document.body.clientHeight;
+              var height = document.body.clientHeight - $("#content").offset().top;
                $("#content").css("height", height);
         }, 100);
        
