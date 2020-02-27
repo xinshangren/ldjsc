@@ -54,7 +54,7 @@
                         <div style="margin-left: 2px;color:#2599e6">
                             <div v-if="file_list.length>0" v-for="file in file_list"
                                 style="display: flex;margin-left: 5px;height:30px">
-                                <div @click="openFj(file.attach_view_url)">{{file.attach_name}}</div>
+                                <div @click="openFj(file)">{{file.attach_name}}</div>
                                 <!-- <img src='../../../../assets/img/icon_delete.png'
                                     style="height: 20px;margin-left: 5px;margin-top: 2px;" /> -->
                                 <img @click="fj_download(file.attach_download_url)"
@@ -118,11 +118,11 @@
             this.feedback_id = this.$route.params.id;
             this.getdata();
         },
-        activated(){
-             this.upd_button = false;
+        activated() {
+            this.upd_button = false;
             var s = window.innerHeight - $("#content").offset().top;
             $("#content").css("min-height", s);
-            this.feedback_id = this.$route.params.id!=null?this.$route.params.id:this.feedback_id;
+            this.feedback_id = this.$route.params.id != null ? this.$route.params.id : this.feedback_id;
             this.getdata();
         },
         methods: {
@@ -161,13 +161,25 @@
             },
             openFj: function (item) {
                 console.log(item);
-                this.$router.push({
-                    path: "/pjlz/pjlz_fj",
-                    name: "pjlz_fj",
-                    params: {
-                        entity: item
-                    }
-                });
+                if (item.attach_type == "office") {
+                    this.$router.push({
+                        path: "/pjlz/pjlz_fj",
+                        name: "pjlz_fj",
+                        params: {
+                            entity: item.attach_pdf_url
+                        }
+                    });
+                } else if (item.attach_type == "image") {
+                    this.$router.push({
+                        path: "/pjlz/pjlz_fj_image",
+                        name: "pjlz_fj_image",
+                        params: {
+                            entity: item.attach_view_url
+                        }
+                    });
+                } else {
+                    this.$toast("文件暂不支持预览");
+                }
             },
         },
     };

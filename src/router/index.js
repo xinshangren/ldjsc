@@ -57,6 +57,7 @@ import pjlzVue from '@/page/pjlz/pjlz.vue'
 import pjlzListSearchVue from '@/page/pjlz/pjlzListSearch/pjlzListSearch.vue'
 import pjlzDetailVue from '@/page/pjlz/pjlzDetail.vue'
 import pjlz_fj_Vue from '@/page/pjlz/pjlz_fj.vue'
+import pjlz_fj_image_Vue from '@/page/pjlz/pjlz_fj_image.vue'
 import pjlzDetail_all_Vue from '@/page/pjlz/pjlzDetail_all.vue'
 import pjlzDetail_cb_Vue from '@/page/pjlz/pjlzDetail_cb/pjlzDetail_cb.vue'
 import pjlzDetail_fk_Vue from '@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'
@@ -305,6 +306,10 @@ export default new Router({
       path: '/pjlz/pjlz_fj',
       name: 'pjlz_fj',
       component: pjlz_fj_Vue,
+    },{
+      path: '/pjlz/pjlz_fj_image',
+      name: 'pjlz_fj_image',
+      component: pjlz_fj_image_Vue,
     },{
       path: '/pjlz/pjlzDetail',
       name: 'pjlzDetail',

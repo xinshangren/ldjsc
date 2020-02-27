@@ -29,6 +29,7 @@
     "vue-amap": "^0.5.10",
     "vue-cute-timeline": "^1.2.8",
     "vue-light-timeline": "^1.0.3",
+    "vue-pdf": "^4.0.8",
     "vue-router": "^3.0.1",
     "vue-scroll-lock": "0.0.6",
     "vue-video-player": "^5.0.2",

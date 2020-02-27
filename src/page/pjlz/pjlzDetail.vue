@@ -8,7 +8,7 @@
           src="../../assets/img/no_overdue.png"
           style="height:38px"
         />
-        <img v-else src="../../assets/img/noverdue.png" style="height:38px" /> -->
+        <img v-else src="../../assets/img/noverdue.png" style="height:38px" />-->
         <div
           style="font-weight: 600;font-size: 16px; padding:7px 7px 7px 7px;width: 85%;margin: auto;"
         >{{pj_detail.approval_name}}</div>
@@ -16,7 +16,7 @@
           style="font-size: 15px;border:1px solid #2599e6 ;border-radius: 5px;color:#2599e6;height: 20px;
                 text-align: center;
                 margin-top: 7px"
-        >{{pj_detail.approval_status}}</div> -->
+        >{{pj_detail.approval_status}}</div>-->
       </div>
       <div style="color: #666666;font-size: 16px;width: 94%;">
         <div style="display: flex;margin-top: 10px;">
@@ -27,20 +27,17 @@
           <div style="width: 30%;text-align: right;">承办人：</div>
           <div style="width:70%">
             <div style="height: 25px;">{{pj_detail.approval_main_person}}</div>
-            <div
-              style="min-height: 25px;"
-            >{{pj_detail.approval_manage_person}}</div>
+            <div style="min-height: 25px;">{{pj_detail.approval_manage_person}}</div>
           </div>
         </div>
         <div style="display: flex;margin-top: 15px;">
           <div style="width: 30%;text-align: right;">事项内容：</div>
-          <div
-            style="width: 70%;height: 100px;overflow-y:scroll;"
-          >
+          <div style="width: 70%;height: 100px;overflow-y:scroll;">
             <div
               style="font-size: 15px;
                         line-height: 23px;
-                        margin: 5px;" v-html="pj_detail.approval_content"
+                        margin: 5px;"
+              v-html="pj_detail.approval_content"
             ></div>
           </div>
         </div>
@@ -52,7 +49,7 @@
               v-for="attach in pj_detail.attachlist"
               style="display: flex;margin-left: 10px; margin-top: 5px;"
             >
-              <div @click="openFj(attach.attach_view_url)">{{attach.attach_name}}</div>
+              <div @click="openFj(attach)">{{attach.attach_name}}</div>
               <img
                 @click="fj_download(attach.attach_download_url)"
                 style="height: 22px;margin-left: 8px;"
@@ -253,8 +250,7 @@ export default {
     this.pdSingleApp();
     this.inint();
   },
-  activated() {
-  },
+  activated() {},
   watch: {
     pj_detail: "inint"
   },
@@ -314,7 +310,10 @@ export default {
         Object.keys(self.pj_detail.approval_done).length > 0
       ) {
         self.last_done = self.pj_detail.approval_done;
-        self.last_done.done_time = self.last_done.done_time.substr(0,self.last_done.done_time.length-3);
+        self.last_done.done_time = self.last_done.done_time.substr(
+          0,
+          self.last_done.done_time.length - 3
+        );
         self.jxjl_null = true;
       } else {
         self.last_done = {};
@@ -323,13 +322,25 @@ export default {
     },
     openFj: function(item) {
       console.log(item);
-      this.$router.push({
-        path: "/pjlz/pjlz_fj",
-        name: "pjlz_fj",
-        params: {
-          entity: item
-        }
-      });
+      if (item.attach_type == "office") {
+        this.$router.push({
+          path: "/pjlz/pjlz_fj",
+          name: "pjlz_fj",
+          params: {
+            entity: item.attach_pdf_url
+          }
+        });
+      } else if (item.attach_type == "image") {
+        this.$router.push({
+          path: "/pjlz/pjlz_fj_image",
+          name: "pjlz_fj_image",
+          params: {
+            entity: item.attach_view_url
+          }
+        });
+      } else {
+        this.$toast("文件暂不支持预览");
+      }
     },
     gofkjl_list: function() {
       console.log(this.pj_detail);

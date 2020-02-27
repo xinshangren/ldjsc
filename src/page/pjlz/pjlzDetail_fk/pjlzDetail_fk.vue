@@ -186,12 +186,16 @@ export default {
           this.getUserInfo(id);
         } else {
           //独立app 流转批件详情
-          this.pj_obj = this.$route.params.obj != null?this.$route.params.obj:this.pj_obj;
+          this.pj_obj =
+            this.$route.params.obj != null
+              ? this.$route.params.obj
+              : this.pj_obj;
           this.getdata();
         }
       } else {
         //领导驾驶舱 流转批件详情
-        this.pj_obj = this.$route.params.obj != null?this.$route.params.obj:this.pj_obj;
+        this.pj_obj =
+          this.$route.params.obj != null ? this.$route.params.obj : this.pj_obj;
         this.getdata();
       }
     },
@@ -327,7 +331,28 @@ export default {
         });
     },
     //预览
-    preview_adjunct: function(item) {},
+    preview_adjunct: function(item) {
+      console.log(item);
+      if (item.attach_type == "office") {
+        this.$router.push({
+          path: "/pjlz/pjlz_fj",
+          name: "pjlz_fj",
+          params: {
+            entity: item.attach_pdf_url
+          }
+        });
+      } else if (item.attach_type == "image") {
+        this.$router.push({
+          path: "/pjlz/pjlz_fj_image",
+          name: "pjlz_fj_image",
+          params: {
+            entity: item.attach_view_url
+          }
+        });
+      } else {
+        this.$toast("文件暂不支持预览");
+      }
+    },
     submit_fk: function() {
       let self = this;
       let approvalInfoId = self.pj_obj.id;
