@@ -194,13 +194,14 @@
 <script>
 import $ from "jquery";
 import Vue from "vue";
-import { Tab, Tabs, Search, Popup } from "vant";
+import { Tab, Tabs, Search, Popup ,Dialog} from "vant";
 import dd from "dingtalk-jsapi";
 import MescrollVue from "mescroll.js/mescroll.vue";
 Vue.use(Tab)
   .use(Tabs)
   .use(Search)
-  .use(Popup);
+  .use(Popup)
+  .use(Dialog);
 import global_variable from "../../../api/global_variable.js";
 import { httpMethod } from "../../../api/getData.js";
 export default {
@@ -446,7 +447,7 @@ export default {
                 self.flag = global_variable.roleJs;
                 console.log(global_variable.roleJs);
                 console.log(self.flag);
-                if (self.flag == "ld" || self.flag == "qt") {
+                if (self.flag.role == "ld" || self.flag.role == "qt") {
                   console.log("关闭应用");
                   Dialog.alert({
                     message: "没有该应用权限"
