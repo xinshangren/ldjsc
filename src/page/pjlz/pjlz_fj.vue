@@ -84,7 +84,11 @@
         console.log(window.innerHeight)
         console.log($("#content").offset())
         var s = window.innerHeight - $("#content").offset().top;
-        $("#content").css("height", s);
+        setTimeout(() => {
+              var height = document.body.clientHeight;
+               $("#content").css("height", height);
+        }, 100);
+       
         if (detail == "1") {
           $("#content").css("margin", "0px 0px 10px");
          
