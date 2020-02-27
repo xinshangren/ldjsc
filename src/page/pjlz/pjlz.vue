@@ -51,9 +51,9 @@
         style="width: 100%;"
         @change="tabsclick1"
       >
-        <van-tab title="办理中"></van-tab>
-        <van-tab title="已办结"></van-tab>
-        <van-tab    v-if="flag.role=='ld'||flag.role=='wdk'" title="数据统计"></van-tab>
+        <van-tab v-if="flag.role!=''" title="办理中"></van-tab>
+        <van-tab v-if="flag.role!=''" title="已办结"></van-tab>
+        <van-tab    v-if="flag.role=='wdk'" title="数据统计"></van-tab>
       </van-tabs>
       <div style="position:relative;" v-if="currentView!=1">
         <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
