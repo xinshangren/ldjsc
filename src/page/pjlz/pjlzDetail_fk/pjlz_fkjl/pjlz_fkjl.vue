@@ -70,6 +70,11 @@ export default {
     this.getdata();
     this.pdSingleApp();
   },
+  activated(){
+    this.pj_id = this.$route.params.id!=null?this.$route.params.id:this.pj_id;
+    this.getdata();
+    this.pdSingleApp();
+  },
   methods: {
     goDetail: function(id) {
       this.$router.push({

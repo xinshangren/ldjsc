@@ -54,16 +54,17 @@
                         <div style="margin-left: 2px;color:#2599e6">
                             <div v-if="file_list.length>0" v-for="file in file_list"
                                 style="display: flex;margin-left: 5px;height:30px">
-                                <div>{{file.attach_name}}</div>
-                                <img src='../../../../assets/img/icon_delete.png'
-                                    style="height: 20px;margin-left: 5px;margin-top: 2px;" />
-                                <img src='../../../../assets/img/icon_download.png'
+                                <div @click="openFj(file.attach_view_url)">{{file.attach_name}}</div>
+                                <!-- <img src='../../../../assets/img/icon_delete.png'
+                                    style="height: 20px;margin-left: 5px;margin-top: 2px;" /> -->
+                                <img @click="fj_download(file.attach_download_url)"
+                                    src='../../../../assets/img/icon_download.png'
                                     style="height: 24px;margin-left: 10px;" />
                             </div>
-                            <div style="display: flex;font-size: 15px;margin-top: 6px;color:#2599e6">
+                            <!-- <div style="display: flex;font-size: 15px;margin-top: 6px;color:#2599e6">
                                 <img style="height: 18px;" src="../../../../assets/img/icon_accessory.png" />
                                 <div style="margin-left: 5px;">添加附件</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -107,7 +108,7 @@
                 feedback_id: '',
                 feedback_obj: "",
                 file_list: [],
-                upd_button:false,
+                upd_button: false,
             };
         },
         mounted() {
@@ -117,11 +118,18 @@
             this.feedback_id = this.$route.params.id;
             this.getdata();
         },
+        activated(){
+             this.upd_button = false;
+            var s = window.innerHeight - $("#content").offset().top;
+            $("#content").css("min-height", s);
+            this.feedback_id = this.$route.params.id!=null?this.$route.params.id:this.feedback_id;
+            this.getdata();
+        },
         methods: {
             getdata: function () {
                 var self = this;
                 //判断 用户角色
-                if(global_variable.roleJs.role == 'cbr'){
+                if (global_variable.roleJs.role == 'cbr') {
                     self.upd_button = true;
                 }
                 let feedbackId = self.feedback_id;
@@ -138,14 +146,28 @@
                         console.log(res);
                         if (res.success == 1) {
                             self.feedback_obj = res.data;
-                            if (res.data.attachlist.length > 0) {
-                                self.file_list = res.data.attachlist;
-                            }
+                            self.file_list = res.data.attachlist;
                         }
                     })
                     .catch(err => {
                         this.$toast(err);
                     });
+            },
+            fj_download: function (url) {
+                const iframe = document.createElement("iframe");
+                iframe.src = url;
+                iframe.style.display = "none";
+                document.body.appendChild(iframe);
+            },
+            openFj: function (item) {
+                console.log(item);
+                this.$router.push({
+                    path: "/pjlz/pjlz_fj",
+                    name: "pjlz_fj",
+                    params: {
+                        entity: item
+                    }
+                });
             },
         },
     };

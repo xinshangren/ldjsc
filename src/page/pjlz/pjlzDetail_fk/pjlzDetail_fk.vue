@@ -186,12 +186,12 @@ export default {
           this.getUserInfo(id);
         } else {
           //独立app 流转批件详情
-          this.pj_obj = this.$route.params.obj;
+          this.pj_obj = this.$route.params.obj != null?this.$route.params.obj:this.pj_obj;
           this.getdata();
         }
       } else {
         //领导驾驶舱 流转批件详情
-        this.pj_obj = this.$route.params.obj;
+        this.pj_obj = this.$route.params.obj != null?this.$route.params.obj:this.pj_obj;
         this.getdata();
       }
     },
