@@ -1,6 +1,15 @@
 
 <template>
   <div style="margin-top:0px;overflow:hidden;">
+    <div style="position:relative;" v-if="flag.role=='wdk'">
+      <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
+      <img
+        id="PjlzSearchImgId"
+        class="shaixuanImg1"
+        style=" position: absolute;right: 23px;top: 17px;height: 20px;"
+        src="@/assets/img/icon_filtrate.png"
+      />
+    </div>
     <div v-if="list.length<1" style="text-align: center;">
       <img style="height: 200px;margin-top: 146px;" src="../../../assets/img/no_data.png" />
     </div>
@@ -38,33 +47,27 @@
               <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>-->
               <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
             </div>
-           <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
+            <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>
-              <div
-                class="pjlzListSmallDivFont"
-                style="margin-left:19px;"
-              >{{item.cbr1}}</div>
+              <div class="pjlzListSmallDivFont" style="margin-left:19px;">{{item.cbr1}}</div>
             </div>
             <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
               <!-- <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
-              <div class="pjlzListSmallDivFont">承办人：</div> -->
-              <div
-                class="pjlzListSmallDivFont"
-                style="margin-left:88px;"
-              >{{item.cbr2}}</div>
+              <div class="pjlzListSmallDivFont">承办人：</div>-->
+              <div class="pjlzListSmallDivFont" style="margin-left:88px;">{{item.cbr2}}</div>
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
               <div class="pjlzListSmallDivFont">办理期限：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_limit_time}}</div>
             </div>
-            <div class="pjlzListSmallDiv" style="">
+            <div class="pjlzListSmallDiv" style>
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">交办时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_create_date}}</div>
             </div>
-              <div class="pjlzListSmallDiv" style="margin-bottom:11px;">
+            <div class="pjlzListSmallDiv" style="margin-bottom:11px;">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">截止时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
@@ -177,10 +180,9 @@
         <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否签收</div>
 
         <ul class="ui-row" id="sfbjDialogId" style="margin-top: 11px;">
-          <li id="" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
+          <li id class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
           <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未签收</li>
           <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已签收</li>
-         
         </ul>
         <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
         <div style="display: flex;background: #f3f3f3;height:110px;">
@@ -230,12 +232,12 @@ export default {
       }, //判断角色
       currentView: "child1",
       isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
-       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
-      isChecked:"",//是否签收：0-未签收，1-已签收
+      status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
+      isChecked: "", //是否签收：0-未签收，1-已签收
       list: [],
       Popshow: false,
-      periodType:"",
-      periodData:"",
+      periodType: "",
+      periodData: "",
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       nodataImg: require("../../../assets/img/nodata.png"),
@@ -262,6 +264,23 @@ export default {
   beforeRouteEnter(to, from, next) {
     console.log(from);
     console.log(to);
+    if (from.name == "pjlzListvue") {
+      if (to.name == "pjlzListSearchVue") {
+        to.meta.keepAlive = true;
+      }
+    } 
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log(from);
+    console.log(to);
+    if (from.name == "pjlzListSearchVue") {
+      if (to.name == "pjlzListvue") {
+        from.meta.keepAlive = false;
+      } 
+    }
+      console.log(from);
+    console.log(to);
     next();
   },
   computed: {
@@ -279,6 +298,39 @@ export default {
         this.mescroll.resetUpScroll();
       }
     }
+  },
+   activated() {
+    console.log("activated");
+     var statusGet = this.$route.params.entity;
+    var time = this.$route.params.time;
+    var periodTypes = this.$route.params.periodType;
+
+    console.log(statusGet);
+    console.log(time);
+    this.periodType = periodTypes;
+    this.periodData = time;
+    switch (parseInt(statusGet)) {
+      case 1:
+        this.status = 0;
+        this.isOvertime = 0;
+        break;
+      case 2:
+        this.status = 2;
+        this.isOvertime = 0;
+        break;
+      case 3:
+        this.status = 1;
+        this.isOvertime = 2;
+        break;
+      case 4:
+        this.status = 1;
+        this.isOvertime = 1;
+        break;
+
+      default:
+        break;
+    }
+    this.pdSingleApp();
   },
   mounted() {
     // this.flag=global_variable.roleJs;
@@ -305,12 +357,12 @@ export default {
     }
     var statusGet = self.$route.params.entity;
     var time = self.$route.params.time;
-     var periodTypes = self.$route.params.periodType;
-    
+    var periodTypes = self.$route.params.periodType;
+
     console.log(statusGet);
-     console.log(time);
-     this.periodType=periodTypes;
-     this.periodData=time;
+    console.log(time);
+    this.periodType = periodTypes;
+    this.periodData = time;
     switch (parseInt(statusGet)) {
       case 1:
         self.status = 0;
@@ -332,9 +384,48 @@ export default {
       default:
         break;
     }
-    self.mescroll.resetUpScroll();
+    self.pdSingleApp();
   },
   methods: {
+    onSearch(val) {
+      this.seach_value = val;
+      this.mescroll.resetUpScroll();
+      // console.log(val);
+    },
+    //判断是否是单独app
+    pdSingleApp: function() {
+      String.prototype.getValue = function(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+        var r = this.substr(this.indexOf("?") + 1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      };
+      var hrefUrl = window.location.href;
+      var indexUrl = hrefUrl.replace("#", "");
+
+      var url = decodeURI(hrefUrl);
+      console.log(url);
+      var detail = url.getValue("type");
+      console.log("type===" + detail);
+      if (detail == "1") {
+        $("#mescroll").css("top", "70px");
+        // var shaixuanApp = this.$refs.PjlzshaixuanImgId;
+        // console.log(shaixuanApp);
+        var self = this;
+        setTimeout(() => {
+          $("#PjlzSearchImgId").click(function() {
+            console.log("openPop");
+            self.Popshow = true;
+          });
+        }, 100);
+      }
+      var intent = localStorage.getItem("intentSearch");
+      console.log(intent);
+      if (intent != "") {
+        this.status = intent;
+      }
+      this.mescroll.resetUpScroll();
+    },
     createListTop: function(top) {
       $("#mescroll").css("top", "210px");
     },
@@ -404,7 +495,7 @@ export default {
               code: code
             };
             httpMethod.getApprovalInfo(params).then(res => {
-              console.log("getUserInfo===="+JSON.stringify(res));
+              console.log("getUserInfo====" + JSON.stringify(res));
               if (res.success == "1") {
                 global_variable.roleJs = Object.assign(
                   {},
@@ -485,12 +576,12 @@ export default {
         dingUserId: global_variable.roleJs.dingUserId,
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
-       isChecked: this.isChecked, //是否签收：0-未签收，1-已签收
-        status:this.status,
+        isChecked: this.isChecked, //是否签收：0-未签收，1-已签收
+        status: this.status,
         createDateBegin: "",
         createDateEnd: "",
-        periodType:this.periodType,
-        periodData:this.periodData
+        periodType: this.periodType,
+        periodData: this.periodData
       };
       httpMethod
         .getApprovalInfo(params)
@@ -513,15 +604,15 @@ export default {
                     data[i].cbr1 = namelist[0];
                     for (var j = 0; j < namelist.length; j++) {
                       if (j > 0) {
-                        if(nameStr2==''){
-                          nameStr2+=namelist[j];
-                        }else{
-                          nameStr2+=","+namelist[j];
+                        if (nameStr2 == "") {
+                          nameStr2 += namelist[j];
+                        } else {
+                          nameStr2 += "," + namelist[j];
                         }
                       }
                     }
 
-                     data[i].cbr2 = nameStr2;
+                    data[i].cbr2 = nameStr2;
                   }
                 } else {
                   data[i].cbr1 = entityName;
@@ -594,6 +685,7 @@ export default {
           obj: item
         }
       });
+      localStorage.setItem("intentSearch", this.status);
       e.stopPropagation();
     }
   }

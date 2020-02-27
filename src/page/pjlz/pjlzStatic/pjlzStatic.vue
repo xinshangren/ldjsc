@@ -148,6 +148,7 @@ export default {
   activated() {
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#ffffff");
+    this.pdSingleApp();
   },
   name: "pjlzStaticVue",
   data() {
@@ -197,6 +198,51 @@ export default {
     self.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
   },
   methods: {
+    
+    //判断是否是单独app
+    pdSingleApp: function() {
+      String.prototype.getValue = function(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
+        var r = this.substr(this.indexOf("?") + 1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+      };
+      var hrefUrl = window.location.href;
+      var indexUrl = hrefUrl.replace("#", "");
+
+      var url = decodeURI(hrefUrl);
+      console.log(url);
+      var detail = url.getValue("type");
+      console.log("type===" + detail);
+      if (detail == "1") {
+        this.showRightMenu1();
+      } 
+    },
+    
+    //添加标题右上方按钮
+    showRightMenu1: function() {
+      var self = this;
+      dd.ready(function() {
+        dd.biz.navigation.setMenu({
+          items: [
+            {
+              id: "1",
+              iconId: "file",
+              text: "消息",
+              url:
+                httpMethod.returnBaseUrlFun() +
+                "webpage/jcsldjscApp/static/icon_info.png"
+            }
+          ],
+          onSuccess: function(data) {
+            self.$router.push({
+              path: "/pjlz/pjfkMessage/pjfkMessage"
+            });
+          },
+          onFail: function(err) {}
+        });
+      });
+    },
     //跳转独立的页面
     intentSearchList: function(flag) {
       console.log(flag);
@@ -219,6 +265,7 @@ export default {
           return;
         }
       }
+        localStorage.setItem("intentSearch","");
       this.$router.push({
         path: "/pjlz/pjlzListSearch/pjlzListSearch",
         name: "pjlzListSearchVue",

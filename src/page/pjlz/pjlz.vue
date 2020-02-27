@@ -51,10 +51,11 @@
         style="width: 100%;"
         @change="tabsclick1"
       >
-        <van-tab title="办理中"></van-tab>
-        <van-tab title="已办结"></van-tab>
+        <van-tab v-if="flag.role!=''" title="办理中"></van-tab>
+        <van-tab v-if="flag.role!=''" title="已办结"></van-tab>
+        <van-tab    v-if="flag.role=='wdk'" title="数据统计"></van-tab>
       </van-tabs>
-      <div style="position:relative;">
+      <div style="position:relative;" v-if="currentView!=1">
         <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
         <img
           ref="PjlzshaixuanImgId"
@@ -68,7 +69,11 @@
       <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
     </div>-->
     <child1 ref="child1" style="position:relative;" v-if="currentView===0"></child1>
-    <child2 style="position:relative;" v-if="flag.role=='ld'&&currentView===1"></child2>
+    <child2
+      id="child2"
+      style="position:relative;"
+      v-if="(flag.role=='ld'||flag.role=='wdk')&&currentView===1"
+    ></child2>
     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
       <div class="wrapper">
         <div id="popSqjxId" class="block" @click.stop>
@@ -151,6 +156,7 @@ export default {
       if (to.name != "main") {
         from.meta.keepAlive = true;
       } else {
+        localStorage.setItem("intent", "");
         from.meta.keepAlive = false;
       }
     } else {
@@ -159,6 +165,7 @@ export default {
     next();
   },
   mounted() {
+    localStorage.setItem("intent", "");
     this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
     console.log(this.flag);
@@ -171,6 +178,7 @@ export default {
       _this.screenHeightNow = document.documentElement.clientHeight; //窗口高度
       console.log(_this.screenHeightNow);
     };
+   
   },
   components: {
     child1,
@@ -189,6 +197,45 @@ export default {
     }
   },
   methods: {
+    //获取用户角色
+    getUserInfo: function() {
+      var self = this;
+      dd.ready(function() {
+        dd.runtime.permission.requestAuthCode({
+          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          onSuccess: function(info) {
+            var code = info.code; // 通过该免登授权码可以获取用户身份
+            var params = {
+              method: "getUserInfo",
+              code: code
+            };
+            httpMethod.getApprovalInfo(params).then(res => {
+              console.log("getUserInfo====" + JSON.stringify(res));
+              if (res.success == "1") {
+                global_variable.roleJs = Object.assign(
+                  {},
+                  global_variable.roleJs,
+                  {
+                    dingUserId: res.data.dingUserId,
+                    username: res.data.username,
+                    role: res.data.role,
+                    department: res.data.department
+                  }
+                );
+                self.flag = global_variable.roleJs;
+                console.log(global_variable.roleJs);
+                console.log(self.flag);
+                // var roleCode=res.data.role;
+                // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
+              }
+            });
+          },
+          onFail: function(err) {
+            alert("dd error: " + JSON.stringify(err));
+          }
+        });
+      });
+    },
     showHeightFun: function() {
       if (this.docmHeight >= this.showHeight) {
         $("#popSqjxId").css("height", "80%");
@@ -218,6 +265,7 @@ export default {
         document.title = "批件流转";
         // this.$route.meta.title = "批件流转";
         this.showRightMenu();
+         this.getUserInfo();
       }
     },
     //添加标题右上方按钮
@@ -299,32 +347,16 @@ export default {
       var index = parseInt(name);
       this.gzxOrStatic = index;
       // console.log(flag);
-
       if (index === 0) {
         this.currentView = 0;
-        this.$refs.child1.changetabState(index + 1);
-        // for (var i = 0; i < this.$children.length; i++) {
-        //   var entity = this.$children[i];
-
-        //   if (entity.$options._componentTag == "child1") {
-        //     // console.log(entity);
-        //     entity.changetabState(index + 1);
-        //   }
-        // }
+        setTimeout(() => {
+          this.$refs.child1.changetabState(index + 1);
+        }, 100);
       } else if (index == 1) {
         this.currentView = 0;
         setTimeout(() => {
           this.$refs.child1.changetabState(index + 1);
-          
         }, 100);
-        
-        // for (var i = 0; i < this.$children.length; i++) {
-        //   var entity = this.$children[i];
-        //   console.log(entity);
-        //   if (entity.$options._componentTag == "child1") {
-        //     entity.changetabState(index + 1);
-        //   }
-        // }
       } else {
         this.currentView = 1;
       }
@@ -332,16 +364,27 @@ export default {
     },
     //承办人和文电科tab切换
     tabsclick1: function(name, title) {
-      var flag = parseInt(name) + 1;
+      var flag = parseInt(name);
       console.log(flag);
-      for (var i = 0; i < this.$children.length; i++) {
-        var entity = this.$children[i];
-
-        if (entity.$options._componentTag == "child1") {
-          console.log(entity);
-          entity.changetabState(flag);
-        }
+      if (flag === 0) {
+        this.currentView = 0;
+        setTimeout(() => {
+          this.$refs.child1.changetabState(flag + 1);
+        }, 100);
+      } else if (flag == 1) {
+        this.currentView = 0;
+        setTimeout(() => {
+          this.$refs.child1.changetabState(flag + 1);
+        }, 100);
+      } else {
+        this.currentView = 1;
+        setTimeout(() => {
+          if (this.flag.role == "wdk") {
+            $("#child2").css("padding-top", "10px");
+          }
+        }, 100);
       }
+      console.log(this.currentView);
     },
     restPjListFun: function() {
       for (var i = 0; i < this.$children.length; i++) {
