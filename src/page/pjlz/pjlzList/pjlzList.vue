@@ -194,7 +194,7 @@
 <script>
 import $ from "jquery";
 import Vue from "vue";
-import { Tab, Tabs, Search, Popup ,Dialog} from "vant";
+import { Tab, Tabs, Search, Popup, Dialog } from "vant";
 import dd from "dingtalk-jsapi";
 import MescrollVue from "mescroll.js/mescroll.vue";
 Vue.use(Tab)
@@ -252,6 +252,11 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
+    console.log(from);
+    console.log(to);
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
     console.log(from);
     console.log(to);
     next();
@@ -325,7 +330,13 @@ export default {
         $("#mescroll").css("top", "113px");
         this.showRightMenu1();
         this.getUserInfo();
-        this.status = 1;
+        var intent = localStorage.getItem("intent");
+        console.log(intent);
+        if (intent != "") {
+          this.status = intent;
+        } else {
+          this.status = 1;
+        }
         this.mescroll.resetUpScroll();
         var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
         console.log(shaixuanApp);
@@ -335,7 +346,13 @@ export default {
           self.Popshow = true;
         });
       } else {
-        this.status = 1;
+        var intent = localStorage.getItem("intent");
+        console.log(intent);
+        if (intent != "") {
+          this.status = intent;
+        } else {
+          this.status = 1;
+        }
         this.mescroll.resetUpScroll();
       }
     },
@@ -456,7 +473,7 @@ export default {
                       dd.biz.navigation.close();
                     });
                   });
-                }else{
+                } else {
                   self.mescroll.resetUpScroll();
                 }
 
@@ -633,6 +650,7 @@ export default {
           obj: item
         }
       });
+      localStorage.setItem("intent",this.status);
       e.stopPropagation();
     }
   }

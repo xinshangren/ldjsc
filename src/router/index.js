@@ -296,7 +296,8 @@ export default new Router({
     },{
       path: '/pjlz/pjlz',
       name: 'pjlzListvue',
-      component: pjlzVue
+      component: pjlzVue,
+      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzListSearch/pjlzListSearch',
       name: 'pjlzListSearchVue',

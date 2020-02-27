@@ -151,6 +151,7 @@ export default {
       if (to.name != "main") {
         from.meta.keepAlive = true;
       } else {
+        localStorage.setItem("intent",""); 
         from.meta.keepAlive = false;
       }
     } else {
@@ -159,6 +160,7 @@ export default {
     next();
   },
   mounted() {
+    localStorage.setItem("intent",""); 
     this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
     console.log(this.flag);
@@ -302,7 +304,10 @@ export default {
 
       if (index === 0) {
         this.currentView = 0;
-        this.$refs.child1.changetabState(index + 1);
+        setTimeout(() => {
+          this.$refs.child1.changetabState(index + 1);
+          
+        }, 100);
         // for (var i = 0; i < this.$children.length; i++) {
         //   var entity = this.$children[i];
 
