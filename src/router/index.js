@@ -301,7 +301,8 @@ export default new Router({
     },{
       path: '/pjlz/pjlzListSearch/pjlzListSearch',
       name: 'pjlzListSearchVue',
-      component: pjlzListSearchVue
+      component: pjlzListSearchVue,
+      meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlz_fj',
       name: 'pjlz_fj',

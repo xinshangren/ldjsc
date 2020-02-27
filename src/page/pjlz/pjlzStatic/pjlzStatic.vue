@@ -219,6 +219,7 @@ export default {
           return;
         }
       }
+        localStorage.setItem("intentSearch","");
       this.$router.push({
         path: "/pjlz/pjlzListSearch/pjlzListSearch",
         name: "pjlzListSearchVue",

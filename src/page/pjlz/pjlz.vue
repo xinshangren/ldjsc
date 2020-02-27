@@ -53,8 +53,9 @@
       >
         <van-tab title="办理中"></van-tab>
         <van-tab title="已办结"></van-tab>
+        <van-tab    v-if="flag.role=='ld'||flag.role=='wdk'" title="数据统计"></van-tab>
       </van-tabs>
-      <div style="position:relative;">
+      <div style="position:relative;" v-if="currentView!=1">
         <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
         <img
           ref="PjlzshaixuanImgId"
@@ -68,7 +69,11 @@
       <div @touchmove.prevent :is="currentView" style="font-size:15px;"></div>
     </div>-->
     <child1 ref="child1" style="position:relative;" v-if="currentView===0"></child1>
-    <child2 style="position:relative;" v-if="flag.role=='ld'&&currentView===1"></child2>
+    <child2
+      id="child2"
+      style="position:relative;"
+      v-if="(flag.role=='ld'||flag.role=='wdk')&&currentView===1"
+    ></child2>
     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
       <div class="wrapper">
         <div id="popSqjxId" class="block" @click.stop>
@@ -151,7 +156,7 @@ export default {
       if (to.name != "main") {
         from.meta.keepAlive = true;
       } else {
-        localStorage.setItem("intent",""); 
+        localStorage.setItem("intent", "");
         from.meta.keepAlive = false;
       }
     } else {
@@ -160,7 +165,7 @@ export default {
     next();
   },
   mounted() {
-    localStorage.setItem("intent",""); 
+    localStorage.setItem("intent", "");
     this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
     console.log(this.flag);
@@ -301,35 +306,16 @@ export default {
       var index = parseInt(name);
       this.gzxOrStatic = index;
       // console.log(flag);
-
       if (index === 0) {
         this.currentView = 0;
         setTimeout(() => {
           this.$refs.child1.changetabState(index + 1);
-          
         }, 100);
-        // for (var i = 0; i < this.$children.length; i++) {
-        //   var entity = this.$children[i];
-
-        //   if (entity.$options._componentTag == "child1") {
-        //     // console.log(entity);
-        //     entity.changetabState(index + 1);
-        //   }
-        // }
       } else if (index == 1) {
         this.currentView = 0;
         setTimeout(() => {
           this.$refs.child1.changetabState(index + 1);
-          
         }, 100);
-        
-        // for (var i = 0; i < this.$children.length; i++) {
-        //   var entity = this.$children[i];
-        //   console.log(entity);
-        //   if (entity.$options._componentTag == "child1") {
-        //     entity.changetabState(index + 1);
-        //   }
-        // }
       } else {
         this.currentView = 1;
       }
@@ -337,16 +323,27 @@ export default {
     },
     //承办人和文电科tab切换
     tabsclick1: function(name, title) {
-      var flag = parseInt(name) + 1;
+      var flag = parseInt(name);
       console.log(flag);
-      for (var i = 0; i < this.$children.length; i++) {
-        var entity = this.$children[i];
-
-        if (entity.$options._componentTag == "child1") {
-          console.log(entity);
-          entity.changetabState(flag);
-        }
+      if (flag === 0) {
+        this.currentView = 0;
+        setTimeout(() => {
+          this.$refs.child1.changetabState(flag + 1);
+        }, 100);
+      } else if (flag == 1) {
+        this.currentView = 0;
+        setTimeout(() => {
+          this.$refs.child1.changetabState(flag + 1);
+        }, 100);
+      } else {
+        this.currentView = 1;
+        setTimeout(() => {
+          if (this.flag.role == "wdk") {
+            $("#child2").css("padding-top", "10px");
+          }
+        }, 100);
       }
+      console.log(this.currentView);
     },
     restPjListFun: function() {
       for (var i = 0; i < this.$children.length; i++) {
