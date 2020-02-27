@@ -178,6 +178,7 @@ export default {
       _this.screenHeightNow = document.documentElement.clientHeight; //窗口高度
       console.log(_this.screenHeightNow);
     };
+   
   },
   components: {
     child1,
@@ -196,6 +197,45 @@ export default {
     }
   },
   methods: {
+    //获取用户角色
+    getUserInfo: function() {
+      var self = this;
+      dd.ready(function() {
+        dd.runtime.permission.requestAuthCode({
+          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          onSuccess: function(info) {
+            var code = info.code; // 通过该免登授权码可以获取用户身份
+            var params = {
+              method: "getUserInfo",
+              code: code
+            };
+            httpMethod.getApprovalInfo(params).then(res => {
+              console.log("getUserInfo====" + JSON.stringify(res));
+              if (res.success == "1") {
+                global_variable.roleJs = Object.assign(
+                  {},
+                  global_variable.roleJs,
+                  {
+                    dingUserId: res.data.dingUserId,
+                    username: res.data.username,
+                    role: res.data.role,
+                    department: res.data.department
+                  }
+                );
+                self.flag = global_variable.roleJs;
+                console.log(global_variable.roleJs);
+                console.log(self.flag);
+                // var roleCode=res.data.role;
+                // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
+              }
+            });
+          },
+          onFail: function(err) {
+            alert("dd error: " + JSON.stringify(err));
+          }
+        });
+      });
+    },
     showHeightFun: function() {
       if (this.docmHeight >= this.showHeight) {
         $("#popSqjxId").css("height", "80%");
@@ -225,6 +265,7 @@ export default {
         document.title = "批件流转";
         // this.$route.meta.title = "批件流转";
         this.showRightMenu();
+         this.getUserInfo();
       }
     },
     //添加标题右上方按钮
