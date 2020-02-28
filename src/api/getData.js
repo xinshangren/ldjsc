@@ -440,8 +440,8 @@ export const httpMethod = {
         return get("dingTalkController.action?fileUpload", params);
     },
     //通用接口
-    sendGetUrl: function (url,params) {
-        return get(url, params);
+    fileShow: function (params) {
+        return get("dingTalkController.action?fileShow", params);
     },
 
     

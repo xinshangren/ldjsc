@@ -108,13 +108,15 @@ export default {
   },
   methods: {
     sendGetUrl: function(attach_view_urls) {
-      var params = {};
+      var params = {
+        url:attach_view_urls
+      };
       httpMethod
-        .sendGetUrl(attach_view_urls, params)
+        .fileShow( params)
         .then(res => {
           console.log(res);
-          this.attach_view_url = res;
-          console.log(res);
+          this.attach_view_url = res.data;
+          console.log(res.data);
           setTimeout(() => {
             var index = attach_view_urls.lastIndexOf("/");
             var url = attach_view_urls.substring(0, index + 1);
