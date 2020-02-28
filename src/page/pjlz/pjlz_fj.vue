@@ -21,8 +21,16 @@
 }
 </style>
 <template>
-  <div id="content" style="background:#ffffff;position: relative;">
-    <div id="sss" class="pdf-box">
+  <div id="content" style="background:#ffffff;position: relative;padding:13px;">
+    <!-- <iframe
+      id="iframe"
+      :src="attach_view_url"
+      frameborder="no"
+      scrolling="yes"
+      style="width:100%; overflow-x:scroll; overflow-y:hidden; "
+    ></iframe>-->
+    <div id="pmJjdivid" style="width:100%;font-size:15px;overflow:auto;" v-html="attach_view_url"></div>
+    <!-- <div id="sss" class="pdf-box">
       <pdf ref="pdf" :src="pdfSrc" :page="pageNum" @num-pages="pageTotalNum=$event"></pdf>
     </div>
     <div
@@ -31,23 +39,9 @@
       <img class="btn_tools" src="../../assets/img/fanye_left.png" @click.stop="prePage" />
       <img class="btn_tools" src="../../assets/img/fanye_right.png" @click.stop="nextPage" />
       <div style="margin-left:20px;">{{pageNum}}&nbsp/&nbsp{{pageTotalNum}}</div>
-      <img
-        class="btn1_tools"
-        src="../../assets/img/suofang_big.png"
-        :class="{select:idx==0}"
-        @touchstart="idx=0"
-        @touchend="idx=-1"
-        @click="scaleD"
-      />
-      <img
-        class="btn1_tools"
-        src="../../assets/img/suofang_small.png"
-        :class="{select:idx==1}"
-        @touchstart="idx=1"
-        @touchend="idx=-1"
-        @click="scaleX"
-      />
-    </div>
+      <img class="btn1_tools" src="../../assets/img/suofang_big.png" :class="{select:idx==0}" @touchstart="idx=0" @touchend="idx=-1" @click="scaleD"/>
+      <img class="btn1_tools" src="../../assets/img/suofang_small.png" :class="{select:idx==1}" @touchstart="idx=1" @touchend="idx=-1" @click="scaleX"/>
+    </div>-->
   </div>
 </template>
 <script>
@@ -77,32 +71,61 @@ export default {
       loadedRatio: 0,
       curPageNum: 0,
       scale: 100, //放大系数
-      idx: -1
+      idx: -1,
+      attach_view_url: ""
     };
   },
   mounted() {
-    this.pdfSrc = this.$route.params.entity;
-    console.log("----------未处理---------------");
-    console.log(this.pdfSrc)
-    var headers = {
-      Authorization: "Bearer SOME_TOKEN",
-      "x-ipp-device-uuid": "SOME_UUID"
-    };
-    this.pdfSrc = pdf.createLoadingTask({
-      url: this.pdfSrc,
-      httpHeaders: headers
-    });
-    console.log("------------处理后--------------");
-    console.log(this.pdfSrc);
-
-    this.pdfSrc.then(pdf => {
-       console.log("------------pdf--------------");
-      console.log(pdf);
-      this.pageTotalNum = pdf.numPages;
-    });
+    var attach_view_urls = this.$route.params.entity.attach_view_url;
+    console.log(attach_view_urls);
+    this.sendGetUrl(attach_view_urls);
     this.pdSingleApp();
+    //  setTimeout(() => {
+    //             this.pdfSrc = pdf.createLoadingTask(pdfSrcs);
+    //         }, 1000);
+    // this.pdfSrc = pdf.createLoadingTask(this.pdfSrc);
+    // this.pdfSrc.then(pdf => {
+    //   this.numPages = pdf.numPages;
+    // });
   },
   methods: {
+    sendGetUrl: function(attach_view_urls) {
+      var params = {
+        url: attach_view_urls
+      };
+      httpMethod
+        .fileShow(params)
+        .then(res => {
+          console.log(res);
+          this.attach_view_url = res.data;
+          console.log(res.data);
+          setTimeout(() => {
+            var index = attach_view_urls.lastIndexOf("/");
+            var url = attach_view_urls.substring(0, index + 1);
+            console.log(url);
+            // var height = document.body.clientHeight;
+            // var o = document.getElementById("pmJjdivid");
+            // var h = o.clientHeight || o.offsetHeight;
+            // if (h < height) {
+            //   $("#pmJjdivid").css("height", height - 80 + "px");
+            // }
+            $("#pmJjdivid img").each(function() {
+              $(this).css("width", "100%");
+              var imageurl = $(this).attr("src");
+              if (imageurl.indexOf("http") == -1) {
+                $(this).attr("src", url + imageurl);
+                $(this).removeAttr("hspace");
+                $(this).removeAttr("vspace");
+                $(this).removeAttr("width");
+                $(this).removeAttr("height");
+              }
+            });
+          }, 100);
+        })
+        .catch(err => {
+          // this.$toast(err);
+        });
+    },
     //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {
@@ -120,15 +143,19 @@ export default {
       console.log("type===" + detail);
       console.log(window.innerHeight);
       console.log($("#content").offset());
-      setTimeout(() => {
-        var height = document.body.clientHeight - $("#content").offset().top;
-        $("#content").css("height", height);
-      }, 100);
-
+      var height = document.body.clientHeight;
       if (detail == "1") {
-        $("#content").css("margin", "0px 0px 10px");
-
+        // $("#content").css("margin", "0px 0px 10px");
+        setTimeout(() => {
+          var height = document.body.clientHeight;
+          $("#pmJjdivid").css("height", height + "px");
+        }, 100);
         // $("#pjlzDeali_fk_top_id").css("margin-top","0px");
+      }else{
+          setTimeout(() => {
+          var height = document.body.clientHeight-100;
+          $("#pmJjdivid").css("height", height + "px");
+        }, 100);
       }
     },
 

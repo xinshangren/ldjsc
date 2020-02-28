@@ -166,7 +166,7 @@
                         path: "/pjlz/pjlz_fj",
                         name: "pjlz_fj",
                         params: {
-                            entity: item.attach_pdf_url
+                            entity: item
                         }
                     });
                 } else if (item.attach_type == "image") {
