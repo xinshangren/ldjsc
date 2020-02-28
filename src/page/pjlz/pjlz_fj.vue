@@ -29,7 +29,7 @@
       scrolling="yes"
       style="width:100%; overflow-x:scroll; overflow-y:hidden; "
     ></iframe>-->
-    <div id="pmJjdivid" style="width:100%;font-size:15px;" v-html="attach_view_url"></div>
+    <div id="pmJjdivid" style="width:100%;font-size:15px;overflow:auto;" v-html="attach_view_url"></div>
     <!-- <div id="sss" class="pdf-box">
       <pdf ref="pdf" :src="pdfSrc" :page="pageNum" @num-pages="pageTotalNum=$event"></pdf>
     </div>
@@ -77,26 +77,6 @@ export default {
     var attach_view_urls = this.$route.params.entity.attach_view_url;
     console.log(attach_view_urls);
     this.sendGetUrl(attach_view_urls);
-    // this.instance.post(attach_view_urls, {}).then(res => {
-    //   this.attach_view_url = res.data;
-    //   console.log(res.data);
-    //   setTimeout(() => {
-    //     var index = attach_view_urls.lastIndexOf("/");
-    //     var url=attach_view_urls.substring(0, index + 1);
-    //     console.log(url);
-    //     $("#pmJjdivid img").each(function() {
-    //       $(this).css("width", "100%");
-    //       var imageurl = $(this).attr("src");
-    //       if (imageurl.indexOf("http") == -1) {
-    //         $(this).attr("src", url+ imageurl);
-    //          $(this).removeAttr("hspace");
-    //           $(this).removeAttr("vspace");
-    //            $(this).removeAttr("width");
-    //             $(this).removeAttr("height");
-    //       }
-    //     });
-    //   }, 100);
-    // });
     this.pdSingleApp();
     //  setTimeout(() => {
     //             this.pdfSrc = pdf.createLoadingTask(pdfSrcs);
@@ -109,10 +89,10 @@ export default {
   methods: {
     sendGetUrl: function(attach_view_urls) {
       var params = {
-        url:attach_view_urls
+        url: attach_view_urls
       };
       httpMethod
-        .fileShow( params)
+        .fileShow(params)
         .then(res => {
           console.log(res);
           this.attach_view_url = res.data;
@@ -121,6 +101,12 @@ export default {
             var index = attach_view_urls.lastIndexOf("/");
             var url = attach_view_urls.substring(0, index + 1);
             console.log(url);
+            // var height = document.body.clientHeight;
+            // var o = document.getElementById("pmJjdivid");
+            // var h = o.clientHeight || o.offsetHeight;
+            // if (h < height) {
+            //   $("#pmJjdivid").css("height", height - 80 + "px");
+            // }
             $("#pmJjdivid img").each(function() {
               $(this).css("width", "100%");
               var imageurl = $(this).attr("src");
@@ -155,19 +141,19 @@ export default {
       console.log("type===" + detail);
       console.log(window.innerHeight);
       console.log($("#content").offset());
-      setTimeout(() => {
-        var height = document.body.clientHeight - $("#content").offset().top;
-        
-        $("#pmJjdivid").css("height", height);
-        // $("#pmJjdivid img").each(function() {
-        //   $(this).css("width", "100%");
-        // });
-      }, 100);
-
+      var height = document.body.clientHeight;
       if (detail == "1") {
-        $("#content").css("margin", "0px 0px 10px");
-
+        // $("#content").css("margin", "0px 0px 10px");
+        setTimeout(() => {
+          var height = document.body.clientHeight;
+          $("#pmJjdivid").css("height", height + "px");
+        }, 100);
         // $("#pjlzDeali_fk_top_id").css("margin-top","0px");
+      }else{
+          setTimeout(() => {
+          var height = document.body.clientHeight-100;
+          $("#pmJjdivid").css("height", height + "px");
+        }, 100);
       }
     },
 
