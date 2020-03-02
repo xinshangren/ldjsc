@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <div id="pjlzDeali_fk_id" style="margin:101px 0px 10px;background:#ffffff;min-height: 202px;">
+    <div id="pjlzDeali_fk_id" style="margin:101px 0px 10px;background:#ffffff;min-height: 210px;">
       <div style="display: flex;padding-top: 10px;">
         <!-- <img
           v-if="pj_detail.approval_warn_flag == 0"
@@ -20,7 +20,7 @@
       </div>
       <div style="color: #666666;font-size: 16px;width: 94%;">
         <div style="display: flex;margin-top: 10px;">
-          <div style="width: 30%;text-align: right;">事项类型：</div>
+          <div style="width: 30%;text-align: right;">批示件类型：</div>
           <div style="width:70%">{{pj_detail.approval_type}}</div>
         </div>
         <div style="display: flex;margin-top: 15px;">
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div style="display: flex;margin-top: 15px;">
-          <div style="width: 30%;text-align: right;">事项内容：</div>
+          <div style="width: 30%;text-align: right;">文件内容：</div>
           <div style="width: 70%;height: 100px;overflow-y:scroll;">
             <div
               style="font-size: 15px;
@@ -40,6 +40,14 @@
               v-html="pj_detail.approval_content"
             ></div>
           </div>
+        </div>
+        <div style="display: flex;margin-top: 15px;">
+          <div style="width: 30%;text-align: right;">文号：</div>
+          <div style="width:70%">{{pj_detail.approval_number}}</div>
+        </div>
+        <div style="display: flex;margin-top: 15px;">
+          <div style="width: 30%;text-align: right;">市长批示：</div>
+          <div style="width:70%">{{pj_detail.approval_instruct}}</div>
         </div>
         <div style="display: flex;margin-top: 15px;padding-bottom: 15px;">
           <div style="width: 30%;text-align: right;">附件：</div>
