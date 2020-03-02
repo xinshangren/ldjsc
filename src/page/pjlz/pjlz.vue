@@ -262,8 +262,8 @@ export default {
       console.log("type===" + detail);
       if (detail == "1") {
         this.top = 0;
-        document.title = "批件流转";
-        // this.$route.meta.title = "批件流转";
+        document.title = "领导批示办理";
+        // this.$route.meta.title = "领导批示办理";
         this.showRightMenu();
          this.getUserInfo();
       }

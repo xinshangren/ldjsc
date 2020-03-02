@@ -179,7 +179,7 @@ export default {
       if (detail == "1") {
         // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
         $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
-        this.$route.meta.title = "批件流转";
+        this.$route.meta.title = "领导批示办理";
         var id = url.getValue("id");
         if (id != null && id != "") {
           //推送页面  跳转
