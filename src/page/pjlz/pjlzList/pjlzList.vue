@@ -50,7 +50,7 @@
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
-              <div class="pjlzListSmallDivFont">反馈期限：</div>
+              <div class="pjlzListSmallDivFont">反馈时限：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_limit_time}}</div>
             </div>
             <div class="pjlzListSmallDiv" style>
