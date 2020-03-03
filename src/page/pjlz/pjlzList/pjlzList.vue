@@ -46,7 +46,7 @@
             <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
               <!-- <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>-->
-              <div class="pjlzListSmallDivFont" style="margin-left:88px;">{{item.cbr2}}</div>
+              <div class="pjlzListSmallDivFont" style="margin-left:99px;">{{item.cbr2}}</div>
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
@@ -154,13 +154,13 @@
       v-model="Popshow"
       position="top"
       get-container="body"
-      :style="{ height: '45%' }"
+      :style="oneStyle"
       @opened="openPop"
       @open="openPopStart"
       style="overflow:hidden;background:rgb(243, 243, 243);"
     >
       <div style="background:#ffffff;">
-        <div v-if="status==1">
+        <div>
           <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否超期</div>
           <ul id="sfcqDialogId" class="ui-row" style="margin-top: 11px;">
             <li id="0" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
@@ -228,6 +228,9 @@ export default {
   data() {
     return {
       seach_value: "",
+      oneStyle: {
+        height: "60%"
+      },
       active: 0,
       flag: {
         dingUserId: "",
@@ -239,7 +242,7 @@ export default {
       isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
       status: "0", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
-      approval_status:"0",//批件状态
+      approval_status: "0", //批件状态
       list: [],
       Popshow: false,
       mescroll: null, // mescroll实例对象
@@ -303,10 +306,9 @@ export default {
     console.log(search_allref);
     var self = this;
     if (global_variable.singleApp != 1) {
-      shaixuan.removeEventListener("click", function() {
-        console.log("openPop");
-        self.Popshow = true;
-      });
+      // shaixuan.removeEventListener("click", function() {
+      //   // console.log("openPop");
+      // });
       shaixuan.addEventListener("click", function() {
         console.log("openPop");
         self.Popshow = true;
@@ -323,6 +325,10 @@ export default {
       self.createListTop();
     }
     self.pdSingleApp();
+
+    //  self.$router.push({
+    //           path: "/pjlz/pjfkMessage/pjfkMessage"
+    //         });
   },
   methods: {
     //判断是否是单独app
@@ -342,7 +348,6 @@ export default {
       console.log("type===" + detail);
       if (detail == "1") {
         $("#mescroll").css("top", "113px");
-        this.showRightMenu1();
         this.getUserInfo();
         var intent = localStorage.getItem("intent");
         console.log(intent);
@@ -355,6 +360,10 @@ export default {
         var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
         console.log(shaixuanApp);
         var self = this;
+        shaixuanApp.removeEventListener("click", function() {
+          console.log("openPop");
+          self.Popshow = true;
+        });
         shaixuanApp.addEventListener("click", function() {
           console.log("openPop");
           self.Popshow = true;
@@ -382,7 +391,7 @@ export default {
               text: "消息",
               url:
                 httpMethod.returnBaseUrlFun() +
-                "webpage/jcsldjscApp/static/icon_info.png"
+                global_variable.messageUrl
             }
           ],
           onSuccess: function(data) {
@@ -400,26 +409,54 @@ export default {
     //切换办理中和已办结，重置查询条件
     changetabState: function(state) {
       console.log(state);
+      if (state == "0") {
+        this.oneStyle = { height: "60%" };
+      } else {
+        this.oneStyle = { height: "30%" };
+      }
       this.status = state;
-      this.approval_status="0";//批件状态
-      this.isOvertime="0";//是否超期
-      this.isChecked="";//是否签收
-        //循环重置查询条件
+      this.approval_status = "0"; //批件状态
+      this.isOvertime = "0"; //是否超期
+      this.isChecked = ""; //是否签收
+      //循环重置查询条件
       $("#sfbjDialogId li").each(function() {
-        $(this).removeClass("dialogSelect");
-        $(this).addClass("dialogNoSelect");
+        // console.log($(this).html());
+         var text = $(this).html();
+        if (text == "全部") {
+         
+          $(this).removeClass("dialogNoSelect");
+          $(this).addClass("dialogSelect");
+        } else {
+          $(this).removeClass("dialogSelect");
+          $(this).addClass("dialogNoSelect");
+        }
       });
       //循环重置查询条件
       $("#sfcqDialogId li").each(function() {
-        $(this).removeClass("dialogSelect");
-        $(this).addClass("dialogNoSelect");
+         var text = $(this).html();
+        if (text == "全部") {
+         
+          $(this).removeClass("dialogNoSelect");
+          $(this).addClass("dialogSelect");
+        } else {
+          $(this).removeClass("dialogSelect");
+          $(this).addClass("dialogNoSelect");
+        }
       });
 
       //循环重置查询条件
       $("#pjztDialogId li").each(function() {
-        $(this).removeClass("dialogSelect");
-        $(this).addClass("dialogNoSelect");
+         var text = $(this).html();
+        if (text == "全部") {
+         
+          $(this).removeClass("dialogNoSelect");
+          $(this).addClass("dialogSelect");
+        } else {
+          $(this).removeClass("dialogSelect");
+          $(this).addClass("dialogNoSelect");
+        }
       });
+
       this.mescroll.resetUpScroll();
     },
     //切换办理中和已办结
@@ -524,6 +561,9 @@ export default {
                 } else {
                   self.mescroll.resetUpScroll();
                 }
+                if (self.flag.role == "cbr") {
+                  self.showRightMenu1();
+                }
 
                 // var roleCode=res.data.role;
                 // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
@@ -555,7 +595,7 @@ export default {
         }
       });
 
-        //循环获取选中的批件状态
+      //循环获取选中的批件状态
       $("#pjztDialogId li").each(function() {
         var isSelect = $(this).hasClass("dialogSelect");
         if (isSelect) {
@@ -572,6 +612,7 @@ export default {
       $("#sfbjDialogId li").each(function() {
         $(this).removeClass("dialogSelect");
         $(this).addClass("dialogNoSelect");
+        console.log($(this).text());
       });
       //循环重置查询条件
       $("#sfcqDialogId li").each(function() {
@@ -584,7 +625,7 @@ export default {
         $(this).removeClass("dialogSelect");
         $(this).addClass("dialogNoSelect");
       });
-       context.approval_status = "0";
+      context.approval_status = "0";
       context.isOvertime = "";
       context.isChecked = "";
       // context.projectNature = "";
@@ -603,7 +644,7 @@ export default {
         // corpId:global_variable.corpId,
         // dingUserId: "086404191926187734",
         dingUserId: global_variable.roleJs.dingUserId,
-        approval_status:this.approval_status,//批件状态
+        approval_status: this.approval_status, //批件状态
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
         isChecked: this.isChecked, //是否签收：0-未签收，1-已签收

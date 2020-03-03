@@ -14,7 +14,7 @@
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div v-for="(item,index) in list" :key="index" class="pjkMessageListDiv">
-          <div class="pjkMessageRedPoint"></div>
+          <!-- <div class="pjkMessageRedPoint"></div> -->
           <div v-if="item.msg_type==0" style="display:flex;">
             <img class="pjkMessagetitileImg" src="../../../assets/img/icon_source1.png" />
             <div class="pjkMessagetitileDiv">系统提示</div>

@@ -53,8 +53,8 @@
   
   .block {
     width: 81%;
-    height: 45%;
-    max-height:50%;
+    height: 55%;
+    max-height:55%;
     background:url(../../assets/img/pop_bg.png);
     background-size:100% 100%;
     position:relative;
