@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:54px;">
+  <div style="">
     <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
       <div id="newsList" style="padding-left:10px;padding-right:10px;margin-top:10px;">
         <div

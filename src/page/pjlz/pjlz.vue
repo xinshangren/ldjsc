@@ -191,8 +191,8 @@ export default {
         $("#popSqjxId").css("height", "80%");
         $("#popSqjxId").css("max-height", "85%");
       } else {
-        $("#popSqjxId").css("height", "45%");
-        $("#popSqjxId").css("max-height", "50%");
+        $("#popSqjxId").css("height", "55%");
+        $("#popSqjxId").css("max-height", "55%");
       }
     }
   },
@@ -225,6 +225,10 @@ export default {
                 self.flag = global_variable.roleJs;
                 console.log(global_variable.roleJs);
                 console.log(self.flag);
+                 if(self.flag.role == "cbr"){
+                   self.showRightMenu();
+                }
+               
                 // var roleCode=res.data.role;
                 // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
               }
@@ -264,7 +268,6 @@ export default {
         this.top = 0;
         document.title = "领导批示办理";
         // this.$route.meta.title = "领导批示办理";
-        this.showRightMenu();
          this.getUserInfo();
       }
     },
@@ -280,7 +283,7 @@ export default {
               text: "消息",
               url:
                 httpMethod.returnBaseUrlFun() +
-                "webpage/jcsldjscApp/static/icon_info.png"
+                 global_variable.messageUrl
             }
           ],
           onSuccess: function(data) {

@@ -117,7 +117,7 @@
       <div ref="myCharts3" style="height:210px;width:100%;"></div>
     </div>
     <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
-      <div class="pjlzStaticTitile">本年度累计延期未完成的工作情况</div>
+      <div class="pjlzStaticTitile">年度累计延期未完成的工作情况</div>
       <div
         class="van-hairline--top"
         style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
@@ -146,6 +146,7 @@ export default {
     document.querySelector("body").setAttribute("style", "background:#ffffff");
   },
   activated() {
+    console.log("activated");
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#ffffff");
     this.pdSingleApp();
@@ -198,7 +199,6 @@ export default {
     self.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
   },
   methods: {
-    
     //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {
@@ -215,10 +215,13 @@ export default {
       var detail = url.getValue("type");
       console.log("type===" + detail);
       if (detail == "1") {
-        this.showRightMenu1();
-      } 
+        console.log(global_variable.roleJs);
+        if (global_variable.roleJs.role == "cbr") {
+          this.showRightMenu1();
+        }
+      }
     },
-    
+
     //添加标题右上方按钮
     showRightMenu1: function() {
       var self = this;
@@ -231,7 +234,7 @@ export default {
               text: "消息",
               url:
                 httpMethod.returnBaseUrlFun() +
-                "webpage/jcsldjscApp/static/icon_info.png"
+                 global_variable.messageUrl
             }
           ],
           onSuccess: function(data) {
@@ -265,7 +268,7 @@ export default {
           return;
         }
       }
-        localStorage.setItem("intentSearch","");
+      localStorage.setItem("intentSearch", "");
       this.$router.push({
         path: "/pjlz/pjlzListSearch/pjlzListSearch",
         name: "pjlzListSearchVue",

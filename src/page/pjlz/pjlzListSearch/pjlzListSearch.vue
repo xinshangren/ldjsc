@@ -234,6 +234,7 @@ export default {
       isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
+      approval_status:"0",
       list: [],
       Popshow: false,
       periodType: "",
@@ -277,11 +278,15 @@ export default {
     if (from.name == "pjlzListSearchVue") {
       if (to.name == "pjlzListvue") {
         from.meta.keepAlive = false;
+        $("#PjlzSearchImgId").off("click");
       } 
     }
       console.log(from);
     console.log(to);
     next();
+  },
+  destroyed(){
+    console.log("destroyed");
   },
   computed: {
     listenComponentState() {
@@ -311,7 +316,7 @@ export default {
     this.periodData = time;
     switch (parseInt(statusGet)) {
       case 1:
-        this.status = 0;
+        this.status = "";
         this.isOvertime = 0;
         break;
       case 2:
@@ -340,10 +345,10 @@ export default {
     console.log(search_allref);
     var self = this;
     if (global_variable.singleApp != 1) {
-      shaixuan.addEventListener("click", function() {
-        console.log("openPop");
-        self.Popshow = true;
-      });
+      // shaixuan.addEventListener("click", function() {
+      //   console.log("openPop");
+      //   self.Popshow = true;
+      // });
     }
 
     console.log(global_variable.roleJs);
@@ -365,20 +370,20 @@ export default {
     this.periodData = time;
     switch (parseInt(statusGet)) {
       case 1:
-        self.status = 0;
-        self.isOvertime = 0;
+        this.status = 0;
+        this.isOvertime = 0;
         break;
       case 2:
-        self.status = 1;
-        self.isOvertime = 0;
+        this.status = 1;
+        this.isOvertime = 0;
         break;
       case 3:
-        self.status = 0;
-        self.isOvertime = 2;
+        this.status = 0;
+        this.isOvertime = 2;
         break;
       case 4:
-        self.status = 0;
-        self.isOvertime = 1;
+        this.status = 0;
+        this.isOvertime = 1;
         break;
 
       default:
@@ -578,6 +583,7 @@ export default {
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
         isChecked: this.isChecked, //是否签收：0-未签收，1-已签收
         status: this.status,
+        approval_status:this.approval_status,
         createDateBegin: "",
         createDateEnd: "",
         periodType: this.periodType,
