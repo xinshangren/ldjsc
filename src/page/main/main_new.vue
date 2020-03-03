@@ -6,6 +6,10 @@
       @click="godetile(index,tabIdList[index])"
       class="ui-col ui-col-25 indexLiStyle"
     >
+      <div
+        v-if="tabNameList[index]=='每日要情'&&yd_hits=='1'"
+        style="position: absolute;right: 10px;background: red;width: 5px;height: 5px;border-radius: 42px;"
+      ></div>
       <img class="indexLiContentImgStyle" :src="tabImage[index]" />
       <div class="indexLiContentDivStyle">{{tabNameList[index]}}</div>
     </li>
@@ -28,7 +32,20 @@ export default {
   },
   activated() {
     //返回保留页面记录
+      console.log("activated");
+   this.getCmsMyrqIfHits();
     document.querySelector("body").setAttribute("style", "background:#ffffff");
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log(from);
+    console.log(to);
+    if (to.name == "splashVue") {
+      dd.ready(function() {
+        dd.biz.navigation.close();
+      });
+    }
+
+    next();
   },
   data() {
     return {
@@ -36,6 +53,7 @@ export default {
       isCreate: false,
       isDeali: false,
       seach_value: "",
+      yd_hits:"0",
       tabImage: [
         require("@/assets/img/icon-yjzl.png"),
         require("@/assets/img/icon_pz.png"),
@@ -80,16 +98,74 @@ export default {
         "7"
         // "999",
         // "1000"
-      ],
+      ]
       // permissionList: []
     };
   },
   created() {
     // var context = this;
     // context.getCuruserid();
+
+    this.getUserInfo();
+    // this.getCmsMyrqIfHits();
   },
   mounted() {},
   methods: {
+    getCmsMyrqIfHits: function() {
+      console.log("获取已读");
+      var self = this;
+      var params = {
+         userId:global_variable.roleJs.dingUserId
+      };
+      httpMethod.getCmsMyrqIfHits(params).then(res => {
+        console.log(JSON.stringify(res));
+        if (res.success == "1") {
+          var yd_hit=res.yd_hits;
+          this.yd_hits=yd_hit;
+        }
+      });
+    },
+    //获取用户角色
+    getUserInfo: function() {
+      console.log("获取用户角色");
+      var self = this;
+      dd.ready(function() {
+        dd.runtime.permission.requestAuthCode({
+          corpId: global_variable.corpId, // 企业id
+          onSuccess: function(info) {
+            var code = info.code; // 通过该免登授权码可以获取用户身份
+            console.log("code=======" + code);
+            var params = {
+              method: "getUserInfo",
+              code: code
+            };
+            httpMethod.getApprovalInfo(params).then(res => {
+              console.log("getUserInfo=====" + JSON.stringify(res));
+              if (res.success == "1") {
+                global_variable.roleJs = Object.assign(
+                  {},
+                  global_variable.roleJs,
+                  {
+                    dingUserId: res.data.dingUserId,
+                    username: res.data.username,
+                    role: res.data.role,
+                    department: res.data.department
+                  }
+                );
+                self.getCmsMyrqIfHits();
+                console.log("roleJs=====" + JSON.stringify(global_variable));
+                console.log(global_variable.roleJs);
+                // var roleCode=res.data.role;
+                // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
+              }
+            });
+          },
+          onFail: function(err) {
+            alert("dd error: " + JSON.stringify(err));
+          }
+        });
+      });
+    },
     godetile: function(index, idValue) {
       console.log(index + "-" + idValue);
       var id = "";
@@ -495,7 +571,7 @@ export default {
                     console.log("main权限" + res.functions);
                     global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
                     self.doAddAppLog(global_variable.userId);
-                  } 
+                  }
                 } else if (res.success == "0") {
                 }
               })

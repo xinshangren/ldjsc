@@ -5,7 +5,7 @@
       :style="backgroundDiv"
       style="width: 92%;padding: 2% 4% 2% 4%;background-size: 100% 100%;"
     >
-      <div id="pmJjdivid" style="width:100%;font-size:15px;" v-html="itemEnti.content"></div>
+      <div id="pmJjdivid" style="width:100%;font-size:15px;overflow:auto;" v-html="itemEnti.content"></div>
       <div
         v-if="fileListnew.length>0"
         style="font-size: 15px;margin-left: 10px;color: #666666;"

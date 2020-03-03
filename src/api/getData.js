@@ -451,6 +451,10 @@ export const httpMethod = {
     findIdByMyrq: function (params) {
         return get("cmsAppInsideController.action?findIdByMyrq", params);
     },
+    //通过id该人的未读
+    getCmsMyrqIfHits: function (params) {
+        return get("cmsAppInsideController.action?getCmsMyrqIfHits", params);
+    },
 
     
 

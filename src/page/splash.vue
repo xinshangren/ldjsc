@@ -72,14 +72,14 @@ export default {
                             .find(".van-dialog__message")
                             .html(self.permissTipTimeOut + "秒后退出应用");
                         }
+                        if (self.permissTipTimeOut < 1) {
+                          //clearInterval(interval);
+                          dd.ready(function() {
+                            dd.biz.navigation.close();
+                          });
+                        }
                       }, 1000);
-                      if (self.permissTipTimeOut < 1) {
-                        //clearInterval(interval);
-                        dd.ready(function() {
-                          dd.biz.navigation.close();
-                        });
-                      }
-                    }, 3000);
+                    }, 100);
                     Dialog.alert({
                       title: global_variable.permissTip,
                       showConfirmButton: false,
