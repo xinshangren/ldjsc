@@ -33,9 +33,11 @@
     <!-- <div id="sss" class="pdf-box">
       <pdf ref="pdf" :src="pdfSrc" :page="pageNum" @num-pages="pageTotalNum=$event"></pdf>
     </div>
-    <div style="position:absolute;bottom: 0px;left:63px;width: 100%;height:35px;font-size: 16px;display: flex;background: #ffffff;  ">
+    <div
+      style="position:absolute;bottom: 0px;left:63px;width: 100%;height:35px;font-size: 16px;display: flex;background: #ffffff;  "
+    >
       <img class="btn_tools" src="../../assets/img/fanye_left.png" @click.stop="prePage" />
-      <img class="btn_tools" src="../../assets/img/fanye_right.png" @click.stop="nextPage"/>
+      <img class="btn_tools" src="../../assets/img/fanye_right.png" @click.stop="nextPage" />
       <div style="margin-left:20px;">{{pageNum}}&nbsp/&nbsp{{pageTotalNum}}</div>
       <img class="btn1_tools" src="../../assets/img/suofang_big.png" :class="{select:idx==0}" @touchstart="idx=0" @touchend="idx=-1" @click="scaleD"/>
       <img class="btn1_tools" src="../../assets/img/suofang_small.png" :class="{select:idx==1}" @touchstart="idx=1" @touchend="idx=-1" @click="scaleX"/>
