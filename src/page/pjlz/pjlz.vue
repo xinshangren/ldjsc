@@ -26,12 +26,12 @@
         style="display:none;height: 40px;margin-top: 9px;margin-left: 10px;margin-right: 10px;"
       >
         <div style="width:50%;position:relative;">
-          <div @click="selectTab(1)" id="tabdiv1" class="pop_tab_select_div1">
+          <div @click="selectTab(0)" id="tabdiv1" class="pop_tab_select_div1">
             <div style="margin:0 auto;">办理中</div>
           </div>
         </div>
         <div style="width:50%;position:relative;">
-          <div @click="selectTab(2)" id="tabdiv2" class="pop_tab_noselect_div2">
+          <div @click="selectTab(1)" id="tabdiv2" class="pop_tab_noselect_div2">
             <div style="margin:0 auto;">已办结</div>
           </div>
         </div>
@@ -325,13 +325,13 @@ export default {
       // }
 
       switch (flag) {
-        case 1: //办理中
+        case 0: //办理中
           $("#tabdiv1").removeClass("pop_tab_noselect_div1");
           $("#tabdiv1").addClass("pop_tab_select_div1");
           $("#tabdiv2").addClass("pop_tab_noselect_div2");
           $("#tabdiv2").removeClass("pop_tab_select_div2");
           break;
-        case 2: //已办结
+        case 1: //已办结
           $("#tabdiv1").removeClass("pop_tab_select_div1");
           $("#tabdiv1").addClass("pop_tab_noselect_div1");
           $("#tabdiv2").addClass("pop_tab_select_div2");
@@ -350,12 +350,12 @@ export default {
       if (index === 0) {
         this.currentView = 0;
         setTimeout(() => {
-          this.$refs.child1.changetabState(index + 1);
+          this.$refs.child1.changetabState(index);
         }, 100);
       } else if (index == 1) {
         this.currentView = 0;
         setTimeout(() => {
-          this.$refs.child1.changetabState(index + 1);
+          this.$refs.child1.changetabState(index);
         }, 100);
       } else {
         this.currentView = 1;
@@ -369,12 +369,12 @@ export default {
       if (flag === 0) {
         this.currentView = 0;
         setTimeout(() => {
-          this.$refs.child1.changetabState(flag + 1);
+          this.$refs.child1.changetabState(flag);
         }, 100);
       } else if (flag == 1) {
         this.currentView = 0;
         setTimeout(() => {
-          this.$refs.child1.changetabState(flag + 1);
+          this.$refs.child1.changetabState(flag);
         }, 100);
       } else {
         this.currentView = 1;

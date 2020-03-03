@@ -160,22 +160,35 @@
       style="overflow:hidden;background:rgb(243, 243, 243);"
     >
       <div style="background:#ffffff;">
-        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否超期</div>
-        <ul id="sfcqDialogId" class="ui-row" style="margin-top: 11px;">
-          <li id="0" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
-          <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">超期</li>
-          <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未超期</li>
-        </ul>
+        <div v-if="status==1">
+          <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否超期</div>
+          <ul id="sfcqDialogId" class="ui-row" style="margin-top: 11px;">
+            <li id="0" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
+            <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">超期</li>
+            <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未超期</li>
+          </ul>
+          <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+        </div>
+        <div v-if="status==0">
+          <div style="padding-top:9px;font-size: 14px;margin-left:17px;">批件状态</div>
 
-        <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
-        <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否签收</div>
+          <ul class="ui-row" id="pjztDialogId" style="margin-top: 11px;">
+            <li id="0" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
+            <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已反馈</li>
+            <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未反馈</li>
+            <li id="3" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">申请结项</li>
+            <li id="5" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">拒绝结项</li>
+          </ul>
+          <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+          <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否签收</div>
 
-        <ul class="ui-row" id="sfbjDialogId" style="margin-top: 11px;">
-          <li id class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
-          <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未签收</li>
-          <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已签收</li>
-        </ul>
-        <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+          <ul class="ui-row" id="sfbjDialogId" style="margin-top: 11px;">
+            <li id class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
+            <li id="0" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未签收</li>
+            <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已签收</li>
+          </ul>
+          <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+        </div>
         <div style="display: flex;background: #f3f3f3;height:110px;">
           <div
             @click="clearType"
@@ -224,8 +237,9 @@ export default {
       }, //判断角色
       currentView: "child1",
       isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
-      status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
+      status: "0", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
+      approval_status:"0",//批件状态
       list: [],
       Popshow: false,
       mescroll: null, // mescroll实例对象
@@ -335,7 +349,7 @@ export default {
         if (intent != "") {
           this.status = intent;
         } else {
-          this.status = 1;
+          this.status = 0;
         }
         this.mescroll.resetUpScroll();
         var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
@@ -351,7 +365,7 @@ export default {
         if (intent != "") {
           this.status = intent;
         } else {
-          this.status = 1;
+          this.status = 0;
         }
         this.mescroll.resetUpScroll();
       }
@@ -383,10 +397,29 @@ export default {
     createListTop: function(top) {
       $("#mescroll").css("top", "210px");
     },
-    //切换办理中和已办结
+    //切换办理中和已办结，重置查询条件
     changetabState: function(state) {
       console.log(state);
       this.status = state;
+      this.approval_status="0";//批件状态
+      this.isOvertime="0";//是否超期
+      this.isChecked="";//是否签收
+        //循环重置查询条件
+      $("#sfbjDialogId li").each(function() {
+        $(this).removeClass("dialogSelect");
+        $(this).addClass("dialogNoSelect");
+      });
+      //循环重置查询条件
+      $("#sfcqDialogId li").each(function() {
+        $(this).removeClass("dialogSelect");
+        $(this).addClass("dialogNoSelect");
+      });
+
+      //循环重置查询条件
+      $("#pjztDialogId li").each(function() {
+        $(this).removeClass("dialogSelect");
+        $(this).addClass("dialogNoSelect");
+      });
       this.mescroll.resetUpScroll();
     },
     //切换办理中和已办结
@@ -405,6 +438,21 @@ export default {
     openPop: function() {
       console.log("openPop");
       $("#openPopId").css("z-index", "10003");
+      //批件状态
+      $("#pjztDialogId li").off("click");
+      $("#pjztDialogId li").click(function(e) {
+        $(this)
+          .siblings("li")
+          .removeClass("dialogSelect");
+        $(this)
+          .siblings("li")
+          .removeClass("dialogNoSelect");
+        $(this)
+          .siblings("li")
+          .addClass("dialogNoSelect");
+        $(this).removeClass("dialogNoSelect");
+        $(this).addClass("dialogSelect");
+      });
       //是否办结
       $("#sfbjDialogId li").off("click");
       $("#sfbjDialogId li").click(function(e) {
@@ -506,8 +554,17 @@ export default {
           context.isOvertime = $(this).attr("id");
         }
       });
-      this.mescroll.resetUpScroll();
-      this.Popshow = false;
+
+        //循环获取选中的批件状态
+      $("#pjztDialogId li").each(function() {
+        var isSelect = $(this).hasClass("dialogSelect");
+        if (isSelect) {
+          context.approval_status = $(this).attr("id");
+        }
+      });
+
+      context.mescroll.resetUpScroll();
+      context.Popshow = false;
     },
     clearType: function() {
       var context = this;
@@ -522,6 +579,12 @@ export default {
         $(this).addClass("dialogNoSelect");
       });
 
+      //循环重置查询条件
+      $("#pjztDialogId li").each(function() {
+        $(this).removeClass("dialogSelect");
+        $(this).addClass("dialogNoSelect");
+      });
+       context.approval_status = "0";
       context.isOvertime = "";
       context.isChecked = "";
       // context.projectNature = "";
@@ -540,6 +603,7 @@ export default {
         // corpId:global_variable.corpId,
         // dingUserId: "086404191926187734",
         dingUserId: global_variable.roleJs.dingUserId,
+        approval_status:this.approval_status,//批件状态
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
         isChecked: this.isChecked, //是否签收：0-未签收，1-已签收
@@ -650,7 +714,7 @@ export default {
           obj: item
         }
       });
-      localStorage.setItem("intent",this.status);
+      localStorage.setItem("intent", this.status);
       e.stopPropagation();
     }
   }
