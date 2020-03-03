@@ -10,13 +10,51 @@ const ddPhone = ''
 const indexTabId = 0;
 const roleJs = {
   // dingUserId: "086404191926187734",
-  // role: "cbr",
+  // role: "ld",
   dingUserId: "",
   role: "",
   department: "",
   username: ""
 };//用户信息
-const singleApp=0;
+const singleApp = 0;
+const permissTip="该功能无权限浏览，需授权";
+// const permissionList = [
+//   "每日要情",
+//   "重大改革",
+//   "文明共创",
+//   "重点工程",
+//   "环保攻坚",
+//   "经济运行",
+//   "三大产业",
+//   "招商引资",
+//   "能源革命",
+//   "热点问题",
+//   "热点事件",
+//   "工作效能",
+//   "教育服务",
+//   "12345",
+//   "就业服务",
+//   "行政审批",
+//   "行政监督",
+//   "全域旅游",
+//   "游客画像",
+//   "非遗保护",
+//   "远程调度",
+//   "城区",
+//   "泽州县",
+//   "高平市",
+//   "阳城县",
+//   "沁水县",
+//   "陵川县",
+//   "综合信息",
+//   "13710督办",
+//   "一键直连",
+//   "市长热线",
+//   "区县直通",
+//   "批件流转"
+// ]
+const permissionList = [
+]
 export default {
   baseURL,
   defaultImg,
@@ -29,5 +67,7 @@ export default {
   ddPhone,
   indexTabId,
   roleJs,
-  singleApp
+  singleApp,
+  permissionList,
+  permissTip
 }

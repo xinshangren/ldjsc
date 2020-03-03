@@ -315,15 +315,15 @@ export default {
         this.isOvertime = 0;
         break;
       case 2:
-        this.status = 2;
+        this.status = 1;
         this.isOvertime = 0;
         break;
       case 3:
-        this.status = 1;
+        this.status = 0;
         this.isOvertime = 2;
         break;
       case 4:
-        this.status = 1;
+        this.status = 0;
         this.isOvertime = 1;
         break;
 
@@ -369,15 +369,15 @@ export default {
         self.isOvertime = 0;
         break;
       case 2:
-        self.status = 2;
+        self.status = 1;
         self.isOvertime = 0;
         break;
       case 3:
-        self.status = 1;
+        self.status = 0;
         self.isOvertime = 2;
         break;
       case 4:
-        self.status = 1;
+        self.status = 0;
         self.isOvertime = 1;
         break;
 

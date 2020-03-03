@@ -67,12 +67,18 @@ import pjlz_cbjl_Vue from '@/page/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl.vue'
 import pjlz_jxjl_Vue from '@/page/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl.vue'
 import pjlz_fkjl_detail_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail.vue'
 import pjfkMessageVue from '@/page/pjlz/pjfkMessage/pjfkMessage.vue'
+import splashVue from '@/page/splash.vue'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
+      name: 'splashVue',
+      component: splashVue,
+    },
+    {
+      path: '/main',
       name: 'main',
       component: mainVue,
       meta:{keepAlive:true}

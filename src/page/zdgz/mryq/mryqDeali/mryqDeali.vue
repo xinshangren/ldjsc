@@ -1,11 +1,11 @@
 <template>
-  <div style="margin-top:54px;background:#ffffff;">
+  <div style="background:#ffffff;">
     <div
       id="contentId"
       :style="backgroundDiv"
       style="width: 92%;padding: 2% 4% 2% 4%;background-size: 100% 100%;"
     >
-      <div id="pmJjdivid" style="width:100%;font-size:15px;" v-html="itemEnti.content"></div>
+      <div id="pmJjdivid" style="width:100%;font-size:15px;overflow:auto;" v-html="itemEnti.content"></div>
       <div
         v-if="fileListnew.length>0"
         style="font-size: 15px;margin-left: 10px;color: #666666;"
@@ -37,8 +37,11 @@ export default {
   data() {
     return {
       list: [],
-      itemEnti: {},
+      itemEnti: {
+        content:""
+      },
       fileList: [],
+      itemId: "",
       fileListnew: [],
       backgroundDiv: {
         backgroundImage:
@@ -48,20 +51,13 @@ export default {
   },
   mounted() {
     this.itemEnti = this.$route.params.entity;
-    this.fileList = this.itemEnti.fileList;
-    this.fileListnew = [];
-    this.fileListnew = this.fileList;
-    for (var i = 0; i < this.fileList.length; i++) {
-      var url = this.fileList[i].url;
-      var index = url.lastIndexOf(".");
-      var changeUrl = url.substring(index + 1, url.length);
-      // console.log(changeUrl);
-      var tSAttachmentName = this.fileList[i].tSAttachmentName;
-      if (tSAttachmentName.indexOf(".") == -1) {
-        this.fileListnew[i].tSAttachmentName =
-          tSAttachmentName + "." + changeUrl;
-      }
+    console.log(this.itemEnti);
+    if (this.itemEnti != undefined) {
+      this.itemId = this.itemEnti.id;
+    } else {
+      this.itemId = localStorage.getItem("mryqItemId");
     }
+    this.findIdByMyrq(this.itemId);
     console.log(document.body.clientHeight);
 
     var height = document.body.clientHeight;
@@ -85,7 +81,7 @@ export default {
           // console.log("没有");
         }
       });
-       $("#pmJjdivid div").each(function() {
+      $("#pmJjdivid div").each(function() {
         if ($(this).find("img").length > 0) {
           // console.log("有");
           $(this).css("overflow-x", "auto");
@@ -96,8 +92,43 @@ export default {
     }, 100);
   },
   methods: {
+    //获取记录日志的logid
+    findIdByMyrq: function(id) {
+      var that = this;
+      var params = {
+        userId: global_variable.roleJs.dingUserId,
+        cms_Id: id
+      };
+      httpMethod
+        .findIdByMyrq(params)
+        .then(res => {
+          console.log(res);
+          if (res.success == "1") {
+            var data = res.data;
+            that.itemEnti=data;
+            that.fileList = data.fileList;
+            that.fileListnew = [];
+            that.fileListnew = that.fileList;
+            for (var i = 0; i < that.fileList.length; i++) {
+              var url = that.fileList[i].url;
+              var index = url.lastIndexOf(".");
+              var changeUrl = url.substring(index + 1, url.length);
+              // console.log(changeUrl);
+              var tSAttachmentName = that.fileList[i].tSAttachmentName;
+              if (tSAttachmentName.indexOf(".") == -1) {
+                that.fileListnew[i].tSAttachmentName =
+                  tSAttachmentName + "." + changeUrl;
+              }
+            }
+          }
+        })
+        .catch(err => {
+          // this.$toast(err);
+        });
+    },
     openFj: function(item) {
       console.log(item);
+      localStorage.setItem("mryqItemId", this.itemId);
       this.$router.push({
         path: "/zdgz/mryq/mryq/mryqDeali/mryqDealiFj",
         name: "mryqDealiFjVue",

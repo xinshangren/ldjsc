@@ -29,6 +29,9 @@
 .nosingleApp {
   margin-top: 101px;
 }
+.pjlbQueryImg{
+ display:none;height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;
+}
 </style>
 
 <template>
@@ -84,10 +87,9 @@
           style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;margin-left: 20px;"
         >
           <img
-          class="shaixuanImg"
+          class="shaixuanImg pjlbQueryImg"
           ref="shaixuanImgId"
             src="@/assets/img/project_filtrate_white.png"
-            style=" display:none;height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;"
             
           />
           <div class="ui-col ui-col index_top_div_style">
@@ -163,7 +165,7 @@ export default {
       scroll_notice: [],
       animateUp: false,
       timer: null,
-      isSingleApp: false
+      isSingleApp: true
     };
   },
   mounted() {
@@ -191,7 +193,6 @@ export default {
       document.title="晋城市领导驾驶舱";
       //  this.$route.meta.title = "晋城市领导驾驶舱";
     }
-    this.getUserInfo();
     this.getFiveNotice();
     this.timer = setInterval(this.scrollAnimate, 5000);
   },
@@ -212,7 +213,7 @@ export default {
     },
     getPath() {
       var path = this.$route.path;
-      if (path == "/") {
+      if (path == "/"||path=="/main") {
         $("#yjzlid").hide();
         $("#appVuerightId").css("width", "22%");
         $("#appVueleftId").css("width", "63%");
@@ -310,43 +311,6 @@ export default {
         }
       });
     },
-    //获取用户角色
-    getUserInfo: function() {
-      var self = this;
-      dd.ready(function() {
-        dd.runtime.permission.requestAuthCode({
-          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
-          onSuccess: function(info) {
-            var code = info.code; // 通过该免登授权码可以获取用户身份
-            var params = {
-              method: "getUserInfo",
-              code: code
-            };
-            httpMethod.getApprovalInfo(params).then(res => {
-              console.log(JSON.stringify(res));
-              if (res.success == "1") {
-                global_variable.roleJs = Object.assign(
-                  {},
-                  global_variable.roleJs,
-                  {
-                    dingUserId: res.data.dingUserId,
-                    username: res.data.username,
-                    role: res.data.role,
-                    department: res.data.department
-                  }
-                );
-                console.log(global_variable.roleJs);
-                // var roleCode=res.data.role;
-                // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
-              }
-            });
-          },
-          onFail: function(err) {
-            alert("dd error: " + JSON.stringify(err));
-          }
-        });
-      });
-    }
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#f7f7f7");

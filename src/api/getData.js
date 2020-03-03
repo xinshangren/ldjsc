@@ -443,6 +443,18 @@ export const httpMethod = {
     fileShow: function (params) {
         return get("dingTalkController.action?fileShow", params);
     },
+    //每日要情新接口
+    getCmsMyrqList: function (params) {
+        return get("cmsAppInsideController.action?getCmsMyrqList", params);
+    },
+    //通过id获取每日要情的全部内容
+    findIdByMyrq: function (params) {
+        return get("cmsAppInsideController.action?findIdByMyrq", params);
+    },
+    //通过id该人的未读
+    getCmsMyrqIfHits: function (params) {
+        return get("cmsAppInsideController.action?getCmsMyrqIfHits", params);
+    },
 
     
 
