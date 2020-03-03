@@ -7,8 +7,9 @@
           v-for="(item,index) of list"
           :key="index"
           @click="goDetile(item)"
-        >
-          <div style="color: #333333;font-size: 16px;width: 100%; overflow: hidden;">{{item.title}}</div>
+        >  
+          <div v-if="item.yd_hits=='1'" style="position: absolute;right: 10px;background: red;width: 5px;height: 5px;border-radius: 42px;"></div>
+          <div style="color: #333333;font-size: 16px;width: 99%; overflow: hidden;">{{item.title}}</div>
 
           <div style="display:flex;margin-top:13px;">
             <div style="font-size:15px;">来源:{{item.source}}</div>
@@ -88,10 +89,11 @@ export default {
     upCallback: function(page, mescroll) {
       var params = {
         page: page.num,
-        pageSize: page.size
+        pageSize: page.size,
+        userId:global_variable.roleJs.dingUserId
       };
       httpMethod
-        .getCmsMyrq(params)
+        .getCmsMyrqList(params)
         .then(res => {
           console.log(res);
           if (res.success == "1") {
@@ -104,7 +106,7 @@ export default {
               var dataNew = [];
               dataNew = data;
               for (var i = 0; i < data.length; i++) {
-                var createDate = this.dateFormat(data[i].createDate);
+                var createDate = this.dateFormat(data[i].create_date);
                 data[i].createDate = createDate;
               }
               this.list = this.list.concat(data);

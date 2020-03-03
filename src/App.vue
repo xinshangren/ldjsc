@@ -29,6 +29,9 @@
 .nosingleApp {
   margin-top: 101px;
 }
+.pjlbQueryImg{
+ display:none;height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;
+}
 </style>
 
 <template>
@@ -84,10 +87,9 @@
           style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;margin-left: 20px;"
         >
           <img
-          class="shaixuanImg"
+          class="shaixuanImg pjlbQueryImg"
           ref="shaixuanImgId"
             src="@/assets/img/project_filtrate_white.png"
-            style=" display:none;height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;"
             
           />
           <div class="ui-col ui-col index_top_div_style">
@@ -163,7 +165,7 @@ export default {
       scroll_notice: [],
       animateUp: false,
       timer: null,
-      isSingleApp: false
+      isSingleApp: true
     };
   },
   mounted() {
@@ -212,7 +214,7 @@ export default {
     },
     getPath() {
       var path = this.$route.path;
-      if (path == "/") {
+      if (path == "/"||path=="/main") {
         $("#yjzlid").hide();
         $("#appVuerightId").css("width", "22%");
         $("#appVueleftId").css("width", "63%");
