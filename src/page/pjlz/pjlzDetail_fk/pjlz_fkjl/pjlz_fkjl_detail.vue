@@ -16,7 +16,7 @@
     }
 </style>
 <template>
-    <div style="margin-top:54px;background:#f7f7f7;">
+    <div style="background:#f7f7f7;">
         <div id="content">
             <img width="250px" style='position: absolute; top: 37px;left: 69px;'
                 src="../../../../assets/img/detail_title.png" />
@@ -44,7 +44,6 @@
                             style="margin-left: 2px;border: 1px solid #9f9f9f;border-radius: 4px;width: 60%;font-size: 14px;min-height: 100px;">
                             <div style="margin:5px ;">
                                 {{feedback_obj.feedback_content}}
-
                             </div>
                         </div>
                     </div>
