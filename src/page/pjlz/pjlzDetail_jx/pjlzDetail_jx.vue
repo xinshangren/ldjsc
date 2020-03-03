@@ -268,6 +268,7 @@ export default {
           if (res.success == "1") {
             self.fk_content = "";
             self.getdata();
+            self.show = false;
             this.$toast("提交成功");
             $('#jx_div').hide()
           }

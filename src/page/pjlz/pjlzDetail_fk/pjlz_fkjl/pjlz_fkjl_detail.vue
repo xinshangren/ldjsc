@@ -113,6 +113,10 @@
         },
         mounted() {
             this.upd_button = false;
+        //      setTimeout(() => {
+        //   var height = document.body.clientHeight-100;
+        //   $("#pmJjdivid").css("height", height + "px");
+        // }, 100);
             var s = window.innerHeight - $("#content").offset().top;
             $("#content").css("min-height", s);
             this.feedback_id = this.$route.params.id;
