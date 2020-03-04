@@ -217,6 +217,7 @@ export default {
     },
     getPath() {
       var path = this.$route.path;
+      this.seach_value="";
       if (path == "/" || path == "/main") {
         $("#yjzlid").hide();
         $("#appVuerightId").css("width", "22%");

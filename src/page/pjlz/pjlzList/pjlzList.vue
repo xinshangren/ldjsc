@@ -582,6 +582,15 @@ export default {
                 }
                 if (self.flag.role == "cbr") {
                   self.showRightMenu1();
+                } else if (self.flag.role == "wdk") {
+                  setTimeout(() => {
+                    dd.ready(function() {
+                      //隐藏右侧分享按钮
+                      dd.biz.navigation.setRight({
+                        show: false
+                      });
+                    });
+                  }, 300);
                 }
 
                 // var roleCode=res.data.role;
