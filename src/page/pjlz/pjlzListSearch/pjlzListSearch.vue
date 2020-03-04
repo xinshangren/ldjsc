@@ -13,13 +13,22 @@
     <div v-if="list.length<1" style="text-align: center;">
       <img style="height: 200px;margin-top: 146px;" src="../../../assets/img/no_data.png" />
     </div>
+     <div id="count_id" style="display:flex;top:106px;position:fixed;width:100%;">
+        <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:16px;">共</div>
+        <div
+          id="totalCountId"
+          ref="totalCountId"
+          style="color: rgb(25, 118, 210);font-size: 24px;height: 32px;line-height: 29px;"
+        >0</div>
+        <div style="width:48%;color:#1976d2;margin-top:6px;font-size:16px;">条</div>
+      </div>
     <mescroll-vue
       id="mescroll"
       ref="mescroll"
       :down="mescrollDown"
       :up="mescrollUp"
       @init="mescrollInit"
-      style="top:108px;"
+      style="top:138px;"
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
@@ -313,6 +322,7 @@ export default {
   },
   activated() {
     console.log("activated");
+    document.querySelector("body").setAttribute("style", "background:#F1F4F6");
     var statusGet = this.$route.params.entity;
     var time = this.$route.params.time;
     var periodTypes = this.$route.params.periodType;
@@ -427,7 +437,8 @@ export default {
       var detail = url.getValue("type");
       console.log("type===" + detail);
       if (detail == "1") {
-        $("#mescroll").css("top", "70px");
+        $("#mescroll").css("top", "100px");
+          $("#count_id").css("top", "65px");
         // var shaixuanApp = this.$refs.PjlzshaixuanImgId;
         // console.log(shaixuanApp);
         var self = this;
@@ -446,7 +457,7 @@ export default {
       this.mescroll.resetUpScroll();
     },
     createListTop: function(top) {
-      $("#mescroll").css("top", "210px");
+      $("#mescroll").css("top", "240px");
     },
     //切换办理中和已办结
     changetabState: function(state) {
@@ -642,10 +653,12 @@ export default {
               this.list = this.list.concat(data);
               //  this.list = this.list.concat(data);
               //   this.list = this.list.concat(data);
+              $("#totalCountId").html(res.data.total);
             } else {
               data = [];
               // this.list = [];
               res.data.total = 0;
+              $("#totalCountId").html("0");
             }
 
             this.$nextTick(() => {
