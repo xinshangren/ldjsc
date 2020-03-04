@@ -144,13 +144,10 @@ export default {
   },
   mounted() {
     this.jx_content = "";
-    this.pj_obj = this.$route.params.obj;
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
   activated() {
-    this.pj_obj =
-      this.$route.params.obj != null ? this.$route.params.obj : this.pj_obj;
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
@@ -218,6 +215,8 @@ export default {
         var id = url.getValue("id");
         if (id != null && id != "") {
           //推送页面  跳转
+          console.log("---------");
+          console.log(id);
           this.getUserInfo(id);
         } else {
           //独立app 流转批件详情
