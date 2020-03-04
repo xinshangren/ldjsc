@@ -51,13 +51,11 @@ import { Tab, Tabs } from "vant";
 Vue.use(Tab).use(Tabs);
 import { httpMethod } from "../../api/getData.js";
 import global_variable from "../../api/global_variable.js";
-import pdf from "vue-pdf";
 export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
   },
   name: "pjlz_fj",
-  components: { pdf },
   data() {
     return {
       list: [],
@@ -181,31 +179,7 @@ export default {
           // this.$toast(err);
         });
     },
-    //放大
-    scaleD: function() {
-      this.scale += 5;
-      console.log(this.$refs.pdf);
-      this.$refs.pdf.$el.style.width = parseInt(this.scale) + "%";
-    },
-
-    //缩小
-    scaleX: function() {
-      if (this.scale == 100) {
-        return;
-      }
-      this.scale += -5;
-      this.$refs.pdf.$el.style.width = parseInt(this.scale) + "%";
-    },
-    prePage() {
-      var p = this.pageNum;
-      p = p > 1 ? p - 1 : this.pageTotalNum;
-      this.pageNum = p;
-    },
-    nextPage() {
-      var p = this.pageNum;
-      p = p < this.pageTotalNum ? p + 1 : 1;
-      this.pageNum = p;
-    }
+    
   }
 };
 </script>
