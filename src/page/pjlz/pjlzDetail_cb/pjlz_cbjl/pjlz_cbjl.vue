@@ -8,7 +8,7 @@
         v-for="obj in cbjl_list"
         style="padding:0px 15px 0px 15px;position: relative;"
       >
-        <div style="display: flex;font-size: 15px;margin-top: 0px;">
+        <div style="display: flex;font-size: 16px;margin-top: 0px;">
           <div
             style="width: 80%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
           >{{obj.warn_content}}</div>

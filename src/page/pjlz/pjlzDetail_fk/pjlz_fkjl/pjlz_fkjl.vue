@@ -8,7 +8,7 @@
         v-if="fkjl_list.length>0"
         v-for="fk in fkjl_list"
       >
-        <div style="display: flex;font-size: 15px;margin-top: 0px;">
+        <div style="display: flex;font-size: 16px;margin-top: 0px;">
           <div
             style="width: 80%; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
           >{{fk.feedback_content}}</div>

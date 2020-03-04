@@ -10,7 +10,7 @@
         />
         <img v-else src="../../assets/img/noverdue.png" style="height:38px" />-->
         <div
-          style="font-weight: 600;font-size: 16px; padding:7px 7px 7px 7px;width: 85%;margin: auto;"
+          style="font-weight: 600;font-size: 18px; padding:7px 7px 7px 7px;width: 85%;margin: auto;"
         >{{pj_detail.approval_name}}</div>
         <!-- <div
           style="font-size: 15px;border:1px solid #2599e6 ;border-radius: 5px;color:#2599e6;height: 20px;
@@ -34,7 +34,7 @@
           <div style="width: 30%;text-align: right;">文件内容：</div>
           <div style="width: 70%;height: 100px;overflow-y:scroll;">
             <div
-              style="font-size: 15px;
+              style="font-size: 16px;
                         line-height: 23px;
                         margin: 5px;"
               v-html="pj_detail.approval_content"
