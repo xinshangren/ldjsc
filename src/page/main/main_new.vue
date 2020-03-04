@@ -449,17 +449,18 @@ export default {
           break;
 
         case 65:
-          if (global_variable.permissionList.indexOf("每日要情") > -1) {
-            id = "65";
-            name = "每日要情";
-            this.$router.push({
-              path: "/zdgz/mryq/mryq"
-            });
-            // this.$parent.removeEvent();
-          } else {
-            this.$toast(global_variable.permissTip);
-            isUploadLog = false;
-          }
+          this.$toast("改版中");
+          // if (global_variable.permissionList.indexOf("每日要情") > -1) {
+          //   id = "65";
+          //   name = "每日要情";
+          //   this.$router.push({
+          //     path: "/zdgz/mryq/mryq"
+          //   });
+          //   // this.$parent.removeEvent();
+          // } else {
+          //   this.$toast(global_variable.permissTip);
+          //   isUploadLog = false;
+          // }
           break;
         case 112:
           this.$toast("部署中");
