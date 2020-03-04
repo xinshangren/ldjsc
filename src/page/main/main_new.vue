@@ -8,7 +8,7 @@
     >
       <div
         v-if="tabNameList[index]=='晋城信息'&&yd_hits=='1'"
-        style="position: absolute;right: 10px;background: red;width: 5px;height: 5px;border-radius: 42px;"
+        style="position: absolute;right: 10px;background: red;width: 5px;height: 5px;border-radius: 42px;display:none;"
       ></div>
       <img class="indexLiContentImgStyle" :src="tabImage[index]" />
       <div class="indexLiContentDivStyle">{{tabNameList[index]}}</div>
