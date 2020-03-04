@@ -450,6 +450,7 @@ export default {
 
         case 65:
           this.$toast("改版中");
+          isUploadLog = false;
           // if (global_variable.permissionList.indexOf("每日要情") > -1) {
           //   id = "65";
           //   name = "每日要情";
