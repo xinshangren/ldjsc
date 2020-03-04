@@ -239,8 +239,8 @@ export default {
         //隐藏右侧分享按钮
         dd.biz.navigation.setRight({
           show: false
-        }, 300);
-      });
+        });
+      },300);
       console.log(this.$route.path);
     },
     toast: function() {
