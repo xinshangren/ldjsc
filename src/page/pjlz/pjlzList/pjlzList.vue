@@ -306,12 +306,17 @@ export default {
     console.log(search_allref);
     var self = this;
     if (global_variable.singleApp != 1) {
-      // shaixuan.removeEventListener("click", function() {
-      //   // console.log("openPop");
-      // });
+      shaixuan.removeEventListener("click", function() {
+        // console.log("openPop");
+      });
       shaixuan.addEventListener("click", function() {
-        console.log("openPop");
-        self.Popshow = true;
+      var path = self.$route.path;
+       console.log(self.$route.path);
+        if (path == "/pjlz/pjlz") {
+          // console.log(self.$route.path);
+          console.log("openPop");
+          self.Popshow = true;
+        }
       });
     }
 
@@ -473,7 +478,7 @@ export default {
       $("#openPopId").css("z-index", "10003");
     },
     openPop: function() {
-      console.log("openPop");
+      // console.log("openPop");
       $("#openPopId").css("z-index", "10003");
       //批件状态
       $("#pjztDialogId li").off("click");

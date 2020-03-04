@@ -234,12 +234,13 @@ export default {
       isOvertime: "0", //是否超期：0-全部，1-超期，2-未超期
       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
-      approval_status:"0",
+      approval_status: "0",
       list: [],
       Popshow: false,
       periodType: "",
       periodData: "",
       mescroll: null, // mescroll实例对象
+      shaixuan: null,
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       nodataImg: require("../../../assets/img/nodata.png"),
       mescrollUp: {
@@ -269,7 +270,7 @@ export default {
       if (to.name == "pjlzListSearchVue") {
         to.meta.keepAlive = true;
       }
-    } 
+    }
     next();
   },
   beforeRouteLeave(to, from, next) {
@@ -279,13 +280,19 @@ export default {
       if (to.name == "pjlzListvue") {
         from.meta.keepAlive = false;
         $("#PjlzSearchImgId").off("click");
-      } 
+      }
     }
-      console.log(from);
+    console.log(from);
     console.log(to);
     next();
   },
-  destroyed(){
+  deactivated() {
+    console.log("deactivated");
+  },
+  beforeDestroy() {
+    console.log("beforeDestroy");
+  },
+  destroyed() {
     console.log("destroyed");
   },
   computed: {
@@ -304,9 +311,9 @@ export default {
       }
     }
   },
-   activated() {
+  activated() {
     console.log("activated");
-     var statusGet = this.$route.params.entity;
+    var statusGet = this.$route.params.entity;
     var time = this.$route.params.time;
     var periodTypes = this.$route.params.periodType;
 
@@ -345,10 +352,17 @@ export default {
     console.log(search_allref);
     var self = this;
     if (global_variable.singleApp != 1) {
-      // shaixuan.addEventListener("click", function() {
-      //   console.log("openPop");
-      //   self.Popshow = true;
-      // });
+       shaixuan.removeEventListener("click", function() {
+        // console.log("openPop");
+      });
+      shaixuan.addEventListener("click", function(e) {
+        var path = self.$route.path;
+        if (path == "/pjlz/pjlzListSearch/pjlzListSearch") {
+          console.log(self.$route.path);
+          console.log("openPop");
+          self.Popshow = true;
+        }
+      });
     }
 
     console.log(global_variable.roleJs);
@@ -583,7 +597,7 @@ export default {
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
         isChecked: this.isChecked, //是否签收：0-未签收，1-已签收
         status: this.status,
-        approval_status:this.approval_status,
+        approval_status: this.approval_status,
         createDateBegin: "",
         createDateEnd: "",
         periodType: this.periodType,
