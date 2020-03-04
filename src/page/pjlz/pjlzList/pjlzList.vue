@@ -4,13 +4,22 @@
     <div v-if="list.length<1" style="text-align: center;">
       <img style="height: 200px;margin-top: 57px;" src="../../../assets/img/no_data.png" />
     </div>
+    <div id="count_id" style="display:flex;top:154px;position:fixed;width:100%;">
+        <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:16px;">共</div>
+        <div
+          id="totalCountId"
+          ref="totalCountId"
+          style="color: rgb(25, 118, 210);font-size: 24px;height: 32px;line-height: 29px;"
+        >0</div>
+        <div style="width:48%;color:#1976d2;margin-top:6px;font-size:16px;">条</div>
+      </div>
     <mescroll-vue
       id="mescroll"
       ref="mescroll"
       :down="mescrollDown"
       :up="mescrollUp"
       @init="mescrollInit"
-      style="top:154px;"
+      style="top:184px;"
     >
       <div id="newsList" style="padding-left:10px;padding-right:10px;">
         <div
@@ -41,19 +50,19 @@
             <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>
-              <div class="pjlzListSmallDivFont" style="margin-left:19px;">{{item.cbr1}}</div>
+              <div class="pjlzListSmallDivFontNew1">{{item.cbr1}}</div>
             </div>
             <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
               <!-- <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>-->
-              <div class="pjlzListSmallDivFont" style="margin-left:99px;">{{item.cbr2}}</div>
+              <div class="pjlzListSmallDivFontNew">{{item.cbr2}}</div>
             </div>
-            <div class="pjlzListSmallDiv">
+            <div class="pjlzListSmallDiv" style="margin-bottom:15px;">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
               <div class="pjlzListSmallDivFont">反馈时限：</div>
-              <div class="pjlzListSmallDivFont">{{item.approval_limit_time}}</div>
+              <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
             </div>
-            <div class="pjlzListSmallDiv" style>
+            <!-- <div class="pjlzListSmallDiv" style>
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">交办时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_create_date}}</div>
@@ -62,7 +71,7 @@
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">截止时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
-            </div>
+            </div>-->
 
             <img
               v-if="item.approval_check_flag==0"
@@ -310,8 +319,8 @@ export default {
         // console.log("openPop");
       });
       shaixuan.addEventListener("click", function() {
-      var path = self.$route.path;
-       console.log(self.$route.path);
+        var path = self.$route.path;
+        console.log(self.$route.path);
         if (path == "/pjlz/pjlz") {
           // console.log(self.$route.path);
           console.log("openPop");
@@ -352,7 +361,8 @@ export default {
       var detail = url.getValue("type");
       console.log("type===" + detail);
       if (detail == "1") {
-        $("#mescroll").css("top", "113px");
+        $("#mescroll").css("top", "143px");
+        $("#count_id").css("top","108px");
         this.getUserInfo();
         var intent = localStorage.getItem("intent");
         console.log(intent);
@@ -394,9 +404,7 @@ export default {
               id: "1",
               iconId: "file",
               text: "消息",
-              url:
-                httpMethod.returnBaseUrlFun() +
-                global_variable.messageUrl
+              url: httpMethod.returnBaseUrlFun() + global_variable.messageUrl
             }
           ],
           onSuccess: function(data) {
@@ -409,7 +417,7 @@ export default {
       });
     },
     createListTop: function(top) {
-      $("#mescroll").css("top", "210px");
+      // $("#mescroll").css("top", "210px");
     },
     //切换办理中和已办结，重置查询条件
     changetabState: function(state) {
@@ -426,9 +434,8 @@ export default {
       //循环重置查询条件
       $("#sfbjDialogId li").each(function() {
         // console.log($(this).html());
-         var text = $(this).html();
+        var text = $(this).html();
         if (text == "全部") {
-         
           $(this).removeClass("dialogNoSelect");
           $(this).addClass("dialogSelect");
         } else {
@@ -438,9 +445,8 @@ export default {
       });
       //循环重置查询条件
       $("#sfcqDialogId li").each(function() {
-         var text = $(this).html();
+        var text = $(this).html();
         if (text == "全部") {
-         
           $(this).removeClass("dialogNoSelect");
           $(this).addClass("dialogSelect");
         } else {
@@ -451,9 +457,8 @@ export default {
 
       //循环重置查询条件
       $("#pjztDialogId li").each(function() {
-         var text = $(this).html();
+        var text = $(this).html();
         if (text == "全部") {
-         
           $(this).removeClass("dialogNoSelect");
           $(this).addClass("dialogSelect");
         } else {
@@ -697,12 +702,13 @@ export default {
               this.list = this.list.concat(data);
               //  this.list = this.list.concat(data);
               //   this.list = this.list.concat(data);
+              $("#totalCountId").html(res.data.total);
             } else {
               data = [];
               // this.list = [];
               res.data.total = 0;
+              $("#totalCountId").html("0");
             }
-
             this.$nextTick(() => {
               this.mescroll.endBySize(data.length, res.data.total);
             });
@@ -767,7 +773,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 @import "../../../page/pjlz/pjlzList/pjlzList.css";
 .van-popup--top {
   z-index: 100000;

@@ -419,6 +419,7 @@ export default {
             self.$toast("申请成功");
             self.sqjxshow = false;
             self.restPjListFun(); //刷新列表
+            self.sqjxmessage="";
           }
         } else {
           self.$toast(msg);
