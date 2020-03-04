@@ -29,8 +29,13 @@
 .nosingleApp {
   margin-top: 101px;
 }
-.pjlbQueryImg{
- display:none;height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;
+.pjlbQueryImg {
+  display: none;
+  height: 31px;
+  top: 17px;
+  position: absolute;
+  right: 121px;
+  z-index: 3;
 }
 </style>
 
@@ -87,10 +92,9 @@
           style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;margin-left: 20px;"
         >
           <img
-          class="shaixuanImg pjlbQueryImg"
-          ref="shaixuanImgId"
+            class="shaixuanImg pjlbQueryImg"
+            ref="shaixuanImgId"
             src="@/assets/img/project_filtrate_white.png"
-            
           />
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
@@ -185,12 +189,12 @@ export default {
     if (detail != null) {
       if (detail == "1") {
         this.isSingleApp = true;
-        document.title="领导批示办理";
+        document.title = "领导批示办理";
         // this.$route.meta.title = "领导批示办理";
         global_variable.singleApp = 1; //独立app判断
       }
-    }else{
-      document.title="晋城市领导驾驶舱";
+    } else {
+      document.title = "晋城市领导驾驶舱";
       //  this.$route.meta.title = "晋城市领导驾驶舱";
     }
     this.getFiveNotice();
@@ -213,7 +217,7 @@ export default {
     },
     getPath() {
       var path = this.$route.path;
-      if (path == "/"||path=="/main") {
+      if (path == "/" || path == "/main") {
         $("#yjzlid").hide();
         $("#appVuerightId").css("width", "22%");
         $("#appVueleftId").css("width", "63%");
@@ -223,11 +227,20 @@ export default {
         $("#appVueleftId").css("width", "63%");
       }
       var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
-      if (path == "/pjlz/pjlz"||path=="/pjlz/pjlzListSearch/pjlzListSearch") {
+      if (
+        path == "/pjlz/pjlz" ||
+        path == "/pjlz/pjlzListSearch/pjlzListSearch"
+      ) {
         $(".shaixuanImg").show();
       } else {
         $(".shaixuanImg").hide();
       }
+      setTimeout(() => {
+        //隐藏右侧分享按钮
+        dd.biz.navigation.setRight({
+          show: false
+        }, 300);
+      });
       console.log(this.$route.path);
     },
     toast: function() {
@@ -310,7 +323,7 @@ export default {
           entity: item
         }
       });
-    },
+    }
   },
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#f7f7f7");
