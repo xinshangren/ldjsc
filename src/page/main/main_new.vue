@@ -114,11 +114,6 @@ export default {
       show: false,
     })
   },
-  activated(){
-    dd.biz.navigation.setRight({
-      show: false,
-    })
-  },
   methods: {
     getCmsMyrqIfHits: function() {
       console.log("获取已读");

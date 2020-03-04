@@ -228,8 +228,7 @@ export default {
       }
       var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
       if (
-        path == "/pjlz/pjlz" ||
-        path == "/pjlz/pjlzListSearch/pjlzListSearch"
+        path == "/pjlz/pjlz"
       ) {
         $(".shaixuanImg").show();
       } else {

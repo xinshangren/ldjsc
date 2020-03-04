@@ -6,7 +6,7 @@
       <img
         id="PjlzSearchImgId"
         class="shaixuanImg1"
-        style=" position: absolute;right: 23px;top: 17px;height: 20px;"
+        style=" position: absolute;right: 23px;top: 17px;height: 20px;display:none;"
         src="@/assets/img/icon_filtrate.png"
       />
     </div>
