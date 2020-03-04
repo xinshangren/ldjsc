@@ -50,12 +50,12 @@
             <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>
-              <div class="pjlzListSmallDivFont" style="margin-left:19px;">{{item.cbr1}}</div>
+              <div class="pjlzListSmallDivFont pjlzListSearchSmallDivFontNew1" >{{item.cbr1}}</div>
             </div>
             <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
               <!-- <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>-->
-              <div class="pjlzListSmallDivFont" style="margin-left:88px;">{{item.cbr2}}</div>
+              <div class="pjlzListSmallDivFont pjlzListSearchSmallDivFontNew" >{{item.cbr2}}</div>
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
