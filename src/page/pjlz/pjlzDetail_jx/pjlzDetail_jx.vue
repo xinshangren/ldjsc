@@ -138,20 +138,19 @@ export default {
       refuse_content: "",
       pj_obj: "",
       pj_detail: "",
-      jx_content:"",
-      jx_div:true
+      jx_content: "",
+      jx_div: true
     };
   },
   mounted() {
     this.jx_content = "";
     this.pj_obj = this.$route.params.obj;
-    this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
   activated() {
-    this.pj_obj = this.$route.params.obj!=null?this.$route.params.obj:this.pj_obj;
-    this.getdata();
+    this.pj_obj =
+      this.$route.params.obj != null ? this.$route.params.obj : this.pj_obj;
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
@@ -215,8 +214,8 @@ export default {
       if (detail == "1") {
         // $("#pjlzDeali_fk_id").css("margin", "0px 0px 10px");
         $("#pjlzDeali_fk_top_id").css("margin-top", "0px");
-         this.$route.meta.title = "领导批示办理";
-         var id = url.getValue("id");
+        this.$route.meta.title = "领导批示办理";
+        var id = url.getValue("id");
         if (id != null && id != "") {
           //推送页面  跳转
           this.getUserInfo(id);
@@ -228,7 +227,7 @@ export default {
               : this.pj_obj;
           this.getdata();
         }
-      }else {
+      } else {
         //领导驾驶舱 流转批件详情
         this.pj_obj =
           this.$route.params.obj != null ? this.$route.params.obj : this.pj_obj;
@@ -275,14 +274,16 @@ export default {
                   break;
                 case "4":
                   self.pj_detail.approval_status = "已结项";
+                  self.jx_div = false;
                   break;
                 case "5":
                   self.pj_detail.approval_status = "拒绝结项";
+                  self.jx_div = false;
                   break;
                 default:
                   break;
               }
-            };
+            }
             self.jx_content = self.pj_detail.approval_done.done_content;
           }
         })
@@ -313,7 +314,7 @@ export default {
       var params = {
         method: "approvalDone",
         //dingUserId: "086404191926187734",
-         dingUserId: global_variable.roleJs.dingUserId,
+        dingUserId: global_variable.roleJs.dingUserId,
         //corpId: global_variable.corpId, //机构id
         approvalInfoId: approvalInfoId, //批件id
         doneResult: doneResult,
