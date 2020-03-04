@@ -59,7 +59,7 @@
                                 <!-- <img @click="fj_download(file.attach_download_url)"
                                     src='../../../../assets/img/icon_download.png'
                                     style="height: 24px;margin-left: 10px;" /> -->
-                                <a :href="file.attach_download_url"
+                                <a :href="file.attach_download_url" download
                                     style="display: flex;background: #2599e6;height: 26px;border-radius: 5px;width: 30%;">
                                     <div
                                         style="color: #ffffff;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">

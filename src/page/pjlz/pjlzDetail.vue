@@ -50,7 +50,7 @@
             <div v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0"
               v-for="attach in pj_detail.attachlist" style="display: flex;margin-left: 10px; margin-top: 5px;">
               <div @click="openFj(attach)" style="width: 70%;">{{attach.attach_name}}</div>
-              <a :href="attach.attach_download_url" style="display: flex;background: #2599e6;height: 26px;border-radius: 5px;width: 30%;">
+              <a :href="attach.attach_download_url" download style="display: flex;background: #2599e6;height: 26px;border-radius: 5px;width: 30%;">
                 <!-- <img
                 
                 style="height: 24px;margin-top: 1px;"
