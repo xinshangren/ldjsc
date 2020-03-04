@@ -14,7 +14,7 @@
         title-inactive-color="#333333"
         :sticky="true"
         line-width="75px"
-        style="width: 100%;height:47px;"
+        style="width: 100%;"
         @change="tabsclick"
       >
         <van-tab title="办理中"></van-tab>

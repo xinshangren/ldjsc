@@ -448,6 +448,13 @@ export default {
             self.Popshow = true;
           });
         }, 100);
+      }else{
+         var isSingleApp = this.$parent.$root.$children[0].isSingleApp;
+        console.log("isSingleApp===" + isSingleApp);
+        if (isSingleApp == false) {
+          $("#mescroll").css("top", "140px");
+          $("#count_id").css("top", "109px");
+        }
       }
       var intent = localStorage.getItem("intentSearch");
       console.log(intent);
