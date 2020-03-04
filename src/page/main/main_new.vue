@@ -7,7 +7,7 @@
       class="ui-col ui-col-25 indexLiStyle"
     >
       <div
-        v-if="tabNameList[index]=='每日要情'&&yd_hits=='1'"
+        v-if="tabNameList[index]=='晋城信息'&&yd_hits=='1'"
         style="position: absolute;right: 10px;background: red;width: 5px;height: 5px;border-radius: 42px;"
       ></div>
       <img class="indexLiContentImgStyle" :src="tabImage[index]" />
@@ -121,7 +121,7 @@ export default {
         console.log(JSON.stringify(res));
         if (res.success == "1") {
           var yd_hit=res.yd_hits;
-          this.yd_hits=yd_hit;
+          self.yd_hits=yd_hit;
         }
       });
     },
