@@ -109,7 +109,11 @@ export default {
     this.getUserInfo();
     // this.getCmsMyrqIfHits();
   },
-  mounted() {},
+  mounted() {
+    dd.biz.navigation.setRight({
+      show: false,
+    })
+  },
   methods: {
     getCmsMyrqIfHits: function() {
       console.log("获取已读");
