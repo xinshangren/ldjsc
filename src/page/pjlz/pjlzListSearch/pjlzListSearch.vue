@@ -13,15 +13,15 @@
     <div v-if="list.length<1" style="text-align: center;">
       <img style="height: 200px;margin-top: 146px;" src="../../../assets/img/no_data.png" />
     </div>
-     <div id="count_id" style="display:flex;top:106px;position:fixed;width:100%;">
-        <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:16px;">共</div>
-        <div
-          id="totalCountId"
-          ref="totalCountId"
-          style="color: rgb(25, 118, 210);font-size: 24px;height: 32px;line-height: 33px;"
-        >0</div>
-        <div style="width:48%;color:#1976d2;margin-top:6px;font-size:16px;">条</div>
-      </div>
+    <div id="count_id" style="display:flex;top:106px;position:fixed;width:100%;">
+      <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:16px;">共</div>
+      <div
+        id="totalCountId"
+        ref="totalCountId"
+        style="color: rgb(25, 118, 210);font-size: 24px;height: 32px;line-height: 33px;"
+      >0</div>
+      <div style="width:48%;color:#1976d2;margin-top:6px;font-size:16px;">条</div>
+    </div>
     <mescroll-vue
       id="mescroll"
       ref="mescroll"
@@ -59,12 +59,12 @@
             <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>
-              <div class="pjlzListSmallDivFont pjlzListSearchSmallDivFontNew1" >{{item.cbr1}}</div>
+              <div class="pjlzListSmallDivFont pjlzListSearchSmallDivFontNew1">{{item.cbr1}}</div>
             </div>
             <div v-if="item.cbr2!=''" class="pjlzListSmallDiv">
               <!-- <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
               <div class="pjlzListSmallDivFont">承办人：</div>-->
-              <div class="pjlzListSmallDivFont pjlzListSearchSmallDivFontNew" >{{item.cbr2}}</div>
+              <div class="pjlzListSmallDivFont pjlzListSearchSmallDivFontNew">{{item.cbr2}}</div>
             </div>
             <div class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
@@ -322,6 +322,11 @@ export default {
   },
   activated() {
     console.log("activated");
+    setTimeout(() => {
+      dd.biz.navigation.setRight({
+        show: false, //控制按钮显示， true 显示， false 隐藏， 默认true
+      });
+    }, 200);
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
     var statusGet = this.$route.params.entity;
     var time = this.$route.params.time;
@@ -362,7 +367,7 @@ export default {
     console.log(search_allref);
     var self = this;
     if (global_variable.singleApp != 1) {
-       shaixuan.removeEventListener("click", function() {
+      shaixuan.removeEventListener("click", function() {
         // console.log("openPop");
       });
       shaixuan.addEventListener("click", function(e) {
@@ -438,7 +443,7 @@ export default {
       console.log("type===" + detail);
       if (detail == "1") {
         $("#mescroll").css("top", "100px");
-          $("#count_id").css("top", "65px");
+        $("#count_id").css("top", "65px");
         // var shaixuanApp = this.$refs.PjlzshaixuanImgId;
         // console.log(shaixuanApp);
         var self = this;
@@ -448,8 +453,8 @@ export default {
             self.Popshow = true;
           });
         }, 100);
-      }else{
-         var isSingleApp = this.$parent.$root.$children[0].isSingleApp;
+      } else {
+        var isSingleApp = this.$parent.$root.$children[0].isSingleApp;
         console.log("isSingleApp===" + isSingleApp);
         if (isSingleApp == false) {
           $("#mescroll").css("top", "140px");
