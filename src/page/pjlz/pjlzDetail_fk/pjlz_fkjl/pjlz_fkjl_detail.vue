@@ -50,15 +50,21 @@
                     <div style="display: flex;margin-top: 10px;padding-bottom: 25px;">
                         <img style="height: 18px;" src="../../../../assets/img/wjj_gzfk.png" />
                         <div style="margin-left: 2px;">附件:</div>
-                        <div style="margin-left: 2px;color:#2599e6">
+                        <div style="margin-left: 2px;color:#2599e6;width:70%">
                             <div v-if="file_list.length>0" v-for="file in file_list"
-                                style="display: flex;margin-left: 5px;height:30px">
-                                <div @click="openFj(file)">{{file.attach_name}}</div>
+                                style="display: flex;margin-left: 5px;height:30px;width:100%">
+                                <div @click="openFj(file)" style="width: 156px">{{file.attach_name}}</div>
                                 <!-- <img src='../../../../assets/img/icon_delete.png'
                                     style="height: 20px;margin-left: 5px;margin-top: 2px;" /> -->
-                                <img @click="fj_download(file.attach_download_url)"
+                                <!-- <img @click="fj_download(file.attach_download_url)"
                                     src='../../../../assets/img/icon_download.png'
-                                    style="height: 24px;margin-left: 10px;" />
+                                    style="height: 24px;margin-left: 10px;" /> -->
+                                <div @click="fj_download(file.attach_download_url)"
+                                    style="display: flex;background: #2599e6;height: 26px;border-radius: 5px;width: 30%;">
+                                    <div
+                                        style="color: #ffffff;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">
+                                        下载</div>
+                                </div>
                             </div>
                             <!-- <div style="display: flex;font-size: 15px;margin-top: 6px;color:#2599e6">
                                 <img style="height: 18px;" src="../../../../assets/img/icon_accessory.png" />
@@ -112,10 +118,10 @@
         },
         mounted() {
             this.upd_button = false;
-        //      setTimeout(() => {
-        //   var height = document.body.clientHeight-100;
-        //   $("#pmJjdivid").css("height", height + "px");
-        // }, 100);
+            //      setTimeout(() => {
+            //   var height = document.body.clientHeight-100;
+            //   $("#pmJjdivid").css("height", height + "px");
+            // }, 100);
             var s = window.innerHeight - $("#content").offset().top;
             $("#content").css("min-height", s);
             this.feedback_id = this.$route.params.id;
@@ -160,6 +166,13 @@
                 const iframe = document.createElement("iframe");
                 iframe.src = url;
                 iframe.style.display = "none";
+                if (navigator.userAgent.match(/iPad|iPhone/i)) {
+                    iframe.style.width = 100 + '%';
+                    iframe.style.overflowX = 'hidden';
+                    iframe.style.overflowY = 'scroll';
+                    iframe.style.webkitOverflowScrolling = 'touch';
+                    iframe.setAttribute('scrolling', 'no');
+                }
                 document.body.appendChild(iframe);
             },
             openFj: function (item) {

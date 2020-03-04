@@ -111,11 +111,13 @@ export default {
   },
   mounted() {
     this.fk_content = "";
+    this.fk_div = true;
     this.upload_file_list = [];
     this.pdSingleApp();
   },
   activated() {
     this.fk_content = "";
+    this.fk_div = true;
     this.upload_file_list = [];
     this.pdSingleApp();
   },
@@ -240,9 +242,11 @@ export default {
                   break;
                 case "4":
                   self.pj_detail.approval_status = "已结项";
+                  self.fk_div = false;
                   break;
                 case "5":
                   self.pj_detail.approval_status = "拒绝结项";
+                  self.fk_div = false;
                   break;
                 default:
                   break;
@@ -385,7 +389,7 @@ export default {
             self.fk_content = "";
             self.getdata();
             this.$toast("提交成功");
-            $("#fk_div").hide();
+             self.fk_div = false;
           }
         })
         .catch(err => {
