@@ -217,6 +217,7 @@ export default {
     },
     getPath() {
       var path = this.$route.path;
+      this.seach_value="";
       if (path == "/" || path == "/main") {
         $("#yjzlid").hide();
         $("#appVuerightId").css("width", "22%");
@@ -228,8 +229,7 @@ export default {
       }
       var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
       if (
-        path == "/pjlz/pjlz" ||
-        path == "/pjlz/pjlzListSearch/pjlzListSearch"
+        path == "/pjlz/pjlz"
       ) {
         $(".shaixuanImg").show();
       } else {

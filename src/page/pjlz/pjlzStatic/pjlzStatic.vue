@@ -1,6 +1,6 @@
 
 <template>
-  <div style="font-size: 15px;border-top: 1px solid #f1f1f1;padding-top:54px;">
+  <div style="font-size: 15px;border-top: 1px solid #f1f1f1;">
     <van-popup
       v-model="showYear"
       @opened="openPopYear"
@@ -33,96 +33,100 @@
         @confirm="onconfirmAlltime"
       />
     </van-popup>
-    <div style="display:flex;">
-      <div class="pjlzStaticTitile">工作完成情况</div>
+    <div id="contentStaticId" style="overflow:auto;">
+      <div style="width:100%;height:10px;"></div>
+      <div style="display:flex;">
+        <div class="pjlzStaticTitile">工作完成情况</div>
 
-      <div id="dateTimeId" style="display:flex;margin-left:1px;">
-        <div class="pjlzStaticTimeSelect">年</div>
-        <div class="pjlzStaticTimenoSelect">月</div>
-        <div class="pjlzStaticTimenoSelect">周</div>
-        <div class="pjlzStaticTimenoSelect">日</div>
+        <div id="dateTimeId" style="display:flex;margin-left:1px;">
+          <div class="pjlzStaticTimeSelect">年</div>
+          <div class="pjlzStaticTimenoSelect">月</div>
+          <div class="pjlzStaticTimenoSelect">周</div>
+          <div class="pjlzStaticTimenoSelect">日</div>
+        </div>
+
+        <div @click="showSelectTime()" style="display:flex;margin-left:10px;">
+          <div class="pjlzStaticRightSelect">{{currentYear1}}</div>
+          <img class="pjlzStaticRightImg" src="../../../assets/img/time_arrow.png" />
+        </div>
       </div>
 
-      <div @click="showSelectTime()" style="display:flex;margin-left:10px;">
-        <div class="pjlzStaticRightSelect">{{currentYear1}}</div>
-        <img class="pjlzStaticRightImg" src="../../../assets/img/time_arrow.png" />
+      <ul class="ui-row" style="margin-top:20px;">
+        <li class="ui-col ui-col-50" @click="intentSearchList(1)">
+          <div class="pjlzStaticModel1">
+            <div style="display:flex;">
+              <div style="width:50%;"></div>
+              <div style="width:50%;">
+                <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
+                  <div style="font-size:20px;color:#3098fb;">{{oneData.approval_create}}</div>
+                  <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
+                </div>
+                <div style="color: #999999;font-size: 13px;">录入工作</div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="ui-col ui-col-50" @click="intentSearchList(2)">
+          <div class="pjlzStaticModel2">
+            <div style="display:flex;">
+              <div style="width:50%;"></div>
+              <div style="width:50%;">
+                <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
+                  <div style="font-size:20px;color:#0ed3e5;">{{oneData.approval_done}}</div>
+                  <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
+                </div>
+                <div style="color: #999999;font-size: 13px;">已完成工作</div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(3)">
+          <div class="pjlzStaticModel3">
+            <div style="display:flex;">
+              <div style="width:50%;"></div>
+              <div style="width:50%;">
+                <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
+                  <div style="font-size:20px;color:#f9bf4e;">{{oneData.approval_undone_normal}}</div>
+                  <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
+                </div>
+                <div style="color: #999999;font-size: 13px;">正常未完成</div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(4)">
+          <div class="pjlzStaticModel4">
+            <div style="display:flex;">
+              <div style="width:50%;"></div>
+              <div style="width:50%;">
+                <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
+                  <div style="font-size:20px;color:#f96a4e;">{{oneData.approval_undone_overtime}}</div>
+                  <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
+                </div>
+                <div style="color: #999999;font-size: 13px;">超时未完成</div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
+        <div class="pjlzStaticTitile">每个月工作安排情况</div>
+        <div
+          class="van-hairline--top"
+          style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
+        ></div>
+        <div ref="myCharts3" style="height:210px;width:100%;"></div>
       </div>
-    </div>
-
-    <ul class="ui-row" style="margin-top:20px;">
-      <li class="ui-col ui-col-50" @click="intentSearchList(1)">
-        <div class="pjlzStaticModel1">
-          <div style="display:flex;">
-            <div style="width:50%;"></div>
-            <div style="width:50%;">
-              <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                <div style="font-size:20px;color:#3098fb;">{{oneData.approval_create}}</div>
-                <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
-              </div>
-              <div style="color: #999999;font-size: 13px;">录入工作</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="ui-col ui-col-50" @click="intentSearchList(2)">
-        <div class="pjlzStaticModel2">
-          <div style="display:flex;">
-            <div style="width:50%;"></div>
-            <div style="width:50%;">
-              <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                <div style="font-size:20px;color:#0ed3e5;">{{oneData.approval_done}}</div>
-                <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
-              </div>
-              <div style="color: #999999;font-size: 13px;">已完成工作</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(3)">
-        <div class="pjlzStaticModel3">
-          <div style="display:flex;">
-            <div style="width:50%;"></div>
-            <div style="width:50%;">
-              <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                <div style="font-size:20px;color:#f9bf4e;">{{oneData.approval_undone_normal}}</div>
-                <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
-              </div>
-              <div style="color: #999999;font-size: 13px;">正常未完成</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(4)">
-        <div class="pjlzStaticModel4">
-          <div style="display:flex;">
-            <div style="width:50%;"></div>
-            <div style="width:50%;">
-              <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                <div style="font-size:20px;color:#f96a4e;">{{oneData.approval_undone_overtime}}</div>
-                <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
-              </div>
-              <div style="color: #999999;font-size: 13px;">超时未完成</div>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-
-    <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
-      <div class="pjlzStaticTitile">每个月工作安排情况</div>
-      <div
-        class="van-hairline--top"
-        style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
-      ></div>
-      <div ref="myCharts3" style="height:210px;width:100%;"></div>
-    </div>
-    <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
-      <div class="pjlzStaticTitile">年度累计延期未完成的工作情况</div>
-      <div
-        class="van-hairline--top"
-        style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
-      ></div>
-      <div ref="myCharts4" style="height:210px;width:100%;"></div>
+      <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
+        <div class="pjlzStaticTitile">年度累计延期未完成的工作情况</div>
+        <div
+          class="van-hairline--top"
+          style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
+        ></div>
+        <div ref="myCharts4" style="height:210px;width:100%;"></div>
+      </div>
+      <div style="width:100%;height:10px;"></div>
     </div>
   </div>
 </template>
@@ -197,6 +201,7 @@ export default {
     self.statisticJobDone(); //统计工作完成情况
     self.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
     self.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
+    self.pdSingleApp();
   },
   methods: {
     //判断是否是单独app
@@ -219,9 +224,19 @@ export default {
         if (global_variable.roleJs.role == "cbr") {
           this.showRightMenu1();
         }
+        var height = document.body.clientHeight;
+        setTimeout(() => {
+          console.log(height);
+          $("#contentStaticId").css("height", height - 44 + "px");
+        }, 100);
+      } else {
+        var height = document.body.clientHeight;
+        setTimeout(() => {
+          console.log(height);
+          $("#contentStaticId").css("height", height - 44 + "px");
+        }, 100);
       }
     },
-
     //添加标题右上方按钮
     showRightMenu1: function() {
       var self = this;
@@ -232,9 +247,7 @@ export default {
               id: "1",
               iconId: "file",
               text: "消息",
-              url:
-                httpMethod.returnBaseUrlFun() +
-                 global_variable.messageUrl
+              url: httpMethod.returnBaseUrlFun() + global_variable.messageUrl
             }
           ],
           onSuccess: function(data) {

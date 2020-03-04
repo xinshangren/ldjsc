@@ -53,7 +53,7 @@
       >
         <van-tab v-if="flag.role!=''" title="办理中"></van-tab>
         <van-tab v-if="flag.role!=''" title="已办结"></van-tab>
-        <van-tab    v-if="flag.role=='wdk'" title="数据统计"></van-tab>
+        <van-tab v-if="flag.role=='wdk'" title="数据统计"></van-tab>
       </van-tabs>
       <div style="position:relative;" v-if="currentView!=1">
         <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
@@ -178,7 +178,6 @@ export default {
       _this.screenHeightNow = document.documentElement.clientHeight; //窗口高度
       console.log(_this.screenHeightNow);
     };
-   
   },
   components: {
     child1,
@@ -225,10 +224,10 @@ export default {
                 self.flag = global_variable.roleJs;
                 console.log(global_variable.roleJs);
                 console.log(self.flag);
-                 if(self.flag.role == "cbr"){
-                   self.showRightMenu();
+                if (self.flag.role == "cbr") {
+                  self.showRightMenu();
                 }
-               
+
                 // var roleCode=res.data.role;
                 // global_variable.roleCode=res.data.role;//cbr=承办人 wdk=文电科 ld=领导
               }
@@ -268,7 +267,7 @@ export default {
         this.top = 0;
         document.title = "领导批示办理";
         // this.$route.meta.title = "领导批示办理";
-         this.getUserInfo();
+        this.getUserInfo();
       }
     },
     //添加标题右上方按钮
@@ -281,9 +280,7 @@ export default {
               id: "1",
               iconId: "file",
               text: "消息",
-              url:
-                httpMethod.returnBaseUrlFun() +
-                 global_variable.messageUrl
+              url: httpMethod.returnBaseUrlFun() + global_variable.messageUrl
             }
           ],
           onSuccess: function(data) {
@@ -419,7 +416,7 @@ export default {
             self.$toast("申请成功");
             self.sqjxshow = false;
             self.restPjListFun(); //刷新列表
-            self.sqjxmessage="";
+            self.sqjxmessage = "";
           }
         } else {
           self.$toast(msg);
