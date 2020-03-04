@@ -90,7 +90,7 @@
                     height: 35px;"
             @click="close"
           >
-            <div style="margin-top: 6px; margin: auto; color: #28bcfe;font-size: 15px;">取消</div>
+            <div @click="close" style="margin-top: 6px; margin: auto; color: #28bcfe;font-size: 15px;">取消</div>
           </div>
           <div
             style="display: flex;background: #28bcfe;border-radius:20px;width: 40%;border: 1px solid #28bcfe;
@@ -297,6 +297,7 @@ export default {
     close: function() {
       var self = this;
       self.show = false;
+      self.jx_content = "";
     },
     submit_sqjx: function(flag) {
       let self = this;
@@ -325,7 +326,7 @@ export default {
           console.log(params);
           console.log(res);
           if (res.success == "1") {
-            self.fk_content = "";
+            self.jx_content = "";
             self.getdata();
             self.show = false;
             this.$toast("提交成功");

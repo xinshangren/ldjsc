@@ -60,7 +60,7 @@
               <div @click="openFj(attach)">{{attach.attach_name}}</div>
               <img
                 @click="fj_download(attach.attach_download_url)"
-                style="height: 22px;margin-left: 8px;"
+                style="height: 26px;margin-left: 8px;"
                 src="../../assets/img/icon_download.png"
               />
             </div>
