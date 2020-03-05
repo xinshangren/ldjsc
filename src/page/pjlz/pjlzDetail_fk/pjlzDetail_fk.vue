@@ -226,6 +226,17 @@ export default {
             //     ","
             //   );
             // }
+            //判断当前人  是否为牵头人
+            setTimeout(function() {
+              if (
+                self.pj_detail.approval_main_person_dingid ==
+                global_variable.roleJs.dingUserId
+              ) {
+                self.fk_div = true;
+              } else {
+                self.fk_div = false;
+              }
+            }, 200);
             if (self.pj_detail.approval_status != null) {
               switch (self.pj_detail.approval_status) {
                 case "0":
@@ -260,12 +271,6 @@ export default {
             }
             if (self.pj_detail.approval_done != null) {
               self.last_done = self.pj_detail.approval_done;
-            }
-            //判断当前人  是否为牵头人 
-            if(self.pj_detail.approval_main_person_dingid == global_variable.roleJs.dingUserId){
-              self.fk_div = true
-            }else{
-              self.fk_div = false
             }
           }
         })
@@ -395,7 +400,23 @@ export default {
             self.fk_content = "";
             self.getdata();
             this.$toast("提交成功");
-             self.fk_div = false;
+            self.fk_div = false;
+            var hrefUrl = window.location.href;
+            var indexUrl = hrefUrl.replace("#", "");
+            var url = decodeURI(hrefUrl);
+            var detail = url.getValue("type");
+            if (detail == "1") {
+              var id = url.getValue("id");
+              if (id != null && id != "") {
+                //推送页面  跳转 退出应用
+                dd.ready(function() {
+                  dd.biz.navigation.close();
+                });
+              } 
+            } else {
+              //退页
+              this.$router.go(-1);
+            }
           }
         })
         .catch(err => {
