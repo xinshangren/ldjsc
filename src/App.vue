@@ -259,7 +259,7 @@ export default {
         this.$root.$emit("test11", "hi");
         //mainJs.changeTabStyle("4");
       } else {
-        this.$router.push("/");
+        this.$router.push("/main");
       }
     },
     goNotice: function() {

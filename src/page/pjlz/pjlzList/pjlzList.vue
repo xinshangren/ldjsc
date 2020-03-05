@@ -75,7 +75,7 @@
 
             <img
               v-if="item.approval_check_flag==0"
-              class="pjlzListImgRightNew"
+              class="pjlzListImgRightNew1"
               src="../../../assets/img/state_1.png"
             />
             <!-- <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
@@ -86,27 +86,27 @@
             <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
             <img
               v-if="item.approval_check_flag==1&&item.approval_status==1"
-              class="pjlzListImgRightNew"
+              class="pjlzListImgRightNew1"
               src="../../../assets/img/state_3.png"
             />
             <img
               v-if="item.approval_check_flag==1&&item.approval_status==2"
-              class="pjlzListImgRightNew"
+              class="pjlzListImgRightNew1"
               src="../../../assets/img/state_2.png"
             />
             <img
               v-if="item.approval_check_flag==1&&item.approval_status==3"
-              class="pjlzListImgRightNew"
+              class="pjlzListImgRightNew1"
               src="../../../assets/img/state_4.png"
             />
             <img
               v-if="item.approval_check_flag==1&&item.approval_status==4"
-              class="pjlzListImgRightNew"
+              class="pjlzListImgRightNew1"
               src="../../../assets/img/state_6.png"
             />
             <img
               v-if="item.approval_check_flag==1&&item.approval_status==5"
-              class="pjlzListImgRightNew"
+              class="pjlzListImgRightNew1"
               src="../../../assets/img/state_5.png"
             />
             <div

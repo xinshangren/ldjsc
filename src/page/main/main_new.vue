@@ -8,7 +8,7 @@
     >
       <div
         v-if="tabNameList[index]=='晋城信息'&&yd_hits=='1'"
-        style="position: absolute;right: 10px;background: red;width: 5px;height: 5px;border-radius: 42px;display:none;"
+        style="position: absolute;right: 10px;background: red;width: 5px;height: 5px;border-radius: 42px;"
       ></div>
       <img class="indexLiContentImgStyle" :src="tabImage[index]" />
       <div class="indexLiContentDivStyle">{{tabNameList[index]}}</div>
@@ -449,19 +449,19 @@ export default {
           break;
 
         case 65:
-          this.$toast("改版中");
-          isUploadLog = false;
-          // if (global_variable.permissionList.indexOf("每日要情") > -1) {
-          //   id = "65";
-          //   name = "每日要情";
-          //   this.$router.push({
-          //     path: "/zdgz/mryq/mryq"
-          //   });
-          //   // this.$parent.removeEvent();
-          // } else {
-          //   this.$toast(global_variable.permissTip);
-          //   isUploadLog = false;
-          // }
+          // this.$toast("改版中");
+          // isUploadLog = false;
+          if (global_variable.permissionList.indexOf("每日要情") > -1) {
+            id = "65";
+            name = "每日要情";
+            this.$router.push({
+              path: "/zdgz/mryq/mryq"
+            });
+            // this.$parent.removeEvent();
+          } else {
+            this.$toast(global_variable.permissTip);
+            isUploadLog = false;
+          }
           break;
         case 112:
           this.$toast("部署中");

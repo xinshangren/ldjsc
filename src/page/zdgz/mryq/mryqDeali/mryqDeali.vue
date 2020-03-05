@@ -5,17 +5,29 @@
       :style="backgroundDiv"
       style="width: 92%;padding: 2% 4% 2% 4%;background-size: 100% 100%;"
     >
-      <div id="pmJjdivid" style="width:100%;font-size:15px;overflow:auto;" v-html="itemEnti.content"></div>
+      <div
+        id="pmJjdivid"
+        style="width:100%;font-size:15px;overflow:auto;"
+        v-html="itemEnti.content"
+      ></div>
       <div
         v-if="fileListnew.length>0"
         style="font-size: 15px;margin-left: 10px;color: #666666;"
       >附件查看:</div>
-      <div v-for="(item,index) of fileListnew" :key="index">
-        <div style="height: 31px;line-height: 14px;">
+      <div v-for="(item,index) of fileListnew" :key="index" style="margin-bottom:20px;">
+        <div style="display:flex;">
           <span
             @click="openFj(item)"
-            style="font-size: 15px;margin-left: 10px;color: #3098FB;border-bottom: 1px solid #3098FB;width: auto;"
+            style="font-size: 15px;margin-left: 10px;color: #3098FB;width: auto;"
           >{{item.tSAttachmentName}}</span>
+          <a :href="item.AllUrl" download style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;">
+                <img
+                
+                style="height: 16px;margin: auto;margin-left: 4px;"
+                src="../../../../assets/img/icon_download_new.png"
+              />
+                <div style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">下载</div>
+                </a>
         </div>
       </div>
     </div>
@@ -38,7 +50,7 @@ export default {
     return {
       list: [],
       itemEnti: {
-        content:""
+        content: ""
       },
       fileList: [],
       itemId: "",
@@ -69,6 +81,8 @@ export default {
     setTimeout(() => {
       var o = document.getElementById("pmJjdivid");
       var h = o.clientHeight || o.offsetHeight;
+
+      console.log(height + "=" + h);
       if (h < height) {
         $("#pmJjdivid").css("height", height - 80 + "px");
       }
@@ -105,7 +119,7 @@ export default {
           console.log(res);
           if (res.success == "1") {
             var data = res.data;
-            that.itemEnti=data;
+            that.itemEnti = data;
             that.fileList = data.fileList;
             that.fileListnew = [];
             that.fileListnew = that.fileList;
@@ -119,6 +133,8 @@ export default {
                 that.fileListnew[i].tSAttachmentName =
                   tSAttachmentName + "." + changeUrl;
               }
+              that.fileListnew[i].AllUrl =
+                httpMethod.returnBaseUrlFun() + that.fileList[i].url;
             }
           }
         })
@@ -126,8 +142,16 @@ export default {
           // this.$toast(err);
         });
     },
+    downFj: function(item) {
+      console.log(item.AllUrl);
+      //  window.location.href=item.Allurl;
+      window.open(item.AllUrl);
+    },
     openFj: function(item) {
-      console.log(item);
+      console.log(item.Allurl);
+      // window.location.href=httpMethod.returnBaseUrlFun()+item.url;
+      //window.open('http://view.officeapps.live.com/op/view.aspx?src=http%3a%2f%2f203.207.104.209%3a7081%2fjcsldjsc%2fupload%2ffiles%2f2003%2f20200303153033Tvd4ErCc.docx');
+
       localStorage.setItem("mryqItemId", this.itemId);
       this.$router.push({
         path: "/zdgz/mryq/mryq/mryqDeali/mryqDealiFj",

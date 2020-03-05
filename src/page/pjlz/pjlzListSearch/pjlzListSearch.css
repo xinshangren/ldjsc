@@ -64,10 +64,11 @@
     width: 60%;
     line-height: 28px;
     margin-left: 12px;
-    font-size: 14px;
+    font-size: 16px;
 }
 .pjlzListSmallIcon{
-    height: 15px;
+    height: 17px;
+    margin-top: 2px;
 }
 .pjlzListSmallDiv{
     display:flex;
@@ -75,7 +76,7 @@
     margin-top: 4px;
 }
 .pjlzListSmallDivFont{
-    font-size: 12px;
+    font-size: 14px;
 color: #666666;
 margin-left: 7px
 }
@@ -132,12 +133,12 @@ margin-left: 3px;
 }
 .pjlzListImgRightNew{
     position: absolute;
-    height: 66px;
-    top: 26px;
+    height: 87px;
+    bottom: 10%;
     right: 27px;
 }
 .pjlzListSearchSmallDivFontNew{
-    margin-left:90px;
+    margin-left:100px;
 }
 .pjlzListSearchSmallDivFontNew1{
     margin-left:20px;

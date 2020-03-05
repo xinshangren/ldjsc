@@ -50,13 +50,13 @@
             <div v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0"
               v-for="attach in pj_detail.attachlist" style="display: flex;margin-left: 10px; margin-top: 5px;">
               <div @click="openFj(attach)" style="width: 70%;">{{attach.attach_name}}</div>
-              <a :href="attach.attach_download_url" download style="display: flex;background: #2599e6;height: 26px;border-radius: 5px;width: 30%;">
-                <!-- <img
+              <a :href="attach.attach_download_url" download style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;">
+                <img
                 
-                style="height: 24px;margin-top: 1px;"
-                src="../../assets/img/icon_download.png"
-              /> -->
-                <div style="color: #ffffff;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">下载</div>
+                style="height: 16px;margin: auto;margin-left: 9px;"
+                src="../../assets/img/icon_download_new.png"
+              />
+                <div style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">下载</div>
                 </a>
             </div>
           </div>

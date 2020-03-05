@@ -66,12 +66,12 @@
               <div class="pjlzListSmallDivFont">承办人：</div>-->
               <div class="pjlzListSmallDivFont pjlzListSearchSmallDivFontNew">{{item.cbr2}}</div>
             </div>
-            <div class="pjlzListSmallDiv">
+            <div class="pjlzListSmallDiv" style="margin-bottom:15px;">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
-              <div class="pjlzListSmallDivFont">办理期限：</div>
-              <div class="pjlzListSmallDivFont">{{item.approval_limit_time}}</div>
+              <div class="pjlzListSmallDivFont">反馈时限：</div>
+              <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
             </div>
-            <div class="pjlzListSmallDiv" style>
+            <!-- <div class="pjlzListSmallDiv" style>
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">交办时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_create_date}}</div>
@@ -80,7 +80,7 @@
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">截止时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
-            </div>
+            </div> -->
 
             <img
               v-if="item.approval_check_flag==0"
