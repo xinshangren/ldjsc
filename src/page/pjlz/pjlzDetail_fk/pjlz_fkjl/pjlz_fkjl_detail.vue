@@ -42,7 +42,7 @@
                         <div style="margin-left: 2px;">反馈内容:</div>
                         <div
                             style="margin-left: 2px;border: 1px solid #9f9f9f;border-radius: 4px;width: 60%;font-size: 14px;min-height: 100px;">
-                            <div style="margin:5px ;">
+                            <div style="margin:5px ;word-break:break-all">
                                 {{feedback_obj.feedback_content}}
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         <div style="margin-left: 2px;color:#2599e6;width:70%">
                             <div v-if="file_list.length>0" v-for="file in file_list"
                                 style="display: flex;margin-left: 5px;height:30px;width:100%">
-                                <div @click="openFj(file)" style="width: 156px">{{file.attach_name}}</div>
+                                <div @click="openFj(file)" style="width: 70%;word-break:break-all">{{file.attach_name}}</div>
                                 <!-- <img src='../../../../assets/img/icon_delete.png'
                                     style="height: 20px;margin-left: 5px;margin-top: 2px;" /> -->
                                 <!-- <img @click="fj_download(file.attach_download_url)"
