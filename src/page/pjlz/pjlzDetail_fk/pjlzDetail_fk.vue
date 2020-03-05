@@ -227,7 +227,6 @@ export default {
             //   );
             // }
             //判断当前人  是否为牵头人
-            setTimeout(function() {
               if (
                 self.pj_detail.approval_main_person_dingid ==
                 global_variable.roleJs.dingUserId
@@ -236,7 +235,7 @@ export default {
               } else {
                 self.fk_div = false;
               }
-            }, 200);
+            
             if (self.pj_detail.approval_status != null) {
               switch (self.pj_detail.approval_status) {
                 case "0":
@@ -412,7 +411,9 @@ export default {
                 dd.ready(function() {
                   dd.biz.navigation.close();
                 });
-              } 
+              } else{
+                 this.$router.go(-1);
+              }
             } else {
               //退页
               this.$router.go(-1);
