@@ -80,6 +80,11 @@
 color: #666666;
 margin-left: 7px
 }
+.pjlzListSmallDivFontTime{
+    font-size: 15px;
+color: #666666;
+margin-left: 7px
+}
 .mescroll{
     position: fixed;
     bottom: 0px;
