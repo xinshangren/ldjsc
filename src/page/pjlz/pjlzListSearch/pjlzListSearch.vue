@@ -122,6 +122,7 @@
               @click="openYjcbFun(item,$event)"
               v-if="(flag.role=='ld'||flag.role=='wdk')&&(item.approval_status!=4&&item.approval_status!=3)&&flag.dingUserId!=item.approval_main_person_dingid"
               class="pjlzListyjcbNew"
+              style="z-index:2;"
             >
               <div style="width:43%;text-align:right;margin-right:3px;">
                 <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
@@ -135,6 +136,7 @@
                 @click="openShsqFun(item,$event)"
                 v-if="item.approval_create_person_dingid==flag.dingUserId&&item.approval_status==3"
                 class="pjlzListyjcbNew"
+                style="z-index:2;"
               >
                 <div
                   v-if="flag.role!='ld'&&item.approval_status!=4&&flag.dingUserId==item.approval_main_person_dingid"
@@ -154,6 +156,7 @@
                 v-if="flag.role!='ld'&&item.approval_status==1&&flag.dingUserId==item.approval_main_person_dingid"
                 class="pjlzListyjcbNew"
                 @click="openSqjxFun(item,$event)"
+                style="z-index:2;"
               >
                 <div style="width:33%;text-align:right;margin-right:3px;">
                   <img class="pjlzListyjcbImg" src="../../../assets/img/icon_complete.png" />
