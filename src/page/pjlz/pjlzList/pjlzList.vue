@@ -60,7 +60,7 @@
             <div class="pjlzListSmallDiv" style="margin-bottom:15px;">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
               <div class="pjlzListSmallDivFont">反馈时限：</div>
-              <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
+              <div class="pjlzListSmallDivFontTime">{{item.approval_end_date}}</div>
             </div>
             <!-- <div class="pjlzListSmallDiv" style>
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
@@ -111,7 +111,7 @@
             />
             <div
               @click="openYjcbFun(item,$event)"
-              v-if="(flag.role=='ld'||flag.role=='wdk')&&(item.approval_status!=4&&item.approval_status!=3)&&flag.dingUserId!=item.approval_main_person_dingid"
+              v-if="(flag.role!='cbr')&&(item.approval_status!=4&&item.approval_status!=3)&&flag.dingUserId!=item.approval_main_person_dingid"
               class="pjlzListyjcbNew"
             >
               <div style="width:43%;text-align:right;margin-right:3px;">
@@ -123,7 +123,7 @@
             <div style="display:flex;">
               <div
                 @click="openShsqFun(item,$event)"
-                v-if="flag.role=='wdk'&&item.approval_status==3"
+                v-if="item.approval_create_person_dingid==flag.dingUserId&&item.approval_status==3"
                 class="pjlzListyjcbNew"
               >
                 <div
