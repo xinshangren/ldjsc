@@ -147,11 +147,11 @@ export default {
                     department: res.data.department
                   }
                 );
-                if (global_variable.roleJs.role == "cbr") {
-                  self.fk_div = true;
-                } else {
-                  self.fk_div = false;
-                }
+                // if (global_variable.roleJs.role == "cbr") {
+                //   self.fk_div = true;
+                // } else {
+                //   self.fk_div = false;
+                // }
                 self.pj_obj.id = id;
                 self.getdata();
               }
@@ -260,6 +260,12 @@ export default {
             }
             if (self.pj_detail.approval_done != null) {
               self.last_done = self.pj_detail.approval_done;
+            }
+            //判断当前人  是否为牵头人 
+            if(self.pj_detail.approval_main_person_dingid == global_variable.roleJs.dingUserId){
+              self.fk_div = true
+            }else{
+              self.fk_div = false
             }
           }
         })
