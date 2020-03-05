@@ -60,9 +60,11 @@
                                     src='../../../../assets/img/icon_download.png'
                                     style="height: 24px;margin-left: 10px;" /> -->
                                 <a :href="file.attach_download_url" download
-                                    style="display: flex;background: #2599e6;height: 26px;border-radius: 5px;width: 30%;">
+                                    style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;">
+                                    <img style="height: 16px;margin: auto;margin-left: 6px;"
+                                        src="../../../../assets/img/icon_download_new.png" />
                                     <div
-                                        style="color: #ffffff;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">
+                                        style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">
                                         下载</div>
                                 </a>
                             </div>
