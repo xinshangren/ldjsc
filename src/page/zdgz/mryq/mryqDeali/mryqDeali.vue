@@ -20,14 +20,19 @@
             @click="openFj(item)"
             style="font-size: 15px;margin-left: 10px;color: #3098FB;width: 80%;"
           >{{item.tSAttachmentName}}</span>
-          <a :href="item.AllUrl" download style="margin-left:10px;display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 68px;color: #3098fb;">
-                <img
-                
-                style="height: 16px;margin: auto;margin-left:8px;"
-                src="../../../../assets/img/icon_download_new.png"
-              />
-                <div style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">下载</div>
-                </a>
+          <a
+            :href="item.AllUrl"
+            download
+            style="margin-left:10px;display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 68px;color: #3098fb;"
+          >
+            <img
+              style="height: 16px;margin: auto;margin-left:8px;"
+              src="../../../../assets/img/icon_download_new.png"
+            />
+            <div
+              style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;"
+            >下载</div>
+          </a>
         </div>
       </div>
     </div>
@@ -94,6 +99,10 @@ export default {
         } else {
           // console.log("没有");
         }
+      });
+      $("#pmJjdivid img").each(function() {
+        $(this).attr("style", "width:100%;");
+        $(this).attr("style", "max-width:100%;");
       });
       $("#pmJjdivid div").each(function() {
         if ($(this).find("img").length > 0) {
