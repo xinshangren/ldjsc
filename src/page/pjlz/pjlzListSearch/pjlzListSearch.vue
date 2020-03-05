@@ -120,7 +120,7 @@
             />
             <div
               @click="openYjcbFun(item,$event)"
-              v-if="(flag.role=='ld'||flag.role=='wdk')&&(item.approval_status!=4&&item.approval_status!=3)"
+              v-if="(flag.role=='ld'||flag.role=='wdk')&&(item.approval_status!=4&&item.approval_status!=3)&&flag.dingUserId!=item.approval_main_person_dingid"
               class="pjlzListyjcbNew"
             >
               <div style="width:43%;text-align:right;margin-right:3px;">
@@ -129,30 +129,40 @@
               <div class="pjlzListyjcbfont">一键催办</div>
             </div>
 
-            <div
-              @click="openShsqFun(item,$event)"
-              v-if="flag.role=='wdk'&&item.approval_status==3"
-              class="pjlzListyjcbNew"
-            >
-              <div style="width:43%;text-align:right;margin-right:3px;">
-                <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
-              </div>
-              <div class="pjlzListyjcbfont">审核申请</div>
-            </div>
+           
             <div style="display:flex;">
               <div
-                v-if="flag.role=='cbr'&&item.approval_status==1"
+                @click="openShsqFun(item,$event)"
+                v-if="flag.role=='wdk'&&item.approval_status==3"
+                class="pjlzListyjcbNew"
+              >
+                <div
+                  v-if="flag.role!='ld'&&item.approval_status!=4&&flag.dingUserId==item.approval_main_person_dingid"
+                  style="width:33%;text-align:right;margin-right:3px;"
+                >
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
+                </div>
+                <div
+                  v-if="flag.dingUserId!=item.approval_main_person_dingid"
+                  style="width:43%;text-align:right;margin-right:3px;"
+                >
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
+                </div>
+                <div class="pjlzListyjcbfont">审核申请</div>
+              </div>
+              <div
+                v-if="flag.role!='ld'&&item.approval_status==1&&flag.dingUserId==item.approval_main_person_dingid"
                 class="pjlzListyjcbNew"
                 @click="openSqjxFun(item,$event)"
               >
-                <div style="width:43%;text-align:right;margin-right:3px;">
+                <div style="width:33%;text-align:right;margin-right:3px;">
                   <img class="pjlzListyjcbImg" src="../../../assets/img/icon_complete.png" />
                 </div>
                 <div class="pjlzListyjcbfont">申请结项</div>
               </div>
               <div
                 @click="openFkFun(item,$event)"
-                v-if="(flag.role=='cbr'&&(item.approval_status==2||item.approval_status==0||item.approval_status==5))"
+                v-if="flag.role!='ld'&&item.approval_status!=4&&flag.dingUserId==item.approval_main_person_dingid"
                 class="pjlzListyjcbNew"
               >
                 <div style="width:43%;text-align:right;margin-right:3px;">

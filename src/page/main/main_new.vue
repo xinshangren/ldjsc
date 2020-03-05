@@ -1,15 +1,13 @@
 <template>
-  <ul class="ui-row indexFontstyle" style="padding-top:0px;">
+  <ul id="main_new_ul_id" class="ui-row indexFontstyle" style="padding-top:0px;">
     <li
       v-for="(item,index) in tabImage"
       :key="index"
       @click="godetile(index,tabIdList[index])"
       class="ui-col ui-col-25 indexLiStyle"
-    >
-      <div
-        v-if="tabNameList[index]=='晋城信息'&&yd_hits=='1'"
-        style="position: absolute;right: 10px;background: red;width: 5px;height: 5px;border-radius: 42px;"
-      ></div>
+    >   
+    
+       <img v-if="tabNameList[index]=='晋城信息'&&yd_hits=='1'" style="position: absolute;height: 16px;top: -7px;right: 12px;" src="../../assets/img/icon_jcxx_info_tip.png"/>
       <img class="indexLiContentImgStyle" :src="tabImage[index]" />
       <div class="indexLiContentDivStyle">{{tabNameList[index]}}</div>
     </li>
@@ -32,8 +30,8 @@ export default {
   },
   activated() {
     //返回保留页面记录
-      console.log("activated");
-   this.getCmsMyrqIfHits();
+    console.log("activated");
+    this.getCmsMyrqIfHits();
     document.querySelector("body").setAttribute("style", "background:#ffffff");
   },
   beforeRouteLeave(to, from, next) {
@@ -53,11 +51,13 @@ export default {
       isCreate: false,
       isDeali: false,
       seach_value: "",
-      yd_hits:"0",
+      yd_hits: "0",
+      nohaveJcxx: require("@/assets/img/icon_jcxx.png"),
+      haveJcxx: require("@/assets/img/icon_jcxx_info.png"),
       tabImage: [
         require("@/assets/img/icon-yjzl.png"),
         require("@/assets/img/icon_pz.png"),
-        require("@/assets/img/icon-mryw.png"),
+        require("@/assets/img/icon_jcxx.png"),
         require("@/assets/img/icon-zdgc.png"),
         require("@/assets/img/icon-jjyx.png"),
         require("@/assets/img/icon-hbgj.png"),
@@ -111,21 +111,21 @@ export default {
   },
   mounted() {
     dd.biz.navigation.setRight({
-      show: false,
-    })
+      show: false
+    });
   },
   methods: {
     getCmsMyrqIfHits: function() {
       console.log("获取已读");
       var self = this;
       var params = {
-         userId:global_variable.roleJs.dingUserId
+        userId: global_variable.roleJs.dingUserId
       };
       httpMethod.getCmsMyrqIfHits(params).then(res => {
         console.log(JSON.stringify(res));
         if (res.success == "1") {
-          var yd_hit=res.yd_hits;
-          self.yd_hits=yd_hit;
+          var yd_hit = res.yd_hits;
+          self.yd_hits = yd_hit;
         }
       });
     },

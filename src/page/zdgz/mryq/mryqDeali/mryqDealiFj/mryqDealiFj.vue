@@ -38,6 +38,7 @@ export default {
     });
     $("#pmJjdivid img").each(function() {
       $(this).attr("style", "width:100%;");
+       $(this).attr("style", "max-width:100%;");
     });
   },
   methods: {
