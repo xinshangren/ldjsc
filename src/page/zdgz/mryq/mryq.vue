@@ -12,7 +12,7 @@
           <div style="color: #333333;font-size: 16px;width: 99%; overflow: hidden;">{{item.title}}</div>
 
           <div style="display:flex;margin-top:13px;">
-            <div style="font-size:15px;">来源:{{item.source}}</div>
+            <div style="font-size:15px;">发布人:  {{item.add_user_name}}</div>
             <div
               style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 5px;line-height: 13px;vertical-align: middle; margin-top: 5px;"
             >
