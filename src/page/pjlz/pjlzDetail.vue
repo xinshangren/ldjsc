@@ -251,10 +251,10 @@
           Object.keys(self.pj_detail.approval_feedback).length > 0
         ) {
           self.last_feedback = self.pj_detail.approval_feedback;
-          self.last_feedback.feedback_time = self.last_feedback.feedback_time.substr(
-            0,
-            self.last_feedback.feedback_time.length - 3
-          );
+          // self.last_feedback.feedback_time = self.last_feedback.feedback_time.substr(
+          //   0,
+          //   self.last_feedback.feedback_time.length - 3
+          // );
           self.fkjl_null = true;
         } else {
           self.last_feedback = {};
@@ -265,10 +265,10 @@
           Object.keys(self.pj_detail.approval_warn).length > 0
         ) {
           self.last_warn = self.pj_detail.approval_warn;
-          self.last_warn.warn_time = self.last_warn.warn_time.substr(
-            0,
-            self.last_warn.warn_time.length - 3
-          );
+          // self.last_warn.warn_time = self.last_warn.warn_time.substr(
+          //   0,
+          //   self.last_warn.warn_time.length - 3
+          // );
           self.cbjl_null = true;
         } else {
           self.last_warn = {};
@@ -279,10 +279,10 @@
           Object.keys(self.pj_detail.approval_done).length > 0
         ) {
           self.last_done = self.pj_detail.approval_done;
-          self.last_done.done_time = self.last_done.done_time.substr(
-            0,
-            self.last_done.done_time.length - 3
-          );
+          // self.last_done.done_time = self.last_done.done_time.substr(
+          //   0,
+          //   self.last_done.done_time.length - 3
+          // );
           self.jxjl_null = true;
         } else {
           self.last_done = {};

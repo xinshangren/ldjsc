@@ -100,12 +100,12 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == "1") {
-            res.data.feedbacklist.forEach(element => {
-              element.feedback_time = element.feedback_time.substr(
-                0,
-                element.feedback_time.length - 5
-              );
-            });
+            // res.data.feedbacklist.forEach(element => {
+            //   element.feedback_time = element.feedback_time.substr(
+            //     0,
+            //     element.feedback_time.length - 5
+            //   );
+            // });
             self.fkjl_list = res.data.feedbacklist;
           }
         })

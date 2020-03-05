@@ -108,7 +108,7 @@ export default {
                 element.warn_type = "电话通知";
               }
               //时间格式化 去掉  ：秒.0
-              element.warn_time = element.warn_time.substr(0,element.warn_time.length-5);
+              // element.warn_time = element.warn_time.substr(0,element.warn_time.length-5);
             });
             self.cbjl_list = res.data.warnlist;
           }

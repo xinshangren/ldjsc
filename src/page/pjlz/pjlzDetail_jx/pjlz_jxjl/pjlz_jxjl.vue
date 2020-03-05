@@ -105,14 +105,14 @@ export default {
           console.log(res);
           if (res.success == "1") {
             res.data.donelist.forEach(element => {
-              element.apply_time = element.apply_time.substr(
-                0,
-                element.apply_time.length - 3
-              );
-              element.done_time = element.done_time.substr(
-                0,
-                element.done_time.length - 3
-              );
+              // element.apply_time = element.apply_time.substr(
+              //   0,
+              //   element.apply_time.length - 3
+              // );
+              // element.done_time = element.done_time.substr(
+              //   0,
+              //   element.done_time.length - 3
+              // );
               if(element.done_result != null && element.done_result == '1'){
                 element.done_result = "同意结项"
               }

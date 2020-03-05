@@ -256,7 +256,6 @@ export default {
                   break;
                 case "5":
                   self.pj_detail.approval_status = "拒绝结项";
-                  self.fk_div = false;
                   break;
                 default:
                   break;
