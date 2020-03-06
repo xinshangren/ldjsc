@@ -28,7 +28,7 @@
       >
         <img
           src="../../../../assets/img/project_filtrate.png"
-          style=" height: 26px; top: -81px; position: absolute; right:128px; z-index: 3;"
+          style=" height: 26px; top: -81px; position: absolute;right: 34.5%; z-index: 3;"
         />
         <div>{{date1}}</div>
       </div>
