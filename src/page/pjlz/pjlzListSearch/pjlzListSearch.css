@@ -134,8 +134,8 @@ margin-left: 3px;
 .pjlzListImgRightNew{
     position: absolute;
     height: 87px;
-    bottom: 10%;
-    right: 27px;
+    top: 0%;
+    right: 6px;
 }
 .pjlzListSearchSmallDivFontNew{
     margin-left:100px;
