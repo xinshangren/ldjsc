@@ -26,7 +26,37 @@
           v-for="(item,index) in list"
           :key="index"
           style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;font-size:15px;background:#ffffff;"
-        >
+        > 
+          <img
+              v-if="item.approval_check_flag==0"
+              class="pjlzListImgRightNew1"
+              src="../../../assets/img/state_1.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==1"
+              class="pjlzListImgRightNew1"
+              src="../../../assets/img/state_3.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==2"
+              class="pjlzListImgRightNew1"
+              src="../../../assets/img/state_2.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==3"
+              class="pjlzListImgRightNew1"
+              src="../../../assets/img/state_4.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==4"
+              class="pjlzListImgRightNew1"
+              src="../../../assets/img/state_6.png"
+            />
+            <img
+              v-if="item.approval_check_flag==1&&item.approval_status==5"
+              class="pjlzListImgRightNew1"
+              src="../../../assets/img/state_5.png"
+            />
           <div style="position:relative;" @click="openIndexFun(item,$event)">
             <div style="display:flex;">
               <img
@@ -73,42 +103,7 @@
               <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
             </div>-->
 
-            <img
-              v-if="item.approval_check_flag==0"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_1.png"
-            />
-            <!-- <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
-              <div v-if="item.approval_status==1" class="pjlzListyfk">已反馈</div>
-              <div v-if="item.approval_status==2" class="pjlzListwfk">未反馈</div>
-              <div v-if="item.approval_status==3" class="pjlzListsqjx">申请结项</div>
-            <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>-->
-            <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==1"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_3.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==2"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_2.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==3"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_4.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==4"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_6.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==5"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_5.png"
-            />
+          
             <div
               @click="openYjcbFun(item,$event)"
               v-if="(flag.role!='cbr')&&(item.approval_status!=4&&item.approval_status!=3)&&flag.dingUserId!=item.approval_main_person_dingid"
