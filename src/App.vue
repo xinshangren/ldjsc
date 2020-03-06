@@ -31,11 +31,6 @@
 }
 .pjlbQueryImg {
   display: none;
-  height: 31px;
-  top: 17px;
-  position: absolute;
-  right: 121px;
-  z-index: 3;
 }
 </style>
 
@@ -67,6 +62,12 @@
             style="display:none;  position: absolute;right: 23px;top: 24px;height: 20px;"
             src="@/assets/img/icon_filtrate.png"
           />-->
+           <img
+            class="shaixuanImg pjlbQueryImg"
+            ref="shaixuanImgId"
+            style="height: 26px; top: 20px; position: absolute; right: 15px; z-index: 3;"
+            src="@/assets/img/project_filtrate.png"
+          />
         </div>
         <!-- <div
           id="appVuerightId"
@@ -92,11 +93,6 @@
           class="ui-row-flex ui-whitespace"
           style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;margin-left: 0px;"
         >
-          <img
-            class="shaixuanImg pjlbQueryImg"
-            ref="shaixuanImgId"
-            src="@/assets/img/project_filtrate.png"
-          />
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
             <div class="appvueRightFont">首页</div>
