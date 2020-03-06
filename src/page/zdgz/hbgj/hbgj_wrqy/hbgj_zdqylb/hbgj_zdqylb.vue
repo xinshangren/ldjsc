@@ -8,8 +8,8 @@
       </form>
       <img  @click="showRecord()" src="../../../../../assets/img/project_voice.png" style="height: 27px;margin-top: 11px;" /> -->
          <img
-      src="../../../../../assets/img/project_filtrate_white.png"
-      style=" height: 31px; top: 17px; position: absolute; right: 121px; z-index: 3;"
+      src="../../../../../assets/img/project_filtrate.png"
+      style=" height: 26px; top:20px; position: absolute; right: 128px; z-index: 3;"
       @click="queryList"
     />
     <!-- </div> -->

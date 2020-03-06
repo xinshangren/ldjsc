@@ -12,7 +12,7 @@
         src="../../../../assets/img/project_voice.png"
         style="height: 27px;margin-top: 10px;"
       />
-    </div> -->
+    </div>-->
     <div style="display: flex;background: #ffffff;height: 36px;">
       <van-popup v-model="showPop" position="bottom" :style="{ height: '200px' }">
         <van-datetime-picker
@@ -27,8 +27,8 @@
         style="width:98px;display: flex;background: #f3f3f3;border-radius: 4px;height: 30px;line-height: 31px;font-size: 14px;margin-left: 20px;padding-right: 15px;"
       >
         <img
-          src="../../../../assets/img/project_calendar.png"
-          style="height: 17px;margin-top: 6px;margin-right: 10px;margin-left: 10px;"
+          src="../../../../assets/img/project_filtrate.png"
+          style=" height: 26px; top: -81px; position: absolute; right:128px; z-index: 3;"
         />
         <div>{{date1}}</div>
       </div>

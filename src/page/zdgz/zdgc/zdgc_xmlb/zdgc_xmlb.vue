@@ -10,8 +10,8 @@
         style="height: 27px;margin-top: 10px;"
     />-->
     <img
-      src="../../../../assets/img/project_filtrate_white.png"
-      style=" height: 31px; top: -83px; position: absolute; right: 121px; z-index: 3;"
+      src="../../../../assets/img/project_filtrate.png"
+      style=" height: 26px; top: -81px; position: absolute; right:128px; z-index: 3;"
       @click="queryList"
     />
     <!-- </div> -->

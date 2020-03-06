@@ -49,7 +49,7 @@
       style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;"
     >
       <div style="display: flex;">
-        <div id="appVueleftId" style="width:63%;position:relative;">
+        <div id="appVueleftId" style="width:75%;position:relative;">
           <van-search
             id="search_all"
             ref="search_allref"
@@ -59,6 +59,7 @@
             v-model="seach_value"
             class="index_top_style"
             style="width:100%;height: 64px;"
+            right-icon="null"
           />
           <!-- <img
             ref="shaixuanImgId"
@@ -89,12 +90,12 @@
         <div
           id="appVuerightId"
           class="ui-row-flex ui-whitespace"
-          style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;margin-left: 20px;"
+          style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;margin-left: 0px;"
         >
           <img
             class="shaixuanImg pjlbQueryImg"
             ref="shaixuanImgId"
-            src="@/assets/img/project_filtrate_white.png"
+            src="@/assets/img/project_filtrate.png"
           />
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
@@ -221,11 +222,11 @@ export default {
       if (path == "/" || path == "/main") {
         $("#yjzlid").hide();
         $("#appVuerightId").css("width", "22%");
-        $("#appVueleftId").css("width", "63%");
+        $("#appVueleftId").css("width", "75%");
       } else {
         $("#yjzlid").show();
         $("#appVuerightId").css("width", "29%");
-        $("#appVueleftId").css("width", "63%");
+        $("#appVueleftId").css("width", "70%");
       }
       var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
       if (
