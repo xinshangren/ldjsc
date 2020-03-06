@@ -22,7 +22,7 @@
 <template>
   <div id="pjlzDeali_fk_top_id" style="margin-top:54px;background:#f7f7f7">
     <pjlzDetailVue :pj_detail="pj_detail"></pjlzDetailVue>
-    <div id="cb_div" style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 400px;">
+    <div v-show="cb_div" id="cb_div" style="margin:10px 0px 0px 0px;background:#ffffff;min-height: 400px;">
       <div style="padding:15px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">被催办人</div>
         <div
@@ -121,17 +121,20 @@ export default {
       pj_obj: "",
       pj_detail: "",
       cb_content: "",
+      cb_div:true,
     };
   },
   mounted() {
     this.cb_content = "";
     this.pj_obj = this.$route.params.obj;
+    this.cb_div = true;
     this.getdata();
     console.log(this.pj_obj);
   },
   activated(){
     this.cb_content = "";
     this.pj_obj = this.$route.params.obj!=null?this.$route.params.obj:this.pj_obj;
+    this.cb_div = true;
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
@@ -256,7 +259,7 @@ export default {
             console.log(res)
               if (res.success == "1") {
                   this.$toast("催办成功");
-                  $('#cb_div').hide();
+                  self.cb_div = false;
               }
           }).catch(err => {
               this.$toast(err);
