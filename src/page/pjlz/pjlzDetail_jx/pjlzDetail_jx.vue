@@ -144,10 +144,12 @@ export default {
   },
   mounted() {
     this.jx_content = "";
+    this.jx_div = true;
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
   activated() {
+    this.jx_div = true;
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
@@ -177,11 +179,11 @@ export default {
                     department: res.data.department
                   }
                 );
-                if (global_variable.roleJs.role == "wdk") {
-                  self.jx_div = true;
-                } else {
-                  self.jx_div = false;
-                }
+                // if (global_variable.roleJs.role == "wdk") {
+                //   self.jx_div = true;
+                // } else {
+                //   self.jx_div = false;
+                // }
                 self.pj_obj.id = id;
                 self.getdata();
               }
@@ -277,7 +279,6 @@ export default {
                   break;
                 case "5":
                   self.pj_detail.approval_status = "拒绝结项";
-                  self.jx_div = false;
                   break;
                 default:
                   break;
