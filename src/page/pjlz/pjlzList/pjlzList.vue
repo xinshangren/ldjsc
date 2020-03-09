@@ -26,37 +26,37 @@
           v-for="(item,index) in list"
           :key="index"
           style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;font-size:15px;background:#ffffff;"
-        > 
+        >
           <img
-              v-if="item.approval_check_flag==0"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_1.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==1"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_3.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==2"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_2.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==3"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_4.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==4"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_6.png"
-            />
-            <img
-              v-if="item.approval_check_flag==1&&item.approval_status==5"
-              class="pjlzListImgRightNew1"
-              src="../../../assets/img/state_5.png"
-            />
+            v-if="item.approval_check_flag==0"
+            class="pjlzListImgRightNew1"
+            src="../../../assets/img/state_1.png"
+          />
+          <img
+            v-if="item.approval_check_flag==1&&item.approval_status==1"
+            class="pjlzListImgRightNew1"
+            src="../../../assets/img/state_3.png"
+          />
+          <img
+            v-if="item.approval_check_flag==1&&item.approval_status==2"
+            class="pjlzListImgRightNew1"
+            src="../../../assets/img/state_2.png"
+          />
+          <img
+            v-if="item.approval_check_flag==1&&item.approval_status==3"
+            class="pjlzListImgRightNew1"
+            src="../../../assets/img/state_4.png"
+          />
+          <img
+            v-if="item.approval_check_flag==1&&item.approval_status==4"
+            class="pjlzListImgRightNew1"
+            src="../../../assets/img/state_6.png"
+          />
+          <img
+            v-if="item.approval_check_flag==1&&item.approval_status==5"
+            class="pjlzListImgRightNew1"
+            src="../../../assets/img/state_5.png"
+          />
           <div style="position:relative;" @click="openIndexFun(item,$event)">
             <div style="display:flex;">
               <img
@@ -103,7 +103,6 @@
               <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
             </div>-->
 
-          
             <div
               @click="openYjcbFun(item,$event)"
               v-if="(flag.role!='cbr')&&(item.approval_status!=4&&item.approval_status!=3)&&flag.dingUserId!=item.approval_main_person_dingid"
@@ -262,6 +261,7 @@ export default {
       approval_status: "0", //批件状态
       list: [],
       Popshow: false,
+      indexPage:null,
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       nodataImg: require("../../../assets/img/nodata.png"),
@@ -286,13 +286,9 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    console.log(from);
-    console.log(to);
     next();
   },
   beforeRouteLeave(to, from, next) {
-    console.log(from);
-    console.log(to);
     next();
   },
   computed: {
@@ -307,20 +303,30 @@ export default {
         this.seach_value = this.$store.state.seach_value;
         console.log(this.$store.state.seach_value);
         //alert(this.searchkey);
+        this.seach_value = this.seach_value.replace(/\s*/g, "");
+        this.$store.state.seach_value = this.$store.state.seach_value.replace(
+          /\s*/g,
+          ""
+        );
+        //  alert(this.seach_value);
         this.mescroll.resetUpScroll();
       }
     }
   },
   activated() {
     console.log("activated");
+    var top = localStorage.getItem("newsListPjlzList");
     this.pdSingleApp();
+    // setTimeout(() => {
+    //   // this.mescroll.triggerUpScroll();
+    //   console.log("滑动距离"+top);
+    //   $("#mescroll").scrollTop(top);
+    // }, 1000);
   },
   mounted() {
     // this.flag=global_variable.roleJs;
     var shaixuan = this.$parent.$root.$children[0].$refs.shaixuanImgId;
     var search_allref = this.$parent.$root.$children[0].seach_value;
-
-    console.log(search_allref);
     var self = this;
 
     if (global_variable.singleApp != 1) {
@@ -383,7 +389,6 @@ export default {
         } else {
           this.status = 0;
         }
-        this.mescroll.resetUpScroll();
         var shaixuanApp = this.$parent.$refs.PjlzshaixuanImgId;
         console.log(shaixuanApp);
         var self = this;
@@ -412,8 +417,8 @@ export default {
             $("#count_id").css("top", "207px");
           }
         }
-        this.mescroll.resetUpScroll();
       }
+       this.mescroll.resetUpScroll();
     },
     //添加标题右上方按钮
     showRightMenu1: function() {
@@ -494,6 +499,8 @@ export default {
     resetUpScroll: function(name) {
       // console.log(name);
       this.seach_value = name;
+      this.seach_value = this.seach_value.replace(/\s*/g, "");
+      console.log(this.seach_value);
       this.mescroll.resetUpScroll();
     },
     //刷新列表
@@ -677,6 +684,8 @@ export default {
     },
     //项目列表
     upCallback: function(page, mescroll) {
+      // console.log(page);
+      this.indexPage=page;
       var params = {
         method: "getApprovalInfoList",
         pageNo: page.num,
@@ -789,6 +798,12 @@ export default {
     },
     //列表大块的点击事件
     openIndexFun: function(item, e) {
+      // console.log($("#mescroll").offset().top);
+      // console.log($("#newsList").offset().top);
+      var top = $("#mescroll").scrollTop();
+       
+      console.log(top+"===="+this.mescroll.getScrollTop()+"===="+JSON.stringify(this.indexPage));
+      localStorage.setItem("newsListPjlzList", top);
       this.$router.push({
         path: "/pjlz/pjlzDetail_all",
         name: "pjlzDetail_all",

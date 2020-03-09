@@ -2,7 +2,12 @@
 <template>
   <div style="margin-top:0px;overflow:hidden;">
     <div style="position:relative;" v-if="flag.role=='wdk'">
-      <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
+      <van-search
+        v-model="seach_value"
+        placeholder="请输入关键字查询 "
+        @input="oninput"
+        @search="onSearch"
+      />
       <img
         id="PjlzSearchImgId"
         class="shaixuanImg1"
@@ -80,7 +85,7 @@
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />
               <div class="pjlzListSmallDivFont">截止时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
-            </div> -->
+            </div>-->
 
             <img
               v-if="item.approval_check_flag==0"
@@ -130,7 +135,6 @@
               <div class="pjlzListyjcbfont">一键催办</div>
             </div>
 
-           
             <div style="display:flex;">
               <div
                 @click="openShsqFun(item,$event)"
@@ -167,7 +171,7 @@
                 @click="openFkFun(item,$event)"
                 v-if="flag.role!='ld'&&item.approval_status!=4&&flag.dingUserId==item.approval_main_person_dingid"
                 class="pjlzListyjcbNew"
-                 style="z-index:2;"
+                style="z-index:2;"
               >
                 <div style="width:43%;text-align:right;margin-right:3px;">
                   <img class="pjlzListyjcbImg" src="../../../assets/img/icon_feedback.png" />
@@ -338,7 +342,7 @@ export default {
     console.log("activated");
     setTimeout(() => {
       dd.biz.navigation.setRight({
-        show: false, //控制按钮显示， true 显示， false 隐藏， 默认true
+        show: false //控制按钮显示， true 显示， false 隐藏， 默认true
       });
     }, 200);
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
@@ -437,8 +441,14 @@ export default {
   methods: {
     onSearch(val) {
       this.seach_value = val;
+      this.seach_value=this.seach_value.replace(/\s*/g,"");
       this.mescroll.resetUpScroll();
       // console.log(val);
+    },
+    oninput(val) {
+      this.seach_value = val;
+      this.seach_value=this.seach_value.replace(/\s*/g,"");
+      this.mescroll.resetUpScroll();
     },
     //判断是否是单独app
     pdSingleApp: function() {
@@ -755,5 +765,8 @@ export default {
 @import "../../../page/pjlz/pjlzListSearch/pjlzListSearch.css";
 .van-popup--top {
   z-index: 100000;
+}
+.van-search__content {
+  padding-right: 0px;
 }
 </style>

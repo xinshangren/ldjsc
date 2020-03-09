@@ -27,7 +27,7 @@
   margin-top: 0px;
 }
 .nosingleApp {
-  margin-top: 101PX;
+  margin-top: 101px;
 }
 .pjlbQueryImg {
   display: none;
@@ -62,7 +62,7 @@
             style="display:none;  position: absolute;right: 23px;top: 24px;height: 20px;"
             src="@/assets/img/icon_filtrate.png"
           />-->
-           <img
+          <img
             class="shaixuanImg pjlbQueryImg"
             ref="shaixuanImgId"
             style="height: 26px; top: 20px; position: absolute; right: 15px; z-index: 3;"
@@ -214,7 +214,7 @@ export default {
     },
     getPath() {
       var path = this.$route.path;
-      this.seach_value="";
+      this.seach_value = "";
       if (path == "/" || path == "/main") {
         $("#yjzlid").hide();
         $("#appVuerightId").css("width", "22%");
@@ -226,18 +226,25 @@ export default {
       }
       var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
       if (
-        path == "/pjlz/pjlz"
+        path == "/pjlz/pjlz" ||
+        path == "/pjlz/pjlzListSearch/pjlzListSearch"
       ) {
+        $("#search_all").attr("placeholder", "请输入关键字查询");
+      } else {
+        $("#search_all").attr("placeholder", "搜索");
+      }
+      if (path == "/pjlz/pjlz") {
         $(".shaixuanImg").show();
       } else {
         $(".shaixuanImg").hide();
       }
+
       setTimeout(() => {
         //隐藏右侧分享按钮
         dd.biz.navigation.setRight({
           show: false
         });
-      },300);
+      }, 300);
       console.log(this.$route.path);
     },
     toast: function() {

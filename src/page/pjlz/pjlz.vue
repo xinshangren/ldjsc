@@ -55,8 +55,8 @@
         <van-tab v-if="flag.role!=''" title="已办结"></van-tab>
         <van-tab v-if="flag.role=='wdk'" title="数据统计"></van-tab>
       </van-tabs>
-      <div style="position:relative;" v-if="currentView!=1">
-        <van-search v-model="seach_value" placeholder="请输入事项名称" @search="onSearch" />
+      <div id="plistSearchId" style="position:relative;" v-if="currentView!=1">
+        <van-search  v-model="seach_value" placeholder="请输入关键字查询" @search="onSearch" @input="oninput" style="" right-icon="null"/>
         <img
           ref="PjlzshaixuanImgId"
           class="shaixuanImg1"
@@ -166,6 +166,7 @@ export default {
   },
   mounted() {
     localStorage.setItem("intent", "");
+    localStorage.setItem("newsListPjlzList","");
     this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
     console.log(this.flag);
@@ -302,14 +303,15 @@ export default {
       this.sqjxshow = false;
     },
     onSearch(val) {
-      for (var i = 0; i < this.$children.length; i++) {
-        var entity = this.$children[i];
-        if (entity.$options._componentTag == "child1") {
-          // console.log(entity);
-          entity.resetUpScroll(val);
-        }
-      }
+        setTimeout(() => {
+          this.$refs.child1.resetUpScroll(val);
+        }, 100);
       // console.log(val);
+    },
+    oninput(val){
+         setTimeout(() => {
+          this.$refs.child1.resetUpScroll(val);
+        }, 100);
     },
     selectTab: function(flag) {
       // console.log(flag);
@@ -434,4 +436,5 @@ export default {
   width: 61px;
   margin-bottom: 2px;
 }
+
 </style>
