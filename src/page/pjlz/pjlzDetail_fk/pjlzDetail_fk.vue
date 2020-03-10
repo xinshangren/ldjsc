@@ -412,7 +412,7 @@ export default {
           if (res.success == "1") {
             self.fk_content = "";
             self.getdata();
-            this.$toast("提交成功");
+            this.$toast("反馈成功");
             self.fk_div = false;
             var hrefUrl = window.location.href;
             var indexUrl = hrefUrl.replace("#", "");

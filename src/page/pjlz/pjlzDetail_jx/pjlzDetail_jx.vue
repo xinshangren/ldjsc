@@ -332,7 +332,7 @@ export default {
             self.jx_content = "";
             self.getdata();
             self.show = false;
-            this.$toast("提交成功");
+            this.$toast("审核成功");
             self.jx_div = false;
           }
         })
