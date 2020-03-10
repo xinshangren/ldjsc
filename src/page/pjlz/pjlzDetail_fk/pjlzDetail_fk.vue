@@ -443,7 +443,7 @@ export default {
       //去空格   特殊字符
       let str = fk_content.replace(/\s*/g, "");
       var pattern = new RegExp(
-        "[`~@#$^&*=|{}''\\[\\]<>/~@%#￥……&*——|{}【】‘”“']"
+        "[`~@#$^&*=|{}''\\[\\]<>/~@%#￥……&*——|{}【】‘”“'\"]"
       );
       var rs = "";
       for (var i = 0; i < str.length; i++) {
