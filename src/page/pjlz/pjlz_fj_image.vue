@@ -3,6 +3,26 @@
     <div id="sss" style="width: 96%;padding: 2% 2% 2% 2%;background-size: 100% 100%;">
       <img id="pmJjdivid" style="width:100%" :src="pdfSrc" />
     </div>
+    <div v-if="isShow" style="position: fixed;bottom: 20px;right: 10px;">
+      <div
+        style="background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;position:relative;"
+        @click="resizeBig()"
+      >
+        <img
+          style="height: 27px;top: 13%;position: absolute;right: 17%;"
+          src="../../assets/img/iframe_big.png"
+        />
+      </div>
+      <div
+        style="margin-top:7px;background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;position:relative;"
+        @click="resizeSmall()"
+      >
+        <img
+          style="height: 27px;top: 13%;position: absolute;right: 17%;"
+          src="../../assets/img/iframe_small.png"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,21 +43,42 @@ export default {
       list: [],
       pdfSrc: "",
       fileList: [],
-      fileListnew: []
+      fileListnew: [],
+      isShow:true,
     };
   },
   mounted() {
     this.pdfSrc = this.$route.params.entity;
+    var self = this;
     setTimeout(() => {
-      var height = document.body.clientHeight;
-      $("#content").css("height", height);
+      self.isShow = true;
+      $("#pmJjdivid").css("width", "100%;");
+      $("#pmJjdivid").css("max-width", "100%;");
     }, 100);
-    $("#pmJjdivid img").each(function() {
-      $(this).attr("style", "width:100%;");
-    });
     this.pdSingleApp();
   },
   methods: {
+     resizeBig: function() {
+          var imgWidth =$("#pmJjdivid").width();
+          // console.log("imgWidth======="+imgWidth);
+          $("#content").css("overflow-x","auto")
+         $("#pmJjdivid")
+            .css("width", imgWidth + 20);
+         $("#pmJjdivid")
+            .css("max-width", imgWidth + 20);
+    },
+    resizeSmall: function() {
+          var imgWidth = $("#pmJjdivid")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          if (imgWidth < 300) {
+            return;
+          }
+        $("#pmJjdivid")
+            .css("width", imgWidth - 20);
+        $("#pmJjdivid")
+            .css("max-width", imgWidth - 20);
+    },
     //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {
@@ -56,8 +97,16 @@ export default {
       var s = window.innerHeight - $("#content").offset().top;
       $("#content").css("min-height", s);
       if (detail == "1") {
-        $("#content").css("margin", "0px 0px 10px");
+       setTimeout(() => {
+          var height = document.body.clientHeight;
+          $("#content").css("height", height + "px");
+        }, 100);
         // $("#pjlzDeali_fk_top_id").css("margin-top","0px");
+      } else {
+        setTimeout(() => {
+          var height = document.body.clientHeight - 105;
+          $("#content").css("height", height + "px");
+        }, 100);
       }
     },
     openFj: function(item) {

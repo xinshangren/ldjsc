@@ -22,26 +22,27 @@
 </style>
 <template>
   <div id="content" style="background:#ffffff;position: relative;padding:13px;">
-    <!-- <iframe
-      id="iframe"
-      :src="attach_view_url"
-      frameborder="no"
-      scrolling="yes"
-      style="width:100%; overflow-x:scroll; overflow-y:hidden; "
-    ></iframe>-->
     <div id="pmJjdivid" style="width:100%;font-size:15px;overflow:auto;" v-html="attach_view_url"></div>
-    <!-- <div id="sss" class="pdf-box">
-      <pdf ref="pdf" :src="pdfSrc" :page="pageNum" @num-pages="pageTotalNum=$event"></pdf>
+    <div v-if="isShow" style="position: fixed;bottom: 20px;right: 10px;">
+      <div
+        style="background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;position:relative;"
+        @click="resizeBig()"
+      >
+        <img
+          style="height: 27px;top: 13%;position: absolute;right: 17%;"
+          src="../../assets/img/iframe_big.png"
+        />
+      </div>
+      <div
+        style="margin-top:7px;background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;position:relative;"
+        @click="resizeSmall()"
+      >
+        <img
+          style="height: 27px;top: 13%;position: absolute;right: 17%;"
+          src="../../assets/img/iframe_small.png"
+        />
+      </div>
     </div>
-    <div
-      style="position:absolute;bottom: 0px;left:63px;width: 100%;height:35px;font-size: 16px;display: flex;background: #ffffff;  "
-    >
-      <img class="btn_tools" src="../../assets/img/fanye_left.png" @click.stop="prePage" />
-      <img class="btn_tools" src="../../assets/img/fanye_right.png" @click.stop="nextPage" />
-      <div style="margin-left:20px;">{{pageNum}}&nbsp/&nbsp{{pageTotalNum}}</div>
-      <img class="btn1_tools" src="../../assets/img/suofang_big.png" :class="{select:idx==0}" @touchstart="idx=0" @touchend="idx=-1" @click="scaleD"/>
-      <img class="btn1_tools" src="../../assets/img/suofang_small.png" :class="{select:idx==1}" @touchstart="idx=1" @touchend="idx=-1" @click="scaleX"/>
-    </div>-->
   </div>
 </template>
 <script>
@@ -70,7 +71,8 @@ export default {
       curPageNum: 0,
       scale: 100, //放大系数
       idx: -1,
-      attach_view_url: ""
+      attach_view_url: "",
+      isShow: false
     };
   },
   mounted() {
@@ -78,15 +80,132 @@ export default {
     console.log(attach_view_urls);
     this.sendGetUrl(attach_view_urls);
     this.pdSingleApp();
-    //  setTimeout(() => {
-    //             this.pdfSrc = pdf.createLoadingTask(pdfSrcs);
-    //         }, 1000);
-    // this.pdfSrc = pdf.createLoadingTask(this.pdfSrc);
-    // this.pdfSrc.then(pdf => {
-    //   this.numPages = pdf.numPages;
-    // });
+    var self = this;
+      $("#pmJjdivid p").each(function() {
+        if ($(this).find("img").length > 0) {
+          self.isShow = true;
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+          $(this)
+            .children("img")
+            .css("width", "100%");
+          $(this)
+            .children("img")
+            .css("max-width", "100%;");
+        } else {
+          // console.log("没有");
+        }
+      });
+      $("#pmJjdivid  img").each(function() {
+        self.isShow = true;
+        $(this).css("width", "100%;");
+        $(this).css("max-width", "100%;");
+        // $(this).attr("style", "");
+      });
+      $("#pmJjdivid div").each(function() {
+        if ($(this).find("img").length > 0) {
+          self.isShow = true;
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+        } else {
+          // console.log("没有");
+        }
+      });
   },
   methods: {
+    resizeBig: function() {
+      $("#pmJjdivid p").each(function() {
+        if ($(this).children("img").length > 0) {
+          var imgWidth = $(this)
+            .children("img")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          $(this)
+            .children("img")
+            .css("width", imgWidth + 20);
+          $(this)
+            .children("img")
+            .css("max-width", imgWidth + 20);
+        } else {
+          // console.log("没有");
+        }
+      });
+      $("#pmJjdivid  img").each(function() {
+        var imgWidth = $(this).width();
+        $(this).css("width", imgWidth + 20);
+        $(this).css("max-width", imgWidth + 20);
+        // $(this).attr("style", "");
+      });
+      $("#pmJjdivid div").each(function() {
+        if ($(this).find("img").length > 0) {
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+          var imgWidth = $(this)
+            .children("img")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          $(this)
+            .children("img")
+            .css("width", imgWidth + 20);
+          $(this)
+            .children("img")
+            .css("max-width", imgWidth + 20);
+        } else {
+          // console.log("没有");
+        }
+      });
+    },
+    resizeSmall: function() {
+      $("#pmJjdivid p").each(function() {
+        if ($(this).children("img").length > 0) {
+          var imgWidth = $(this)
+            .children("img")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          if (imgWidth < 300) {
+            return;
+          }
+          $(this)
+            .children("img")
+            .css("width", imgWidth - 20);
+          $(this)
+            .children("img")
+            .css("max-width", imgWidth - 20);
+        } else {
+          // console.log("没有");
+        }
+      });
+      $("#pmJjdivid  img").each(function() {
+        var imgWidth = $(this).width();
+        if (imgWidth < 300) {
+          return;
+        }
+        $(this).css("width", imgWidth - 20);
+        $(this).css("max-width", imgWidth - 20);
+        // $(this).attr("style", "");
+      });
+      $("#pmJjdivid div").each(function() {
+        if ($(this).find("img").length > 0) {
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+          var imgWidth = $(this)
+            .children("img")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          if (imgWidth < 300) {
+            return;
+          }
+          $(this)
+            .children("img")
+            .css("width", imgWidth - 20);
+          $(this)
+            .children("img")
+            .css("max-width", imgWidth - 20);
+        } else {
+          // console.log("没有");
+        }
+      });
+    },
     sendGetUrl: function(attach_view_urls) {
       var params = {
         url: attach_view_urls
@@ -107,7 +226,9 @@ export default {
             // if (h < height) {
             //   $("#pmJjdivid").css("height", height - 80 + "px");
             // }
+            var self = this;
             $("#pmJjdivid img").each(function() {
+              self.isShow = true;
               $(this).css("width", "100%");
               var imageurl = $(this).attr("src");
               if (imageurl.indexOf("http") == -1) {
@@ -149,9 +270,9 @@ export default {
           $("#pmJjdivid").css("height", height + "px");
         }, 100);
         // $("#pjlzDeali_fk_top_id").css("margin-top","0px");
-      }else{
-          setTimeout(() => {
-          var height = document.body.clientHeight-100;
+      } else {
+        setTimeout(() => {
+          var height = document.body.clientHeight - 100;
           $("#pmJjdivid").css("height", height + "px");
         }, 100);
       }
@@ -178,8 +299,7 @@ export default {
         .catch(err => {
           // this.$toast(err);
         });
-    },
-    
+    }
   }
 };
 </script>
