@@ -32,11 +32,17 @@
       </div>
       <div style="padding:0px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">被催办内容</div>
-        <textarea
+        <van-field
           v-model="cb_content"
+          rows="2"
+          autosize
+          type="textarea"
+          maxlength="150"
           placeholder="请输入催办内容"
-          style="font-size: 15px;margin-top: 10px;border: 1px solid #9f9f9f;border-radius: 10px;resize: none;width: 100%;height: 70px;"
-        ></textarea>
+          show-word-limit
+          :formatter="formatter(cb_content)"
+          style="font-size: 15px;margin-top: 10px;border: 1px solid #9f9f9f;border-radius: 10px;resize: none;width: 100%;"
+        />
         <van-divider />
       </div>
       <div style="padding:0px 15px 0px 15px;position: relative;">
@@ -140,6 +146,21 @@ export default {
     console.log(this.pj_obj);
   },
   methods: {
+    formatter(fk_content) {
+      //去空格   特殊字符
+      let str = fk_content.replace(/\s*/g, "");
+      var pattern = new RegExp(
+        "[`~@#$^&*=|{}''\\[\\]<>/~@%#￥……&*——|{}【】‘”“'\"]"
+      );
+      var rs = "";
+      for (var i = 0; i < str.length; i++) {
+        rs = rs + str.substr(i, 1).replace(pattern, "");
+      }
+      //去掉 emoji
+      var rs = rs.replace(/[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig, "");
+      this.cb_content = rs;
+      return str;
+    },
     //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {

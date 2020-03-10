@@ -73,16 +73,18 @@
           style="height: 25px; position: absolute;right: 0px;"
           src="../../../assets/img/pop_close.png"
         />
-        <textarea
+        <div style="padding-top:60px;padding: 60px 5px 1px 5px;">
+         <van-field
           v-model="refuse_content"
-          placeholder="请输入拒绝理由"
-          style="resize: none; font-size: 16px;
-                border-radius: 5px;
-                margin-top: 75px;
-                margin-left: 20px;
-                height: 125px;
-                width: 257px;"
-        ></textarea>
+          rows="4"
+          autosize
+          type="textarea"
+          maxlength="150"
+          placeholder="请输入反馈内容"
+          show-word-limit
+          :formatter="formatter(refuse_content)"
+          style="font-size: 16px;border: 1px solid #9f9f9f;border-radius: 10px;resize: none;" />
+        </div>
         <div style="margin-top:5px;margin-left: 20px;display: flex;width: 257px;">
           <div
             style="display: flex;background: #ffffff;border-radius:20px;width: 40%;border: 1px solid #28bcfe;
@@ -154,6 +156,21 @@ export default {
     console.log(this.pj_obj);
   },
   methods: {
+    formatter(fk_content) {
+      //去空格   特殊字符
+      let str = fk_content.replace(/\s*/g, "");
+      var pattern = new RegExp(
+        "[`~@#$^&*=|{}''\\[\\]<>/~@%#￥……&*——|{}【】‘”“'\"]"
+      );
+      var rs = "";
+      for (var i = 0; i < str.length; i++) {
+        rs = rs + str.substr(i, 1).replace(pattern, "");
+      }
+      //去掉 emoji
+      var rs = rs.replace(/[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig, "");
+      this.refuse_content = rs;
+      return str;
+    },
     //获取用户角色
     getUserInfo: function(id) {
       var self = this;
