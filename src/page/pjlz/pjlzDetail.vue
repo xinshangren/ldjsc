@@ -57,7 +57,7 @@
               v-for="attach in pj_detail.attachlist"
               style="display: flex;margin-left: 10px; margin-top: 5px;"
             >
-              <div @click="openFj(attach)" style="width: 70%;">{{attach.attach_name}}</div>
+              <div @click="openFj(attach)" style="width: 70%;word-break:break-all">{{attach.attach_name}}</div>
               <a
                 :href="attach.attach_download_url"
                 download
@@ -228,10 +228,10 @@
         </div>
       </div>
     </div>
-    <van-popup v-model="pj_content" round  closeable :style="{ height: '80%',width:'80%'}">
-     <div  >
-      <div style="width: 88px;font-size: 19px;margin: auto;margin-top: 11px;">文件内容</div>
-      <div v-html="pj_detail.approval_content" style="overflow-y: auto;margin:16px 10px 10px 10px;">
+    <van-popup v-model="pj_content" round  closeable :style="{ height: '80%',width:'83%'}">
+     <div style="height: 98%;" >
+      <div style="width:88px;font-size: 19px;margin: auto;margin-top: 11px;">文件内容</div>
+      <div v-html="pj_detail.approval_content" style="overflow-y: auto;margin:12px 10px 0px 10px;height:90%">
         </div>
     </div>
 
