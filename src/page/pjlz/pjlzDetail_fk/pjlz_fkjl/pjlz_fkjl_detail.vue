@@ -52,7 +52,7 @@
                         <div style="margin-left: 2px;">附件:</div>
                         <div style="margin-left: 2px;color:#2599e6;width:70%">
                             <div v-if="file_list.length>0" v-for="file in file_list"
-                                style="display: flex;margin-left: 5px;width:100%">
+                                style="display: flex;margin-left: 5px;width:100%;margin-top:5px">
                                 <div @click="openFj(file)" style="width: 70%;word-break:break-all">{{file.attach_name}}</div>
                                 <!-- <img src='../../../../assets/img/icon_delete.png'
                                     style="height: 20px;margin-left: 5px;margin-top: 2px;" /> -->

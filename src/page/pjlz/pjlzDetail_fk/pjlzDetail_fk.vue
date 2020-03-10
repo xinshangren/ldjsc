@@ -440,9 +440,17 @@ export default {
         });
     },
     formatter(fk_content) {
-      // 过滤输入的数字
-      let str = fk_content.replace(/\s*/g,"")
-      this.fk_content = str;
+      //去空格   特殊字符
+      let str = fk_content.replace(/\s*/g, "");
+      var pattern = new RegExp(
+        "[`~@#$^&*=|{}''\\[\\]<>/~@%#￥……&*——|{}【】‘”“']"
+      );
+      var rs = "";
+      for (var i = 0; i < str.length; i++) {
+        rs = rs + str.substr(i, 1).replace(pattern, "");
+      }
+      
+      this.fk_content = rs;
       return str;
     }
   }
