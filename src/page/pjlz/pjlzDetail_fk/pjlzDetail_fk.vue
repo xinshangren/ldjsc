@@ -28,20 +28,21 @@
       <div style="padding:10px 15px 10px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">工作反馈</div>
         <van-field
-            v-model="fk_content"
-            rows="4"
-            autosize
-            type="textarea"
-            maxlength="150"
-            placeholder="请输入反馈内容"
-            show-word-limit
-            style="font-size: 15px;margin-top: 10px;border: 1px solid #9f9f9f;border-radius: 10px;resize: none;width: 100%;"
-          />
+          v-model="fk_content"
+          rows="2"
+          autosize
+          type="textarea"
+          maxlength="150"
+          placeholder="请输入反馈内容"
+          show-word-limit
+          :formatter="formatter(fk_content)"
+          style="font-size: 15px;margin-top: 10px;border: 1px solid #9f9f9f;border-radius: 10px;resize: none;width: 100%;"
+        />
         <!-- <textarea
           v-model="fk_content"
           placeholder="请输入反馈内容"
           style="font-size: 15px;margin-top: 10px;border: 1px solid #9f9f9f;border-radius: 10px;resize: none;width: 100%;height: 70px;"
-        ></textarea> -->
+        ></textarea>-->
         <van-uploader
           v-model="file_list"
           multiple
@@ -92,6 +93,8 @@ import { Uploader } from "vant";
 import { ImagePreview } from "vant";
 import { httpMethod } from "../../../api/getData.js";
 import pjlzDetailVue from "@/page/pjlz/pjlzDetail.vue";
+import { Field } from "vant";
+Vue.use(Field);
 Vue.use(ImagePreview);
 Vue.use(Uploader);
 Vue.use(Divider);
@@ -237,15 +240,15 @@ export default {
             //   );
             // }
             //判断当前人  是否为牵头人
-              if (
-                self.pj_detail.approval_main_person_dingid ==
-                global_variable.roleJs.dingUserId
-              ) {
-                self.fk_div = true;
-              } else {
-                self.fk_div = false;
-              }
-            
+            if (
+              self.pj_detail.approval_main_person_dingid ==
+              global_variable.roleJs.dingUserId
+            ) {
+              self.fk_div = true;
+            } else {
+              self.fk_div = false;
+            }
+
             if (self.pj_detail.approval_status != null) {
               switch (self.pj_detail.approval_status) {
                 case "0":
@@ -380,7 +383,7 @@ export default {
       let self = this;
       let approvalInfoId = self.pj_obj.id;
       let feedbackContent = self.fk_content;
-      if (feedbackContent == "") {
+      if (feedbackContent.replace(/\s*/g, "") == "") {
         this.$toast("请填写反馈内容");
         return false;
       }
@@ -420,8 +423,8 @@ export default {
                 dd.ready(function() {
                   dd.biz.navigation.close();
                 });
-              } else{
-                 this.$router.go(-1);
+              } else {
+                this.$router.go(-1);
               }
             } else {
               //退页
@@ -432,6 +435,12 @@ export default {
         .catch(err => {
           this.$toast(err);
         });
+    },
+    formatter(fk_content) {
+      // 过滤输入的数字
+      let str = fk_content.replace(/\s*/g,"")
+      this.fk_content = str;
+      return str;
     }
   }
 };
