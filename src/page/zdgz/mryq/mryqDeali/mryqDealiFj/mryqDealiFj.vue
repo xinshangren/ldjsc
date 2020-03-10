@@ -4,16 +4,16 @@
       <div id="pmJjdivid" style="width:100%;font-size:15px;" v-html="itemEnti.html"></div>
        <div v-if="isShow" style="position: fixed;bottom: 20px;right: 10px;">
         <div
-          style="background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;"
+          style="background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;position:relative;"
           @click="resizeBig()"
         >
-          <img style="height:27px;margin-bottom:5px;" src="../../../../../assets/img/iframe_big.png" />
+          <img style="height: 27px;top: 13%;position: absolute;right: 17%;" src="../../../../../assets/img/iframe_big.png" />
         </div>
         <div
-          style="margin-top:7px;background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;"
+          style="margin-top:7px;background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;position:relative;"
           @click="resizeSmall()"
         >
-          <img style="height:27px;margin-bottom:5px;" src="../../../../../assets/img/iframe_small.png" />
+          <img style="height: 27px;top: 13%;position: absolute;right: 17%;" src="../../../../../assets/img/iframe_small.png" />
         </div>
       </div>
     </div>
