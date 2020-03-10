@@ -224,10 +224,14 @@
         </div>
       </div>
     </van-popup>
-     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
+    <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
       <div class="wrapper">
         <div id="popSqjxId" class="block" @click.stop>
-          <img @click="sqjxshow=false" class="pjlzSqjxClose" src="../../../assets/img/pop_close.png" />
+          <img
+            @click="sqjxshow=false"
+            class="pjlzSqjxClose"
+            src="../../../assets/img/pop_close.png"
+          />
           <div class="pjlzSqjx">申请结项</div>
 
           <van-field
@@ -237,6 +241,7 @@
             type="textarea"
             maxlength="150"
             placeholder="请输入结项说明"
+            :formatter="formatter(sqjxmessage)"
             show-word-limit
             class="pjlzSqjxContent"
           />
@@ -289,7 +294,7 @@ export default {
       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
       approval_status: "0",
-        sqjxshow: false, //申请结伴标记
+      sqjxshow: false, //申请结伴标记
       sqjxmessage: "", //申请结伴内容
       nowItem: null,
       list: [],
@@ -810,11 +815,11 @@ export default {
     },
     //申请结项
     openSqjxFun: function(item, e) {
-       console.log(item);
+      console.log(item);
       this.nowItem = item;
       this.sqjxshow = true;
       console.log(this.$store.getters.get_showText);
-        e.stopPropagation();
+      e.stopPropagation();
     },
     //一键催办跳转
     openYjcbFun: function(item, e) {
@@ -876,7 +881,23 @@ export default {
       localStorage.setItem("newsListPjlzListSearch", "");
       localStorage.setItem("pjlzListcountSearch", "");
       localStorage.setItem("pjlzSearchDealiId", "");
-    }, jxsqFun: function() {
+    },
+
+    formatter(sqjxmessage) {
+      //去空格   特殊字符
+      let str = sqjxmessage.replace(/\s*/g, "");
+      var pattern = new RegExp(
+        "[`~@#$^&*=|{}''\\[\\]<>/~@%#￥……&*——|{}【】\"‘”“']"
+      );
+      var rs = "";
+      for (var i = 0; i < str.length; i++) {
+        rs = rs + str.substr(i, 1).replace(pattern, "");
+      }
+
+      this.sqjxmessage = rs;
+      return str;
+    },
+    jxsqFun: function() {
       var self = this;
       if (self.sqjxmessage == "") {
         self.$toast("请输入结项说明");
@@ -901,9 +922,9 @@ export default {
               //成功
               self.$toast("申请成功");
               self.sqjxshow = false;
-             self.mescroll.resetUpScroll();
+              self.mescroll.resetUpScroll();
               self.sqjxmessage = "";
-              $("#mescroll").scrollTop(0)
+              $("#mescroll").scrollTop(0);
             }
           } else {
             self.$toast(msg);

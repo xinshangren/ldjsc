@@ -95,6 +95,7 @@
             maxlength="150"
             placeholder="请输入结项说明"
             show-word-limit
+            :formatter="formatter(sqjxmessage)"
             class="pjlzSqjxContent"
           />
           <div style="display:flex;margin-top:24px;">
@@ -406,6 +407,21 @@ export default {
           entity.resetList();
         }
       }
+    },
+    
+    formatter(sqjxmessage) {
+      //去空格   特殊字符
+      let str = sqjxmessage.replace(/\s*/g, "");
+      var pattern = new RegExp(
+        "[`~@#$^&*=|{}''\\[\\]<>/~@%#￥……&*——|{}【】\"‘”“']"
+      );
+      var rs = "";
+      for (var i = 0; i < str.length; i++) {
+        rs = rs + str.substr(i, 1).replace(pattern, "");
+      }
+      
+      this.sqjxmessage = rs;
+      return str;
     },
     jxsqFun: function() {
       var self = this;
