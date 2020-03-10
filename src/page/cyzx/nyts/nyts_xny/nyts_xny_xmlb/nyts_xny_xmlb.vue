@@ -383,6 +383,7 @@ export default {
       self.counties = "";
       self.ent_nature = "";
       self.ent_type = "";
+      self.project_phase="";
       //项目类型选择
       $("#xmlxListDialogId li").each(function() {
         if ($(this).hasClass("dialogSelect")) {

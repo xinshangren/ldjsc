@@ -10,18 +10,18 @@ const ddPhone = ''
 const indexTabId = 0;
 const roleJs = {
   // dingUserId: "086404191926187734",
-  // role: "cbr",
+  // role: "ld",
   dingUserId: "",
   role: "",
   department: "",
   username: ""
 };//用户信息
-const messageUrl="webpage/jcsldjscApp/static/icon_info.png";//生产环境消息图标地址
-// const messageUrl="jcsldjscApp/static/icon_info.png";//测试环境消息图标地址
+// const messageUrl="webpage/jcsldjscApp/static/icon_info.png";//生产环境消息图标地址
+const messageUrl="jcsldjscApp/static/icon_info.png";//测试环境消息图标地址
 const singleApp = 0;
 const permissTip="该功能无权限浏览，需授权";
 // const permissionList = [
-//   "每日要情",
+//   "晋城信息",
 //   "重大改革",
 //   "文明共创",
 //   "重点工程",
@@ -53,7 +53,7 @@ const permissTip="该功能无权限浏览，需授权";
 //   "一键直连",
 //   "市长热线",
 //   "区县直通",
-//   "批件流转"
+//   "领导批示"
 // ]
 const permissionList = [
 ]

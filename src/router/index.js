@@ -262,7 +262,8 @@ export default new Router({
     },{
       path: '/zdgz/mryq/mryq',
       name: 'zdgz_mryqVue',
-      component: zdgz_mryqVue
+      component: zdgz_mryqVue,
+      meta:{keepAlive:true}
     },{
       path: '/zdgz/mryq/mryq/mryqDeali',
       name: 'mryqDealiVue',

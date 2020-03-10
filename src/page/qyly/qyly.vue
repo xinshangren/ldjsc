@@ -147,7 +147,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     console.log(from);
-    if (from.path != "/") {
+    if (from.path != "/main") {
       if (to.path == "/qyly/qyly") {
         to.meta.keepAlive = true;
       } else {

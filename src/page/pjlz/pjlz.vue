@@ -174,6 +174,9 @@ export default {
   mounted() {
     localStorage.setItem("intent", "");
     localStorage.setItem("newsListPjlzList", "");
+      localStorage.setItem("newsListPjlzListSearch", "");
+      localStorage.setItem("pjlzListcountSearch", "");
+      localStorage.setItem("pjlzSearchDealiId", "");
     this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
     console.log(this.flag);
@@ -431,6 +434,7 @@ export default {
               self.sqjxshow = false;
               self.restPjListFun(); //刷新列表
               self.sqjxmessage = "";
+               self.$refs.child1.scrollTopZero();
             }
           } else {
             self.$toast(msg);

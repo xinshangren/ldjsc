@@ -224,6 +224,33 @@
         </div>
       </div>
     </van-popup>
+     <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
+      <div class="wrapper">
+        <div id="popSqjxId" class="block" @click.stop>
+          <img @click="sqjxshow=false" class="pjlzSqjxClose" src="../../../assets/img/pop_close.png" />
+          <div class="pjlzSqjx">申请结项</div>
+
+          <van-field
+            v-model="sqjxmessage"
+            rows="4"
+            autosize
+            type="textarea"
+            maxlength="150"
+            placeholder="请输入结项说明"
+            show-word-limit
+            class="pjlzSqjxContent"
+          />
+          <div style="display:flex;margin-top:24px;">
+            <div style="width:50%;text-align: center;" @click="sqjxshow=false">
+              <div class="pjlzSqjxCancelButton1">取消</div>
+            </div>
+            <div style="width:50%;text-align: center;" @click="jxsqFun()">
+              <div class="pjlzSqjxCancelButton2">确定</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
@@ -262,6 +289,9 @@ export default {
       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
       approval_status: "0",
+        sqjxshow: false, //申请结伴标记
+      sqjxmessage: "", //申请结伴内容
+      nowItem: null,
       list: [],
       Popshow: false,
       periodType: "",
@@ -306,6 +336,7 @@ export default {
     if (from.name == "pjlzListSearchVue") {
       if (to.name == "pjlzListvue") {
         from.meta.keepAlive = false;
+        this.clearCreateData();
         $("#PjlzSearchImgId").off("click");
       }
     }
@@ -375,7 +406,20 @@ export default {
       default:
         break;
     }
-    this.pdSingleApp();
+
+    var pjlzId = localStorage.getItem("pjlzSearchDealiId");
+    if (pjlzId != null && pjlzId != "") {
+      this.getPjlzDeali(pjlzId);
+      setTimeout(() => {
+        var top = localStorage.getItem("newsListPjlzListSearch");
+
+        console.log("滑动距离" + top);
+        $("#mescroll").scrollTop(top);
+        $("#totalCountId").html(localStorage.getItem("pjlzListcountSearch"));
+      }, 100);
+    } else {
+      this.pdSingleApp();
+    }
   },
   mounted() {
     // this.flag=global_variable.roleJs;
@@ -439,15 +483,72 @@ export default {
     self.pdSingleApp();
   },
   methods: {
+    scrollTopZero: function() {
+      $("#mescroll").scrollTop(0);
+    },
+    //根据id获取批件详情，修改批件列表刷新某一个值
+    getPjlzDeali: function(approvalInfoId) {
+      var self = this;
+      var params = {
+        method: "getApprovalInfo",
+        dingUserId: global_variable.roleJs.dingUserId,
+        approvalInfoId: approvalInfoId //批件id
+      };
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(res);
+          if (res.success == 1) {
+            var data = res.data;
+            if (self.list.length > 0) {
+              let arr = self.list.slice(0); //深拷贝，（等价一个新的数组）
+              arr.forEach(item => {
+                var id = item.id;
+                if (id === data.id) {
+                  var entityName = data.approval_manage_person;
+                  if (entityName.indexOf(",") != -1) {
+                    var namelist = entityName.split(",");
+                    var nameStr2 = "";
+                    if (namelist.length > 0) {
+                      data.cbr1 = namelist[0];
+                      for (var j = 0; j < namelist.length; j++) {
+                        if (j > 0) {
+                          if (nameStr2 == "") {
+                            nameStr2 += namelist[j];
+                          } else {
+                            nameStr2 += "," + namelist[j];
+                          }
+                        }
+                      }
+                      data.cbr2 = nameStr2;
+                    }
+                  } else {
+                    data.cbr1 = entityName;
+                    data.cbr2 = "";
+                  }
+                  item.approval_status = data.approval_status;
+                  item.approval_check_flag = data.approval_check_flag;
+                }
+              });
+              console.log(arr);
+              self.list = arr;
+              console.log(self.list);
+            }
+          }
+        })
+        .catch(err => {
+          this.$toast(err);
+        });
+    },
     onSearch(val) {
       this.seach_value = val;
-      this.seach_value=this.seach_value.replace(/\s*/g,"");
+      this.seach_value = this.seach_value.replace(/\s*/g, "");
       this.mescroll.resetUpScroll();
       // console.log(val);
     },
     oninput(val) {
       this.seach_value = val;
-      this.seach_value=this.seach_value.replace(/\s*/g,"");
+      this.seach_value = this.seach_value.replace(/\s*/g, "");
       this.mescroll.resetUpScroll();
     },
     //判断是否是单独app
@@ -709,11 +810,15 @@ export default {
     },
     //申请结项
     openSqjxFun: function(item, e) {
-      this.$parent.showSqjxPop(item);
-      e.stopPropagation();
+       console.log(item);
+      this.nowItem = item;
+      this.sqjxshow = true;
+      console.log(this.$store.getters.get_showText);
+        e.stopPropagation();
     },
     //一键催办跳转
     openYjcbFun: function(item, e) {
+      this.createTopAndIdAndCount(item);
       this.$router.push({
         path: "/pjlz/pjlzDetail_cb/pjlzDetail_cb",
         name: "pjlzDetail_cb",
@@ -725,6 +830,7 @@ export default {
     },
     //审核申请跳转
     openShsqFun: function(item, e) {
+      this.createTopAndIdAndCount(item);
       this.$router.push({
         path: "/pjlz/pjlzDetail_jx/pjlzDetail_jx",
         name: "pjlzDetail_jx",
@@ -736,6 +842,7 @@ export default {
     },
     //反馈跳转
     openFkFun: function(item, e) {
+      this.createTopAndIdAndCount(item);
       this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlzDetail_fk",
         name: "pjlzDetail_fk",
@@ -747,6 +854,7 @@ export default {
     },
     //列表大块的点击事件
     openIndexFun: function(item, e) {
+      this.createTopAndIdAndCount(item);
       this.$router.push({
         path: "/pjlz/pjlzDetail_all",
         name: "pjlzDetail_all",
@@ -756,6 +864,55 @@ export default {
       });
       localStorage.setItem("intentSearch", this.status);
       e.stopPropagation();
+    }, //记录点击数据，用于返回列表滑动等
+    createTopAndIdAndCount: function(item) {
+      var top = $("#mescroll").scrollTop();
+      localStorage.setItem("newsListPjlzListSearch", top);
+      localStorage.setItem("pjlzSearchDealiId", item.id);
+      localStorage.setItem("pjlzListcountSearch", $("#totalCountId").html());
+    },
+    //清除数据
+    clearCreateData: function() {
+      localStorage.setItem("newsListPjlzListSearch", "");
+      localStorage.setItem("pjlzListcountSearch", "");
+      localStorage.setItem("pjlzSearchDealiId", "");
+    }, jxsqFun: function() {
+      var self = this;
+      if (self.sqjxmessage == "") {
+        self.$toast("请输入结项说明");
+        return;
+      }
+      self.$store.commit("showLoadingBigText", "申请结项中");
+      var params = {
+        method: "approvalApply",
+        dingUserId: global_variable.roleJs.dingUserId,
+        approvalInfoId: self.nowItem.id,
+        applyReason: self.sqjxmessage
+      };
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(JSON.stringify(res));
+          var msg = res.msg;
+          self.$store.commit("hideLoadingBig");
+          if (res.success == "1") {
+            var result = res.data;
+            if (result == "1") {
+              //成功
+              self.$toast("申请成功");
+              self.sqjxshow = false;
+             self.mescroll.resetUpScroll();
+              self.sqjxmessage = "";
+              $("#mescroll").scrollTop(0)
+            }
+          } else {
+            self.$toast(msg);
+          }
+        })
+        .catch(function(error) {
+          self.$store.commit("hideLoadingBig");
+          console.log(error);
+        });
     }
   }
 };

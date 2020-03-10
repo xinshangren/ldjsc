@@ -1,25 +1,31 @@
 <template>
-  <div style="">
-    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
+  <div style>
+    <mescroll-vue id="mescroll" ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
       <div id="newsList" style="padding-left:10px;padding-right:10px;margin-top:10px;">
         <div
           style="position: relative;padding: 10px;background: rgb(255, 255, 255);height: 80px;border-radius: 10px;margin-bottom: 6px;box-shadow: 1px 1px 1px #cccccc;"
           v-for="(item,index) of list"
           :key="index"
           @click="goDetile(item)"
-        >  
-          <div v-if="item.yd_hits=='1'" style="position: absolute;right: 0px;background: red;width: 43px;height: 19px;border-radius: 0px 10px 0px 10px;top: 0px;color: #ffffff;font-size: 13px;text-align: center;">未读</div>
-          <div class="van-multi-ellipsis--l2" style="color: #333333;font-size: 16px;width: 99%; overflow: hidden;">{{item.title}}</div>
+        >
+          <div
+            v-if="item.yd_hits=='1'"
+            style="position: absolute;right: 0px;background: red;width: 43px;height: 19px;border-radius: 0px 10px 0px 10px;top: 0px;color: #ffffff;font-size: 13px;text-align: center;"
+          >未读</div>
+          <div
+            class="van-multi-ellipsis--l2"
+            style="color: #333333;font-size: 16px;width: 93%; overflow: hidden;"
+          >{{item.title}}</div>
 
           <div style="display:flex;margin-top:5px;">
-            <div style="font-size:15px;color:#999999;">发布人:  {{item.add_user_name}}</div>
+            <div style="font-size:15px;color:#999999;">发布人: {{item.add_user_name}}</div>
           </div>
-           <div style="display:flex;margin-top:4px;">
+          <div style="display:flex;margin-top:4px;">
             <div
               style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 14px;line-height: 13px;vertical-align: middle; margin-top: 0px;"
             >
               <img src="../../../assets/img/icon_time.png" style="height: 13px;" />
-               <div style="margin-left:4px;"> {{item.createDate}}</div>
+              <div style="margin-left:4px;">{{item.createDate}}</div>
             </div>
           </div>
         </div>
@@ -68,16 +74,43 @@ export default {
       }
     };
   },
+  activated() {
+    document.querySelector("body").setAttribute("style", "background:#F1F4F6");
+    var top = localStorage.getItem("mryqList");
+    console.log(top);
+    if (top != null && top != ""&&top!=undefined) {
+      $("#mescroll").scrollTop(top);
+      var items = localStorage.getItem("mryqDealiId");
+       console.log(items);
+      var itemv = JSON.parse(items);
+      var self = this;
+      if (self.list.length > 0) {
+        let arr = self.list.slice(0); //深拷贝，（等价一个新的数组）
+        arr.forEach(item => {
+          var id = item.id;
+          if (id === itemv.id) {
+            item.yd_hits = "0";
+          }
+        });
+        console.log(arr);
+        self.list = arr;
+      }
+    }else{
+       this.mescroll.resetUpScroll();
+    }
+  },
   beforeRouteLeave(to, from, next) {
     console.log(from);
     console.log(to);
     if (from.name == "main") {
       to.meta.keepAlive = false;
+        localStorage.setItem("mryqList","");
+      localStorage.setItem("mryqDealiId","");
     } else {
       if (from.name == "zdgz_mryqVue") {
         if (to.name == "mryqDealiVue") {
-           to.meta.keepAlive = false;
-        } 
+          to.meta.keepAlive = false;
+        }
       }
     }
     next();
@@ -92,7 +125,7 @@ export default {
       var params = {
         page: page.num,
         pageSize: page.size,
-        userId:global_variable.roleJs.dingUserId
+        userId: global_variable.roleJs.dingUserId
       };
       httpMethod
         .getCmsMyrqList(params)
@@ -170,6 +203,10 @@ export default {
         });
     },
     goDetile(item) {
+      var top = $("#mescroll").scrollTop();
+      localStorage.setItem("mryqList", top);
+      localStorage.setItem("mryqDealiId", JSON.stringify(item));
+      // localStorage.setItem("pjlzListcount", $("#totalCountId").html());
       this.$router.push({
         path: "/zdgz/mryq/mryq/mryqDeali",
         name: "mryqDealiVue",

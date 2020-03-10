@@ -316,16 +316,20 @@ export default {
   },
   activated() {
     console.log("activated");
-    var top = localStorage.getItem("newsListPjlzList");
     var pjlzId = localStorage.getItem("pjlzDealiId");
     // this.pdSingleApp();
-    this.getPjlzDeali(pjlzId);
-    setTimeout(() => {
-      // this.mescroll.triggerUpScroll();
-      console.log("滑动距离" + top);
-      $("#mescroll").scrollTop(top);
-      $("#totalCountId").html(localStorage.getItem("pjlzListcount"));
-    }, 100);
+    if (pjlzId != null && pjlzId != "") {
+      this.getPjlzDeali(pjlzId);
+      setTimeout(() => {
+        var top = localStorage.getItem("newsListPjlzList");
+
+        console.log("滑动距离" + top);
+        $("#mescroll").scrollTop(top);
+        $("#totalCountId").html(localStorage.getItem("pjlzListcount"));
+      }, 100);
+    } else {
+      this.pdSingleApp();
+    }
   },
   mounted() {
     // this.flag=global_variable.roleJs;
@@ -367,8 +371,12 @@ export default {
     //         });
   },
   methods: {
+    scrollTopZero: function() {
+      $("#mescroll").scrollTop(0);
+    },
     //根据id获取批件详情，修改批件列表刷新某一个值
     getPjlzDeali: function(approvalInfoId) {
+      var self = this;
       var params = {
         method: "getApprovalInfo",
         dingUserId: global_variable.roleJs.dingUserId,
@@ -379,33 +387,41 @@ export default {
         .then(res => {
           console.log(res);
           if (res.success == 1) {
-            var data=res.data;
-             for (var i = 0; i < data.length; i++) {
-                var entityName = data[i].approval_manage_person;
-                if (entityName.indexOf(",") != -1) {
-                  var namelist = entityName.split(",");
-                  var nameStr2 = "";
-                  if (namelist.length > 0) {
-                    data[i].cbr1 = namelist[0];
-                    for (var j = 0; j < namelist.length; j++) {
-                      if (j > 0) {
-                        if (nameStr2 == "") {
-                          nameStr2 += namelist[j];
-                        } else {
-                          nameStr2 += "," + namelist[j];
+            var data = res.data;
+            if (self.list.length > 0) {
+              let arr = self.list.slice(0); //深拷贝，（等价一个新的数组）
+              arr.forEach(item => {
+                var id = item.id;
+                if (id === data.id) {
+                  var entityName = data.approval_manage_person;
+                  if (entityName.indexOf(",") != -1) {
+                    var namelist = entityName.split(",");
+                    var nameStr2 = "";
+                    if (namelist.length > 0) {
+                      data.cbr1 = namelist[0];
+                      for (var j = 0; j < namelist.length; j++) {
+                        if (j > 0) {
+                          if (nameStr2 == "") {
+                            nameStr2 += namelist[j];
+                          } else {
+                            nameStr2 += "," + namelist[j];
+                          }
                         }
                       }
+                      data.cbr2 = nameStr2;
                     }
-
-                    data[i].cbr2 = nameStr2;
+                  } else {
+                    data.cbr1 = entityName;
+                    data.cbr2 = "";
                   }
-                } else {
-                  data[i].cbr1 = entityName;
-                  data[i].cbr2 = "";
+                  item.approval_status = data.approval_status;
+                  item.approval_check_flag = data.approval_check_flag;
                 }
-              }
-              console.log(data);
-              this.list = this.list.concat(data);
+              });
+              console.log(arr);
+              self.list = arr;
+              console.log(self.list);
+            }
           }
         })
         .catch(err => {
@@ -870,7 +886,7 @@ export default {
       localStorage.setItem("pjlzListcount", $("#totalCountId").html());
     },
     //清除数据
-    clearCreateData:function(){
+    clearCreateData: function() {
       localStorage.setItem("newsListPjlzList", "");
       localStorage.setItem("pjlzListcount", "");
       localStorage.setItem("pjlzDealiId", "");

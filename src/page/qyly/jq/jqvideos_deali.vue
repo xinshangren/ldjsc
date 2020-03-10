@@ -1,7 +1,7 @@
 <template>
   <div style="overflow:hidden;background: #ffffff;">
     <van-popup id="popup" v-model="show" position="top" :style="{height: '100%' }" @opened="openPop" :overlay='true'
-      :closeable='true' @click='closePop' style="overflow:hidden;background:rgb(0, 0, 0);">
+       @click='closePop' style="overflow:hidden;background:rgb(0, 0, 0);">
 
 <video-player style="margin-top:100px" class="video-player vjs-custom-skin"
       ref="videoPlayer"
