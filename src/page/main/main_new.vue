@@ -33,6 +33,8 @@ export default {
     console.log("activated");
     this.getCmsMyrqIfHits();
     document.querySelector("body").setAttribute("style", "background:#ffffff");
+    localStorage.setItem("mryqList","");
+      localStorage.setItem("mryqDealiId","");
   },
   beforeRouteLeave(to, from, next) {
     console.log(from);
@@ -451,9 +453,9 @@ export default {
         case 65:
           // this.$toast("改版中");
           // isUploadLog = false;
-          if (global_variable.permissionList.indexOf("每日要情") > -1) {
+          if (global_variable.permissionList.indexOf("晋城信息") > -1) {
             id = "65";
-            name = "每日要情";
+            name = "晋城信息";
             this.$router.push({
               path: "/zdgz/mryq/mryq"
             });
@@ -490,9 +492,9 @@ export default {
           isUploadLog = false;
           break;
         case 100:
-          if (global_variable.permissionList.indexOf("批件流转") > -1) {
+          if (global_variable.permissionList.indexOf("领导批示") > -1) {
             id = "100";
-            name = "批件流转";
+            name = "领导批示";
             this.$router.push({
               path: "/pjlz/pjlz"
             });

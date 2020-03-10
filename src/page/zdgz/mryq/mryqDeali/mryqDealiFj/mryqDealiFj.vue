@@ -2,6 +2,20 @@
   <div style="background:#ffffff;">
     <div :style="backgroundDiv" style="width: 92%;padding: 2% 4% 2% 4%;background-size: 100% 100%;">
       <div id="pmJjdivid" style="width:100%;font-size:15px;" v-html="itemEnti.html"></div>
+       <div v-if="isShow" style="position: fixed;bottom: 20px;right: 10px;">
+        <div
+          style="background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;"
+          @click="resizeBig()"
+        >
+          <img style="height:27px;margin-bottom:5px;" src="../../../../../assets/img/iframe_big.png" />
+        </div>
+        <div
+          style="margin-top:7px;background: rgba(0,0,0,0.6);width: 40px;height: 40px;border-radius: 5px;text-align: center;"
+          @click="resizeSmall()"
+        >
+          <img style="height:27px;margin-bottom:5px;" src="../../../../../assets/img/iframe_small.png" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +37,7 @@ export default {
       list: [],
       itemEnti: {},
       fileList: [],
+       isShow:false,
       fileListnew: [],
       backgroundDiv: {
         backgroundImage:
@@ -33,15 +48,150 @@ export default {
   mounted() {
     this.itemEnti = this.$route.params.entity;
     console.log(this.itemEnti);
+    console.log(document.body.clientHeight);
+
+    var height = document.body.clientHeight;
+    // $("#contentId").css("height",height+200+"px");
+    //console.log(this.itemEnti);
     $("#pmJjdivid p").each(function() {
       $(this).attr("style", "font-size:15px;");
     });
-    $("#pmJjdivid img").each(function() {
-      $(this).attr("style", "width:100%;");
-       $(this).attr("style", "max-width:100%;");
-    });
+    var self=this;
+    setTimeout(() => {
+      var o = document.getElementById("pmJjdivid");
+      var h = o.clientHeight || o.offsetHeight;
+
+      console.log(height + "=" + h);
+      if (h < height) {
+        $("#pmJjdivid").css("height", height - 80 + "px");
+      }
+      console.log(h);
+      $("#pmJjdivid p").each(function() {
+        if ($(this).children("img").length > 0) {
+          self.isShow=true;
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+          $(this)
+            .children("img")
+            .css("width", "100%");
+          $(this)
+            .children("img")
+            .css("max-width", "100%;");
+        } else {
+          // console.log("没有");
+        }
+      });
+      $("#pmJjdivid  img").each(function() {
+        self.isShow=true;
+        $(this).css("width", "100%;");
+        $(this).css("max-width", "100%;");
+        // $(this).attr("style", "");
+      });
+      $("#pmJjdivid div").each(function() {
+        if ($(this).find("img").length > 0) {
+          self.isShow=true;
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+        } else {
+          // console.log("没有");
+        }
+      });
+    }, 100);
   },
   methods: {
+     resizeBig: function() {
+      $("#pmJjdivid p").each(function() {
+        if ($(this).children("img").length > 0) {
+          var imgWidth = $(this)
+            .children("img")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          $(this)
+            .children("img")
+            .css("width", imgWidth + 20);
+          $(this)
+            .children("img")
+            .css("max-width", imgWidth + 20);
+        } else {
+          // console.log("没有");
+        }
+      });
+      $("#pmJjdivid  img").each(function() {
+        var imgWidth = $(this).width();
+        $(this).css("width", imgWidth + 20);
+        $(this).css("max-width", imgWidth + 20);
+        // $(this).attr("style", "");
+      });
+      $("#pmJjdivid div").each(function() {
+        if ($(this).find("img").length > 0) {
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+          var imgWidth = $(this)
+            .children("img")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          $(this)
+            .children("img")
+            .css("width", imgWidth + 20);
+          $(this)
+            .children("img")
+            .css("max-width", imgWidth + 20);
+        } else {
+          // console.log("没有");
+        }
+      });
+    },
+    resizeSmall: function() {
+      $("#pmJjdivid p").each(function() {
+        if ($(this).children("img").length > 0) {
+          var imgWidth = $(this)
+            .children("img")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          if (imgWidth < 300) {
+            return;
+          }
+          $(this)
+            .children("img")
+            .css("width", imgWidth - 20);
+          $(this)
+            .children("img")
+            .css("max-width", imgWidth - 20);
+        } else {
+          // console.log("没有");
+        }
+      });
+      $("#pmJjdivid  img").each(function() {
+        var imgWidth = $(this).width();
+        if (imgWidth < 300) {
+          return;
+        }
+        $(this).css("width", imgWidth - 20);
+        $(this).css("max-width", imgWidth - 20);
+        // $(this).attr("style", "");
+      });
+      $("#pmJjdivid div").each(function() {
+        if ($(this).find("img").length > 0) {
+          // console.log("有");
+          $(this).css("overflow-x", "auto");
+          var imgWidth = $(this)
+            .children("img")
+            .width();
+          // console.log("imgWidth======="+imgWidth);
+          if (imgWidth < 300) {
+            return;
+          }
+          $(this)
+            .children("img")
+            .css("width", imgWidth - 20);
+          $(this)
+            .children("img")
+            .css("max-width", imgWidth - 20);
+        } else {
+          // console.log("没有");
+        }
+      });
+    },
     openFj: function(item) {
       console.log(item);
     },
