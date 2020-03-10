@@ -240,6 +240,7 @@ export default {
         this.$toast("请选择催办方式");
         return false;
       }
+      self.$store.commit("showLoadingBigText", "一键催办中");
       let params = {
         method: "approvalWarn",
         //corpId: corpId,
@@ -257,11 +258,13 @@ export default {
           .then(res => {
             console.log(params)
             console.log(res)
+            self.$store.commit("hideLoadingBig");
               if (res.success == "1") {
                   this.$toast("催办成功");
                   self.cb_div = false;
               }
           }).catch(err => {
+            self.$store.commit("hideLoadingBig");
               this.$toast(err);
           });
 

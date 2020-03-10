@@ -10,7 +10,7 @@
       >
         <div style="display: flex;font-size: 16px;margin-top: 0px;">
           <div
-            style="width: 80%; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
+            style="width: 95%; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
           >{{fk.feedback_content}}</div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">

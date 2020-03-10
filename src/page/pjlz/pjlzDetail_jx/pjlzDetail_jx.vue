@@ -312,6 +312,7 @@ export default {
         this.$toast("请填写拒绝理由");
         return false;
       }
+      self.$store.commit("showLoadingBigText", "审核提交中");
       var params = {
         method: "approvalDone",
         //dingUserId: "086404191926187734",
@@ -326,15 +327,17 @@ export default {
         .then(res => {
           console.log(params);
           console.log(res);
+           self.$store.commit("hideLoadingBig");
           if (res.success == "1") {
             self.jx_content = "";
             self.getdata();
             self.show = false;
-            this.$toast("提交成功");
+            this.$toast("审核成功");
             self.jx_div = false;
           }
         })
         .catch(err => {
+          self.$store.commit("hideLoadingBig");
           this.$toast(err);
         });
     }

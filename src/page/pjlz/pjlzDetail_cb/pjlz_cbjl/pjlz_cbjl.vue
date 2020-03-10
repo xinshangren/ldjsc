@@ -10,7 +10,7 @@
       >
         <div style="display: flex;font-size: 16px;margin-top: 0px;">
           <div
-            style="width: 80%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
+            style="width: 95%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
           >{{obj.warn_content}}</div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
@@ -19,9 +19,10 @@
             <div style="margin-left: 2px;">催办人:</div>
             <div style="margin-left: 2px;">{{obj.warn_person}}</div>
           </div>
-          <div style="display: flex;padding-left:10px;">
-            <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
-            <div style="margin-left: 2px;">催办时间:{{obj.warn_time}}</div>
+           <div style="display: flex;padding-left:10px;">
+            <img style="height: 18px;" src="../../../../assets/img/cuibanfangshi.png" />
+            <div style="margin-left: 2px;">催办方式:</div>
+            <div style="margin-left: 2px;">{{obj.warn_type}}</div>
           </div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
@@ -30,12 +31,13 @@
             <div style="margin-left: 2px;">被催办人:</div>
             <div style="margin-left: 2px;">{{obj.warn_obj_person}}</div>
           </div>
-          <div style="display: flex;padding-left:10px;">
-            <img style="height: 18px;" src="../../../../assets/img/cuibanfangshi.png" />
-            <div style="margin-left: 2px;">催办方式:</div>
-            <div style="margin-left: 2px;">{{obj.warn_type}}</div>
-          </div>
         </div>
+         <div style="display: flex;font-size: 14px;margin-top: 7px;color:#666666 ;">
+          <div style="display: flex;">
+            <img style="height: 18px;" src="../../../../assets/img/icon_time.png" />
+            <div style="margin-left: 2px;">催办时间:{{obj.warn_time}}</div>
+          </div>
+         </div>
         <van-divider />
       </div>
       <div
