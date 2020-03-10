@@ -261,7 +261,8 @@ export default {
       approval_status: "0", //批件状态
       list: [],
       Popshow: false,
-      indexPage:null,
+      indexPage: null,
+      allCount: 0,
       mescroll: null, // mescroll实例对象
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       nodataImg: require("../../../assets/img/nodata.png"),
@@ -316,12 +317,15 @@ export default {
   activated() {
     console.log("activated");
     var top = localStorage.getItem("newsListPjlzList");
-    this.pdSingleApp();
-    // setTimeout(() => {
-    //   // this.mescroll.triggerUpScroll();
-    //   console.log("滑动距离"+top);
-    //   $("#mescroll").scrollTop(top);
-    // }, 1000);
+    var pjlzId = localStorage.getItem("pjlzDealiId");
+    // this.pdSingleApp();
+    this.getPjlzDeali(pjlzId);
+    setTimeout(() => {
+      // this.mescroll.triggerUpScroll();
+      console.log("滑动距离" + top);
+      $("#mescroll").scrollTop(top);
+      $("#totalCountId").html(localStorage.getItem("pjlzListcount"));
+    }, 100);
   },
   mounted() {
     // this.flag=global_variable.roleJs;
@@ -363,6 +367,51 @@ export default {
     //         });
   },
   methods: {
+    //根据id获取批件详情，修改批件列表刷新某一个值
+    getPjlzDeali: function(approvalInfoId) {
+      var params = {
+        method: "getApprovalInfo",
+        dingUserId: global_variable.roleJs.dingUserId,
+        approvalInfoId: approvalInfoId //批件id
+      };
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(res);
+          if (res.success == 1) {
+            var data=res.data;
+             for (var i = 0; i < data.length; i++) {
+                var entityName = data[i].approval_manage_person;
+                if (entityName.indexOf(",") != -1) {
+                  var namelist = entityName.split(",");
+                  var nameStr2 = "";
+                  if (namelist.length > 0) {
+                    data[i].cbr1 = namelist[0];
+                    for (var j = 0; j < namelist.length; j++) {
+                      if (j > 0) {
+                        if (nameStr2 == "") {
+                          nameStr2 += namelist[j];
+                        } else {
+                          nameStr2 += "," + namelist[j];
+                        }
+                      }
+                    }
+
+                    data[i].cbr2 = nameStr2;
+                  }
+                } else {
+                  data[i].cbr1 = entityName;
+                  data[i].cbr2 = "";
+                }
+              }
+              console.log(data);
+              this.list = this.list.concat(data);
+          }
+        })
+        .catch(err => {
+          this.$toast(err);
+        });
+    },
     //判断是否是单独app
     pdSingleApp: function() {
       String.prototype.getValue = function(parm) {
@@ -418,7 +467,7 @@ export default {
           }
         }
       }
-       this.mescroll.resetUpScroll();
+      this.mescroll.resetUpScroll();
     },
     //添加标题右上方按钮
     showRightMenu1: function() {
@@ -447,6 +496,8 @@ export default {
     },
     //切换办理中和已办结，重置查询条件
     changetabState: function(state) {
+      $("#mescroll").scrollTop(0);
+      this.clearCreateData();
       console.log(state);
       if (state == "0") {
         this.oneStyle = { height: "60%" };
@@ -649,7 +700,6 @@ export default {
           context.approval_status = $(this).attr("id");
         }
       });
-
       context.mescroll.resetUpScroll();
       context.Popshow = false;
     },
@@ -685,7 +735,7 @@ export default {
     //项目列表
     upCallback: function(page, mescroll) {
       // console.log(page);
-      this.indexPage=page;
+      this.indexPage = page;
       var params = {
         method: "getApprovalInfoList",
         pageNo: page.num,
@@ -765,6 +815,7 @@ export default {
     },
     //一键催办跳转
     openYjcbFun: function(item, e) {
+      this.createTopAndIdAndCount(item);
       this.$router.push({
         path: "/pjlz/pjlzDetail_cb/pjlzDetail_cb",
         name: "pjlzDetail_cb",
@@ -776,6 +827,7 @@ export default {
     },
     //审核申请跳转
     openShsqFun: function(item, e) {
+      this.createTopAndIdAndCount(item);
       this.$router.push({
         path: "/pjlz/pjlzDetail_jx/pjlzDetail_jx",
         name: "pjlzDetail_jx",
@@ -787,6 +839,7 @@ export default {
     },
     //反馈跳转
     openFkFun: function(item, e) {
+      this.createTopAndIdAndCount(item);
       this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlzDetail_fk",
         name: "pjlzDetail_fk",
@@ -798,12 +851,7 @@ export default {
     },
     //列表大块的点击事件
     openIndexFun: function(item, e) {
-      // console.log($("#mescroll").offset().top);
-      // console.log($("#newsList").offset().top);
-      var top = $("#mescroll").scrollTop();
-       
-      console.log(top+"===="+this.mescroll.getScrollTop()+"===="+JSON.stringify(this.indexPage));
-      localStorage.setItem("newsListPjlzList", top);
+      this.createTopAndIdAndCount(item);
       this.$router.push({
         path: "/pjlz/pjlzDetail_all",
         name: "pjlzDetail_all",
@@ -813,6 +861,19 @@ export default {
       });
       localStorage.setItem("intent", this.status);
       e.stopPropagation();
+    },
+    //记录点击数据，用于返回列表滑动等
+    createTopAndIdAndCount: function(item) {
+      var top = $("#mescroll").scrollTop();
+      localStorage.setItem("newsListPjlzList", top);
+      localStorage.setItem("pjlzDealiId", item.id);
+      localStorage.setItem("pjlzListcount", $("#totalCountId").html());
+    },
+    //清除数据
+    clearCreateData:function(){
+      localStorage.setItem("newsListPjlzList", "");
+      localStorage.setItem("pjlzListcount", "");
+      localStorage.setItem("pjlzDealiId", "");
     }
   }
 };

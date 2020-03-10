@@ -275,7 +275,7 @@ export default {
       var self = this;
       console.log("录音识别开始");
       if (self.recordId == "1") {
-        self.$store.commit("showLoadingBig");
+        self.$store.commit('showLoadingBigText',"语音识别中...");
         dd.ready(function() {
           dd.device.audio.translateVoice({
             mediaId: mediaIds,

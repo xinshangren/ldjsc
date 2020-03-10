@@ -56,7 +56,14 @@
         <van-tab v-if="flag.role=='wdk'" title="数据统计"></van-tab>
       </van-tabs>
       <div id="plistSearchId" style="position:relative;" v-if="currentView!=1">
-        <van-search  v-model="seach_value" placeholder="请输入关键字查询" @search="onSearch" @input="oninput" style="" right-icon="null"/>
+        <van-search
+          v-model="seach_value"
+          placeholder="请输入关键字查询"
+          @search="onSearch"
+          @input="oninput"
+          style
+          right-icon="null"
+        />
         <img
           ref="PjlzshaixuanImgId"
           class="shaixuanImg1"
@@ -166,7 +173,7 @@ export default {
   },
   mounted() {
     localStorage.setItem("intent", "");
-    localStorage.setItem("newsListPjlzList","");
+    localStorage.setItem("newsListPjlzList", "");
     this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
     console.log(this.flag);
@@ -298,20 +305,21 @@ export default {
       console.log(item);
       this.nowItem = item;
       this.sqjxshow = true;
+      console.log(this.$store.getters.get_showText);
     },
     closePop: function() {
       this.sqjxshow = false;
     },
     onSearch(val) {
-        setTimeout(() => {
-          this.$refs.child1.resetUpScroll(val);
-        }, 100);
+      setTimeout(() => {
+        this.$refs.child1.resetUpScroll(val);
+      }, 100);
       // console.log(val);
     },
-    oninput(val){
-         setTimeout(() => {
-          this.$refs.child1.resetUpScroll(val);
-        }, 100);
+    oninput(val) {
+      setTimeout(() => {
+        this.$refs.child1.resetUpScroll(val);
+      }, 100);
     },
     selectTab: function(flag) {
       // console.log(flag);
@@ -402,28 +410,36 @@ export default {
         self.$toast("请输入结项说明");
         return;
       }
+      self.$store.commit("showLoadingBigText", "申请结项中");
       var params = {
         method: "approvalApply",
         dingUserId: global_variable.roleJs.dingUserId,
         approvalInfoId: self.nowItem.id,
         applyReason: self.sqjxmessage
       };
-      httpMethod.getApprovalInfo(params).then(res => {
-        console.log(JSON.stringify(res));
-        var msg = res.msg;
-        if (res.success == "1") {
-          var result = res.data;
-          if (result == "1") {
-            //成功
-            self.$toast("申请成功");
-            self.sqjxshow = false;
-            self.restPjListFun(); //刷新列表
-            self.sqjxmessage = "";
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          console.log(JSON.stringify(res));
+          var msg = res.msg;
+          self.$store.commit("hideLoadingBig");
+          if (res.success == "1") {
+            var result = res.data;
+            if (result == "1") {
+              //成功
+              self.$toast("申请成功");
+              self.sqjxshow = false;
+              self.restPjListFun(); //刷新列表
+              self.sqjxmessage = "";
+            }
+          } else {
+            self.$toast(msg);
           }
-        } else {
-          self.$toast(msg);
-        }
-      });
+        })
+        .catch(function(error) {
+          self.$store.commit("hideLoadingBig");
+          console.log(error);
+        });
     }
   }
 };
@@ -436,5 +452,4 @@ export default {
   width: 61px;
   margin-bottom: 2px;
 }
-
 </style>
