@@ -393,6 +393,7 @@ export default {
           attachIds = attachIds + e.attachid + ",";
         });
       }
+      self.$store.commit("showLoadingBigText", "反馈提交中");
       var params = {
         method: "approvalFeedback",
         //dingUserId: "086404191926187734",
@@ -433,6 +434,7 @@ export default {
           }
         })
         .catch(err => {
+          self.$store.commit("hideLoadingBig");
           this.$toast(err);
         });
     },
