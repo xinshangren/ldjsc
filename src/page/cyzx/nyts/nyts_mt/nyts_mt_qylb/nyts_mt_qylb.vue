@@ -165,7 +165,7 @@
       v-model="show"
       position="top"
       get-container="#count_id"
-      :style="{ height: '257px' }"
+      :style="{ height: '45%' }"
       @opened="openPop"
       style="overflow:hidden;background:rgb(243, 243, 243);"
     >
