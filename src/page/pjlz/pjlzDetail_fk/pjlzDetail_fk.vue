@@ -27,11 +27,21 @@
     >
       <div style="padding:10px 15px 10px 15px;position: relative;">
         <div style="display: flex;font-size: 15px;margin-top: 13px">工作反馈</div>
-        <textarea
+        <van-field
+            v-model="fk_content"
+            rows="4"
+            autosize
+            type="textarea"
+            maxlength="150"
+            placeholder="请输入反馈内容"
+            show-word-limit
+            style="font-size: 15px;margin-top: 10px;border: 1px solid #9f9f9f;border-radius: 10px;resize: none;width: 100%;"
+          />
+        <!-- <textarea
           v-model="fk_content"
           placeholder="请输入反馈内容"
           style="font-size: 15px;margin-top: 10px;border: 1px solid #9f9f9f;border-radius: 10px;resize: none;width: 100%;height: 70px;"
-        ></textarea>
+        ></textarea> -->
         <van-uploader
           v-model="file_list"
           multiple
