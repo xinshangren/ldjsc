@@ -258,6 +258,7 @@ export default {
           .then(res => {
             console.log(params)
             console.log(res)
+            self.$store.commit("hideLoadingBig");
               if (res.success == "1") {
                   this.$toast("催办成功");
                   self.cb_div = false;

@@ -327,6 +327,7 @@ export default {
         .then(res => {
           console.log(params);
           console.log(res);
+           self.$store.commit("hideLoadingBig");
           if (res.success == "1") {
             self.jx_content = "";
             self.getdata();
