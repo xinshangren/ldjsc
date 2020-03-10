@@ -333,7 +333,7 @@ export default {
     document.querySelector("body").setAttribute("style", "background:#f7f7f7");
   },
   computed: {
-    ...mapState(["LOADING", "BIGLOADING", "seach_value", "seach_placeholder"]),
+    ...mapState(["LOADING", "BIGLOADING", "seach_value", "seach_placeholder","showLoadingBigText"]),
     seach_value: {
       get() {
         return this.$store.state.seach_value;
