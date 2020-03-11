@@ -7,13 +7,13 @@
       <div
         style="position: relative; margin-top: 15px; border-radius:12px;border: 1px solid #EFEFEF; background: #ffffff;height: 220px;"
         v-for="item of list" :key="item.id" @click="goDetile(item)">
-        <div v-if='item.ifRead=="1"'
-          style="font-size: 12px;line-height: 25px;vertical-align: middle;text-align: center; color:#ffffff;border-radius:0 12px 0 12px;background-color: #e43b21;width: 60px;height: 25px;position: absolute;right: 0;top: 0;">
-          已读
-        </div>
         <div v-if='item.ifRead=="0"'
-          style="font-size: 12px;line-height: 25px;vertical-align: middle; text-align: center; color:#ffffff;border-radius:0 12px 0 12px;background-color: #a7a7a7;width: 60px;height: 25px;position: absolute;right: 0;top: 0;">
+          style="font-size: 12px;line-height: 25px;vertical-align: middle;text-align: center; color:#ffffff;border-radius:0 12px 0 12px;background-color: #e43b21;width: 60px;height: 25px;position: absolute;right: 0;top: 0;">
           未读
+        </div>
+        <div v-if='item.ifRead=="1"'
+          style="font-size: 12px;line-height: 25px;vertical-align: middle; text-align: center; color:#ffffff;border-radius:0 12px 0 12px;background-color: #a7a7a7;width: 60px;height: 25px;position: absolute;right: 0;top: 0;">
+          已读
         </div>
         <img :src="item.imgUrl" style="width: 100%;height:190px;border-radius:12px 12px 0 0;" />
         <div style="display: flex;">
