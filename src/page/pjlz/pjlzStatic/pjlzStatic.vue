@@ -247,13 +247,14 @@ export default {
         setTimeout(() => {
           console.log(height);
           $("#contentStaticId").css("height", height - 44 + "px");
+          $("#contentStaticId").css("margin-top", "30px");
         }, 100);
       } else {
         var height = document.body.clientHeight;
         setTimeout(() => {
           console.log(height);
           $("#contentStaticId").css("height", height - 44 + "px");
-          $("#contentStaticId").css("margin-top", "48px");
+          $("#contentStaticId").css("margin-top", "30px");
         }, 100);
       }
     },

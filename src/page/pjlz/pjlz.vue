@@ -38,7 +38,9 @@
       </div>
     </div>
 
-    <div v-show="flag.role!='ld'">
+    <div v-show="flag.role!='ld'"
+     style="z-index: 2000;width: 100%;background: #f1f1f1;position:fixed;"
+    >
       <van-tabs
         id="tabs1"
         @touchmove.prevent
