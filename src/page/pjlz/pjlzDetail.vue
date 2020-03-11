@@ -19,43 +19,48 @@
       </div>
       <div style="color: #666666;font-size: 16px;width: 94%;">
         <div style="display: flex;margin-top: 10px;">
-          <div style="width: 30%;text-align: right;">批示件类型：</div>
-          <div style="width:70%">{{pj_detail.approval_type}}</div>
+          <div style="width: 30%;text-align: left;">文号：</div>
+          <div style="width:70%">{{pj_detail.approval_number}}</div>
         </div>
-        <div style="display: flex;margin-top: 15px;">
-          <div style="width: 30%;text-align: right;">承办人：</div>
-          <div style="width:70%">
-            <div style="height: 25px;">{{pj_detail.approval_main_person}}</div>
-            <div v-if="pj_detail.approval_manage_person.length>0" style="min-height:25px;">{{pj_detail.approval_manage_person}}</div>
-          </div>
-        </div>
-        <div style="display: flex;margin-top: 15px;">
-          <div style="width: 30%;text-align: right;">文件内容：</div>
+        <div style="display: flex;margin-top: 15px;position: relative;">
+          <div style="width: 30%;text-align: left;">文件内容：</div>
+          <span style="position: absolute;
+          top: 27px;
+          font-size: 14px;">（点击内容放大）</span>
           <div style="width: 70%;height: 100px;overflow-y:scroll;">
             <div
               style="font-size: 16px;
                         line-height: 23px;
-                        margin: 5px;"
+                       "
               v-html="pj_detail.approval_content"
               @click="pjDetail"
             ></div>
           </div>
         </div>
         <div style="display: flex;margin-top: 15px;">
-          <div style="width: 30%;text-align: right;">文号：</div>
-          <div style="width:70%">{{pj_detail.approval_number}}</div>
+          <div style="width: 30%;text-align: left;">批示件类型：</div>
+          <div style="width:70%">{{pj_detail.approval_type}}</div>
         </div>
         <div style="display: flex;margin-top: 15px;">
-          <div style="width: 30%;text-align: right;">市长批示：</div>
+          <div style="width: 30%;text-align: left;">承办人：</div>
+          <div style="width:70%">
+            <div style="height: 25px;">{{pj_detail.approval_main_person}}</div>
+            <div v-if="pj_detail.approval_manage_person" style="min-height:25px;">{{pj_detail.approval_manage_person}}</div>
+          </div>
+        </div>
+        
+        
+        <div style="display: flex;margin-top: 15px;padding-bottom: 15px;">
+          <div style="width: 30%;text-align: left;">市长批示：</div>
           <div style="width:70%">{{pj_detail.approval_instruct}}</div>
         </div>
-        <div style="display: flex;margin-top: 15px;padding-bottom: 15px;">
-          <div style="width: 30%;text-align: right;">附件：</div>
+        <div style="display: flex;padding-bottom: 15px;" v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0">
+          <div style="width: 30%;text-align: left;">附件：</div>
           <div style="width: 70%;color:#2599e6;font-size: 15px;">
             <div
               v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0"
               v-for="attach in pj_detail.attachlist"
-              style="display: flex;margin-left: 10px; margin-top: 5px;"
+              style="display: flex; margin-top: 5px;"
             >
               <div
                 @click="openFj(attach)"
@@ -80,27 +85,11 @@
       </div>
     </div>
     <div id="jl_content" style="margin:10px 0px 10px;background:#ffffff;">
-      <div id="all_jl" style="height:350px;padding-top: 15px;">
+      <div id="all_jl" style="height:246px;padding-top: 15px;">
         <div id="fkjl" style="padding:0px 15px 0px 15px;position: relative;">
           <div style="display: flex;font-size: 16px;">
             <div style="width: 80%;display: flex;">
               <div>反馈记录({{pj_detail.approval_feedback_time == null?0:pj_detail.approval_feedback_time}})</div>
-            </div>
-            <div
-              v-show="fkjl_null"
-              @click="gofkjl_list"
-              style="width: 30%;display: flex;color: #2599e6;text-align: right;"
-            >
-              <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
-              <div>更多记录</div>
-            </div>
-          </div>
-          <div style="display: flex;font-size: 15px;margin-top: 13px;">
-            <div
-              style="height:20px; width: 70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
-            >
-              <!-- {{pj_detail.approval_feedback.feedback_content}} -->
-              <!-- {{last_feedback.feedback_content}} -->
             </div>
           </div>
           <div
@@ -124,8 +113,8 @@
           </div>
           <img
             v-show="fkjl_null"
-            @click="gofkjl_list_detail(last_feedback.feedback_id)"
-            style="right: 15px; top: 43px;; width: 30px;position: absolute;"
+            @click="gofkjl_list"
+            style="    right: 13px; top: 20px; width: 19px;position: absolute;"
             src="../../assets/img/icon_more.png"
           />
           <van-divider />
@@ -135,23 +124,22 @@
             <div style="width: 80%;display: flex;">
               <div>催办记录({{pj_detail.approval_warn_time== null?0:pj_detail.approval_warn_time}})</div>
             </div>
-            <div
+            <!-- <div
               v-show="cbjl_null"
               @click="gocbjl_list"
               style="width: 30%;display: flex;color: #2599e6;text-align: right;"
             >
               <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
               <div>更多记录</div>
-            </div>
+            </div> -->
           </div>
-          <div style="display: flex;font-size: 15px;margin-top: 13px;">
+          <!-- <div style="display: flex;font-size: 15px;margin-top: 13px;">
             <div
               style="height: 20px;width: 70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
             >
-              <!-- {{last_warn.warn_content}} -->
+              {{last_warn.warn_content}}
             </div>
-            <!-- <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_way2.png" /> -->
-          </div>
+          </div> -->
           <div
             v-if="cbjl_null"
             style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;"
@@ -171,6 +159,12 @@
               <div style="margin-left: 2px;">暂无催办记录</div>
             </div>
           </div>
+          <img
+          v-show="cbjl_null"
+          @click="gocbjl_list"
+          style="    right: 13px; top: 20px; width: 19px;position: absolute;"
+          src="../../assets/img/icon_more.png"
+        />
           <van-divider />
         </div>
         <div id="jxjl" style="padding:0px 15px;position: relative;">
@@ -178,24 +172,24 @@
             <div style="width: 80%;display: flex;">
               <div>结项记录({{pj_detail.approval_done_time == null?0:pj_detail.approval_done_time}})</div>
             </div>
-            <div
+            <!-- <div
               v-show="jxjl_null"
               @click="gojxjl_list"
               style="width: 30%;display: flex;color: #2599e6;text-align: right;"
             >
               <img style="height: 22px;" src="../../assets/img/icon_record_more.png" />
               <div>更多记录</div>
-            </div>
+            </div> -->
           </div>
-          <div style="display: flex;font-size: 15px;margin-top: 13px;">
+          <!-- <div style="display: flex;font-size: 15px;margin-top: 13px;">
             <div
               style="height: 20px;width:70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
             >
-              <!-- {{last_done.done_content}} -->
+               {{last_done.done_content}}
             </div>
-            <!-- <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_edit.png" />
-            <div style="color:#2599e6 ;margin-left: 3px;">编辑</div>-->
-          </div>
+           <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_edit.png" />
+            <div style="color:#2599e6 ;margin-left: 3px;">编辑</div>
+          </div> -->
           <div
             v-if="jxjl_null"
             style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;"
@@ -218,6 +212,12 @@
               <div style="margin-left: 2px;">暂无申请结项记录</div>
             </div>
           </div>
+          <img
+          v-show="jxjl_null"
+          @click="gojxjl_list"
+          style="    right: 13px; top: 20px; width: 19px;position: absolute;"
+          src="../../assets/img/icon_more.png"
+        />
           <van-divider />
         </div>
       </div>

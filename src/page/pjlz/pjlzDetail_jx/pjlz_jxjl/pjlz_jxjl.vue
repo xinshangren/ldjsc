@@ -8,7 +8,7 @@
         v-for="obj in jxjl_list"
       style="padding:0px 15px 0px 15px;position: relative;">
         <div style="display: flex;font-size: 16px;margin-top: 0px;">
-          <div style="width: 95%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">{{obj.apply_content}}</div>
+          <div style="width: 95%; overflow: hidden;word-break:break-all;">{{obj.apply_content}}</div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
           <div style="display: flex;">

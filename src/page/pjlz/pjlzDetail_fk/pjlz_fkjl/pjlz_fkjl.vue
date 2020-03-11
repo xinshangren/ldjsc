@@ -10,7 +10,7 @@
       >
         <div style="display: flex;font-size: 16px;margin-top: 0px;">
           <div
-            style="width: 95%; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
+            style="width: 95%;word-break:break-all; overflow: hidden;"
           >{{fk.feedback_content}}</div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
@@ -24,11 +24,14 @@
             <div style="margin-left: 2px;">反馈时间:{{fk.feedback_time}}</div>
           </div>
         </div>
-        <img
+         <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;" v-if="fk.attachlist != null && fk.attachlist.length>0">
+
+         </div>
+        <!-- <img
           style="right: 8px; top: 10px;width: 30px;position: absolute;"
           src="../../../../assets/img/icon_more.png"
           @click="goDetail(fk.id)"
-        />
+        /> -->
         <van-divider />
       </div>
       <div
