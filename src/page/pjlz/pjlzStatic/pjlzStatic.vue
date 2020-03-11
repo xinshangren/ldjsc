@@ -254,7 +254,7 @@ export default {
         setTimeout(() => {
           console.log(height);
           $("#contentStaticId").css("height", height - 44 + "px");
-          $("#contentStaticId").css("margin-top", "30px");
+          $("#contentStaticId").css("margin-top", "40px");
         }, 100);
       }
     },
