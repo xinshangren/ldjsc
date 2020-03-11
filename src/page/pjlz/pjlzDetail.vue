@@ -58,8 +58,31 @@
           <div style="width: 30%;text-align: left;">附件：</div>
           <div style="width: 70%;color:#2599e6;font-size: 15px;">
             <div
-              v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0"
-              v-for="attach in pj_detail.attachlist"
+              v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0 && index == 0"
+              v-for="(index,attach) in pj_detail.attachlist"
+              style="display: flex; "
+            >
+              <div
+                @click="openFj(attach)"
+                style="width: 70%;word-break:break-all"
+              >{{attach.attach_name}}</div>
+              <a
+                :href="attach.attach_download_url"
+                download
+                style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;"
+              >
+                <img
+                  style="height: 16px;margin: auto;margin-left: 9px;"
+                  src="../../assets/img/icon_download_new.png"
+                />
+                <div
+                  style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;"
+                >下载</div>
+              </a>
+            </div>
+            <div
+              v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0 && index > 0"
+              v-for="(index,attach) in pj_detail.attachlist"
               style="display: flex; margin-top: 5px;"
             >
               <div
@@ -317,21 +340,23 @@ export default {
     inint: function() {
       var self = this;
       //去除 相关人中牵头人
-      var cbrStr = self.pj_detail.approval_manage_person;
-      var cbr1Str = "";
-      if (cbrStr.indexOf(",") != -1) {
-        var namelist = cbrStr.split(",");
-        for (var j = 0; j < namelist.length; j++) {
-          if (j > 0) {
-            if (cbr1Str == "") {
-              cbr1Str += namelist[j];
-            } else {
-              cbr1Str += "," + namelist[j];
+      if(self.pj_detail != ""){
+        var cbrStr = self.pj_detail.approval_manage_person;
+        var cbr1Str = "";
+        if (cbrStr != null && cbrStr.indexOf(",") != -1) {
+          var namelist = cbrStr.split(",");
+          for (var j = 0; j < namelist.length; j++) {
+            if (j > 0) {
+              if (cbr1Str == "") {
+                cbr1Str += namelist[j];
+              } else {
+                cbr1Str += "," + namelist[j];
+              }
             }
           }
         }
+        self.pj_detail.approval_manage_person = cbr1Str;  
       }
-      self.pj_detail.approval_manage_person = cbr1Str;  
 
 
       if (

@@ -9,9 +9,7 @@
         v-for="fk in fkjl_list"
       >
         <div style="display: flex;font-size: 16px;margin-top: 0px;">
-          <div
-            style="width: 95%;word-break:break-all; overflow: hidden;"
-          >{{fk.feedback_content}}</div>
+          <div style="width: 95%;word-break:break-all; overflow: hidden;">{{fk.feedback_content}}</div>
         </div>
         <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
           <div style="display: flex;">
@@ -24,14 +22,36 @@
             <div style="margin-left: 2px;">反馈时间:{{fk.feedback_time}}</div>
           </div>
         </div>
-         <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;" v-if="fk.attachlist != null && fk.attachlist.length>0">
-
-         </div>
-        <!-- <img
+        <!-- <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+          <div style="display: flex;width: 100%;">
+            <img style="height: 18px;" src="../../../../assets/img/icon_people.png" />
+            <div style="margin-left: 2px;">附件:</div>
+            <div style="margin-left: 2px;display:flex;width:76%">
+              <div
+                style="display: flex;width:100%;"
+              >
+                <div @click="openFj(file)" style="width: 80%;word-break:break-all">d.png</div>
+                <a
+                  download
+                  style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;"
+                >
+                  <img
+                    style="height: 16px;margin: auto;margin-left: 6px;"
+                    src="../../../../assets/img/icon_download_new.png"
+                  />
+                  <div
+                    style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;"
+                  >下载</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <img
           style="right: 8px; top: 10px;width: 30px;position: absolute;"
           src="../../../../assets/img/icon_more.png"
           @click="goDetail(fk.id)"
-        /> -->
+        />
         <van-divider />
       </div>
       <div
@@ -73,8 +93,9 @@ export default {
     this.getdata();
     this.pdSingleApp();
   },
-  activated(){
-    this.pj_id = this.$route.params.id!=null?this.$route.params.id:this.pj_id;
+  activated() {
+    this.pj_id =
+      this.$route.params.id != null ? this.$route.params.id : this.pj_id;
     this.getdata();
     this.pdSingleApp();
   },
@@ -83,8 +104,8 @@ export default {
       this.$router.push({
         path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail",
         name: "pjlz_fkjl_detail",
-        params:{
-          id:id
+        params: {
+          id: id
         }
       });
     },
