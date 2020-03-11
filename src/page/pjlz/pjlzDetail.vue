@@ -231,7 +231,7 @@
     <van-popup v-model="pj_content" round  closeable :style="{ height: '80%',width:'83%'}">
      <div style="height: 98%;" >
       <div style="width:88px;font-size: 19px;margin: auto;margin-top: 11px;">文件内容</div>
-      <div v-html="pj_detail.approval_content" style="overflow-y: auto;margin:12px 10px 0px 10px;height:90%">
+      <div  v-html="pj_detail.approval_content" style="overflow-y: auto;margin:12px 10px 0px 10px;height:90%;font-size:16px">
         </div>
     </div>
 
