@@ -34,8 +34,10 @@ export default {
     $("#imgSplashId").css("height", that.screenHeight + "px");
     that.getCuruserid();
     // console.log("111");
-    this.$parent.isSingleApp = false;
-    this.$router.push("/main");
+    if (global_variable.isDebugging) {
+      this.$parent.isSingleApp = false;
+      this.$router.push("/main");
+    }
   },
   methods: {
     getCuruserid: function() {

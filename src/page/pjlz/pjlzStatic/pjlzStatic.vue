@@ -196,6 +196,25 @@ export default {
       $(this).addClass("pjlzStaticTimeSelect");
       console.log($(this).index());
       self.flagindex = $(this).index();
+      switch (self.flagindex) {
+        case 0: //年
+          console.log(new Date().getFullYear());
+          self.currentYear1 = self.timeFormatYear(new Date());
+          break;
+        case 1: //月
+          self.currentYear1 = self.timeFormatMonth(new Date());
+          break;
+        case 2: //周
+          self.currentYear1 = self.timeFormatDay(new Date());
+        case 3: //日
+          self.currentYear1 = self.timeFormatDay(new Date());
+          break;
+        default:
+          break;
+      }
+      self.statisticJobDone(); //统计工作完成情况
+      self.statisticJobCreate(); //按照年份获取每月工作安排情况的统计数据
+      self.statisticJobUndone(); //按照年份获取每月延期未完成工作情况的统计数据
     });
 
     self.statisticJobDone(); //统计工作完成情况
@@ -234,6 +253,7 @@ export default {
         setTimeout(() => {
           console.log(height);
           $("#contentStaticId").css("height", height - 44 + "px");
+          $("#contentStaticId").css("margin-top", "48px");
         }, 100);
       }
     },
