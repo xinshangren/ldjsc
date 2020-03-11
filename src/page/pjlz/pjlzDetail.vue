@@ -26,7 +26,7 @@
           <div style="width: 30%;text-align: right;">承办人：</div>
           <div style="width:70%">
             <div style="height: 25px;">{{pj_detail.approval_main_person}}</div>
-            <div style="min-height: 25px;">{{pj_detail.approval_manage_person}}</div>
+            <div v-if="pj_detail.approval_manage_person.length>0" style="min-height:25px;">{{pj_detail.approval_manage_person}}</div>
           </div>
         </div>
         <div style="display: flex;margin-top: 15px;">
@@ -57,7 +57,10 @@
               v-for="attach in pj_detail.attachlist"
               style="display: flex;margin-left: 10px; margin-top: 5px;"
             >
-              <div @click="openFj(attach)" style="width: 70%;word-break:break-all">{{attach.attach_name}}</div>
+              <div
+                @click="openFj(attach)"
+                style="width: 70%;word-break:break-all"
+              >{{attach.attach_name}}</div>
               <a
                 :href="attach.attach_download_url"
                 download
@@ -97,7 +100,7 @@
               style="height:20px; width: 70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
             >
               <!-- {{pj_detail.approval_feedback.feedback_content}} -->
-              {{last_feedback.feedback_content}}
+              <!-- {{last_feedback.feedback_content}} -->
             </div>
           </div>
           <div
@@ -144,7 +147,9 @@
           <div style="display: flex;font-size: 15px;margin-top: 13px;">
             <div
               style="height: 20px;width: 70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
-            >{{last_warn.warn_content}}</div>
+            >
+              <!-- {{last_warn.warn_content}} -->
+            </div>
             <!-- <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_way2.png" /> -->
           </div>
           <div
@@ -185,7 +190,9 @@
           <div style="display: flex;font-size: 15px;margin-top: 13px;">
             <div
               style="height: 20px;width:70%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;"
-            >{{last_done.done_content}}</div>
+            >
+              <!-- {{last_done.done_content}} -->
+            </div>
             <!-- <img style="height: 20px;margin-left: 5px;" src="../../assets/img/icon_edit.png" />
             <div style="color:#2599e6 ;margin-left: 3px;">编辑</div>-->
           </div>
@@ -228,14 +235,15 @@
         </div>
       </div>
     </div>
-    <van-popup v-model="pj_content" round  closeable :style="{ height: '80%',width:'83%'}">
-     <div style="height: 98%;" >
-      <div style="width:88px;font-size: 19px;margin: auto;margin-top: 11px;">文件内容</div>
-      <div  v-html="pj_detail.approval_content" style="overflow-y: auto;margin:12px 10px 0px 10px;height:90%;font-size:16px">
-        </div>
-    </div>
-
-    </van-popup> 
+    <van-popup v-model="pj_content" round closeable :style="{ height: '80%',width:'83%'}">
+      <div style="height: 98%;">
+        <div style="width:88px;font-size: 19px;margin: auto;margin-top: 11px;">文件内容</div>
+        <div
+          v-html="pj_detail.approval_content"
+          style="overflow-y: auto;margin:12px 10px 0px 10px;height:90%;font-size:16px"
+        ></div>
+      </div>
+    </van-popup>
   </div>
 </template>
 <script>
@@ -268,7 +276,7 @@ export default {
       fkjl_null: true,
       cbjl_null: true,
       jxjl_null: true,
-      pj_content:false,
+      pj_content: false
     };
   },
   mounted() {
@@ -282,7 +290,7 @@ export default {
     pj_detail: "inint"
   },
   methods: {
-    pjDetail:function(){
+    pjDetail: function() {
       var self = this;
       self.pj_content = true;
     },
@@ -308,6 +316,24 @@ export default {
     },
     inint: function() {
       var self = this;
+      //去除 相关人中牵头人
+      var cbrStr = self.pj_detail.approval_manage_person;
+      var cbr1Str = "";
+      if (cbrStr.indexOf(",") != -1) {
+        var namelist = cbrStr.split(",");
+        for (var j = 0; j < namelist.length; j++) {
+          if (j > 0) {
+            if (cbr1Str == "") {
+              cbr1Str += namelist[j];
+            } else {
+              cbr1Str += "," + namelist[j];
+            }
+          }
+        }
+      }
+      self.pj_detail.approval_manage_person = cbr1Str;  
+
+
       if (
         self.pj_detail.approval_feedback != null &&
         Object.keys(self.pj_detail.approval_feedback).length > 0
