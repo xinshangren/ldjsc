@@ -61,12 +61,12 @@
             <div style="display:flex;">
               <img
                 v-if="item.approval_warn_flag==0"
-                style="height:30px;"
+                style="height:30px;margin-top:-4px;"
                 src="../../../assets/img/no_overdue.png"
               />
               <img
                 v-if="item.approval_warn_flag==1"
-                style="height:30px;"
+                style="height:30px;margin-top:-4px;"
                 src="../../../assets/img/noverdue.png"
               />
               <div class="van-ellipsis-2 pjlzListTitle">{{item.approval_name}}</div>

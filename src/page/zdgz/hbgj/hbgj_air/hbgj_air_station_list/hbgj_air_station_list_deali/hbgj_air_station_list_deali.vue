@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:54px;overflow:hidden;">
+  <div style="overflow:hidden;">
     <div style="position:relative;height:320px;">
       <img class="index_bg" src="../../../../../../assets/img/air_detail_bg.png" />
       <div
