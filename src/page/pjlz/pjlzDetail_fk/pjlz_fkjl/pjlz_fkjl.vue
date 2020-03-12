@@ -22,36 +22,65 @@
             <div style="margin-left: 2px;">反馈时间:{{fk.feedback_time}}</div>
           </div>
         </div>
-        <!-- <div style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;">
+        <div
+          style="display: flex;font-size: 14px;margin-top: 13px;color:#666666 ;"
+          v-if="fk.attachlist.length > 0"
+        >
           <div style="display: flex;width: 100%;">
-            <img style="height: 18px;" src="../../../../assets/img/icon_people.png" />
+            <img style="height: 18px;" src="../../../../assets/img/fj.png" />
             <div style="margin-left: 2px;">附件:</div>
-            <div style="margin-left: 2px;display:flex;width:76%">
+            <div style="margin-left: 2px;width:78%">
               <div
-                style="display: flex;width:100%;"
+                style="display: flex;width:100%;color:#2599e6;"
+                v-for="(file,index) in fk.attachlist"
+                :key="index"
               >
-                <div @click="openFj(file)" style="width: 80%;word-break:break-all">d.png</div>
-                <a
-                  download
-                  style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;"
-                >
-                  <img
-                    style="height: 16px;margin: auto;margin-left: 6px;"
-                    src="../../../../assets/img/icon_download_new.png"
-                  />
+                <div style="display: flex;width:100%;" v-if="index == 0">
                   <div
-                    style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;"
-                  >下载</div>
-                </a>
+                    @click="openFj(file)"
+                    style="width: 80%;word-break:break-all"
+                  >{{file.attach_name}}</div>
+                  <a
+                    download
+                    style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;"
+                  >
+                    <img
+                      style="height: 16px;margin: auto;margin-left: 6px;"
+                      src="../../../../assets/img/icon_download_new.png"
+                    />
+                    <div
+                      style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;"
+                    >下载</div>
+                  </a>
+                </div>
+                <div style="display: flex;width:100%;margin-top:7px;" v-if="index > 0">
+                  <div
+                    @click="openFj(file)"
+                    style="width: 80%;word-break:break-all"
+                  >{{file.attach_name}}</div>
+                  <a
+                    :href="file.attach_download_url" 
+                    download
+                    style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;"
+                  >
+                    <img
+                      style="height: 16px;margin: auto;margin-left: 6px;"
+                      src="../../../../assets/img/icon_download_new.png"
+                    />
+                    <div
+                      style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;"
+                    >下载</div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div> -->
-        <img
+        </div>
+        <!-- <img
           style="right: 8px; top: 10px;width: 30px;position: absolute;"
           src="../../../../assets/img/icon_more.png"
           @click="goDetail(fk.id)"
-        />
+        />-->
         <van-divider />
       </div>
       <div
@@ -156,6 +185,41 @@ export default {
         $("#content").css("margin", "0px 0px 10px");
         // $("#pjlzDeali_fk_top_id").css("margin-top","0px");
         this.$route.meta.title = "领导批示办理";
+      }
+    },
+    fj_download: function(url) {
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.style.display = "none";
+      if (navigator.userAgent.match(/iPad|iPhone/i)) {
+        iframe.style.width = 100 + "%";
+        iframe.style.overflowX = "hidden";
+        iframe.style.overflowY = "scroll";
+        iframe.style.webkitOverflowScrolling = "touch";
+        iframe.setAttribute("scrolling", "no");
+      }
+      document.body.appendChild(iframe);
+    },
+    openFj: function(item) {
+      console.log(item);
+      if (item.attach_type == "office") {
+        this.$router.push({
+          path: "/pjlz/pjlz_fj",
+          name: "pjlz_fj",
+          params: {
+            entity: item
+          }
+        });
+      } else if (item.attach_type == "image") {
+        this.$router.push({
+          path: "/pjlz/pjlz_fj_image",
+          name: "pjlz_fj_image",
+          params: {
+            entity: item.attach_view_url
+          }
+        });
+      } else {
+        this.$toast("文件暂不支持预览");
       }
     }
   }
