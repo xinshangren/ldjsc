@@ -21,7 +21,7 @@ Vue.config.productionTip = false
 Vue.use(Vant);
 var instance = axios.create({
   baseURL:'',
-  timeout:10000,
+  timeout:30000,
   headers:{"Content-Type":"multipart/form-data"}
 });
  

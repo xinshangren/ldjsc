@@ -54,13 +54,17 @@
             <img style="height: 18px;" src="../../../assets/img/icon_accessory.png" />
             <div style="margin-left: 5px;">添加附件</div>
           </div>
+          <!-- <div class="progress-wrapper">
+            <div class="progress-progress" :style="uploadStyle"></div>
+            <div class="progress-rate">{{(uploadRate*100).toFixed(2)}}%</div>
+          </div>-->
         </van-uploader>
         <div
           v-if="upload_file_list.length>0"
           v-for="(item,index) of upload_file_list"
-          style="display: flex;font-size: 14px;color:#2599e6 ;"
+          style="display: flex;font-size: 14px;color:#666666 ;"
         >
-          <div @click="preview_adjunct(item)">{{item.name}}</div>
+          <div >{{item.name}}</div>
           <img
             @click="delete_adjunct(index,item.attachid)"
             style="height: 20px;margin-left: 5px;"
@@ -80,6 +84,12 @@
         </div>
       </div>
     </div>
+    <!-- <van-overlay :show="upl_show">
+      <div class="wrapper" @click.stop style="position: relative;">
+        <div style="color:#1989fa;font-size:19px;margin:auto">{{uploadStyle.width}}</div>
+        <van-loading color="#1989fa" style="position:absolute"size="65px" />
+      </div>
+    </van-overlay> -->
   </div>
 </template>
 
@@ -94,6 +104,9 @@ import { ImagePreview } from "vant";
 import { httpMethod } from "../../../api/getData.js";
 import pjlzDetailVue from "@/page/pjlz/pjlzDetail.vue";
 import { Field } from "vant";
+import { Overlay } from "vant";
+
+Vue.use(Overlay);
 Vue.use(Field);
 Vue.use(ImagePreview);
 Vue.use(Uploader);
@@ -119,7 +132,12 @@ export default {
       pj_detail: "",
       fk_content: "",
       upload_file_list: [],
-      fk_div: true
+      fk_div: true,
+      uploadRate: 0,
+      uploadStyle: {
+        width: "0%"
+      },
+      upl_show: false
     };
   },
   mounted() {
@@ -292,6 +310,7 @@ export default {
     //附件读取后操作
     afterRead: function() {
       var self = this;
+      //显示遮罩层 
       var file = this.file_list.slice(-1)[0];
       //单个附件上传
       var approvalInfoId = this.pj_detail.id;
@@ -302,14 +321,37 @@ export default {
       formData.append("attach", file.file);
       console.log(formData.get("attach"));
       console.log(formData.get("method"));
+      var config = {
+        headers: { "Content-Type": "multipart/form-data" },
+        onUploadProgress: function(e) {
+          console.log("进度：");
+          console.log(e);
+          //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+          //如果lengthComputable为false，就获取不到e.total和e.loaded
+          if (e.lengthComputable) {
+            var rate = (self.uploadRate = e.loaded / e.total); //已上传的比例
+            if (rate < 1) {
+              //这里的进度只能表明文件已经上传到后台，但是后台有没有处理完还不知道
+              //因此不能直接显示为100%，不然用户会误以为已经上传完毕，关掉浏览器的话就可能导致上传失败
+              //等响应回来时，再将进度设为100%
+              self.uploadRate = rate;
+              self.uploadStyle.width = (rate * 100).toFixed(0) + "%";
+              self.$store.commit("showLoadingBigText", self.uploadStyle.width);
+            }
+          }
+        }
+      };
       this.instance
         .post(
           httpMethod.returnBaseUrlFun() +
             "dingTalkController.action?fileUpload",
-          formData
+          formData,
+          config
         )
         .then(res => {
           console.log(res);
+          //遮罩层 
+          self.$store.commit("hideLoadingBig");
           if (res.data.success == "1") {
             var file_upl = res.data.data;
             file_upl.name = file.file.name;
@@ -450,7 +492,10 @@ export default {
         rs = rs + str.substr(i, 1).replace(pattern, "");
       }
       //去掉 emoji
-      var rs = rs.replace(/[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig, "");
+      var rs = rs.replace(
+        /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/gi,
+        ""
+      );
       this.fk_content = rs;
       return str;
     }
