@@ -490,6 +490,11 @@ export default {
     },
     //判断是否是单独app
     pdSingleApp: function() {
+      localStorage.setItem("intent", "");
+    localStorage.setItem("newsListPjlzList", "");
+      localStorage.setItem("newsListPjlzListSearch", "");
+      localStorage.setItem("pjlzListcountSearch", "");
+      localStorage.setItem("pjlzSearchDealiId", "");
       String.prototype.getValue = function(parm) {
         var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
         var r = this.substr(this.indexOf("?") + 1).match(reg);
