@@ -29,7 +29,7 @@
           <div style="display: flex;width: 100%;">
             <img style="height: 18px;" src="../../../../assets/img/fj.png" />
             <div style="margin-left: 2px;">附件:</div>
-            <div style="margin-left: 2px;width:76%">
+            <div style="margin-left: 2px;width:78%">
               <div
                 style="display: flex;width:100%;color:#2599e6;"
                 v-for="(file,index) in fk.attachlist"
