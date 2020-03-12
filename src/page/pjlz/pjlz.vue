@@ -83,7 +83,7 @@
       style="position:relative;"
       v-if="(flag.role=='ld'||flag.role=='wdk')&&currentView===1"
     ></child2>
-    <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
+    <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="2001">
       <div class="wrapper">
         <div id="popSqjxId" class="block" @click.stop>
           <img @click="sqjxshow=false" class="pjlzSqjxClose" src="../../assets/img/pop_close.png" />

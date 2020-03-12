@@ -38,7 +38,7 @@ export default {
   mounted() {
     var self = this;
     setTimeout(function() {
-      $("#overlay").css("z-index", "1000");
+      $("#overlay").css("z-index", "2003");
       self.showText = self.$store.getters.get_showText;
       console.log(self.$store.getters.get_showText);
     }, 300);

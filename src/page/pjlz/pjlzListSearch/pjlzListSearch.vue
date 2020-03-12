@@ -45,21 +45,32 @@
             <div style="display:flex;">
               <img
                 v-if="item.approval_warn_flag==0"
-                style="height:30px;"
+                style="height:30px;margin-top:-4px;"
                 src="../../../assets/img/no_overdue.png"
               />
               <img
                 v-if="item.approval_warn_flag==1"
-                style="height:30px;"
+                style="height:30px;margin-top:-4px;"
                 src="../../../assets/img/noverdue.png"
               />
-              <div class="van-ellipsis pjlzListTitle">{{item.approval_name}}</div>
+              <div class="van-ellipsis-2 pjlzListTitle">{{item.approval_name}}</div>
               <!-- <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
               <div v-if="item.approval_status==1" class="pjlzListyfk">已反馈</div>
               <div v-if="item.approval_status==2" class="pjlzListwfk">未反馈</div>
               <div v-if="item.approval_status==3" class="pjlzListsqjx">申请结项</div>
               <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>-->
               <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
+            </div>
+              <div style="display:flex;">
+              <div class="pjlzListSmallDiv" style="display:flex;">
+                <img class="pjlzListSmallIcon" src="../../../assets/img/pjbh_list_bg.png" />
+                <div class="pjlzListSmallDivFont">批件文号：</div>
+                <div
+                  v-if="item.approval_number!=''"
+                  class="pjlzListSearchSmallDivFontNew2"
+                >{{item.approval_number}}</div>
+                <div v-if="item.approval_number==''" class="pjlzListSearchSmallDivFontNew2">暂无</div>
+              </div>
             </div>
             <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
@@ -74,7 +85,7 @@
             <div class="pjlzListSmallDiv" style="margin-bottom:15px;">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_deadline.png" />
               <div class="pjlzListSmallDivFont">反馈时限：</div>
-              <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
+              <div class="pjlzListSearchSmallDivFontTime">{{item.approval_end_date}}</div>
             </div>
             <!-- <div class="pjlzListSmallDiv" style>
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_time_pjlz.png" />

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:55px">
+  <div >
     <div style="background:#ffffff;padding-bottom:15px;">
       <div
         style="color: rgb(39, 150, 231);font-size: 16px;margin-left: 20px;padding-top: 10px;"

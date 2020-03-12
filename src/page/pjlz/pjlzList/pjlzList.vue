@@ -61,21 +61,32 @@
             <div style="display:flex;">
               <img
                 v-if="item.approval_warn_flag==0"
-                style="height:30px;"
+                style="height:30px;margin-top:-4px;"
                 src="../../../assets/img/no_overdue.png"
               />
               <img
                 v-if="item.approval_warn_flag==1"
-                style="height:30px;"
+                style="height:30px;margin-top:-4px;"
                 src="../../../assets/img/noverdue.png"
               />
-              <div class="van-ellipsis pjlzListTitle">{{item.approval_name}}</div>
+              <div class="van-ellipsis-2 pjlzListTitle">{{item.approval_name}}</div>
               <!-- <div v-if="item.approval_status==0" class="pjlzListblz">办理中</div>
               <div v-if="item.approval_status==1" class="pjlzListyfk">已反馈</div>
               <div v-if="item.approval_status==2" class="pjlzListwfk">未反馈</div>
               <div v-if="item.approval_status==3" class="pjlzListsqjx">申请结项</div>
               <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>-->
               <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
+            </div>
+            <div style="display:flex;">
+              <div class="pjlzListSmallDiv" style="display:flex;">
+                <img class="pjlzListSmallIcon" src="../../../assets/img/pjbh_list_bg.png" />
+                <div class="pjlzListSmallDivFont">批件文号：</div>
+                <div
+                  v-if="item.approval_number!=''"
+                  class="pjlzListSmallDivFontNew2"
+                >{{item.approval_number}}</div>
+                <div v-if="item.approval_number==''" class="pjlzListSmallDivFontNew2">暂无</div>
+              </div>
             </div>
             <div v-if="item.cbr1!=''" class="pjlzListSmallDiv">
               <img class="pjlzListSmallIcon" src="../../../assets/img/icon_people.png" />
@@ -102,20 +113,41 @@
               <div class="pjlzListSmallDivFont">截止时间：</div>
               <div class="pjlzListSmallDivFont">{{item.approval_end_date}}</div>
             </div>-->
-
-            <div
-              @click="openYjcbFun(item,$event)"
-              v-if="(flag.role!='cbr')&&(item.approval_status!=4&&item.approval_status!=3)&&flag.dingUserId!=item.approval_main_person_dingid"
-              class="pjlzListyjcbNew"
-              style="z-index:2;"
-            >
-              <div style="width:43%;text-align:right;margin-right:3px;">
-                <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
-              </div>
-              <div class="pjlzListyjcbfont">一键催办</div>
-            </div>
-
             <div style="display:flex;">
+              <div
+                @click="openYjcbFun(item,$event)"
+                v-if="(flag.role!='cbr')&&(item.approval_status!=4&&item.approval_status!=3)&&flag.dingUserId!=item.approval_main_person_dingid"
+                class="pjlzListyjcbNew"
+                style="z-index:2;"
+              >
+                <div
+                  v-if="item.approval_create_person_dingid!=flag.dingUserId"
+                  style="width:43%;text-align:right;margin-right:3px;"
+                >
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
+                </div>
+                <div
+                  v-if="item.approval_create_person_dingid==flag.dingUserId"
+                  style="width:33%;text-align:right;margin-right:3px;"
+                >
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_urge.png" />
+                </div>
+                <div class="pjlzListyjcbfont">一键催办</div>
+              </div>
+
+              <div
+                @click="openZdbFun(item,$event)"
+                v-if="flag.role=='wdk'&&item.approval_create_person_dingid==flag.dingUserId&&item.approval_status!=4&&item.approval_status!=3"
+                class="pjlzListyjcbNew"
+                style="z-index:2;"
+              >
+                <div style="width:33%;text-align:right;margin-right:3px;">
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
+                </div>
+                <div class="pjlzListyjcbfont">提交督办</div>
+              </div>
+            </div>
+            <div style="display:flex;" v-if="flag.role!='ld'">
               <div
                 @click="openShsqFun(item,$event)"
                 v-if="item.approval_create_person_dingid==flag.dingUserId&&item.approval_status==3"
@@ -129,13 +161,41 @@
                   <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
                 </div>
                 <div
-                  v-if="flag.dingUserId!=item.approval_main_person_dingid"
+                  v-if="flag.dingUserId!=item.approval_main_person_dingid&&flag.dingUserId!=item.approval_create_person_dingid"
                   style="width:43%;text-align:right;margin-right:3px;"
+                >
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
+                </div>
+                <div
+                  v-if="flag.dingUserId==item.approval_create_person_dingid"
+                  style="width:33%;text-align:right;margin-right:3px;"
                 >
                   <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
                 </div>
                 <div class="pjlzListyjcbfont">审核申请</div>
               </div>
+
+              <div
+                @click="openZdbFun(item,$event)"
+                v-if="flag.role=='wdk'&&item.approval_create_person_dingid==flag.dingUserId&&item.approval_status==3"
+                class="pjlzListyjcbNew"
+                style="z-index:2;"
+              >
+                <div
+                  v-if="flag.role!='ld'&&item.approval_status!=4&&flag.dingUserId==item.approval_create_person_dingid"
+                  style="width:33%;text-align:right;margin-right:3px;"
+                >
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
+                </div>
+                <div
+                  v-if="flag.dingUserId!=item.approval_create_person_dingid"
+                  style="width:43%;text-align:right;margin-right:3px;"
+                >
+                  <img class="pjlzListyjcbImg" src="../../../assets/img/icon_check.png" />
+                </div>
+                <div class="pjlzListyjcbfont">提交督办</div>
+              </div>
+
               <div
                 v-if="flag.role!='ld'&&item.approval_status==1&&flag.dingUserId==item.approval_main_person_dingid"
                 class="pjlzListyjcbNew"
@@ -430,6 +490,11 @@ export default {
     },
     //判断是否是单独app
     pdSingleApp: function() {
+      localStorage.setItem("intent", "");
+    localStorage.setItem("newsListPjlzList", "");
+      localStorage.setItem("newsListPjlzListSearch", "");
+      localStorage.setItem("pjlzListcountSearch", "");
+      localStorage.setItem("pjlzSearchDealiId", "");
       String.prototype.getValue = function(parm) {
         var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
         var r = this.substr(this.indexOf("?") + 1).match(reg);
@@ -853,6 +918,23 @@ export default {
       });
       e.stopPropagation();
     },
+    //转到督办
+    openZdbFun: function(item, e) {
+      var self = this;
+      Dialog.confirm({
+        title: "提示",
+        message: "确认将此批件转到督办？"
+      })
+        .then(() => {
+          console.log("确认");
+
+          self.approvalSupervision(item.id);
+        })
+        .catch(() => {
+          console.log("取消");
+        });
+      e.stopPropagation();
+    },
     //反馈跳转
     openFkFun: function(item, e) {
       this.createTopAndIdAndCount(item);
@@ -890,6 +972,30 @@ export default {
       localStorage.setItem("newsListPjlzList", "");
       localStorage.setItem("pjlzListcount", "");
       localStorage.setItem("pjlzDealiId", "");
+    },
+    //批件转督办
+    approvalSupervision: function(approvalInfoId) {
+      var self = this;
+      var params = {
+        method: "approvalSupervision",
+        dingUserId: global_variable.roleJs.dingUserId,
+        approvalInfoId: approvalInfoId //批件id
+      };
+      self.$store.commit("showLoadingBigText", "转到督办中");
+      httpMethod
+        .getApprovalInfo(params)
+        .then(res => {
+          self.$store.commit("hideLoadingBig");
+          console.log(res);
+          if (res.success == 1) {
+            self.mescroll.resetUpScroll();
+            $("#mescroll").scrollTop(0);
+          }
+        })
+        .catch(err => {
+          self.$store.commit("hideLoadingBig");
+          this.$toast(err);
+        });
     }
   }
 };

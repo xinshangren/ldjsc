@@ -86,7 +86,7 @@
     </div>-->
     <div
       id="moveId"
-      style="height: 50px;position:absolute;right: 0px;bottom: 11px;display:flex;"
+      style="height: 50px;position:fixed;right: 0px;bottom: 11px;display:flex;"
       @touchmove.prevent
     >
       <div id="rightAreaDivId" style="display:none;">
