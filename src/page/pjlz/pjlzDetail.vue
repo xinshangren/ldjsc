@@ -79,8 +79,8 @@
           </div>
           <div style="width: 63%;color:#2599e6;font-size: 15px;">
             <div v-for="(attach,index) in pj_detail.attachlist" :key="index"
-              v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0 " style="display: flex; ">
-              <div v-if="index == 0" style="margin-top:0px;display: flex;">
+              v-if="pj_detail.attachlist != null && pj_detail.attachlist.length>0 " style="display: flex;width: 100%; ">
+              <div v-if="index == 0" style="margin-top:0px;display: flex;width: 100%;">
                 <div @click="openFj(attach)" style="width: 70%;word-break:break-all">{{attach.attach_name}}</div>
                 <a :href="attach.attach_download_url" download
                   style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;">
@@ -89,7 +89,7 @@
                   <div style="color: #3098fb;font-size: 15px;margin-top: 2px;width: 100%;text-align: center;">下载</div>
                 </a>
               </div>
-              <div v-if="index > 0" style="margin-top:5px;display: flex;">
+              <div v-if="index > 0" style="margin-top:5px;display: flex;width: 100%;">
                 <div @click="openFj(attach)" style="width: 70%;word-break:break-all">{{attach.attach_name}}</div>
                 <a :href="attach.attach_download_url" download
                   style="display: flex;background: #DBEEFF;height: 26px;border-radius: 5px;width: 30%;color: #3098fb;">
