@@ -241,6 +241,12 @@ export default {
                 $(this).removeAttr("height");
               }
             });
+            //去掉A标签 链接
+            if($("#pmJjdivid").find("a").length>0){
+              $("#pmJjdivid").find("a").each(function(){
+                $(this).removeAttr("href");
+              })
+            }
           }, 100);
         })
         .catch(err => {
