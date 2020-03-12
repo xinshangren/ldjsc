@@ -1,7 +1,7 @@
 <style scoped>
-.title{
-  margin-left: 25px;
-}
+  .title {
+    margin-left: 25px;
+  }
 </style>
 <template>
   <div>
@@ -106,7 +106,7 @@
     </div>
     <div id="jl_content" style="margin:10px 0px 10px;background:#ffffff;">
       <div id="all_jl" style="height:246px;padding-top: 15px;">
-        <div id="fkjl" style="padding:0px 15px 0px 15px;position: relative;">
+        <div id="fkjl" style="padding:0px 15px 0px 15px;position: relative;" @click="gofkjl_list">
           <div style="display: flex;font-size: 16px;">
             <div style="width: 80%;display: flex;">
               <div>反馈记录({{pj_detail.approval_feedback_time == null?0:pj_detail.approval_feedback_time}})</div>
@@ -128,11 +128,11 @@
               <div style="margin-left: 2px;">暂无反馈记录</div>
             </div>
           </div>
-          <img v-show="fkjl_null" @click="gofkjl_list"
-            style="    right: 13px; top: 20px; width: 19px;position: absolute;" src="../../assets/img/icon_more.png" />
+          <img v-show="fkjl_null" style="    right: 13px; top: 20px; width: 19px;position: absolute;"
+            src="../../assets/img/icon_more.png" />
           <van-divider />
         </div>
-        <div id="cbjl" style="padding:0px 15px;position: relative;">
+        <div id="cbjl" style="padding:0px 15px;position: relative;" @click="gocbjl_list">
           <div style="display: flex;font-size: 16px;">
             <div style="width: 80%;display: flex;">
               <div>催办记录({{pj_detail.approval_warn_time== null?0:pj_detail.approval_warn_time}})</div>
@@ -169,11 +169,11 @@
               <div style="margin-left: 2px;">暂无催办记录</div>
             </div>
           </div>
-          <img v-show="cbjl_null" @click="gocbjl_list"
-            style="    right: 13px; top: 20px; width: 19px;position: absolute;" src="../../assets/img/icon_more.png" />
+          <img v-show="cbjl_null" style="    right: 13px; top: 20px; width: 19px;position: absolute;"
+            src="../../assets/img/icon_more.png" />
           <van-divider />
         </div>
-        <div id="jxjl" style="padding:0px 15px;position: relative;">
+        <div id="jxjl" style="padding:0px 15px;position: relative;" @click="gojxjl_list">
           <div style="display: flex;font-size: 16px;">
             <div style="width: 80%;display: flex;">
               <div>结项记录({{pj_detail.approval_done_time == null?0:pj_detail.approval_done_time}})</div>
@@ -212,8 +212,8 @@
               <div style="margin-left: 2px;">暂无申请结项记录</div>
             </div>
           </div>
-          <img v-show="jxjl_null" @click="gojxjl_list"
-            style="    right: 13px; top: 20px; width: 19px;position: absolute;" src="../../assets/img/icon_more.png" />
+          <img v-show="jxjl_null" style="    right: 13px; top: 20px; width: 19px;position: absolute;"
+            src="../../assets/img/icon_more.png" />
           <van-divider />
         </div>
       </div>
@@ -391,32 +391,38 @@
         }
       },
       gofkjl_list: function () {
-        console.log(this.pj_detail);
-        this.$router.push({
-          path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl",
-          name: "pjlz_fkjl",
-          params: {
-            id: this.pj_detail.id
-          }
-        });
+        if (this.fkjl_null) {
+          console.log(this.pj_detail);
+          this.$router.push({
+            path: "/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl",
+            name: "pjlz_fkjl",
+            params: {
+              id: this.pj_detail.id
+            }
+          });
+        }
       },
       gocbjl_list: function (id) {
-        this.$router.push({
-          path: "/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl",
-          name: "pjlz_cbjl",
-          params: {
-            id: this.pj_detail.id
-          }
-        });
+        if (this.cbjl_null) {
+          this.$router.push({
+            path: "/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl",
+            name: "pjlz_cbjl",
+            params: {
+              id: this.pj_detail.id
+            }
+          });
+        }
       },
       gojxjl_list: function (id) {
-        this.$router.push({
-          path: "/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl",
-          name: "pjlz_jxjl",
-          params: {
-            id: this.pj_detail.id
-          }
-        });
+        if (this.jxjl_null) {
+          this.$router.push({
+            path: "/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl",
+            name: "pjlz_jxjl",
+            params: {
+              id: this.pj_detail.id
+            }
+          });
+        }
       },
       gofkjl_list_detail: function (id) {
         this.$router.push({

@@ -81,6 +81,7 @@ export default {
     this.sendGetUrl(attach_view_urls);
     this.pdSingleApp();
     var self = this;
+    setTimeout(function(){
       $("#pmJjdivid p").each(function() {
         if ($(this).find("img").length > 0) {
           self.isShow = true;
@@ -111,6 +112,7 @@ export default {
           // console.log("没有");
         }
       });
+      },200)
   },
   methods: {
     resizeBig: function() {
@@ -228,7 +230,7 @@ export default {
             // }
             var self = this;
             $("#pmJjdivid img").each(function() {
-              self.isShow = true;
+              // self.isShow = true;
               $(this).css("width", "100%");
               var imageurl = $(this).attr("src");
               if (imageurl.indexOf("http") == -1) {
