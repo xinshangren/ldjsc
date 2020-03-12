@@ -21,7 +21,7 @@
 }
 </style>
 <template>
-  <div style="margin-top:45px;overflow:hidden;background: rgb(247, 247, 247);">
+  <div style="overflow:hidden;background: rgb(247, 247, 247);">
     <div style="background:#ffffff;height:auto;width:100%;margin-top:5px;">
       <div style="margin: 10px 20px 10px 20px; padding-top:10px;" id="compDetail">
         <div style="font-weight: 600; font-size: 17px;  color: #2796e7;">{{compDetail.ent_name}}</div>

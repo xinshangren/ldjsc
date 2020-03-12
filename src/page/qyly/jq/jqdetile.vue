@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 70px;">
+  <div style="margin-top:110px;">
     <van-popup id="popup" v-model="show" position="top" :style="{height: '100%' }" @opened="openPop" :overlay='true'
       :closeable='true' @click='closePop' style="overflow:hidden;background:rgb(0, 0, 0);">
 

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 70px;">
+  <div style="margin-top: 110px;">
 
     <div style="margin-left: 15px;margin-right:15px;">
       <div style="color:#3ca1ec;font-size:18px;">{{data.village_name}}</div>
