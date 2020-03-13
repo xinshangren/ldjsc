@@ -19,13 +19,13 @@
       <img style="height: 200px;margin-top: 146px;" src="../../../assets/img/no_data.png" />
     </div>
     <div id="count_id" style="display:flex;top:106px;position:fixed;width:100%;">
-      <div style="width:48%;text-align:right;color:#1976d2;margin-top:6px;font-size:16px;">共</div>
+      <div style="width:48%;text-align:right;color:#1976d2;font-size:16px;height:32px;line-height: 36px;">共</div>
       <div
         id="totalCountId"
         ref="totalCountId"
         style="color: rgb(25, 118, 210);font-size: 24px;height: 32px;line-height: 33px;"
       >0</div>
-      <div style="width:48%;color:#1976d2;margin-top:6px;font-size:16px;">条</div>
+      <div style="width:48%;color:#1976d2;font-size:16px;height:32px;line-height: 36px;">条</div>
     </div>
     <mescroll-vue
       id="mescroll"

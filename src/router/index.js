@@ -1,25 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import homeVue from '@/page/main/home.vue'
-import dingbanVue from '@/page/main/dingban.vue'
-import noticeVue from '@/page/main/notice.vue'
-import noticeDetailVue from '@/page/main/noticeDetail.vue'
-import noticeDetailFjVue from '@/page/main/noticeDetailFj.vue'
-import headlineVue from '@/page/main/headline.vue'
-import picsnewsVue from '@/page/toutiao/picsnews.vue'
-import mljcVue from '@/page/toutiao/mljc.vue'
-import pzjcVue from '@/page/toutiao/pzjc.vue'
-import swszfVue from '@/page/dingban/swszf.vue'
-import szxVue from '@/page/dingban/szx.vue'
-import dsjyyjVue from '@/page/dingban/dsjyyj.vue'
-import qxqkfqVue from '@/page/dingban/qxqkfq.vue'
 import gqxwsjVue from '@/page/dingban/gqxwsj.vue'
-import srdVue from '@/page/dingban/srd.vue'
-import dingbanDetailVue from '@/page/dingban/dingbanDetail.vue'
 import newsdetileVue from '@/page/toutiao/newsdetile.vue'
 import ldzcVue from '@/page/toutiao/ldzc.vue'
 import zwgkVue from '@/page/toutiao/zwgk.vue'
-import mainVue from '@/page/main/main_new.vue'
 import hbgjVue from '@/page/zdgz/hbgj/hbgj.vue'
 import zdgcVue from '@/page/zdgz/zdgc/zdgc.vue'
 import zdgc_xmdealiVue from '@/page/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali.vue'
@@ -53,21 +37,6 @@ import cq_dingbanDetailVue from '@/page/qxztc/cq/cq_dingbanDetail.vue'
 import zdgz_mryqDealiFjVue from '@/page/zdgz/mryq/mryqDeali/mryqDealiFj/mryqDealiFj.vue'
 import qxtz_newVue from '@/page/main/qxtz_new.vue'
 import yqdataVue from '@/page/yqdata/yqdata.vue'
-import pjlzVue from '@/page/pjlz/pjlz.vue'
-import pjlzListSearchVue from '@/page/pjlz/pjlzListSearch/pjlzListSearch.vue'
-import pjlzDetailVue from '@/page/pjlz/pjlzDetail.vue'
-import pjlz_fj_Vue from '@/page/pjlz/pjlz_fj.vue'
-import pjlz_fj_image_Vue from '@/page/pjlz/pjlz_fj_image.vue'
-import pjlzDetail_all_Vue from '@/page/pjlz/pjlzDetail_all.vue'
-import pjlzDetail_cb_Vue from '@/page/pjlz/pjlzDetail_cb/pjlzDetail_cb.vue'
-import pjlzDetail_fk_Vue from '@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'
-import pjlzDetail_jx_Vue from '@/page/pjlz/pjlzDetail_jx/pjlzDetail_jx.vue'
-import pjlz_fkjl_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl.vue'
-import pjlz_cbjl_Vue from '@/page/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl.vue'
-import pjlz_jxjl_Vue from '@/page/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl.vue'
-import pjlz_fkjl_detail_Vue from '@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail.vue'
-import pjfkMessageVue from '@/page/pjlz/pjfkMessage/pjfkMessage.vue'
-import splashVue from '@/page/splash.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -75,74 +44,54 @@ export default new Router({
     {
       path: '/',
       name: 'splashVue',
-      component: splashVue,
+      component:  () => import('@/page/splash.vue'),
     },
     {
       path: '/main',
       name: 'main',
-      component: mainVue,
+      component:  () => import('@/page/main/main_new.vue'),
       meta:{keepAlive:true}
     }, {
       path: '/main/home',
       name: 'home',
-      component: homeVue
+      component: () => import('@/page/main/home.vue'),
     },  {
       path: '/main/dingban',
       name: 'dingban',
-      component: dingbanVue
+      component: () => import('@/page/main/dingban.vue'),
     },  {
       path: '/main/headline',
       name: 'headline',
-      component: headlineVue,
+      component: () => import('@/page/main/headline.vue'),
       meta:{keepAlive:true}
     }, {
       path: '/main/notice',
       name: 'notice',
-      component: noticeVue
+      component: () => import('@/page/main/notice.vue')
     },{
       path: 'main/noticeDetail',
       name: 'noticeDetail',
-      component: noticeDetailVue
+      component: () => import('@/page/main/noticeDetail.vue')
     },{
       path: 'main/noticeDetailFj',
       name: 'noticeDetailFj',
-      component: noticeDetailFjVue
+      component: () => import('@/page/main/noticeDetailFj.vue')
     },{
       path: '/toutiao/picsnews',
       name: 'picsnews',
-      component: picsnewsVue
+      component: () => import('@/page/toutiao/picsnews.vue')
     },{
       path: '/toutiao/mljc',
       name: 'mljc',
-      component: mljcVue
+      component: () => import('@/page/toutiao/mljc.vue')
     },{
       path: '/toutiao/pzjc',
       name: 'pzjc',
-      component: pzjcVue
-    },{
-      path: '/dingban/swszf',
-      name: 'swszf',
-      component: swszfVue
-    },  {
-      path: '/dingban/srd',
-      name: 'srd',
-      component: srdVue
-    }, {
-      path: '/dingban/szx',
-      name: 'szx',
-      component: szxVue
-    }, {
-      path: '/dingban/dsjyyj',
-      name: 'dsjyyj',
-      component: dsjyyjVue
-    }, {
-      path: '/dingban/qxqkfq',
-      name: 'qxqkfq',
-      component: qxqkfqVue
+      component: () => import('@/page/toutiao/pzjc.vue')
     },{
       path: '/dingban/dingbanDetail',
       name: 'dingbanDetail',
-      component: dingbanDetailVue
+      component: () => import('@/page/dingban/dingbanDetail.vue')
     },{
       path: '/toutiao/newsdetile',
       name: 'newsdetile',
@@ -304,71 +253,71 @@ export default new Router({
     },{
       path: '/pjlz/pjlz',
       name: 'pjlzListvue',
-      component: pjlzVue,
+      component: () => import('@/page/pjlz/pjlz.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzListSearch/pjlzListSearch',
       name: 'pjlzListSearchVue',
-      component: pjlzListSearchVue,
+      component: () => import('@/page/pjlz/pjlzListSearch/pjlzListSearch.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlz_fj',
       name: 'pjlz_fj',
-      component: pjlz_fj_Vue,
+      component: () => import('@/page/pjlz/pjlz_fj.vue'),
     },{
       path: '/pjlz/pjlz_fj_image',
       name: 'pjlz_fj_image',
-      component: pjlz_fj_image_Vue,
+      component: () => import('@/page/pjlz/pjlz_fj_image.vue'),
     },{
       path: '/pjlz/pjlzDetail',
       name: 'pjlzDetail',
-      component: pjlzDetailVue,
+      component: () => import('@/page/pjlz/pjlzDetail.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_all',
       name: 'pjlzDetail_all',
-      component: pjlzDetail_all_Vue,
+      component: () => import('@/page/pjlz/pjlzDetail_all.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_cb/pjlzDetail_cb',
       name: 'pjlzDetail_cb',
-      component: pjlzDetail_cb_Vue,
+      component: () => import('@/page/pjlz/pjlzDetail_cb/pjlzDetail_cb.vue'),
       meta:{keepAlive:true}
     }
     ,{
       path: '/pjlz/pjlzDetail_fk/pjlzDetail_fk',
       name: 'pjlzDetail_fk',
-      component: pjlzDetail_fk_Vue,
+      component: () => import('@/page/pjlz/pjlzDetail_fk/pjlzDetail_fk.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_jx/pjlzDetail_jx',
       name: 'pjlzDetail_jx',
-      component: pjlzDetail_jx_Vue,
+      component: () => import('@/page/pjlz/pjlzDetail_jx/pjlzDetail_jx.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl',
       name: 'pjlz_fkjl',
-      component: pjlz_fkjl_Vue,
+      component: () => import('@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl',
       name: 'pjlz_cbjl',
-      component: pjlz_cbjl_Vue,
+      component: () => import('@/page/pjlz/pjlzDetail_cb/pjlz_cbjl/pjlz_cbjl.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl',
       name: 'pjlz_jxjl',
-      component: pjlz_jxjl_Vue,
+      component: () => import('@/page/pjlz/pjlzDetail_jx/pjlz_jxjl/pjlz_jxjl.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail',
       name: 'pjlz_fkjl_detail',
-      component: pjlz_fkjl_detail_Vue,
+      component: () => import('@/page/pjlz/pjlzDetail_fk/pjlz_fkjl/pjlz_fkjl_detail.vue'),
       meta:{keepAlive:true}
     },{
       path: '/pjlz/pjfkMessage/pjfkMessage',
       name: 'pjfkMessageVue',
-      component: pjfkMessageVue
+      component: () => import('@/page/pjlz/pjfkMessage/pjfkMessage.vue'),
     }
     
     

@@ -108,6 +108,49 @@
             </div>
           </div>
         </li>
+        <!-- <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(5)">
+          <div class="pjlzStaticModel5">
+            <div style="display:flex;">
+              <div style="width:50%;"></div>
+              <div style="width:50%;">
+                <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
+                  <div style="font-size:20px;color:#FF9933;">0</div>
+                  <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
+                </div>
+                <div style="color: #999999;font-size: 13px;">正常未反馈</div>
+              </div>
+            </div>
+          </div>
+        </li>
+         <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(6)">
+          <div class="pjlzStaticModel6">
+            <div style="display:flex;">
+              <div style="width:50%;"></div>
+              <div style="width:50%;">
+                <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
+                  <div style="font-size:20px;color:#F96A4E;">0</div>
+                  <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
+                </div>
+                <div style="color: #999999;font-size: 13px;">超时未反馈</div>
+              </div>
+            </div>
+          </div>
+        </li>
+         <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(6)">
+          <div class="pjlzStaticModel7">
+            <div style="display:flex;">
+              <div style="width:50%;"></div>
+              <div style="width:50%;">
+                <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
+                  <div style="font-size:20px;color:#FF6699;">0</div>
+                  <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
+                </div>
+                <div style="color: #999999;font-size: 13px;">转13710督办</div>
+              </div>
+            </div>
+          </div>
+        </li> -->
+
       </ul>
 
       <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
