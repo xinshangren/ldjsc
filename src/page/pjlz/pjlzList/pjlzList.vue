@@ -286,6 +286,7 @@ import Vue from "vue";
 import { Tab, Tabs, Search, Popup, Dialog } from "vant";
 import dd from "dingtalk-jsapi";
 import MescrollVue from "mescroll.js/mescroll.vue";
+import Watermark from '../../../assets/js/watermark'; 
 Vue.use(Tab)
   .use(Tabs)
   .use(Search)
@@ -719,6 +720,7 @@ export default {
                 self.flag = global_variable.roleJs;
                 console.log(global_variable.roleJs);
                 console.log(self.flag);
+                   Watermark.set(self.flag.username+" 领导批示");
                 if (self.flag.role == "ld" || self.flag.role == "qt") {
                   console.log("关闭应用");
                   Dialog.alert({

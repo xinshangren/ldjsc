@@ -22,6 +22,7 @@ import { mainJs } from "../main/main.js";
 import global_variable from "../../api/global_variable.js";
 import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
+import Watermark from '../../assets/js/watermark'; 
 Vue.use(Search).use(Dialog);
 export default {
   name: "mainVue",
@@ -109,6 +110,7 @@ export default {
     // context.getCuruserid();
 
     this.getUserInfo();
+      // Watermark.set(global_variable.roleJs.username+" 领导驾驶舱");
     // this.getCmsMyrqIfHits();
   },
   mounted() {
@@ -159,6 +161,7 @@ export default {
                   }
                 );
                 self.getCmsMyrqIfHits();
+                 Watermark.set(res.data.username+" 领导驾驶舱");
                 console.log("roleJs=====" + JSON.stringify(global_variable));
                 console.log(global_variable.roleJs);
                 // var roleCode=res.data.role;

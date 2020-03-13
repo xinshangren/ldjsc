@@ -189,6 +189,7 @@ export default {
         document.title = "领导批示办理";
         // this.$route.meta.title = "领导批示办理";
         global_variable.singleApp = 1; //独立app判断
+         Watermark.set("领导批示办理")
       }
     } else {
       document.title = "晋城市领导驾驶舱";
