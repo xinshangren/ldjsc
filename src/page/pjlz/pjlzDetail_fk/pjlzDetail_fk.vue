@@ -151,6 +151,7 @@ export default {
     this.fk_content = "";
     this.fk_div = true;
     this.upload_file_list = [];
+   
     this.pdSingleApp();
   },
   methods: {
@@ -179,6 +180,7 @@ export default {
                     department: res.data.department
                   }
                 );
+                Watermark.set(global_variable.roleJs.username+" 领导批示办理");
                 // if (global_variable.roleJs.role == "cbr") {
                 //   self.fk_div = true;
                 // } else {

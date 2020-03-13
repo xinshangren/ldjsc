@@ -148,11 +148,13 @@ export default {
   mounted() {
     this.jx_content = "";
     this.jx_div = true;
+   
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
   activated() {
     this.jx_div = true;
+    
     this.pdSingleApp();
     console.log(this.pj_obj);
   },
@@ -197,6 +199,7 @@ export default {
                     department: res.data.department
                   }
                 );
+                Watermark.set(global_variable.roleJs.username+" 领导批示办理");
                 // if (global_variable.roleJs.role == "wdk") {
                 //   self.jx_div = true;
                 // } else {

@@ -135,6 +135,7 @@ export default {
     this.cb_content = "";
     this.pj_obj = this.$route.params.obj;
     this.cb_div = true;
+    Watermark.set(self.flag.username+" 领导批示办理");
     this.getdata();
     console.log(this.pj_obj);
   },
@@ -142,6 +143,7 @@ export default {
     this.cb_content = "";
     this.pj_obj = this.$route.params.obj!=null?this.$route.params.obj:this.pj_obj;
     this.cb_div = true;
+    Watermark.set(self.flag.username+" 领导批示办理");
     this.getdata();
     this.pdSingleApp();
     console.log(this.pj_obj);
