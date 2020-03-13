@@ -720,7 +720,7 @@ export default {
                 self.flag = global_variable.roleJs;
                 console.log(global_variable.roleJs);
                 console.log(self.flag);
-                   Watermark.set(self.flag.username+" 领导批示");
+                   Watermark.set(self.flag.username+" 领导批示办理");
                 if (self.flag.role == "ld" || self.flag.role == "qt") {
                   console.log("关闭应用");
                   Dialog.alert({

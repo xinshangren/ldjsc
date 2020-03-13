@@ -16,9 +16,9 @@ let setWatermark = (str) => {
   let cans = can.getContext('2d');
   //旋转角度
   cans.rotate(-0.6);
-  cans.font = '13px Microsoft YaHei';
+  cans.font = '16px Microsoft YaHei';
   //设置填充绘画的颜色、渐变或者模式
-  cans.fillStyle = 'rgba(200, 200, 200, 0.30)';
+  cans.fillStyle = 'rgba(200, 200, 200, 0.40)';
   //设置文本内容的当前对齐方式
   cans.textAlign = 'left';
   //设置在绘制文本时使用的当前文本基线
