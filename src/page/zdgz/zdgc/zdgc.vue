@@ -17,7 +17,7 @@
     <div
       id="menu_ul_id"
       v-show="md_show"
-      style="width:41.5%; display:flex;position: fixed;background: #e8f4ff;top:101px;z-index:100;height:100%;left: -163px;"
+      style="width:156px; display:flex;position: fixed;background: #e8f4ff;top:101px;z-index:100;height:100%;left: -156px;"
     >
       <div style="left: 20px;background: #e8f4ff;top: 157px;z-index:100;">
         <div @click="returnCom(1)" style="display:flex;margin-top: 10px;background: #e8f4ff;">
@@ -233,19 +233,19 @@ export default {
       false
     );
     $("#show_menu_Id").click(function() {
-      if ($("#menu_ul_id").css("left") == "-163px") {
+      if ($("#menu_ul_id").css("left") == "-156px") {
         $("#menu_ul_id").animate({ left: "0px" }, 500);
         $("#tabs").animate({ left: "156px" }, 500);
       } else {
-        $("#menu_ul_id").animate({ left: "-163px" }, 500);
+        $("#menu_ul_id").animate({ left: "-156px" }, 500);
         $("#tabs").animate({ left: "0px" }, 500);
       }
     });
     $("body").click(function(e) {
       if (e.target.id != "show_menu_Id")
-        if ($("#menu_ul_id").css("left") == "-163px") {
+        if ($("#menu_ul_id").css("left") == "-156px") {
         } else {
-          $("#menu_ul_id").animate({ left: "-163px" }, 500);
+          $("#menu_ul_id").animate({ left: "-156px" }, 500);
           $("#tabs").animate({ left: "0px" }, 500);
         }
     });
