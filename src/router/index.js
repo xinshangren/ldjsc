@@ -318,8 +318,10 @@ export default new Router({
       path: '/pjlz/pjfkMessage/pjfkMessage',
       name: 'pjfkMessageVue',
       component: () => import('@/page/pjlz/pjfkMessage/pjfkMessage.vue'),
-    }
-    
-    
+    },{
+      path: '/zdgz/mryq/qklist',
+      name: 'qklistVue',
+      component: () => import('@/page//zdgz/mryq/qklist/qklist.vue'),
+    },
   ]
 })

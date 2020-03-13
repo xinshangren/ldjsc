@@ -1,33 +1,35 @@
 <template>
   <div style>
+    <div style="font-size: 20px;padding-left: 16px;padding-top: 8px;">标题</div>
     <mescroll-vue id="mescroll" ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
       <div id="newsList" style="padding-left:10px;padding-right:10px;margin-top:10px;">
         <div
-          style="position: relative;padding: 10px;background: rgb(255, 255, 255);height: 80px;border-radius: 10px;margin-bottom: 6px;box-shadow: 1px 1px 1px #cccccc;"
+          style="position: relative;padding: 10px;background: rgb(255, 255, 255);height: 36px;border-radius: 10px;margin-bottom: 6px;box-shadow: 1px 1px 1px #cccccc;"
           v-for="(item,index) of list"
           :key="index"
           @click="goDetile(item)"
         >
-          <div
+          <!-- <div
             v-if="item.yd_hits=='1'"
             style="position: absolute;right: 0px;background: red;width: 43px;height: 19px;border-radius: 0px 10px 0px 10px;top: 0px;color: #ffffff;font-size: 13px;text-align: center;"
-          >未读</div>
+          >未读</div> -->
           <div
             class="van-multi-ellipsis--l2"
             style="color: #333333;font-size: 16px;width: 93%; overflow: hidden;"
           >{{item.title}}</div>
 
-          <div style="display:flex;margin-top:5px;">
+          <!-- <div style="display:flex;margin-top:5px;">
             <div style="font-size:15px;color:#999999;">发布人: {{item.add_user_name}}</div>
           </div>
           <div style="display:flex;margin-top:4px;">
             <div
+
               style="color: #cccccc;font-size: 13px;display: flex;position: absolute;right: 14px;line-height: 13px;vertical-align: middle; margin-top: 0px;"
             >
-              <img src="../../../assets/img/icon_time.png" style="height: 13px;" />
+              <img src="../../../../assets/img/icon_time.png" style="height: 13px;" />
               <div style="margin-left:4px;">{{item.createDate}}</div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </mescroll-vue>
@@ -40,8 +42,8 @@ import MescrollVue from "mescroll.js/mescroll.vue";
 import Vue from "vue";
 import { Tab, Tabs } from "vant";
 Vue.use(Tab).use(Tabs);
-import { httpMethod } from "../../../api/getData.js";
-import global_variable from "../../../api/global_variable.js";
+import { httpMethod } from "../../../../api/getData.js";
+import global_variable from "../../../../api/global_variable.js";
 export default {
   components: {
     MescrollVue // 注册mescroll组件
@@ -206,6 +208,7 @@ export default {
       var top = $("#mescroll").scrollTop();
       localStorage.setItem("mryqList", top);
       localStorage.setItem("mryqDealiId", JSON.stringify(item));
+      // localStorage.setItem("pjlzListcount", $("#totalCountId").html());
       this.$router.push({
         path: "/zdgz/mryq/mryq/mryqDeali",
         name: "mryqDealiVue",
@@ -213,18 +216,11 @@ export default {
           entity: item
         }
       });
-
-      //   this.$router.push({
-      //   path: "/zdgz/mryq/qklist",
-      //   params: {
-      //     entity: item
-      //   }
-      // });
     }
   }
 };
 </script>
 
 <style >
-@import "../../../page/zdgz/mryq/mryq.css";
+@import "../../../../page/zdgz/mryq/qklist/qklist.css";
 </style>
