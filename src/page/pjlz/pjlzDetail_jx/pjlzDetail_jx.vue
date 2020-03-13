@@ -125,6 +125,7 @@ Vue.use(Tab)
   .use(Tabs)
   .use(Search);
 import global_variable from "../../../api/global_variable.js";
+import Watermark from '../../../assets/js/watermark'; 
 export default {
   beforeCreate() {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
