@@ -32,6 +32,19 @@ export default {
     const that = this;
     console.log(that.screenHeight);
     $("#imgSplashId").css("height", that.screenHeight + "px");
+
+    var env = dd.env.platform;
+    console.log(env);
+    if (!global_variable.isDebugging&&env == "notInDingTalk") {
+      Dialog.alert({
+        title: "非法操作",
+        showConfirmButton: true,
+        message:"请从钉钉浏览器打开"
+      }).then(() => {
+        // window.location.href="www.baidu.com";
+      });
+      return;
+    }
     that.getCuruserid();
     // console.log("111");
     if (global_variable.isDebugging) {
@@ -99,6 +112,9 @@ export default {
             alert("dd error: " + JSON.stringify(err));
           }
         });
+      });
+      dd.error(function(error) {
+        alert("dd error: " + JSON.stringify(error));
       });
     }
   }

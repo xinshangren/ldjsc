@@ -38,8 +38,9 @@
       </div>
     </div>
 
-    <div v-show="flag.role!='ld'"
-     style="z-index: 2000;width: 100%;background: #f1f1f1;position:fixed;"
+    <div
+      v-show="flag.role!='ld'"
+      style="z-index: 2000;width: 100%;background: #f1f1f1;position:fixed;"
     >
       <van-tabs
         id="tabs1"
@@ -83,10 +84,10 @@
       style="position:relative;"
       v-if="(flag.role=='ld'||flag.role=='wdk')&&currentView===1"
     ></child2>
-    <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="2001">
+    <van-overlay :show="sqjxshow" @click="sqjxshow=false;sqjxmessage=''" :z-index="2001">
       <div class="wrapper">
         <div id="popSqjxId" class="block" @click.stop>
-          <img @click="sqjxshow=false" class="pjlzSqjxClose" src="../../assets/img/pop_close.png" />
+          <img @click="sqjxshow=false;sqjxmessage=''" class="pjlzSqjxClose" src="../../assets/img/pop_close.png" />
           <div class="pjlzSqjx">申请结项</div>
 
           <van-field
@@ -101,7 +102,7 @@
             class="pjlzSqjxContent"
           />
           <div style="display:flex;margin-top:24px;">
-            <div style="width:50%;text-align: center;" @click="sqjxshow=false">
+            <div style="width:50%;text-align: center;" @click="sqjxshow=false;sqjxmessage=''">
               <div class="pjlzSqjxCancelButton1">取消</div>
             </div>
             <div style="width:50%;text-align: center;" @click="jxsqFun()">
@@ -177,9 +178,9 @@ export default {
   mounted() {
     localStorage.setItem("intent", "");
     localStorage.setItem("newsListPjlzList", "");
-      localStorage.setItem("newsListPjlzListSearch", "");
-      localStorage.setItem("pjlzListcountSearch", "");
-      localStorage.setItem("pjlzSearchDealiId", "");
+    localStorage.setItem("newsListPjlzListSearch", "");
+    localStorage.setItem("pjlzListcountSearch", "");
+    localStorage.setItem("pjlzSearchDealiId", "");
     this.flag = global_variable.roleJs;
     console.log(global_variable.roleJs);
     console.log(this.flag);
@@ -188,20 +189,21 @@ export default {
     //           path: "/pjlz/pjfkMessage/pjfkMessage"
     //         });
     var _this = this;
-    window.onresize = function() {
-      _this.screenHeightNow = document.documentElement.clientHeight; //窗口高度
-      console.log(_this.screenHeightNow);
-    };
+    window.addEventListener('resize',() => _this.measure1(), false);
   },
   components: {
     child1,
     child2
   },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.measure1(), false);
+  },
   watch: {
     screenHeightNow: function(newName, oldName) {
+      console.log(this.screenHeight + "===" + this.screenHeightNow);
       //监听屏幕宽度变化
       if (this.screenHeight > this.screenHeightNow) {
-        $("#popSqjxId").css("height", "80%");
+        $("#popSqjxId").css("height", "85%");
         $("#popSqjxId").css("max-height", "85%");
       } else {
         $("#popSqjxId").css("height", "55%");
@@ -210,6 +212,11 @@ export default {
     }
   },
   methods: {
+    measure1:function(){
+       window.fullHeight = document.documentElement.clientHeight;
+        this.screenHeightNow = window.fullHeight;
+        console.log(this.screenHeightNow);
+    },
     //获取用户角色
     getUserInfo: function() {
       var self = this;
@@ -410,7 +417,7 @@ export default {
         }
       }
     },
-    
+
     formatter(sqjxmessage) {
       //去空格   特殊字符
       let str = sqjxmessage.replace(/\s*/g, "");
@@ -421,7 +428,10 @@ export default {
       for (var i = 0; i < str.length; i++) {
         rs = rs + str.substr(i, 1).replace(pattern, "");
       }
-        var rs = rs.replace(/[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig, "");
+      var rs = rs.replace(
+        /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/gi,
+        ""
+      );
       this.sqjxmessage = rs;
       return str;
     },
@@ -452,7 +462,7 @@ export default {
               self.sqjxshow = false;
               self.restPjListFun(); //刷新列表
               self.sqjxmessage = "";
-               self.$refs.child1.scrollTopZero();
+              self.$refs.child1.scrollTopZero();
             }
           } else {
             self.$toast(msg);

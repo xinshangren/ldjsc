@@ -5,7 +5,9 @@
       <img style="height: 200px;margin-top: 57px;" src="../../../assets/img/no_data.png" />
     </div>
     <div id="count_id" style="display:flex;top:154px;position:fixed;width:100%;">
-      <div style="width:48%;text-align:right;color:#1976d2;font-size:16px;height:32px;line-height: 36px;">共</div>
+      <div
+        style="width:48%;text-align:right;color:#1976d2;font-size:16px;height:32px;line-height: 36px;"
+      >共</div>
       <div
         id="totalCountId"
         ref="totalCountId"
@@ -244,6 +246,15 @@
             <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未超期</li>
           </ul>
           <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+
+          <div v-if="status==1">
+            <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否督办</div>
+            <ul id="dbztDialogId" class="ui-row" style="margin-top: 11px;">
+              <li id="" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
+              <li id="1" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">已转督办</li>
+            </ul>
+            <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
+          </div>
         </div>
         <div v-if="status==0">
           <div style="padding-top:9px;font-size: 14px;margin-left:17px;">批件状态</div>
@@ -286,7 +297,7 @@ import Vue from "vue";
 import { Tab, Tabs, Search, Popup, Dialog } from "vant";
 import dd from "dingtalk-jsapi";
 import MescrollVue from "mescroll.js/mescroll.vue";
-import Watermark from '../../../assets/js/watermark'; 
+import Watermark from "../../../assets/js/watermark";
 Vue.use(Tab)
   .use(Tabs)
   .use(Search)
@@ -320,6 +331,7 @@ export default {
       status: "0", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
       approval_status: "0", //批件状态
+      supervision:"",//督办状态
       list: [],
       Popshow: false,
       indexPage: null,
@@ -492,7 +504,7 @@ export default {
     //判断是否是单独app
     pdSingleApp: function() {
       localStorage.setItem("intent", "");
-    localStorage.setItem("newsListPjlzList", "");
+      localStorage.setItem("newsListPjlzList", "");
       localStorage.setItem("newsListPjlzListSearch", "");
       localStorage.setItem("pjlzListcountSearch", "");
       localStorage.setItem("pjlzSearchDealiId", "");
@@ -513,6 +525,18 @@ export default {
         $("#mescroll").css("top", "143px");
         $("#count_id").css("top", "108px");
         this.getUserInfo();
+        var env = dd.env.platform;
+        console.log(env);
+        if (env == "notInDingTalk") {
+          Dialog.alert({
+            title: "非法操作",
+            showConfirmButton: true,
+            message: "请从钉钉浏览器打开"
+          }).then(() => {
+            // window.location.href="www.baidu.com";
+          });
+          return;
+        }
         var intent = localStorage.getItem("intent");
         console.log(intent);
         if (intent != "") {
@@ -584,9 +608,10 @@ export default {
       if (state == "0") {
         this.oneStyle = { height: "60%" };
       } else {
-        this.oneStyle = { height: "30%" };
+        this.oneStyle = { height: "40%" };
       }
       this.status = state;
+      this.supervision="";//督办状态
       this.approval_status = "0"; //批件状态
       this.isOvertime = "0"; //是否超期
       this.isChecked = ""; //是否签收
@@ -613,6 +638,18 @@ export default {
           $(this).addClass("dialogNoSelect");
         }
       });
+ //循环重置查询条件督办
+      $("#dbztDialogId li").each(function() {
+        var text = $(this).html();
+        if (text == "全部") {
+          $(this).removeClass("dialogNoSelect");
+          $(this).addClass("dialogSelect");
+        } else {
+          $(this).removeClass("dialogSelect");
+          $(this).addClass("dialogNoSelect");
+        }
+      });
+      
 
       //循环重置查询条件
       $("#pjztDialogId li").each(function() {
@@ -646,6 +683,21 @@ export default {
     openPop: function() {
       // console.log("openPop");
       $("#openPopId").css("z-index", "10003");
+       //督办状态
+      $("#dbztDialogId li").off("click");
+      $("#dbztDialogId li").click(function(e) {
+        $(this)
+          .siblings("li")
+          .removeClass("dialogSelect");
+        $(this)
+          .siblings("li")
+          .removeClass("dialogNoSelect");
+        $(this)
+          .siblings("li")
+          .addClass("dialogNoSelect");
+        $(this).removeClass("dialogNoSelect");
+        $(this).addClass("dialogSelect");
+      });
       //批件状态
       $("#pjztDialogId li").off("click");
       $("#pjztDialogId li").click(function(e) {
@@ -720,7 +772,7 @@ export default {
                 self.flag = global_variable.roleJs;
                 console.log(global_variable.roleJs);
                 console.log(self.flag);
-                   Watermark.set(self.flag.username+" 领导批示办理");
+                Watermark.set(self.flag.username + " 领导批示办理");
                 if (self.flag.role == "ld" || self.flag.role == "qt") {
                   console.log("关闭应用");
                   Dialog.alert({
@@ -776,6 +828,14 @@ export default {
         }
       });
 
+        //循环获取选中的是否超期
+      $("#dbztDialogId li").each(function() {
+        var isSelect = $(this).hasClass("dialogSelect");
+        if (isSelect) {
+          context.supervision = $(this).attr("id");
+        }
+      });
+     
       //循环获取选中的批件状态
       $("#pjztDialogId li").each(function() {
         var isSelect = $(this).hasClass("dialogSelect");
@@ -805,6 +865,12 @@ export default {
         $(this).removeClass("dialogSelect");
         $(this).addClass("dialogNoSelect");
       });
+      //循环重置查询条件
+      $("#dbztDialogId li").each(function() {
+        $(this).removeClass("dialogSelect");
+        $(this).addClass("dialogNoSelect");
+      });
+      context.supervision="";
       context.approval_status = "0";
       context.isOvertime = "";
       context.isChecked = "";
@@ -823,6 +889,7 @@ export default {
         method: "getApprovalInfoList",
         pageNo: page.num,
         pageSize: page.size,
+        supervision: this.supervision,
         // corpId:global_variable.corpId,
         // dingUserId: "086404191926187734",
         dingUserId: global_variable.roleJs.dingUserId,
