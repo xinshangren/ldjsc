@@ -10,7 +10,7 @@ axios.defaults.timeout = 10000;
 // axios.defaults.baseURL = "http://203.207.103.48:8080/jcsldjscjk/";//正式环境互联网ip
 // axios.defaults.baseURL = "http://10.7.1.69:8090/jeecg-boot/";//zhangrui
 axios.defaults.baseURL = "http://203.207.104.209:7081/jcsldjscjk/";//另一个生产服务器
-//  axios.defaults.baseURL = "http://127.0.0.1:8080/jcsldjsc/";//张峰宽
+//  axios.defaults.baseURL = "http://10.7.1.69:8062/jcsldjscjk/";//张峰宽203.207.104.209:7081
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;application/json;charset=UTF-8";
 axios.defaults.headers["X-Requested-With"] = "XMLHttpRequest";
 axios.defaults.headers["Cache-Control"] = "no-cache";

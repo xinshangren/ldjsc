@@ -321,7 +321,13 @@ export default new Router({
     },{
       path: '/zdgz/mryq/qklist',
       name: 'qklistVue',
-      component: () => import('@/page//zdgz/mryq/qklist/qklist.vue'),
+      meta:{keepAlive:false},
+      component: () => import('@/page/zdgz/mryq/qklist/qklist.vue'),
+    },{
+      path: '/zdgz/mryq/qklist/qklistDeali',
+      name: 'qklistDealiVue',
+      meta:{keepAlive:false},
+      component: () => import('@/page/zdgz/mryq/qklist/qklistDeali/qklistDeali.vue'),
     },
   ]
 })

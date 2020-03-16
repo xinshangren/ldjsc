@@ -454,8 +454,17 @@ export const httpMethod = {
     //通过id该人的未读
     getCmsMyrqIfHits: function (params) {
         return get("cmsAppInsideController.action?getCmsMyrqIfHits", params);
+    }, 
+    //根据期刊id获取详情并统计查看次数
+    findQkIdByXq: function (params) {
+        return get("cmsAppInsideController.action?findQkIdByXq", params);
+    },
+    //保存领导批示记录
+    saveCmsArticlePsMryq: function (params) {
+        return get("cmsAppInsideController.action?saveCmsArticlePsMryq", params);
     },
 
+    
     
 
     

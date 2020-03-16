@@ -41,8 +41,12 @@
         <div
           v-for="(item,index) in list"
           :key="index"
-          style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;font-size:15px;background:#ffffff;"
+          style=" padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;font-size:15px;background:#ffffff;"
         >
+          <div
+            :class="item.supervision_status=='0'?'backgroundListSearchZero':'backgroundListSearchOne' "
+          ></div>
+
           <div style="position:relative;" @click="openIndexFun(item,$event)">
             <div style="display:flex;">
               <img
@@ -307,6 +311,8 @@ export default {
       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
       approval_status: "0",
+      supervision: "", //督办状态
+      isFeedback: "", //是否有反馈
       sqjxshow: false, //申请结伴标记
       sqjxmessage: "", //申请结伴内容
       nowItem: null,
@@ -409,27 +415,43 @@ export default {
       case 1:
         this.status = "";
         this.isOvertime = 0;
-         this.supervision="";
+        this.supervision = ""; //督办状态
+        this.isFeedback = ""; //是否有反馈
         break;
       case 2:
         this.status = 1;
         this.isOvertime = 0;
-         this.supervision="";
+        this.supervision = "0"; //督办状态
+        this.isFeedback = ""; //是否有反馈
         break;
       case 3:
         this.status = 0;
-        this.isOvertime = 2;
-         this.supervision="";
+        this.isOvertime = 0;
+        this.supervision = ""; //督办状态
+        this.isFeedback = "1"; //是否有反馈
         break;
-      case 4:
+      case 4: //超时未完成，已抛弃
         this.status = 0;
         this.isOvertime = 1;
-         this.supervision="";
+        this.supervision = "";
+        break;
+      case 5:
+        this.status = 0;
+        this.isOvertime = 2;
+        this.supervision = "";
+        this.isFeedback = "0"; //是否有反馈
+        break;
+      case 6:
+        this.status = 0;
+        this.isOvertime = 1;
+        this.supervision = "";
+        this.isFeedback = "0"; //是否有反馈
         break;
       case 7:
         this.status = 1;
         this.isOvertime = 0;
-         this.supervision=1;
+        this.supervision = 1;
+        this.isFeedback = ""; //是否有反馈
         break;
 
       default:
@@ -492,27 +514,27 @@ export default {
       case 1:
         this.status = 0;
         this.isOvertime = 0;
-         this.supervision="";
+        this.supervision = "";
         break;
       case 2:
         this.status = 1;
         this.isOvertime = 0;
-         this.supervision="";
+        this.supervision = "";
         break;
       case 3:
         this.status = 0;
         this.isOvertime = 2;
-         this.supervision="";
+        this.supervision = "";
         break;
       case 4:
         this.status = 0;
         this.isOvertime = 1;
-         this.supervision="";
+        this.supervision = "";
         break;
-       case 7:
+      case 7:
         this.status = 0;
         this.isOvertime = 1;
-        this.supervision=1;
+        this.supervision = 1;
         break;
       default:
         break;
@@ -711,7 +733,7 @@ export default {
       var self = this;
       dd.ready(function() {
         dd.runtime.permission.requestAuthCode({
-          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          corpId: global_variable.corpId, // 企业id
           onSuccess: function(info) {
             var code = info.code; // 通过该免登授权码可以获取用户身份
             var params = {
@@ -797,7 +819,8 @@ export default {
         pageSize: page.size,
         // corpId:global_variable.corpId,
         // dingUserId: "086404191926187734",
-        supervision:this.supervision,//转督办
+        supervision: this.supervision, //转督办
+        isFeedback: this.isFeedback, //反馈
         dingUserId: global_variable.roleJs.dingUserId,
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期

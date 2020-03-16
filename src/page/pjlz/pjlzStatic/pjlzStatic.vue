@@ -89,7 +89,7 @@
                   <div style="font-size:20px;color:#f9bf4e;">{{oneData.approval_undone_normal}}</div>
                   <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
                 </div>
-                <div style="color: #999999;font-size: 13px;">正常未完成</div>
+                <div style="color: #999999;font-size: 13px;">正常进行中</div>
               </div>
             </div>
           </div>
@@ -326,10 +326,10 @@ export default {
     //跳转独立的页面
     intentSearchList: function(flag) {
       console.log(flag);
-        if(flag=='5'||flag=='6'){
-        this.$toast("该功能改造中");
-       return;
-      }
+      //   if(flag=='5'||flag=='6'){
+      //   this.$toast("该功能改造中");
+      //  return;
+      // }
       var dateFormat = /^(\d{4})-(\d{2})-(\d{2})$/;
       var dateFormatMonth = /^(\d{4})-(\d{2})$/;
       var dateFormatyear = /^(\d{4})$/;
