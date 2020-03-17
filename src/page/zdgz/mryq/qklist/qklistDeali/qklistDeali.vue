@@ -23,9 +23,9 @@
                 height: 40px;"
           @click="saveCmsArticlePsMryq"
         > 
-        <div style="width:44%;text-align:right;">
+        <div style="width:44%;text-align:right;line-height:28px;">
           <img
-            style="height: 20px;vertical-align:super;"
+            style="height: 20px;"
             src="../../../../../assets/img/tijiao_icon.png"
           />
           </div>
@@ -91,15 +91,9 @@ export default {
     console.log(to);
     next();
   },
-  mounted() {
-    this.entity = this.$route.params.entity; //期刊实体
-    this.itemEnti = this.$route.params.itemEnti; //cms实体
-    console.log(this.itemEnti);
-    console.log(this.entity);
-    this.findQkIdByXq(this.entity.id);
-    var height = document.body.clientHeight;
-    // $("#contentId").css("height",height+200+"px");
-    //console.log(this.itemEnti);
+  updated(){
+ var height = document.body.clientHeight;
+   
     $("#pmJjdivid p").each(function() {
       $(this).attr("style", "font-size:15px;");
     });
@@ -144,6 +138,14 @@ export default {
         }
       });
     }, 100);
+  },
+  mounted() {
+    this.entity = this.$route.params.entity; //期刊实体
+    this.itemEnti = this.$route.params.itemEnti; //cms实体
+    console.log(this.itemEnti);
+    console.log(this.entity);
+    this.findQkIdByXq(this.entity.id);
+   
   },
   methods: {
       resizeBig: function() {
@@ -285,7 +287,7 @@ export default {
       var params = {
         userId: global_variable.roleJs.dingUserId,
         cmsId: that.itemEnti.id,
-        qkid: that.entity.id,
+        qkId: that.entity.id,
         content: that.content
       };
        that.$store.commit("showLoadingBigText", "提交批示中");
