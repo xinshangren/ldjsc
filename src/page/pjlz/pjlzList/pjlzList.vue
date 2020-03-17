@@ -240,6 +240,7 @@
     >
       <div style="background:#ffffff;">
         <div>
+          <div v-if="status==0">
           <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否超期</div>
           <ul id="sfcqDialogId" class="ui-row" style="margin-top: 11px;">
             <li id="0" class="ui-col ui-col-25 dialogSelect" style="width:30%;">全部</li>
@@ -247,7 +248,7 @@
             <li id="2" class="ui-col ui-col-25 dialogNoSelect" style="width:30%;">未超期</li>
           </ul>
           <div style="width: 100%;height: 8px;background: #f3f3f3;margin-top: 10px;"></div>
-
+          </div>
           <div v-if="status==1">
             <div style="padding-top:9px;font-size: 14px;margin-left:17px;">是否督办</div>
             <ul id="dbztDialogId" class="ui-row" style="margin-top: 11px;">

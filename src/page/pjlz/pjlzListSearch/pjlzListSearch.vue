@@ -412,25 +412,25 @@ export default {
     this.periodType = periodTypes;
     this.periodData = time;
     switch (parseInt(statusGet)) {
-      case 1:
+       case 1:
         this.status = "";
         this.isOvertime = 0;
-        this.supervision = ""; //督办状态
-        this.isFeedback = ""; //是否有反馈
+        this.supervision = "";
+        this.isFeedback = "";
         break;
       case 2:
         this.status = 1;
         this.isOvertime = 0;
-        this.supervision = "0"; //督办状态
-        this.isFeedback = ""; //是否有反馈
+        this.supervision = "";
+        this.isFeedback = "";
         break;
       case 3:
         this.status = 0;
-        this.isOvertime = 0;
-        this.supervision = ""; //督办状态
-        this.isFeedback = "1"; //是否有反馈
+        this.isOvertime = 2;
+        this.supervision = "";
+        this.isFeedback = "1";
         break;
-      case 4: //超时未完成，已抛弃
+      case 4:
         this.status = 0;
         this.isOvertime = 1;
         this.supervision = "";
@@ -439,19 +439,19 @@ export default {
         this.status = 0;
         this.isOvertime = 2;
         this.supervision = "";
-        this.isFeedback = "0"; //是否有反馈
+        this.isFeedback = "0";
         break;
       case 6:
         this.status = 0;
         this.isOvertime = 1;
         this.supervision = "";
-        this.isFeedback = "0"; //是否有反馈
+         this.isFeedback = "0";
         break;
       case 7:
-        this.status = 1;
-        this.isOvertime = 0;
+        this.status = 0;
+        this.isOvertime = 1;
         this.supervision = 1;
-        this.isFeedback = ""; //是否有反馈
+          this.isFeedback = "";
         break;
 
       default:
@@ -512,29 +512,45 @@ export default {
     this.periodData = time;
     switch (parseInt(statusGet)) {
       case 1:
-        this.status = 0;
+        this.status = "";
         this.isOvertime = 0;
         this.supervision = "";
+        this.isFeedback = "";
         break;
       case 2:
         this.status = 1;
         this.isOvertime = 0;
         this.supervision = "";
+        this.isFeedback = "";
         break;
       case 3:
         this.status = 0;
         this.isOvertime = 2;
         this.supervision = "";
+        this.isFeedback = "1";
         break;
       case 4:
         this.status = 0;
         this.isOvertime = 1;
         this.supervision = "";
         break;
+      case 5:
+        this.status = 0;
+        this.isOvertime = 2;
+        this.supervision = "";
+        this.isFeedback = "0";
+        break;
+      case 6:
+        this.status = 0;
+        this.isOvertime = 1;
+        this.supervision = "";
+         this.isFeedback = "0";
+        break;
       case 7:
         this.status = 0;
         this.isOvertime = 1;
         this.supervision = 1;
+          this.isFeedback = "";
         break;
       default:
         break;
