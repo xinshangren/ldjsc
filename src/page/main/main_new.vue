@@ -566,7 +566,7 @@ export default {
       dd.ready(function() {
         dd.ui.webViewBounce.disable();
         dd.runtime.permission.requestAuthCode({
-          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          corpId: global_variable.corpId, // 企业id
           onSuccess: function(info) {
             var code = info.code; // 通过该免登授权码可以获取用户身份
             var params = {

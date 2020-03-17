@@ -249,12 +249,12 @@ export const hbgjAirJs = {
         var nameList = [];
         var valueList = [];
         for (var i = 0; i < data.length; i++) {
-            var month=data[i].approval_undone_month;
+            var month=data[i].approval_normal_month;
             if(parseInt(month)<10){
                 month=month.replace("0","");
             }
             nameList.push(month);
-            valueList.push(data[i].approval_undone_num);
+            valueList.push(data[i].approval_normal_num);
         }
 
         var option = {

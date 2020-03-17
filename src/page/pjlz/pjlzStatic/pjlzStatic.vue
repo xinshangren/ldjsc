@@ -89,12 +89,12 @@
                   <div style="font-size:20px;color:#f9bf4e;">{{oneData.approval_undone_normal}}</div>
                   <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
                 </div>
-                <div style="color: #999999;font-size: 13px;">正常未完成</div>
+                <div style="color: #999999;font-size: 13px;">正常进行中</div>
               </div>
             </div>
           </div>
         </li>
-        <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(4)">
+        <!-- <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(4)">
           <div class="pjlzStaticModel4">
             <div style="display:flex;">
               <div style="width:50%;"></div>
@@ -107,14 +107,14 @@
               </div>
             </div>
           </div>
-        </li>
-        <!-- <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(5)">
+        </li> -->
+        <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(5)">
           <div class="pjlzStaticModel5">
             <div style="display:flex;">
               <div style="width:50%;"></div>
               <div style="width:50%;">
                 <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                  <div style="font-size:20px;color:#FF9933;">0</div>
+                  <div style="font-size:20px;color:#FF9933;">{{oneData.approval_normal_nofeedback}}</div>
                   <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
                 </div>
                 <div style="color: #999999;font-size: 13px;">正常未反馈</div>
@@ -128,7 +128,7 @@
               <div style="width:50%;"></div>
               <div style="width:50%;">
                 <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                  <div style="font-size:20px;color:#F96A4E;">0</div>
+                  <div style="font-size:20px;color:#F96A4E;">{{oneData.approval_overtime_nofeedback}}</div>
                   <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
                 </div>
                 <div style="color: #999999;font-size: 13px;">超时未反馈</div>
@@ -136,20 +136,20 @@
             </div>
           </div>
         </li>
-         <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(6)">
+         <li class="ui-col ui-col-50" style="margin-top:14px;" @click="intentSearchList(7)">
           <div class="pjlzStaticModel7">
             <div style="display:flex;">
               <div style="width:50%;"></div>
               <div style="width:50%;">
                 <div style="display: flex;margin-top: 8px;line-height: 22px;height: 22px;">
-                  <div style="font-size:20px;color:#FF6699;">0</div>
+                  <div style="font-size:20px;color:#FF6699;">{{oneData.approval_send_supervision}}</div>
                   <div style="color: #333333;font-size: 13px;line-height: 29px;margin-left:2px;">项</div>
                 </div>
                 <div style="color: #999999;font-size: 13px;">转13710督办</div>
               </div>
             </div>
           </div>
-        </li> -->
+        </li>
 
       </ul>
 
@@ -162,7 +162,7 @@
         <div ref="myCharts3" style="height:210px;width:100%;"></div>
       </div>
       <div style="margin-top: 18px;border-top: 10px solid #f1f1f1;padding-top: 10px;">
-        <div class="pjlzStaticTitile">年度累计延期未完成的工作情况</div>
+        <div class="pjlzStaticTitile">每个月正常完成的工作情况</div>
         <div
           class="van-hairline--top"
           style="height: 1px;margin-top: 10px;margin-left: 16px;margin-right: 18px;"
@@ -326,6 +326,10 @@ export default {
     //跳转独立的页面
     intentSearchList: function(flag) {
       console.log(flag);
+      //   if(flag=='5'||flag=='6'){
+      //   this.$toast("该功能改造中");
+      //  return;
+      // }
       var dateFormat = /^(\d{4})-(\d{2})-(\d{2})$/;
       var dateFormatMonth = /^(\d{4})-(\d{2})$/;
       var dateFormatyear = /^(\d{4})$/;
@@ -346,6 +350,9 @@ export default {
         }
       }
       localStorage.setItem("intentSearch", "");
+        localStorage.setItem("newsListPjlzListSearch", "");
+      localStorage.setItem("pjlzListcountSearch", "");
+      localStorage.setItem("pjlzSearchDealiId", "");
       this.$router.push({
         path: "/pjlz/pjlzListSearch/pjlzListSearch",
         name: "pjlzListSearchVue",
@@ -421,7 +428,7 @@ export default {
       }
       var self = this;
       var params = {
-        method: "statisticJobUndone",
+        method: "statisticJobnormal",
         dingUserId: global_variable.roleJs.dingUserId,
         year: yearDate
       };

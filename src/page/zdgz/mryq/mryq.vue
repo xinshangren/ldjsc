@@ -1,6 +1,12 @@
 <template>
   <div style>
-    <mescroll-vue id="mescroll" ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
+    <mescroll-vue
+      id="mescroll"
+      ref="mescroll"
+      :down="mescrollDown"
+      :up="mescrollUp"
+      @init="mescrollInit"
+    >
       <div id="newsList" style="padding-left:10px;padding-right:10px;margin-top:10px;">
         <div
           style="position: relative;padding: 10px;background: rgb(255, 255, 255);height: 80px;border-radius: 10px;margin-bottom: 6px;box-shadow: 1px 1px 1px #cccccc;"
@@ -78,10 +84,10 @@ export default {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
     var top = localStorage.getItem("mryqList");
     console.log(top);
-    if (top != null && top != ""&&top!=undefined) {
+    if (top != null && top != "" && top != undefined) {
       $("#mescroll").scrollTop(top);
       var items = localStorage.getItem("mryqDealiId");
-       console.log(items);
+      console.log(items);
       var itemv = JSON.parse(items);
       var self = this;
       if (self.list.length > 0) {
@@ -95,8 +101,8 @@ export default {
         console.log(arr);
         self.list = arr;
       }
-    }else{
-       this.mescroll.resetUpScroll();
+    } else {
+      this.mescroll.resetUpScroll();
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -104,8 +110,8 @@ export default {
     console.log(to);
     if (from.name == "main") {
       to.meta.keepAlive = false;
-        localStorage.setItem("mryqList","");
-      localStorage.setItem("mryqDealiId","");
+      localStorage.setItem("mryqList", "");
+      localStorage.setItem("mryqDealiId", "");
     } else {
       if (from.name == "zdgz_mryqVue") {
         if (to.name == "mryqDealiVue") {
@@ -206,20 +212,26 @@ export default {
       var top = $("#mescroll").scrollTop();
       localStorage.setItem("mryqList", top);
       localStorage.setItem("mryqDealiId", JSON.stringify(item));
-      this.$router.push({
-        path: "/zdgz/mryq/mryq/mryqDeali",
-        name: "mryqDealiVue",
-        params: {
-          entity: item
-        }
-      });
 
-      //   this.$router.push({
-      //   path: "/zdgz/mryq/qklist",
-      //   params: {
-      //     entity: item
-      //   }
-      // });
+      var addPattern = item.add_pattern; //1=每日要情2=期刊
+      if (addPattern === "1") {
+        this.$router.push({
+          path: "/zdgz/mryq/mryq/mryqDeali",
+          name: "mryqDealiVue",
+          params: {
+            entity: item
+          }
+        });
+      } else {
+          localStorage.setItem("qklistitemEnti","");
+        this.$router.push({
+          path: "/zdgz/mryq/qklist",
+          name:"qklistVue",
+          params: {
+            entity: item
+          }
+        });
+      }
     }
   }
 };

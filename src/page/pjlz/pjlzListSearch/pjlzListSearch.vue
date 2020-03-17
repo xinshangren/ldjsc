@@ -19,7 +19,9 @@
       <img style="height: 200px;margin-top: 146px;" src="../../../assets/img/no_data.png" />
     </div>
     <div id="count_id" style="display:flex;top:106px;position:fixed;width:100%;">
-      <div style="width:48%;text-align:right;color:#1976d2;font-size:16px;height:32px;line-height: 36px;">共</div>
+      <div
+        style="width:48%;text-align:right;color:#1976d2;font-size:16px;height:32px;line-height: 36px;"
+      >共</div>
       <div
         id="totalCountId"
         ref="totalCountId"
@@ -39,8 +41,12 @@
         <div
           v-for="(item,index) in list"
           :key="index"
-          style="padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;font-size:15px;background:#ffffff;"
+          style=" padding-top:7px;padding-bottom:7px;box-shadow:0px 0px 2px #cccccc;position:relative;font-size:15px;background:#ffffff;"
         >
+          <div
+            :class="item.supervision_status=='0'?'backgroundListSearchZero':'backgroundListSearchOne' "
+          ></div>
+
           <div style="position:relative;" @click="openIndexFun(item,$event)">
             <div style="display:flex;">
               <img
@@ -61,7 +67,7 @@
               <div v-if="item.approval_status==4" class="pjlzListybj">已办结</div>-->
               <!-- <div v-if="item.approval_status==5" class="pjlzListjjjx">拒绝结项</div> -->
             </div>
-              <div style="display:flex;">
+            <div style="display:flex;">
               <div class="pjlzListSmallDiv" style="display:flex;">
                 <img class="pjlzListSmallIcon" src="../../../assets/img/pjbh_list_bg.png" />
                 <div class="pjlzListSmallDivFont">批件文号：</div>
@@ -235,11 +241,11 @@
         </div>
       </div>
     </van-popup>
-    <van-overlay :show="sqjxshow" @click="sqjxshow=false" :z-index="100">
+    <van-overlay :show="sqjxshow" @click="sqjxshow=false;sqjxmessage=''" :z-index="100">
       <div class="wrapper">
         <div id="popSqjxId" class="block" @click.stop>
           <img
-            @click="sqjxshow=false"
+            @click="sqjxshow=false;sqjxmessage=''"
             class="pjlzSqjxClose"
             src="../../../assets/img/pop_close.png"
           />
@@ -257,7 +263,7 @@
             class="pjlzSqjxContent"
           />
           <div style="display:flex;margin-top:24px;">
-            <div style="width:50%;text-align: center;" @click="sqjxshow=false">
+            <div style="width:50%;text-align: center;" @click="sqjxshow=false;sqjxmessage=''">
               <div class="pjlzSqjxCancelButton1">取消</div>
             </div>
             <div style="width:50%;text-align: center;" @click="jxsqFun()">
@@ -305,6 +311,8 @@ export default {
       status: "1", //办理状态:0-全部，1-办理中，2-已结办，3-申请结办
       isChecked: "", //是否签收：0-未签收，1-已签收
       approval_status: "0",
+      supervision: "", //督办状态
+      isFeedback: "", //是否有反馈
       sqjxshow: false, //申请结伴标记
       sqjxmessage: "", //申请结伴内容
       nowItem: null,
@@ -314,6 +322,8 @@ export default {
       periodData: "",
       mescroll: null, // mescroll实例对象
       shaixuan: null,
+      screenHeight: document.documentElement.clientHeight, //屏幕高度
+      screenHeightNow: 0,
       mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
       nodataImg: require("../../../assets/img/nodata.png"),
       mescrollUp: {
@@ -405,18 +415,43 @@ export default {
       case 1:
         this.status = "";
         this.isOvertime = 0;
+        this.supervision = ""; //督办状态
+        this.isFeedback = ""; //是否有反馈
         break;
       case 2:
         this.status = 1;
         this.isOvertime = 0;
+        this.supervision = "0"; //督办状态
+        this.isFeedback = ""; //是否有反馈
         break;
       case 3:
         this.status = 0;
-        this.isOvertime = 2;
+        this.isOvertime = 0;
+        this.supervision = ""; //督办状态
+        this.isFeedback = "1"; //是否有反馈
         break;
-      case 4:
+      case 4: //超时未完成，已抛弃
         this.status = 0;
         this.isOvertime = 1;
+        this.supervision = "";
+        break;
+      case 5:
+        this.status = 0;
+        this.isOvertime = 2;
+        this.supervision = "";
+        this.isFeedback = "0"; //是否有反馈
+        break;
+      case 6:
+        this.status = 0;
+        this.isOvertime = 1;
+        this.supervision = "";
+        this.isFeedback = "0"; //是否有反馈
+        break;
+      case 7:
+        this.status = 1;
+        this.isOvertime = 0;
+        this.supervision = 1;
+        this.isFeedback = ""; //是否有反馈
         break;
 
       default:
@@ -479,26 +514,54 @@ export default {
       case 1:
         this.status = 0;
         this.isOvertime = 0;
+        this.supervision = "";
         break;
       case 2:
         this.status = 1;
         this.isOvertime = 0;
+        this.supervision = "";
         break;
       case 3:
         this.status = 0;
         this.isOvertime = 2;
+        this.supervision = "";
         break;
       case 4:
         this.status = 0;
         this.isOvertime = 1;
+        this.supervision = "";
         break;
-
+      case 7:
+        this.status = 0;
+        this.isOvertime = 1;
+        this.supervision = 1;
+        break;
       default:
         break;
     }
     self.pdSingleApp();
+    var _this = this;
+    window.addEventListener("resize", () => _this.measure1(), false);
+  },
+  watch: {
+    screenHeightNow: function(newName, oldName) {
+      console.log(this.screenHeight + "===" + this.screenHeightNow);
+      //监听屏幕宽度变化
+      if (this.screenHeight > this.screenHeightNow) {
+        $("#popSqjxId").css("height", "85%");
+        $("#popSqjxId").css("max-height", "85%");
+      } else {
+        $("#popSqjxId").css("height", "55%");
+        $("#popSqjxId").css("max-height", "55%");
+      }
+    }
   },
   methods: {
+    measure1: function() {
+      window.fullHeight = document.documentElement.clientHeight;
+      this.screenHeightNow = window.fullHeight;
+      console.log(this.screenHeightNow);
+    },
     scrollTopZero: function() {
       $("#mescroll").scrollTop(0);
     },
@@ -670,7 +733,7 @@ export default {
       var self = this;
       dd.ready(function() {
         dd.runtime.permission.requestAuthCode({
-          corpId: "dingf1c7cc28f05dbd2335c2f4657eb6378f", // 企业id
+          corpId: global_variable.corpId, // 企业id
           onSuccess: function(info) {
             var code = info.code; // 通过该免登授权码可以获取用户身份
             var params = {
@@ -756,6 +819,8 @@ export default {
         pageSize: page.size,
         // corpId:global_variable.corpId,
         // dingUserId: "086404191926187734",
+        supervision: this.supervision, //转督办
+        isFeedback: this.isFeedback, //反馈
         dingUserId: global_variable.roleJs.dingUserId,
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
@@ -904,7 +969,10 @@ export default {
       for (var i = 0; i < str.length; i++) {
         rs = rs + str.substr(i, 1).replace(pattern, "");
       }
-         var rs = rs.replace(/[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig, "");
+      var rs = rs.replace(
+        /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/gi,
+        ""
+      );
       this.sqjxmessage = rs;
       return str;
     },

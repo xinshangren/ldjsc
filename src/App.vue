@@ -192,7 +192,7 @@ export default {
          Watermark.set("领导批示办理")
       }
     } else {
-      document.title = "晋城市领导驾驶舱";
+      document.title = "晋城市领导驾驶舱";//晋城市领导驾驶舱
       //  this.$route.meta.title = "晋城市领导驾驶舱";
     }
     this.getFiveNotice();
