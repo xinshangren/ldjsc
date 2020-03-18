@@ -1,9 +1,12 @@
 <template>
   <div style="background:#ffffff;">
-      
     <div :style="backgroundDiv" style="width: 92%;padding: 2% 4% 2% 4%;background-size: 100% 100%;">
       <div style="font-size: 20px;text-align:center;padding-top: 8px;">{{entity.remark}}</div>
-      <div id="pmJjdivid" style="width:100%;font-size:15px;margin-top:15px;overflow:auto;" v-html="entity.content"></div>
+      <div
+        id="pmJjdivid"
+        style="width:100%;font-size:15px;margin-top:15px;overflow:auto;"
+        v-html="entity.content"
+      ></div>
       <van-field
         v-model="content"
         rows="4"
@@ -15,24 +18,21 @@
         :formatter="formatter(content)"
         class="qklistDealiContent"
       />
-      
-       <div
-          style="display: flex;background: #28bcfe;border-radius:20px;width: 64%;
+
+      <div
+        style="display: flex;background: #28bcfe;border-radius:20px;width: 64%;
                 margin: auto;
                 margin-top: 15px;
                 height: 40px;"
-          @click="saveCmsArticlePsMryq"
-        > 
+        @click="saveCmsArticlePsMryq"
+      >
         <div style="width:44%;text-align:right;line-height:28px;">
-          <img
-            style="height: 20px;"
-            src="../../../../../assets/img/tijiao_icon.png"
-          />
-          </div>
-          <div
-            style="margin-top: 6px; color: #ffffff;font-size: 18px;font-weight: 600;margin-left: 5px;"
-          >确定</div>
+          <img style="height: 20px;" src="../../../../../assets/img/tijiao_icon.png" />
         </div>
+        <div
+          style="margin-top: 6px; color: #ffffff;font-size: 18px;font-weight: 600;margin-left: 5px;"
+        >确定</div>
+      </div>
 
       <div v-if="isShow" style="position: fixed;bottom: 20px;right: 10px;">
         <div
@@ -91,12 +91,18 @@ export default {
     console.log(to);
     next();
   },
-  updated(){
- var height = document.body.clientHeight;
-   
+  updated() {
+    var height = document.body.clientHeight;
+
     $("#pmJjdivid p").each(function() {
       $(this).attr("style", "font-size:15px;");
     });
+    $("#pmJjdivid img").each(function() {
+		var imageurl = $(this).attr('src');
+		if(imageurl.indexOf("http") == -1) {
+			$(this).attr('src',httpMethod.returnBaseUrlFun()+ imageurl);
+		}
+	});
     var self = this;
     setTimeout(() => {
       var o = document.getElementById("pmJjdivid");
@@ -145,10 +151,9 @@ export default {
     console.log(this.itemEnti);
     console.log(this.entity);
     this.findQkIdByXq(this.entity.id);
-   
   },
   methods: {
-      resizeBig: function() {
+    resizeBig: function() {
       $("#pmJjdivid p").each(function() {
         if ($(this).children("img").length > 0) {
           var imgWidth = $(this)
@@ -290,11 +295,11 @@ export default {
         qkId: that.entity.id,
         content: that.content
       };
-       that.$store.commit("showLoadingBigText", "提交批示中");
+      that.$store.commit("showLoadingBigText", "提交批示中");
       httpMethod
         .saveCmsArticlePsMryq(params)
         .then(res => {
-            that.$store.commit("hideLoadingBig");
+          that.$store.commit("hideLoadingBig");
           console.log(res);
           if (res.success == "1") {
             that.$toast("提交成功");
@@ -302,7 +307,7 @@ export default {
           }
         })
         .catch(err => {
-             that.$store.commit("hideLoadingBig");
+          that.$store.commit("hideLoadingBig");
           // this.$toast(err);
         });
     }
