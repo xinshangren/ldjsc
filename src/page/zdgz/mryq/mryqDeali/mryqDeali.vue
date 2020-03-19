@@ -81,16 +81,9 @@ export default {
       }
     };
   },
-  mounted() {
-    this.itemEnti = this.$route.params.entity;
-    console.log(this.itemEnti);
-    if (this.itemEnti != undefined) {
-      this.itemId = this.itemEnti.id;
-    } else {
-      this.itemId = localStorage.getItem("mryqItemId");
-    }
-    this.findIdByMyrq(this.itemId);
-    console.log(document.body.clientHeight);
+  updated(){
+     console.log("111");
+     console.log(document.body.clientHeight);
 
     var height = document.body.clientHeight;
     // $("#contentId").css("height",height+200+"px");
@@ -138,7 +131,18 @@ export default {
           // console.log("没有");
         }
       });
-    }, 100);
+    }, 50);
+  },
+  mounted() {
+    this.itemEnti = this.$route.params.entity;
+    console.log(this.itemEnti);
+    if (this.itemEnti != undefined) {
+      this.itemId = this.itemEnti.id;
+    } else {
+      this.itemId = localStorage.getItem("mryqItemId");
+    }
+    this.findIdByMyrq(this.itemId);
+    
   },
   methods: {
     resizeBig: function() {

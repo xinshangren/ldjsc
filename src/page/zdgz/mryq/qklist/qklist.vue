@@ -11,7 +11,7 @@
           <div
             class="van-multi-ellipsis--l2"
             style="color: #333333;font-size: 16px;width: 93%; overflow: hidden;"
-          >{{item.remark}}</div>
+          >{{index+1}}.{{item.remark}}</div>
         </div>
       </div>
   </div>

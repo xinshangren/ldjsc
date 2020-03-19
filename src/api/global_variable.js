@@ -13,14 +13,14 @@ const roleJs = {
   // role: "cbr",
   // dingUserId: "086404191926187734",
   // role: "wdk",
-  // dingUserId: "",
-  // role: "",
+  dingUserId: "",
+  role: "",
   department: "",
   username: ""
 };//用户信息
 const isDebugging=false;//是否本地调试
-// const messageUrl="webpage/jcsldjscApp/static/icon_info.png";//生产环境消息图标地址
-const messageUrl="jcsldjscApp/static/icon_info.png";//测试环境消息图标地址
+const messageUrl="webpage/jcsldjscApp/static/icon_info.png";//生产环境消息图标地址
+// const messageUrl="jcsldjscApp/static/icon_info.png";//测试环境消息图标地址
 const singleApp = 0;
 const permissTip="该功能无权限浏览，需授权";
 // const permissionList = [

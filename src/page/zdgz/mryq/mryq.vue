@@ -212,7 +212,13 @@ export default {
       var top = $("#mescroll").scrollTop();
       localStorage.setItem("mryqList", top);
       localStorage.setItem("mryqDealiId", JSON.stringify(item));
-
+      //  this.$router.push({
+      //     path: "/zdgz/mryq/mryq/mryqDeali",
+      //     name: "mryqDealiVue",
+      //     params: {
+      //       entity: item
+      //     }
+      //   });
       var addPattern = item.add_pattern; //1=每日要情2=期刊
       if (addPattern === "1") {
         this.$router.push({
