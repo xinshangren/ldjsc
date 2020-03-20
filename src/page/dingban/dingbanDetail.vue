@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div
+    <div v-show="all_pick_sum"
       style="border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin: 0px 0px -4px -4px;background: #ffffff;"
     >
       <img
@@ -108,7 +108,8 @@ export default {
       callButton: false,
       map: {},
       callPhoneList_length: 0,
-      list_true: []
+      list_true: [],
+      all_pick_sum:true,
     };
   },
   props: ["departId", "callPhoneList_p", "depart_flag", "child_phoneList"],
@@ -122,10 +123,23 @@ export default {
     this.$root.$on("test11", data => {
       this.change_list(data);
     });
+    if(this.callPhoneList_length>0){
+      this.all_pick_sum = true;
+    }else{
+      this.all_pick_sum = false;
+    }
+  },
+  watch:{
+    callPhoneList_length:function(val, oldval){
+      if(val > 0){
+       this.all_pick_sum = true
+      }else{
+       this.all_pick_sum = true
+      }
+    }
   },
   methods: {
     change_list: function(data) {
-      console.log(data);
       this.list_true.forEach(e => {
         if (data.indexOf(e.dingid) > -1) {
           if (this.callPhoneList.indexOf(e.dingid) > -1) {
@@ -146,7 +160,6 @@ export default {
         this.all_pick_flag = false;
       }
       this.addPhone(null, null);
-      console.log(this.callPhoneList);
     },
     all_pick: function() {
       var self = this;
@@ -264,8 +277,8 @@ export default {
                if(e.phoneJurisdiction == 1){
                  call_flag = false;
                }else if(e.phoneJurisdiction == 3){
-                 if(phoneJurisdictionDingid != null && phoneJurisdictionDingid.length>0){
-                   if(phoneJurisdictionDingid.indexOf(this.corpId)>-1){
+                 if(e.phoneJurisdictionDingid != null && e.phoneJurisdictionDingid.length>0){
+                   if(e.phoneJurisdictionDingid.indexOf(this.corpId)>-1){
                      call_flag = true;
                      datalist.push(e);
                    }else{
@@ -397,7 +410,6 @@ export default {
     },
     //打电话
     goDetile(item) {
-      console.log(item);
       if (item.dingid != null) {
         if (item.dingid == global_variable.userId) {
           this.$toast("无法拨打自己电话");
@@ -410,7 +422,6 @@ export default {
               corpId: ddd, //企业id
               onSuccess: function() {},
               onFail: function(e) {
-                console.log(e);
                 self.$toast("钉钉系统原因导致无法拨打，请联系管理员");
               }
             });
