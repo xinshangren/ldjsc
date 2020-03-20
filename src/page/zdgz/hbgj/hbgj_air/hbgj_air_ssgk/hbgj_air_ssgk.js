@@ -1,15 +1,15 @@
 export const hbgjAirJs = {
     changeTime(time){
-            var commonTime = "";
+        var commonTime = "";
             if(time){
-                var unixTimestamp = new Date(time*1) ;
+            var unixTimestamp = new Date(time*1) ;
                     var vYear = unixTimestamp.getFullYear();
                     var vMon = unixTimestamp.getMonth()+1;
                     var vDay = unixTimestamp.getDate();
                     var hours = unixTimestamp.getHours();
                     var minutes = unixTimestamp.getMinutes();
                     var s = unixTimestamp.getSeconds();
-                    var currDay = unixTimestamp.getDate()+2;
+                    var currDay = unixTimestamp.getDate();
                     var current = vYear + "-" + (vMon < 10 ? "0" + vMon : vMon) + "-"
                                 + (currDay<10 ?  "0"+ currDay : currDay) + " "
                                 + (hours < 10 ? "0" + hours : hours) + ":"
