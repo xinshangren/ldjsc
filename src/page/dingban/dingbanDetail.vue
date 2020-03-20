@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div v-show="all_pick_sum"
-      style="border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin: 0px 0px -4px -4px;background: #ffffff;"
+    <div 
+      style="height:30px;border:5px solid #F7F7F7; width:100%;vertical-align: middle;display: flex;margin: 0px 0px -4px -4px;background: #F7F7F7;"
     >
+      <div v-show="all_pick_sum" style="background: #ffffff;width:100%;vertical-align: middle;display: flex;">
       <img
         id="all_pick"
         style="height: 20px;margin: 5px 0px 5px 12px;"
@@ -21,6 +22,7 @@
       <div
         style="font-size: 14px;margin: 5px 0px 5px 0px;color: rgb(48, 152, 251)"
       >（{{callPhoneList.length}}/{{callPhoneList_length}}）</div>
+      </div>
     </div>
     <van-list
       :id="departId"
