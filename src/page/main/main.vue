@@ -14,7 +14,7 @@
       <div class="main_item" id="0">
         <img class="main_item_img" v-bind:src="tabImage[0]" />
         <div class="main_item_noSelect">综合信息</div>
-      </div>
+      </div> 
       <div class="main_item" id="1">
         <img class="main_item_img" v-bind:src="tabImage[1]" />
         <div class="main_item_noSelect">13710督办</div>
