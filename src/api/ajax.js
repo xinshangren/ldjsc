@@ -1,6 +1,6 @@
 import axios from 'axios'; // 引入axiosimport axios from "axios";
 import store from '../store/store'
-import Qs from 'qs'
+import Qs from 'qs' 
 let router = import("@/router");
 axios.defaults.timeout = 10000;
 //axios.defaults.baseURL = "/api";
