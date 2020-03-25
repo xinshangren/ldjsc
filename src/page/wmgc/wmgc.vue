@@ -43,6 +43,18 @@ export default {
   activated() {
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#ffffff");
+    var typebt= this.$route.params.typebt;
+    if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+      this.active=parseInt(typebt);
+      this.tabsclick(this.active,"")
+    }else{
+      this.doAddAppLogList(
+      global_variable.logId,
+      global_variable.ddPhone,
+      "61",
+      "概况"
+      );
+    }
   },
   data() {
     return {
@@ -64,12 +76,6 @@ export default {
      next();
   },
   mounted() {
-    this.doAddAppLogList(
-      global_variable.logId,
-      global_variable.ddPhone,
-      "61",
-      "概况"
-    );
   },
   methods: {
     changeactive: function(data) {

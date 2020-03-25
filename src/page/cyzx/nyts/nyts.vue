@@ -171,6 +171,17 @@ export default {
   activated() {
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#ffffff");
+    var typebt= this.$route.params.typebt;
+    if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+      this.selectIndexTab(parseInt(typebt)+1)
+    }else{
+      this.doAddAppLogList(
+      global_variable.logId,
+      global_variable.ddPhone,
+      "39",
+      "煤炭"
+      );
+    }
   },
   beforeRouteEnter(to, from, next) {
     console.log(from);
@@ -207,12 +218,6 @@ export default {
     };
   },
   mounted() {
-    this.doAddAppLogList(
-      global_variable.logId,
-      global_variable.ddPhone,
-      "39",
-      "煤炭"
-    );
     var self = this;
     $("#leftUlId li").click(function() {
       console.log($(this).index());

@@ -44,7 +44,7 @@
       style="z-index: 2; height: 64px;background: #3098fb;position: fixed;top: 0px;width: 100%;"
     >
       <div style="display: flex;">
-        <div id="appVueleftId" style="width:75%;position:relative;">
+        <div id="appVueleftId" style="width:70%;position:relative;">
           <van-search
             id="search_all"
             ref="search_allref"
@@ -91,16 +91,18 @@
         <div
           id="appVuerightId"
           class="ui-row-flex ui-whitespace"
-          style="color:#ffffff;width:25%;height: 64px;font-size:14px;padding:0px;margin-left: 0px;"
+          style="color:#ffffff;width:30%;height: 64px;font-size:14px;padding:0px;margin-left: 0px;"
         >
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_home.png" class="home_top_img" @click="gotoHome()" />
             <div class="appvueRightFont">首页</div>
           </div>
-          <!-- <div class="ui-col ui-col index_top_div_style">
-            <img src="@/assets/img/icon_message.png" class="home_top_img" @click="toast()" />
+          <div class="ui-col ui-col index_top_div_style">
+            <img v-if="tzCount>=10" style="position: absolute;height: 12px;top: 5px;right: 45px;" src="./assets/img/icon_jcxx_info_tip.png"/> 
+            <div v-if="tzCount>0 && tzCount<10" style="position: absolute;height: 16px;width: 12px;top: 5px;margin-left: 20px;background: red;border-radius: 20px;color: rgb(255, 255, 255);font-size: 1px;">{{tzCount}}</div>
+            <img src="@/assets/img/icon_message.png" class="home_top_img"  @click="getxxtz()" />
             <div class="appvueRightFont">消息</div>
-          </div>-->
+          </div>
           <div class="ui-col ui-col index_top_div_style">
             <img src="@/assets/img/icon_user.png" class="home_top_img" @click="toast()" />
             <div class="appvueRightFont">我的</div>
@@ -166,10 +168,12 @@ export default {
       scroll_notice: [],
       animateUp: false,
       timer: null,
-      isSingleApp: true
+      isSingleApp: true,
+      tzCount:0
     };
   },
   mounted() {
+    
     String.prototype.getValue = function(parm) {
       var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)");
       var r = this.substr(this.indexOf("?") + 1).match(reg);
@@ -197,6 +201,17 @@ export default {
     }
     this.getFiveNotice();
     this.timer = setInterval(this.scrollAnimate, 5000);
+    var params = {
+      userId: global_variable.roleJs.dingUserId
+      };
+      console.log(params)
+      httpMethod.getTzCount(params).then(res => {
+        console.log(res);
+        alert(res.total);
+        if (res.success == "1") {
+          this.tzCount=res.total;
+        }
+      });
   },
   watch: {
     $route: "getPath"
@@ -218,12 +233,12 @@ export default {
       this.seach_value = "";
       if (path == "/" || path == "/main") {
         $("#yjzlid").hide();
-        $("#appVuerightId").css("width", "22%");
-        $("#appVueleftId").css("width", "75%");
+        $("#appVuerightId").css("width", "27%");
+        $("#appVueleftId").css("width", "70%");
       } else {
         $("#yjzlid").show();
-        $("#appVuerightId").css("width", "29%");
-        $("#appVueleftId").css("width", "70%");
+        $("#appVuerightId").css("width", "34%");
+        $("#appVueleftId").css("width", "65%");
       }
       var zdgcDeali = "/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali";
       if (
@@ -266,6 +281,11 @@ export default {
       } else {
         this.$router.push("/main");
       }
+    },
+    getxxtz:function(){
+      this.$router.replace({
+        path: "/main/msglb"
+      });
     },
     goNotice: function() {
       this.$router.push({

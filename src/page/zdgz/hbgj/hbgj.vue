@@ -309,6 +309,12 @@ export default {
       false
     );
   },
+  activated:function(){
+    var typebt= this.$route.params.typebt;
+    if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+      this.selectIndexTab(parseInt(typebt)+1)
+    }
+  },
   methods: {
      down: function() {
       var self = this;

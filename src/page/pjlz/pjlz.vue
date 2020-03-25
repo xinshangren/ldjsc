@@ -176,6 +176,10 @@ export default {
     next();
   },
   mounted() {
+    var typebt= this.$route.params.typebt;
+    if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+      this.active1=parseInt(typebt);
+    }
     localStorage.setItem("intent", "");
     localStorage.setItem("newsListPjlzList", "");
     localStorage.setItem("newsListPjlzListSearch", "");

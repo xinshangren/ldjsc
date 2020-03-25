@@ -253,6 +253,10 @@ export default {
     };
   },
   mounted() {
+    var typebt= this.$route.params.typebt;
+    if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+      this.active=parseInt(typebt);
+    }
     var self = this;
 
     $("#leftAreaDivId").click(function() {

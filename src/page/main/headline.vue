@@ -39,17 +39,32 @@ export default {
   name: "headline",
   data() {
     return {
-      active: 0
+      active: 0,
     };
   },
   mounted() {
-    this.$parent.isDeali = false;
-    this.doAddAppLogList(
+    var typebt= this.$route.params.typebt;
+    if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+      this.active=parseInt(typebt);
+      this.tabsclick(this.active,"");
+    }else{
+      this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
       "7",
       "头条"
-    );
+      );
+    }
+    this.$parent.isDeali = false;
+    
+  },
+  activated:function(){
+      var typebt= this.$route.params.typebt;
+      if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+        this.active=parseInt(typebt);
+        this.tabsclick(this.active,"");
+      }
+
   },
   beforeRouteLeave(to, from, next) {
     console.log(from);

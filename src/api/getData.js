@@ -427,6 +427,15 @@ export const httpMethod = {
     getCmsGG: function (params) {
         return get("cmsAppInsideController.action?getCmsGG", params);
     },
+    getTzList: function (params) {
+        return get("cmsAppInsideController.action?getTzList", params);
+    },
+    getTzCount: function (params) {
+        return get("cmsAppInsideController.action?getTzCount", params);
+    },
+    readTz: function (params) {
+        return get("cmsAppInsideController.action?readTz", params);
+    },
     //获取一键直连部门信息
     getDirectCon: function (params) {
         return get("dingAppInsideController.action?getDirectCon", params);

@@ -181,6 +181,12 @@ export default {
     next();
   },
   mounted() {
+    var typebt= this.$route.params.typebt;
+    if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+      this.tabsclick(typebt,"")
+      this.active=parseInt(typebt);
+    }
+   
     this.doAddAppLogList(
       global_variable.logId,
       global_variable.ddPhone,
