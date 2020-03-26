@@ -1,16 +1,25 @@
 <template>
   <ul id="main_new_ul_id" class="ui-row indexFontstyle" style="padding-top:0px;">
-    <li
-      v-for="(item,index) in tabImage"
-      :key="index"
-      @click="godetile(index,tabIdList[index])"
-      class="ui-col ui-col-25 indexLiStyle"
-    >   
-    
-       <img v-if="tabNameList[index]=='晋城信息'&&yd_hits=='1'" style="position: absolute;height: 16px;top: -7px;right: 12px;" src="../../assets/img/icon_jcxx_info_tip.png"/>
-      <img class="indexLiContentImgStyle" :src="tabImage[index]" />
+    <li v-for="(item,index) in tabImage" :key="index" class="ui-col ui-col-25 indexLiStyle" :id="forid(index)"
+      @touchstart="start(index)" @touchend="end" @click="godetile(index,tabIdList[index])">
+
+      <div style="position: relative;">
+        <img v-if="tabNameList[index]=='晋城信息'&&yd_hits=='1'"
+          style="position: absolute;height: 16px;top: -7px;right: 12px;"
+          src="../../assets/img/icon_jcxx_info_tip.png" />
+        <img class="indexLiContentImgStyle" :src="tabImage[index]" />
+        <img v-if="folowlist.indexOf(tabNameList[index])>-1" class="indexLiContentGzImgStyle"
+          src="../../assets/img/icon_collect.png" />
+      </div>
+
       <div class="indexLiContentDivStyle">{{tabNameList[index]}}</div>
     </li>
+    <van-overlay :show="show" @click="gbshow" :z-index="2001">
+      <div class="wrapper">
+        <img  v-if="showjs==0" style="position:absolute;bottom:310px;width:220px;left: 13px;" src="../../assets/img/pic1.png" />
+        <img v-if="showjs==1" style="position: absolute;top: 9px;width: 167px;z-index: 108;right: -4px;" src="../../assets/img/pic2.png" />
+      </div>
+    </van-overlay>
   </ul>
 </template>
 
@@ -22,7 +31,9 @@ import { mainJs } from "../main/main.js";
 import global_variable from "../../api/global_variable.js";
 import { httpMethod } from "../../api/getData.js";
 import dd from "dingtalk-jsapi";
-import Watermark from '../../assets/js/watermark'; 
+import Watermark from "../../assets/js/watermark";
+import { Overlay } from "vant";
+Vue.use(Overlay);
 Vue.use(Search).use(Dialog);
 export default {
   name: "mainVue",
@@ -34,8 +45,8 @@ export default {
     console.log("activated");
     this.getCmsMyrqIfHits();
     document.querySelector("body").setAttribute("style", "background:#ffffff");
-    localStorage.setItem("mryqList","");
-      localStorage.setItem("mryqDealiId","");
+    localStorage.setItem("mryqList", "");
+    localStorage.setItem("mryqDealiId", "");
   },
   beforeRouteLeave(to, from, next) {
     console.log(from);
@@ -50,6 +61,8 @@ export default {
   },
   data() {
     return {
+      show: true,
+      showjs:0,
       tabid: 4,
       isCreate: false,
       isDeali: false,
@@ -101,7 +114,8 @@ export default {
         "7"
         // "999",
         // "1000"
-      ]
+      ],
+      folowlist: ""
       // permissionList: []
     };
   },
@@ -110,15 +124,77 @@ export default {
     // context.getCuruserid();
 
     this.getUserInfo();
-      // Watermark.set(global_variable.roleJs.username+" 领导驾驶舱");
+    // Watermark.set(global_variable.roleJs.username+" 领导驾驶舱");
     // this.getCmsMyrqIfHits();
   },
   mounted() {
+    var gzxxts =localStorage.getItem("gzxxts");
+    if(gzxxts==1){
+      this.show=false;
+    }
     dd.biz.navigation.setRight({
       show: false
     });
+    var sss = global_variable.followList;
+    for (var i = 0; i < global_variable.followList.length; i++) {
+      this.folowlist += global_variable.followList[i].name + ",";
+    }
   },
   methods: {
+    gbshow(){
+      this.showjs++;
+      if(this.showjs==2){
+        this.show=false; 
+        localStorage.setItem("gzxxts","1");//关注消息是否已读1是已读
+      }
+    },
+    start(index) {
+      clearTimeout(this.loop); //再次清空定时器，防止重复注册定时器
+      this.loop = setTimeout(() => {
+        if (this.folowlist.indexOf(this.tabNameList[index]) > -1) {
+          this.saveAttentionRelevancy(this.tabNameList[index], 2);
+        } else {
+          this.saveAttentionRelevancy(this.tabNameList[index], 1);
+        }
+      }, 1000);
+    },
+
+    end() {
+      clearTimeout(this.loop); //清空定时器，防止重复注册定时器
+    },
+    forid(index) {
+      return "forid" + index;
+    },
+    saveAttentionRelevancy(name, msg) {
+      var params = {
+        userId: global_variable.roleJs.dingUserId,
+        bmid: "",
+        type: msg
+      };
+
+      for (var i = 0; i < global_variable.allList.length; i++) {
+        if (global_variable.allList[i].name.indexOf(name) > -1) {
+          params.bmid = global_variable.allList[i].id;
+        }
+      }
+
+      httpMethod.saveAttentionRelevancy(params).then(res => {
+        if (res.success == "1") {
+          if (msg == 1) {
+            this.$toast("添加关注");
+            this.folowlist += name + ",";
+          } else {
+            this.$toast("取消关注");
+            this.folowlist = this.folowlist.replace(name + ",", "");
+            for (var i = 0; i < global_variable.followList.length; i++) {
+              if (global_variable.followList[i].name.indexOf(name) > -1) {
+                global_variable.followList.splice(i, 1);
+              }
+            }
+          }
+        }
+      });
+    },
     getCmsMyrqIfHits: function() {
       console.log("获取已读");
       var self = this;
@@ -161,7 +237,7 @@ export default {
                   }
                 );
                 self.getCmsMyrqIfHits();
-                 Watermark.set(res.data.username+" 领导驾驶舱");
+                Watermark.set(res.data.username + " 领导驾驶舱");
                 console.log("roleJs=====" + JSON.stringify(global_variable));
                 console.log(global_variable.roleJs);
                 // var roleCode=res.data.role;
@@ -603,4 +679,15 @@ export default {
 <style scoped>
 @import "../../page/main/main_new.css";
 @import "../../assets/css/frozenui.css";
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block {
+  width: 120px;
+  height: 120px;
+}
 </style>

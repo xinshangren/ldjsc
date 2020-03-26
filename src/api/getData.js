@@ -427,6 +427,15 @@ export const httpMethod = {
     getCmsGG: function (params) {
         return get("cmsAppInsideController.action?getCmsGG", params);
     },
+    getTzList: function (params) {
+        return get("cmsAppInsideController.action?getTzList", params);
+    },
+    getTzCount: function (params) {
+        return get("cmsAppInsideController.action?getTzCount", params);
+    },
+    readTz: function (params) {
+        return get("cmsAppInsideController.action?readTz", params);
+    },
     //获取一键直连部门信息
     getDirectCon: function (params) {
         return get("dingAppInsideController.action?getDirectCon", params);
@@ -462,6 +471,10 @@ export const httpMethod = {
     //保存领导批示记录
     saveCmsArticlePsMryq: function (params) {
         return get("cmsAppInsideController.action?saveCmsArticlePsMryq", params);
+    },
+    //添加或取消模块关注
+    saveAttentionRelevancy: function (params) {
+        return get("cmsAppInsideController.action?saveAttentionRelevancy", params);
     },
 
     

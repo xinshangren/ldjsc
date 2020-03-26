@@ -144,6 +144,17 @@ export default {
   activated() {
     //返回保留页面记录
     document.querySelector("body").setAttribute("style", "background:#F7F7F7");
+    var typebt= this.$route.params.typebt;
+    if(typebt !=undefined&& typebt!='undefined' &&typebt!=null){
+      this.changeState(parseInt(typebt)+1)
+    }else{
+      this.doAddAppLogList(
+      global_variable.logId,
+      global_variable.ddPhone,
+      "23",
+      "景区"
+      )
+    }
   },
   beforeRouteEnter(to, from, next) {
     console.log(from);
@@ -184,12 +195,6 @@ export default {
       this.currentView=this.$route.params.tabsel;
       this.active =this.$route.params.active;
     }
-    this.doAddAppLogList(
-      global_variable.logId,
-      global_variable.ddPhone,
-      "23",
-      "景区"
-    );
     this.handleScroll();
     window.addEventListener("scroll", this.handleScroll);
   },

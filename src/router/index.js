@@ -47,6 +47,11 @@ export default new Router({
       component:  () => import('@/page/splash.vue'),
     },
     {
+      path: '/main/msglb',
+      name: 'msglb',
+      component:  () => import('@/page/main/msglb.vue'),
+    },
+    {
       path: '/main',
       name: 'main',
       component:  () => import('@/page/main/main_new.vue'),
@@ -62,6 +67,7 @@ export default new Router({
     },  {
       path: '/main/headline',
       name: 'headline',
+      bmid:'7',
       component: () => import('@/page/main/headline.vue'),
       meta:{keepAlive:true}
     }, {
@@ -110,20 +116,24 @@ export default new Router({
     {
       path: '/zdgz/zdgc/zdgc',
       name: 'zdgc',
+      bmid:'1',
       component: zdgcVue
     }, {
       path: '/zdgz/hbgj/hbgj',
       name: 'hbgj',
+      bmid:'2',
       component: hbgjVue,
       meta:{keepAlive:true}
     }, {
       path: '/qyly/qyly',
       name: 'qyly',
+      bmid:'3',
       component: qylyVue,
       meta:{keepAlive:true}
     }, {
       path: '/wmgc/wmgc',
       name: 'wmgc',
+      bmid:'4',
       component: wmgcVue,
       meta:{keepAlive:true}
     }, {
@@ -162,6 +172,7 @@ export default new Router({
     },{
       path: '/cyzx/nyts/nyts',
       name: 'nyts',
+      bmid:'6',
       component: nytsVue
     },{
       path: '/zdgz/zdgc/zdgc_xmlb/zdgc_xmdeali/zdgc_xmdeali',
@@ -175,6 +186,7 @@ export default new Router({
     }, {
       path: '/jjyx/jjyx_ztts/jjyx_ztts',
       name: 'jjyx_ztts',
+      bmid:'5',
       component: jjyx_zttsVue
     }, {
       path: '/zdgz/hbgj/hbgj_air/hbgj_air_station_list/hbgj_air_station_list_deali',
@@ -211,6 +223,7 @@ export default new Router({
     },{
       path: '/zdgz/mryq/mryq',
       name: 'zdgz_mryqVue',
+      bmid:'82',
       component: zdgz_mryqVue,
       meta:{keepAlive:true}
     },{
@@ -221,7 +234,6 @@ export default new Router({
       path: '/zdgz/mryq/mryq/mryqDeali/mryqDealiFj',
       name: 'mryqDealiFjVue',
       component: zdgz_mryqDealiFjVue,
-     
     },{
       path: '/qyly/jq/mryq/jqvideos_deali',
       name: 'jqvideos_dealVue',
@@ -253,6 +265,7 @@ export default new Router({
     },{
       path: '/pjlz/pjlz',
       name: 'pjlzListvue',
+      bmid:'81',
       component: () => import('@/page/pjlz/pjlz.vue'),
       meta:{keepAlive:true}
     },{

@@ -10,6 +10,12 @@
 .indexLiContentImgStyle{
      height: 54px;
 }
+.indexLiContentGzImgStyle{
+     height: 18px;
+     position: absolute;
+     bottom: 4px;
+     right: 20px;
+}
 .indexLiContentDivStyle{
     margin-top: 4px;
 }

@@ -55,6 +55,58 @@ export default {
   methods: {
     getCuruserid: function() {
       var self = this;
+
+      if (global_variable.isDebugging){//调试获取权限以及关注列表
+            var params = {
+              code: ""
+            };
+            httpMethod
+              .getUser(params)
+              .then(res => {
+                console.log(res);
+                if (res.success == "1") {
+                  if (res.functions != null) {
+                    global_variable.permissionList = res.functions;
+                    global_variable.followList = res.listMap;
+                    global_variable.allList = res.listdy;
+                    global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
+                    self.$parent.isSingleApp = false;
+                    self.$router.push("/main");
+                  } else {
+                    console.log("关闭应用");
+                    setTimeout(() => {
+                      var interval = setInterval(() => {
+                        self.permissTipTimeOut = self.permissTipTimeOut - 1;
+                        console.log(self.permissTipTimeOut);
+                        // console.log($(".van-dialog"));
+                        if (self.permissTipTimeOut > 0) {
+                          $(".van-dialog")
+                            .find(".van-dialog__message")
+                            .html(self.permissTipTimeOut + "秒后退出应用");
+                        }
+                        if (self.permissTipTimeOut < 1) {
+                          //clearInterval(interval);
+                          dd.ready(function() {
+                            dd.biz.navigation.close();
+                          });
+                        }
+                      }, 1000);
+                    }, 100);
+                    Dialog.alert({
+                      title: global_variable.permissTip,
+                      showConfirmButton: false,
+                      message: self.permissTipTimeOut + "秒后退出应用"
+                    }).then(() => {});
+                  }
+                } else if (res.success == "0") {
+                }
+              })
+              .catch(err => {
+                //self.$toast(err);
+              });
+          
+      }
+
       dd.ready(function() {
         dd.ui.webViewBounce.disable();
         dd.runtime.permission.requestAuthCode({
@@ -71,6 +123,8 @@ export default {
                 if (res.success == "1") {
                   if (res.functions != null) {
                     global_variable.permissionList = res.functions;
+                    global_variable.followList = res.listMap;
+                    global_variable.allList = res.listdy;
                     console.log("main权限" + global_variable.permissionList);
                     global_variable.userId = res.userId; //将全局变量模块挂载到Vue.prototype中
                     self.$parent.isSingleApp = false;

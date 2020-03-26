@@ -421,12 +421,12 @@ export default {
       case 2:
         this.status = 1;
         this.isOvertime = 0;
-        this.supervision = "";
+        this.supervision = "0";
         this.isFeedback = "";
         break;
       case 3:
         this.status = 0;
-        this.isOvertime = 2;
+        this.isOvertime = "";
         this.supervision = "";
         this.isFeedback = "1";
         break;
@@ -445,15 +445,14 @@ export default {
         this.status = 0;
         this.isOvertime = 1;
         this.supervision = "";
-         this.isFeedback = "0";
+        this.isFeedback = "0";
         break;
       case 7:
-        this.status = 0;
-        this.isOvertime = 1;
+        this.status = 1;
+        this.isOvertime = 0;
         this.supervision = 1;
-          this.isFeedback = "";
+        this.isFeedback = "";
         break;
-
       default:
         break;
     }
@@ -520,12 +519,12 @@ export default {
       case 2:
         this.status = 1;
         this.isOvertime = 0;
-        this.supervision = "";
+        this.supervision = "0";
         this.isFeedback = "";
         break;
       case 3:
         this.status = 0;
-        this.isOvertime = 2;
+        this.isOvertime = "";
         this.supervision = "";
         this.isFeedback = "1";
         break;
@@ -544,13 +543,13 @@ export default {
         this.status = 0;
         this.isOvertime = 1;
         this.supervision = "";
-         this.isFeedback = "0";
+        this.isFeedback = "0";
         break;
       case 7:
-        this.status = 0;
-        this.isOvertime = 1;
+        this.status = 1;
+        this.isOvertime = 0;
         this.supervision = 1;
-          this.isFeedback = "";
+        this.isFeedback = "";
         break;
       default:
         break;
@@ -835,14 +834,14 @@ export default {
         pageSize: page.size,
         // corpId:global_variable.corpId,
         // dingUserId: "086404191926187734",
-        supervision: this.supervision, //转督办
-        isFeedback: this.isFeedback, //反馈
         dingUserId: global_variable.roleJs.dingUserId,
         approvalKeywords: this.seach_value, //关键词
         isOvertime: this.isOvertime, //是否超期：0-全部，1-超期，2-未超期
         isChecked: this.isChecked, //是否签收：0-未签收，1-已签收
         status: this.status,
         approval_status: this.approval_status,
+        supervision: this.supervision, //转督办
+        isFeedback: this.isFeedback, //反馈
         createDateBegin: "",
         createDateEnd: "",
         periodType: this.periodType,
