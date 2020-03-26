@@ -67,7 +67,7 @@
         <div style="display: flex;margin-top: 15px;padding-bottom: 15px;">
           <div style="width: 37%;text-align: left;display:flex;">
             <!-- <img src="../../assets/img/szps.png" style="height: 16px;margin: 3px;" /> -->
-            <div class="title">市长批示：</div>
+            <div class="title">领导批示：</div>
           </div>
           <div style="width:63%">{{pj_detail.approval_instruct}}</div>
         </div>
