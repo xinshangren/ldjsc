@@ -472,6 +472,10 @@ export const httpMethod = {
     saveCmsArticlePsMryq: function (params) {
         return get("cmsAppInsideController.action?saveCmsArticlePsMryq", params);
     },
+    //添加或取消模块关注
+    saveAttentionRelevancy: function (params) {
+        return get("cmsAppInsideController.action?saveAttentionRelevancy", params);
+    },
 
     
     
