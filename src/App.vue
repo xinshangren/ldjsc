@@ -141,6 +141,11 @@
       console.log("+++++++++++++++++");
       this.$setgoindex();
     },
+    provide(){
+      return{
+          getmsgnum:this.getmsgnum
+      }
+    },
     data() {
       return {
         scroll_notice: [],
@@ -180,21 +185,8 @@
       }
       this.getFiveNotice();
       this.timer = setInterval(this.scrollAnimate, 5000);
-     
-      var _this=this;
-      var params = {
-        userId: global_variable.roleJs.dingUserId
-      };
-      console.log(params)
-      httpMethod.getTzCount(params).then(res => {
-        console.log(res);
-        if (res.success == "1") {
-          _this.tzCount = res.total;
-          _this.isdone=true;
-        }
-      }).catch(err => {
-        console.log(err);
-      });;
+     this.getmsgnum();
+      
     },
     watch: {
       $route: "getPath"
@@ -203,6 +195,21 @@
       clearInterval(this.timer);
     },
     methods: {
+      getmsgnum:function (){
+        var _this=this;
+        var params = {
+          userId: global_variable.roleJs.dingUserId
+        };
+        httpMethod.getTzCount(params).then(res => {
+          console.log(res);
+          if (res.success == "1") {
+            _this.tzCount = res.total;
+            _this.isdone=true;
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+      },
       scrollAnimate() {
         this.animateUp = true;
         setTimeout(() => {

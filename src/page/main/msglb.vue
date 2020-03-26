@@ -41,6 +41,7 @@ export default {
     document.querySelector("body").setAttribute("style", "background:#F1F4F6");
   },
   name: "zdgz_mryqVue",
+  inject:['getmsgnum'],
   data() {//定义变量
     return {
       list: [],
@@ -169,7 +170,9 @@ export default {
     },
     goDetile(item) {
       var params = {id: item.id };
-      httpMethod.readTz(params);
+      httpMethod.readTz(params).then(res => {
+         this.getmsgnum();
+      });
       var routesUrl='';
       var routesName='';
       var routes =this.$router.options.routes;
@@ -180,6 +183,7 @@ export default {
           break;
         }
       }
+     
       this.$router.push({
         path: routesUrl,
         name: routesName,
@@ -187,6 +191,7 @@ export default {
             typebt: item.headline_num
           }
       });
+      
     }
   }
 };
